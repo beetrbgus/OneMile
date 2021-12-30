@@ -12,13 +12,16 @@ import com.kh.onemile.repository.image.middle.CobuyMidImgDao;
 import com.kh.onemile.service.image.ImageService;
 import com.kh.onemile.util.Sequence;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
-public class CobuyServiceImpl implements CobuyService{
-	//파일 저장 폴더
+public class CobuyServiceImpl implements CobuyService {
+	// 파일 저장 폴더
 	private final String folderName="/cobuy";
 	private final String seqName = "cobuy_seq";
-	//시퀀스 이름
-	
+	// 시퀀스 이름
+
 	@Autowired
 	private CobuyDao cobuyDao; // 공동 구매 서비스
 	@Autowired
@@ -27,32 +30,37 @@ public class CobuyServiceImpl implements CobuyService{
 	private CobuyMidImgDao middleService; // 이미지 중간 테이블 서비스
 	@Autowired
 	private Sequence seq;
-	
+
 	@Override
 	public int reg(CobuyDTO cobuyDTO) throws IllegalStateException, IOException {
 		int cbiNo = seq.getSequence(seqName); // 공동구매 상품 번호
-		
+
 		cobuyDTO.setCobuyNo(cbiNo);
-		//공구 테이블에 등록
+		// 공구 테이블에 등록
 		cobuyDao.reg(cobuyDTO);
-		List<Integer> imgNoList = imageService.regImage(cobuyDTO.getAttach(), folderName);
-		
-		//연결 테이블 
-		CobuyImgMidDTO cobuyImgMidDTO = new CobuyImgMidDTO();
-		
-		cobuyImgMidDTO.setImgNoList(imgNoList); //이미지 갯수만큼 넣어 줌
-		cobuyImgMidDTO.setCbiNo(cbiNo); // 공구 상품 번호
-		
-		//중간 이미지 테이블에 등록
-		middleService.reg(cobuyImgMidDTO);
-		//등록 후 상세페이지로 돌아가기 위해 공구 상품 번호 반환. 
+		log.debug("cobuyDTO 뭘까내용이???    "+cobuyDTO.toString());
+		log.debug("파일이 없나???    "+cobuyDTO.getAttach().isEmpty());
+		if (cobuyDTO.getAttach() != null) {
+			List<Integer> imgNoList = imageService.regImage(cobuyDTO.getAttach(), folderName);
+
+			// 연결 테이블
+			CobuyImgMidDTO cobuyImgMidDTO = new CobuyImgMidDTO();
+
+			cobuyImgMidDTO.setImgNoList(imgNoList); // 이미지 갯수만큼 넣어 줌
+			cobuyImgMidDTO.setCbiNo(cbiNo); // 공구 상품 번호
+
+			// 중간 이미지 테이블에 등록
+			middleService.reg(cobuyImgMidDTO);
+			log.debug("등록 완료  cobuyImgMidDTO   "+cobuyImgMidDTO.toString());
+		}
+		// 등록 후 상세페이지로 돌아가기 위해 공구 상품 번호 반환.
 		return cbiNo;
 	}
 
 	@Override
-	public List<CobuyDTO> getList() {		
-		//글 정보 불러오기(이미지는 한장만)
-		return cobuyDao.cobuyList(); 
+	public List<CobuyDTO> getList() {
+		// 글 정보 불러오기(이미지는 한장만)
+		return cobuyDao.cobuyList();
 	}
 
 	@Override
@@ -62,12 +70,12 @@ public class CobuyServiceImpl implements CobuyService{
 
 	@Override
 	public void modify(CobuyDTO cobuyDTO) {
-		
+
 	}
 
 	@Override
-	public void delete() {	
-		
+	public void delete() {
+
 	}
-	
+
 }
