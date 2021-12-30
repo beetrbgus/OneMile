@@ -1,0 +1,333 @@
+@font-face {
+    font-family: Noto Sans KR;
+    font-style: normal;
+    font-weight: 100;
+    src: url(http://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.woff2) format("woff2"), url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.woff) format("woff"), url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.otf) format("opentype")
+}
+
+@font-face {
+    font-family: Noto Sans KR;
+    font-style: normal;
+    font-weight: 300;
+    src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.woff2) format("woff2"), url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.woff) format("woff"), url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.otf) format("opentype")
+}
+
+@font-face {
+    font-family: Noto Sans KR;
+    font-style: normal;
+    font-weight: 400;
+    src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff2) format("woff2"), url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff) format("woff"), url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.otf) format("opentype")
+}
+
+@font-face {
+    font-family: Noto Sans KR;
+    font-style: normal;
+    font-weight: 500;
+    src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.woff2) format("woff2"), url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.woff) format("woff"), url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.otf) format("opentype")
+}
+
+@font-face {
+    font-family: Noto Sans KR;
+    font-style: normal;
+    font-weight: 700;
+    src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.woff2) format("woff2"), url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.woff) format("woff"), url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.otf) format("opentype")
+}
+
+@font-face {
+    font-family: Noto Sans KR;
+    font-style: normal;
+    font-weight: 900;
+    src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.woff2) format("woff2"), url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.woff) format("woff"), url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.otf) format("opentype")
+}
+
+a,
+a:active,
+a:focus,
+a:hover {
+    text-decoration: none;
+    color: inherit
+}
+
+.pointer {
+    cursor: pointer
+}
+
+body,
+html {
+    font-family: Noto Sans KR;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    letter-spacing: -.4px
+}
+
+#navbar {
+    margin-bottom: 0
+}
+
+.alert {
+    border-radius: 0
+}
+
+.container {
+    width: 100%;
+    padding-right: 0;
+    padding-left: 0;
+    margin-right: auto;
+    margin-left: auto
+}
+
+.col,
+.col-3,
+.col-4,
+.col-5,
+.col-6,
+.col-8,
+.col-9,
+.col-12,
+.col-auto,
+.col-md-1,
+.col-md-2,
+.col-md-3,
+.col-md-4,
+.col-md-5,
+.col-md-6,
+.col-md-7,
+.col-md-8,
+.col-md-9,
+.col-md-10,
+.col-md-11,
+.col-md-12,
+.col-sm-1,
+.col-sm-2,
+.col-sm-3,
+.col-sm-4,
+.col-sm-5,
+.col-sm-6,
+.col-sm-7,
+.col-sm-8,
+.col-sm-9,
+.col-sm-10,
+.col-sm-11,
+.col-sm-12,
+.col-xs-1,
+.col-xs-2,
+.col-xs-3,
+.col-xs-4,
+.col-xs-5,
+.col-xs-6,
+.col-xs-7,
+.col-xs-8,
+.col-xs-9,
+.col-xs-10,
+.col-xs-11,
+.col-xs-12 {
+    position: relative;
+    height: 100%;
+    min-height: 1px;
+    padding-right: 0;
+    padding-left: 0
+}
+
+.row {
+    margin-right: 0;
+    margin-left: 0
+}
+
+.footer {
+    margin-top: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-top: none
+}
+
+.panel {
+    border: none
+}
+
+p {
+    margin: 0
+}
+
+button {
+    outline: none !important
+}
+
+.swiper-nav-btn {
+    color: #000;
+    border: none;
+    background-color: #fff;
+    font-size: 20px;
+    display: none;
+    width: 35px;
+    padding: 0
+}
+
+.swiper-nav-btn img {
+    width: 35px
+}
+
+.swiper-nav-btn:not(.carousel-button-prev, .carousel-button-next, .no-hover):hover img:first-child,
+.swiper-nav-btn:not(.carousel-button-prev, .carousel-button-next, .no-hover) img:last-child {
+    display: none
+}
+
+.swiper-nav-btn:not(.carousel-button-prev, .carousel-button-next, .no-hover):hover img:last-child {
+    display: block
+}
+
+.swiper-nav-btn:after {
+    display: none
+}
+
+.swiper-button-prev {
+    left: -50px
+}
+
+.swiper-button-next {
+    right: -50px
+}
+
+@media (min-width:576px) {
+    .container {
+        max-width: 100%;
+        width: 100%
+    }
+}
+
+@media (min-width:768px) {
+
+    .swiper-button-next,
+    .swiper-button-prev {
+        display: inline
+    }
+
+    .container {
+        max-width: 1200px;
+        width: 100%
+    }
+
+    .swiper-container .blur {
+        display: inline-block
+    }
+}
+
+@media (min-width:992px) {
+    .container {
+        max-width: 1200px;
+        width: 100%
+    }
+}
+
+@media (min-width:1200px) {
+    .container {
+        max-width: 1200px;
+        width: 100%
+    }
+}
+
+.blur {
+    display: none;
+    position: absolute;
+    width: 50px;
+    background: linear-gradient(270deg, #fff, hsla(0, 0%, 100%, 0) 140%);
+    z-index: 1000;
+    pointer-events: none;
+    top: 0;
+    right: 0;
+    height: calc(100% + 8px)
+}
+
+body {
+    background-color: #f8f8f8
+}
+
+.main-banner {
+    width: 100%;
+    height: 100px;
+    box-sizing: border-box;
+    display: block;
+    font-size: 25px;
+    font-weight: 700;
+    color: #242424;
+    padding: 30px 20px 0
+}
+
+.main-banner>p:first-child {
+    font-size: 14px;
+    font-weight: 400;
+    color: #ea5a45;
+    margin-bottom: 10px
+}
+
+.main-banner p {
+    line-height: 1
+}
+
+.content {
+    padding-bottom: 35px
+}
+
+.content .title {
+    height: 60px;
+    display: block;
+    border: 1px solid #eaeaea;
+    background-color: #fff;
+    line-height: 60px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #242424;
+    padding: 0 20px;
+    margin-top: 5px
+}
+
+.content .title .bar {
+    background-color: #434343;
+    width: 3px;
+    height: 16px;
+    float: left;
+    margin: 21px 13px 0 0
+}
+
+.content .title p {
+    display: inline-block;
+    width: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap
+}
+
+.content .title.active {
+    border-bottom: none;
+    color: #e73e26
+}
+
+.content .title.active .bar {
+    background-color: #e73e26
+}
+
+.content .notice-content {
+    background-color: #fff;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.47;
+    color: #434343;
+    padding: 0 20px 24px;
+    border: 1px solid #eaeaea;
+    border-top: none;
+    display: none
+}
+
+@media (min-width:768px) {
+    .main-banner {
+        height: 145px;
+        font-size: 30px;
+        padding-top: 60px
+    }
+
+    .content {
+        padding-bottom: 160px
+    }
+}
+
+/*# sourceMappingURL=/notices.e1c9fb68.css.map */
