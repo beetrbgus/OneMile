@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kh.onemile.entity.cobuy.CobuyDTO;
 import com.kh.onemile.service.cobuy.CobuyService;
 
-
 @RequestMapping("/cobuy")
 @RestController
 public class CobuyController {
@@ -31,8 +30,8 @@ public class CobuyController {
 	//공동 구매 등록 기능 ->  공동구매 글 , 이미지 , 연결테이블 
 	@PostMapping("/reg")
 	public String reg(@ModelAttribute CobuyDTO cobuyDTO) throws IllegalStateException, IOException {
-		int cbiNo = cobuyService.reg(cobuyDTO);
-		return "redirect:cobuy/detail?cbiNo="+cbiNo;
+		int cobuyNo = cobuyService.reg(cobuyDTO);
+		return "redirect:cobuy/detail?cobuyNo="+cobuyNo;
 	}
 	@GetMapping("/list")
 	public String list(Model model) {
