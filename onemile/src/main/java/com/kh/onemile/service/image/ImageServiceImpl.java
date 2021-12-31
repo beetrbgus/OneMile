@@ -4,12 +4,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import com.kh.onemile.entity.image.ImageDTO;
 import com.kh.onemile.repository.image.ImageDao;
 import com.kh.onemile.util.SaveFile;
 import com.kh.onemile.util.Sequence;
-
+@Service
 public class ImageServiceImpl implements ImageService {
 	@Autowired
 	private Sequence seq;

@@ -22,7 +22,7 @@ public class MilesController {
 	
 	@Autowired
 	private MilesService milesService;
-	@Autowired @Qualifier("milesImage")
+	@Autowired
 	private ImageService imageService;
 	
 	//마일즈 생성
@@ -39,7 +39,7 @@ public class MilesController {
 		milesVo.setMemberNo(writer);
 		milesService.create(milesVo);
 		if(imageVo!=null) {
-			imageService.regImage(imageVo);
+//			imageService.regImage(imageVo);
 		}
 		return "redirect:/";
 	}

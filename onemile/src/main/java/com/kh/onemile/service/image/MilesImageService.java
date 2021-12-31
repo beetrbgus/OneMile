@@ -15,66 +15,19 @@ import com.kh.onemile.repository.image.MilesImageDao;
 import com.kh.onemile.util.Sequence;
 import com.kh.onemile.vo.ImageVO;
 
-@Service
-@Qualifier("milesImage")
+
 public class MilesImageService implements ImageService{
-	
-	@Autowired
-	private ImageDao imageDao;
-	
-	@Autowired
-	private MilesImageDao milesImageDao;
-	
-	@Autowired
-	private Sequence seq;
 
 	@Override
-	public void regImage(ImageVO imageVo) throws IllegalStateException, IOException {
-		for(MultipartFile multipartFile : imageVo.getAttach()) {
-			if(!multipartFile.isEmpty()) {
-				ImageDTO imageDto = new ImageDTO();
-				
-				int imageNo = seq.nextSequence("image_seq");
-				
-				imageDto.setImageNo(imageNo);
-				imageDto.setUploadName(multipartFile.getOriginalFilename());
-				imageDto.setFileSize(multipartFile.getSize());
-				imageDto.setFileType(multipartFile.getContentType());
-				
-				imageDao.regImage(imageDto, multipartFile);
-				
-				MilesImageDTO milesImageDto = new MilesImageDTO();
-				
-				int miNo = seq.nextSequence("mi_seq");
-				milesImageDto.setMiNo(miNo);
-				milesImageDto.setImageNo(imageNo);
-				milesImageDto.setMilesNo(imageVo.getMilesNo());
-				milesImageDto.setThumbnail(imageVo.getThumbnail());
-			}
-		}
+	public List<Integer> regImage(List<MultipartFile> attach, String save) throws IllegalStateException, IOException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public void deleteImage(int imageNo) {
-		imageDao.deleteImage(imageNo);
-		milesImageDao.deleteImage(imageNo);
-	}
-	
-	@Override
-	public ImageVO loadImage(int imageNo) throws IOException {
-		MilesImageDTO miDto = new MilesImageDTO();
-		miDto = milesImageDao.get(imageNo);
+	public void deleteImage(int imageNo, String save) {
+		// TODO Auto-generated method stub
 		
-		//이미지 불러오기
-		ImageVO imageVo = new ImageVO();
-		imageVo.setLoad(imageDao.load(miDto.getImageNo()));
-		
-		return imageVo;
 	}
-
-	@Override
-	public List<ImageDTO> listByBoardNo(int boardNo) {
-		List<ImageDTO> list = imageDao.listByBoardNo(boardNo);
-		return list;
-	}
+	
 }
