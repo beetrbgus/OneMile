@@ -28,8 +28,8 @@ public class MembershipBuyDaoImpl implements MembershipBuyDao{
 	
 	//날짜 비교하기
 	@Override
-	public MembershipBuyDTO dayCheck() {
-		return sqlSession.selectOne("membership.dayCheck");
+	public List<MembershipBuyDTO> dayCheck() {
+		return sqlSession.selectList("membership.dayCheck");
 		
 	}
 	//정기결제 전체목록
