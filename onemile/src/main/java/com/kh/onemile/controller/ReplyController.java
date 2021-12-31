@@ -20,10 +20,7 @@ public class ReplyController {
 
 	@Autowired
 	private ReplyService replyService;
-	
-	@Autowired
-	private ReplyVO replyVo;
-	
+
 	@Autowired
 	private ReplyDao replyDao;
 	
