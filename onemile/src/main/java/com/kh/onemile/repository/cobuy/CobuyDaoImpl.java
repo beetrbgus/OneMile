@@ -18,7 +18,7 @@ public class CobuyDaoImpl implements CobuyDao{
 	}
 	@Override
 	public List<CobuyDTO> cobuyList() {
-		return sqlSession.selectList("cobuy.getList");
+		return sqlSession.selectList("cobuy.getCobuy");
 	}
 
 }
