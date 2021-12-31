@@ -5,7 +5,7 @@
 <mapper namespace="mi">
 	
 	<!-- 사진 추가 -->
-	<insert id="regMi" parameterType="milesImageDTO">
+	<insert id="regMi" parameterType="milesImageMidDTO">
 		insert into mi
 		values(
 			#{miNo}, #{imageNo}, #{milesNo}, #{thumbnail}
@@ -13,7 +13,7 @@
 	</insert>
 	
 	<!-- 단일조회 -->
-	<select id="getMi" parameterType="int" resultType="milesImageDTO">
+	<select id="getMi" parameterType="int" resultType="milesImageMidDTO">
 		select * from mi where image_no = #{imageNo}
 	</select>
 	

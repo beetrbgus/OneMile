@@ -10,8 +10,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.onemile.entity.image.CommuImageDTO;
 import com.kh.onemile.entity.image.ImageDTO;
-import com.kh.onemile.repository.image.CommuImageDao;
 import com.kh.onemile.repository.image.ImageDao;
+import com.kh.onemile.repository.image.middle.CommuImageDao;
 import com.kh.onemile.util.Sequence;
 import com.kh.onemile.vo.ImageVO;
 

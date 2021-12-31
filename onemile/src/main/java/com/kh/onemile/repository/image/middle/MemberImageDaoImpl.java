@@ -1,10 +1,10 @@
-package com.kh.onemile.repository.image;
+package com.kh.onemile.repository.image.middle;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.kh.onemile.entity.image.MemberImageDTO;
+import com.kh.onemile.entity.image.middle.MemberImageDTO;
 @Repository
 public class MemberImageDaoImpl implements MemberImageDao{
 

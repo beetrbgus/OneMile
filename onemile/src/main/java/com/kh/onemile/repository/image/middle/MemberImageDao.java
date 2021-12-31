@@ -1,6 +1,6 @@
-package com.kh.onemile.repository.image;
+package com.kh.onemile.repository.image.middle;
 
-import com.kh.onemile.entity.image.MemberImageDTO;
+import com.kh.onemile.entity.image.middle.MemberImageDTO;
 
 public interface MemberImageDao {
 	void regMi(MemberImageDTO memberImageDTO);

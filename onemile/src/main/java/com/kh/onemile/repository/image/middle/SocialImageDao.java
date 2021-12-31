@@ -1,6 +1,6 @@
-package com.kh.onemile.repository.image;
+package com.kh.onemile.repository.image.middle;
 
-import com.kh.onemile.entity.image.SocialImageDTO;
+import com.kh.onemile.entity.image.middle.SocialImageDTO;
 
 public interface SocialImageDao {
 	void regCmi(SocialImageDTO socialImageDto);

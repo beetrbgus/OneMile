@@ -1,4 +1,4 @@
-package com.kh.onemile.entity.image;
+package com.kh.onemile.entity.image.middle;
 
 import lombok.Data;
 

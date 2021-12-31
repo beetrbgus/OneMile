@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.onemile.entity.image.ImageDTO;
-import com.kh.onemile.entity.image.MemberImageDTO;
+import com.kh.onemile.entity.image.middle.MemberImageDTO;
 import com.kh.onemile.repository.image.ImageDao;
-import com.kh.onemile.repository.image.MemberImageDao;
+import com.kh.onemile.repository.image.middle.MemberImageDao;
 import com.kh.onemile.util.Sequence;
 import com.kh.onemile.vo.ImageVO;
 
