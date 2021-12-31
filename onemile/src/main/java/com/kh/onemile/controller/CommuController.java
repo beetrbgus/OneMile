@@ -29,7 +29,7 @@ public class CommuController {
 	@Autowired
 	private CommuService commuService;
 	
-	@Autowired @Qualifier("commuImage")
+	@Autowired
 	private ImageService imageService;
 	
 	@Autowired
@@ -54,7 +54,7 @@ public class CommuController {
 		commuService.write(commuVo);
 		if(imageVo!=null) {
 			imageVo.setCommuNo(commuNo);
-			imageService.regImage(imageVo);
+//			imageService.regImage(imageVo);
 		}
 		return "redirect:list";
 	}
@@ -69,7 +69,7 @@ public class CommuController {
 	public String detailQ(@RequestParam int boardNo, Model model) throws IOException {
 		//조회 3번 (commu, reply, image)
 		model.addAttribute("commuDetailVO", commuService.detail(boardNo));
-		model.addAttribute("imageNoList", imageService.listByBoardNo(boardNo)); //boardNo로 imageNo list를 불러오는 거 만들기
+//		model.addAttribute("imageNoList", imageService.listByBoardNo(boardNo)); //boardNo로 imageNo list를 불러오는 거 만들기
 		model.addAttribute("replyVOList", replyService.listByBoardNo(boardNo)); //boardNo로 댓글 찾아주는 거 만들기
 		
 		return "commu/questions/detail";
@@ -96,7 +96,7 @@ public class CommuController {
 		commuService.write(commuVo);
 		if(imageVo!=null) {
 			imageVo.setCommuNo(commuNo);
-			imageService.regImage(imageVo);
+//			imageService.regImage(imageVo);
 		}
 		return "redirect:list";
 	}
@@ -110,7 +110,7 @@ public class CommuController {
 	@RequestMapping("/boonsil/detail")
 	public String detailBoonsil(@RequestParam int boardNo, Model model) throws IOException {
 		model.addAttribute("commuDetailVO", commuService.detail(boardNo));
-		model.addAttribute("imageNoList", imageService.listByBoardNo(boardNo));
+//		model.addAttribute("imageNoList", imageService.listByBoardNo(boardNo));
 		model.addAttribute("replyVOList", replyService.listByBoardNo(boardNo));
 		return "commu/boonsil/detail";
 	}
@@ -130,7 +130,7 @@ public class CommuController {
 		commuService.write(commuVo);
 		if(imageVo!=null) {
 			imageVo.setCommuNo(commuNo);
-			imageService.regImage(imageVo);
+//			imageService.regImage(imageVo);
 		}
 		return "redirect:list";
 	}
@@ -144,7 +144,7 @@ public class CommuController {
 	@RequestMapping("/funding/detail")
 	public String detailFunding(@RequestParam int boardNo, Model model) throws IOException {
 		model.addAttribute("commuDetailVO", commuService.detail(boardNo));
-		model.addAttribute("imageNoList", imageService.listByBoardNo(boardNo));
+//		model.addAttribute("imageNoList", imageService.listByBoardNo(boardNo));
 		model.addAttribute("replyVOList", replyService.listByBoardNo(boardNo));
 		return "commu/funding/detail";
 	}

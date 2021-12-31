@@ -28,7 +28,7 @@ public class CommuWithMapController {
 	@Autowired
 	private CommuService commuService;
 	
-	@Autowired @Qualifier("commuImage")
+	@Autowired
 	private ImageService imageService;
 	
 	@Autowired
@@ -52,7 +52,7 @@ public class CommuWithMapController {
 		commuService.write(commuVo);
 		if(imageVo!=null) {
 			imageVo.setCommuNo(commuNo);
-			imageService.regImage(imageVo);
+//			imageService.regImage(imageVo);
 		}
 		return "redirect:list";
 	}
@@ -66,7 +66,7 @@ public class CommuWithMapController {
 	@RequestMapping("/matjip/detail")
 	public String detailMatjip(@RequestParam int boardNo, Model model) throws IOException {
 		model.addAttribute("commuDetailVO", commuService.detail(boardNo));
-		model.addAttribute("imageNoList", imageService.listByBoardNo(boardNo)); //boardNo로 imageNo list를 불러오는 거 만들기
+//		model.addAttribute("imageNoList", imageService.listByBoardNo(boardNo)); //boardNo로 imageNo list를 불러오는 거 만들기
 		model.addAttribute("replyVOList", replyService.listByBoardNo(boardNo)); //boardNo로 댓글 찾아주는 거 만들기
 		return "commu/matjip/detail";
 	}
@@ -86,7 +86,7 @@ public class CommuWithMapController {
 		commuService.write(commuVo);
 		if(imageVo!=null) {
 			imageVo.setCommuNo(commuNo);
-			imageService.regImage(imageVo);
+//			imageService.regImage(imageVo);
 		}
 		return "redirect:list";
 	}
@@ -100,7 +100,7 @@ public class CommuWithMapController {
 	@RequestMapping("/inc/detail")
 	public String detailInc(@RequestParam int boardNo, Model model) throws IOException {
 		model.addAttribute("commuDetailVO", commuService.detail(boardNo));
-		model.addAttribute("imageNoList", imageService.listByBoardNo(boardNo));
+//		model.addAttribute("imageNoList", imageService.listByBoardNo(boardNo));
 		model.addAttribute("replyVOList", replyService.listByBoardNo(boardNo));
 		return "commu/inc/detail";
 	}
@@ -120,7 +120,7 @@ public class CommuWithMapController {
 		commuService.write(commuVo);
 		if(imageVo!=null) {
 			imageVo.setCommuNo(commuNo);
-			imageService.regImage(imageVo);
+//			imageService.regImage(imageVo);
 		}
 		return "redirect:list";
 	}
@@ -134,7 +134,7 @@ public class CommuWithMapController {
 	@RequestMapping("/yam/detail")
 	public String detailYam(@RequestParam int boardNo, Model model) throws IOException {
 		model.addAttribute("commuDetailVO", commuService.detail(boardNo));
-		model.addAttribute("imageNoList", imageService.listByBoardNo(boardNo));
+//		model.addAttribute("imageNoList", imageService.listByBoardNo(boardNo));
 		model.addAttribute("replyVOList", replyService.listByBoardNo(boardNo));
 		return "commu/yam/detail";
 	}

@@ -15,8 +15,7 @@ import com.kh.onemile.repository.image.SocialImageDao;
 import com.kh.onemile.util.Sequence;
 import com.kh.onemile.vo.ImageVO;
 
-@Service
-@Qualifier("socialImage")
+
 public class SocialImageService implements ImageService{
 
 	@Autowired
@@ -29,51 +28,16 @@ public class SocialImageService implements ImageService{
 	private Sequence seq;
 
 	@Override
-	public void regImage(ImageVO imageVo) throws IllegalStateException, IOException {
-		for(MultipartFile multipartFile : imageVo.getAttach()) {
-			if(!multipartFile.isEmpty()) {
-				ImageDTO imageDto = new ImageDTO();
-				
-				int imageNo = seq.nextSequence("image_seq");
-				
-				imageDto.setImageNo(imageNo);
-				imageDto.setUploadName(multipartFile.getOriginalFilename());
-				imageDto.setFileSize(multipartFile.getSize());
-				imageDto.setFileType(multipartFile.getContentType());
-				
-				imageDao.regImage(imageDto, multipartFile);
-				
-				SocialImageDTO socialImageDto = new SocialImageDTO();
-				
-				int smiNo = seq.nextSequence("smi_seq");
-				socialImageDto.setSmiNo(smiNo);
-				socialImageDto.setImageNo(imageNo);
-				socialImageDto.setSocialNo(imageVo.getSocialNo());
-			}
-		}
+	public List<Integer> regImage(List<MultipartFile> attach, String save) throws IllegalStateException, IOException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public void deleteImage(int imageNo) {
-		imageDao.deleteImage(imageNo);
-		socialImageDao.deleteImage(imageNo);
-	}
-
-	@Override
-	public ImageVO loadImage(int imageNo) throws IOException {
-		SocialImageDTO siDto = new SocialImageDTO();
-		siDto = socialImageDao.get(imageNo);
+	public void deleteImage(int imageNo, String save) {
+		// TODO Auto-generated method stub
 		
-		//이미지 불러오기
-		ImageVO imageVo = new ImageVO();
-		imageVo.setLoad(imageDao.load(siDto.getImageNo()));
-		
-		return imageVo;
 	}
 
-	@Override
-	public List<ImageDTO> listByBoardNo(int boardNo) {
-		List<ImageDTO> list = imageDao.listByBoardNo(boardNo);
-		return list;
-	}
+	
 }

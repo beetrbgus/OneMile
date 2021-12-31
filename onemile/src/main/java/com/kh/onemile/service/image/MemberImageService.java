@@ -16,68 +16,19 @@ import com.kh.onemile.repository.image.MemberImageDao;
 import com.kh.onemile.util.Sequence;
 import com.kh.onemile.vo.ImageVO;
 
-@Component
 public class MemberImageService implements ImageService{
 
-	@Autowired
-	private ImageDao imageDao;
-	
-	@Autowired
-	private MemberImageDao memberImageDao;
-	
-	@Autowired
-	private Sequence seq;
-
 	@Override
-	public void regImage(ImageVO imageVo) throws IllegalStateException, IOException {
-		for(MultipartFile multipartFile : imageVo.getAttach()) {
-			if(!multipartFile.isEmpty()) {
-				ImageDTO imageDto = new ImageDTO();
-				
-				int imageNo = seq.nextSequence("image_seq");
-				
-				imageDto.setImageNo(imageNo);
-				imageDto.setUploadName(multipartFile.getOriginalFilename());
-				imageDto.setFileSize(multipartFile.getSize());
-				imageDto.setFileType(multipartFile.getContentType());
-				
-				imageDao.regImage(imageDto, multipartFile);
-				
-				MemberImageDTO memberImageDto = new MemberImageDTO();
-				
-				int meiNo = seq.nextSequence("mei_seq");
-				memberImageDto.setMeiNo(meiNo);
-				memberImageDto.setImageNo(imageNo);
-				memberImageDto.setMemberNo(imageVo.getMemberNo());
-				memberImageDto.setImageDivision(imageVo.getImageDivision());
-			}
-		}
-	}
-	public void makeDTO(String tableName , int tablePrimary,int typeNo , int imgNO ) {
-		
-	}
-	@Override
-	public void deleteImage(int imageNo) {
-		//이미지 삭제 (비동기 처리 예정)
-		imageDao.deleteImage(imageNo);
-		memberImageDao.deleteImage(imageNo);
-	}
-	
-	@Override
-	public ImageVO loadImage(int imageNo) throws IOException {
-		MemberImageDTO memberImageDto = new MemberImageDTO();
-		memberImageDto = memberImageDao.get(imageNo);
-		
-		//이미지 불러오기
-		ImageVO imageVo = new ImageVO();
-		imageVo.setLoad(imageDao.load(memberImageDto.getImageNo()));
-		
-		return imageVo;
+	public List<Integer> regImage(List<MultipartFile> attach, String save) throws IllegalStateException, IOException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public List<ImageDTO> listByBoardNo(int boardNo) {
-		List<ImageDTO> list = imageDao.listByBoardNo(boardNo);
-		return list;
+	public void deleteImage(int imageNo, String save) {
+		// TODO Auto-generated method stub
+		
 	}
+
+	
 }
