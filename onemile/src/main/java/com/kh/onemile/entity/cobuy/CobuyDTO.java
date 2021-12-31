@@ -14,7 +14,7 @@ public class CobuyDTO {
 	// 제목 , 닉네임 ,  댓글 수(보류) , 작성시간 , 만료시간
 	// 상품이름 , 가격 ,  상품 설명
 	private int cobuyNo ;
-	private String memberNo;
+	private int memberNo;
 	private String largeName;
 	private String title;
 	private int price ;

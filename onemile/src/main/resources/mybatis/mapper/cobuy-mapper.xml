@@ -7,32 +7,57 @@
 	<!-- 글쓰기 -->
 	<insert id="reg" parameterType="cobuyDTO">
 		insert into cobuy(
-			COBUY_NO, MEMBER_NO, LARGE_NAME, TITLE,
+			COBUY_NO,
+			MEMBER_NO, TITLE,
 			PRICE,DESCRIPT, PNAME
 		)values(
-			#{cobuyNo}, #{memberNo},#{largeName},#{title},
+			#{cobuyNo},
+			#{memberNo},#{title},
 			#{price},#{descript},#{pName}
 		)
 	</insert>
-
-	<!-- 상세조회 -->
-	<select id="getList" parameterType="int"
-		resultType="CommuDetailVO">
-		select 
-		co.*, bdt.lagname, me.nick, map.lat, map.lon, map.detailaddress
-		from
-		commu co left join bdt bdt on co.middlename = bdt.middlename
-		left join member me on co.member_no = me.member_no
-		left join map map on co.map_no = map.map_no
-		where
-		commu_no = #{commuNo}
+	<!-- 단일 조회할 때  -->
+	<resultMap type="CategoryVO" id="cobuy">
+		<result column="cobuy_No" property="cobuyNo" />
+		<result column="MEMBER_NO" property="memberNo" />
+		<result column="LARGE_NAME" property="largeName" />
+		<result column="TITLE" property="title" />
+		<result column="PRICE" property="price" />
+		<result column="HIT" property="hit" />
+		<result column="REGDATE" property="regDate" />
+		<result column="DEADLINE" property="deadLine" />
+		<result column="DESCRIPT" property="descript" />
+		<result column="PNAME" property="pName" />
+		<!-- 항목 이름이 list인 변수가 있고 이게 List<CategoryVO> 형태이다 listSub를 불러서 해당 데이터를 
+			채워주세요(category_no)를 이용해서 -->
+		<collection property="imageList" select="getList" column="IMAGE_NO" ofType="List" />
+	</resultMap>
+	<!-- 단일조회 -->
+	<select id="getCobuy" parameterType="int"
+		resultMap="cobuy">
+		select * from cobuy cb 
+   			inner join cbi on 
+      			cb.cobuy_no=cbi.cobuy_no
+    		inner join image img on 
+        		cbi.image_no =img.image_no
+        where cb.cobuy_no = #{imageNo} and cb.HIDDENYN = 'N' 
+        	order by cb.cobuy_no desc;
+	</select>
+	
+	<!-- 목록조회 -->
+	<select id="getCobuyAll" resultMap="cobuy">
+		select * from  cobuy cb 
+	    	inner join cbi on 
+	    	    cb.COBUY_NO=cbi.COBUY_NO
+	    	left outer join image img on 
+	        	cbi.image_no =img.image_no
+	    where cb.HIDDENYN = 'N' order by cb.cobuy_no desc;
 	</select>
 
-
-	<!-- 숨김처리 -->
-	<update id="hide">
-		update comu set
-		viewyn = #{viewYN}
-		where commu_no = #{commuNo}
+	<!-- 숨김 변경 -->
+	<update id="hide" parameterType="Map">
+		update cobuy set
+		HIDDENYN = #{viewYN}
+		where COBUY_NO = #{cobuyNo}
 	</update>
 </mapper>

@@ -30,7 +30,7 @@ public class ImageServiceImpl implements ImageService {
 
 				int imageNo = seq.nextSequence("image_seq");
 				String saveName = String.valueOf(imageNo);
-
+				// 연결테이블 
 				imageDto.setImageNo(imageNo);
 				imageDto.setUploadName(multipartFile.getOriginalFilename());// 회원이 올린 이름.
 				imageDto.setFileSize(multipartFile.getSize());
