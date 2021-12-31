@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.onemile.entity.image.middle.MilesImgMidDTO;
-import com.kh.onemile.repository.image.MilesImageDao;
+import com.kh.onemile.repository.image.middle.MilesImageDao;
 import com.kh.onemile.repository.miles.MilesDao;
 import com.kh.onemile.service.image.ImageService;
 import com.kh.onemile.util.Sequence;
