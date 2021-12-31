@@ -32,7 +32,7 @@ public class CommuDaoImpl implements CommuDao{
 	}
 
 	@Override
-	public List<CommuDTO> menuList(String middleName) {
+	public List<CommuDetailVO> menuList(String middleName) {
 		return sqlSession.selectList("commu.menuList", middleName);
 	}
 

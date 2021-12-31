@@ -18,6 +18,8 @@
     <link rel="stylesheet" type="text/css" href="${root}/resources/css/reset.css">
     <link rel="stylesheet" type="text/css" href="${root}/resources/css/commons.css">
     <link rel="stylesheet" type="text/css" href="${root}/resources/css/layout.css">
+    <!-- 토스트 알림창 -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
 	<style>
         .logo-wrapper {
             width:130px;
@@ -30,11 +32,13 @@
             flex-grow: 1;
         }
 	 </style>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b89479d3bf4f702a0c7b99d5edfb1391&libraries=services" charset="utf-8"></script> 
-    <script src="${root}/resources/js/navigator.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/sha1.min.js"></script>
+    <script type="text/javascript"src="${root}/resources/js/navigator.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.2/sockjs.min.js"></script>
+    <script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/sha1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" ></script>
     
     <!-- <script>
     	//form이 전송되면 input[type=password]가 자동 암호화되도록 설정
@@ -56,6 +60,54 @@
     		});
     	});
     </script> -->
+    
+    <script>
+	    var socket = null;
+	
+	    $(document).ready(function (){ //준비가 되면
+	 	   connectWs();
+	    });
+	
+	    function connectWs(){
+	    	sock = new SockJS( "<c:url value="/echo"/>" );
+	    	socket = sock;
+	
+	    	sock.onopen = function() {
+	            console.log('info:connection opened.');
+	      };
+	
+	     sock.onmessage = function(evt) {
+	 	 	var data = evt.data;
+	 	   	
+		   	var toastTop = app.toast.create({
+	            text: "알림 : " + data + "\n",
+	            closeButton: true,
+	            debug: false,
+	            newestOnTop: false,
+	            progressBar: false,
+	            positionClass: "toast-top-right",
+	            preventDuplicates: false,
+	            onclick: null,
+	            showDuration: 300,
+	            hideDuration: 1000,
+	            timeOut: 5000,
+	            extendedTimeOut: 1000,
+	            showEasing: "swing",
+	            hideEasing: "linear",
+	            showMethod: "fadeIn",
+	            hideMethod: "fadeOut"
+	          });
+	          toastTop.open();
+	    };
+
+	    sock.onclose = function() {
+	      	console.log('connect close');
+	    };
+
+	    sock.onerror = function (err) {console.log('Errors : ' , err);};
+
+	   }
+	   </script>
 </head>
 <body>
     <!-- 홈페이지 전체 폭을 설정하는 테두리 영역 -->

@@ -42,8 +42,8 @@ public class CommuServiceImpl implements CommuService{
 	@Override
 	public void write(CommuVO commuVo) throws IllegalStateException, IOException {
 		
-//		//시퀀스 생성
-//		int commuNo = seq.nextSequence("commu_seq");
+		//시퀀스 생성
+		int commuNo = seq.nextSequence("commu_seq");
 		
 		//게시글 Dto 설정
 		CommuDTO commuDto = new CommuDTO();
@@ -122,8 +122,8 @@ public class CommuServiceImpl implements CommuService{
 
 	//카테고리별 리스트
 	@Override
-	public List<CommuDTO> menuList(String middleName) {
-		List<CommuDTO> list = commuDao.menuList(middleName);
+	public List<CommuDetailVO> menuList(String middleName) {
+		List<CommuDetailVO> list = commuDao.menuList(middleName);
 		return list;
 	}
 	

@@ -30,4 +30,14 @@ public class ReplyDaoImpl implements ReplyDao{
 		List<ReplyVO> list = sqlSession.selectList("reply.listByBoardNo", boardNo);
 		return list;
 	}
+	
+	@Override
+	public void delete(int replyNo) {
+		sqlSession.delete("reply.delete", replyNo);
+	}
+
+	@Override
+	public void edit(ReplyDTO replyDto) {
+		sqlSession.update("reply.edit", replyDto);
+	}
 }

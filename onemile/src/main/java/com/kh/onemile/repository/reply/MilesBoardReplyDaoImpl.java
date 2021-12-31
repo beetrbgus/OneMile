@@ -13,12 +13,17 @@ public class MilesBoardReplyDaoImpl implements MilesBoardReplyDao{
 	
 	@Override
 	public void write(MilesBoardReplyDTO milesBoardReplyDto) {
-		sqlSession.insert("mr.insert", milesBoardReplyDto);
+		sqlSession.insert("mr.write", milesBoardReplyDto);
 	} 
 
 	@Override
 	public int getSeq() {
 		int seq = sqlSession.selectOne("mr.sequence");
 		return seq;
+	}
+	
+	@Override
+	public void delete(int replyNo) {
+		sqlSession.delete("mr.delete", replyNo);
 	}
 }

@@ -9,4 +9,6 @@ public interface ReplyDao {
 	void write(ReplyDTO replyDto);
 	int getSeq();
 	List<ReplyVO> listByBoardNo(int boardNo);
+	void delete(int replyNo);
+	void edit(ReplyDTO replyDto);
 }

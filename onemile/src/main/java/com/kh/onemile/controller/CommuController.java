@@ -20,6 +20,7 @@ import com.kh.onemile.service.reply.ReplyService;
 import com.kh.onemile.util.Sequence;
 import com.kh.onemile.vo.CommuVO;
 import com.kh.onemile.vo.ImageVO;
+import com.kh.onemile.vo.ReplyVO;
 
 @RequestMapping("/commu")
 @Controller
@@ -39,6 +40,7 @@ public class CommuController {
 	
 	@GetMapping("/questions/write")
 	public String writeQ() {
+		
 		return "commu/questions/write";
 	}
 	
@@ -58,7 +60,8 @@ public class CommuController {
 	}
 	
 	@GetMapping("/questions/list")
-	public String listQ() {
+	public String listQ(Model model, @RequestParam String middleName) {
+		model.addAttribute("listQ", commuService.menuList(middleName));
 		return "commu/questions/list";
 	}
 	
@@ -70,6 +73,12 @@ public class CommuController {
 		model.addAttribute("replyVOList", replyService.listByBoardNo(boardNo)); //boardNo로 댓글 찾아주는 거 만들기
 		
 		return "commu/questions/detail";
+	}
+	
+	@PostMapping("/boonsil/detail")
+	public String detailQ(@RequestParam ReplyVO replyVo, Model model) throws IllegalStateException, IOException {
+		replyService.writeReply(replyVo);
+		return "redirect:list";
 	}
 	
 	@GetMapping("/boonsil/write")
@@ -93,7 +102,8 @@ public class CommuController {
 	}
 	
 	@GetMapping("/boonsil/list")
-	public String listBoonsil() {
+	public String listBoonsil(Model model, @RequestParam String middleName) {
+		model.addAttribute("listBoonsil", commuService.menuList(middleName));
 		return "commu/boonsil/list";
 	}
 	
@@ -126,7 +136,8 @@ public class CommuController {
 	}
 	
 	@GetMapping("/funding/list")
-	public String listFunding() {
+	public String listFunding(Model model, @RequestParam String middleName) {
+		model.addAttribute("listFunding", commuService.menuList(middleName));
 		return "commu/funding/list";
 	}
 	

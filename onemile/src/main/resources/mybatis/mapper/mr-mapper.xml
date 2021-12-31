@@ -10,9 +10,13 @@
 	</select>
 	
 	<!-- 마일즈 게시판 댓글 등록 -->
-	<insert id="insert">
+	<insert id="write">
 		insert into mr value(
 			#{mrNo}, #{replyNo}, #{mbNo}
 		)
 	</insert>
+	
+	<delete id="delete">
+		delete from mr where reply_no = #{replyNo}
+	</delete>
 </mapper>

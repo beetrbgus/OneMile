@@ -220,6 +220,16 @@
 		    <version>2.13.0</version>
 		</dependency>
 		
+		<!-- 
+			웹소켓 라이브러리
+			- 알림 기능 구현을 위해서 추가
+		 -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-websocket</artifactId>
+		    <version>${org.springframework-version}</version>
+		</dependency>
+		
 	</dependencies>
 	
 	<!-- 

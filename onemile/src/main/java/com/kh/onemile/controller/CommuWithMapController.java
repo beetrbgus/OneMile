@@ -58,7 +58,8 @@ public class CommuWithMapController {
 	}
 	
 	@GetMapping("/matjip/list")
-	public String listMatjip() {
+	public String listMatjip(Model model, @RequestParam String middleName) {
+		model.addAttribute("listMatjip", commuService.menuList(middleName));
 		return "commu/matjip/list";
 	}
 	
@@ -91,7 +92,8 @@ public class CommuWithMapController {
 	}
 	
 	@GetMapping("/inc/list")
-	public String listInc() {
+	public String listInc(Model model, @RequestParam String middleName) {
+		model.addAttribute("listInce", commuService.menuList(middleName));
 		return "commu/inc/list";
 	}
 	
@@ -124,7 +126,8 @@ public class CommuWithMapController {
 	}
 	
 	@GetMapping("/yam/list")
-	public String listYam() {
+	public String listYam(Model model, @RequestParam String middleName) {
+		model.addAttribute("listYam", commuService.menuList(middleName));
 		return "commu/yam/list";
 	}
 	

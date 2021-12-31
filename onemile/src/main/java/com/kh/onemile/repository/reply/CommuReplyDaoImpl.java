@@ -21,4 +21,9 @@ public class CommuReplyDaoImpl implements CommuReplyDao{
 		int seq = sqlSession.selectOne("crp.sequence");
 		return seq;
 	}
+
+	@Override
+	public void delete(int replyNo) {
+		sqlSession.delete("crp.delete", replyNo);
+	}
 }

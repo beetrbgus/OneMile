@@ -2,58 +2,57 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<script>
+	$(document).ready(function(){
+		if(${logId==null})){
+		alert("로그인 후 이용가능 합니다.");
+		location.href="";//login페이지
+		}
+	});
+</script>
 
-<h1>게시글 목록</h1>
+<div>
+	<div>
+		<h2>제목 : ${commuDetailVO.title}</h2>
+		작성자 : ${commuDetailVO.nick}
+	</div>
+	<div>
+		내용
+		${commuDetailVO.content}
+		<!--<c:if test="사진이 있으면">
+			<img src = "">
+		</c:if>-->
+	</div>
 
-<ul>
-	<li>제목 : ${commuDetailVo.title}</li>
-	<li>내용 : ${commuDetailVo.content}</li>
-</ul>
+	<div>
+		<form action="reply/edit">
+	    	<c:forEach var="replyVo" items="${replyVOList}">
+	    		${replyVo.writerNick},
+	    		${replyVo.regDate},
+	    		${replyVo.content},
+	    	</c:forEach>
+	    </form>
+	    <div>
+	    	 <form action="reply/insert" method="post">
+            <c:forEach var="replyVo" items="${replyVo}">
+                <input type="hidden" name="commuNo" value="${commuVo.commuNo}">
+                <input type="hidden" name="memberNo" value="${sessionsScope.uid}">
+                <input type="hidden" name="replyReceiverNo" value="${commuVo.writer}">
+                <input type="hidden" name="vieYN" value="N">
+            </c:forEach>
+			<c:if test="${logId == null}">
+	            <input type="button" value="댓글 쓰기" disabled="disabled">
+	        </c:if>
+	        <c:if test="${logId != null}">
+	            <input type="button" value="댓글 쓰기" id="commentWrite">
+	        </c:if>
+        </form>
+	    </div>
+	    
+	    <div>
+	    	
+	    </div>
+	</div>
+</div>
 
-<c:if test="${buyDto.status != '전체취소'}">
-<h2><a href="cancel_all?no=${buyDto.no}">전체 취소</a></h2>
-</c:if>
-
-<hr>
-
-<ul>
-<c:forEach var="buyDetailDto" items="${buyDetailList}">
-	<li>
-		${buyDetailDto}
-		
-		<c:if test="${buyDetailDto.status != '취소'}">
-		<a href="cancel_part?buyNo=${buyDetailDto.buyNo}&productNo=${buyDetailDto.productNo}">해당항목 취소</a>
-		</c:if>
-	</li>
-</c:forEach>
-</ul>
-
-<hr>
-
-<ul>
-	<li>tid : ${responseVO.tid}</li>
-	<li>cid : ${responseVO.cid}</li>
-	<li>status : ${responseVO.status}</li>
-	<li>partner_order_id : ${responseVO.partner_order_id}</li>
-	<li>partner_user_id : ${responseVO.partner_user_id}</li>
-	<li>payment_method_type : ${responseVO.payment_method_type}</li>
-	<li>amount : ${responseVO.amount}</li>
-	<li>canceled_amount : ${responseVO.canceled_amount}</li>
-	<li>cancel_available_amount : ${responseVO.cancel_available_amount}</li>
-	<li>item_name : ${responseVO.item_name}</li>
-	<li>item_code : ${responseVO.item_code}</li>
-	<li>quantity : ${responseVO.quantity}</li>
-	<li>created_at : ${responseVO.created_at}</li>
-	<li>approved_at : ${responseVO.approved_at}</li>
-	<li>canceled_at : ${responseVO.canceled_at}</li>
-	<li>selected_card_info : ${responseVO.selected_card_info}</li>
-	<li>
-		payment_action_detail : ${responseVO.payment_action_details}
-		<ul>
-			<c:forEach var="detail" items="${responseVO.payment_action_details}">
-			<li>${detail}</li>
-			</c:forEach>
-		</ul>
-	</li>
-</ul>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

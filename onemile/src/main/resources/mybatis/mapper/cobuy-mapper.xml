@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cobuy">
+
+	<!-- 글쓰기 -->
+	<insert id="reg" parameterType="cobuyDTO">
+		insert into cobuy(
+			COBUY_NO, MEMBER_NO, LARGE_NAME, TITLE,
+			PRICE,DESCRIPT, PNAME
+		)values(
+			#{cobuyNo}, #{memberNo},#{largeName},#{title},
+			#{price},#{descript},#{pName}
+		)
+	</insert>
+
+	<!-- 상세조회 -->
+	<select id="getList" parameterType="int"
+		resultType="CommuDetailVO">
+		select 
+		co.*, bdt.lagname, me.nick, map.lat, map.lon, map.detailaddress
+		from
+		commu co left join bdt bdt on co.middlename = bdt.middlename
+		left join member me on co.member_no = me.member_no
+		left join map map on co.map_no = map.map_no
+		where
+		commu_no = #{commuNo}
+	</select>
+
+
+	<!-- 숨김처리 -->
+	<update id="hide">
+		update comu set
+		viewyn = #{viewYN}
+		where commu_no = #{commuNo}
+	</update>
+</mapper>
