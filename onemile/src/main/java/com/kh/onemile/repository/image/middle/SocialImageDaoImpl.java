@@ -4,7 +4,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.kh.onemile.entity.image.middle.SocialImageDTO;
+import com.kh.onemile.entity.image.middle.SocialImgMidDTO;
 @Repository
 public class SocialImageDaoImpl implements SocialImageDao{
 
@@ -12,19 +12,12 @@ public class SocialImageDaoImpl implements SocialImageDao{
 	private SqlSession sqlSession;
 
 	@Override
-	public void regCmi(SocialImageDTO socailImageDto) {
-		sqlSession.insert("smi.regIamge", socailImageDto);
-	}
-
-	@Override
-	public SocialImageDTO get(int imageNo) {
-		return sqlSession.selectOne("smi.get", imageNo);
-	}
-
-	@Override
-	public boolean deleteImage(int smiNo) {
-		int count = sqlSession.delete("smi.deleteImage", smiNo);
-		return count > 0;
+	public void reg(SocialImgMidDTO socialImgMidDto) {
+		for(int imgIdx : socialImgMidDto.getImgNoList()) {
+			socialImgMidDto.setImgNo(imgIdx);
+			
+			sqlSession.insert("smi.regSmi",socialImgMidDto);
+		}
 	}
 }
 

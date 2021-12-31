@@ -9,6 +9,7 @@ import com.kh.onemile.entity.image.ImageDTO;
 import com.kh.onemile.repository.image.ImageDao;
 import com.kh.onemile.util.SaveFile;
 import com.kh.onemile.util.Sequence;
+import com.kh.onemile.vo.ReplyVO;
 
 public class ImageServiceImpl implements ImageService {
 	@Autowired
@@ -60,4 +61,9 @@ public class ImageServiceImpl implements ImageService {
 		imageDao.deleteImage(imageNo);
 	}
 
+	@Override
+	public List<ImageDTO> listByBoardNo(int boardNo) {
+		List<ImageDTO> list = imageDao.listByBoardNo(boardNo);
+		return list;
+	}
 }

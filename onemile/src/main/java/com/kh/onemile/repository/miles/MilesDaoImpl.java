@@ -4,7 +4,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.kh.onemile.entity.miles.MilesDTO;
+import com.kh.onemile.vo.MilesVO;
 
 @Repository
 public class MilesDaoImpl implements MilesDao{
@@ -14,7 +14,7 @@ public class MilesDaoImpl implements MilesDao{
 	
 	//마일즈 생성
 	@Override
-	public void create(MilesDTO milesDTO) {
-		sqlSession.insert("miles.create",milesDTO);
+	public void create(MilesVO milesVo) {
+		sqlSession.insert("miles.create",milesVo);
 	}
 }

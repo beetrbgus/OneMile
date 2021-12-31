@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.kh.onemile.entity.cobuy.CobuyDTO;
 import com.kh.onemile.entity.image.middle.CobuyImgMidDTO;
 import com.kh.onemile.repository.cobuy.CobuyDao;
@@ -33,9 +34,9 @@ public class CobuyServiceImpl implements CobuyService {
 
 	@Override
 	public int reg(CobuyDTO cobuyDTO) throws IllegalStateException, IOException {
-		int cbiNo = seq.getSequence(seqName); // 공동구매 상품 번호
+		int cobuyNo = seq.getSequence(seqName); // 공동구매 상품 번호
 
-		cobuyDTO.setCobuyNo(cbiNo);
+		cobuyDTO.setCobuyNo(cobuyNo);
 		// 공구 테이블에 등록
 		cobuyDao.reg(cobuyDTO);
 		log.debug("cobuyDTO 뭘까내용이???    "+cobuyDTO.toString());
@@ -47,14 +48,14 @@ public class CobuyServiceImpl implements CobuyService {
 			CobuyImgMidDTO cobuyImgMidDTO = new CobuyImgMidDTO();
 
 			cobuyImgMidDTO.setImgNoList(imgNoList); // 이미지 갯수만큼 넣어 줌
-			cobuyImgMidDTO.setCbiNo(cbiNo); // 공구 상품 번호
+			cobuyImgMidDTO.setCobuyNo(cobuyNo); // 공구 상품 번호
 
 			// 중간 이미지 테이블에 등록
 			middleService.reg(cobuyImgMidDTO);
 			log.debug("등록 완료  cobuyImgMidDTO   "+cobuyImgMidDTO.toString());
 		}
 		// 등록 후 상세페이지로 돌아가기 위해 공구 상품 번호 반환.
-		return cbiNo;
+		return cobuyNo;
 	}
 
 	@Override

@@ -45,16 +45,10 @@ public class CommuWithMapController {
 	@PostMapping("/matjip/write")
 	public String writeMatjip(@ModelAttribute CommuVO commuVo, @ModelAttribute ImageVO imageVo, HttpSession session) throws IllegalStateException, IOException {
 		int memberNo = (int)session.getAttribute("logNo");
-		int commuNo = seq.nextSequence("commu_seq");
-		
 		commuVo.setMemberNo(memberNo);
-		commuVo.setCommuNo(commuNo);
-		commuService.write(commuVo);
-		if(imageVo!=null) {
-			imageVo.setCommuNo(commuNo);
-			imageService.regImage(imageVo);
-		}
-		return "redirect:list";
+		int commuNo = commuService.write(commuVo);
+		
+		return "redirect:commu/detail?commuNo="+commuNo;
 	}
 	
 	@GetMapping("/matjip/list")
@@ -79,16 +73,10 @@ public class CommuWithMapController {
 	@PostMapping("/inc/write")
 	public String writeInc(@ModelAttribute CommuVO commuVo, @ModelAttribute ImageVO imageVo, HttpSession session) throws IllegalStateException, IOException {
 		int memberNo = (int)session.getAttribute("logNo");
-		int commuNo = seq.nextSequence("commu_seq");
-		
 		commuVo.setMemberNo(memberNo);
-		commuVo.setCommuNo(commuNo);
-		commuService.write(commuVo);
-		if(imageVo!=null) {
-			imageVo.setCommuNo(commuNo);
-			imageService.regImage(imageVo);
-		}
-		return "redirect:list";
+		int commuNo = commuService.write(commuVo);
+		
+		return "redirect:commu/detail?commuNo="+commuNo;
 	}
 	
 	@GetMapping("/inc/list")
@@ -113,16 +101,10 @@ public class CommuWithMapController {
 	@PostMapping("/yam/write")
 	public String writeYam(@ModelAttribute CommuVO commuVo, @ModelAttribute ImageVO imageVo, HttpSession session) throws IllegalStateException, IOException {
 		int memberNo = (int)session.getAttribute("logNo");
-		int commuNo = seq.nextSequence("commu_seq");
-		
 		commuVo.setMemberNo(memberNo);
-		commuVo.setCommuNo(commuNo);
-		commuService.write(commuVo);
-		if(imageVo!=null) {
-			imageVo.setCommuNo(commuNo);
-			imageService.regImage(imageVo);
-		}
-		return "redirect:list";
+		int commuNo = commuService.write(commuVo);
+		
+		return "redirect:commu/detail?commuNo="+commuNo;
 	}
 	
 	@GetMapping("/yam/list")
