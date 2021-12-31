@@ -37,4 +37,13 @@
 	<select id="msbList">
 		select * from msb
 	</select>
+	
+	<!-- 회원의 멤버십 혜택을 불러온다. -->
+	<select id="membershipForMember" parameterType="int" resultType="AdDTO">
+		select ad.* from member me
+			inner join msb msb on me.member_no = msb.member_no
+			inner join msp msp on msb.msp_no = msp.msp_no
+			inner join ad ad on msp.msp_no = ad.msp_no
+		where me.member_no = #{memberNo}
+	</select>
 </mapper>

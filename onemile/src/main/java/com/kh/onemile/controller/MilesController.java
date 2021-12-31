@@ -5,26 +5,31 @@ import java.io.IOException;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
+import com.kh.onemile.service.member.MemberService;
 import com.kh.onemile.service.miles.MilesService;
-import com.kh.onemile.vo.ImageVO;
 import com.kh.onemile.vo.MilesVO;
 
 @RequestMapping("/miles")
-@RestController
+@Controller
 public class MilesController {
 
     @Autowired
     private MilesService milesService;
+    @Autowired
+    private MemberService memberService;
 
     //마일즈 생성
     @GetMapping("/create")
-    public String create() {
+    public String create(HttpSession session, Model model) {
+    	int memberNo = (int)session.getAttribute("logNo");
+    	model.addAttribute("adDto",memberService.membership(memberNo));
         return "miles/create";
     }
     @PostMapping("/create")

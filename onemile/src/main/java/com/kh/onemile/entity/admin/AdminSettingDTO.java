@@ -2,10 +2,16 @@ package com.kh.onemile.entity.admin;
 
 import lombok.Data;
 
-// 관리자 모임 참여인원 세팅
+// 멤버십 혜택
 @Data
 public class AdminSettingDTO {
 	private int adNo;
-	private String isFree;
-	private String groupType;
+	private int mspNo;
+	private int jRegCnt;
+	private int jMaxCnt;
+	private int milCnt;
+	private int milJoinMax;
+	private int sRegCnt;
+	private int sMaxCnt;
+	private int nModTime;
 }
