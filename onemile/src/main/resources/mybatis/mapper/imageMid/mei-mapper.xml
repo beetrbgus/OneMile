@@ -5,7 +5,7 @@
 <mapper namespace="mei">
 	
 	<!-- 사진 추가 -->
-	<insert id="regMei" parameterType="memberImageMidDTO">
+	<insert id="regMei" parameterType="memberProfileMidDTO">
 		insert into mei
 		values(
 			#{meiNo}, #{imageNo}, #{memberNo}, #{imageDivision}
@@ -13,7 +13,7 @@
 	</insert>
 	
 	<!-- 단일조회 -->
-	<select id="getMei" parameterType="int" resultType="memberImageMidDTO">
+	<select id="getMei" parameterType="int" resultType="memberProfileMidDTO">
 		select * from mei where image_no = #{imageNo}
 	</select>
 	

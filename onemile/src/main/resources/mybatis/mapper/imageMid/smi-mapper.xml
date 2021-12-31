@@ -5,7 +5,7 @@
 <mapper namespace="smi">
 	
 	<!-- 사진 추가 -->
-	<insert id="regSmi" parameterType="socialImageMidDTO">
+	<insert id="regSmi" parameterType="socialImgMidDTO">
 		insert into smi
 		values(
 			#{smiNo}, #{imageNo}, #{socialNo}
@@ -13,7 +13,7 @@
 	</insert>
 	
 	<!-- 단일조회 -->
-	<select id="getSmi" parameterType="int" resultType="socialImageMidDTO">
+	<select id="getSmi" parameterType="int" resultType="socialImgMidDTO">
 		select * from smi where image_no = #{imageNo}
 	</select>
 	
