@@ -110,13 +110,11 @@
 		</property>
 	</bean> 
 	
-	
-	
 	<!-- 
 		Task 관련 설정 
 		- namespace에 task를 추가
 		- annotation-driven 태그를 작성하여 관련 어노테이션을 활성화
 	-->
 	<task:annotation-driven/>	
-		
+	
 </beans>

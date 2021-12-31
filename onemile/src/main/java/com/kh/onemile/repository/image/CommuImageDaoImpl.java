@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.onemile.entity.image.CommuImageDTO;
-import com.kh.onemile.repository.image.CommuImageDao;
 @Repository
 public class CommuImageDaoImpl implements CommuImageDao{
 
@@ -14,12 +13,12 @@ public class CommuImageDaoImpl implements CommuImageDao{
 
 	@Override
 	public void regCmi(CommuImageDTO commuImageDto) {
-		sqlSession.insert("cmi.insert", commuImageDto);
+		sqlSession.insert("cmi.regCmi", commuImageDto);
 	}
 
 	@Override
-	public CommuImageDTO get(int cmiNo) {
-		return sqlSession.selectOne("cmi.get", cmiNo);
+	public CommuImageDTO get(int imageNo) {
+		return sqlSession.selectOne("cmi.get", imageNo);
 	}
 
 	@Override

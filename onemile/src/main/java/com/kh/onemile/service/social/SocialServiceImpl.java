@@ -37,7 +37,7 @@ public class SocialServiceImpl implements SocialService{
 		SocialDTO socialDto = new SocialDTO();
 		socialDto.setSocialNo(socialNo);
 		socialDto.setMemberNo(socialVo.getMemberNo());
-		socialDto.setName(socialVo.getName());
+		socialDto.setTitle(socialVo.getName());
 		socialDto.setType(socialVo.getType());
 		socialDto.setContext(socialVo.getContext());
 		socialDto.setStartDate(socialVo.getStratDate());
@@ -60,26 +60,49 @@ public class SocialServiceImpl implements SocialService{
 	}
 
 	//소셜링 디테일
-//	@Override
-//	public SocialVO detail(int socialNo) {
-//		
-//	}
+	@Override
+	public SocialVO detail(int socialNo) {
+		SocialDTO socialDto = new SocialDTO();
+		socialDto = socialDao.detail(socialNo);
+		
+		SocialVO socialVo = new SocialVO();
+		
+		socialVo.setSocialNo(socialNo);
+		
+		int memberNo = socialDto.getMemberNo();
+//		MemberDTO memberDto = new MemberDTO();
+//		memberDto = memberDao.getNick(memberNo);
+//		commuVo.setNick(memberDto.getNick());
+			
+		int mapNo = socialDto.getMapNo();
+		
+		MapDTO mapDto = new MapDTO();
+		mapDto = mapDao.get(mapNo);
+		
+		socialVo.setLat(mapDto.getLat());
+		socialVo.setLon(mapDto.getLon());
+		socialVo.setDetailaddress(mapDto.getDetailaddress());
+		socialVo.setStratDate(socialDto.getStartDate());
+		
+		socialVo.setAdNo(socialDto.getAdNo());
+		socialVo.setContext(socialDto.getContext());
+		socialVo.setEndDate(socialDto.getEndDate());
+		socialVo.setMemberNo(memberNo);
+		socialVo.setName(socialDto.getTitle());
+		socialVo.setSmalltype(socialDto.getSmallType());
+		socialVo.setType(socialDto.getType());
+		return socialVo;
+	}
 
 	@Override
 	public List<SocialDTO> list() {
-		// TODO Auto-generated method stub
-		return null;
+		List<SocialDTO> list = socialDao.list();
+		return list;
 	}
 
 	@Override
 	public void changeSocial(SocialVO socialVo) {
 		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
-	public SocialVO detail(int socialNo) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

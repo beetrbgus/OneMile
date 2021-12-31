@@ -14,7 +14,7 @@
 	
 	<!-- 단일조회 -->
 	<select id="getSmi" parameterType="int" resultType="socialImageDTO">
-		select * from smi where smi_no = #{smiNo}
+		select * from smi where image_no = #{imageNo}
 	</select>
 	
 	<!-- 삭제하기 -->

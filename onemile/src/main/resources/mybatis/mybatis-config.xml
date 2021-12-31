@@ -49,6 +49,7 @@
 			<package name="com.kh.onemile.entity.social"/>
 			<package name="com.kh.onemile.entity.social.chat"/>
 			<package name="com.kh.onemile.vo"/>
+			<package name="com.kh.onemile.vo.kakaopay"/>
 	</typeAliases>
 
 	

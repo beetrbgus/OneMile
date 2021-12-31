@@ -8,13 +8,13 @@
 	<insert id="regMi" parameterType="milesImageDTO">
 		insert into mi
 		values(
-			#{miNo}, #{imageNo}, #{milesNo}
+			#{miNo}, #{imageNo}, #{milesNo}, #{thumbnail}
 		)
 	</insert>
 	
 	<!-- 단일조회 -->
 	<select id="getMi" parameterType="int" resultType="milesImageDTO">
-		select * from mi where mi_no = #{miNo}
+		select * from mi where image_no = #{imageNo}
 	</select>
 	
 	<!-- 삭제하기 -->

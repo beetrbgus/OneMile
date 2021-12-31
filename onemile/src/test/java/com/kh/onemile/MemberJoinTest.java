@@ -35,10 +35,10 @@ public class MemberJoinTest {
 			Date a = new Date();
 			SimpleDateFormat a1 =  new SimpleDateFormat("YYYY-MM-DD");
 			a  = a1.parse("2021-09-10");
-			memberDTO.setEmail("qkrrmsdnqkqh@naver.com");
-			memberDTO.setPw("qkrrmsdnqkqh");
-			memberDTO.setNick("쿠쿠");
-			memberDTO.setPhone("010-1000-0012");
+			memberDTO.setEmail("test1111@naver.com");
+			memberDTO.setPw("1234");
+			memberDTO.setNick("활동상태");
+			memberDTO.setPhone("010-1000-0009");
 			memberDTO.setBirth(a);
 			memberDTO.setMbti("INFP");
 			memberDTO.setIntro(" 1");

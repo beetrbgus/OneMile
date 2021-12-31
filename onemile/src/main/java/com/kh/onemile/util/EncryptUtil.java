@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class EncryptUtil {
 	@Autowired
 	private PasswordEncoder encoder;
-	
+
 	public String encryptPw(String password) {
 		return encoder.encode(password);
 	}

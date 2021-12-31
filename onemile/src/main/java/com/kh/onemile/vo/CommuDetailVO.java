@@ -18,14 +18,9 @@ public class CommuDetailVO {
 	private int hit;
 	private String viewYN;
 	
-	//지도
+	private String lagname;
+	private String nick;
 	private double lat;
 	private double lon;
 	private String detailaddress;
-	
-	//이미지
-	private byte[] load;
-	
-	//회원정보
-	private String nick;
 }

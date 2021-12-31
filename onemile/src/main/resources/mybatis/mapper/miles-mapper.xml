@@ -4,14 +4,15 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="miles">
 	
-	<insert id="create" parameterType="MilesVO">
+	<!-- 마일즈 생성 -->
+	<insert id="create" parameterType="MilesDTO">
 		insert into miles(
-                miles_no, smallname, member_no,ad_no,
+                miles_no, smallname, member_no,
                 name,context,area
         )
         values(
-            #{milesNo}, #{smallname},#{memberNo},#{adNo},
-            #{name},#{context},#{area}
+            #{milesNo}, #{smallName}, #{memberNo},
+            #{name}, #{context}, #{area}
         )
 	</insert>
 	

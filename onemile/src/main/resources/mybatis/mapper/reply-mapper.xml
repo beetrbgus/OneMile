@@ -4,11 +4,6 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="reply">
 	
-	<!-- 댓글 시퀀스 가져오기 -->
-	<select id="sequence" resultType="int">
-		select reply_seq.nextval from dual
-	</select>
-	
 	<!-- 댓글 등록 -->
 	<insert id="write">
 		insert into reply(
@@ -20,4 +15,20 @@
 			#{viewYn},#{replyReciver}
 		)
 	</insert>
+		
+	<select id="listForCommu" parameterType="int" resultType="ReplyVO">
+		select C.commu_no as commuNo, crp.crp_no as crpNo, re.regdate as regDate, re.content as content, me.nick as writerNick, mere.nick reciverNick from commu C left join crp crp on C.commu_no = crp.crp_no left join reply re on crp.reply_no = re.reply_no left join member me on re.member_no = me.member_no left join member mere on re.reply_reciver = mere.member_no where commu_no = #{commuNo};
+	</select>
+	
+	<select id="listForMiles" parameterType="int" resultType="ReplyVO">
+		select MB.mb_no as mbNo, mr.mr_no as mrNo, re.regdate as regDate, re.content as content, me.nick as writerNick, mere.nick reciverNick from mb mb left join mr mr on MB.mb_no = mr.mr_no left join reply re on mr.reply_no = re.reply_no left join member me on re.member_no = me.member_no left join member mere on re.reply_reciver = mere.member_no where mb_no = #{mbNo};
+	</select>
+	
+	<delete id="delete">
+		delete from reply where reply_no = #{replyNo}
+	</delete>
+	
+	<update id="edit">
+		update reply set content = #{content} where reply_no = #{replyNo}
+	</update>
 </mapper>

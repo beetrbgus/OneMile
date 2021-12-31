@@ -3,7 +3,7 @@
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="admin">
-
+	
 	<!-- 승인 등록 -->
 	<insert id="regApproveMember"  parameterType="ApproveDTO">
 		insert into approve values(#{approveNo},#{memberNo})
@@ -16,7 +16,7 @@
 	</update>
 	
 	<!-- 회원 목록 가져오기 -->
-	<select id="memberSearchList" resultType="Map">
-		select * from member
+	<select id="memberSearchList" resultType="List">
+		select * from member m inner join msp where m.member_no = msp.member_no
 	</select>
 </mapper>

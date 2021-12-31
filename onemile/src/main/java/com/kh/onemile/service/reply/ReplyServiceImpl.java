@@ -1,5 +1,7 @@
 package com.kh.onemile.service.reply;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +32,7 @@ public class ReplyServiceImpl implements ReplyService{
 	private Sequence seq;
 	
 	@Override
-	public void write(ReplyVO replyVo) {
+	public void writeReply(ReplyVO replyVo) {
 		
 		//시퀀스 가져오기
 		int replyNo = seq.nextSequence(SEQID);
@@ -71,9 +73,36 @@ public class ReplyServiceImpl implements ReplyService{
 			commuReplyDto.setCommuNo(replyVo.getCommuNo());
 			commuReplyDto.setCrpNo(crpNo);
 			commuReplyDto.setReplyNo(replyNo);
+			
+			commuReplyDao.write(commuReplyDto);
 		}
 		
 		//댓글 테이블 추가
 		replyDao.write(replyDto);
+	}
+
+	@Override
+	public List<ReplyVO> listByBoardNo(int boardNo) {
+		List<ReplyVO> list = replyDao.listByBoardNo(boardNo);
+		return list;
+	}
+
+	@Override
+	public void deleteReply(int replyNo) {
+		
+	}
+
+	@Override
+	public void editReply(ReplyVO replyVo) {
+		ReplyDTO replyDto = new ReplyDTO();
+		replyDto.setReplyNo(replyVo.getReplyNo());
+		replyDto.setMemberNo(replyVo.getMemberNo());
+		replyDto.setReplyReceiverNo(replyVo.getReplyReceiverNo());
+		replyDto.setContent(replyVo.getContent());
+		replyDto.setRegDate(replyVo.getRegDate());
+		replyDto.setViewYN(replyVo.getViewYN());
+		
+		//댓글 테이블 추가
+		replyDao.edit(replyDto);
 	}
 }

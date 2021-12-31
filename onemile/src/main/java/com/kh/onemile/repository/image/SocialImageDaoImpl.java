@@ -17,8 +17,8 @@ public class SocialImageDaoImpl implements SocialImageDao{
 	}
 
 	@Override
-	public SocialImageDTO get(int smiNo) {
-		return sqlSession.selectOne("smi.get", smiNo);
+	public SocialImageDTO get(int imageNo) {
+		return sqlSession.selectOne("smi.get", imageNo);
 	}
 
 	@Override

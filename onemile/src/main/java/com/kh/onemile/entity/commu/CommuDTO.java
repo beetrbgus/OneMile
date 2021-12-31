@@ -9,7 +9,6 @@ import lombok.Data;
 public class CommuDTO {
 	private int commuNo;
 	private int memberNo;
-	private int cmiNo;
 	private int mapNo;
 	
 	private String middleName;

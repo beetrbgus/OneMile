@@ -34,7 +34,4 @@ public class CommuVO {
 	//커뮤니티 이미지
 	private int cmiNo;
 	private int commuNo;
-	
-	
-	
 }

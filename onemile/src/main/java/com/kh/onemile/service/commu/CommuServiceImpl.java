@@ -5,11 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.onemile.entity.commu.CommuDTO;
-import com.kh.onemile.entity.image.CommuImageDTO;
-import com.kh.onemile.entity.image.ImageDTO;
 import com.kh.onemile.entity.map.MapDTO;
 import com.kh.onemile.repository.commu.CommuDao;
 import com.kh.onemile.repository.image.CommuImageDao;
@@ -50,11 +47,13 @@ public class CommuServiceImpl implements CommuService{
 		
 		//게시글 Dto 설정
 		CommuDTO commuDto = new CommuDTO();
-		commuDto.setCommuNo(commuNo);
+		
+		
+		commuDto.setCommuNo(commuVo.getCommuNo());
 		commuDto.setMemberNo(commuVo.getMemberNo());
 		commuDto.setMiddleName(commuVo.getMiddleName());
 		commuDto.setTitle(commuVo.getTitle());
-		commuDto.setContent(commuVo.getTitle());
+		commuDto.setContent(commuVo.getContent());
 		
 		double lat = commuVo.getLat();
 		double lon = commuVo.getLon();
@@ -76,22 +75,19 @@ public class CommuServiceImpl implements CommuService{
 			
 			commuDao.write(commuDto);
 		}else {
+			commuDto.setMapNo(1);
 			//게시글 작성
 			commuDao.write(commuDto);
 		}
-		
-		
 	}
 	
 	//수정하기
 	@Override
 	public void change(CommuVO commuVo) throws IllegalStateException, IOException {
 		
-		int commuNo = commuVo.getCommuNo();
-		
 		//게시글 Dto 설정
 		CommuDTO commuDto = new CommuDTO();
-		commuDto.setCommuNo(commuNo);
+		commuDto.setCommuNo(commuVo.getCommuNo());
 		commuDto.setMemberNo(commuVo.getMemberNo());
 		commuDto.setMiddleName(commuVo.getMiddleName());
 		commuDto.setTitle(commuVo.getTitle());
@@ -113,7 +109,7 @@ public class CommuServiceImpl implements CommuService{
 			mapDto.setDetailaddress(commuVo.getDetailaddress());
 			
 			mapDao.regMap(mapDto);
-			commuDto.setMapNo(mapNo);
+			//commuDto.setMapNo(mapNo);
 		}
 			commuDao.write(commuDto);
 	}
@@ -126,45 +122,15 @@ public class CommuServiceImpl implements CommuService{
 
 	//카테고리별 리스트
 	@Override
-	public List<CommuDTO> menuList(String middleName) {
-		List<CommuDTO> list = commuDao.menuList(middleName);
+	public List<CommuDetailVO> menuList(String middleName) {
+		List<CommuDetailVO> list = commuDao.menuList(middleName);
 		return list;
 	}
 	
 	//상세조회
 	@Override
 	public CommuDetailVO detail(int commuNo) throws IOException {
-		CommuDTO commuDto = new CommuDTO();
-		commuDto = commuDao.detail(commuNo);
-		
-		CommuDetailVO commuVo = new CommuDetailVO();
-		commuVo.setContent(commuDto.getContent());
-		commuVo.setMiddleName(commuDto.getMiddleName());
-		commuVo.setHit(commuDto.getHit());
-		commuVo.setRegDate(commuDto.getRegDate());
-		commuVo.setTitle(commuDto.getTitle());
-		commuVo.setViewYN(commuDto.getViewYN());
-		
-		int memberNo = commuDto.getMemberNo();
-//		MemberDTO memberDto = new MemberDTO();
-//		memberDto = memberDao.getNick(memberNo);
-//		commuVo.setNick(memberDto.getNick());
-		
-		CommuImageDTO cmiDto = new CommuImageDTO();
-		cmiDto = commuImageDao.get(commuDto.getCmiNo());
-		
-		//이미지 불러오기
-		commuVo.setLoad(imageDao.load(cmiDto.getImageNo()));
-			
-		int mapNo = commuDto.getMapNo();
-		
-		MapDTO mapDto = new MapDTO();
-		mapDto = mapDao.get(mapNo);
-		
-		commuVo.setLat(mapDto.getLat());
-		commuVo.setLon(mapDto.getLon());
-		commuVo.setDetailaddress(mapDto.getDetailaddress());
-		
+		CommuDetailVO commuVo = commuDao.detail(commuNo);
 		return commuVo;
 	}
 }

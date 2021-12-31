@@ -9,5 +9,5 @@ public class MilesImageDTO {
 	private int imageNo;
 	private int milesNo;
 	
-	private String thumbnail;
+	private String thumbnail; 
 }

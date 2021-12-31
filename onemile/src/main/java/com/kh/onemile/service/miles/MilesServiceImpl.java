@@ -3,6 +3,8 @@ package com.kh.onemile.service.miles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.onemile.entity.commu.CommuDTO;
+import com.kh.onemile.entity.map.MapDTO;
 import com.kh.onemile.entity.miles.MilesDTO;
 import com.kh.onemile.repository.miles.MilesDao;
 import com.kh.onemile.util.Sequence;
@@ -11,7 +13,7 @@ import com.kh.onemile.vo.MilesVO;
 @Service
 public class MilesServiceImpl implements MilesService{
 	final String SEQID = "miles_seq";
-	final String SEQNAME = "miles_no";
+	
 	@Autowired
 	private Sequence seq;
 	@Autowired
@@ -21,20 +23,15 @@ public class MilesServiceImpl implements MilesService{
 	public void create(MilesVO milesVo) {
 		int milesNo = seq.nextSequence(SEQID);
 		
-		milesDao.create(milesVo);
-		
+		//마일즈 DTO 설정
 		MilesDTO milesDTO = new MilesDTO();
 		milesDTO.setMilesNo(milesNo);
-		milesDTO.setSmallName(milesVo.getSmallName());
 		milesDTO.setMemberNo(milesVo.getMemberNo());
-		milesDTO.setAdNo(milesVo.getAdNo());
 		milesDTO.setName(milesVo.getName());
 		milesDTO.setContext(milesVo.getContext());
 		milesDTO.setArea(milesVo.getArea());
+		milesDTO.setSmallName(milesVo.getSmallName());
 		
-		
-		
-		
+		milesDao.create(milesDTO);
 	}
-	
 }

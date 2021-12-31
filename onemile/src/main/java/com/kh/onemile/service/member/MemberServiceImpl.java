@@ -1,5 +1,8 @@
 package com.kh.onemile.service.member;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -7,10 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.onemile.entity.member.MemberDTO;
 import com.kh.onemile.entity.member.certi.CertiDTO;
-import com.kh.onemile.repository.admin.AdminDao;
 import com.kh.onemile.repository.certi.CertiDao;
 import com.kh.onemile.repository.member.MemberDao;
-import com.kh.onemile.service.admin.AdminService;
 import com.kh.onemile.util.Sequence;
 import com.kh.onemile.util.SetDefaut;
 import com.kh.onemile.vo.MemberJoinVO;
@@ -56,16 +57,25 @@ public class MemberServiceImpl implements MemberService {
 	//로그인
 	@Override
 	public MemberDTO login(MemberDTO memberDTO) {
-		//로그인 암호화
-		String arwPw = encoder.encode(memberDTO.getPw());
-		memberDTO.setPw(arwPw);
-		
-		return memberDao.login(memberDTO);
+		MemberDTO loginMember = memberDao.login(memberDTO);
+		//암호화 비교
+		if(encoder.matches(memberDTO.getPw(), loginMember.getPw())) {
+			return loginMember;
+		}
+		else {
+			return null;
+		}
 	}
 	//회원탈퇴
 	@Override
 	public boolean quit(String email, String pw) {
-		return memberDao.quit(email,pw);
+		MemberDTO loginMember = memberDao.get(email);
+		boolean match = encoder.matches(pw, loginMember.getPw());
+		if(match) {	
+			return memberDao.quit(email);
+		}else {
+			return false;
+		}
 	}
 	//아이디찾기
 	@Override
@@ -77,4 +87,26 @@ public class MemberServiceImpl implements MemberService {
 	public boolean emailCheck(CertiDTO certiDTO) {
 		return certiDao.check(certiDTO);
 	}
+
+	//비밀번호 변경
+	@Override
+	public boolean changePw(String email, String nowPw, String changePw) {
+		MemberDTO loginMember = memberDao.get(email);//단일조회
+		boolean match = encoder.matches(nowPw, loginMember.getPw());
+		if(match) {
+			String encrypt = encoder.encode(changePw);
+			Map<String, Object> param = new HashMap<>();
+			param.put("changePw",encrypt);
+			param.put("email",email);
+			return memberDao.changePw(param);
+		}else {
+			return false;
+		}
+	}
+	
+	@Override
+	public String getNick(int memberNo) {
+		return memberDao.getNick(memberNo);
+	}
+
 }

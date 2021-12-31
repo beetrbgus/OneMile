@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.onemile.entity.image.MilesImageDTO;
+
 @Repository
 public class MilesImageDaoImpl implements MilesImageDao{
 
@@ -13,7 +14,8 @@ public class MilesImageDaoImpl implements MilesImageDao{
 
 	@Override
 	public void regMi(MilesImageDTO milesImageDto) {
-		sqlSession.insert("mi.regImage", milesImageDto);
+		milesImageDto.setThumbnail("1");//일단 넣기
+		sqlSession.insert("mi.regMi", milesImageDto);
 	}
 
 	@Override
@@ -22,3 +24,8 @@ public class MilesImageDaoImpl implements MilesImageDao{
 		return count > 0;
 	}
 }
+
+	@Override
+	public MilesImageDTO get(int imageNo) {
+		return sqlSession.selectOne("mi.get", imageNo);
+	}

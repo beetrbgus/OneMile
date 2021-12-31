@@ -12,7 +12,7 @@
 	</div>
 	<div class="row">
 		<label>현재 비밀번호</label>
-		<input type="password" name="memberPw" required class="form-input">
+		<input type="password" name="nowPw" required class="form-input">
 	</div>
 	<div class="row">
 		<label>바꿀 비밀번호</label>

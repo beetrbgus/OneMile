@@ -1,12 +1,16 @@
 package com.kh.onemile.service.admin;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.onemile.entity.admin.ApproveDTO;
+import com.kh.onemile.entity.admin.MemberListDTO;
 import com.kh.onemile.repository.admin.AdminDao;
 import com.kh.onemile.util.Sequence;
+
 import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
@@ -47,5 +51,10 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public void deniedApproveMember(int memberNo) {
 		adminDao.deniedApproveMember(memberNo);
+	}
+	//회원 목록 가져오기
+	@Override
+	public List<MemberListDTO> memberList() {
+		return adminDao.memberList();
 	}
 }

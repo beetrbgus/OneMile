@@ -1,8 +1,5 @@
 package com.kh.onemile;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 import org.junit.runner.RunWith;

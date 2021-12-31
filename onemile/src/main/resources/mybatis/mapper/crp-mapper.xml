@@ -14,4 +14,12 @@
 			#{crpNo}, #{replyNo}, #{commuNo}
 		)
 	</insert>
+	
+	<select id="get">
+		select * from crp where commu_no = #{commuNo}
+	</select>
+	
+	<delete id="delete">
+		delete from crp where reply_no = #{replyNo}
+	</delete>
 </mapper>

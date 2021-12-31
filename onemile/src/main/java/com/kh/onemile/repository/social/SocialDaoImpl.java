@@ -21,8 +21,7 @@ public class SocialDaoImpl implements SocialDao{
 
 	@Override
 	public List<SocialDTO> list() {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectList("social.list");
 	}
 
 	@Override

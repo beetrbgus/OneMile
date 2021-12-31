@@ -16,4 +16,11 @@ public interface MemberService {
 	public MemberDTO findId(MemberDTO memberDTO);
 	//이메일 전송 체크
 	public boolean emailCheck(CertiDTO certiDTO);
+
+	//비밀번호 변경
+	public boolean changePw(String email, String nowPw, String changePw);
+
+	//닉네임
+	public String getNick(int memberNo);
+
 }

@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
+
 import com.kh.onemile.entity.member.MemberDTO;
 import com.kh.onemile.vo.MemberJoinVO;
 
@@ -26,14 +27,7 @@ public class MemberDaoImpl implements MemberDao{
 	//로그인
 	@Override
 	public MemberDTO login(MemberDTO memberDTO) {
-		MemberDTO findDTO = sqlSession.selectOne("member.get",memberDTO.getEmail());
-		//암호화 비교
-		if(findDTO != null && encoder.matches(memberDTO.getPw(), findDTO.getPw())) {
-			return findDTO;
-		}
-		else {
-			return null;
-		}
+		return sqlSession.selectOne("member.get",memberDTO.getEmail());
 	}
 	//아이디 찾기
 	@Override
@@ -51,11 +45,26 @@ public class MemberDaoImpl implements MemberDao{
 	}
 	//회원탈퇴
 	@Override
-	public boolean quit(String email, String pw) {
-		MemberDTO memberDTO = new MemberDTO();
-		memberDTO.setEmail(email);
-		memberDTO.setPw(pw);
-		int count = sqlSession.delete("member.quit",memberDTO);
-		return count > 0;
+	public boolean quit(String email) {
+		return sqlSession.update("member.quit",email) > 0;
+	}
+
+	//단일조회
+	@Override
+	public MemberDTO get(String email) {	
+		return sqlSession.selectOne("member.get2",email);
+		
+	}
+	//비밀번호 변경
+	@Override
+	public boolean changePw(Map<String, Object> param) {
+		return sqlSession.update("member.changePw",param) > 0;
+		
+	}
+
+	//커뮤 글 작성자, 소모임 모임장, 마일즈 모임장 표기를 위해 닉네임 가져오기
+	@Override
+	public String getNick(int memberNo) {
+		return sqlSession.selectOne("member.getNick", memberNo);
 	}
 }

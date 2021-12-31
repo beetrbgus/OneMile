@@ -35,4 +35,7 @@ public class ImageVO {
 	private int meiNo;
 	private int memberNo;
 	private String imageDivision;
+	
+	//파일 정보
+	private byte[] load;
 }

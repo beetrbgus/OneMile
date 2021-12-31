@@ -10,7 +10,6 @@ public class MilesDTO {
 	private int milesNo;
 	private String smallName;
 	private int memberNo;
-	private int adNo;
 	
 	private String name;
 	private String context;
