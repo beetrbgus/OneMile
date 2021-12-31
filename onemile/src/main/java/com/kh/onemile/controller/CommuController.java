@@ -45,6 +45,13 @@ public class CommuController {
 		commuVo.setMemberNo(memberNo);
 		int commuNo = commuService.write(commuVo);
 		
+		commuVo.setMemberNo(memberNo);
+		commuVo.setCommuNo(commuNo);
+		commuService.write(commuVo);
+		if(imageVo!=null) {
+			imageVo.setCommuNo(commuNo);
+//			imageService.regImage(imageVo);
+		}
 		return "redirect:commu/detail?commuNo="+commuNo;
 	}
 	

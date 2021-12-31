@@ -17,7 +17,7 @@
 		)
 	</insert>
 	<!-- 단일 조회할 때  -->
-	<resultMap type="CategoryVO" id="cobuy">
+	<resultMap type="cobuyDTO" id="cobuy">
 		<result column="cobuy_No" property="cobuyNo" />
 		<result column="MEMBER_NO" property="memberNo" />
 		<result column="LARGE_NAME" property="largeName" />

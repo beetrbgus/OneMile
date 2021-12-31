@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.kh.onemile.entity.image.middle.MilesImgMidDTO;
 import com.kh.onemile.entity.miles.MilesDTO;
 import com.kh.onemile.repository.image.middle.MilesImageDao;
@@ -28,6 +27,7 @@ public class MilesServiceImpl implements MilesService{
 	@Autowired
 	private MilesImageDao middleService;
 	
+	//마일즈 생성
 	@Override
 	public void create(MilesVO milesVo) throws IllegalStateException, IOException {
 		int milesNo = seq.nextSequence(SEQID);

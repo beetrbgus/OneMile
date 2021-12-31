@@ -18,7 +18,7 @@ import com.kh.onemile.vo.MilesVO;
 @RequestMapping("/miles")
 @RestController
 public class MilesController {
-    
+
     @Autowired
     private MilesService milesService;
 

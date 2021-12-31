@@ -6,8 +6,6 @@ import lombok.Data;
 @Data
 public class MembershipDTO {
 	private int mspNo;
-	private int memberNo;
-	
 	private String mspProduct;
 	private int mspPrice;
 }
