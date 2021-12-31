@@ -36,6 +36,7 @@
 			<package name="com.kh.onemile.entity.admin.black"/>
 			<package name="com.kh.onemile.entity.commu"/>
 			<package name="com.kh.onemile.entity.image"/>
+			<package name="com.kh.onemile.entity.image.middle"/>
 			<package name="com.kh.onemile.entity.map"/>
 			<package name="com.kh.onemile.entity.member"/>
 			<package name="com.kh.onemile.entity.member.certi"/>
@@ -48,6 +49,7 @@
 			<package name="com.kh.onemile.entity.seq"/>
 			<package name="com.kh.onemile.entity.social"/>
 			<package name="com.kh.onemile.entity.social.chat"/>
+			<package name="com.kh.onemile.entity.cobuy"/>
 			<package name="com.kh.onemile.vo"/>
 			<package name="com.kh.onemile.vo.kakaopay"/>
 	</typeAliases>

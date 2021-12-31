@@ -2,23 +2,23 @@
 <!DOCTYPE mapper
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="mi">
+<mapper namespace="smi">
 	
 	<!-- 사진 추가 -->
-	<insert id="regMi" parameterType="milesImageDTO">
-		insert into mi
+	<insert id="regSmi" parameterType="socialImgMidDTO">
+		insert into smi
 		values(
-			#{miNo}, #{imageNo}, #{milesNo}, #{thumbnail}
+			#{smiNo}, #{imageNo}, #{socialNo}
 		)
 	</insert>
 	
 	<!-- 단일조회 -->
-	<select id="getMi" parameterType="int" resultType="milesImageDTO">
-		select * from mi where image_no = #{imageNo}
+	<select id="getSmi" parameterType="int" resultType="socialImgMidDTO">
+		select * from smi where image_no = #{imageNo}
 	</select>
 	
 	<!-- 삭제하기 -->
 	<delete id="deleteImage">
-		delete mi where image_no = #{imageNo}
+		delete smi where image_no = #{imageNo}
 	</delete>
 </mapper>

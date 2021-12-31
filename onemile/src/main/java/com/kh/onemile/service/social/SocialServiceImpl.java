@@ -3,6 +3,7 @@ package com.kh.onemile.service.social;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.kh.onemile.entity.map.MapDTO;
 import com.kh.onemile.entity.social.SocialDTO;
@@ -12,6 +13,7 @@ import com.kh.onemile.repository.social.SocialDao;
 import com.kh.onemile.util.Sequence;
 import com.kh.onemile.vo.SocialVO;
 
+@Service
 public class SocialServiceImpl implements SocialService{
 	final String SEQID = "social_seq";
 

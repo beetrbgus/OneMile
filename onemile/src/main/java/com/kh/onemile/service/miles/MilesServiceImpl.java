@@ -1,37 +1,48 @@
 package com.kh.onemile.service.miles;
 
+import java.io.IOException;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.kh.onemile.entity.commu.CommuDTO;
-import com.kh.onemile.entity.map.MapDTO;
+import com.kh.onemile.entity.image.middle.MilesImgMidDTO;
 import com.kh.onemile.entity.miles.MilesDTO;
+import com.kh.onemile.repository.image.middle.MilesImageDao;
 import com.kh.onemile.repository.miles.MilesDao;
+import com.kh.onemile.service.image.ImageService;
 import com.kh.onemile.util.Sequence;
 import com.kh.onemile.vo.MilesVO;
 
 @Service
 public class MilesServiceImpl implements MilesService{
-	final String SEQID = "miles_seq";
+	private final String folderName="/miles";
+	private final String SEQID = "miles_seq";
 	
 	@Autowired
 	private Sequence seq;
 	@Autowired
 	private MilesDao milesDao;
+	@Autowired
+	private ImageService imageService;
+	@Autowired
+	private MilesImageDao middleService;
 	
+	//마일즈 생성
 	@Override
-	public void create(MilesVO milesVo) {
+	public void create(MilesVO milesVo) throws IllegalStateException, IOException {
 		int milesNo = seq.nextSequence(SEQID);
 		
-		//마일즈 DTO 설정
-		MilesDTO milesDTO = new MilesDTO();
-		milesDTO.setMilesNo(milesNo);
-		milesDTO.setMemberNo(milesVo.getMemberNo());
-		milesDTO.setName(milesVo.getName());
-		milesDTO.setContext(milesVo.getContext());
-		milesDTO.setArea(milesVo.getArea());
-		milesDTO.setSmallName(milesVo.getSmallName());
+		milesDao.create(milesVo);
 		
-		milesDao.create(milesDTO);
+		if(milesVo.getAttach()!=null) {
+			List<Integer> imgNoList = imageService.regImage(milesVo.getAttach(), folderName);
+			
+			MilesImgMidDTO milesImgMidDto = new MilesImgMidDTO();
+			
+			milesImgMidDto.setImgNoList(imgNoList);
+			milesImgMidDto.setMilesNo(milesNo);
+			
+			middleService.reg(milesImgMidDto);
+		}
 	}
 }

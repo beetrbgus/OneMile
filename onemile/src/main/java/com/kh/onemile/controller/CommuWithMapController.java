@@ -28,7 +28,7 @@ public class CommuWithMapController {
 	@Autowired
 	private CommuService commuService;
 	
-	@Autowired @Qualifier("commuImage")
+	@Autowired
 	private ImageService imageService;
 	
 	@Autowired
@@ -45,16 +45,10 @@ public class CommuWithMapController {
 	@PostMapping("/matjip/write")
 	public String writeMatjip(@ModelAttribute CommuVO commuVo, @ModelAttribute ImageVO imageVo, HttpSession session) throws IllegalStateException, IOException {
 		int memberNo = (int)session.getAttribute("logNo");
-		int commuNo = seq.nextSequence("commu_seq");
-		
 		commuVo.setMemberNo(memberNo);
-		commuVo.setCommuNo(commuNo);
-		commuService.write(commuVo);
-		if(imageVo!=null) {
-			imageVo.setCommuNo(commuNo);
-			imageService.regImage(imageVo);
-		}
-		return "redirect:list";
+		int commuNo = commuService.write(commuVo);
+		
+		return "redirect:commu/detail?commuNo="+commuNo;
 	}
 	
 	@GetMapping("/matjip/list")
@@ -66,7 +60,7 @@ public class CommuWithMapController {
 	@RequestMapping("/matjip/detail")
 	public String detailMatjip(@RequestParam int boardNo, Model model) throws IOException {
 		model.addAttribute("commuDetailVO", commuService.detail(boardNo));
-		model.addAttribute("imageNoList", imageService.listByBoardNo(boardNo)); //boardNo로 imageNo list를 불러오는 거 만들기
+//		model.addAttribute("imageNoList", imageService.listByBoardNo(boardNo)); //boardNo로 imageNo list를 불러오는 거 만들기
 		model.addAttribute("replyVOList", replyService.listByBoardNo(boardNo)); //boardNo로 댓글 찾아주는 거 만들기
 		return "commu/matjip/detail";
 	}
@@ -79,16 +73,10 @@ public class CommuWithMapController {
 	@PostMapping("/inc/write")
 	public String writeInc(@ModelAttribute CommuVO commuVo, @ModelAttribute ImageVO imageVo, HttpSession session) throws IllegalStateException, IOException {
 		int memberNo = (int)session.getAttribute("logNo");
-		int commuNo = seq.nextSequence("commu_seq");
-		
 		commuVo.setMemberNo(memberNo);
-		commuVo.setCommuNo(commuNo);
-		commuService.write(commuVo);
-		if(imageVo!=null) {
-			imageVo.setCommuNo(commuNo);
-			imageService.regImage(imageVo);
-		}
-		return "redirect:list";
+		int commuNo = commuService.write(commuVo);
+		
+		return "redirect:commu/detail?commuNo="+commuNo;
 	}
 	
 	@GetMapping("/inc/list")
@@ -100,7 +88,7 @@ public class CommuWithMapController {
 	@RequestMapping("/inc/detail")
 	public String detailInc(@RequestParam int boardNo, Model model) throws IOException {
 		model.addAttribute("commuDetailVO", commuService.detail(boardNo));
-		model.addAttribute("imageNoList", imageService.listByBoardNo(boardNo));
+//		model.addAttribute("imageNoList", imageService.listByBoardNo(boardNo));
 		model.addAttribute("replyVOList", replyService.listByBoardNo(boardNo));
 		return "commu/inc/detail";
 	}
@@ -113,16 +101,10 @@ public class CommuWithMapController {
 	@PostMapping("/yam/write")
 	public String writeYam(@ModelAttribute CommuVO commuVo, @ModelAttribute ImageVO imageVo, HttpSession session) throws IllegalStateException, IOException {
 		int memberNo = (int)session.getAttribute("logNo");
-		int commuNo = seq.nextSequence("commu_seq");
-		
 		commuVo.setMemberNo(memberNo);
-		commuVo.setCommuNo(commuNo);
-		commuService.write(commuVo);
-		if(imageVo!=null) {
-			imageVo.setCommuNo(commuNo);
-			imageService.regImage(imageVo);
-		}
-		return "redirect:list";
+		int commuNo = commuService.write(commuVo);
+		
+		return "redirect:commu/detail?commuNo="+commuNo;
 	}
 	
 	@GetMapping("/yam/list")
@@ -134,7 +116,7 @@ public class CommuWithMapController {
 	@RequestMapping("/yam/detail")
 	public String detailYam(@RequestParam int boardNo, Model model) throws IOException {
 		model.addAttribute("commuDetailVO", commuService.detail(boardNo));
-		model.addAttribute("imageNoList", imageService.listByBoardNo(boardNo));
+//		model.addAttribute("imageNoList", imageService.listByBoardNo(boardNo));
 		model.addAttribute("replyVOList", replyService.listByBoardNo(boardNo));
 		return "commu/yam/detail";
 	}

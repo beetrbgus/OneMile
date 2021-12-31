@@ -20,15 +20,12 @@ public class ReplyController {
 
 	@Autowired
 	private ReplyService replyService;
-	
-	@Autowired
-	private ReplyVO replyVo;
-	
+
 	@Autowired
 	private ReplyDao replyDao;
 	
 	@GetMapping("/delete")
-	public String home() {
+	public String deleteReply() {
 		return "reply/delete";
 	}
 	

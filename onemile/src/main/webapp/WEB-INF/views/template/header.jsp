@@ -31,8 +31,18 @@
         .title-wrapper {
             flex-grow: 1;
         }
-	 </style>   
-    <!-- <script>    	//form이 전송되면 input[type=password]가 자동 암호화되도록 설정
+	 </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b89479d3bf4f702a0c7b99d5edfb1391&libraries=services" charset="utf-8"></script> 
+    <script type="text/javascript"src="${root}/resources/js/navigator.js"></script>
+    <script type="text/javascript"src="${root}/resources/js/notification.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.2/sockjs.min.js"></script>
+    <script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/sha1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" ></script>
+    
+    <!-- <script>
+    	//form이 전송되면 input[type=password]가 자동 암호화되도록 설정
     	$(function(){
     		$("form").submit(function(e){
     			//this == form
@@ -53,51 +63,7 @@
     </script> -->
     
     <script>
-	    var socket = null;
 	
-	    $(document).ready(function (){ //준비가 되면
-	 	   connectWs();
-	    });
-	
-	    function connectWs(){
-	    	sock = new SockJS( "<c:url value="/echo"/>" );
-	    	socket = sock;
-	
-	    	sock.onopen = function() {
-	            console.log('info:connection opened.');
-	      };
-	
-	     sock.onmessage = function(evt) {
-	 	 	var data = evt.data;
-	 	   	
-		   	var toastTop = app.toast.create({
-	            text: "알림 : " + data + "\n",
-	            closeButton: true,
-	            debug: false,
-	            newestOnTop: false,
-	            progressBar: false,
-	            positionClass: "toast-top-right",
-	            preventDuplicates: false,
-	            onclick: null,
-	            showDuration: 300,
-	            hideDuration: 1000,
-	            timeOut: 5000,
-	            extendedTimeOut: 1000,
-	            showEasing: "swing",
-	            hideEasing: "linear",
-	            showMethod: "fadeIn",
-	            hideMethod: "fadeOut"
-	          });
-	          toastTop.open();
-	    };
-
-	    sock.onclose = function() {
-	      	console.log('connect close');
-	    };
-
-	    sock.onerror = function (err) {console.log('Errors : ' , err);};
-
-	   }
 	   </script>
 </head>
 <body>
@@ -119,7 +85,7 @@
                 <span>[<%=session.getAttribute("logId")%>]님</span>
                 <span>[<%=session.getAttribute("nick") %>]님</span>
                 <span>[<%=session.getAttribute("grade") %>]등급</span>
-                
+                <span>멤버십 번호 : [<%=session.getAttribute("mspNo") %>]</span>
                
             </div>
 
@@ -133,6 +99,7 @@
             			<li><a href="${root}">홈으로</a></li>
 		            	<li><a href="${root}/board/list">게시판</a></li>
 		            	<li><a href="${root}/miles/create">마일즈생성(임시)</a></li>
+		            	<li><a href="${root}/membership/list">멤버십결제(임시)</a></li>
 		            	<li class="flex-right">
 		            		<a href="#">회원메뉴</a>
 		            		<ul>

@@ -11,9 +11,11 @@ public class MembershipBuyDTO {
 	private int memberNo;
 	private int mspNo;
 	
-	private int tid;
+	private String sid;
 	private String itemName;
 	private int totalAmount;
 	private Date buyTime;
+	private Date buyEndtime;
+	private String partnerUserId;
 	private String status;
 }
