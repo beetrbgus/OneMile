@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="membership">
+	<!-- 멤버십 상품 목록 -->
+	<select id="membershipList" resultType="MembershipDTO">
+		 select * from msp
+	<!-- select msp.*, ad.* from msp inner join ad on msp.msp_no = ad.msp_no-->
+	</select>
+	
+	<!-- 결제 상품 확인(단일 조회) -->
+	<select id="get" parameterType="int" resultType="MembershipDTO">
+		select * from msp where msp_no = #{mspNo}
+	</select>
+		
+	<!-- 멤버십 가입 -->
+	<insert id="join" parameterType="membershipBuyDTO">
+		insert into msb (
+			msb_no, member_no ,msp_no, sid, total_amount, partner_user_id,
+			buy_time, buy_endtime, status
+			)
+			values(
+			#{msbNo},#{memberNo},#{mspNo},#{sid},#{totalAmount}, #{partnerUserId},
+			sysdate, sysdate+31, '결제완료'
+			)
+	</insert>
+		
+	<!-- 결제일 비교하기-->
+	<select id="dayCheck" >
+	<![CDATA[
+		 select  * from msb where buy_endtime <= sysdate
+		  ]]>
+	</select>
+	
+	<!--정기결제 전체 목록 -->
+	<select id="msbList">
+		select * from msb
+	</select>
+</mapper>

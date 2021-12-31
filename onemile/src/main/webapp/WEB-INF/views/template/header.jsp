@@ -128,7 +128,7 @@
                 <span>[<%=session.getAttribute("logId")%>]님</span>
                 <span>[<%=session.getAttribute("nick") %>]님</span>
                 <span>[<%=session.getAttribute("grade") %>]등급</span>
-                
+                <span>멤버십 번호 : [<%=session.getAttribute("mspNo") %>]</span>
                
             </div>
 
@@ -142,6 +142,7 @@
             			<li><a href="${root}">홈으로</a></li>
 		            	<li><a href="${root}/board/list">게시판</a></li>
 		            	<li><a href="${root}/miles/create">마일즈생성(임시)</a></li>
+		            	<li><a href="${root}/membership/list">멤버십결제(임시)</a></li>
 		            	<li class="flex-right">
 		            		<a href="#">회원메뉴</a>
 		            		<ul>

@@ -18,7 +18,6 @@ import com.kh.onemile.entity.member.MemberDTO;
 import com.kh.onemile.entity.member.certi.CertiDTO;
 import com.kh.onemile.service.admin.AdminService;
 import com.kh.onemile.service.email.EmailService;
-import com.kh.onemile.service.image.MemberImageService;
 import com.kh.onemile.service.member.MemberService;
 import com.kh.onemile.vo.MemberJoinVO;
 
@@ -57,13 +56,16 @@ public class MemberController {
 	@PostMapping("/login")
 	public String login(@ModelAttribute MemberDTO memberDTO, @RequestParam(required = false) String saveId,
 			HttpServletResponse response, HttpSession session) {
+			
 			MemberDTO findDTO = memberService.login(memberDTO);
+			
 			
 			if(findDTO != null) {
 			session.setAttribute("logId", findDTO.getEmail());
 			session.setAttribute("nick", findDTO.getNick());
 			session.setAttribute("grade", findDTO.getGrade());
 			session.setAttribute("logNo", findDTO.getMemberNo());
+			
 			
 			if(saveId != null) {//생성
 				Cookie c = new Cookie("saveId", findDTO.getEmail());

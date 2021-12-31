@@ -2,9 +2,6 @@ package com.kh.onemile.service.miles;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.kh.onemile.entity.commu.CommuDTO;
-import com.kh.onemile.entity.map.MapDTO;
 import com.kh.onemile.entity.miles.MilesDTO;
 import com.kh.onemile.repository.miles.MilesDao;
 import com.kh.onemile.util.Sequence;
@@ -19,6 +16,7 @@ public class MilesServiceImpl implements MilesService{
 	@Autowired
 	private MilesDao milesDao;
 	
+	//마일즈 생성
 	@Override
 	public void create(MilesVO milesVo) {
 		int milesNo = seq.nextSequence(SEQID);
