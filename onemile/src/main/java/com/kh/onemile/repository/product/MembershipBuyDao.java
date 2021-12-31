@@ -1,5 +1,7 @@
 package com.kh.onemile.repository.product;
 
+import java.util.List;
+
 import com.kh.onemile.entity.product.MembershipBuyDTO;
 
 public interface MembershipBuyDao {
@@ -7,6 +9,9 @@ public interface MembershipBuyDao {
 	void insert(MembershipBuyDTO membershipBuyDTO);
 	
 	//멤버십 종료일 비교하기
-	void dayCheck(MembershipBuyDTO membershipBuyDTO);
+	MembershipBuyDTO dayCheck();
+	
+	//정기결제 전체목록
+	List<MembershipBuyDTO> list();
 	
 }

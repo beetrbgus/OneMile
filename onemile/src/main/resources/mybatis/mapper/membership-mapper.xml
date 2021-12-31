@@ -27,7 +27,14 @@
 	</insert>
 		
 	<!-- 결제일 비교하기-->
-	<!-- <select id="dayCheck" parameterType="">
+	<select id="dayCheck" >
+	<![CDATA[
 		 select  * from msb where buy_endtime <= sysdate
-	</select> -->
+		  ]]>
+	</select>
+	
+	<!--정기결제 전체 목록 -->
+	<select id="msbList">
+		select * from msb
+	</select>
 </mapper>

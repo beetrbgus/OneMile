@@ -19,6 +19,7 @@ import com.kh.onemile.entity.product.MembershipDTO;
 import com.kh.onemile.repository.product.MembershipBuyDao;
 import com.kh.onemile.repository.product.MembershipDao;
 import com.kh.onemile.service.kakaopay.KakaoPayService;
+import com.kh.onemile.service.schedule.ScheduleService;
 import com.kh.onemile.vo.kakaopay.KakaoPayApproveRequestVO;
 import com.kh.onemile.vo.kakaopay.KakaoPayApproveResponseVO;
 import com.kh.onemile.vo.kakaopay.KakaoPayReadyRequestVO;
@@ -32,6 +33,8 @@ public class MembershipController {
 	private MembershipDao membershipDao;
 	@Autowired
 	private KakaoPayService kakaoPayService;
+	@Autowired
+	private ScheduleService scheduleService;
 	@Autowired
 	private MembershipBuyDao membershipBuyDao;
 	//멤버십 목록 + AD추가

@@ -1,5 +1,7 @@
 package com.kh.onemile.repository.product;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -26,7 +28,13 @@ public class MembershipBuyDaoImpl implements MembershipBuyDao{
 	
 	//날짜 비교하기
 	@Override
-	public void dayCheck(MembershipBuyDTO membershipBuyDTO) {
-		sqlSession.selectList("membership.dayCheck", membershipBuyDTO);
+	public MembershipBuyDTO dayCheck() {
+		return sqlSession.selectOne("membership.dayCheck");
+		
+	}
+	//정기결제 전체목록
+	@Override
+	public List<MembershipBuyDTO> list() {
+		return sqlSession.selectList("membership.dayCheck");
 	}
 }
