@@ -7,12 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.onemile.entity.commu.CommuDTO;
+import com.kh.onemile.entity.image.middle.CommuImgMidDTO;
 import com.kh.onemile.entity.map.MapDTO;
 import com.kh.onemile.repository.commu.CommuDao;
-import com.kh.onemile.repository.image.CommuImageDao;
-import com.kh.onemile.repository.image.ImageDao;
+import com.kh.onemile.repository.image.middle.CommuImageDao;
 import com.kh.onemile.repository.map.MapDao;
 import com.kh.onemile.repository.member.MemberDao;
+import com.kh.onemile.service.image.ImageService;
 import com.kh.onemile.util.Sequence;
 import com.kh.onemile.vo.CommuDetailVO;
 import com.kh.onemile.vo.CommuVO;
@@ -20,14 +21,15 @@ import com.kh.onemile.vo.CommuVO;
 @Service
 public class CommuServiceImpl implements CommuService{
 	
+	private final String folderName = "/commu";
 	@Autowired
 	private CommuDao commuDao;
 	
 	@Autowired
-	private ImageDao imageDao;
+	private ImageService imageService;
 	
 	@Autowired
-	private CommuImageDao commuImageDao;
+	private CommuImageDao middleService;
 	
 	@Autowired
 	private MapDao mapDao;
@@ -40,14 +42,13 @@ public class CommuServiceImpl implements CommuService{
 
 	//글쓰기
 	@Override
-	public void write(CommuVO commuVo) throws IllegalStateException, IOException {
+	public int write(CommuVO commuVo) throws IllegalStateException, IOException {
 		
 		//시퀀스 생성
 		int commuNo = seq.nextSequence("commu_seq");
 		
 		//게시글 Dto 설정
 		CommuDTO commuDto = new CommuDTO();
-		
 		
 		commuDto.setCommuNo(commuVo.getCommuNo());
 		commuDto.setMemberNo(commuVo.getMemberNo());
@@ -72,13 +73,21 @@ public class CommuServiceImpl implements CommuService{
 			
 			mapDao.regMap(mapDto);
 			commuDto.setMapNo(mapNo);
-			
-			commuDao.write(commuDto);
-		}else {
-			commuDto.setMapNo(1);
-			//게시글 작성
-			commuDao.write(commuDto);
 		}
+		
+		if(commuVo.getAttach()!=null) {
+			List<Integer> imgNoList = imageService.regImage(commuVo.getAttach(), folderName);
+			
+			CommuImgMidDTO commuImgMidDto = new CommuImgMidDTO();
+			
+			commuImgMidDto.setImgNoList(imgNoList);
+			commuImgMidDto.setCommuNo(commuNo);
+			
+			middleService.reg(commuImgMidDto);
+		}
+		commuDao.write(commuDto);
+		
+		return commuNo;
 	}
 	
 	//수정하기

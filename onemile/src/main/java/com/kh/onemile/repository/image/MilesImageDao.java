@@ -1,6 +1,5 @@
 package com.kh.onemile.repository.image;
 
-import com.kh.onemile.entity.image.MilesImageDTO;
 import com.kh.onemile.entity.image.middle.MilesImgMidDTO;
 
 public interface MilesImageDao {

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.kh.onemile.entity.cobuy.CobuyDTO;
 import com.kh.onemile.entity.image.middle.CobuyImgMidDTO;
 import com.kh.onemile.repository.cobuy.CobuyDao;
@@ -47,7 +48,7 @@ public class CobuyServiceImpl implements CobuyService {
 			CobuyImgMidDTO cobuyImgMidDTO = new CobuyImgMidDTO();
 
 			cobuyImgMidDTO.setImgNoList(imgNoList); // 이미지 갯수만큼 넣어 줌
-			cobuyImgMidDTO.setCbiNo(cobuyNo); // 공구 상품 번호
+			cobuyImgMidDTO.setCobuyNo(cobuyNo); // 공구 상품 번호
 
 			// 중간 이미지 테이블에 등록
 			middleService.reg(cobuyImgMidDTO);

@@ -61,4 +61,9 @@ public class ImageServiceImpl implements ImageService {
 		imageDao.deleteImage(imageNo);
 	}
 
+	@Override
+	public List<ImageDTO> listByBoardNo(int boardNo) {
+		List<ImageDTO> list = imageDao.listByBoardNo(boardNo);
+		return list;
+	}
 }

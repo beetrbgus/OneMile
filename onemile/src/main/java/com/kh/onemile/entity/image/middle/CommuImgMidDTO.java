@@ -8,6 +8,7 @@ import lombok.Data;
 @Data
 public class CommuImgMidDTO {
 	private int cmiNo;
-	private List<Integer> imgNo;
+	private List<Integer> imgNoList;
 	private int commuNo;
+	private int imgNo;
 }
