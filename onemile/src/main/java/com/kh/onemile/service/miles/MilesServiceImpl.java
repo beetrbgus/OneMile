@@ -9,7 +9,10 @@ import com.kh.onemile.vo.MilesVO;
 
 @Service
 public class MilesServiceImpl implements MilesService{
-	final String SEQID = "miles_seq";
+	//파일 저장 폴더
+	private final String folderName="/miles";
+	//시퀀스 이름
+	private final String SEQID = "miles_seq";
 	
 	@Autowired
 	private Sequence seq;
@@ -19,7 +22,9 @@ public class MilesServiceImpl implements MilesService{
 	//마일즈 생성
 	@Override
 	public void create(MilesVO milesVo) {
+		//마일즈 번호
 		int milesNo = seq.nextSequence(SEQID);
+		
 		
 		//마일즈 DTO 설정
 		MilesDTO milesDTO = new MilesDTO();

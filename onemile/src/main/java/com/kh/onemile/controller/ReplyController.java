@@ -22,9 +22,6 @@ public class ReplyController {
 	private ReplyService replyService;
 	
 	@Autowired
-	private ReplyVO replyVo;
-	
-	@Autowired
 	private ReplyDao replyDao;
 	
 	@GetMapping("/delete")
