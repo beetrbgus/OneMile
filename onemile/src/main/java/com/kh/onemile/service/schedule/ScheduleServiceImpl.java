@@ -29,7 +29,7 @@ public class ScheduleServiceImpl implements ScheduleService{
 	
 	
 	//이메일 인증번호(누적된 DB) 삭제 스케줄러
-	@Scheduled(cron = "0 0 9 * * *")//매일 오전 9시
+	@Scheduled(cron = "0 0 0 * * *")//매일 오전12시
 	@Override
 	public void execute() {
 		log.debug("DB 스케줄러 테스트중");
@@ -40,20 +40,19 @@ public class ScheduleServiceImpl implements ScheduleService{
 	@Override
 	public void regularPayment() throws URISyntaxException {
 		
-		MembershipBuyDTO membershipBuyDTO	= membershipBuyDao.dayCheck();//날짜비교해서
-		if(membershipBuyDTO != null) {//데이터가 있으면
-			List<MembershipBuyDTO> list = membershipBuyDao.list(); //정기결제해야할 전체목록
+		List<MembershipBuyDTO> membershipBuyDTO	= membershipBuyDao.dayCheck();//날짜비교해서
+		for(MembershipBuyDTO msbDTO : membershipBuyDTO) {//데이터가 있으면
+			
 			KakaoPayRegularApproveRequestVO requestVO = new KakaoPayRegularApproveRequestVO();
-			System.out.println(list.toString());
-			for(MembershipBuyDTO dto : list) {
-				requestVO.setPartner_user_id(dto.getPartnerUserId());
-				requestVO.setSid(dto.getSid());
-				requestVO.setTotal_amount(dto.getTotalAmount());
-				
-				KakaoPayApproveResponseVO responseVO = kakaoPaySerivce.regularApprove(requestVO);
-				membershipBuyDao.insert(membershipBuyDTO);
-				System.out.println("정기결제 성공!");
+			requestVO.setPartner_user_id(msbDTO.getPartnerUserId());
+			requestVO.setSid(msbDTO.getSid());
+			requestVO.setTotal_amount(msbDTO.getTotalAmount());
+			
+			KakaoPayApproveResponseVO responseVO = kakaoPaySerivce.regularApprove(requestVO);
+			System.out.println("정기 결제 성공");
+			
+			membershipBuyDao.insert(msbDTO);
+			
 		}
-	}
 	}
 }

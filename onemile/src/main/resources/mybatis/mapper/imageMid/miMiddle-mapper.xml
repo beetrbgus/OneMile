@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mi">
+	<!-- getSequence 하라고 권장. -->
+	<!-- 테이블이 40개가 넘어서  -->
+	<!--등록 -->
+	<insert id="reg" parameterType="milesImgMidDto">
+		insert into mi(mi_no,image_no,miles_no,thumbnail) values(
+			mi_seq.nextval, #{imageNo}, #{milesNo}, 'y'
+		)
+	</insert>
+	
+	<!--삭제  -->
+	<delete id="delete" parameterType="int">
+		delete cbi where cbi_no = #{cbiNo}
+	</delete>
+	
+	<!--이미지 조회 1개 또는 여러개일 수 있음. -->
+	<select id="getImg" parameterType="int" resultType="List">
+		select IMAGE_NO from cbi where cobuy_no = #{cobuyNo}
+	</select>
+</mapper>
