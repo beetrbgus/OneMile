@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 public class MemberProfileMidDTO {
 	private int meiNo;
-	private List<Integer> imgNo;
+	private List<Integer> imgNoList;
 	private int memberNo;
+	private int imgNo;
 }

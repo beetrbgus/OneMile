@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 public class MilesImgMidDTO {
 	private int miNo;
-	private List<Integer> imgNo;
+	private List<Integer> imgNoList;
 	private int milesNo;
+	private int imgNo;
 }

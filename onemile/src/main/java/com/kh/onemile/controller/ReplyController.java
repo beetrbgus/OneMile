@@ -25,7 +25,7 @@ public class ReplyController {
 	private ReplyDao replyDao;
 	
 	@GetMapping("/delete")
-	public String home() {
+	public String deleteReply() {
 		return "reply/delete";
 	}
 	
