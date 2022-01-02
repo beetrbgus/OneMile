@@ -18,8 +18,9 @@ import com.kh.onemile.entity.product.MembershipBuyDTO;
 import com.kh.onemile.entity.product.MembershipDTO;
 import com.kh.onemile.repository.product.MembershipBuyDao;
 import com.kh.onemile.repository.product.MembershipDao;
+import com.kh.onemile.repository.social.BigCategoryDao;
+import com.kh.onemile.service.CategoryService;
 import com.kh.onemile.service.kakaopay.KakaoPayService;
-import com.kh.onemile.service.schedule.ScheduleService;
 import com.kh.onemile.vo.kakaopay.KakaoPayApproveRequestVO;
 import com.kh.onemile.vo.kakaopay.KakaoPayApproveResponseVO;
 import com.kh.onemile.vo.kakaopay.KakaoPayReadyRequestVO;
@@ -34,9 +35,8 @@ public class MembershipController {
 	@Autowired
 	private KakaoPayService kakaoPayService;
 	@Autowired
-	private ScheduleService scheduleService;
-	@Autowired
 	private MembershipBuyDao membershipBuyDao;
+	
 	//멤버십 목록 + AD추가
 	@RequestMapping("/list")
 	public String list(Model model) {
@@ -46,10 +46,11 @@ public class MembershipController {
 	
 	//결제할 상품 확인
 	@GetMapping("/confirm")
-	public String confirm(@RequestParam int mspNo, Model model) {
+	public String confirm(@RequestParam int mspNo, Model model, HttpSession session) {
 		List<MembershipDTO> list = membershipDao.search(mspNo);
 		model.addAttribute("list", list);
-		return "membership/confirm";
+		session.setAttribute("mspNo", mspNo);
+		return "redirect:/";
 	}
 	
 	//결제 준비 요청

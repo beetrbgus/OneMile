@@ -35,7 +35,7 @@ public class CobuyServiceImpl implements CobuyService {
 	@Override
 	public int reg(CobuyDTO cobuyDTO) throws IllegalStateException, IOException {
 		int cobuyNo = seq.getSequence(seqName); // 공동구매 상품 번호
-
+		
 		cobuyDTO.setCobuyNo(cobuyNo);
 		// 공구 테이블에 등록
 		cobuyDao.reg(cobuyDTO);

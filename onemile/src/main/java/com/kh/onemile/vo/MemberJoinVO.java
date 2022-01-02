@@ -32,4 +32,7 @@ public class MemberJoinVO {
 	private Date exitDate;
 	private List<MultipartFile> attach;
 	
+	private int imageNo;
+	private List<Integer> imageList; //가져올 때 이미지 번호들
+	
 }

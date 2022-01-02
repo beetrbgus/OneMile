@@ -1,6 +1,8 @@
 package com.kh.onemile.service.member;
 
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,10 +10,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kh.onemile.entity.image.middle.MemberProfileMidDTO;
 import com.kh.onemile.entity.member.MemberDTO;
 import com.kh.onemile.entity.member.certi.CertiDTO;
 import com.kh.onemile.repository.certi.CertiDao;
+import com.kh.onemile.repository.image.middle.MemberImageDao;
 import com.kh.onemile.repository.member.MemberDao;
+import com.kh.onemile.service.image.ImageService;
 import com.kh.onemile.util.Sequence;
 import com.kh.onemile.util.SetDefaut;
 import com.kh.onemile.vo.MemberJoinVO;
@@ -22,8 +27,11 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Transactional
 public class MemberServiceImpl implements MemberService {
-	final String SEQID = "member_seq";
-	final String SEQNAME = "member_no";//혹시 몰라서 보류 나중에 지우기
+	private final String folderName="/member";
+	private final String SEQID = "member_seq";
+	private final String SEQNAME = "member_no";//혹시 몰라서 보류 나중에 지우기
+	
+	
 	@Autowired
 	private MemberDao memberDao;
 	@Autowired
@@ -32,13 +40,17 @@ public class MemberServiceImpl implements MemberService {
 	private Sequence seq;
 	@Autowired
 	private PasswordEncoder encoder;
-
+	@Autowired
+	private ImageService imageService; //이미지 서비스
+	@Autowired
+	private MemberImageDao middleService; // 이미지 중간 테이블 서비스
+	
 	@Autowired
 	private SetDefaut setDefault;
 	
 	// 회원가입
 	@Override
-	public int join(MemberJoinVO memberJoinVO) {
+	public int join(MemberJoinVO memberJoinVO) throws IllegalStateException, IOException {
 		setDefault.setMemberCoronaDefault(memberJoinVO.getCorona());
 		// 비밀번호 암호화
 		String origin = memberJoinVO.getPw();
@@ -49,8 +61,20 @@ public class MemberServiceImpl implements MemberService {
 		int memNo = seq.nextSequence(SEQID);
 		memberJoinVO.setMemberNo(memNo);
 		log.debug("가입한 회원번호   "+ memNo);
-		memberDao.join(memberJoinVO);
+		memberDao.join(memberJoinVO);//회원테이블에 등록
+		if(memberJoinVO.getAttach() != null) {  //사진이 있으면
+			List<Integer> imgNoList = imageService.regImage(memberJoinVO.getAttach(), folderName);
 		
+		//연결 테이블
+		MemberProfileMidDTO memberProfileMidDTO = new MemberProfileMidDTO();
+		
+		memberProfileMidDTO.setImgNoList(imgNoList);
+		memberProfileMidDTO.setMemberNo(memNo);
+		
+		// 중간 이미지 테이블에 등록
+		middleService.reg(memberProfileMidDTO);
+		log.debug("등록 완료  memberJoinVO   "+memberProfileMidDTO.toString());
+		}
 		return memNo;
 	}
 
