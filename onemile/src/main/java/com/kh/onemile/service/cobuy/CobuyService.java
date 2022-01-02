@@ -3,12 +3,13 @@ package com.kh.onemile.service.cobuy;
 import java.io.IOException;
 import java.util.List;
 
-import com.kh.onemile.entity.cobuy.CobuyDTO;
+import com.kh.onemile.vo.cobuy.CobuyDetailVO;
+import com.kh.onemile.vo.cobuy.CobuyListVO;
 
 public interface CobuyService {
-	public int reg(CobuyDTO cobuyDTO) throws IllegalStateException, IOException;
-	public List<CobuyDTO> getList();
-	public CobuyDTO getDetail(int cobuyNo);
-	public void modify(CobuyDTO cobuyDTO);
-	public void delete();
+	public int reg(CobuyDetailVO cobuyDTO) throws IllegalStateException, IOException;
+	public List<CobuyListVO> getList();
+	public CobuyListVO getDetail(int cobuyNo);
+	public void modify(CobuyDetailVO cobuyDetailVO);
+	public void delete(int cobuyNo);
 }

@@ -12,7 +12,7 @@ import com.kh.onemile.repository.reply.CommuReplyDao;
 import com.kh.onemile.repository.reply.MilesBoardReplyDao;
 import com.kh.onemile.repository.reply.ReplyDao;
 import com.kh.onemile.util.Sequence;
-import com.kh.onemile.vo.ReplyVO;
+import com.kh.onemile.vo.reply.ReplyVO;
 
 @Service
 public class ReplyServiceImpl implements ReplyService{

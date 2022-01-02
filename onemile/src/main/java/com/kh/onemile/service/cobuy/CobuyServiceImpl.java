@@ -5,15 +5,20 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.kh.onemile.entity.cobuy.CobuyDTO;
 import com.kh.onemile.entity.image.middle.CobuyImgMidDTO;
 import com.kh.onemile.repository.cobuy.CobuyDao;
 import com.kh.onemile.repository.image.middle.CobuyMidImgDao;
 import com.kh.onemile.service.image.ImageService;
 import com.kh.onemile.util.Sequence;
+import com.kh.onemile.vo.cobuy.CobuyDetailVO;
+import com.kh.onemile.vo.cobuy.CobuyListVO;
 
 import lombok.extern.slf4j.Slf4j;
 
+@Transactional
 @Slf4j
 @Service
 public class CobuyServiceImpl implements CobuyService {
@@ -32,50 +37,70 @@ public class CobuyServiceImpl implements CobuyService {
 	private Sequence seq;
 
 	@Override
-	public int reg(CobuyDTO cobuyDTO) throws IllegalStateException, IOException {
-		int cbiNo = seq.getSequence(seqName); // 공동구매 상품 번호
-
-		cobuyDTO.setCobuyNo(cbiNo);
+	public int reg(CobuyDetailVO cobuyDetailVO) throws IllegalStateException, IOException {
+		int cbNo = seq.nextSequence(seqName); // 공동구매 상품 번호
+		log.debug("cbNo       " + cbNo );
+		cobuyDetailVO.setCobuyNo(cbNo);
 		// 공구 테이블에 등록
-		cobuyDao.reg(cobuyDTO);
-		log.debug("cobuyDTO 뭘까내용이???    "+cobuyDTO.toString());
-		log.debug("파일이 없나???    "+cobuyDTO.getAttach().isEmpty());
-		if (cobuyDTO.getAttach() != null) {
-			List<Integer> imgNoList = imageService.regImage(cobuyDTO.getAttach(), folderName);
+		cobuyDao.reg(cobuyDetailVO);
+		log.debug("cobuyDTO 뭘까내용이???    "+cobuyDetailVO.toString());
+		log.debug("파일이 없나???    "+(cobuyDetailVO.getAttach()==null) != null?"ㅇㅇ 널임":"아님 널 아님");
+		if (cobuyDetailVO.getAttach() != null) {
+			List<Integer> imgNoList = imageService.regImage(cobuyDetailVO.getAttach(), folderName);
 
 			// 연결 테이블
 			CobuyImgMidDTO cobuyImgMidDTO = new CobuyImgMidDTO();
 
 			cobuyImgMidDTO.setImgNoList(imgNoList); // 이미지 갯수만큼 넣어 줌
-			cobuyImgMidDTO.setCbiNo(cbiNo); // 공구 상품 번호
+			cobuyImgMidDTO.setCobuyNo(cbNo); // 공구 상품 번호
 
 			// 중간 이미지 테이블에 등록
 			middleService.reg(cobuyImgMidDTO);
 			log.debug("등록 완료  cobuyImgMidDTO   "+cobuyImgMidDTO.toString());
 		}
 		// 등록 후 상세페이지로 돌아가기 위해 공구 상품 번호 반환.
-		return cbiNo;
+		return cbNo;
 	}
 
 	@Override
-	public List<CobuyDTO> getList() {
-		// 글 정보 불러오기(이미지는 한장만)
+	public List<CobuyListVO> getList() {
 		return cobuyDao.cobuyList();
 	}
-
+	
 	@Override
-	public CobuyDTO getDetail(int cobuyNo) {
-		return null;
+	public CobuyListVO getDetail(int cobuyNo) {
+		return cobuyDao.detail(cobuyNo);
 	}
 
 	@Override
-	public void modify(CobuyDTO cobuyDTO) {
+	public void modify(CobuyDetailVO cobuyDetailVO) {
+		int cbNo = cobuyDetailVO.getCobuyNo();
+		
+		// 공구 테이블에 등록
+//		cobuyDao.modify(cobuyDetailVO);
+		
+		log.debug("cobuyDTO 뭘까내용이???    "+cobuyDetailVO.toString());
+		log.debug("파일이 없나???    "+(cobuyDetailVO.getAttach()==null) != null?"ㅇㅇ 널임":"아님 널 아님");
+		if (cobuyDetailVO.getAttach() != null) {
+//			List<Integer> imgNoList = imageService.regImage(cobuyDetailVO.getAttach(), folderName);
 
+			// 연결 테이블
+			CobuyImgMidDTO cobuyImgMidDTO = new CobuyImgMidDTO();
+
+//			cobuyImgMidDTO.setImgNoList(imgNoList); // 이미지 갯수만큼 넣어 줌
+//			cobuyImgMidDTO.setCbiNo(cbiNo); // 공구 상품 번호
+
+			// 중간 이미지 테이블에 등록
+			middleService.reg(cobuyImgMidDTO);
+			log.debug("등록 완료  cobuyImgMidDTO   "+cobuyImgMidDTO.toString());
+		}
+		// 등록 후 상세페이지로 돌아가기 위해 공구 상품 번호 반환.
+//		return cbiNo;
 	}
 
 	@Override
-	public void delete() {
-
+	public void delete(int cobuyNo) {
+		cobuyDao.delete(cobuyNo);
 	}
 
 }

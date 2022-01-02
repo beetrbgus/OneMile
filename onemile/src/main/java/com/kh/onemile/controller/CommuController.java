@@ -20,7 +20,7 @@ import com.kh.onemile.service.reply.ReplyService;
 import com.kh.onemile.util.Sequence;
 import com.kh.onemile.vo.CommuVO;
 import com.kh.onemile.vo.ImageVO;
-import com.kh.onemile.vo.ReplyVO;
+import com.kh.onemile.vo.reply.ReplyVO;
 
 @RequestMapping("/commu")
 @Controller

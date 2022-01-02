@@ -58,8 +58,7 @@ public class MemberController {
 			HttpServletResponse response, HttpSession session) {
 			
 			MemberDTO findDTO = memberService.login(memberDTO);
-			
-			
+	
 			if(findDTO != null) {
 			session.setAttribute("logId", findDTO.getEmail());
 			session.setAttribute("nick", findDTO.getNick());

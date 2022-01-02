@@ -16,7 +16,7 @@ public class CobuyMidImgDaoImpl implements CobuyMidImgDao {
 	@Override
 	public void reg(CobuyImgMidDTO cobuyImgMidDTO) {
 		for(int imgIdx : cobuyImgMidDTO.getImgNoList()) {
-			cobuyImgMidDTO.setImgNo(imgIdx); //이미지 번호를 한개씩 풀어주는거
+			cobuyImgMidDTO.setImageNo(imgIdx); //이미지 번호를 한개씩 풀어주는거
 
 			sqlSession.insert("cbi.reg", cobuyImgMidDTO);
 		}
