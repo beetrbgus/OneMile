@@ -13,10 +13,10 @@
 	<insert id="join" parameterType="MemberJoinVO">
 		insert into member(
 			member_no, email, pw, nick,
-			phone,birth, mbti, intro, corona, gender
+			phone,birth, mbti, intro, gender
 		) values(
 			#{memberNo}, #{email}, #{pw}, #{nick}, 
-			#{phone}, #{birth}, #{mbti},#{intro}, #{corona}, #{gender}
+			#{phone}, #{birth}, #{mbti},#{intro},#{gender}
 		)
 	</insert>
 	

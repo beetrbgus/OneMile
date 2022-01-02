@@ -85,7 +85,7 @@
                 <span>[<%=session.getAttribute("logId")%>]님</span>
                 <span>[<%=session.getAttribute("nick") %>]님</span>
                 <span>[<%=session.getAttribute("grade") %>]등급</span>
-                <span>멤버십 번호 : [<%=session.getAttribute("mspNo") %>]</span>
+           <%--      <span>멤버십 번호 : [<%=session.getAttribute("mspNo") %>]</span> --%>
                
             </div>
 

@@ -9,5 +9,5 @@ public class MemberProfileMidDTO {
 	private int meiNo;
 	private List<Integer> imgNoList;
 	private int memberNo;
-	private int imgNo;
+	private int imageNo;
 }

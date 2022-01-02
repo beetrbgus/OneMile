@@ -23,4 +23,5 @@ public interface MemberDao {
 	//회원 정보 가져오기
 	String getNick(int memberNo);
 
+
 }
