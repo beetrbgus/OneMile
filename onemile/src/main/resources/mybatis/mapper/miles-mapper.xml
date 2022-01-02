@@ -5,7 +5,7 @@
 <mapper namespace="miles">
 	
 	<!-- 마일즈 생성 -->
-	<insert id="create" parameterType="MilesDTO">
+	<insert id="create" parameterType="milesVO">
 		insert into miles(
                 miles_no, smallname, member_no,
                 name,context,area

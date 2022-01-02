@@ -27,10 +27,11 @@
 	</insert>
 		
 	<!-- 결제일 비교하기-->
-	<select id="dayCheck" >
+	<!--테스트로 바꿔놓음 <=해야댐  -->
+	<select id="dayCheck" resultType="MembershipBuyDTO">
 	<![CDATA[
 		 select  * from msb where buy_endtime <= sysdate
-		  ]]>
+		 ]]>
 	</select>
 	
 	<!--정기결제 전체 목록 -->

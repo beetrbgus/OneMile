@@ -27,14 +27,15 @@ import lombok.extern.slf4j.Slf4j;
 public class CobuyController {
 	@Autowired
 	private CobuyService cobuyService;
-	// 공동 구매 글을 올리면 -- 컨트롤러
-	// 공동 구매 테이블에 저장을 하고 --서비스
-	// 파일이 있으면 이미지 파일을 저장하고  --서비스
-	//공동 구매 등록 기능 ->  공동구매 글 , 이미지 , 연결테이블 
+	
 	@GetMapping("/regcobuy")
 	public String getreg() throws IllegalStateException, IOException {
 		return "/cobuy/regcobuy";
 	}
+	// 공동 구매 글을 올리면 -- 컨트롤러
+	// 공동 구매 테이블에 저장을 하고 --서비스
+	// 파일이 있으면 이미지 파일을 저장하고  --서비스
+	//공동 구매 등록 기능 ->  공동구매 글 , 이미지 , 연결테이블 
 	@PostMapping("/regcobuy")
 	public String reg(@ModelAttribute CobuyDetailVO cobuyDetailVO,HttpSession session) throws IllegalStateException, IOException {
 		int memNo = Integer.parseInt(String.valueOf(session.getAttribute("logNo")));
@@ -47,6 +48,10 @@ public class CobuyController {
 		int cbiNo = cobuyService.reg(cobuyDetailVO);
 
 		return "redirect:detail?cbiNo="+cbiNo;
+	@PostMapping("/reg")
+	public String reg(@ModelAttribute CobuyDTO cobuyDTO) throws IllegalStateException, IOException {
+		int cobuyNo = cobuyService.reg(cobuyDTO);
+		return "redirect:cobuy/detail?cobuyNo="+cobuyNo;
 	}
 	@GetMapping("/list")
 	public String list(Model model) {
