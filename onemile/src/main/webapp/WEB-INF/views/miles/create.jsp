@@ -1,8 +1,12 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
 <%@page import="java.util.List"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<c:set var="root" value="${pageContext.request.contextPath}"></c:set>
+
+<script src="${root}/resources/js/sigungu.js"></script>
 <script>
 	$(function(){
 		$(".big").change(function(){
@@ -34,22 +38,19 @@
 	} );
 });
 </script>
-
-
-	<div class="row center">
+  <div class="row center">
 		<h2>마일즈 생성</h2>
 	</div>
     <form method="post" enctype="multipart/form-data">
      <div class="container-500 container-center">
-      <div class="row center">
+      <div class="row">
+      <select name="sido" id="sido"></select>
+	  <select name="gugun" id="gugun"></select>
+	  <input type="hidden" id="area" name="area">
       <input type="text" name="name" placeholder="제목을 입력해주세요." style="width:500px;" required >
         </div>
-        <div class="row center">
-      <input type="text" name="area" placeholder="활동지역 작성(구까지)" style="width:300px;" required >
-        </div>
-      	<div class="row center">
-     	
-     	<select class="big" required>
+
+		<select class="big" required>
      		<option value="">카테고리선택</option>
      		<c:forEach var="category" items="${category}">
           		<option value="${category.bigType}">${category.bigType}</option>

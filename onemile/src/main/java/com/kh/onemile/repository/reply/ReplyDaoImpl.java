@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.onemile.entity.reply.ReplyDTO;
-import com.kh.onemile.vo.ReplyVO;
+import com.kh.onemile.vo.reply.ReplyVO;
 @Repository
 public class ReplyDaoImpl implements ReplyDao{
 

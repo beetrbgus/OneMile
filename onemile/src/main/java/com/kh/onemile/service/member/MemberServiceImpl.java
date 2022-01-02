@@ -13,10 +13,12 @@ import org.springframework.transaction.annotation.Transactional;
 import com.kh.onemile.entity.image.middle.MemberProfileMidDTO;
 import com.kh.onemile.entity.member.MemberDTO;
 import com.kh.onemile.entity.member.certi.CertiDTO;
+import com.kh.onemile.entity.member.membership.AdDTO;
 import com.kh.onemile.repository.certi.CertiDao;
 import com.kh.onemile.repository.image.middle.MemberImageDao;
 import com.kh.onemile.repository.member.MemberDao;
 import com.kh.onemile.service.image.ImageService;
+import com.kh.onemile.repository.member.membership.IsMembershipDao;
 import com.kh.onemile.util.Sequence;
 import com.kh.onemile.util.SetDefaut;
 import com.kh.onemile.vo.MemberJoinVO;
@@ -36,6 +38,8 @@ public class MemberServiceImpl implements MemberService {
 	private MemberDao memberDao;
 	@Autowired
 	private CertiDao certiDao;
+	@Autowired
+	private IsMembershipDao msDao;
 	@Autowired
 	private Sequence seq;
 	@Autowired
@@ -133,4 +137,8 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.getNick(memberNo);
 	}
 
+	@Override
+	public AdDTO membership(int memberNo) {
+		return msDao.membership(memberNo);
+	}
 }

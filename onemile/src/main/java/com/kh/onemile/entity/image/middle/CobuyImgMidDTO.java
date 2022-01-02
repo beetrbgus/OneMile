@@ -8,6 +8,7 @@ import lombok.Data;
 public class CobuyImgMidDTO {
 	private int cbiNo;
 	private List<Integer> imgNoList;
-	private int imgNo;
+	private int imageNo;
 	private int cobuyNo;
+	private int imgNo;
 }

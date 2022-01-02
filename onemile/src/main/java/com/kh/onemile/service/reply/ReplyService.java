@@ -2,7 +2,7 @@ package com.kh.onemile.service.reply;
 
 import java.util.List;
 
-import com.kh.onemile.vo.ReplyVO;
+import com.kh.onemile.vo.reply.ReplyVO;
 
 public interface ReplyService {
 	public void writeReply(ReplyVO replyVo);
