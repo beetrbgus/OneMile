@@ -53,7 +53,7 @@ public class SocialServiceImpl implements SocialService{
 		int mapNo = seq.nextSequence("map_seq");
 			
 		mapDto.setLat(lat);
-		mapDto.setLon(lon);
+		mapDto.setLng(lon);
 		mapDto.setMapNo(mapNo);
 		mapDto.setDetailaddress(socialVo.getDetailaddress());
 			
@@ -82,7 +82,7 @@ public class SocialServiceImpl implements SocialService{
 		mapDto = mapDao.get(mapNo);
 		
 		socialVo.setLat(mapDto.getLat());
-		socialVo.setLon(mapDto.getLon());
+		socialVo.setLon(mapDto.getLng());
 		socialVo.setDetailaddress(mapDto.getDetailaddress());
 		socialVo.setStratDate(socialDto.getStartDate());
 		

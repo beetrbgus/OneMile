@@ -67,7 +67,7 @@ public class CommuServiceImpl implements CommuService{
 			int mapNo = mapDao.getSeq();
 			
 			mapDto.setLat(lat);
-			mapDto.setLon(lon);
+			mapDto.setLng(lon);
 			mapDto.setMapNo(mapNo);
 			mapDto.setDetailaddress(commuVo.getDetailaddress());
 			
@@ -113,7 +113,7 @@ public class CommuServiceImpl implements CommuService{
 			int mapNo = mapDao.getSeq();
 			
 			mapDto.setLat(lat);
-			mapDto.setLon(lon);
+			mapDto.setLng(lon);
 			mapDto.setMapNo(mapNo);
 			mapDto.setDetailaddress(commuVo.getDetailaddress());
 			
