@@ -11,4 +11,13 @@
 	<select id="listBySuper" parameterType="String" resultType="SocialCategoryDTO">
 		select * from smc where bigtype = #{bigtype}
 	</select>
+	
+	<insert id="insert">
+		insert into ic values(
+			#{IcNo},#{smalltype},#{memNo}
+		)
+		
+	</insert>
+	
+	
 </mapper>

@@ -94,7 +94,7 @@ function nickCheck(){
 }
 //연락처 정규표현식
 function phoneCheck(){
-    var regex = /^01[016789][1-9][0-9]{3}[0-9]{4}$/;
+    var regex = /^01[016789]-[1-9][0-9]{3}-[0-9]{4}$/;
     var input = document.querySelector("input[name=phone]");
     var notice = input.nextElementSibling;
 
@@ -103,7 +103,7 @@ function phoneCheck(){
         return true;
     }
     else{
-        notice.textContent = "전화번호는 - 없이 11자리로 작성하세요";
+        notice.textContent = "전화번호는 -포함 13자리로 작성하세요";
         return false;
     }
 } 
@@ -184,7 +184,22 @@ $(function(){
 	} );
 });
 
+function lengCheck() {
+ 
+    var input = document.querySelector("#intro");
+    var output = document.querySelector("#intro-length");
 
+    var len = input.value.length;
+    
+    //만약 1000글자가 넘어간다면 넘어간 만큼 글자를 제거
+    while(len > 100) {
+        input.value = input.value.substring(0,input.value.length-1);
+        len--;
+    }
+
+    //글자 정리 후 길이 설정
+    output.textContent = len;
+    }
 
 </script>
 
@@ -220,7 +235,7 @@ $(function(){
 	</div>
 	<div class="row">
 		<label>연락처</label>
-		<input type="tel" name="phone" class="form-input" autocomplete="off" onblur="phoneCheck();" placeholder="전화번호11자리를 입력해주세요.">
+		<input type="tel" name="phone" class="form-input" autocomplete="off" onblur="phoneCheck();" placeholder="전화번호 -포함 13자리를 입력해주세요.">
 		<div class="notice"></div>
 	</div>
 	<div class="row">
@@ -238,8 +253,11 @@ $(function(){
 	</div>
 	
 	<div class="row">
-		<textarea name="intro" rows="5" cols="50" placeholder="자기소개"></textarea>
+		<textarea name="intro" rows="5" cols="50" placeholder="자기소개" id="intro"  oninput="lengCheck();"></textarea>
 	</div>
+	<div class="row reft">
+            <span id="intro-length">0</span> / 100
+        </div>
 	<div class="row">
 		<input type="checkbox"> [필수]이용약관과 개인정보처리방침에 동의
 	</div>
@@ -264,13 +282,13 @@ $(function(){
           		<option value="${category.bigType}">${category.bigType}</option>
           	</c:forEach>
       </select>
-      <select class="middle"></select>
+      <select class="middle" name="smalltype"></select>
 	</div>
 	
 	<div class="row" >
 		<label>MBTI</label>
 		<br>
-			<select>
+			<select name="mbti">
 				<option value="INFP">INFP<option>
 			</select>
 	</div>

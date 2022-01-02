@@ -17,6 +17,7 @@ import com.kh.onemile.entity.member.membership.AdDTO;
 import com.kh.onemile.repository.certi.CertiDao;
 import com.kh.onemile.repository.image.middle.MemberImageDao;
 import com.kh.onemile.repository.member.MemberDao;
+import com.kh.onemile.service.CategoryService;
 import com.kh.onemile.service.image.ImageService;
 import com.kh.onemile.repository.member.membership.IsMembershipDao;
 import com.kh.onemile.util.Sequence;
@@ -48,6 +49,8 @@ public class MemberServiceImpl implements MemberService {
 	private ImageService imageService; //이미지 서비스
 	@Autowired
 	private MemberImageDao middleService; // 이미지 중간 테이블 서비스
+	@Autowired
+	private CategoryService categoryService;
 	
 	@Autowired
 	private SetDefaut setDefault;
@@ -56,6 +59,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int join(MemberJoinVO memberJoinVO) throws IllegalStateException, IOException {
 		setDefault.setMemberCoronaDefault(memberJoinVO.getCorona());
+		
 		// 비밀번호 암호화
 		String origin = memberJoinVO.getPw();
 		String encrypt = encoder.encode(origin);
@@ -65,20 +69,23 @@ public class MemberServiceImpl implements MemberService {
 		int memNo = seq.nextSequence(SEQID);
 		memberJoinVO.setMemberNo(memNo);
 		log.debug("가입한 회원번호   "+ memNo);
-		memberDao.join(memberJoinVO);//회원테이블에 등록
-		if(memberJoinVO.getAttach() != null) {  //사진이 있으면
+		//회원 테이블에 등록
+		memberDao.join(memberJoinVO);
+		if(memberJoinVO.getAttach() != null) {//사진이 있으면
 			List<Integer> imgNoList = imageService.regImage(memberJoinVO.getAttach(), folderName);
 		
 		//연결 테이블
 		MemberProfileMidDTO memberProfileMidDTO = new MemberProfileMidDTO();
 		
-		memberProfileMidDTO.setImgNoList(imgNoList);
-		memberProfileMidDTO.setMemberNo(memNo);
+		memberProfileMidDTO.setImgNoList(imgNoList);//이미지 갯수만큼 넣어 줌
+		memberProfileMidDTO.setMemberNo(memNo); //회원 번호
 		
 		// 중간 이미지 테이블에 등록
 		middleService.reg(memberProfileMidDTO);
 		log.debug("등록 완료  memberJoinVO   "+memberProfileMidDTO.toString());
 		}
+		
+		
 		return memNo;
 	}
 
@@ -140,5 +147,12 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public AdDTO membership(int memberNo) {
 		return msDao.membership(memberNo);
+	}
+
+
+	@Override
+	public void insert(MemberJoinVO memberJoinVO) {
+		// TODO Auto-generated method stub
+		
 	}
 }

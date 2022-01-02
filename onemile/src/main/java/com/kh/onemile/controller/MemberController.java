@@ -42,8 +42,11 @@ public class MemberController {
 	}
 	//회원가입. 가입 후 회원 승인 테이블로 감.
 	@PostMapping("/join")
-	public String postJoin(@ModelAttribute MemberJoinVO memberJoinVO) throws IllegalStateException, IOException {
+	public String postJoin(@ModelAttribute MemberJoinVO memberJoinVO
+								   ) throws IllegalStateException, IOException {
 		int memNo = memberService.join(memberJoinVO);
+		//관심 카테고리 테이블 전송
+		categoryService.insert(memberJoinVO, memNo);
 		//회원 승인 테이블 전송.
 		adminService.regApproveMember(memNo);
 		return "redirect:join_success";
