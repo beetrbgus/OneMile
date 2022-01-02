@@ -11,5 +11,4 @@ public class CobuyImgMidDTO {
 	private int imageNo;
 	private int cobuyNo;
 	private int imgNo;
-	private int cobuyNo;
 }

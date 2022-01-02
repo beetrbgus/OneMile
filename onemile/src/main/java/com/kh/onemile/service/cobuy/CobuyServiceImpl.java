@@ -5,13 +5,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.kh.onemile.entity.cobuy.CobuyDTO;
 import com.kh.onemile.entity.image.middle.CobuyImgMidDTO;
 import com.kh.onemile.repository.cobuy.CobuyDao;
 import com.kh.onemile.repository.image.middle.CobuyMidImgDao;
 import com.kh.onemile.service.image.ImageService;
 import com.kh.onemile.util.Sequence;
+import com.kh.onemile.vo.cobuy.CobuyDetailVO;
+import com.kh.onemile.vo.cobuy.CobuyListVO;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.extern.slf4j.Slf4j;
