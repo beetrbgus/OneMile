@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kh.onemile.entity.cobuy.CobuyDTO;
 import com.kh.onemile.service.cobuy.CobuyService;
 
-
 @RequestMapping("/cobuy")
 @RestController
 public class CobuyController {
