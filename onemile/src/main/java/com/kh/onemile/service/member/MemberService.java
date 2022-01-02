@@ -2,6 +2,7 @@ package com.kh.onemile.service.member;
 
 import com.kh.onemile.entity.member.MemberDTO;
 import com.kh.onemile.entity.member.certi.CertiDTO;
+import com.kh.onemile.entity.member.membership.AdDTO;
 import com.kh.onemile.vo.MemberJoinVO;
 
 public interface MemberService {
@@ -23,4 +24,6 @@ public interface MemberService {
 	//닉네임
 	public String getNick(int memberNo);
 
+	//멤버십 혜택 불러오는 기능
+	public AdDTO membership(int memberNo);
 }
