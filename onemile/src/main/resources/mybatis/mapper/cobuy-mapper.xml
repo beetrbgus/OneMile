@@ -7,20 +7,28 @@
 	<!-- 글쓰기 -->
 	<insert id="reg" parameterType="cobuyDTO">
 		insert into cobuy(
-			COBUY_NO,
-			MEMBER_NO, TITLE,
-			PRICE,DESCRIPT, PNAME
+		COBUY_NO,
+		MEMBER_NO, TITLE,
+		PRICE,DESCRIPT, PNAME,DEADLINE
 		)values(
-			#{cobuyNo},
-			#{memberNo},#{title},
-			#{price},#{descript},#{pName}
+		#{cobuyNo},
+		#{memberNo},#{title},
+		#{price},#{descript},#{pName}, #{deadLine}
 		)
 	</insert>
-	<!-- 단일 조회할 때  -->
-	<resultMap type="cobuyDTO" id="cobuy">
+	<!-- 숨김 변경 -->
+	<update id="hide" parameterType="Map">
+		update cobuy set
+		HIDDENYN = #{hiddenYN}
+		where COBUY_NO = #{cobuyNo}
+	</update>
+
+
+	<resultMap type="CobuyDetailVO" id="customCobuy">
+		<!-- DB항목과 변수를 연결 -->
 		<result column="cobuy_No" property="cobuyNo" />
 		<result column="MEMBER_NO" property="memberNo" />
-		<result column="LARGE_NAME" property="largeName" />
+		<result column="MIDDLE_NAME" property="middleName" />
 		<result column="TITLE" property="title" />
 		<result column="PRICE" property="price" />
 		<result column="HIT" property="hit" />
@@ -28,36 +36,52 @@
 		<result column="DEADLINE" property="deadLine" />
 		<result column="DESCRIPT" property="descript" />
 		<result column="PNAME" property="pName" />
-		<!-- 항목 이름이 list인 변수가 있고 이게 List<CategoryVO> 형태이다 listSub를 불러서 해당 데이터를 
-			채워주세요(category_no)를 이용해서 -->
-		<collection property="imageList" select="getList" column="IMAGE_NO" ofType="List" />
-	</resultMap>
-	<!-- 단일조회 -->
-	<select id="getCobuy" parameterType="int"
-		resultMap="cobuy">
-		select * from cobuy cb 
-   			inner join cbi on 
-      			cb.cobuy_no=cbi.cobuy_no
-    		inner join image img on 
-        		cbi.image_no =img.image_no
-        where cb.cobuy_no = #{imageNo} and cb.HIDDENYN = 'N' 
-        	order by cb.cobuy_no desc;
-	</select>
-	
-	<!-- 목록조회 -->
-	<select id="getCobuyAll" resultMap="cobuy">
-		select * from  cobuy cb 
-	    	inner join cbi on 
-	    	    cb.COBUY_NO=cbi.COBUY_NO
-	    	left outer join image img on 
-	        	cbi.image_no =img.image_no
-	    where cb.HIDDENYN = 'N' order by cb.cobuy_no desc;
-	</select>
 
-	<!-- 숨김 변경 -->
-	<update id="hide" parameterType="Map">
-		update cobuy set
-		HIDDENYN = #{viewYN}
-		where COBUY_NO = #{cobuyNo}
-	</update>
+		<collection property="imageList" javaType="java.util.List"
+			ofType="ImageDTO" select="DetailImgs" column="cobuy_no"></collection>
+	</resultMap>
+	<!-- 목록 조회  DB항목과 변수를 연결-->
+	<resultMap type="CobuyListVO" id="CobuyList">
+		<result column="cobuy_No" property="cobuyNo" />
+		<result column="MEMBER_NO" property="memberNo" />
+		<result column="PNAME" property="pName" />
+		<result column="NICK" property="nick" />
+		<result column="TITLE" property="title" />
+		<result column="PRICE" property="price" />
+		<result column="STOCK" property="stock" />
+		<result column="DEADLINE" property="deadLine" />
+		<result column="IMAGE_NO" property="imgNo" />
+	</resultMap> 
+
+	<!-- 목록 조회 구문 (메인) -->
+	<select id="getList" resultMap="CobuyList">
+		select c.* , m.nick from cobuy c
+			inner join member m
+				on c.member_no = m.member_no
+		where c.HIDDENYN = 'N' and m.HIDDENYN ='N'
+        	order by deadline desc
+	</select>
+	<!-- 상세 조회 구문 (메인) -->
+	<select id="getDetail" parameterType="int"
+		resultMap="customCobuy">
+		select c.* , m.nick from cobuy c inner join member m
+		on c.member_no = m.member_no
+		where cobuy_no = #{cobuyNo} and c.HIDDENYN = 'N'
+	</select>
+	<!-- 목록에서의 이미지 한개 -->
+	<select id="oneImg" resultType="ImageDto" parameterType="int">
+		select * from image where 
+			image_no in (select min(image_no) from cbi where cobuy_no = #{cobuyNo})
+		order by image_no
+	</select>
+	<!-- 상세페이지에서의 이미지 여러개 -->
+	<select id="DetailImgs" resultType="ImageDto" parameterType="int">
+		select * from image where image_no 
+			in (select image_no from cbi where cobuy_no = #{cobuyNo})
+		order by image_no
+	</select>
 </mapper>
+
+
+
+

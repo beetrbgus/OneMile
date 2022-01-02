@@ -1,4 +1,4 @@
-package com.kh.onemile.vo;
+package com.kh.onemile.vo.reply;
 
 import java.util.Date;
 
