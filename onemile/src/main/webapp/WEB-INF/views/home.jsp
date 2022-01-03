@@ -45,4 +45,5 @@
 <h1>바디</h1>
 <h1>바디</h1>
 </div>
+
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

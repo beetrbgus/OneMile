@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.onemile.repository.reply.ReplyDao;
 import com.kh.onemile.service.reply.ReplyService;
-import com.kh.onemile.vo.ReplyVO;
+import com.kh.onemile.vo.reply.ReplyVO;
 
 @Controller
 @RequestMapping("/reply")

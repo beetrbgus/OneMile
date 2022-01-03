@@ -8,6 +8,6 @@ import lombok.Data;
 public class MilesImgMidDTO {
 	private int miNo;
 	private List<Integer> imgNoList;
+	private int imageNo;
 	private int milesNo;
-	private int imgNo;
 }

@@ -11,6 +11,9 @@
 <html lang="ko" class="show-footer">
 <!-- Mirrored from www.wadiz.kr/web/wpartner/main by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 31 Dec 2021 09:26:35 GMT -->
 <!-- Added by HTTrack -->
+<span>[<%=session.getAttribute("logId")%>]님</span>
+<span>[<%=session.getAttribute("nick") %>]님</span>
+<span>[<%=session.getAttribute("grade") %>]등급</span>
 
 <head>
 	<link rel="stylesheet" href="${root}/resources/css/reset-w.css">
@@ -41,6 +44,8 @@
 										</path>
 									</a>
 							</h1>
+							<button id="confirmbtn">동네인증</button>
+			                <input type="text" id="dong">
 							<ul class="GNBMobile_container__1OTMW">
 								<li class="GNBMobile_item__1b4ZL"><a aria-current="page"
 										class="GNBMobile_link__t1Y9t GNBMobile_active__3WNf8 GNBMobile_active__3WNf8"
