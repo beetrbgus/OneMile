@@ -13,8 +13,8 @@ import com.kh.onemile.util.Sequence;
 
 import lombok.extern.slf4j.Slf4j;
 @Slf4j
-@Service
 @Transactional
+@Service
 public class AdminServiceImpl implements AdminService{
 	String approveSeq ="approve_seq";
 	@Autowired

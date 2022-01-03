@@ -52,6 +52,7 @@
 			<package name="com.kh.onemile.entity.cobuy"/>
 			<package name="com.kh.onemile.vo"/>
 			<package name="com.kh.onemile.vo.kakaopay"/>
+			<package name="com.kh.onemile.vo.cobuy"/>
 	</typeAliases>
 
 	

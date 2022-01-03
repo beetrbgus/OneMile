@@ -3,6 +3,7 @@ package com.kh.onemile.vo;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Data;
@@ -18,6 +19,7 @@ public class MilesVO {
 	private String name;
 	private String context;
 	private String area;
+	@DateTimeFormat(pattern="YYYY-MM-DD HH24:mm:ss")
 	private Date regDate;
 	private String viewYN;
 	
@@ -26,4 +28,5 @@ public class MilesVO {
 	private int imageNo;
 	private int miNo;
 	private String thumbnailCount;
+	private List<Integer> imageList; //가져올 때 이미지 번호들
 }

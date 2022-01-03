@@ -3,7 +3,7 @@ package com.kh.onemile.repository.reply;
 import java.util.List;
 
 import com.kh.onemile.entity.reply.ReplyDTO;
-import com.kh.onemile.vo.ReplyVO;
+import com.kh.onemile.vo.reply.ReplyVO;
 
 public interface ReplyDao {
 	void write(ReplyDTO replyDto);
