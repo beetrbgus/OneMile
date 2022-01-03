@@ -28,8 +28,11 @@ public interface MemberService {
 
 	//멤버십 혜택 불러오는 기능
 	public AdDTO membership(int memberNo);
-	
+	//카테고리
 	public void insert(MemberJoinVO memberJoinVO);
+	
+	//회원정보 불러오기
+	public MemberDTO get(int logNo);
 	
 	
 }

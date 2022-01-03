@@ -155,4 +155,10 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public MemberDTO get(int logNo) {
+		return memberDao.get2(logNo);
+		
+	}
 }

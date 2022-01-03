@@ -35,15 +35,18 @@ public class MemberController {
 	@Autowired
 	private CategoryService categoryService;
 	
+	//회원가입
 	@GetMapping("/join")
 	public String getJoin(Model model) {
 		model.addAttribute("category",categoryService.category());
 		return "member/join";
 	}
-	//회원가입. 가입 후 회원 승인 테이블로 감.
+	//가입 후 회원 승인 테이블로 감.
 	@PostMapping("/join")
 	public String postJoin(@ModelAttribute MemberJoinVO memberJoinVO
 								   ) throws IllegalStateException, IOException {
+		//String[] array = memberJoinVO.getSmalltype();
+		
 		int memNo = memberService.join(memberJoinVO);
 		//관심 카테고리 테이블 전송
 		categoryService.insert(memberJoinVO, memNo);
@@ -177,4 +180,12 @@ public class MemberController {
 			return "redirect:edit_pw?error";
 		}
 	}
+	
+	//마이페이지
+	/*@RequestMapping("/mypage")
+	public String mypage(HttpSession session,Model model) {
+			String email = (String) session.getAttribute("logId");*/
+		/* MemberDTO memberDTO = memberService.login(email); */
+		
+	/* } */
 }

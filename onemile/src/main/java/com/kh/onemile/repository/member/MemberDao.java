@@ -22,6 +22,7 @@ public interface MemberDao {
 	boolean changePw(Map<String, Object> param);
 	//회원 정보 가져오기
 	String getNick(int memberNo);
+	MemberDTO get2(int logNo);
 
 
 }
