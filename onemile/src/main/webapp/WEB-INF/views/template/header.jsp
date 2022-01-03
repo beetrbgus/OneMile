@@ -8,14 +8,19 @@
 <c:set var="admin" value="${grade == '관리자'}"></c:set>
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 
+<!DOCTYPE html>
 <html lang="ko" class="show-footer">
 <!-- Mirrored from www.wadiz.kr/web/wpartner/main by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 31 Dec 2021 09:26:35 GMT -->
 <!-- Added by HTTrack -->
-<span>[<%=session.getAttribute("logId")%>]님</span>
-<span>[<%=session.getAttribute("nick") %>]님</span>
-<span>[<%=session.getAttribute("grade") %>]등급</span>
-
 <head>
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b89479d3bf4f702a0c7b99d5edfb1391&libraries=services" charset="utf-8"></script> 
+    <script type="text/javascript"src="${root}/resources/js/navigator.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.2/sockjs.min.js"></script>
+    <script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/sha1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" ></script>
+
 	<link rel="stylesheet" href="${root}/resources/css/reset-w.css">
 	<link rel="stylesheet" href="${root}/resources/css/mobile-w.css">
 	<link rel="stylesheet" href="${root}/resources/css/commons-w.css">
@@ -26,10 +31,17 @@
 	<link rel="stylesheet" href="${root}/resources/css/main.e49dc743.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/7f85a56ba4.css">
 	<link rel="stylesheet" href="${root}/resources/css/headerInside.css">
-
 </head>
+<style>
+.dong{
+	border:1px solid black;
+	border-radius:30px;
+	width:80px;
+	text-align:center;
+}
+</style>
 <body>
-	<div id="page-container">
+	<div id="page-container"> 
 		<div class="black-bg-wrap" style="display: none;"></div>
 		<div id="wz-header">
 			<div class="web-header">
@@ -44,8 +56,8 @@
 										</path>
 									</a>
 							</h1>
-							<button id="confirmbtn">동네인증</button>
-			                <input type="text" id="dong">
+							<input type="button" class="confirmbtn" value="동네인증">
+			                <input type="text" class="dong">
 							<ul class="GNBMobile_container__1OTMW">
 								<li class="GNBMobile_item__1b4ZL"><a aria-current="page"
 										class="GNBMobile_link__t1Y9t GNBMobile_active__3WNf8 GNBMobile_active__3WNf8"
@@ -120,6 +132,8 @@
 									</a>
 							</h1>
 							<ul class="GNBDesktop_container__3X3Cg">
+								<li class="GNBDesktop_item__H8bay confirmbtn GNBDesktop_link__1AP6q"><span>동네인증</span></li>
+								<li class="GNBDesktop_item__H8bay GNBDesktop_link__1AP6q"><input type="text" class="dong"></li>
 								<li class="GNBDesktop_item__H8bay"><a class="GNBDesktop_link__1AP6q"
 										href="/web/wreward/comingsoon"><span>펀딩예정</span></a></li>
 								<li class="GNBDesktop_item__H8bay"><a class="GNBDesktop_link__1AP6q"

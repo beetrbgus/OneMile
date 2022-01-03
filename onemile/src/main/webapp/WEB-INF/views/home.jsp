@@ -16,6 +16,9 @@
 	}
 </style>
 <div class="page-body">
+<span>[<%=session.getAttribute("logId")%>]님</span>
+<span>[<%=session.getAttribute("nick") %>]님</span>
+<span>[<%=session.getAttribute("grade") %>]등급</span>
 <h1>바디</h1>
 <h1>바디</h1>
 <h1>바디</h1>

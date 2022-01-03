@@ -72,7 +72,7 @@
 			</div>
 			</c:if>
           </div>
-          <button type="button" id="btnLogin" class="wz button primary block submit-button" data-event="iam.signin.submit">로그인</button>
+          <input type="submit" id="btnLogin" class="wz button primary block submit-button" value="로그인"/>
           <input type="hidden" name="returnURL" value="wAccountLogin07d0.html">
         </form>
         <div class="bottom-message">
