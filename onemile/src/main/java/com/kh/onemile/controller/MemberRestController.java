@@ -16,6 +16,7 @@ public class MemberRestController {
 	@Autowired
 	private MemberDao memberDao;
 	
+	//이메일 중복체크
 	@GetMapping("/emailcheck")
 	public String emailCheck(@RequestParam String email) {
 		MemberDTO memberDTO = memberDao.get(email);

@@ -11,12 +11,16 @@ public interface MemberService {
 	
 	//회원가입
 	public int join(MemberJoinVO memberJoinVO) throws IllegalStateException, IOException;
+	
 	//로그인
 	public MemberDTO login(MemberDTO memberDTO);
+	
 	//회원탈퇴
 	public boolean quit(String email, String pw);
+	
 	//아이디찾기
 	public MemberDTO findId(MemberDTO memberDTO);
+	
 	//이메일 전송 체크
 	public boolean emailCheck(CertiDTO certiDTO);
 
@@ -28,11 +32,7 @@ public interface MemberService {
 
 	//멤버십 혜택 불러오는 기능
 	public AdDTO membership(int memberNo);
-	//카테고리
-	public void insert(MemberJoinVO memberJoinVO);
 	
 	//회원정보 불러오기
-	public MemberDTO get(int logNo);
-	
-	
+	public MemberDTO profile(int memberNo);
 }

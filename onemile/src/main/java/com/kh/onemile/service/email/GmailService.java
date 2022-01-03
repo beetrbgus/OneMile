@@ -50,6 +50,4 @@ public class GmailService implements EmailService{
 		certiDTO.setMemberNo(memberNo);
 		certiDao.insert(certiDTO);
 	}
-	
-	
 }

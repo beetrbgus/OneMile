@@ -27,7 +27,6 @@ public class ScheduleServiceImpl implements ScheduleService{
 	@Autowired
 	private KakaoPayService kakaoPaySerivce;
 	
-	
 	//이메일 인증번호(누적된 DB) 삭제 스케줄러
 	@Scheduled(cron = "0 0 0 * * *")//매일 오전12시
 	@Override
@@ -35,7 +34,7 @@ public class ScheduleServiceImpl implements ScheduleService{
 		log.debug("DB 스케줄러 테스트중");
 		certiDao.clean();
 	}
-	//정기결제 결제일검사 스케줄러
+	//정기결제 스케줄러
 	@Scheduled(cron = "0 0 0 * * *")//매일 오전12시
 	@Override
 	public void regularPayment() throws URISyntaxException {

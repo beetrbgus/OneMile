@@ -1,4 +1,4 @@
-package com.kh.onemile.service;
+package com.kh.onemile.service.category;
 
 import java.util.List;
 
@@ -14,16 +14,19 @@ import com.kh.onemile.vo.MemberJoinVO;
 @Service
 public class CategoryServiceImpl implements CategoryService{
 	private final String SEQID = "ic_seq";
+	
 	@Autowired
 	private BigCategoryDao bigCategoryDao;
 	@Autowired
 	private Sequence seq;
 	
+	//소모임 대분류 목록
 	@Override
-	public List<SocialBigCategoryDTO> category() {
-		return bigCategoryDao.category();
+	public List<SocialBigCategoryDTO> list() {
+		return bigCategoryDao.list();
 	}
-
+	
+	//소모임 대분류로 소분류 가져오기
 	@Override
 	public List<SocialCategoryDTO> listBySuper(String categorySuper) {
 		return bigCategoryDao.listBySuper(categorySuper);

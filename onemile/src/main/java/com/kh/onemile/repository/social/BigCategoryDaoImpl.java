@@ -18,16 +18,19 @@ public class BigCategoryDaoImpl implements BigCategoryDao{
 	@Autowired
 	private SqlSession sqlSession;
 	
+	//소모임 대분류 목록
 	@Override
-	public List<SocialBigCategoryDTO> category() {
+	public List<SocialBigCategoryDTO> list() {
 		return sqlSession.selectList("category.list");
 	}
-
+	
+	//소모임 대분류로 소분류 가져오기
 	@Override
 	public List<SocialCategoryDTO> listBySuper(String categorySuper) {
 		return sqlSession.selectList("category.listBySuper",categorySuper);
 	}
-
+	
+	//회원 관심 카테고리 
 	@Override
 	public void insert(MemberJoinVO memberJoinVO, int memNo) {
 		Map<String, Object> param = new HashMap<>();

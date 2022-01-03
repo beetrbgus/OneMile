@@ -1,12 +1,17 @@
 package com.kh.onemile.controller;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,11 +19,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.onemile.entity.image.ImageDTO;
+import com.kh.onemile.entity.image.middle.MemberProfileMidDTO;
 import com.kh.onemile.entity.member.MemberDTO;
 import com.kh.onemile.entity.member.certi.CertiDTO;
-import com.kh.onemile.service.CategoryService;
+import com.kh.onemile.repository.image.middle.MemberImageDao;
 import com.kh.onemile.service.admin.AdminService;
+import com.kh.onemile.service.category.CategoryService;
 import com.kh.onemile.service.email.EmailService;
 import com.kh.onemile.service.member.MemberService;
 import com.kh.onemile.vo.MemberJoinVO;
@@ -34,19 +43,19 @@ public class MemberController {
 	private AdminService adminService;
 	@Autowired
 	private CategoryService categoryService;
+	@Autowired
+	private MemberImageDao memberImageDao;
 	
 	//회원가입
 	@GetMapping("/join")
 	public String getJoin(Model model) {
-		model.addAttribute("category",categoryService.category());
+		//소모임 대분류
+		model.addAttribute("category",categoryService.list());
 		return "member/join";
 	}
 	//가입 후 회원 승인 테이블로 감.
 	@PostMapping("/join")
-	public String postJoin(@ModelAttribute MemberJoinVO memberJoinVO
-								   ) throws IllegalStateException, IOException {
-		//String[] array = memberJoinVO.getSmalltype();
-		
+	public String postJoin(@ModelAttribute MemberJoinVO memberJoinVO) throws IllegalStateException, IOException {
 		int memNo = memberService.join(memberJoinVO);
 		//관심 카테고리 테이블 전송
 		categoryService.insert(memberJoinVO, memNo);
@@ -69,19 +78,19 @@ public class MemberController {
 			HttpServletResponse response, HttpSession session) {
 			
 			MemberDTO findDTO = memberService.login(memberDTO);
-	
+			
+			//정보가 있으면 세션저장
 			if(findDTO != null) {
-			session.setAttribute("logId", findDTO.getEmail());
-			session.setAttribute("nick", findDTO.getNick());
-			session.setAttribute("grade", findDTO.getGrade());
 			session.setAttribute("logNo", findDTO.getMemberNo());
+			session.setAttribute("logId", findDTO.getEmail());
+			session.setAttribute("grade", findDTO.getGrade());
+			session.setAttribute("nick", findDTO.getNick());
 			
-			
-			if(saveId != null) {//생성
+			if(saveId != null) {//쿠키 생성
 				Cookie c = new Cookie("saveId", findDTO.getEmail());
 				c.setMaxAge(4 * 7 * 24 * 60 * 60);//4주
 				response.addCookie(c);
-			}else {//삭제
+			}else {//쿠키 삭제
 				Cookie c = new Cookie("saveId", findDTO.getEmail());
 				c.setMaxAge(0);
 				response.addCookie(c);
@@ -95,6 +104,7 @@ public class MemberController {
 	//로그아웃
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
+		//로그아웃 시 세션 삭제
 		session.removeAttribute("logId");
 		session.removeAttribute("nick");
 		session.removeAttribute("grade");
@@ -116,10 +126,14 @@ public class MemberController {
 			session.removeAttribute("logNo");
 			session.removeAttribute("nick");
 			session.removeAttribute("grade");
-			return "redirect:/";
+			return "redirect:quit_success";
 		}else{
 			return "redirect:quit?error";
 		}
+	}
+	@RequestMapping("/quit_success")
+	public String quitSuccess() {
+		return "member/quit_success";
 	}
 	
 	//아이디찾기
@@ -182,10 +196,42 @@ public class MemberController {
 	}
 	
 	//마이페이지
-	/*@RequestMapping("/mypage")
+	@RequestMapping("/mypage")
 	public String mypage(HttpSession session,Model model) {
-			String email = (String) session.getAttribute("logId");*/
-		/* MemberDTO memberDTO = memberService.login(email); */
+		int memberNo =(int) session.getAttribute("logNo");
 		
-	/* } */
+		//회원정보 불러오기
+		MemberDTO memberDTO = memberService.profile(memberNo);
+		//회원이미지 불러오기
+		MemberProfileMidDTO memberProfileMidDTO = memberImageDao.get(memberNo);
+		model.addAttribute("memberDTO",memberDTO);
+		model.addAttribute("memberProfileMidDTO",memberProfileMidDTO);
+		return "member/mypage";
+	}
+	
+	//프로필 다운로드에 대한 요청 처리
+	@GetMapping("/profile")
+	@ResponseBody//이 메소드만큼은 뷰 리졸버를 쓰지 않겠다
+	public ResponseEntity<ByteArrayResource> profile(
+				@RequestParam int imageNo
+			) throws IOException {
+		
+		//이미지번호(imageNo)로 프로필 이미지 파일정보를 구한다.
+		ImageDTO imageDTO = memberImageDao.getImage(imageNo);
+		
+		//이미지번호(imageNo)로 실제 파일 정보를 불러온다
+		byte[] data = memberImageDao.load(imageNo);
+		
+		ByteArrayResource resource = new ByteArrayResource(data);
+		
+		String encodeName = URLEncoder.encode(imageDTO.getUploadName(), "UTF-8");
+		encodeName = encodeName.replace("+", "%20");
+		
+		return ResponseEntity.ok()
+			.contentType(MediaType.APPLICATION_OCTET_STREAM)
+			.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\""+encodeName+"\"")
+			.header(HttpHeaders.CONTENT_ENCODING, "UTF-8")
+			.contentLength(imageDTO.getFileSize())
+			.body(resource);
+	}
 }

@@ -5,9 +5,9 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <style>
    .notice {
-   color:red;
-   }
-    </style>
+   		color:red;
+	}
+</style>
 
 <script>
 //아이디 중복확인 Ajax
@@ -144,7 +144,7 @@ function formCheck(){
         $(".page").eq(p).show();
     });
     
-    $(".prev").click(function(e){
+  	    $(".prev").click(function(e){
         e.preventDefault();
 
         p--;
@@ -157,7 +157,7 @@ function formCheck(){
 $(function(){
 		$(".big").change(function(){
 			
-			var category = $(this).val();
+		var category = $(this).val();
 		$.ajax({
 		  url : "${pageContext.request.contextPath}/miles/data/category/child",
   		  type : "post",
@@ -166,7 +166,8 @@ $(function(){
   		  },
   		  success : function(resp) {
   			console.log("성공", resp);
-  			var middle = $(".middle"); //지정
+  			
+  			var middle = $(".middle");
   			middle.find("option").remove();
   			for (var dto of resp) {
   				
@@ -174,22 +175,20 @@ $(function(){
 				middleOption.val(dto.smallType);
 				middleOption.text(dto.smallType);
 				middle.append(middleOption);
-				
-				
-				
 			}
   		  },
   		  error : function(e) {
 			  console.log("실패", e);
   		  }
-  		 });
-		
-	} );
+  		});
+	});
 });
+
+/* 선택한 카테고리 출력하기 */
 $(function(){
 	$(".middle").change(function(){
 		var div = $("#category-select");
-		var big = $("select[name=location] option:selected").val(); //text값 가져오기
+		var big = $("select[name=location] option:selected").val();
 		var middle = $(this).val();
 		
 		var select = $("<input type='text' placeholder=' "+big+""+middle+" '>");
@@ -198,8 +197,8 @@ $(function(){
 		div.append(select);
 		div.append(select2);
 	});
-
-	$(".delete").on("click", function () {
+		/* 버튼누르면 해당 카테고리 삭제 */
+		$(".delete").on("click", function () {
     	$(this).parent().remove();
     });
 });
@@ -219,7 +218,7 @@ function lengCheck() {
 
     //글자 정리 후 길이 설정
     output.textContent = len;
-    }
+}
 
 </script>
 
@@ -234,7 +233,7 @@ function lengCheck() {
 	</div>
 	<div class="row">
 		<label>프로필 사진</label>
-		<input type="file" name="attach" accept="image/*" class="form-input" required>
+		<input type="file" name="attach" accept="image/*" class="form-input">
 	</div>	
 	<div class="row">
 		<label>이메일</label> 
@@ -327,7 +326,7 @@ function lengCheck() {
 	<button type="button" class="form-btn prev">이전 단계로</button>
 		
 	<div class="row">
-			<input type="submit" value="가입" class="form-btn">
+		<input type="submit" value="가입" class="form-btn">
 	</div>
 
 </div>
