@@ -21,6 +21,7 @@ public class CobuyDetailVO {
 	private String title;
 	private int price ;
 	private int hit ;
+	
 	@DateTimeFormat(pattern="yyyy-MM-dd HH24:mm:ss")
 	private Date regDate;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
@@ -28,7 +29,13 @@ public class CobuyDetailVO {
 	private String descript;
 	private String pName;
 	private List<MultipartFile> attach;
+	
 	private int imageNo;
 	private List<ImageDTO> imageList; //가져올 때 이미지 번호들
 	private List<ReplyVO> replyList;
+	//지도 부분
+	private int mapNo;
+	private double lat;
+	private double lng;
+	private String detailAddress;
 }
