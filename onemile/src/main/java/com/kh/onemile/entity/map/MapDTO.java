@@ -7,5 +7,5 @@ public class MapDTO {
 	private int mapNo;
 	private double lat;
 	private double lng;
-	private String detailaddress;
+	private String detailAddress;
 }

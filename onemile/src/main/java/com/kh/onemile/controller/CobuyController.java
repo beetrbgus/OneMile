@@ -38,7 +38,7 @@ public class CobuyController {
 		cobuyDetailVO.setMemberNo(memNo);
 		int cbNo = cobuyService.reg(cobuyDetailVO);
 
-		return "redirect:detail?cbNo="+cbNo;
+		return "detail?cbNo="+cbNo;
 	}
 	@GetMapping("/list")
 	public String list(Model model) {
@@ -55,8 +55,8 @@ public class CobuyController {
 		return "/cobuy/list";
 	}
 	@GetMapping("/detail")
-	public String detail(@RequestParam int cobuyNo , Model model) {
-		model.addAttribute("get", cobuyService.getDetail(cobuyNo));
+	public String detail(@RequestParam int cbNo , Model model) {
+		model.addAttribute("get", cobuyService.getDetail(cbNo));
 		return "detail";
 	}
 	@PostMapping("/delete")

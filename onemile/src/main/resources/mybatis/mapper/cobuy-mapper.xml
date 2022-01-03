@@ -9,11 +9,11 @@
 		insert into cobuy(
 		COBUY_NO,
 		MEMBER_NO, TITLE,
-		PRICE,DESCRIPT, PNAME,DEADLINE
+		PRICE,DESCRIPT, PNAME,DEADLINE ,MAP_NO
 		)values(
 		#{cobuyNo},
 		#{memberNo},#{title},
-		#{price},#{descript},#{pName}, #{deadLine}
+		#{price},#{descript},#{pName}, #{deadLine} ,#{mapNo}
 		)
 	</insert>
 	<!-- 숨김 변경 -->

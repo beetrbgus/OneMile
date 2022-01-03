@@ -8,29 +8,39 @@
     #centerAddr {display:block;margin-top:2px;font-weight: normal;}
     .bAddr {padding:5px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
 </style>
-<form method="post" enctype="multipart/form-data">
-	<input type="file" name="attach"> <input type="text"
-		name="title" placeholder="공구의 제목을 입력해주세요."> 만료 기한 : <input
-		type="date" min="2022-01-01" name="deadLine"> 가격 : <input
-		type="number" name="price"> 수량 : <input type="number"
-		name="stock"> 상품 이름 : <input type="text" name="pName">
-	상품 설명 :
-	<textarea name="descript" placeholder="상품 정보를 입력해주세요."></textarea>
-	<input type="file" name="attach" multiple="multiple">
+<form id="cobuyform" method="post" enctype="multipart/form-data">
+	<input type="file" name="attach" required accept="image/jpeg, image/png, image/jpg">
+	<input type="text" name="title" placeholder="공구의 제목을 입력해주세요." required> 
+		만료 기한 : <input type="date" min="2022-01-01" name="deadLine" required>
+		가격 : <input type="number" name="price" min="100" required> 
+		수량 : <input type="number" name="stock" min="0" required> 
+		상품 이름 : <input type="text" name="pName" required>
+		상품 설명 : <textarea name="descript" placeholder="상품 정보를 입력해주세요." required></textarea>
+		이미지 : <input type="file" name="attach" multiple="multiple">
 	<!--  지도 영역 -->
 	<div class="map_wrap">
 		<div id="map"
 			style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
 	</div>
-	<input id="location" type="hidden" name="detailAddress">
-	<input id="lat" type="hidden" name="lat">
-	<input id="lng" type="hidden" name="lng">
+	<input id="location" type="hidden" name="detailAddress" required>
+	<input id="lat" type="hidden" name="lat" required>
+	<input id="lng" type="hidden" name="lng" required>
 
 	<p id="result"></p>
 
-	<button type="submit">전송한다</button>
+	<button id="submitBtn" type="submit">전송한다</button>
 </form>
+<script> 
+ $("#submitBtn").click(function(e){
+	 e.preventDefault();
+	 let location = $("#location").val();
+	 if(location==undefined|| location ==""||location==null){
+		 return alert("지도를 검색해주세요.");
+	 }
+	 $("#cobuyform").submit();
+ });
 
+</script>
 <script>
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	mapOption = {
@@ -70,15 +80,11 @@
 				infowindow.setContent(content);
 				infowindow.open(map, marker);
 				
-				console.log('mouseEvent.latLng     :' +mouseEvent.latLng);
 				map.setCenter(mouseEvent.latLng); 
-				console.log("marker.getPosition()    "+marker.getPosition());
-				console.log("map.getCenter().la    "+map.getCenter().getLat());
-				console.log("map.getCenter().ma    "+map.getCenter().getLng());
 				
 				document.getElementById('lat').value = map.getCenter().getLat();
 				document.getElementById('lng').value = map.getCenter().getLng();
-				
+				document.getElementById('location').value = result[0].address.address_name;
 			}
 		});
 	});

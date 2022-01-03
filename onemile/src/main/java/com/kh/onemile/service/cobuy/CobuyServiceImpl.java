@@ -43,18 +43,19 @@ public class CobuyServiceImpl implements CobuyService {
 	public int reg(CobuyDetailVO cobuyDetailVO) throws IllegalStateException, IOException {
 		int cbNo = seq.nextSequence(seqName); // 공동구매 상품 번호
 		log.debug("cbNo       " + cbNo);
-
+		System.out.println("----------------------------");
+		System.out.println("cobuyDetailVO.getDetailAddress    "+ cobuyDetailVO.getDetailAddress());
 		// 지도 등록
 		MapDTO mapDTO = new MapDTO();
 		mapDTO.setLat(cobuyDetailVO.getLat());
 		mapDTO.setLng(cobuyDetailVO.getLng());
-		mapDTO.setLat(cobuyDetailVO.getLat());
-		
+		mapDTO.setDetailAddress(cobuyDetailVO.getDetailAddress());
+		log.debug("cobuyDetailVO.getDetailAddress()      "+cobuyDetailVO.getDetailAddress());
 		int mapNo = mapService.regMap(mapDTO);
+
+		// 공구 테이블에 등록
 		cobuyDetailVO.setMapNo(mapNo);
 		cobuyDetailVO.setCobuyNo(cbNo);
-		
-		// 공구 테이블에 등록
 		cobuyDao.reg(cobuyDetailVO);
 		log.debug("cobuyDTO 뭘까내용이???    " + cobuyDetailVO.toString());
 		log.debug("파일이 없나???    " + (cobuyDetailVO.getAttach() == null) != null ? "ㅇㅇ 널임" : "아님 널 아님");
