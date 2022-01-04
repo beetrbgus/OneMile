@@ -44,6 +44,7 @@
 			<package name="com.kh.onemile.entity.member.town"/>
 			<package name="com.kh.onemile.entity.miles"/>
 			<package name="com.kh.onemile.entity.miles.board"/>
+			<package name="com.kh.onemile.entity.notice"/>
 			<package name="com.kh.onemile.entity.product"/>
 			<package name="com.kh.onemile.entity.reply"/>
 			<package name="com.kh.onemile.entity.seq"/>
@@ -53,6 +54,7 @@
 			<package name="com.kh.onemile.vo"/>
 			<package name="com.kh.onemile.vo.kakaopay"/>
 			<package name="com.kh.onemile.vo.cobuy"/>
+			
 	</typeAliases>
 
 	
