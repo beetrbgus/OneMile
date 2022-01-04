@@ -10,7 +10,7 @@
 	<input type="hidden" name="total_amount" value="${membershipDTO.mspPrice}">
 	
 	<div>
-		${membershipDTO.mspNo}	 / ${membershipDTO.mspProduct} / ${membershipDTO.mspPrice}
+		${membershipDTO.mspNo}	/ ${membershipDTO.mspProduct} / ${membershipDTO.mspPrice}
 	</div>
 <input type="submit" value="결제하기">
 </c:forEach>

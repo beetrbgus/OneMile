@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="category">
+	
+	<!-- 소모임 대분류 목록 -->
+	<select id="list" resultType="SocialBigCategoryDTO">
+		select * from sbc
+	</select>
+	
+	<!-- 소모임 대분류로 소분류 가져오기 -->
+	<select id="listBySuper" parameterType="String" resultType="SocialCategoryDTO">
+		select * from smc where bigtype = #{bigtype}
+	</select>
+	
+	<!-- 회원 관심 카테고리  -->
+	<insert id="insert">
+		insert into ic values(
+			#{IcNo},#{smalltype},#{memNo}
+		)
+		
+	</insert>
+	
+</mapper>

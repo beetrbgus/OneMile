@@ -35,7 +35,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b89479d3bf4f702a0c7b99d5edfb1391&libraries=services" charset="utf-8"></script> 
     <script type="text/javascript"src="${root}/resources/js/navigator.js"></script>
-    <script type="text/javascript"src="${root}/resources/js/notification.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.2/sockjs.min.js"></script>
     <script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/sha1.min.js"></script>
@@ -85,7 +84,7 @@
                 <span>[<%=session.getAttribute("logId")%>]님</span>
                 <span>[<%=session.getAttribute("nick") %>]님</span>
                 <span>[<%=session.getAttribute("grade") %>]등급</span>
-                <span>멤버십 번호 : [<%=session.getAttribute("mspNo") %>]</span>
+           <%--      <span>멤버십 번호 : [<%=session.getAttribute("mspNo") %>]</span> --%>
                
             </div>
 

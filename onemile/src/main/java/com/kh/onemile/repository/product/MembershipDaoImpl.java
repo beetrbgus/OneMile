@@ -4,6 +4,8 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.kh.onemile.entity.product.MembershipBuyDTO;
 import com.kh.onemile.entity.product.MembershipDTO;
 
 @Repository
@@ -20,5 +22,10 @@ public class MembershipDaoImpl implements MembershipDao{
 	@Override
 	public List<MembershipDTO> search(int mspNo) {
 		return sqlSession.selectList("membership.get", mspNo);
+	}
+	@Override
+	public List<MembershipBuyDTO> joinMembership(int memberNo) {
+		return sqlSession.selectList("membership.joinMembership", memberNo);
+		
 	}
 }
