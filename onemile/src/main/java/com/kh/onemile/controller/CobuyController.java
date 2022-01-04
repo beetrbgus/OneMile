@@ -29,7 +29,9 @@ public class CobuyController {
 	private CobuyService cobuyService;
 	
 	@GetMapping("/regcobuy")
-	public String getreg() throws IllegalStateException, IOException {
+	public String getreg(Model model) throws IllegalStateException, IOException {
+		model.addAttribute("","");
+		
 		return "/cobuy/regcobuy";
 	}
 	@PostMapping("/regcobuy")

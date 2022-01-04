@@ -7,7 +7,7 @@ $(function(){
 		    	let lng = position.coords.longitude;
 		    	
 		    	let region = getAddr(lat,lng);
-		    	$.ajax({
+		    	/*$.ajax({
 		    		url:"/AjaxTest/ex01.do",
 		    		type: "POST", //요청 메소드 방식
 		    		dataType:"json", //서버가 요청 URL을 통해서 응답하는 내용의 타입
@@ -22,7 +22,7 @@ $(function(){
 		    			//통신 실패시 발생하는 함수(콜백)
 		    			alert(a + b + c);
 		    		}
-		    	});
+		    	});*/
 		    });
 
 		}

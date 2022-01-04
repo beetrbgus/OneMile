@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cobuy">
+<mapper namespace="middle">
 
 	<!-- 글쓰기 -->
 	<insert id="reg" parameterType="cobuyDTO">
@@ -63,7 +63,7 @@
 		cobuy_no) cbi on
 		c.cobuy_no = cbi.cobuy_no
 		inner join member m on m.member_no = c.member_no
-		where c.hiddenyn = 'N'
+		where c.hiddenyn = 'N';
 	</select>
 	<!-- 상세 조회 구문 (메인) -->
 	<select id="getDetail" parameterType="int"

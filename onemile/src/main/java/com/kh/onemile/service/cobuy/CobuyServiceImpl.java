@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.kh.onemile.entity.image.middle.CobuyImgMidDTO;
 import com.kh.onemile.entity.map.MapDTO;
+import com.kh.onemile.entity.menu.MiddleNameDTO;
 import com.kh.onemile.repository.cobuy.CobuyDao;
 import com.kh.onemile.repository.image.middle.CobuyMidImgDao;
 import com.kh.onemile.service.image.ImageService;
@@ -117,6 +118,12 @@ public class CobuyServiceImpl implements CobuyService {
 	@Override
 	public void delete(int cobuyNo) {
 		cobuyDao.delete(cobuyNo);
+	}
+
+	@Override
+	public List<MiddleNameDTO> getMiddleName() {
+		
+		return cobuyDao.getMiddleName();
 	}
 
 }
