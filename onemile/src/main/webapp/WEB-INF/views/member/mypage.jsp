@@ -33,6 +33,7 @@
 				<img src="https://via.placeholder.com/300x300?text=User" width="100%" class="image image-round image-border">
 				</c:when>
 				<c:otherwise>
+				<!-- <img src="D:\upload\member\117.jpg" /> -->
 				<img src="profile?imageNo=${memberProfileMidDTO.imageNo}" width="100%" class="image image-round image-border">
 				</c:otherwise>
 			</c:choose>
