@@ -11,10 +11,10 @@ CobuyListVO의 pName을 가져오는데 , 오류가 생김
 	${CobuyListVO.PName}도 됨.
   -->
 <c:forEach items="${list}" var="CobuyListVO">
-	상품번호 : ${CobuyListVO.cobuyNo}/작성자: ${CobuyListVO.nick} /상품이름 :${CobuyListVO.PName} 
+	 : <a href="detail?cobuyNo=${CobuyListVO.cobuyNo}">상품번호</a>/작성자: ${CobuyListVO.nick} /상품이름 :${CobuyListVO.PName} 
 	/가격 : ${CobuyListVO.price}원/ 제목 : ${CobuyListVO.title} /재고 : ${CobuyListVO.stock} /
 	마감기한 : ${CobuyListVO.deadLine}/ 사진번호 : ${CobuyListVO.imgNo}
-<img src="D:upload/cobuy/93" width="100%" class="image image-round image-border">
+<img src="${root}/resouces/cobuy/93" width="100%" class="image image-round image-border">
 <%-- <img src="D:upload/cobuy/${CobuyListVO.imgNo}" width="100%" class="image image-round image-border"> --%>
 	<br>
 </c:forEach>

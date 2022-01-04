@@ -85,7 +85,7 @@ public class CobuyServiceImpl implements CobuyService {
 	}
 
 	@Override
-	public CobuyListVO getDetail(int cobuyNo) {
+	public CobuyDetailVO getDetail(int cobuyNo) {
 		return cobuyDao.detail(cobuyNo);
 	}
 

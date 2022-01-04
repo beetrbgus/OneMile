@@ -25,7 +25,7 @@ public class CobuyDaoImpl implements CobuyDao{
 		return sqlSession.selectList("cobuy.getList");
 	}
 	@Override 
-	public CobuyListVO detail(int cobuyNo) {
+	public CobuyDetailVO detail(int cobuyNo) {
 		return sqlSession.selectOne("cobuy.getDetail",cobuyNo);
 	}
 	@Override
