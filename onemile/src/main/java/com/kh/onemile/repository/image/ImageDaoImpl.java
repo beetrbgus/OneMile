@@ -24,7 +24,7 @@ public class ImageDaoImpl implements ImageDao{
 		int count = sqlSession.delete("image.delete", imageNo);
 		return count > 0;
 	}
-	
+
 	@Override
 	public ImageDTO get(int imageNo) {
 		return sqlSession.selectOne("image.get", imageNo);
