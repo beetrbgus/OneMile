@@ -71,4 +71,18 @@ public class MemberDaoImpl implements MemberDao{
 		return sqlSession.selectOne("member.getProfile",memberNo);
 	}
 	
+	//닉네임 중복체크
+	@Override
+	public MemberDTO get2(String nick) {
+		return sqlSession.selectOne("member.getCheckNick",nick);
+	
+	}
+	
+	//전화번호 중복체크
+	@Override
+	public MemberDTO get3(String phone) {
+		return sqlSession.selectOne("member.getCheckPhone",phone);
+		
+	}
+	
 }

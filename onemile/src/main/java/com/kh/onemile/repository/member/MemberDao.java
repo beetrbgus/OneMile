@@ -30,7 +30,12 @@ public interface MemberDao {
 	//커뮤 글 작성자, 소모임 모임장, 마일즈 모임장 표기를 위해 닉네임 가져오기
 	String getNick(int memberNo);
 	
-	//회원정보 불러오기
+	//회원정보 가져오기
 	MemberDTO profile(int memberNo);
+	
+	//닉네임 중복체크
+	MemberDTO get2(String nick);
+	//전화번호 중복체크
+	MemberDTO get3(String phone);
 	
 }

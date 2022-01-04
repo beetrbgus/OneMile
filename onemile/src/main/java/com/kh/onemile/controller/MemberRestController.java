@@ -27,4 +27,29 @@ public class MemberRestController {
 			return "NONONO"; 
 		}
 	}
+	
+	//닉네임 중복체크
+	@GetMapping("/nickcheck")
+	public String nickCheck(@RequestParam String nick) {
+		MemberDTO memberDTO = memberDao.get2(nick);
+		if(memberDTO == null) {//없으면 닉네임 사용가능 -> YESICAN 리턴
+			return "YESICAN";
+		}
+		else {//있으면 사용 불가 -> NONONO리턴
+			return "NONONO"; 
+		}
+	}	
+	
+	//전화번호 중복체크
+	@GetMapping("/phonecheck")
+	public String phoneCheck(@RequestParam String phone) {
+		MemberDTO memberDTO = memberDao.get3(phone);
+		if(memberDTO == null) {//없으면 닉네임 사용가능 -> YESICAN 리턴
+			return "YESICAN";
+		}
+		else {//있으면 사용 불가 -> NONONO리턴
+			return "NONONO"; 
+		}
+	}
+	
 }
