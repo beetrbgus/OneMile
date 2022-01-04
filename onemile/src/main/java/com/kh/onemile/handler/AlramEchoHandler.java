@@ -26,9 +26,7 @@ public class AlramEchoHandler extends TextWebSocketHandler{
 		sessions.add(session);
 		
 		String sender = getNick(session); //센더 정보를 가져온다
-		if(sender!=null) {
 		userSessions.put(sender, session);
-		}
 		log.info("연결 성공");
 	}
 	
