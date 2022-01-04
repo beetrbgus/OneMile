@@ -1,5 +1,5 @@
 $(function(){
-	$("#confirmbtn").click(function(){
+	$(".confirmbtn").click(function(){
 		if('geolocation' in navigator){
 		    navigator.geolocation.getCurrentPosition((position) => {
 		    	
@@ -24,22 +24,19 @@ $(function(){
 		    		}
 		    	});*/
 		    });
-
 		}
 	});
 	function getAddr(lat,lng){
 		let geocoder = new kakao.maps.services.Geocoder();
-
 	    let coord = new kakao.maps.LatLng(lat, lng);
 	    let callback = function(result, status) {
 	        if (status === kakao.maps.services.Status.OK) {
 	        	console.log(result[0]);
 	        	let dong = result[0].region_3depth_name;
-	        	$("#dong").val(dong);
+	        	$(".dong").val(dong);
 	        }
 	        return result[0];
 	    };
 	    geocoder.coord2RegionCode(lng,lat,callback);
 	}
-
 });

@@ -1,5 +1,7 @@
 package com.kh.onemile.controller;
 
+import java.io.IOException;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.onemile.entity.member.MemberDTO;
 import com.kh.onemile.entity.member.certi.CertiDTO;
+import com.kh.onemile.service.CategoryService;
 import com.kh.onemile.service.admin.AdminService;
 import com.kh.onemile.service.email.EmailService;
 import com.kh.onemile.service.member.MemberService;
@@ -29,15 +32,21 @@ public class MemberController {
 	private EmailService emailService;
 	@Autowired
 	private AdminService adminService;
+	@Autowired
+	private CategoryService categoryService;
 	
 	@GetMapping("/join")
-	public String getJoin() {
+	public String getJoin(Model model) {
+		model.addAttribute("category",categoryService.category());
 		return "member/join";
 	}
 	//회원가입. 가입 후 회원 승인 테이블로 감.
 	@PostMapping("/join")
-	public String postJoin(@ModelAttribute MemberJoinVO memberJoinVO) {
+	public String postJoin(@ModelAttribute MemberJoinVO memberJoinVO
+								   ) throws IllegalStateException, IOException {
 		int memNo = memberService.join(memberJoinVO);
+		//관심 카테고리 테이블 전송
+		categoryService.insert(memberJoinVO, memNo);
 		//회원 승인 테이블 전송.
 		adminService.regApproveMember(memNo);
 		return "redirect:join_success";

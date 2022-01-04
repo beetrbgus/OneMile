@@ -1,0 +1,528 @@
+@font-face {
+    font-family: Noto Sans KR;
+    font-style: normal;
+    font-weight: 100;
+    src: url(http://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.woff2) format("woff2"), url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.woff) format("woff"), url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.otf) format("opentype")
+}
+
+@font-face {
+    font-family: Noto Sans KR;
+    font-style: normal;
+    font-weight: 300;
+    src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.woff2) format("woff2"), url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.woff) format("woff"), url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.otf) format("opentype")
+}
+
+@font-face {
+    font-family: Noto Sans KR;
+    font-style: normal;
+    font-weight: 400;
+    src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff2) format("woff2"), url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff) format("woff"), url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.otf) format("opentype")
+}
+
+@font-face {
+    font-family: Noto Sans KR;
+    font-style: normal;
+    font-weight: 500;
+    src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.woff2) format("woff2"), url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.woff) format("woff"), url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.otf) format("opentype")
+}
+
+@font-face {
+    font-family: Noto Sans KR;
+    font-style: normal;
+    font-weight: 700;
+    src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.woff2) format("woff2"), url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.woff) format("woff"), url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.otf) format("opentype")
+}
+
+@font-face {
+    font-family: Noto Sans KR;
+    font-style: normal;
+    font-weight: 900;
+    src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.woff2) format("woff2"), url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.woff) format("woff"), url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.otf) format("opentype")
+}
+
+a,
+a:active,
+a:focus,
+a:hover {
+    text-decoration: none;
+    color: inherit
+}
+
+.pointer {
+    cursor: pointer
+}
+
+body,
+html {
+    font-family: Noto Sans KR;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    letter-spacing: -.4px
+}
+
+#navbar {
+    margin-bottom: 0
+}
+
+.alert {
+    border-radius: 0
+}
+
+.container {
+    width: 100%;
+    padding-right: 0;
+    padding-left: 0;
+    margin-right: auto;
+    margin-left: auto
+}
+
+.col,
+.col-3,
+.col-4,
+.col-5,
+.col-6,
+.col-8,
+.col-9,
+.col-12,
+.col-auto,
+.col-md-1,
+.col-md-2,
+.col-md-3,
+.col-md-4,
+.col-md-5,
+.col-md-6,
+.col-md-7,
+.col-md-8,
+.col-md-9,
+.col-md-10,
+.col-md-11,
+.col-md-12,
+.col-sm-1,
+.col-sm-2,
+.col-sm-3,
+.col-sm-4,
+.col-sm-5,
+.col-sm-6,
+.col-sm-7,
+.col-sm-8,
+.col-sm-9,
+.col-sm-10,
+.col-sm-11,
+.col-sm-12,
+.col-xs-1,
+.col-xs-2,
+.col-xs-3,
+.col-xs-4,
+.col-xs-5,
+.col-xs-6,
+.col-xs-7,
+.col-xs-8,
+.col-xs-9,
+.col-xs-10,
+.col-xs-11,
+.col-xs-12 {
+    position: relative;
+    height: 100%;
+    min-height: 1px;
+    padding-right: 0;
+    padding-left: 0
+}
+
+.row {
+    margin-right: 0;
+    margin-left: 0
+}
+
+.footer {
+    margin-top: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-top: none
+}
+
+.panel {
+    border: none
+}
+
+p {
+    margin: 0
+}
+
+button {
+    outline: none !important
+}
+
+.swiper-nav-btn {
+    color: #000;
+    border: none;
+    background-color: #fff;
+    font-size: 20px;
+    display: none;
+    width: 35px;
+    padding: 0
+}
+
+.swiper-nav-btn img {
+    width: 35px
+}
+
+.swiper-nav-btn:not(.carousel-button-prev, .carousel-button-next, .no-hover):hover img:first-child,
+.swiper-nav-btn:not(.carousel-button-prev, .carousel-button-next, .no-hover) img:last-child {
+    display: none
+}
+
+.swiper-nav-btn:not(.carousel-button-prev, .carousel-button-next, .no-hover):hover img:last-child {
+    display: block
+}
+
+.swiper-nav-btn:after {
+    display: none
+}
+
+.swiper-button-prev {
+    left: -50px
+}
+
+.swiper-button-next {
+    right: -50px
+}
+
+@media (min-width:576px) {
+    .container {
+        max-width: 100%;
+        width: 100%
+    }
+}
+
+@media (min-width:768px) {
+
+    .swiper-button-next,
+    .swiper-button-prev {
+        display: inline
+    }
+
+    .container {
+        max-width: 1200px;
+        width: 100%
+    }
+
+    .swiper-container .blur {
+        display: inline-block
+    }
+}
+
+@media (min-width:992px) {
+    .container {
+        max-width: 1200px;
+        width: 100%
+    }
+}
+
+@media (min-width:1200px) {
+    .container {
+        max-width: 1200px;
+        width: 100%
+    }
+}
+
+.blur {
+    display: none;
+    position: absolute;
+    width: 50px;
+    background: linear-gradient(270deg, #fff, hsla(0, 0%, 100%, 0) 140%);
+    z-index: 1000;
+    pointer-events: none;
+    top: 0;
+    right: 0;
+    height: calc(100% + 8px)
+}
+
+.main-banner-background {
+    width: 100%;
+    height: 170px;
+    position: absolute;
+    top: 89px;
+    z-index: -1;
+    background-image: url(/corp_mobile.4b120776.png);
+    background-size: cover;
+    background-position: 50%
+}
+
+.main-banner {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    height: 170px;
+    padding: 80px 20px 0
+}
+
+.main-banner p {
+    line-height: 1;
+    color: #fff
+}
+
+.main-banner p:first-of-type {
+    font-size: 24px;
+    font-weight: 700
+}
+
+.main-banner p:nth-of-type(2) {
+    margin-top: 9px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.43
+}
+
+.section-1 {
+    padding: 30px 20px
+}
+
+.section-1 .heading {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1;
+    color: #181818
+}
+
+.section-1 .content {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.73;
+    color: #434343;
+    margin-top: 10px
+}
+
+.section-2 {
+    padding: 30px 20px
+}
+
+.section-2 .heading {
+    font-size: 26px;
+    font-weight: 700;
+    color: #e73e26
+}
+
+.section-2 .sub-heading {
+    margin-top: 5px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #434343
+}
+
+.section-2 .content {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.8;
+    color: #434343
+}
+
+.section-2>div:nth-of-type(2),
+.section-2>div:nth-of-type(3) {
+    margin-top: 50px
+}
+
+.section-3 {
+    padding: 40px 20px
+}
+
+.section-3>.heading {
+    font-size: 26px;
+    font-weight: 700;
+    color: #181818
+}
+
+.section-3>div:nth-of-type(2) {
+    margin-top: 20px
+}
+
+.section-3>div:nth-of-type(3),
+.section-3>div:nth-of-type(4) {
+    margin-top: 60px
+}
+
+.section-3>div:not(:first-child) .cover {
+    background-size: cover;
+    background-position: 50%;
+    width: 100%;
+    height: 200px
+}
+
+.section-3>div:not(:first-child) .heading {
+    margin-top: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #434343
+}
+
+.section-3>div:not(:first-child) span {
+    margin-top: 3px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.57;
+    color: #434343
+}
+
+.section-3>div:not(:first-child) .cover.leader {
+    background-image: url(/corp_leader_mobile.c2a291d4.png)
+}
+
+.section-3>div:not(:first-child) .cover.class {
+    background-image: url(/corp_class_mobile.26930bef.png)
+}
+
+.section-3>div:not(:first-child) .cover.together {
+    background-image: url(/corp_together_mobile.ec055c95.png)
+}
+
+.section-4 {
+    padding: 30px 0 60px 20px;
+    position: relative
+}
+
+.section-4 .heading {
+    font-size: 24px;
+    font-weight: 700;
+    color: #080606
+}
+
+.section-4 .swiper-container {
+    margin-top: 20px
+}
+
+@media (min-width:768px) {
+    .main-banner-background {
+        height: 427px;
+        top: 69px;
+        background-image: url(/corp_mobile.4b120776.png)
+    }
+
+    .main-banner {
+        margin: 0 auto;
+        height: 427px;
+        padding: 260px 0 0
+    }
+
+    .main-banner p:first-of-type {
+        font-size: 42px
+    }
+
+    .main-banner p:nth-of-type(2) {
+        margin-top: 9px;
+        font-size: 26px
+    }
+
+    .section-1 {
+        padding: 30px 0
+    }
+
+    .section-1 .content {
+        font-size: 16px
+    }
+
+    .section-1 .content br {
+        display: none
+    }
+
+    .section-2 {
+        display: inline-block;
+        width: 100%;
+        padding: 30px 0
+    }
+
+    .section-2>div {
+        margin-top: 0;
+        display: inline-block;
+        float: left;
+        width: 33.3333333333%;
+        height: 100%
+    }
+
+    .section-2>div:first-of-type {
+        padding-right: 40px
+    }
+
+    .section-2>div:nth-of-type(2) {
+        padding: 0 40px
+    }
+
+    .section-2>div:nth-of-type(2),
+    .section-2>div:nth-of-type(3) {
+        margin-top: 0;
+        border-left: 2px solid #d8d8d8
+    }
+
+    .section-2>div:nth-of-type(3) {
+        padding-left: 40px
+    }
+
+    .section-3 {
+        padding: 60px 0
+    }
+
+    .section-3>div:not(:first-child) .cover {
+        height: 423px
+    }
+
+    .section-3>div:not(:first-child) .heading {
+        width: 100%;
+        display: inline-block;
+        font-size: 18px
+    }
+
+    .section-3>div:not(:first-child) .heading span {
+        font-size: 15px;
+        font-weight: 500;
+        margin-left: 50px;
+        display: inline-block
+    }
+
+    .section-3>div:not(:first-child) .cover.leader {
+        background-image: url(/corp_leader_desktop.6ab8cf91.png)
+    }
+
+    .section-3>div:not(:first-child) .cover.class {
+        background-image: url(/corp_class_desktop.0daad225.png)
+    }
+
+    .section-3>div:not(:first-child) .cover.together {
+        background-image: url(/corp_together_desktop.4d12fae8.png)
+    }
+
+    .section-4 {
+        padding: 60px 0 120px
+    }
+}
+
+@media (min-width:750px) {
+    .section-2 {
+        height: 450px
+    }
+}
+
+@media (min-width:850px) {
+    .section-2 {
+        height: 400px
+    }
+}
+
+@media (min-width:950px) {
+    .section-2 {
+        height: 350px
+    }
+}
+
+@media (max-width:1040px) {
+    .section-3>div:not(:first-child) .heading span {
+        margin-left: 0;
+        display: block
+    }
+}
+
+@media (min-width:1200px) {
+    .section-2 {
+        height: 320px
+    }
+}
+
+/*# sourceMappingURL=/corp.99e2209d.css.map */
