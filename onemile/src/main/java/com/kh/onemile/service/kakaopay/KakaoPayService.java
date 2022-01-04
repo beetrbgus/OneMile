@@ -18,6 +18,5 @@ public interface KakaoPayService {
 	
 	//결제 승인
 	KakaoPayApproveResponseVO approve(KakaoPayApproveRequestVO requestVO) throws URISyntaxException;
-
 	KakaoPayAutoPayMentInactiveResponseVO autoInactive(String sid) throws URISyntaxException;
 }

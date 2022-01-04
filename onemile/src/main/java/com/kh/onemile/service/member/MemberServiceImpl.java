@@ -17,7 +17,6 @@ import com.kh.onemile.entity.member.membership.AdDTO;
 import com.kh.onemile.repository.certi.CertiDao;
 import com.kh.onemile.repository.image.middle.MemberImageDao;
 import com.kh.onemile.repository.member.MemberDao;
-import com.kh.onemile.service.category.CategoryService;
 import com.kh.onemile.service.image.ImageService;
 import com.kh.onemile.repository.member.membership.IsMembershipDao;
 import com.kh.onemile.util.Sequence;

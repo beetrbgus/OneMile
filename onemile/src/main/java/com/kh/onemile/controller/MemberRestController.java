@@ -1,18 +1,10 @@
 package com.kh.onemile.controller;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
-
-import com.kh.onemile.entity.image.ImageDTO;
 import com.kh.onemile.entity.member.MemberDTO;
 import com.kh.onemile.repository.member.MemberDao;
 

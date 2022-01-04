@@ -51,7 +51,6 @@ public class ScheduleServiceImpl implements ScheduleService{
 			System.out.println("정기 결제 성공");
 			
 			membershipBuyDao.insert(msbDTO);
-			
 		}
 	}
 }

@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@page import="java.util.List"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%-- 페이지에서 사용할 JSTL 변수 --%>
+<c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 
@@ -70,7 +72,7 @@
         
        <div class="row center">
        	  <input type="file" name="attach" multiple/>
-       </div>  
+       </div>
        <div class="row center">
           <input type="submit" value="개설" />
        </div>

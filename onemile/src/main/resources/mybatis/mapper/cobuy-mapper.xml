@@ -5,15 +5,17 @@
 <mapper namespace="cobuy">
 
 	<!-- 글쓰기 -->
-	<insert id="reg" parameterType="cobuyDTO">
+	<insert id="reg" parameterType="CobuyDetailVO">
 		insert into cobuy(
 		COBUY_NO,
 		MEMBER_NO, TITLE,
-		PRICE,DESCRIPT, PNAME,DEADLINE ,MAP_NO
+		PRICE,DESCRIPT, PNAME,DEADLINE ,MAP_NO ,MIDDLE_NAME
 		)values(
 		#{cobuyNo},
 		#{memberNo},#{title},
-		#{price},#{descript},#{pName}, #{deadLine} ,#{mapNo}
+		#{price},#{descript},#{pName},
+		#{deadLine}
+		,#{mapNo} ,#{middleName}
 		)
 	</insert>
 	<!-- 숨김 변경 -->
@@ -25,22 +27,32 @@
 
 
 	<resultMap type="CobuyDetailVO" id="customCobuy">
-		<!-- DB항목과 변수를 연결 -->
+		<!-- 상품정보 -->
 		<result column="cobuy_No" property="cobuyNo" />
-		<result column="MEMBER_NO" property="memberNo" />
-		<result column="MIDDLE_NAME" property="middleName" />
 		<result column="TITLE" property="title" />
 		<result column="PRICE" property="price" />
+		<result column="STOCK" property="stock" />
 		<result column="HIT" property="hit" />
-		<result column="REGDATE" property="regDate" />
+		<result column="PNAME" property="pName" />
 		<result column="DEADLINE" property="deadLine" />
 		<result column="DESCRIPT" property="descript" />
-		<result column="PNAME" property="pName" />
 
+		<result column="MIDDLE_NAME" property="middleName" />
+		<!-- 판매자 영역 -->
+		<result column="MEMBER_NO" property="memberNo" />
+		<result column="IMAGE_NO" property="memberImageNo" />
+		<result column="EMAIL" property="email" />
+		<result column="NICK" property="nick" />
+		<result column="PHONE" property="phone" />
+		<!-- 지도 영역 -->
+		<result column="LAT" property="lat" />
+		<result column="LNG" property="lng" />
+		<result column="DETAILADDRESS" property="detailAddress" />
+		<!-- 상품 이미지들 -->
 		<collection property="imageList" javaType="java.util.List"
 			ofType="ImageDTO" select="DetailImgs" column="cobuy_no"></collection>
 	</resultMap>
-	<!-- 목록 조회  DB항목과 변수를 연결-->
+	<!-- 목록 조회 DB항목과 변수를 연결 -->
 	<resultMap type="CobuyListVO" id="CobuyList">
 		<result column="cobuy_No" property="cobuyNo" />
 		<result column="MEMBER_NO" property="memberNo" />
@@ -51,35 +63,48 @@
 		<result column="STOCK" property="stock" />
 		<result column="DEADLINE" property="deadLine" />
 		<result column="IMAGE_NO" property="imgNo" />
-	</resultMap> 
-
+	</resultMap>
+	<!-- 목록에는 이미지가 1개만 있는데 -->
+	<!-- 한 글에 사진이 4개가 들어가면 그 중에 하나만 뽑아야하는데 -->
 	<!-- 목록 조회 구문 (메인) -->
 	<select id="getList" resultMap="CobuyList">
-		select c.* , m.nick from cobuy c
-			inner join member m
-				on c.member_no = m.member_no
-		where c.HIDDENYN = 'N' and m.HIDDENYN ='N'
-        	order by deadline desc
+		select c.* , m.nick ,cbi.image_no
+		from cobuy c
+		left outer join (select cobuy_no, min(image_no) image_no
+		from cbi group by
+		cobuy_no) cbi on
+		c.cobuy_no = cbi.cobuy_no
+		inner join
+		member m on m.member_no = c.member_no
+		where c.hiddenyn = 'N'
 	</select>
-	<!-- 상세 조회 구문 (메인) -->
+	<!-- 상세 조회 구문 (메인) 상품테이블 , 구매자 테이블, 회원테이블, 회원이미지 테이블,지도 -->
 	<select id="getDetail" parameterType="int"
 		resultMap="customCobuy">
-		select c.* , m.nick from cobuy c inner join member m
-		on c.member_no = m.member_no
-		where cobuy_no = #{cobuyNo} and c.HIDDENYN = 'N'
+		select * from cobuy c
+		inner join member m on c.member_no = m.member_no
+		inner join mei on mei.member_no = m.member_no
+		inner join map m on m.map_no = c.map_no
+		where cobuy_no = ${cobuyNo} and c.HIDDENYN = 'N' AND m.HIDDENYN='N'
 	</select>
 	<!-- 목록에서의 이미지 한개 -->
 	<select id="oneImg" resultType="ImageDto" parameterType="int">
-		select * from image where 
-			image_no in (select min(image_no) from cbi where cobuy_no = #{cobuyNo})
+		select *
+		from image where
+		image_no in (select min(image_no) from cbi where
+		cobuy_no = #{cobuyNo})
+		order
+		by image_no
+	</select>
+	<!-- 상세페이지에서의 이미지 여러개의 정보 -->
+	<select id="DetailImgs" resultType="ImageDto"
+		parameterType="int">
+		select * from image where image_no
+		in (select image_no
+		from cbi where cobuy_no = #{cobuyNo})
 		order by image_no
 	</select>
-	<!-- 상세페이지에서의 이미지 여러개 -->
-	<select id="DetailImgs" resultType="ImageDto" parameterType="int">
-		select * from image where image_no 
-			in (select image_no from cbi where cobuy_no = #{cobuyNo})
-		order by image_no
-	</select>
+
 </mapper>
 
 
