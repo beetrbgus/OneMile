@@ -35,4 +35,7 @@ public interface MemberService {
 	
 	//회원정보 불러오기
 	public MemberDTO profile(int memberNo);
+	
+	//회원정보 수정
+	public boolean changeInformation(MemberDTO memberDTO);
 }

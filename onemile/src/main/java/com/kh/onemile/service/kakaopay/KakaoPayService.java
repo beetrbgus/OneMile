@@ -4,6 +4,7 @@ import java.net.URISyntaxException;
 
 import com.kh.onemile.vo.kakaopay.KakaoPayApproveRequestVO;
 import com.kh.onemile.vo.kakaopay.KakaoPayApproveResponseVO;
+import com.kh.onemile.vo.kakaopay.KakaoPayAutoPayMentInactiveResponseVO;
 import com.kh.onemile.vo.kakaopay.KakaoPayReadyRequestVO;
 import com.kh.onemile.vo.kakaopay.KakaoPayReadyResponseVO;
 import com.kh.onemile.vo.kakaopay.KakaoPayRegularApproveRequestVO;
@@ -17,4 +18,6 @@ public interface KakaoPayService {
 	
 	//결제 승인
 	KakaoPayApproveResponseVO approve(KakaoPayApproveRequestVO requestVO) throws URISyntaxException;
+
+	KakaoPayAutoPayMentInactiveResponseVO autoInactive(String sid) throws URISyntaxException;
 }

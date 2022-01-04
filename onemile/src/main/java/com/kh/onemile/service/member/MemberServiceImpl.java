@@ -49,8 +49,6 @@ public class MemberServiceImpl implements MemberService {
 	private ImageService imageService; //이미지 서비스
 	@Autowired
 	private MemberImageDao middleService; // 이미지 중간 테이블 서비스
-	@Autowired
-	private CategoryService categoryService;
 	
 	@Autowired
 	private SetDefaut setDefault;
@@ -155,5 +153,11 @@ public class MemberServiceImpl implements MemberService {
 	public MemberDTO profile(int memberNo) {
 		return memberDao.profile(memberNo);
 		
+	}
+
+	//회원정보 수정
+	@Override
+	public boolean changeInformation(MemberDTO memberDTO) {
+		return memberDao.changeInformation(memberDTO);
 	}
 }

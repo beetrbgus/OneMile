@@ -13,5 +13,7 @@ public interface MembershipBuyDao {
 	
 	//정기결제 전체목록
 	List<MembershipBuyDTO> list();
+
+	void regularPayDelete(String sid);
 	
 }

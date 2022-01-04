@@ -1,7 +1,9 @@
 package com.kh.onemile.controller;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URLEncoder;
+import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -25,12 +27,17 @@ import com.kh.onemile.entity.image.ImageDTO;
 import com.kh.onemile.entity.image.middle.MemberProfileMidDTO;
 import com.kh.onemile.entity.member.MemberDTO;
 import com.kh.onemile.entity.member.certi.CertiDTO;
+import com.kh.onemile.entity.product.MembershipBuyDTO;
 import com.kh.onemile.repository.image.middle.MemberImageDao;
+import com.kh.onemile.repository.product.MembershipBuyDao;
+import com.kh.onemile.repository.product.MembershipDao;
 import com.kh.onemile.service.admin.AdminService;
 import com.kh.onemile.service.category.CategoryService;
 import com.kh.onemile.service.email.EmailService;
+import com.kh.onemile.service.kakaopay.KakaoPayService;
 import com.kh.onemile.service.member.MemberService;
 import com.kh.onemile.vo.MemberJoinVO;
+import com.kh.onemile.vo.kakaopay.KakaoPayAutoPayMentInactiveResponseVO;
 
 @RequestMapping("/member")
 @Controller
@@ -45,6 +52,12 @@ public class MemberController {
 	private CategoryService categoryService;
 	@Autowired
 	private MemberImageDao memberImageDao;
+	@Autowired
+	private MembershipDao membershipDao;
+	@Autowired
+	private KakaoPayService kakaoPayService;
+	@Autowired
+	private MembershipBuyDao membershipBuyDao;
 	
 	//회원가입
 	@GetMapping("/join")
@@ -211,7 +224,7 @@ public class MemberController {
 	
 	//프로필 다운로드에 대한 요청 처리
 	@GetMapping("/profile")
-	@ResponseBody//이 메소드만큼은 뷰 리졸버를 쓰지 않겠다
+	@ResponseBody
 	public ResponseEntity<ByteArrayResource> profile(
 				@RequestParam int imageNo
 			) throws IOException {
@@ -221,7 +234,6 @@ public class MemberController {
 		
 		//이미지번호(imageNo)로 실제 파일 정보를 불러온다
 		byte[] data = memberImageDao.load(imageNo);
-		
 		ByteArrayResource resource = new ByteArrayResource(data);
 		
 		String encodeName = URLEncoder.encode(imageDTO.getUploadName(), "UTF-8");
@@ -233,5 +245,47 @@ public class MemberController {
 			.header(HttpHeaders.CONTENT_ENCODING, "UTF-8")
 			.contentLength(imageDTO.getFileSize())
 			.body(resource);
+	}
+	
+	//회원정보 수정
+	@GetMapping("/edit")
+	public String edit(HttpSession session, Model model) {
+		int memberNo = (int)session.getAttribute("logNo");
+		MemberDTO memberDTO = memberService.profile(memberNo);
+		
+		model.addAttribute("memberDTO",memberDTO);
+		return "member/edit";
+	}
+	@PostMapping("/edit")
+	public String edit(@ModelAttribute MemberDTO memberDTO, HttpSession session) {
+		int memberNo = (int)session.getAttribute("logNo");
+		memberDTO.setMemberNo(memberNo);
+		
+		boolean result = memberService.changeInformation(memberDTO);
+		if(result) {
+			return "redirect:edit_success";
+		}
+		else {
+			return "redirect:edit?error";
+		}
+	}
+	
+	//구매한 멤버십 목록
+	@GetMapping("reg_membership")
+	public String membershipList(Model model, HttpSession session) {
+		int memberNo = (int)session.getAttribute("logNo");
+		List<MembershipBuyDTO> membershipBuyDTO = membershipDao.joinMembership(memberNo);
+		System.out.println(membershipBuyDTO);
+		model.addAttribute("list",membershipBuyDTO);
+		return "member/reg_membership";
+	}
+	
+	//정기기부 비활성화 요청
+	@GetMapping("/membership/disabled")
+	public String autoInactive(@RequestParam String sid, Model model) throws URISyntaxException {
+		KakaoPayAutoPayMentInactiveResponseVO responseVo = kakaoPayService.autoInactive(sid);
+		
+		membershipBuyDao.regularPayDelete(sid);
+		return "redirect:/member/reg_membership";
 	}
 }

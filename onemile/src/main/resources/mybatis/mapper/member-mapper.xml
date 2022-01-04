@@ -71,4 +71,27 @@
 	<select id="getCheckPhone" parameterType="String" resultType="MemberDTO">
 		select * from member where phone = #{phone}
 	</select>
+	
+	<update id="changeInformation" parameterType="MemberDTO">
+		update member
+		<!-- set을 이용하여 수정항목을 동적으로 배치(단 마지막 콤마는 반드시 작성) -->
+		<set>
+			<if test="nick != null">
+				nick = #{nick},
+			</if>
+			<if test="memberBirth != null">
+				member_birth = #{memberBirth},
+			</if>
+			<if test="phone != null">
+				phone = #{phone},
+			</if>
+			<if test="birth != null">
+				birth = #{birth},
+			</if>
+			
+		</set>
+		where member_no = #{memberNo}
+	</update>
+	
+	
 </mapper>

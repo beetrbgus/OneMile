@@ -46,4 +46,13 @@
 			inner join ad ad on msp.msp_no = ad.msp_no
 		where me.member_no = #{memberNo}
 	</select>
+	
+	<select id="joinMembership" parameterType="int" resultType="MembershipBuyDTO">
+		select * from msb where member_no = #{memberNo}
+	</select>	
+	
+	<!-- 정기결제 해지 -->
+		<delete id="autoPayDelete" parameterType="String">
+			delete msb where sid = #{sid}
+		</delete>
 </mapper>

@@ -37,5 +37,7 @@ public interface MemberDao {
 	MemberDTO get2(String nick);
 	//전화번호 중복체크
 	MemberDTO get3(String phone);
+	//회원정보 수정하기
+	boolean changeInformation(MemberDTO memberDTO);
 	
 }

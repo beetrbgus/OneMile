@@ -106,4 +106,6 @@ public class MembershipController {
 	public String successResult() {
 		return "membership/success_result";
 	}
+	
+	
 }

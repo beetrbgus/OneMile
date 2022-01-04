@@ -20,39 +20,43 @@
 </style>
 
 <div class="container-900 container-center">
-	<div class="row">
-		<h2>회원 상세 정보</h2>
-	</div>
 	<div class="row float-container">
 	
 	<div class="float-item-left">
 		<!-- 회원 프로필 이미지 -->
-		<div class="row">
+		<div class="row">	
 			<c:choose>
 				<c:when test="${memberProfileMidDTO == null}">
 				<img src="https://via.placeholder.com/300x300?text=User" width="100%" class="image image-round image-border">
 				</c:when>
 				<c:otherwise>
-				<!-- <img src="D:\upload\member\117.jpg" /> -->
 				<img src="profile?imageNo=${memberProfileMidDTO.imageNo}" width="100%" class="image image-round image-border">
 				</c:otherwise>
 			</c:choose>
 		</div> 
 			
-			<!-- 회원 아이디 -->
+			<!-- 회원 정보 -->
 			<div class="row center">
-				<h2>${memberDTO.email}</h2>
+				<h2>${memberDTO.nick}</h2>
+			</div>
+			<div class="row center">
+				<h4>${memberDTO.email}</h4>
+			</div>
+			<div class="row center">
+				<h4>[${memberDTO.grade}]</h4>
 			</div>
 			
+			<div class="row center"></div>
+			
 			<!-- 각종 메뉴들 -->
+			<div class="row center">
+				<a href="edit" class="link-btn-block">내 정보 수정</a>
+			</div>
 			<div class="row center">
 				<a href="edit_pw" class="link-btn-block">비밀번호 변경</a>
 			</div>
 			<div class="row center">
-				<a href="edit" class="link-btn-block">개인정보 변경</a>
-			</div>
-			<div class="row center">
-				<a href="quit" class="link-btn-block">회원 탈퇴</a>
+				<a href="reg_membership" class="link-btn-block">멤버십 구매목록</a>
 			</div>
 			
 		</div>
@@ -61,9 +65,6 @@
 		<div class="float-item-left">
 		
 			<!-- 회원 정보 출력 -->
-			<div class="row">
-				<h2>회원 상세 정보</h2>
-			</div>
 			<div class="row">
 				<table class="table table-stripe">
 					<tbody>

@@ -85,4 +85,11 @@ public class MemberDaoImpl implements MemberDao{
 		
 	}
 	
+	//회원정보 수정
+	@Override
+	public boolean changeInformation(MemberDTO memberDTO) {
+		int count = sqlSession.update("member.changeInformation", memberDTO);
+		return count > 0;
+	}
+	
 }
