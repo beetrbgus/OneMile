@@ -1,0 +1,834 @@
+@media (max-width:768px) {
+    .class-image-card {
+        height: 240px !important
+    }
+
+    .magazine-card-cover {
+        height: 250px !important
+    }
+}
+
+.magazine-card {
+    border-radius: 4px;
+    background-color: #fff;
+    position: relative;
+    cursor: pointer
+}
+
+.magazine-card .magazine-card-cover {
+    width: 100%;
+    height: 198px;
+    border-radius: 4px;
+    background-color: #999696;
+    background-size: cover;
+    background-position: 50%;
+    background-repeat: no-repeat
+}
+
+.magazine-card .magazine-content-wrapper {
+    height: 70px;
+    width: 100%;
+    padding: 0
+}
+
+.magazine-card .magazine-content-wrapper .type {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1;
+    color: #b9b6b6
+}
+
+.magazine-card .magazine-content-wrapper .title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-top: 12px;
+    -webkit-line-clamp: 2;
+    line-height: 1.4em;
+    height: 2.8em
+}
+
+.magazine-card .magazine-content-wrapper .content,
+.magazine-card .magazine-content-wrapper .title {
+    color: #383535;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+
+.magazine-card .magazine-content-wrapper .content {
+    -webkit-line-clamp: 3;
+    line-height: 1.6em;
+    height: 4.8em;
+    word-wrap: break-word;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 400
+}
+
+.magazine-card .magazine-content-wrapper .detail-btn {
+    border-radius: 17.5px;
+    border: 1px solid #dbdbdb;
+    font-size: 12px;
+    font-weight: 400;
+    text-align: center;
+    color: #b8b8b8;
+    display: inline-block;
+    height: 26px;
+    line-height: 26px;
+    padding: 0 13px;
+    position: absolute;
+    right: 18px;
+    bottom: 16px
+}
+
+.class-card {
+    height: 260px;
+    border-radius: 4px;
+    background-color: #fff;
+    position: relative;
+    cursor: pointer;
+    box-sizing: border-box
+}
+
+.class-card .like-btn {
+    cursor: pointer;
+    position: absolute;
+    top: 35%;
+    right: 10px;
+    color: #fff;
+    font-size: 24px
+}
+
+.class-card .like-btn.fas {
+    color: #ff5252
+}
+
+.class-card .badge {
+    opacity: .8;
+    border-radius: 15px;
+    background-color: #ff5252;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    padding: 9px 11px;
+    position: absolute;
+    top: 10px;
+    right: 10px
+}
+
+.class-card .class-card-cover {
+    height: 104px;
+    border-radius: 4px;
+    background-color: #999696;
+    background-size: cover;
+    background-position: 50%;
+    background-repeat: no-repeat
+}
+
+.class-card .class-content {
+    display: inline-block;
+    width: 100%;
+    padding: 7px 7px 7px 0
+}
+
+.class-card .class-content .subject {
+    padding: 6px 10px;
+    border-radius: 4px;
+    background-color: #f4f4f4;
+    font-size: 10px;
+    font-weight: 400;
+    text-align: center;
+    color: #999696;
+    display: inline-block;
+    margin-right: 6px;
+    line-height: 1
+}
+
+.class-card .class-content .class-info,
+.class-card .class-content .class-name,
+.class-card .class-content .class-subject {
+    float: left;
+    display: inline-block;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+
+.class-card .class-content .class-name {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    display: -webkit-inline-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    width: 100%;
+    color: #383535
+}
+
+.class-card .class-content .class-summary {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 4px;
+    width: 100%;
+    font-size: 12px;
+    color: #383535;
+    line-height: 1.3em;
+    height: 3.9em;
+    float: left
+}
+
+.class-card .class-content .class-info {
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1.6;
+    word-spacing: -1px;
+    letter-spacing: -1px;
+    color: #999696
+}
+
+.class-card .class-content .class-info .class-leader-image {
+    float: left;
+    width: 16px;
+    height: 16px;
+    border-radius: 50px;
+    background-color: #999696;
+    background-position: 50%;
+    display: inline-block;
+    margin-right: 5px
+}
+
+.class-card.fixed,
+.socialing-card.fixed {
+    width: calc(50% - 5px);
+    display: inline-block;
+    margin: 0 10px 20px 0;
+    float: left
+}
+
+@media (max-width:768px) {
+
+    .class-card.fixed:nth-child(2n),
+    .socialing-card.fixed:nth-child(2n) {
+        margin-right: 0;
+        float: right
+    }
+}
+
+.class-image-card {
+    background-color: #999696;
+    height: 230px;
+    border-radius: 4px;
+    background-size: cover;
+    background-position: 50%;
+    background-repeat: no-repeat
+}
+
+.review-card {
+    position: relative;
+    height: 172px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px -5px hsla(0, 0%, 76.9%, .3);
+    border: 1px solid #f4f4f4;
+    padding: 16px
+}
+
+.review-card .review-content,
+.review-card .review-footer,
+.review-card .review-header {
+    width: 100%;
+    display: inline-block
+}
+
+.review-card .review-header img {
+    width: 24px;
+    height: 24px;
+    border-radius: 50px
+}
+
+.review-card .review-header .user-name {
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    color: #080606;
+    margin-left: 4px
+}
+
+.review-card .review-header .user-grade {
+    font-size: 10px;
+    line-height: 1;
+    color: #999696;
+    margin-left: 4px
+}
+
+.review-card .review-header .date {
+    font-size: 10px;
+    color: #999696;
+    float: right;
+    line-height: 24px
+}
+
+.review-card .review-content {
+    margin-top: 10px;
+    font-size: 12px;
+    font-weight: 400;
+    color: #999696;
+    line-height: 1.6em;
+    height: 4.8em;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical
+}
+
+.review-card .review-footer {
+    cursor: pointer;
+    width: 140px;
+    height: 28px;
+    line-height: 28px;
+    font-size: 12px;
+    color: #ea4637;
+    border-radius: 17px;
+    margin-top: 14px
+}
+
+.socialing-card {
+    height: 250px;
+    border-radius: 16px;
+    border: 1px solid #f1f1f1;
+    background-color: #fff
+}
+
+.socialing-card .cover {
+    height: 104px;
+    border-radius: 16px 16px 0 0;
+    background-color: #999696;
+    background-size: cover;
+    background-position: 50%;
+    background-repeat: no-repeat
+}
+
+.socialing-card .socialing-card-content {
+    width: 100%;
+    height: calc(100% - 104px);
+    padding: 13px
+}
+
+.socialing-card .socialing-card-content .socialing-name {
+    display: inline-block;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 700;
+    color: #383535;
+    line-height: 1.5em;
+    height: 3em;
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+
+.socialing-card .socialing-card-content .subject-wrapper {
+    display: inline-block;
+    width: 100%;
+    height: 30px
+}
+
+.socialing-card .socialing-card-content .subject-wrapper .subject {
+    float: left;
+    border: 1px solid #f1f1f1;
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 400;
+    color: #383535;
+    border-radius: 12px;
+    background-color: #f4f4f4;
+    padding: 0 8px;
+    height: 19px;
+    line-height: 19px;
+    margin-right: 6px;
+    margin-top: 4px
+}
+
+.socialing-card .socialing-card-content .date,
+.socialing-card .socialing-card-content .total-member {
+    margin-top: 4px;
+    font-size: 10px;
+    font-weight: 400;
+    color: #383535;
+    display: inline-block;
+    width: 100%;
+    float: left;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap
+}
+
+.socialing-card .socialing-card-content .date i,
+.socialing-card .socialing-card-content .total-member i {
+    font-size: 10px;
+    margin-right: 6px;
+    width: 12px;
+    text-align: center
+}
+
+.socialing-card .socialing-card-content .date {
+    margin-top: 5px;
+    padding-bottom: 10px;
+    border-bottom: .5px solid #dbdbdb
+}
+
+.socialing-card .socialing-card-content .info {
+    padding-top: 12px;
+    display: inline-block;
+    width: 100%
+}
+
+.socialing-card .socialing-card-content .info>div {
+    float: left;
+    display: inline-block
+}
+
+.socialing-card .socialing-card-content .info .leader-image {
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+    display: inline-block;
+    background-size: cover;
+    background-position: 50%;
+    background-repeat: no-repeat
+}
+
+.socialing-card .socialing-card-content .info .leader-grade,
+.socialing-card .socialing-card-content .info .leader-name {
+    font-weight: 400;
+    color: #383535;
+    float: left;
+    line-height: 34px
+}
+
+.socialing-card .socialing-card-content .info .leader-name {
+    font-size: 12px;
+    margin-left: 4px
+}
+
+.socialing-card .socialing-card-content .info .leader-grade {
+    font-size: 10px;
+    margin-left: 2px
+}
+
+.order-history-card {
+    display: inline-block;
+    width: 100%;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    background-color: #fff;
+    position: relative
+}
+
+.order-history-card .header {
+    display: block
+}
+
+.order-history-card .header span:first-of-type {
+    display: inline-block;
+    padding: 0 8px;
+    height: 28px;
+    line-height: 28px;
+    border-radius: 24px;
+    border: 1px solid #383535;
+    font-size: 12px;
+    font-weight: 700;
+    color: #383535
+}
+
+.order-history-card .header.active span {
+    border-color: #e73331;
+    color: #e73331
+}
+
+.order-history-card .header.active .order-claim-date {
+    font-size: 14px;
+    font-weight: 500;
+    margin-left: 8px
+}
+
+.order-history-card .content {
+    display: inline-block;
+    margin-top: 16px
+}
+
+.order-history-card .content>div {
+    width: 100%;
+    display: inline-block;
+    float: left
+}
+
+.order-history-card .content>div:first-of-type .cover {
+    display: inline-block;
+    float: left;
+    width: 40%;
+    max-width: 104px;
+    height: 64px;
+    border-radius: 8px;
+    background-image: url(../munto-images.s3.ap-northeast-2.amazonaws.com/dev-item/1604329342101-cover-%ec%96%91%ec%a3%bc.JPG);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50%
+}
+
+.order-history-card .content>div:first-of-type .info {
+    width: calc(60% - 10px);
+    margin-left: 10px;
+    display: inline-block;
+    float: left
+}
+
+.order-history-card .content>div:first-of-type .info>p {
+    line-height: 1.1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis
+}
+
+.order-history-card .content>div:first-of-type .info>p:first-of-type {
+    font-size: 12px;
+    font-weight: 400;
+    color: #6a6a6a
+}
+
+.order-history-card .content>div:first-of-type .info>p:nth-of-type(2) {
+    font-size: 18px;
+    font-weight: 700;
+    color: #161616;
+    margin-top: 8px
+}
+
+.order-history-card .content>div:first-of-type .info>p:nth-of-type(3) {
+    font-size: 12px;
+    font-weight: 400;
+    color: #383535;
+    margin-top: 10px
+}
+
+.order-history-card .content>div:not(:first-child) {
+    margin-top: 10px
+}
+
+.order-history-card .content>div:not(:first-child) .title,
+.order-history-card .content>div:not(:first-child) .value {
+    display: inline-block
+}
+
+.order-history-card .content>div:not(:first-child) .title {
+    width: 40%;
+    max-width: 104px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    color: #999696
+}
+
+.order-history-card .content>div:not(:first-child) .value {
+    padding-left: 10px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    color: #383535
+}
+
+.order-history-card .content>div:not(:first-child) .price.value {
+    font-weight: 700
+}
+
+.order-history-card .content .refund-btn {
+    margin-top: 15px !important;
+    font-size: 12px;
+    font-weight: 400;
+    text-decoration: underline;
+    cursor: pointer;
+    color: #b9b6b6
+}
+
+.order-history-card .detail-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-image: url(/right_black.eb995c1a.svg);
+    width: 24px;
+    height: 24px
+}
+
+@media (min-width:768px) {
+    .class-card {
+        height: 340px
+    }
+
+    .class-card .class-card-cover {
+        height: 152px
+    }
+
+    .class-card .class-content {
+        padding: 10px 0
+    }
+
+    .class-card .class-content .subject {
+        font-size: 12px;
+        margin-right: 8px
+    }
+
+    .class-card .class-content .class-name {
+        margin-top: 14px;
+        font-size: 16px
+    }
+
+    .class-card .class-content .class-summary {
+        margin-top: 10px;
+        font-size: 14px
+    }
+
+    .class-card .class-content .class-info {
+        font-size: 12px;
+        line-height: 2.3
+    }
+
+    .class-card .class-content .class-info .class-leader-image {
+        width: 24px;
+        height: 24px;
+        display: inline-block;
+        margin-right: 8px
+    }
+
+    .class-image-card {
+        height: 400px
+    }
+
+    .class-card.fixed,
+    .socialing-card.fixed {
+        width: calc(25% - 15px);
+        margin: 0 20px 40px 0;
+        float: left !important
+    }
+
+    .class-card.fixed:nth-child(4n+4),
+    .socialing-card.fixed:nth-child(4n+4) {
+        margin-right: 0 !important
+    }
+
+    .class-card.fixed:nth-child(2n) {
+        float: left
+    }
+
+    .socialing-card {
+        height: 280px
+    }
+
+    .socialing-card .cover {
+        height: 106px
+    }
+
+    .socialing-card .socialing-card-content {
+        width: 100%;
+        height: calc(100% - 106px);
+        padding: 13px
+    }
+
+    .socialing-card .socialing-card-content .socialing-name {
+        font-size: 16px
+    }
+
+    .socialing-card .socialing-card-content .subject-wrapper .subject {
+        height: 24px;
+        line-height: 24px;
+        font-size: 12px;
+        margin-right: 8px
+    }
+
+    .socialing-card .socialing-card-content .total-member {
+        margin-top: 5px
+    }
+
+    .socialing-card .socialing-card-content .date,
+    .socialing-card .socialing-card-content .total-member {
+        font-size: 12px
+    }
+
+    .socialing-card .socialing-card-content .date i,
+    .socialing-card .socialing-card-content .total-member i {
+        font-size: 12px;
+        width: 15px;
+        margin-left: 6px
+    }
+
+    .socialing-card .socialing-card-content .info {
+        padding-top: 15px
+    }
+
+    .socialing-card .socialing-card-content .info .leader-grade,
+    .socialing-card .socialing-card-content .info .leader-name {
+        line-height: 42px
+    }
+
+    .socialing-card .socialing-card-content .info .leader-image {
+        width: 40px;
+        height: 40px
+    }
+
+    .socialing-card .socialing-card-content .info .leader-name {
+        font-size: 14px;
+        margin-left: 8px
+    }
+
+    .socialing-card .socialing-card-content .info .leader-grade {
+        font-size: 12px;
+        margin-left: 4px
+    }
+
+    .order-history-card {
+        border-bottom: .5px solid #dbdbdb;
+        margin-bottom: 0;
+        padding: 15px 0 0
+    }
+
+    .order-history-card .content {
+        width: 100%
+    }
+
+    .order-history-card .content>div:first-of-type {
+        width: 50%;
+        display: inline-block;
+        float: left
+    }
+
+    .order-history-card .content>div:nth-of-type(2) {
+        margin-top: 0
+    }
+
+    .order-history-card .content>div:not(:first-child) {
+        width: calc(50% - 10px);
+        float: right
+    }
+
+    .order-history-card .content>div:not(:first-child) .title {
+        width: 20%
+    }
+
+    .order-history-card .content .refund-btn {
+        width: 100% !important;
+        padding-left: calc(50% + 10px)
+    }
+}
+
+.review-card2 {
+    position: relative;
+    width: 100%;
+    min-height: 140px;
+    display: inline-block;
+    border-radius: 8px;
+    border: .5px solid #b9b6b6;
+    background-color: #f8f8f8;
+    margin-top: 12px;
+    padding: 16px 20px
+}
+
+.review-card2 .review-profile {
+    width: 100%
+}
+
+.review-card2 .review-profile,
+.review-card2 .review-profile>div {
+    display: inline-block;
+    float: left
+}
+
+.review-card2 .review-profile .review-profile-image {
+    width: 24px;
+    height: 24px;
+    background-size: cover;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    border-radius: 25px
+}
+
+.review-card2 .review-profile .review-user-name {
+    font-size: 12px;
+    font-weight: 400;
+    color: #080606;
+    margin-left: 6px;
+    margin-top: 2px
+}
+
+.review-card2 .review-profile .review-createdat {
+    margin-top: 2px;
+    font-size: 12px;
+    font-weight: 400;
+    color: #999696;
+    margin-left: 10px
+}
+
+.review-card2 .review-photo {
+    width: 100%;
+    background-size: cover;
+    display: inline-block;
+    float: left;
+    border-radius: 4px;
+    margin: 8px 0 12px
+}
+
+.review-card2 .review-content {
+    width: 100%;
+    float: left;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #383535;
+    line-height: 1.6em;
+    min-height: 4.8em
+}
+
+.review-card2 .review-toggle-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px
+}
+
+.review-card2.hide .review-photo {
+    display: none
+}
+
+.review-card2.hide .review-content {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.6em;
+    height: 4.8em
+}
+
+@media (min-width:768px) {
+    .review-card2 .review-photo {
+        width: 30%
+    }
+
+    .review-card2 .review-content {
+        width: calc(70% - 16px);
+        margin-left: 16px
+    }
+
+    .review-card2 .review-content.no-photo {
+        width: 100%;
+        margin-left: 0
+    }
+}
+
+@media (max-width:768px) {
+    .like-btn {
+        top: 28% !important
+    }
+}
+
+/*# sourceMappingURL=/card.a6051e70.css.map */
