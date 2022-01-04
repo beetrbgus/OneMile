@@ -17,6 +17,25 @@ $(function() {
 		sock.onmessage = function(evt) {
 			var data = evt.data;
 
+			var toastTop = app.toast.create({
+				text : "알림 : " + data + "\n",
+				closeButton : true,
+				debug : false,
+				newestOnTop : false,
+				progressBar : false,
+				positionClass : "toast-top-right",
+				preventDuplicates : false,
+				onclick : null,
+				showDuration : 300,
+				hideDuration : 1000,
+				timeOut : 5000,
+				extendedTimeOut : 1000,
+				showEasing : "swing",
+				hideEasing : "linear",
+				showMethod : "fadeIn",
+				hideMethod : "fadeOut"
+			});
+			toastTop.open();
 		};
 
 		sock.onclose = function() {
