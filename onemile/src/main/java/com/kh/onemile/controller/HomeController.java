@@ -8,6 +8,7 @@ public class HomeController {
 	//메인페이지
 	@RequestMapping("/")
 	public String home() {
+		System.out.println("home controller");
 		return "home";
 	}
 }

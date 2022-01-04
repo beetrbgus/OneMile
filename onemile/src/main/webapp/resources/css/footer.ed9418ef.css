@@ -1,0 +1,113 @@
+footer {
+    background-color: #f4f4f4;
+    padding: 29px 20px 90px
+}
+
+footer .menu {
+    width: 100%;
+    display: flex
+}
+
+footer .menu ul {
+    width: 50%;
+    display: inline-block;
+    padding: 0;
+    text-align: left
+}
+
+footer .menu li {
+    list-style: none;
+    font-size: 14px;
+    font-weight: 500;
+    color: #242424;
+    margin: 5px 10px 5px 0
+}
+
+footer .menu .munto-sns {
+    display: inline-block;
+    width: 100%;
+    text-align: left
+}
+
+footer .menu .munto-sns div {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-size: contain;
+    margin-right: 16px
+}
+
+footer .menu .facebook-btn {
+    background-image: url(facebook.15dc484b.svg)
+}
+
+footer .menu .insta-btn {
+    background-image: url(insta.224d6cb6.svg)
+}
+
+footer .menu .url-btn {
+    background-image: url(blog.ff7d7e73.svg)
+}
+
+footer .info {
+    margin-top: 20px
+}
+
+footer .info p {
+    line-height: 1.9;
+    color: #6a6a6a;
+    margin-top: 5px
+}
+
+footer .info p,
+footer .terms {
+    font-size: 12px;
+    font-weight: 500
+}
+
+footer .terms {
+    color: #434343
+}
+
+footer .terms a {
+    cursor: pointer
+}
+
+@media (max-width:768px) {
+    .terms {
+        text-align: start
+    }
+}
+
+@media (min-width:768px) {
+    footer {
+        padding: 30px 0 40px
+    }
+
+    footer .menu {
+        width: 50%
+    }
+
+    footer .menu li {
+        margin-right: 50px
+    }
+
+    footer .menu .munto-sns {
+        margin-top: 10px
+    }
+
+    footer .info {
+        margin: 0;
+        padding: 0
+    }
+
+    footer .info br.h {
+        display: none
+    }
+
+    footer .terms {
+        padding: 0
+    }
+}
+
+/*# sourceMappingURL=/footer.ed9418ef.css.map */
