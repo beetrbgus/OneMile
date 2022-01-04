@@ -37,4 +37,10 @@ public class MembershipBuyDaoImpl implements MembershipBuyDao{
 	public List<MembershipBuyDTO> list() {
 		return sqlSession.selectList("membership.dayCheck");
 	}
+
+	@Override
+	public void regularPayDelete(String sid) {
+		sqlSession.delete("membership.regularPayDelete", sid);
+		
+	}
 }

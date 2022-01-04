@@ -8,9 +8,9 @@
 	<input type="hidden" name="mspNo" value="${membershipDTO.mspNo}">
 	<input type="hidden" name="partner_user_id" value="${sessionScope.logId}">
 	<input type="hidden" name="total_amount" value="${membershipDTO.mspPrice}">
-		
+	
 	<div>
-		${membershipDTO.mspNo}	 / ${membershipDTO.mspProduct} / ${membershipDTO.mspPrice}
+		${membershipDTO.mspNo}	/ ${membershipDTO.mspProduct} / ${membershipDTO.mspPrice}
 	</div>
 <input type="submit" value="결제하기">
 </c:forEach>

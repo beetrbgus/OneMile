@@ -12,4 +12,5 @@ public interface ImageDao {
 	boolean deleteImage(int imageNo);
 	ImageDTO get(int imageNo);
 	List<ImageDTO> listByBoardNo(int boardNo);
+	
 }

@@ -18,8 +18,6 @@ import com.kh.onemile.entity.product.MembershipBuyDTO;
 import com.kh.onemile.entity.product.MembershipDTO;
 import com.kh.onemile.repository.product.MembershipBuyDao;
 import com.kh.onemile.repository.product.MembershipDao;
-import com.kh.onemile.repository.social.BigCategoryDao;
-import com.kh.onemile.service.CategoryService;
 import com.kh.onemile.service.kakaopay.KakaoPayService;
 import com.kh.onemile.vo.kakaopay.KakaoPayApproveRequestVO;
 import com.kh.onemile.vo.kakaopay.KakaoPayApproveResponseVO;
@@ -50,7 +48,7 @@ public class MembershipController {
 		List<MembershipDTO> list = membershipDao.search(mspNo);
 		model.addAttribute("list", list);
 		session.setAttribute("mspNo", mspNo);
-		return "redirect:/";
+		return "membership/confirm";
 	}
 	
 	//결제 준비 요청
@@ -72,7 +70,7 @@ public class MembershipController {
 	public String approve(@RequestParam String pg_token, 
 									HttpSession session) throws URISyntaxException {
 		
-		//세션에 전달되는 다음 데이터들을 수신한 뒤 삭제
+		//변수에 세션값 담고 세션삭제
 		String tid = (String)session.getAttribute("tid");
 		String partnerUserId = (String)session.getAttribute("partner_user_id");
 		Integer mspNo = (int)session.getAttribute("mspNo");
@@ -108,4 +106,6 @@ public class MembershipController {
 	public String successResult() {
 		return "membership/success_result";
 	}
+	
+	
 }

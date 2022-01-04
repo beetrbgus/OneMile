@@ -5,13 +5,13 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <style>
    .notice {
-   color:red;
-   }
-    </style>
+   		color:red;
+	}
+</style>
 
 <script>
-//아이디 중복확인 Ajax
 $(function(){
+	//아이디 중복확인 Ajax
    	$("input[name=email]").on("blur", function(){
    		var input = $("input[name=email]").val();
    		$.ajax({
@@ -30,6 +30,45 @@ $(function(){
 			}
 		});
 	});
+  //닉네임 중복확인 Ajax
+   	$("input[name=nick]").on("blur", function(){
+   		var input = $("input[name=nick]").val();
+   		$.ajax({
+   			url : "${root}/member/nickcheck",
+				type : "get",
+				data : {
+					nick : input
+				},
+				success : function(resp) {
+					if (resp == "YESICAN") {
+					} else if (resp == "NONONO") {
+						$("input[name=nick]").next().text("이미 사용중인 닉네임입니다.");
+					}
+				},
+				error : function(err) {
+			}
+		});
+	});
+  //전화번호 중복확인 Ajax
+   	$("input[name=phone]").on("blur", function(){
+   		var input = $("input[name=phone]").val();
+   		$.ajax({
+   			url : "${root}/member/phonecheck",
+				type : "get",
+				data : {
+					phone : input
+				},
+				success : function(resp) {
+					if (resp == "YESICAN") {
+					} else if (resp == "NONONO") {
+						$("input[name=phone]").next().text("이미 사용중인 전화번호입니다.");
+					}
+				},
+				error : function(err) {
+			}
+		});
+	});
+
 });
 
 //이메일 정규표현식
@@ -144,7 +183,7 @@ function formCheck(){
         $(".page").eq(p).show();
     });
     
-    $(".prev").click(function(e){
+  	    $(".prev").click(function(e){
         e.preventDefault();
 
         p--;
@@ -157,7 +196,7 @@ function formCheck(){
 $(function(){
 		$(".big").change(function(){
 			
-			var category = $(this).val();
+		var category = $(this).val();
 		$.ajax({
 		  url : "${pageContext.request.contextPath}/miles/data/category/child",
   		  type : "post",
@@ -166,7 +205,8 @@ $(function(){
   		  },
   		  success : function(resp) {
   			console.log("성공", resp);
-  			var middle = $(".middle"); //지정
+  			
+  			var middle = $(".middle");
   			middle.find("option").remove();
   			for (var dto of resp) {
   				
@@ -179,9 +219,27 @@ $(function(){
   		  error : function(e) {
 			  console.log("실패", e);
   		  }
-  		 });
+  		});
+	});
+});
+
+/* 선택한 카테고리 출력하기 */
+$(function(){
+	$(".middle").change(function(){
+		var div = $("#category-select");
+		var big = $("select[name=location] option:selected").val();
+		var middle = $(this).val();
 		
-	} );
+		var select = $("<input type='text' placeholder=' "+big+""+middle+" '>");
+		var select2 = $("<button type='button' class='delete'>x</button>");
+		
+		div.append(select);
+		div.append(select2);
+	});
+		/* 버튼누르면 해당 카테고리 삭제 */
+		$(".delete").on("click", function () {
+    	$(this).parent().remove();
+    });
 });
 
 function lengCheck() {
@@ -199,11 +257,11 @@ function lengCheck() {
 
     //글자 정리 후 길이 설정
     output.textContent = len;
-    }
+}
 
 </script>
 
-<form method="post" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data" onsubmit="return formCheck();">
 
 <!-- 1페이지 -->
 <div class="page">
@@ -212,7 +270,10 @@ function lengCheck() {
 	<div class="row center">
 		<h1>회원가입</h1>
 	</div>
-	
+	<div class="row">
+		<label>프로필 사진</label>
+		<input type="file" name="attach" accept="image/*" class="form-input" required>
+	</div>	
 	<div class="row">
 		<label>이메일</label> 
 		<input type="email" name="email" required class="form-input" autocomplete="off" onblur="emailCheck();">
@@ -275,8 +336,9 @@ function lengCheck() {
 	<div class="row">
 		<label>관심사 설정</label>
 	</div>
+	
 	<div class="row">
-		<select class="big" required>
+		<select class="big" required name="location">
      		<option value="">카테고리선택</option>
      		<c:forEach var="category" items="${category}">
           		<option value="${category.bigType}">${category.bigType}</option>
@@ -285,6 +347,8 @@ function lengCheck() {
       <select class="middle" name="smalltype"></select>
 	</div>
 	
+	<div id="category-select">
+	</div>
 	<div class="row" >
 		<label>MBTI</label>
 		<br>
@@ -292,11 +356,7 @@ function lengCheck() {
 				<option value="INFP">INFP<option>
 			</select>
 	</div>
-	<div class="row">
-		<label>프로필 사진</label>
-		<input type="file" name="attach" accept="image/*" class="form-input" multiple>
-	</div>
-		
+	
 	<div class="row">
 		<label>코로나 백신접종여부</label>
 		<input type="file" name="attach" accept="image/*" class="form-input">
@@ -304,7 +364,7 @@ function lengCheck() {
 	<button type="button" class="form-btn prev">이전 단계로</button>
 		
 	<div class="row">
-			<input type="submit" value="가입" class="form-btn">
+		<input type="submit" value="가입" class="form-btn">
 	</div>
 
 </div>

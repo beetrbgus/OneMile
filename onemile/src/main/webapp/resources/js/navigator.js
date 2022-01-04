@@ -1,3 +1,5 @@
+
+
 $(function(){
 	$("#confirmbtn").click(function(){
 		if('geolocation' in navigator){
