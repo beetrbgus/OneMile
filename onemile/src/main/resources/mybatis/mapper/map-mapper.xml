@@ -14,4 +14,11 @@
 	<select id="getMap" parameterType="int" resultType="mapDTO">
 		select * from map where map_no = #{mapNo}
 	</select>
+	<update id="modify" parameterType="MapDTO">
+		UPDATE MAP SET LAT=#{lat},LNG=#{lng},DETAILADDRESS=#{detailAddress}  
+			WHERE MAP_NO=#{mapNo} 
+	</update>
+	<delete id="delete" parameterType="int">
+		DELETE FROM MAP WHERE MAP_NO=#{mapNo}
+	</delete>
 </mapper>

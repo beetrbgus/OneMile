@@ -11,9 +11,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.kh.onemile.entity.cobuy.CobuyModDTO;
 import com.kh.onemile.service.cobuy.CobuyService;
 import com.kh.onemile.vo.cobuy.CobuyDetailVO;
 import com.kh.onemile.vo.cobuy.CobuyListVO;
+import com.kh.onemile.vo.cobuy.CobuyRegVO;
+
 import lombok.extern.slf4j.Slf4j;
 
 @RequestMapping("/cobuy")
@@ -30,12 +34,12 @@ public class CobuyController {
 		return "/cobuy/regcobuy";
 	}
 	@PostMapping("/regcobuy")
-	public String postreg(@ModelAttribute CobuyDetailVO cobuyDetailVO,HttpSession session) throws IllegalStateException, IOException {
+	public String postreg(@ModelAttribute CobuyRegVO cobuyRegVO,HttpSession session) throws IllegalStateException, IOException {
 		int memNo = Integer.parseInt(String.valueOf(session.getAttribute("logNo")));
-		cobuyDetailVO.setMemberNo(memNo);
-		int cobuyNo = cobuyService.reg(cobuyDetailVO);
+		cobuyRegVO.setMemberNo(memNo);
+		int cobuyNo = cobuyService.reg(cobuyRegVO);
 
-		return "detail?cobuyNo="+cobuyNo;
+		return "redirect:detail?cobuyNo="+cobuyNo;
 	}
 	@GetMapping("/list")
 	public String list(Model model) {
@@ -74,11 +78,16 @@ public class CobuyController {
 		return "detail";
 	}
 	@PostMapping("/modify")
-	public String postModify(@ModelAttribute CobuyDetailVO cobuyDetailVO) {
-//		int cbiNo = cobuyService.modify(cobuyDetailVO);
-//		return "redirect:cobuy/detail?cbiNo="+cbiNo;
-		return "";
+	public String postModify(@ModelAttribute CobuyModDTO cobuyModDTO,HttpSession session) throws IllegalStateException, IOException{
+		int memNo = Integer.parseInt(String.valueOf(session.getAttribute("logNo")));
+		
+		if(memNo ==cobuyModDTO.getMemberNo()) {
+			cobuyService.modify(cobuyModDTO);
+		}
+		
+		return "redirect:detail?cobuyNo="+cobuyModDTO.getCobuyNo();
 	}
+
 	@RequestMapping("/upload")
 	public void uploadTest(@ModelAttribute CobuyDetailVO testVO) {
 		log.debug(" -------------------------------------------");
