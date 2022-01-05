@@ -13,7 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.kh.onemile.entity.cobuy.CobuyDTO;
+import com.kh.onemile.entity.cobuy.CobuyBuyDTO;
 import com.kh.onemile.service.cobuy.CobuyService;
 import com.kh.onemile.vo.cobuy.CobuyDetailVO;
 import com.kh.onemile.vo.cobuy.CobuyListVO;
@@ -64,9 +64,9 @@ public class CoyBuyTest {
 			log.debug(cobuyDTO.toString());
 		}
 	}
-//	@Test
+	@Test
 	public void getCoyBuy(){
-		CobuyListVO result=cobuyService.getDetail(22);
+		CobuyDetailVO result=cobuyService.getDetail(60);
 		log.debug(result.toString());
 	}
 //	@Test

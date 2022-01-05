@@ -14,7 +14,7 @@ import com.kh.onemile.service.map.MapService;
 import com.kh.onemile.util.Sequence;
 import com.kh.onemile.vo.cobuy.CobuyDetailVO;
 import com.kh.onemile.vo.cobuy.CobuyListVO;
-
+import com.kh.onemile.entity.menu.MiddleNameDTO;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.extern.slf4j.Slf4j;
@@ -84,7 +84,7 @@ public class CobuyServiceImpl implements CobuyService {
 	}
 
 	@Override
-	public CobuyListVO getDetail(int cobuyNo) {
+	public CobuyDetailVO getDetail(int cobuyNo) {
 		return cobuyDao.detail(cobuyNo);
 	}
 
@@ -117,6 +117,12 @@ public class CobuyServiceImpl implements CobuyService {
 	@Override
 	public void delete(int cobuyNo) {
 		cobuyDao.delete(cobuyNo);
+	}
+
+	@Override
+	public List<MiddleNameDTO> getMiddleName() {
+		
+		return cobuyDao.getMiddleName();
 	}
 
 }

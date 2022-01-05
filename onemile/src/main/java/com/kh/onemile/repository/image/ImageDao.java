@@ -2,9 +2,6 @@ package com.kh.onemile.repository.image;
 
 import java.io.IOException;
 import java.util.List;
-
-import org.springframework.web.multipart.MultipartFile;
-
 import com.kh.onemile.entity.image.ImageDTO;
 
 public interface ImageDao {

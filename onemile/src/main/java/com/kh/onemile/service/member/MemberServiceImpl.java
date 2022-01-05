@@ -17,7 +17,6 @@ import com.kh.onemile.entity.member.membership.AdDTO;
 import com.kh.onemile.repository.certi.CertiDao;
 import com.kh.onemile.repository.image.middle.MemberImageDao;
 import com.kh.onemile.repository.member.MemberDao;
-import com.kh.onemile.service.CategoryService;
 import com.kh.onemile.service.image.ImageService;
 import com.kh.onemile.repository.member.membership.IsMembershipDao;
 import com.kh.onemile.util.Sequence;
@@ -49,8 +48,6 @@ public class MemberServiceImpl implements MemberService {
 	private ImageService imageService; //이미지 서비스
 	@Autowired
 	private MemberImageDao middleService; // 이미지 중간 테이블 서비스
-	@Autowired
-	private CategoryService categoryService;
 	
 	@Autowired
 	private SetDefaut setDefault;
@@ -72,22 +69,21 @@ public class MemberServiceImpl implements MemberService {
 		//회원 테이블에 등록
 		memberDao.join(memberJoinVO);
 		if(memberJoinVO.getAttach() != null) {//사진이 있으면
+			
 			List<Integer> imgNoList = imageService.regImage(memberJoinVO.getAttach(), folderName);
 		
-		//연결 테이블
-		MemberProfileMidDTO memberProfileMidDTO = new MemberProfileMidDTO();
+			//연결 테이블
+			MemberProfileMidDTO memberProfileMidDTO = new MemberProfileMidDTO();
 		
-		memberProfileMidDTO.setImgNoList(imgNoList);//이미지 갯수만큼 넣어 줌
-		memberProfileMidDTO.setMemberNo(memNo); //회원 번호
+			memberProfileMidDTO.setImgNoList(imgNoList);//이미지 갯수만큼 넣어 줌
+			memberProfileMidDTO.setMemberNo(memNo); //회원 번호
 		
-		// 중간 이미지 테이블에 등록
-		middleService.reg(memberProfileMidDTO);
-		log.debug("등록 완료  memberJoinVO   "+memberProfileMidDTO.toString());
+			// 중간 이미지 테이블에 등록
+			middleService.reg(memberProfileMidDTO);
+			log.debug("등록 완료  memberJoinVO   "+memberProfileMidDTO.toString());
+			}
+			return memNo;
 		}
-		
-		
-		return memNo;
-	}
 
 	//로그인
 	@Override
@@ -139,20 +135,28 @@ public class MemberServiceImpl implements MemberService {
 		}
 	}
 	
+	//커뮤 글 작성자, 소모임 모임장, 마일즈 모임장 표기를 위해 닉네임 가져오기
 	@Override
 	public String getNick(int memberNo) {
 		return memberDao.getNick(memberNo);
 	}
-
+	
+	//멤버십 혜택
 	@Override
 	public AdDTO membership(int memberNo) {
 		return msDao.membership(memberNo);
 	}
-
-
+	
+	//회원정보 불러오기
 	@Override
-	public void insert(MemberJoinVO memberJoinVO) {
-		// TODO Auto-generated method stub
+	public MemberDTO profile(int memberNo) {
+		return memberDao.profile(memberNo);
 		
+	}
+
+	//회원정보 수정
+	@Override
+	public boolean changeInformation(MemberDTO memberDTO) {
+		return memberDao.changeInformation(memberDTO);
 	}
 }
