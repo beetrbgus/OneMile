@@ -2,56 +2,30 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-<script>
-	$(document).ready(function(){
-		if(${logId==null})){
-		alert("로그인 후 이용가능 합니다.");
-		location.href="";//login페이지
-		}
-	});
-</script>
 
-<div>
-	<div>
-		<h2>제목 : ${commuDetailVO.title}</h2>
-		작성자 : ${commuDetailVO.nick}
-	</div>
-	<div>
-		내용
-		${commuDetailVO.content}
-		<!--<c:if test="사진이 있으면">
-			<img src = "">
-		</c:if>-->
-	</div>
-
-	<div>
-		<form action="reply/edit">
-	    	<c:forEach var="replyVo" items="${replyVOList}">
-	    		${replyVo.writerNick},
-	    		${replyVo.regDate},
-	    		${replyVo.content},
-	    	</c:forEach>
-	    </form>
-	    <div>
-	    	 <form action="reply/insert" method="post">
-            <c:forEach var="replyVo" items="${replyVo}">
-                <input type="hidden" name="commuNo" value="${commuVo.commuNo}">
-                <input type="hidden" name="memberNo" value="${sessionsScope.uid}">
-                <input type="hidden" name="replyReceiverNo" value="${commuVo.writer}">
-                <input type="hidden" name="vieYN" value="N">
-            </c:forEach>
-			<c:if test="${logId == null}">
-	            <input type="button" value="댓글 쓰기" disabled="disabled">
-	        </c:if>
-	        <c:if test="${logId != null}">
-	            <input type="button" value="댓글 쓰기" id="commentWrite">
-	        </c:if>
-        </form>
-	    </div>
-	    
-	    <div>
-	    	
-	    </div>
+<div id="newContainer">
+	<div id="wBoardWrap">
+		<div class="wboard-wrap">
+			<div class="wboard-detail-content">
+				<div class="article-top">
+					<p class="title">${commuDetailVO.title}</p>
+					<div class="info">
+						<em class="user-img" style="background-image:url(https://static.wadiz.kr/assets/icon/apple-touch-icon.png)"></em>
+						<span class="user-info">${commuDetailVO.nick}
+						<br>${commuDetailVO.regDate}</span>
+					</div>
+				</div>
+				<div class="inner-contents">
+					<p><img src="https://cdn.wadiz.kr/ft/images/green001/2021/1228/20211228100127501_120.jpg/wadiz/format/jpg/quality/80/optimize"class="fr-fic fr-dib">
+					${commuDetailVO.content}
+				</div>
+			</div>
+		</div>
+		<div class="wboard-detail-bottom">
+			<div class="wboard-detail-btn-wrap">
+				<a class="wz button" href="http://localhost:8080/onemile/commu/boonsil/list?middleName=분실">목록으로 돌아가기</a>
+			</div>
+		</div>
 	</div>
 </div>
 

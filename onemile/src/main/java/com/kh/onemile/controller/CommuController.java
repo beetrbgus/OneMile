@@ -71,8 +71,12 @@ public class CommuController {
 	}
 	
 	@GetMapping("/questions/list")
-	public String listQQ(){
-		
+	public String listQQ(Model model){
+		/*
+		 * List<MemberMiddleImageDTO>
+		 * 
+		 * model.add("list",List<MemberMiddleImageDTO> )
+		 */
 		return "commu/questions/list";
 	}
 	
@@ -81,7 +85,7 @@ public class CommuController {
 		//조회 3번 (commu, reply, image)
 		model.addAttribute("commuDetailVO", commuService.detail(boardNo));
 		model.addAttribute("imageNoList", imageService.listByBoardNo(boardNo)); //boardNo로 imageNo list를 불러오는 거 만들기
-		model.addAttribute("replyVOList", replyService.listByBoardNo(boardNo)); //boardNo로 댓글 찾아주는 거 만들기
+//		model.addAttribute("replyVOList", replyService.listByBoardNo(boardNo)); //boardNo로 댓글 찾아주는 거 만들기
 		
 		return "commu/questions/detail";
 	}
@@ -127,7 +131,7 @@ public class CommuController {
 	public String detailBoonsil(@RequestParam int boardNo, Model model) throws IOException {
 		model.addAttribute("commuDetailVO", commuService.detail(boardNo));
 		model.addAttribute("imageNoList", imageService.listByBoardNo(boardNo));
-		model.addAttribute("replyVOList", replyService.listByBoardNo(boardNo));
+//		model.addAttribute("replyVOList", replyService.listByBoardNo(boardNo));
 		return "commu/boonsil/detail";
 	}
 }

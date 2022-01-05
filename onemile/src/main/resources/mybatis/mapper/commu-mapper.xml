@@ -24,7 +24,7 @@
 	<!-- 상세조회 -->
 	<select id="detail" parameterType="int" resultType="CommuDetailVO">
 		select 
-			co.*, bdt.lagname, me.nick, map.lat, map.lon, map.detailaddress
+			co.*, bdt.lagname, me.nick, map.lat, map.lng, map.detailaddress
 		from
 			commu co left join bdt bdt on co.middlename = bdt.middlename
 			left join member me on co.member_no = me.member_no
