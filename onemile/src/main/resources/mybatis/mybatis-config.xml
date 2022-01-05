@@ -38,6 +38,7 @@
 			<package name="com.kh.onemile.entity.image"/>
 			<package name="com.kh.onemile.entity.image.middle"/>
 			<package name="com.kh.onemile.entity.map"/>
+			<package name="com.kh.onemile.entity.menu"/>
 			<package name="com.kh.onemile.entity.member"/>
 			<package name="com.kh.onemile.entity.member.certi"/>
 			<package name="com.kh.onemile.entity.member.notification"/>
