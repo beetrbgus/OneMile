@@ -24,16 +24,18 @@ public class CobuyController {
 	private CobuyService cobuyService;
 	
 	@GetMapping("/regcobuy")
-	public String getreg() throws IllegalStateException, IOException {
+	public String getreg(Model model) throws IllegalStateException, IOException {
+		model.addAttribute("","");
+		
 		return "/cobuy/regcobuy";
 	}
 	@PostMapping("/regcobuy")
 	public String postreg(@ModelAttribute CobuyDetailVO cobuyDetailVO,HttpSession session) throws IllegalStateException, IOException {
 		int memNo = Integer.parseInt(String.valueOf(session.getAttribute("logNo")));
 		cobuyDetailVO.setMemberNo(memNo);
-		int cbNo = cobuyService.reg(cobuyDetailVO);
+		int cobuyNo = cobuyService.reg(cobuyDetailVO);
 
-		return "detail?cbNo="+cbNo;
+		return "detail?cobuyNo="+cobuyNo;
 	}
 	@GetMapping("/list")
 	public String list(Model model) {
@@ -49,10 +51,17 @@ public class CobuyController {
 		
 		return "/cobuy/list";
 	}
-	@GetMapping("/detail")
-	public String detail(@RequestParam int cbNo , Model model) {
-		model.addAttribute("get", cobuyService.getDetail(cbNo));
-		return "detail";
+	@GetMapping("/detail") 
+	public String detail(@RequestParam int cobuyNo , Model model) {
+		CobuyDetailVO cobuyDetailVO =cobuyService.getDetail(cobuyNo);
+		System.out.println("cobuyDetailVO.getCobuyNo()   "+cobuyDetailVO.getCobuyNo());
+		System.out.println("cobuyDetailVO.getDescript()   "+cobuyDetailVO.getDescript());
+		System.out.println("cobuyDetailVO.getDetailAddress()   "+cobuyDetailVO.getDetailAddress());
+		System.out.println("cobuyDetailVO.getMemberNo()   "+cobuyDetailVO.getMemberNo());
+		System.out.println("cobuyDetailVO.getTitle()   "+cobuyDetailVO.getTitle());
+		
+		model.addAttribute("detail", cobuyDetailVO);
+		return "/cobuy/detail";
 	}
 	@PostMapping("/delete")
 	public String delete(@RequestParam int cobuyNo) {
@@ -61,7 +70,7 @@ public class CobuyController {
 	}
 	@GetMapping("/modify")
 	public String getModify(@RequestParam int cobuyNo , Model model) {
-		model.addAttribute("get", cobuyService.getDetail(cobuyNo));
+		model.addAttribute("detail", cobuyService.getDetail(cobuyNo));
 		return "detail";
 	}
 	@PostMapping("/modify")

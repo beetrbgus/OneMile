@@ -11,7 +11,7 @@
 <form id="cobuyform" method="post" enctype="multipart/form-data">
 	<input type="file" name="attach" required accept="image/jpeg, image/png, image/jpg">
 	<input type="text" name="title" placeholder="공구의 제목을 입력해주세요." required> 
-		만료 기한 : <input type="date" min="2022-01-01" name="deadLine" required>
+		만료 기한 : <input type="date" id="deadLine" name="deadLine" required>
 		가격 : <input type="number" name="price" min="100" required> 
 		수량 : <input type="number" name="stock" min="0" required> 
 		상품 이름 : <input type="text" name="pName" required>
@@ -30,7 +30,20 @@
 
 	<button id="submitBtn" type="submit">전송한다</button>
 </form>
-<script> 
+<script>
+
+function getToday(){
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = ("0" + (1 + date.getMonth())).slice(-2);
+    var day = ("0" + date.getDate()).slice(-2);
+
+    return year + "-" + month + "-" + day;
+}
+
+let deadLine = $("#deadLine");
+deadLine.attr("min",getToday);
+
  $("#submitBtn").click(function(e){
 	 e.preventDefault();
 	 let location = $("#location").val();

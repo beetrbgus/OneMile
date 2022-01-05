@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
-import com.kh.onemile.entity.cobuy.CobuyDTO;
+import com.kh.onemile.entity.cobuy.CobuyBuyDTO;
 import com.kh.onemile.entity.image.middle.CobuyImgMidDTO;
 
 @Repository
@@ -23,7 +23,7 @@ public class CobuyMidImgDaoImpl implements CobuyMidImgDao {
 		}
 	}
 	@Override
-	public List<CobuyDTO> cobuyDao() {
+	public List<CobuyBuyDTO> cobuyDao() {
 		// TODO Auto-generated method stub
 		return null;
 	}

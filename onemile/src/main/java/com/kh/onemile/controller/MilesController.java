@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import com.kh.onemile.service.category.CategoryService;
 import com.kh.onemile.service.member.MemberService;
 import com.kh.onemile.service.miles.MilesService;

@@ -2,12 +2,10 @@ package com.kh.onemile.repository.image.middle;
 
 import java.io.File;
 import java.io.IOException;
-
 import org.apache.commons.io.FileUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import com.kh.onemile.entity.image.ImageDTO;
 import com.kh.onemile.entity.image.middle.MemberProfileMidDTO;
 

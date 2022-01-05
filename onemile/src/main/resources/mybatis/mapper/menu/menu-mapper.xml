@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="menu">
+
+	<!-- 대메뉴 생성 -->
+	<insert id="reglargemenu" parameterType="MenuDTO">
+		insert into clc(LARGE_NAME,
+		HIDDENYN , MAINPATH)
+		values( #{largeName}, #{hiddenYN},#{mainPath})
+	</insert>
+	<!-- 소메뉴 생성 -->
+	<insert id="regsmallmenu" parameterType="MenuDTO">
+		insert into cmc(MIDDLE_NAME,LARGE_NAME
+		HIDDENYN , URLPATH)
+		values( #{largeName}, #{middleName},#{hiddenYN},#{urlPath})
+	</insert>
+
+	<!-- 전체 메뉴 조회 -->
+	<resultMap type="MenuDTO" id="customMenu">
+		<!-- DB항목과 변수를 연결 -->
+		<result column="LARGE_NAME" property="largeName" />
+		<result column="HIDDENYN" property="hiddenYN" />
+		<result column="MAINPATH" property="mainPath" />
+
+		<collection property="middleDTO" javaType="java.util.List"
+			ofType="MiddleNameDTO" select="getSmall" column="LARGE_NAME"></collection>
+	</resultMap>
+
+	<!-- 조회 구문 (대분류) -->
+	<select id="getLarge" resultMap="customMenu">
+		select * from clc
+	</select>
+	<!-- 대분류 조회하면서 소분류 조회 -->
+	<select id="getSmall" resultType="MiddleNameDTO" parameterType="String">
+		select * from cmc where large_name = #{large_name}
+	</select>
+</mapper>
+
+
+
+
