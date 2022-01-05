@@ -21,6 +21,7 @@ import com.kh.onemile.repository.product.MembershipDao;
 import com.kh.onemile.service.kakaopay.KakaoPayService;
 import com.kh.onemile.vo.kakaopay.KakaoPayApproveRequestVO;
 import com.kh.onemile.vo.kakaopay.KakaoPayApproveResponseVO;
+import com.kh.onemile.vo.kakaopay.KakaoPayAutoPayMentInactiveResponseVO;
 import com.kh.onemile.vo.kakaopay.KakaoPayReadyRequestVO;
 import com.kh.onemile.vo.kakaopay.KakaoPayReadyResponseVO;
 
@@ -107,5 +108,11 @@ public class MembershipController {
 		return "membership/success_result";
 	}
 	
-	
+	//정기기부 비활성화 요청
+	@GetMapping("/membership/disabled")
+	public String autoInactive(@RequestParam String sid, Model model) throws URISyntaxException {
+		KakaoPayAutoPayMentInactiveResponseVO responseVo = kakaoPayService.autoInactive(sid);
+		membershipBuyDao.regularPayDelete(sid);
+		return "redirect:/member/reg_membership";
+	}
 }
