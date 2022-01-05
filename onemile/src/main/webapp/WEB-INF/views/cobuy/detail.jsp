@@ -22,7 +22,9 @@
 		<input type="number" name="stock" min="0">
 		<input type="hidden" name="cobuyNo" value="${detail.getCobuyNo()}">
 		<input type="hidden" name="memberNo" value="${detail.memberNo}">
+		<button type="submit">구매하기</button>
 	</form>
+	<p>상품에 문제가 있나요? <a>신고하기</a></p>
 	
 	<!-- 판매자 영역 -->
 	<p>${detail.memberImageNo}</p>

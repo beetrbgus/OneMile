@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.kh.onemile.entity.cobuy.CobuyModDTO;
 import com.kh.onemile.entity.image.middle.CobuyImgMidDTO;
 import com.kh.onemile.entity.map.MapDTO;
 import com.kh.onemile.repository.cobuy.CobuyDao;
@@ -14,6 +16,7 @@ import com.kh.onemile.service.map.MapService;
 import com.kh.onemile.util.Sequence;
 import com.kh.onemile.vo.cobuy.CobuyDetailVO;
 import com.kh.onemile.vo.cobuy.CobuyListVO;
+import com.kh.onemile.vo.cobuy.CobuyRegVO;
 import com.kh.onemile.entity.menu.MiddleNameDTO;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,40 +43,25 @@ public class CobuyServiceImpl implements CobuyService {
 	private Sequence seq;
 
 	@Override
-	public int reg(CobuyDetailVO cobuyDetailVO) throws IllegalStateException, IOException {
+	public int reg(CobuyRegVO cobuyRegVO) throws IllegalStateException, IOException {
 		int cbNo = seq.nextSequence(seqName); // 공동구매 상품 번호
 		log.debug("cbNo       " + cbNo);
 		System.out.println("----------------------------");
-		System.out.println("cobuyDetailVO.getDetailAddress    "+ cobuyDetailVO.getDetailAddress());
+		System.out.println("cobuyDetailVO.getDetailAddress    "+ cobuyRegVO.getDetailAddress());
 		// 지도 등록
 		MapDTO mapDTO = new MapDTO();
-		mapDTO.setLat(cobuyDetailVO.getLat());
-		mapDTO.setLng(cobuyDetailVO.getLng());
-		mapDTO.setDetailAddress(cobuyDetailVO.getDetailAddress());
-		log.debug("cobuyDetailVO.getDetailAddress()      "+cobuyDetailVO.getDetailAddress());
+		mapDTO.setLat(cobuyRegVO.getLat());
+		mapDTO.setLng(cobuyRegVO.getLng());
+		mapDTO.setDetailAddress(cobuyRegVO.getDetailAddress());
+		
+		log.debug("cobuyDetailVO.getDetailAddress()      "+cobuyRegVO.getDetailAddress());
 		int mapNo = mapService.regMap(mapDTO);
 
 		// 공구 테이블에 등록
-		cobuyDetailVO.setMapNo(mapNo);
-		cobuyDetailVO.setCobuyNo(cbNo);
-		cobuyDao.reg(cobuyDetailVO);
-		log.debug("cobuyDTO 뭘까내용이???    " + cobuyDetailVO.toString());
-		log.debug("파일이 없나???    " + (cobuyDetailVO.getAttach() == null) != null ? "ㅇㅇ 널임" : "아님 널 아님");
+		cobuyRegVO.setMapNo(mapNo);
+		cobuyRegVO.setCobuyNo(cbNo);
+		cobuyDao.reg(cobuyRegVO);
 		
-		if (cobuyDetailVO.getAttach() != null) {
-
-			List<Integer> imgNoList = imageService.regImage(cobuyDetailVO.getAttach(), folderName);
-
-			// 연결 테이블
-			CobuyImgMidDTO cobuyImgMidDTO = new CobuyImgMidDTO();
-
-			cobuyImgMidDTO.setImgNoList(imgNoList); // 이미지 갯수만큼 넣어 줌
-			cobuyImgMidDTO.setCobuyNo(cbNo); // 공구 상품 번호
-
-			// 중간 이미지 테이블에 등록
-			middleService.reg(cobuyImgMidDTO);
-			log.debug("등록 완료  cobuyImgMidDTO   " + cobuyImgMidDTO.toString());
-		}
 		// 등록 후 상세페이지로 돌아가기 위해 공구 상품 번호 반환.
 		return cbNo;
 	}
@@ -89,29 +77,17 @@ public class CobuyServiceImpl implements CobuyService {
 	}
 
 	@Override
-	public void modify(CobuyDetailVO cobuyDetailVO) {
-		int cbNo = cobuyDetailVO.getCobuyNo();
-
-		// 공구 테이블에 등록
-//		cobuyDao.modify(cobuyDetailVO);
-
-		log.debug("cobuyDTO 뭘까내용이???    " + cobuyDetailVO.toString());
-		log.debug("파일이 없나???    " + (cobuyDetailVO.getAttach() == null) != null ? "ㅇㅇ 널임" : "아님 널 아님");
-		if (cobuyDetailVO.getAttach() != null) {
-//			List<Integer> imgNoList = imageService.regImage(cobuyDetailVO.getAttach(), folderName);
-
-			// 연결 테이블
-			CobuyImgMidDTO cobuyImgMidDTO = new CobuyImgMidDTO();
-
-//			cobuyImgMidDTO.setImgNoList(imgNoList); // 이미지 갯수만큼 넣어 줌
-//			cobuyImgMidDTO.setCbiNo(cbiNo); // 공구 상품 번호
-
-			// 중간 이미지 테이블에 등록
-			middleService.reg(cobuyImgMidDTO);
-			log.debug("등록 완료  cobuyImgMidDTO   " + cobuyImgMidDTO.toString());
-		}
-		// 등록 후 상세페이지로 돌아가기 위해 공구 상품 번호 반환.
-//		return cbiNo;
+	public void modify(CobuyModDTO cobuyModDTO) {
+		// 공구 테이블에 수정
+		cobuyDao.modify(cobuyModDTO);
+		MapDTO mapDTO = new MapDTO();
+		mapDTO.setMapNo(cobuyModDTO.getMapNo());
+		mapDTO.setLat(cobuyModDTO.getLat());
+		mapDTO.setLng(cobuyModDTO.getLng());
+		mapDTO.setDetailAddress(cobuyModDTO.getDetailAddress());
+		
+		mapService.modify(mapDTO);
+		
 	}
 
 	@Override

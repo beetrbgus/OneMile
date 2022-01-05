@@ -24,6 +24,11 @@ public class MapDaoImpl implements MapDao{
 
 	@Override
 	public MapDTO get(int mapNo) {
-		return sqlSession.selectOne("map.get", mapNo);
+		return sqlSession.selectOne("map.getMap", mapNo);
+	}
+
+	@Override
+	public void modify(MapDTO mapDTO) {
+		sqlSession.update("map.modify", mapDTO);
 	}
 }
