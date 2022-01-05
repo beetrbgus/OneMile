@@ -12,8 +12,6 @@ public interface ImageService {
 	void deleteImage(int imageNo,String save);
 	List<ImageDTO> listByBoardNo(int boardNo);
 	ImageDTO getImage(int imageNo);
-	
-	int save(ImageDTO imageDTO);
 	ImageDownloadVO download(int imageNo, String folder) throws IOException;
 
 }

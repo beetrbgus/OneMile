@@ -19,11 +19,10 @@ public class MemberJoinVO {
 	private String gender;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date birth;
-	private String grade;
-	@DateTimeFormat(pattern="yyyy-MM-dd HH24:mm:ss")
-	private Date joinDate;
-	private String mbti;
 	private String intro;
+	
+	//두번째 페이지
+	private String mbti;
 	private String corona;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH24:mm:ss")
 	private Date nickModi;

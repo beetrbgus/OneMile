@@ -74,17 +74,6 @@ public class CommuServiceImpl implements CommuService{
 			mapDao.regMap(mapDto);
 			commuDto.setMapNo(mapNo);
 		}
-		
-		if(commuVo.getAttach()!=null) {
-			List<Integer> imgNoList = imageService.regImage(commuVo.getAttach(), folderName);
-			
-			CommuImgMidDTO commuImgMidDto = new CommuImgMidDTO();
-			
-			commuImgMidDto.setImgNoList(imgNoList);
-			commuImgMidDto.setCommuNo(commuNo);
-			
-			middleService.reg(commuImgMidDto);
-		}
 		commuDao.write(commuDto);
 		
 		return commuNo;
