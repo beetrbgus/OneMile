@@ -51,11 +51,11 @@ public class CommuWithMapController {
 		return "redirect:commu/detail?commuNo="+commuNo;
 	}
 	
-	@GetMapping("/matjip/list")
-	public String listMatjip(Model model, @RequestParam String middleName) {
-		model.addAttribute("listMatjip", commuService.menuList(middleName));
-		return "commu/matjip/list";
-	}
+//	@GetMapping("/matjip/list")
+//	public String listMatjip(Model model, @RequestParam String middleName) {
+//		model.addAttribute("listMatjip", commuService.menuList(middleName));
+//		return "commu/matjip/list";
+//	}
 	
 	@RequestMapping("/matjip/detail")
 	public String detailMatjip(@RequestParam int boardNo, Model model) throws IOException {
@@ -79,11 +79,11 @@ public class CommuWithMapController {
 		return "redirect:commu/detail?commuNo="+commuNo;
 	}
 	
-	@GetMapping("/inc/list")
-	public String listInc(Model model, @RequestParam String middleName) {
-		model.addAttribute("listInce", commuService.menuList(middleName));
-		return "commu/inc/list";
-	}
+//	@GetMapping("/inc/list")
+//	public String listInc(Model model, @RequestParam String middleName) {
+//		model.addAttribute("listInce", commuService.menuList(middleName));
+//		return "commu/inc/list";
+//	}
 	
 	@RequestMapping("/inc/detail")
 	public String detailInc(@RequestParam int boardNo, Model model) throws IOException {
@@ -107,11 +107,11 @@ public class CommuWithMapController {
 		return "redirect:commu/detail?commuNo="+commuNo;
 	}
 	
-	@GetMapping("/yam/list")
-	public String listYam(Model model, @RequestParam String middleName) {
-		model.addAttribute("listYam", commuService.menuList(middleName));
-		return "commu/yam/list";
-	}
+//	@GetMapping("/yam/list")
+//	public String listYam(Model model, @RequestParam String middleName) {
+//		model.addAttribute("listYam", commuService.menuList(middleName));
+//		return "commu/yam/list";
+//	}
 	
 	@RequestMapping("/yam/detail")
 	public String detailYam(@RequestParam int boardNo, Model model) throws IOException {

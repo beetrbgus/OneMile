@@ -21,16 +21,24 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/sha1.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" ></script>
 
-	<link rel="stylesheet" href="${root}/resources/css/reset-w.css">
-	<link rel="stylesheet" href="${root}/resources/css/mobile-w.css">
+	<link rel="stylesheet" href="${root}/resources/css/board.ace40453.css">
+	<link rel="stylesheet" href="${root}/resources/css/campaign.30c4c08b.css">
 	<link rel="stylesheet" href="${root}/resources/css/commons-w.css">
+	<link rel="stylesheet" href="${root}/resources/css/equity-main.4e5c0c27.chunk.css">
+	<link rel="stylesheet" href="${root}/resources/css/froala_cust.css">
 	<link rel="stylesheet" href="${root}/resources/css/layout-w.css">
-	<link href="${root}/resources/css/wlayoutfde0.css" rel="stylesheet">
-	<link rel="stylesheet" href="${root}/resources/css/partners.e0da7bd4.css">
 	<link rel="stylesheet" href="${root}/resources/css/main.19e53e7f.css">
 	<link rel="stylesheet" href="${root}/resources/css/main.e49dc743.css">
+	<link rel="stylesheet" href="${root}/resources/css/mobile-w.css">
+	<link rel="stylesheet" href="${root}/resources/css/partners.e0da7bd4.css">
+	<link rel="stylesheet" href="${root}/resources/css/reply.css">
+	<link rel="stylesheet" href="${root}/resources/css/reset-w.css">
+	<link rel="stylesheet" href="${root}/resources/css/reward-main.57e0ec6d.chunk.css">
+	<link rel="stylesheet" href="${root}/resources/css/terms.09f05cfa.css">
+	<link rel="stylesheet" href="${root}/resources/css/wboard.css">
+	<link rel="stylesheet" href="${root}/resources/css/wlayoutfde0.css">
+	<link rel="stylesheet" href="${root}/resources/css/wprojectcard.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/7f85a56ba4.css">
-	<link rel="stylesheet" href="${root}/resources/css/headerInside.css">
 </head>
 <style>
 .dong{

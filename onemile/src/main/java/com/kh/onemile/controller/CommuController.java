@@ -1,6 +1,7 @@
 package com.kh.onemile.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -12,10 +13,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.onemile.service.commu.CommuService;
 import com.kh.onemile.service.image.ImageService;
 import com.kh.onemile.service.reply.ReplyService;
+import com.kh.onemile.vo.CommuDetailVO;
 import com.kh.onemile.vo.CommuVO;
 import com.kh.onemile.vo.ImageVO;
 import com.kh.onemile.vo.reply.ReplyVO;
@@ -55,9 +58,21 @@ public class CommuController {
 		return "redirect:commu/detail?commuNo="+commuNo;
 	}
 	
+	@GetMapping("/questions/listdetail")
+	@ResponseBody
+	public List<CommuDetailVO> listQ(
+			@RequestParam String middleName,
+			@RequestParam(required =false, defaultValue = "1") int page,
+			@RequestParam(required =false, defaultValue = "10") int size
+			) {
+		int endRow = page* size;
+		int startRow = endRow - (size - 1);
+		return commuService.menuList(middleName, startRow, endRow);
+	}
+	
 	@GetMapping("/questions/list")
-	public String listQ(Model model, @RequestParam String middleName) {
-		model.addAttribute("listQ", commuService.menuList(middleName));
+	public String listQQ(){
+		
 		return "commu/questions/list";
 	}
 	
@@ -91,11 +106,11 @@ public class CommuController {
 		return "redirect:commu/detail?commuNo="+commuNo;
 	}
 	
-	@GetMapping("/boonsil/list")
-	public String listBoonsil(Model model, @RequestParam String middleName) {
-		model.addAttribute("listBoonsil", commuService.menuList(middleName));
-		return "commu/boonsil/list";
-	}
+//	@GetMapping("/boonsil/list")
+//	public String listBoonsil(Model model, @RequestParam String middleName) {
+//		model.addAttribute("listBoonsil", commuService.menuList(middleName));
+//		return "commu/boonsil/list";
+//	}
 	
 	@RequestMapping("/boonsil/detail")
 	public String detailBoonsil(@RequestParam int boardNo, Model model) throws IOException {
