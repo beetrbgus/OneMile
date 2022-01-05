@@ -67,4 +67,9 @@ public class ImageServiceImpl implements ImageService {
 		List<ImageDTO> list = imageDao.listByBoardNo(boardNo);
 		return list;
 	}
+
+	@Override
+	public ImageDTO getImage(int imageNo) {
+		return imageDao.get(imageNo);
+	}
 }

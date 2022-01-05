@@ -10,4 +10,5 @@ public interface ImageService {
 	List<Integer> regImage(List<MultipartFile> attach, String save) throws IllegalStateException, IOException;
 	void deleteImage(int imageNo,String save);
 	List<ImageDTO> listByBoardNo(int boardNo);
+	ImageDTO getImage(int imageNo);
 }
