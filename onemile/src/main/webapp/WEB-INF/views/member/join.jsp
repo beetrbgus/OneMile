@@ -10,6 +10,43 @@
 </style>
 
 <script>
+
+	$(function(){
+		$("input[name=attach]").on("input", function(e){
+			
+// 			파일이 선택되지 않은 경우는 차단
+			if(!this.files || !this.files[0]) {
+				return;
+			}
+
+// 			2. 낱개 데이터를 업로드
+			var formData = new FormData();
+			formData.append("attach", this.files[0]);
+			
+			$.ajax({
+				url:"${pageContext.request.contextPath}/image/upload",
+				type:"post",
+				data:formData,
+				dataType:"text",
+				processData:false,
+				contentType:false,
+				success:function(resp){
+					console.log("성공", resp);
+					
+
+					var tag = $("<img>").attr("src", "${pageContext.request.contextPath}/image/download?imageNo=${memberProfileMidDTO.imageNo}&folder=member"+resp)
+													.addClass("preview");
+					$("#result").append(tag);
+				},
+				error:function(e){
+					console.log("실패", e);
+				}
+			});
+		});
+	});
+</script>
+
+<script>
 $(function(){
 	//아이디 중복확인 Ajax
    	$("input[name=email]").on("blur", function(){
@@ -274,6 +311,8 @@ function lengCheck() {
 		<label>프로필 사진</label>
 		<input type="file" name="attach" accept="image/*" class="form-input" required>
 	</div>	
+	<div id="result"></div>
+	
 	<div class="row">
 		<label>이메일</label> 
 		<input type="email" name="email" required class="form-input" autocomplete="off" onblur="emailCheck();">

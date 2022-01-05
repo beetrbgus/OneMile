@@ -159,4 +159,6 @@ public class MemberServiceImpl implements MemberService {
 	public boolean changeInformation(MemberDTO memberDTO) {
 		return memberDao.changeInformation(memberDTO);
 	}
+
+	
 }

@@ -4,6 +4,7 @@
 
 <%-- 출력 --%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+
 <style>
 	.float-container > .float-item-left:nth-child(1) {
 		width:25%;	
@@ -19,22 +20,24 @@
 	}
 </style>
 
+
 <div class="container-900 container-center">
 	<div class="row float-container">
 	
 	<div class="float-item-left">
 		<!-- 회원 프로필 이미지 -->
 		<div class="row">	
-			<c:choose>
-				<c:when test="${memberProfileMidDTO == null}">
+			<c:choose> 
+				<c:when test="${memberProfileMidDTO.imageNo == null||memberProfileMidDTO.imageNo==0}">
 				<img src="https://via.placeholder.com/300x300?text=User" width="100%" class="image image-round image-border">
 				</c:when>
 				<c:otherwise>
-				<img src="profile?imageNo=${memberProfileMidDTO.imageNo}" width="100%" class="image image-round image-border">
+				<img src="${pageContext.request.contextPath}/image/download?imageNo=${memberProfileMidDTO.imageNo}&folder=member" width="100%" height="100%" class="image image-round image-border">
+				<%-- <img src="profile?imageNo=${memberProfileMidDTO.imageNo}&folderName=member" width="100%" class="image image-round image-border"> --%>
 				</c:otherwise>
 			</c:choose>
 		</div> 
-			
+			<button id="byn" type="button">버튼 </button>
 			<!-- 회원 정보 -->
 			<div class="row center">
 				<h2>${memberDTO.nick}</h2>
@@ -79,7 +82,9 @@
 						<tr>
 							<th>생년월일</th>
 							<td>${memberDTO.birth}</td>
+							<input id="birth"  type="date" value="${memberDTO.birth}">
 						</tr>
+						
 						<tr>
 							<th>이메일</th>
 							<td>${memberDTO.email}</td>

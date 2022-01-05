@@ -9,48 +9,30 @@
 
 <form method="post">
 	
-	<table class="table">
-		<tbody>
-			<tr>
-				<th>비밀번호</th>
-				<td>
-					<input type="password" name="memberPw" required>
-				</td>
-			</tr>
-			<tr>
-				<th>닉네임</th>
-				<td>
-					<input type="text" name="nick" required value="${memberDTO.nick}">
-				</td>
-			</tr>
-			<tr>
-				<th>생년월일</th>
-				<td>
-					<input type="date" name="birth" required value="${memberDTO.birth}">
-
-				</td>
-			</tr>
-			<tr>
-				<th>이메일</th>
-				<td>
-					<input type="email" name="email" value="${memberDTO.email}">
-				</td>
-			</tr>
-			<tr>
-				<th>전화번호</th>
-				<td>
-					<input type="tel" name="phone" value="${memberDTO.phone}">
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2" align="right">
-					<input type="submit" value="수정">
-				</td>
-			</tr>
-		</tbody>
-	</table>
-	<div class="row right">
-		<a href="quit">회원 탈퇴</a>
+	<div class="container-400 container-center">
+		<div class="row center">
+        <h2>회원정보 수정</h2>
+    </div>
+		<div class="row">
+			<label>이메일</label>  
+			<input type="email" name="email" required class="form-input" value="${memberDTO.email}" readonly>
+		</div>
+		<div class="row">
+			<label>닉네임</label>
+			<input type="text" name="nick" required class="form-input" value="${memberDTO.nick}">
+		</div>
+		<div class="row">
+			<label>휴대전화</label>
+			<input type="tel" name="phone" required class="form-input" autocomplete="off" value="${memberDTO.phone}">
+		</div>
+		<div class="row">
+			<label for="birth">생년월일</label>
+			<input type="date" name="birth" required class="form-input"autocomplete="off">
+		</div>
+		<div class="row">
+			<button class="snap-sync-btn-submit">수정</button>
+		</div>
+	
 	</div>
 </form>
 

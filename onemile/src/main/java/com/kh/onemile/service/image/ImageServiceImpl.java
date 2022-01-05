@@ -1,9 +1,11 @@
 package com.kh.onemile.service.image;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import com.kh.onemile.entity.image.ImageDTO;
@@ -11,6 +13,8 @@ import com.kh.onemile.entity.image.middle.MemberProfileMidDTO;
 import com.kh.onemile.repository.image.ImageDao;
 import com.kh.onemile.util.SaveFile;
 import com.kh.onemile.util.Sequence;
+import com.kh.onemile.vo.ImageDownloadVO;
+
 @Service
 public class ImageServiceImpl implements ImageService {
 	@Autowired
@@ -20,34 +24,45 @@ public class ImageServiceImpl implements ImageService {
 	@Autowired
 	private SaveFile saveFile;
 
+	private final String path = "D:/upload";
+
 	@Override
-	public List<Integer> regImage(List<MultipartFile> attach, String save) throws IllegalStateException, IOException {
-		String savePath = path + save;
-		List<Integer> imgNoList = new ArrayList<Integer>();
-		
-		
-		for (MultipartFile multipartFile : attach) {
-			if (!multipartFile.isEmpty()) {
-				ImageDTO imageDto = new ImageDTO();
+	public int regImage(MultipartFile attach, String savePath) throws IllegalStateException, IOException {
 
-				int imageNo = seq.nextSequence("image_seq");
-				String saveName = String.valueOf(imageNo);
-				// 연결테이블 
-				imageDto.setImageNo(imageNo);
-				imageDto.setUploadName(multipartFile.getOriginalFilename());// 회원이 올린 이름.
-				imageDto.setFileSize(multipartFile.getSize());
-				imageDto.setSaveName(saveName);
-				imageDto.setFileType(multipartFile.getContentType());
+		int imageNo = seq.nextSequence("image_seq");
+		String saveName = String.valueOf(imageNo);
 
-				// 실제 D드라이브에 저장되는 메서드
-				saveFile.saveImg(savePath, multipartFile, saveName);
-				// DB에 파일 정보 넣는 메서드
-				imageDao.regImage(imageDto);
-				// DB에 저장 될 때마다 리스트에 이미지 번호가 추가 됨.
-				imgNoList.add(imageNo);
-			}
+		if (!attach.isEmpty()) {
+			ImageDTO imageDto = new ImageDTO();
+
+			// 이미지 테이블
+			imageDto.setImageNo(imageNo);
+			imageDto.setUploadName(attach.getOriginalFilename());// 회원이 올린 이름.
+			imageDto.setFileSize(attach.getSize());
+			imageDto.setSaveName(saveName);
+			imageDto.setFileType(attach.getContentType());
+
+			// 실제 D드라이브에 저장되는 메서드
+			String realPath = path + "/" + savePath;
+			saveFile.saveImg(realPath, attach, saveName);
+			// DB에 파일 정보 넣는 메서드
+			imageDao.regImage(imageDto);
 		}
-		return imgNoList;
+
+		return imageNo;
+	}
+
+	@Override
+	public ImageDownloadVO download(int imageNo, String folder) throws IOException {
+		
+		ImageDownloadVO imageDownloadVO = new ImageDownloadVO(); 
+		ImageDTO imageDTO = imageDao.get(imageNo);
+		byte[] data = saveFile.downImg(path, imageNo);
+		
+		imageDownloadVO.setImageDTO(imageDTO);
+		imageDownloadVO.setData(data);
+
+		return imageDownloadVO;
 	}
 
 	@Override
@@ -67,4 +82,16 @@ public class ImageServiceImpl implements ImageService {
 		List<ImageDTO> list = imageDao.listByBoardNo(boardNo);
 		return list;
 	}
+
+	@Override
+	public ImageDTO getImage(int imageNo) {
+		return imageDao.get(imageNo);
+	}
+
+	@Override
+	public int save(ImageDTO imageDTO) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

@@ -35,5 +35,4 @@ public class ImageDaoImpl implements ImageDao{
 		List<ImageDTO> list = sqlSession.selectList("image.listByBoardNo", boardNo);
 		return list;
 	}
-
 }
