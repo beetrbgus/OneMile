@@ -106,11 +106,22 @@ public class CommuController {
 		return "redirect:commu/detail?commuNo="+commuNo;
 	}
 	
-//	@GetMapping("/boonsil/list")
-//	public String listBoonsil(Model model, @RequestParam String middleName) {
-//		model.addAttribute("listBoonsil", commuService.menuList(middleName));
-//		return "commu/boonsil/list";
-//	}
+	@GetMapping("/boonsil/listdetail")
+	@ResponseBody
+	public List<CommuDetailVO> listBoonsil(
+			@RequestParam String middleName,
+			@RequestParam(required =false, defaultValue = "1") int page,
+			@RequestParam(required =false, defaultValue = "10") int size
+			) {
+		int endRow = page* size;
+		int startRow = endRow - (size - 1);
+		return commuService.menuList(middleName, startRow, endRow);
+	}
+	
+	@GetMapping("/boonsil/list")
+	public String listBB(){
+		return "commu/boonsil/list";
+	}
 	
 	@RequestMapping("/boonsil/detail")
 	public String detailBoonsil(@RequestParam int boardNo, Model model) throws IOException {

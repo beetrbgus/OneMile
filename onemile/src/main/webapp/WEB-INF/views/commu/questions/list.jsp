@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<style>
+.more-btn{
+	margin-top:1rem;
+	font-size:15px;
+}
+</style>
 <script>
 	$(function() {
 		var page = 1;
@@ -10,7 +16,9 @@
 			loadData(page, size, '질문');
 			page++;
 		});
-
+		
+		$(".more-btn").click();
+		
 		function loadData(page, size, middleName) {
 
 			$.ajax({
@@ -31,7 +39,7 @@
 								console.log(i,"번째 실행");
 								var commuVo = resp[i];
 								var divCol = "<ul>" + "<li>"
-										+ "<a class='article' href='newsBoardDetila/79761045.html?headWordId=&amp;cPage=1'>"
+										+ "<a class='article' href='detail?boardNo="+resp[i].commuNo+"'>"
 										+ "<div class='info'>"
 										+ "<div class='thumb' style='background-image: url(https://cdn.wadiz.kr/ft/images/green001/2021/1228/20211228095651665_0.jpg/wadiz/resize/400/format/jpg/quality/80/optimize)'></div>"
 										+ "<h3 class='title'>" + commuVo.title
@@ -67,7 +75,7 @@
 		<div class="board-footer">
 			<div class="row mt-3 mb-5">
 				<div class="col mt-3">
-					<button type="button" class="justify-content-md btn btn-primary more-btn">더보기</button>
+					<button type="button" class="wz button less ProjectList_search_result_btnExpand__aKnyZ more-btn">더보기<i class="icon expand-more"></i></button>
 				</div>
 			</div>
 		</div>
