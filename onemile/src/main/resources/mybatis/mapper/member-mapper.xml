@@ -91,7 +91,5 @@
 			
 		</set>
 		where member_no = #{memberNo}
-	</update>
-	
-	
+	</update>	
 </mapper>
