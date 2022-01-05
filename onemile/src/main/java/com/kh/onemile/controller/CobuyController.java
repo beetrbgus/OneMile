@@ -35,7 +35,7 @@ public class CobuyController {
 		cobuyDetailVO.setMemberNo(memNo);
 		int cobuyNo = cobuyService.reg(cobuyDetailVO);
 
-		return "detail?cobuyNo="+cobuyNo;
+		return "redirect:detail?cobuyNo="+cobuyNo;
 	}
 	@GetMapping("/list")
 	public String list(Model model) {

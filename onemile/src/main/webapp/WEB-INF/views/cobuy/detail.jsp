@@ -10,17 +10,49 @@
 	상품 설명 , 상품 이미지 나머지. -->
 	<!-- 판매자 테이블 - 프로필 사진 ,회원번호 닉네임 , 이메일  , 전화 -->
 	<!-- 지도 테이블 - 위도,경도 ,상세주소 -->
+	<p>${detail.imageList[0]}</p>
+	<!-- 상품 영역 -->
 	<p>${detail.title}</p> 
 	<p>${detail.deadLine}</p> 
 	<p>${detail.customerCnt}</p>
 	<p>${detail.stock}</p>
-	<input type="number" name="stock" min="0">
-	<p>${detail.title}</p>
-	<p>${detail.deadLine}</p>
-	<p>${detail.title}</p>
-	<p>${detail.deadLine}</p>
-	<p>${detail.title}</p>
-	<p>${detail.deadLine}</p>
+	<p>${detail.PName}</p>
+	<p>${detail.descript}</p>
+	<form action="buy" method="post">
+		<input type="number" name="stock" min="0">
+		<input type="hidden" name="cobuyNo" value="${detail.getCobuyNo()}">
+		<input type="hidden" name="memberNo" value="${detail.memberNo}">
+	</form>
+	
+	<!-- 판매자 영역 -->
+	<p>${detail.memberImageNo}</p>
+	<p>${detail.nick}</p>
+	<p>${detail.email}</p>
+	<p>${detail.phone}</p>
+	<!-- 지도 영역 -->
+	<p>${detail.lat}</p>
+	<p>${detail.lng}</p>
+	<p>수령 장소 :  ${detail.detailAddress}</p>
+	<p>${detail.lat}</p>
 
-zzzzzzzzzzzzzzzzzz
+<script>
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	mapOption = {
+		center : new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+		level : 1
+	// 지도의 확대 레벨
+	};
+
+	//지도를 생성합니다    
+	var map = new kakao.maps.Map(mapContainer, mapOption);
+
+	//주소-좌표 변환 객체를 생성합니다
+	var geocoder = new kakao.maps.services.Geocoder();
+
+	var marker = new kakao.maps.Marker(), // 클릭한 위치를 표시할 마커입니다
+	infowindow = new kakao.maps.InfoWindow({
+		zindex : 1
+	}); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
+
+</script>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
