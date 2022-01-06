@@ -30,7 +30,7 @@
 
 	<!-- 조회 구문 (대분류) -->
 	<select id="getLarge" resultMap="customMenu">
-		select * from clc
+		select * from clc where large_name in ('커뮤니티','운영사항')
 	</select>
 	<!-- 대분류 조회하면서 소분류 조회 -->
 	<select id="getSmall" resultType="MiddleNameDTO" parameterType="String">
