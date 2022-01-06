@@ -4,11 +4,12 @@
 
 <h1>결제 테스트</h1>
 
-<form action="confirm" method="get">
+<form action="${pageContext.request.contextPath}/membership/confirm" method="get">
 <c:forEach var="membershipDTO" items="${list}">
 <div>
 		<input type="checkbox" name="mspNo" value="${membershipDTO.mspNo}">
 	${membershipDTO.mspNo}	 / ${membershipDTO.mspProduct} / ${membershipDTO.mspPrice}
+	
 	</div>
 </c:forEach>
 

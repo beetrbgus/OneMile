@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.onemile.entity.product.MembershipBuyDTO;
 import com.kh.onemile.repository.certi.CertiDao;
-import com.kh.onemile.repository.product.MembershipBuyDao;
+import com.kh.onemile.repository.membership.MembershipBuyDao;
 import com.kh.onemile.service.kakaopay.KakaoPayService;
 import com.kh.onemile.vo.kakaopay.KakaoPayApproveResponseVO;
 import com.kh.onemile.vo.kakaopay.KakaoPayRegularApproveRequestVO;

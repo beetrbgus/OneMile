@@ -52,7 +52,7 @@
 	</select>	
 	
 	<!-- 정기결제 해지 -->
-		<delete id="autoPayDelete" parameterType="String">
+		<delete id="regularPayDelete" parameterType="String">
 			delete msb where sid = #{sid}
 		</delete>
 </mapper>

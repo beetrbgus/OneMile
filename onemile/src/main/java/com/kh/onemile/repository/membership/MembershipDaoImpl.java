@@ -1,4 +1,4 @@
-package com.kh.onemile.repository.product;
+package com.kh.onemile.repository.membership;
 
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
