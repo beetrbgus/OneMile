@@ -11,7 +11,7 @@
 	<div>
 		${membershipBuyDTO.itemName} / ${membershipBuyDTO.totalAmount} / ${membershipBuyDTO.buyTime} / ${membershipBuyDTO.buyEndtime}
 		${membershipBuyDTO.status}
-		<a href="${pageContext.request.contextPath}/member/membership/disabled?sid=${membershipBuyDTO.sid}">중지</a>
+		<a href="${pageContext.request.contextPath}/pay/reguler/disabled?sid=${membershipBuyDTO.sid}">중지</a>
 	</div>
 </c:forEach>
 	

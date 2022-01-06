@@ -1,7 +1,9 @@
 package com.kh.onemile.controller;
 
 import java.net.URISyntaxException;
+
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,8 +12,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import com.kh.onemile.entity.product.MembershipBuyDTO;
-import com.kh.onemile.repository.product.MembershipBuyDao;
+import com.kh.onemile.repository.membership.MembershipBuyDao;
 import com.kh.onemile.service.kakaopay.KakaoPayService;
 import com.kh.onemile.vo.kakaopay.KakaoPayApproveRequestVO;
 import com.kh.onemile.vo.kakaopay.KakaoPayApproveResponseVO;
@@ -83,8 +86,8 @@ public class PayController {
 			return "membership/success_result";
 		}
 		
-		//정기기부 비활성화 요청
-		@GetMapping("/membership/disabled")
+		//정기결제 비활성화 요청
+		@GetMapping("/reguler/disabled")
 		public String autoInactive(@RequestParam String sid, Model model) throws URISyntaxException {
 			KakaoPayAutoPayMentInactiveResponseVO responseVo = kakaoPayService.autoInactive(sid);
 			membershipBuyDao.regularPayDelete(sid);

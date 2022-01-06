@@ -1,21 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <style>
-   .notice {
-   		color:red;
-	}
+.notice {
+	color: red;
+}
 </style>
 <!-- 1. 맘껏 사진을 올린다. 
 2. 사진 올릴 때 이미지 번호를 배열에 담는다.
 3. 배열을 같이 보내서 회원가입을 한다.
 4. 멤버컨트롤러에서 배열의 길이만큼 이미지 삭제하는 서비스를 호출한다. -->
 
-<script>
+<!-- <script>
 let imgList = new Array();
-let folder = member;
+let folder = "member";
+
 	$(function(){
 		$("input[name=attach]").on("input", function(e){
 			
@@ -33,6 +34,7 @@ let folder = member;
 				url:"${pageContext.request.contextPath}/image/upload",
 				type:"post",
 				data:formData,
+				data:imgList,
 				dataType:"text",
 				processData:false,
 				contentType:false,
@@ -53,8 +55,54 @@ let folder = member;
 			});
 		});
 	});
-</script>
+</script> -->
+<script>
 
+function readURL(input) {
+    if (input.files && input.files[0]) {
+       var reader = new FileReader();
+       reader.onload = function (e) {
+	       for(var i in input){
+	          $('#img'+i).attr('src', e.target.result[i]);
+	    	   
+	       }
+       }
+       reader.readAsDataURL(input.files[0]);
+    }
+}
+
+ $(function () {
+	 //파일이 선택되면 3개 이상인지 확인해서 차단
+    $("input[name=attach]").on("input", function () {
+    	console.log(this.files);
+    	console.log("event " +event.target);
+    	console.log(this.files);
+        if (this.files.length > 3) {
+            alert("파일은 3개까지만 선택이 가능합니다");
+            $(this).val(""); //선택취소
+            return;
+        }
+        setThumbnail($(this).files);
+		//선택한 파일을 읽어서 전송 가능하도록 보관
+        //파일이 몇갠지 모르니까 배열에 보관한다
+        fileList = this.files;
+        console.log(fileList);  
+		
+    });
+
+		function setThumbnail(imagefile) {
+			console.log("썸네일    "+imagefile)
+            var reader = new FileReader();
+            reader.onload = function (imagefile) {
+                var img = document.createElement("img");
+                img.setAttribute("src", event.target.result);
+                document.querySelector("div#preview").appendChild(img);
+            };
+            reader.readAsDataURL(event.target.files[0]); }
+        
+		 
+ }); 		
+</script>
 <script>
 $(function(){
 	//아이디 중복확인 Ajax
@@ -313,120 +361,119 @@ $(document).ready(function(){
 
 </script>
 
-<form method="post" enctype="multipart/form-data" onsubmit="return formCheck();">
+<form method="post" enctype="multipart/form-data"
+	onsubmit="return formCheck();">
 
-<!-- 1페이지 -->
-<div class="page">
-<div class="container-400 container-center">
-	
-	<div class="row center">
-		<h1>회원가입</h1>
-	</div>
-	<div class="row">
-		<label>프로필 사진</label>
-		<input type="file" name="attach" accept="image/*" class="form-input" required>
-		<input type="file" name="attach" accept="image/*" class="form-input" required>
-		<input type="file" name="attach" accept="image/*" class="form-input" required>
-		
-	</div>	
-	<div id="result"></div>
-	
-	<div class="row">
-		<label>이메일</label> 
-		<input type="email" name="email" required class="form-input" autocomplete="off" onblur="emailCheck();">
-		<div class="notice"></div>
-	</div>
-	<div class="row">
-		<label>비밀번호</label>
-		<input type="password" name="pw" required class="form-input" autocomplete="off" onblur="pwCheck();">
-		<div class="notice"></div>
-	</div>
-	<div class="row">
-		<label>비밀번호 확인</label>
-		<input type="password" name="pw2" required class="form-input" autocomplete="off" onblur="pw2Check();">
-		<div class="notice"></div>
-	</div>
-	<div class="row">
-		<label>닉네임</label>
-		<input type="text" name="nick" required class="form-input" autocomplete="off" onblur="nickCheck();">
-		<div class="notice"></div>
-	</div>
-	<div class="row">
-		<label>연락처</label>
-		<input type="tel" name="phone" class="form-input" autocomplete="off" onblur="phoneCheck();" placeholder="전화번호 -포함 13자리를 입력해주세요.">
-		<div class="notice"></div>
-	</div>
-	<div class="row">
-		<label>생년월일</label>
-		<input type="date" name="birth" required class="form-input form-inline" autocomplete="off" onblur="birthCheck();">
-	</div>
-	
-	<div class="row" >
-		<label>성별</label>
-		<select name="gender">
-			<option value="남자">남자</option>
-			<option value="여자">여자</option>
-			<option value="기타">기타</option>
-		</select>
-	</div>
-	
-	<div class="row">
-		<textarea name="intro" rows="5" cols="50" placeholder="자기소개" id="intro"  oninput="lengCheck();"></textarea>
-	</div>
-	<div class="row reft">
-            <span id="intro-length">0</span> / 100
-        </div>
-	<div class="row">
-		<input type="checkbox"> [필수]이용약관과 개인정보처리방침에 동의
-	</div>
-	<div class="row">
-		<button type="button" class="form-btn next">다음으로</button>
-	</div>
-</div>
-</div>
+	<!-- 1페이지 -->
+	<div class="page">
+		<div class="container-400 container-center">
 
-<div class="page">		
-<div class="container-400 container-center">
-	<div class="row center">
-		<h1>회원가입</h1>
-	</div>		
-	<div class="row">
-		<label>관심사 설정</label>
-	</div>
-	
-	<div class="row">
-		<select class="big" required name="location">
-     		<option value="">카테고리선택</option>
-     		<c:forEach var="category" items="${category}">
-          		<option value="${category.bigType}">${category.bigType}</option>
-          	</c:forEach>
-      </select>
-      <select class="middle" name="smalltype"></select>
-	</div>
-	
-	<div id="category-select">
-	</div>
-	<div class="row" >
-		<label>MBTI</label>
-		<br>
-			<select name="mbti">
-				<option value="INFP">INFP<option>
-			</select>
+			<div class="row center">
+				<h1>회원가입</h1>
+			</div>
+			<div class="row">
+				<label>프로필 사진</label> <input type="file" name="attach" multiple>
+				<div id="preview">
+					<img id="img1"></img> <img id="img2"></img> <img id="img3"></img>
+				</div>
+			</div>
 
-	</div>
-	
-	<div class="row">
-		<label>코로나 백신접종여부</label>
-		<input type="file" name="attach" accept="image/*" class="form-input">
-	</div>
-	<button type="button" class="form-btn prev">이전 단계로</button>
-		
-	<div class="row">
-		<input type="submit" value="가입" class="form-btn">
+
+			<div class="row">
+				<label>이메일</label> <input type="email" name="email" required
+					class="form-input" autocomplete="off" onblur="emailCheck();">
+				<div class="notice"></div>
+			</div>
+			<div class="row">
+				<label>비밀번호</label> <input type="password" name="pw" required
+					class="form-input" autocomplete="off" onblur="pwCheck();">
+				<div class="notice"></div>
+			</div>
+			<div class="row">
+				<label>비밀번호 확인</label> <input type="password" name="pw2" required
+					class="form-input" autocomplete="off" onblur="pw2Check();">
+				<div class="notice"></div>
+			</div>
+			<div class="row">
+				<label>닉네임</label> <input type="text" name="nick" required
+					class="form-input" autocomplete="off" onblur="nickCheck();">
+				<div class="notice"></div>
+			</div>
+			<div class="row">
+				<label>연락처</label> <input type="tel" name="phone" class="form-input"
+					autocomplete="off" onblur="phoneCheck();"
+					placeholder="전화번호 -포함 13자리를 입력해주세요.">
+				<div class="notice"></div>
+			</div>
+			<div class="row">
+				<label>생년월일</label> <input type="date" name="birth" required
+					class="form-input form-inline" autocomplete="off"
+					onblur="birthCheck();">
+			</div>
+
+			<div class="row">
+				<label>성별</label> <select name="gender">
+					<option value="남자">남자</option>
+					<option value="여자">여자</option>
+					<option value="기타">기타</option>
+				</select>
+			</div>
+
+			<div class="row">
+				<textarea name="intro" rows="5" cols="50" placeholder="자기소개"
+					id="intro" oninput="lengCheck();"></textarea>
+			</div>
+			<div class="row reft">
+				<span id="intro-length">0</span> / 100
+			</div>
+			<div class="row">
+				<input type="checkbox"> [필수]이용약관과 개인정보처리방침에 동의
+			</div>
+			<div class="row">
+				<button type="button" class="form-btn next">다음으로</button>
+			</div>
+		</div>
 	</div>
 
-</div>
-</div>
+	<div class="page">
+		<div class="container-400 container-center">
+			<div class="row center">
+				<h1>회원가입</h1>
+			</div>
+			<div class="row">
+				<label>관심사 설정</label>
+			</div>
+
+			<div class="row">
+				<select class="big" required name="location">
+					<option value="">카테고리선택</option>
+					<c:forEach var="category" items="${category}">
+						<option value="${category.bigType}">${category.bigType}</option>
+					</c:forEach>
+				</select> <select class="middle" name="smalltype"></select>
+			</div>
+
+			<div id="category-select"></div>
+			<div class="row">
+				<label>MBTI</label> <br> <select name="mbti">
+					<option value="INFP">INFP
+					<option>
+				</select>
+
+			</div>
+
+			<div class="row">
+				<label>코로나 백신접종여부</label> <input type="file" name="attach"
+					accept="image/*" class="form-input">
+			</div>
+			<button type="button" class="form-btn prev">이전 단계로</button>
+
+			<div class="row">
+				<input type="submit" value="가입" class="form-btn">
+			</div>
+
+		</div>
+	</div>
 
 </form>
 

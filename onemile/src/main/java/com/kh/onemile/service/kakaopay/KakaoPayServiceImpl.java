@@ -45,16 +45,16 @@ public class KakaoPayServiceImpl implements KakaoPayService{
 		body.add("partner_order_id", "원마일");
 		body.add("partner_user_id", requestVO.getPartner_user_id());
 		
-		body.add("item_name", "멤버십(일반)");
+		body.add("item_name", requestVO.getItem_name());
 		body.add("quantity", "1");
 		body.add("total_amount", requestVO.getTotal_amount_string());
 		body.add("tax_free_amount", "0");
 		
 		//카카오서버에게 결제 결과에 따른 페이지를 미리 안내(단, 애플리케이션에 등록된 주소만 가능)
 		//=(주의) 반드시 완성된 주소를 알려줘야 카카오에서 우리 서버로 다시 돌아올 수 있다
-		body.add("approval_url", "http://localhost:8080/onemile/membership/success");
-		body.add("cancel_url", "http://localhost:8080/onemile/membership/cancel");
-		body.add("fail_url", "http://localhost:8080/onemile/membership/fail");
+		body.add("approval_url", "http://localhost:8080/onemile/pay/success");
+		body.add("cancel_url", "http://localhost:8080/onemile/pay/cancel");
+		body.add("fail_url", "http://localhost:8080/onemile/pay/fail");
 		
 		//2-3. Header와 Body를 합성
 		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
@@ -87,9 +87,9 @@ public class KakaoPayServiceImpl implements KakaoPayService{
 		body.add("tax_free_amount", "0");
 		
 		
-		body.add("approval_url", "http://localhost:8080/onemile/kakao/success");
-		body.add("cancel_url", "http://localhost:8080/onemile/kakao/cancel");
-		body.add("fail_url", "http://localhost:8080/onemile/kakao/fail");
+		body.add("approval_url", "http://localhost:8080/onemile/pay/success");
+		body.add("cancel_url", "http://localhost:8080/onemile/pay/cancel");
+		body.add("fail_url", "http://localhost:8080/onemile/pay/fail");
 		
 		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
 		

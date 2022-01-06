@@ -3,12 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <h1>결제할 상품 정보 확인</h1>
-<form action="confirm" method="POST">
+<form action="${pageContext.request.contextPath}/pay/confirm" method="POST">
 <c:forEach var="membershipDTO" items="${list}">
 	<input type="hidden" name="mspNo" value="${membershipDTO.mspNo}">
 	<input type="hidden" name="partner_user_id" value="${sessionScope.logId}">
 	<input type="hidden" name="total_amount" value="${membershipDTO.mspPrice}">
-	
+	<input type="hidden" name="item_name" value="${membershipDTO.mspProduct}">
 	<div>
 		${membershipDTO.mspNo}	/ ${membershipDTO.mspProduct} / ${membershipDTO.mspPrice}
 	</div>
