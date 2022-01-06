@@ -1,3 +1,173 @@
+<script>
+//약관확인 이벤트 처리
+$(function(){
+var $agreeContainer = $('.modal-terms-agree');
+var $btnClose = $('#btn-agree-terms-close', $agreeContainer);
+}
+$agreeContainer.each(function () {
+    var $checkbox = $('input[type="checkbox"]:not(.toggle)', this);
+    var $agreeTermField = $('.agree-term-field');
+    var $inputAgreeAll = $checkbox.filter('#agreeAllCheckBox');
+    var $inputAgree = $checkbox.filter('#agreeCheck');
+    var $inputAgreePrivacy = $checkbox.filter('#agreePrivacyCheck');
+    var $inputAgreeGroup = $checkbox.filter('#agreeCheck, #allowDirectMail');
+    var $inputAllowDirectMail = $checkbox.filter('#allowDirectMail');
+    var $inputsAllow = $('.sub-field input', $agreeTermField);
+    var $inputAllowEmail = $checkbox.filter('#allowEmail');
+    var $inputAllowSMS = $checkbox.filter('#allowSMS');
+    var $buttonAgree = $('#btnAgree', $agreeContainer);
+
+    function setClosingEvent() {
+        var event = new CustomEvent("closing", {
+            detail: {
+                isAgreeTermAll: $inputAgreeAll.prop('checked'),
+                isAgreeTerm: $inputAgree.prop('checked'),
+                isAllowDM: $inputAllowDirectMail.prop('checked') ? 1 : 0,
+                isAllowEmail: $inputAllowEmail.prop('checked') ? 1 : 0,
+                isAllowSMS: $inputAllowSMS.prop('checked') ? 1 : 0
+            }
+        });
+        $agreeContainer[0].dispatchEvent(event);
+    }
+})
+
+    // 체크박스
+    $checkbox.on('change', function (event) {
+        var target = event.target;
+        var id = target.id;
+        var checked = target.checked;
+
+        if (id === 'agreeAllCheckBox') {
+            // 전체동의
+            $checkbox.prop('checked', checked);
+        }
+
+        // 전체동의
+        $inputAgreeAll.prop('checked', $(
+            '#agreeCheck, #agreePrivacyCheck, #allowDirectMail').filter(
+            ':checked').length === 3);
+
+        // 확인 버튼
+        $buttonAgree.prop('disabled', !$inputAgree.is(':checked') || !$inputAgreePrivacy
+            .is(
+                ':checked'));
+    });
+
+    $inputAllowDirectMail.on('click', function (event) {
+        var target = event.target;
+        $inputsAllow.prop('checked', target.checked);
+    });
+
+    // 닫기
+    $btnClose.on('click', function () {
+        $checkbox.prop('checked', false);
+        $('#agreeAllCheckPage')
+            .prop('checked', false)
+            .removeClass('partial-selected');
+
+        closeLyPop('agreeTerms');
+        setClosingEvent();
+    });
+
+    // 확인
+    $buttonAgree.on('click', function () {
+        $('#agreeAllCheckPage').prop('checked', $inputAgree.is(':checked'));
+        if ($inputAgreeAll.prop('checked')) {
+            $('#agreeAllCheckPage').removeClass('partial-selected');
+        } else if ($inputAgree.prop('checked')) {
+            $('#agreeAllCheckPage').addClass('partial-selected');
+        }
+
+        closeLyPop('agreeTerms');
+        setClosingEvent();
+    });
+});
+
+$(function () {
+    // 약관확인 이벤트 처리
+    var $agreeContainer = $('.modal-terms-agree');
+    var $btnClose = $('#btn-agree-terms-close', $agreeContainer);
+
+    $agreeContainer.each(function () {
+        var $checkbox = $('input[type="checkbox"]:not(.toggle)', this);
+        var $agreeTermField = $('.agree-term-field');
+        var $inputAgreeAll = $checkbox.filter('#agreeAllCheckBox');
+        var $inputAgree = $checkbox.filter('#agreeCheck');
+        var $inputAgreePrivacy = $checkbox.filter('#agreePrivacyCheck');
+        var $inputAgreeGroup = $checkbox.filter('#agreeCheck, #allowDirectMail');
+        var $inputAllowDirectMail = $checkbox.filter('#allowDirectMail');
+        var $inputsAllow = $('.sub-field input', $agreeTermField);
+        var $inputAllowEmail = $checkbox.filter('#allowEmail');
+        var $inputAllowSMS = $checkbox.filter('#allowSMS');
+        var $buttonAgree = $('#btnAgree', $agreeContainer);
+
+        function setClosingEvent() {
+            var event = new CustomEvent("closing", {
+                detail: {
+                    isAgreeTermAll: $inputAgreeAll.prop('checked'),
+                    isAgreeTerm: $inputAgree.prop('checked'),
+                    isAllowDM: $inputAllowDirectMail.prop('checked') ? 1 : 0,
+                    isAllowEmail: $inputAllowEmail.prop('checked') ? 1 : 0,
+                    isAllowSMS: $inputAllowSMS.prop('checked') ? 1 : 0
+                }
+            });
+            $agreeContainer[0].dispatchEvent(event);
+        }
+
+        // 체크박스
+        $checkbox.on('change', function (event) {
+            var target = event.target;
+            var id = target.id;
+            var checked = target.checked;
+
+            if (id === 'agreeAllCheckBox') {
+                // 전체동의
+                $checkbox.prop('checked', checked);
+            }
+
+            // 전체동의
+            $inputAgreeAll.prop('checked', $(
+                '#agreeCheck, #agreePrivacyCheck, #allowDirectMail').filter(
+                ':checked').length === 3);
+
+            // 확인 버튼
+            $buttonAgree.prop('disabled', !$inputAgree.is(':checked') || !$inputAgreePrivacy
+                .is(
+                    ':checked'));
+        });
+
+        $inputAllowDirectMail.on('click', function (event) {
+            var target = event.target;
+            $inputsAllow.prop('checked', target.checked);
+        });
+
+        // 닫기
+        $btnClose.on('click', function () {
+            $checkbox.prop('checked', false);
+            $('#agreeAllCheckPage')
+                .prop('checked', false)
+                .removeClass('partial-selected');
+
+            closeLyPop('agreeTerms');
+            setClosingEvent();
+        });
+
+        // 확인
+        $buttonAgree.on('click', function () {
+            $('#agreeAllCheckPage').prop('checked', $inputAgree.is(':checked'));
+            if ($inputAgreeAll.prop('checked')) {
+                $('#agreeAllCheckPage').removeClass('partial-selected');
+            } else if ($inputAgree.prop('checked')) {
+                $('#agreeAllCheckPage').addClass('partial-selected');
+            }
+
+            closeLyPop('agreeTerms');
+            setClosingEvent();
+        });
+    });
+})
+</script>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!-- S: 약관동의 -->

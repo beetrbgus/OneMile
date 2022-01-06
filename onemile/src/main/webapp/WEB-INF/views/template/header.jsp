@@ -20,7 +20,7 @@
     <script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/sha1.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" ></script>
-
+	<script src="${pageContext.request.contextPath}/resources/js/join.js" ></script>
 	<link rel="stylesheet" href="${root}/resources/css/board.ace40453.css">
 	<link rel="stylesheet" href="${root}/resources/css/campaign.30c4c08b.css">
 	<link rel="stylesheet" href="${root}/resources/css/commons-w.css">
