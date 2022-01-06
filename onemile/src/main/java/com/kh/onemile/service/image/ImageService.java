@@ -8,7 +8,7 @@ import com.kh.onemile.vo.ImageDownloadVO;
 
 public interface ImageService {
 	final String path="D:/upload"; 
-	int regImage(MultipartFile attach, String savePath) throws IllegalStateException, IOException;
+	List<Integer> regImage(List<MultipartFile> attach, String savePath) throws IllegalStateException, IOException;
 	void deleteImage(int imageNo,String save);
 	List<ImageDTO> listByBoardNo(int boardNo);
 	ImageDTO getImage(int imageNo);

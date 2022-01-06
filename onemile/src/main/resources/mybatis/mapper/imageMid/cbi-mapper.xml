@@ -2,19 +2,17 @@
 <!DOCTYPE mapper
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="si">
+<mapper namespace="cbi">
 	
-	<!-- 사진 추가 -->
+	<!--등록 -->
 	<insert id="reg" parameterType="MiddleImgTableDTO">
-		insert into smi
-		values(
-			SMI_SEQ.nextval,#{imgNo},#{connTableNo}
+		insert into cbi(cbi_no,image_no,cobuy_no) values(
+			cbi_seq.nextval, #{imgNo}, #{connTableNo}
 		)
 	</insert>
-	
-	<!-- 삭제하기 -->
+	<!--삭제  -->
 	<delete id="delete" parameterType="int">
-		delete from smi where SOCIAL_NO = #{socialNo}
+		delete from cbi where cobuy_no = #{cobuyNo}
 	</delete>
 
 </mapper>
