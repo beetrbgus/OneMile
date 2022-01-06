@@ -39,5 +39,5 @@ public interface MemberDao {
 	MemberDTO get3(String phone);
 	//회원정보 수정하기
 	boolean changeInformation(MemberDTO memberDTO);
-	
+
 }

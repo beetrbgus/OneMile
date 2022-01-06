@@ -45,33 +45,23 @@ public class MemberController {
 	@Autowired
 	private EmailService emailService;
 	@Autowired
-	private AdminService adminService;
-	@Autowired
-	private CategoryService categoryService;
-	@Autowired
 	private MemberImageDao memberImageDao;
 	@Autowired
 	private MembershipDao membershipDao;
-	@Autowired
-	private KakaoPayService kakaoPayService;
-	@Autowired
-	private MembershipBuyDao membershipBuyDao;
 	
 	//회원가입
 	@GetMapping("/join")
 	public String getJoin(Model model) {
 		//소모임 대분류
-		model.addAttribute("category",categoryService.list());
+		model.addAttribute("category",memberService.getfavorite());
 		return "member/join";
 	}
 	//가입 후 회원 승인 테이블로 감.
 	@PostMapping("/join")
 	public String postJoin(@ModelAttribute MemberJoinVO memberJoinVO) throws IllegalStateException, IOException {
-		int memNo = memberService.join(memberJoinVO);
-		//관심 카테고리 테이블 전송
-		categoryService.insert(memberJoinVO, memNo);
+		memberService.join(memberJoinVO);
+		
 		//회원 승인 테이블 전송.
-		adminService.regApproveMember(memNo);
 		return "redirect:join_success";
 	}
 	@RequestMapping("/join_success")
@@ -177,16 +167,16 @@ public class MemberController {
 
 	//비밀번호찾기(이메일 체크)
 	@PostMapping("/emailCheck")
-	public String emailCheck(@ModelAttribute CertiDTO certiDTO) {
+	public String emailCheck(@ModelAttribute CertiDTO certiDTO,HttpSession session) {
 		boolean success = memberService.emailCheck(certiDTO);
 		if(success) {
-			return "member/edit_pw";//(임시)성공하면 비밀번호 변경페이지로?
+			return "member/edit_pw";
 		}
 		else {
-			return "redirect:/";//(임시)실패시 메인페이지로 이동
+			return "redirect:/";
 		}
 	}
-	
+
 	//비밀번호 변경
 	@GetMapping("/edit_pw")
 	public String editPw() {
@@ -200,7 +190,7 @@ public class MemberController {
 		String email = (String) session.getAttribute("logId");
 		boolean result = memberService.changePw(email, nowPw, changePw);
 		if(result) {
-			return "redirect:/";//마이페이지만들면 마이페이지로 보낼 예정
+			return "redirect:/";
 		}else {
 			return "redirect:edit_pw?error";
 		}
@@ -220,37 +210,11 @@ public class MemberController {
 		return "member/mypage";
 	}
 	
-	//프로필 다운로드에 대한 요청 처리
-	@GetMapping("/profile")
-	@ResponseBody
-	public ResponseEntity<ByteArrayResource> profile(
-				@RequestParam int imageNo
-			) throws IOException {
-		
-		//이미지번호(imageNo)로 프로필 이미지 파일정보를 구한다.
-		ImageDTO imageDTO = memberImageDao.getImage(imageNo);
-		
-		//이미지번호(imageNo)로 실제 파일 정보를 불러온다
-		byte[] data = memberImageDao.load(imageNo);
-		ByteArrayResource resource = new ByteArrayResource(data);
-		
-		String encodeName = URLEncoder.encode(imageDTO.getUploadName(), "UTF-8");
-		encodeName = encodeName.replace("+", "%20");
-		
-		return ResponseEntity.ok()
-			.contentType(MediaType.APPLICATION_OCTET_STREAM)
-			.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\""+encodeName+"\"")
-			.header(HttpHeaders.CONTENT_ENCODING, "UTF-8")
-			.contentLength(imageDTO.getFileSize())
-			.body(resource);
-	}
-	
 	//회원정보 수정
 	@GetMapping("/edit")
 	public String edit(HttpSession session, Model model) {
 		int memberNo = (int)session.getAttribute("logNo");
 		MemberDTO memberDTO = memberService.profile(memberNo);
-		
 		model.addAttribute("memberDTO",memberDTO);
 		return "member/edit";
 	}
@@ -258,7 +222,6 @@ public class MemberController {
 	public String edit(@ModelAttribute MemberDTO memberDTO, HttpSession session) {
 		int memberNo = (int)session.getAttribute("logNo");
 		memberDTO.setMemberNo(memberNo);
-		
 		boolean result = memberService.changeInformation(memberDTO);
 		if(result) {
 			return "redirect:edit_success";
@@ -267,23 +230,12 @@ public class MemberController {
 			return "redirect:edit?error";
 		}
 	}
-	
 	//구매한 멤버십 목록
 	@GetMapping("reg_membership")
 	public String membershipList(Model model, HttpSession session) {
 		int memberNo = (int)session.getAttribute("logNo");
 		List<MembershipBuyDTO> membershipBuyDTO = membershipDao.joinMembership(memberNo);
-		System.out.println(membershipBuyDTO);
 		model.addAttribute("list",membershipBuyDTO);
 		return "member/reg_membership";
-	}
-	
-	//정기기부 비활성화 요청
-	@GetMapping("/membership/disabled")
-	public String autoInactive(@RequestParam String sid, Model model) throws URISyntaxException {
-		KakaoPayAutoPayMentInactiveResponseVO responseVo = kakaoPayService.autoInactive(sid);
-		
-		membershipBuyDao.regularPayDelete(sid);
-		return "redirect:/member/reg_membership";
 	}
 }

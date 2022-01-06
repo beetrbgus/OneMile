@@ -8,7 +8,52 @@
         color: red;
     }
 </style>
+<!-- 1. 맘껏 사진을 올린다. 
+2. 사진 올릴 때 이미지 번호를 배열에 담는다.
+3. 배열을 같이 보내서 회원가입을 한다.
+4. 멤버컨트롤러에서 배열의 길이만큼 이미지 삭제하는 서비스를 호출한다. -->
+
 <script>
+let imgList = new Array();
+let folder = member;
+	$(function(){
+		$("input[name=attach]").on("input", function(e){
+			
+// 			파일이 선택되지 않은 경우는 차단
+			if(!this.files || !this.files[0]) {
+				return;
+			}
+
+// 			2. 낱개 데이터를 업로드
+			var formData = new FormData();
+			formData.append("attach", this.files[0]);
+			formData.append("folder", "member");
+			
+			$.ajax({
+				url:"${pageContext.request.contextPath}/image/upload",
+				type:"post",
+				data:formData,
+				dataType:"text",
+				processData:false,
+				contentType:false,
+				success:function(resp){
+					console.log("성공", resp);
+					console.log("resp    "+resp);
+
+					var tag = $("<img>").attr("src", "${pageContext.request.contextPath}/image/download?imageNo="+resp+"&folder="+folder)
+													.addClass("preview");
+					$("#result").append(tag);
+					$("input[name=imageList]").val(resp);
+					imgList.push(resp);
+					console.log(imgList);
+				},
+				error:function(e){
+					console.log("실패", e);
+				}
+			});
+		});
+	});
+
     $(function () {
         //아이디 중복확인 Ajax
         $("input[name=email]").on("blur", function () {
@@ -251,6 +296,15 @@
     $(function(){
     var $agreeContainer = $('.modal-terms-agree');
     var $btnClose = $('#btn-agree-terms-close', $agreeContainer);
+    
+    //글자 정리 후 길이 설정
+    output.textContent = len;
+	}
+	$(document).ready(function(){
+		let mbti  = $("select[name=mbti]");
+		mbti.append("<option>ㅋㅋㅋㅋ</option>");
+		console.log("mbti   "+mbti);
+	});
 
     $agreeContainer.each(function () {
         var $checkbox = $('input[type="checkbox"]:not(.toggle)', this);
@@ -419,7 +473,6 @@
 <main class="sign-up-page">
     <div class="wz container form-container">
         <form method="post" enctype="multipart/form-data" onsubmit="">
-
             <!-- 1페이지 -->
             <div class="page">
                 <div class="wz text display2 page-title">
@@ -427,7 +480,9 @@
                 </div>
                 <div class="field name-field">
                     <label class="label">프로필 사진</label>
-                    <input type="file" class="input text block large" id="frofile" name="attach" accept="image/*" required>
+                    <input type="file" class="input text block large" name="attach" accept="image/*" required>
+                    <input type="file" class="input text block large" name="attach" accept="image/*" required>
+                    <input type="file" class="input text block large" name="attach" accept="image/*" required>
                 </div>
                 <div class="field name-field">
                     <label class="label">이메일</label> <input type="email" id="mail" name="email" required class="input text block large valid"
@@ -458,7 +513,6 @@
                     <label class="label">생년월일</label> <input type="date" id="birthdDay" name="birth" required class="wz input"
                         autocomplete="off" onblur="birthCheck();">
                 </div>
-
                 <div class="field name-field">
                     <label>성별</label> <select name="gender" class="input text block large">
                         <option value="남자" class="label">남자</option>

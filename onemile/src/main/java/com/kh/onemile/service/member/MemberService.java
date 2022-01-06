@@ -1,16 +1,18 @@
 package com.kh.onemile.service.member;
 
 import java.io.IOException;
+import java.util.List;
 
 import com.kh.onemile.entity.member.MemberDTO;
 import com.kh.onemile.entity.member.certi.CertiDTO;
 import com.kh.onemile.entity.member.membership.AdDTO;
+import com.kh.onemile.entity.social.SocialBigCategoryDTO;
 import com.kh.onemile.vo.MemberJoinVO;
 
 public interface MemberService {
 	
 	//회원가입
-	public int join(MemberJoinVO memberJoinVO) throws IllegalStateException, IOException;
+	public void join(MemberJoinVO memberJoinVO) throws IllegalStateException, IOException;
 	
 	//로그인
 	public MemberDTO login(MemberDTO memberDTO);
@@ -38,4 +40,7 @@ public interface MemberService {
 	
 	//회원정보 수정
 	public boolean changeInformation(MemberDTO memberDTO);
+
+	public List<SocialBigCategoryDTO> getfavorite();
+
 }

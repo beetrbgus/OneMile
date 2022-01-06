@@ -22,4 +22,9 @@ public class MapServiceImpl implements MapService{
 		mapDao.regMap(mapDTO);
 		return mapNo;
 	}
+
+	@Override
+	public void modify(MapDTO mapDTO) {
+		mapDao.modify(mapDTO);
+	}
 }
