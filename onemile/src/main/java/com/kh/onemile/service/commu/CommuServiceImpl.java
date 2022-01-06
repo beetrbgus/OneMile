@@ -1,7 +1,9 @@
 package com.kh.onemile.service.commu;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -120,8 +122,8 @@ public class CommuServiceImpl implements CommuService{
 
 	//카테고리별 리스트
 	@Override
-	public List<CommuDetailVO> menuList(String middleName) {
-		List<CommuDetailVO> list = commuDao.menuList(middleName);
+	public List<CommuDetailVO> menuList(String middleName, int startRow, int endRow) {
+		List<CommuDetailVO> list = commuDao.menuList(middleName, startRow, endRow);
 		return list;
 	}
 	

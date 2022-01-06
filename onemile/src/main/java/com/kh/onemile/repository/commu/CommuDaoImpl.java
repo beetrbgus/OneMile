@@ -1,6 +1,8 @@
 package com.kh.onemile.repository.commu;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,11 +34,6 @@ public class CommuDaoImpl implements CommuDao{
 	}
 
 	@Override
-	public List<CommuDetailVO> menuList(String middleName) {
-		return sqlSession.selectList("commu.menuList", middleName);
-	}
-
-	@Override
 	public List<CommuDTO> List() {
 		return sqlSession.selectList("commu.list");
 	}
@@ -44,5 +41,15 @@ public class CommuDaoImpl implements CommuDao{
 	@Override
 	public CommuDetailVO detail(int commuNo) {
 		return sqlSession.selectOne("commu.detail", commuNo);
+	}
+
+	@Override
+	public List<CommuDetailVO> menuList(String middleName, int startRow, int endRow) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("middleName", middleName);
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+		List<CommuDetailVO> list = sqlSession.selectList("commu.menuList", map);
+		return list;
 	}
 }
