@@ -5,20 +5,15 @@
 <mapper namespace="cmi">
 	
 	<!-- 사진 추가 -->
-	<insert id="regCmi" parameterType="commuImgMidDto">
+	<insert id="reg" parameterType="MiddleImgTableDTO">
 		insert into cmi
 		values(
-			#{cmiNo}, #{imageNo}, #{commuNo}
+			COMMUIMG_SEQ.nextval, #{imgNo}, #{connTableNo}
 		)
 	</insert>
-	
-	<!-- 단일조회 -->
-	<select id="getCmi" parameterType="int" resultType="CommuImgMidDTO">
-		select * from cmi where image_no = #{imageNo}
-	</select>
-	
-	<!-- 삭제하기 -->
-	<delete id="deleteImage">
-		delete cmi where image_no = #{imageNo}
+
+	<!--삭제  -->
+	<delete id="delete" parameterType="int">
+		delete from cbi where commu_no = #{commuNo}
 	</delete>
 </mapper>

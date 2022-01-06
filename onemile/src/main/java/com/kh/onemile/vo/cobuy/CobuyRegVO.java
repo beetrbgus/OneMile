@@ -1,7 +1,11 @@
 package com.kh.onemile.vo.cobuy;
 
 import java.util.Date;
+import java.util.List;
+
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 @Data
@@ -22,4 +26,5 @@ public class CobuyRegVO {
 	private double lat;
 	private double lng;
 	private String detailAddress;
+	private List<MultipartFile> attach;
 }

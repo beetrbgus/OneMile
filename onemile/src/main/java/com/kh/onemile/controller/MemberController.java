@@ -15,12 +15,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import com.kh.onemile.entity.image.middle.MemberProfileMidDTO;
 import com.kh.onemile.entity.member.MemberDTO;
 import com.kh.onemile.entity.member.certi.CertiDTO;
 import com.kh.onemile.entity.product.MembershipBuyDTO;
-import com.kh.onemile.repository.image.middle.MemberImageDao;
 import com.kh.onemile.repository.membership.MembershipDao;
 import com.kh.onemile.service.email.EmailService;
 import com.kh.onemile.service.member.MemberService;
@@ -33,8 +30,6 @@ public class MemberController {
 	private MemberService memberService;
 	@Autowired
 	private EmailService emailService;
-	@Autowired
-	private MemberImageDao memberImageDao;
 	@Autowired
 	private MembershipDao membershipDao;
 	
@@ -193,9 +188,9 @@ public class MemberController {
 		//회원정보 불러오기
 		MemberDTO memberDTO = memberService.profile(memberNo);
 		//회원이미지 불러오기
-		MemberProfileMidDTO memberProfileMidDTO = memberImageDao.get(memberNo);
+//		MemberProfileMidDTO memberProfileMidDTO = imageService.getImage(imageNo);
 		model.addAttribute("memberDTO",memberDTO);
-		model.addAttribute("memberProfileMidDTO",memberProfileMidDTO);
+//		model.addAttribute("memberProfileMidDTO",memberProfileMidDTO);
 		return "member/mypage";
 	}
 	
