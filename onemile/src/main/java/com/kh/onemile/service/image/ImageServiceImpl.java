@@ -54,10 +54,10 @@ public class ImageServiceImpl implements ImageService {
 
 	@Override
 	public ImageDownloadVO download(int imageNo, String folder) throws IOException {
-		
+		String savePath = path +"/"+ folder;
 		ImageDownloadVO imageDownloadVO = new ImageDownloadVO(); 
 		ImageDTO imageDTO = imageDao.get(imageNo);
-		byte[] data = saveFile.downImg(path, imageNo);
+		byte[] data = saveFile.downImg(savePath, imageNo);
 		
 		imageDownloadVO.setImageDTO(imageDTO);
 		imageDownloadVO.setData(data);
@@ -87,11 +87,4 @@ public class ImageServiceImpl implements ImageService {
 	public ImageDTO getImage(int imageNo) {
 		return imageDao.get(imageNo);
 	}
-
-	@Override
-	public int save(ImageDTO imageDTO) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 }

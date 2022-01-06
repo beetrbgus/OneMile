@@ -45,33 +45,23 @@ public class MemberController {
 	@Autowired
 	private EmailService emailService;
 	@Autowired
-	private AdminService adminService;
-	@Autowired
-	private CategoryService categoryService;
-	@Autowired
 	private MemberImageDao memberImageDao;
 	@Autowired
 	private MembershipDao membershipDao;
-	@Autowired
-	private KakaoPayService kakaoPayService;
-	@Autowired
-	private MembershipBuyDao membershipBuyDao;
 	
 	//회원가입
 	@GetMapping("/join")
 	public String getJoin(Model model) {
 		//소모임 대분류
-		model.addAttribute("category",categoryService.list());
+		model.addAttribute("category",memberService.getfavorite());
 		return "member/join";
 	}
 	//가입 후 회원 승인 테이블로 감.
 	@PostMapping("/join")
 	public String postJoin(@ModelAttribute MemberJoinVO memberJoinVO) throws IllegalStateException, IOException {
-		int memNo = memberService.join(memberJoinVO);
-		//관심 카테고리 테이블 전송
-		categoryService.insert(memberJoinVO, memNo);
+		memberService.join(memberJoinVO);
+		
 		//회원 승인 테이블 전송.
-		adminService.regApproveMember(memNo);
 		return "redirect:join_success";
 	}
 	@RequestMapping("/join_success")

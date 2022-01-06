@@ -39,17 +39,6 @@ public class MilesServiceImpl implements MilesService{
 		//마일즈 테이블에 등록
 		milesDao.create(milesVo);
 		
-		if(milesVo.getAttach()!=null) {
-            List<Integer> imgNoList = imageService.regImage(milesVo.getAttach(), folderName);
-            
-            //연결 테이블
-            MilesImgMidDTO milesImgMidDto = new MilesImgMidDTO();
-            
-            milesImgMidDto.setImgNoList(imgNoList);// 이미지 갯수만큼 넣어 줌
-            milesImgMidDto.setMilesNo(milesNo);//마일즈 번호
-            
-            //중간 이미지 테이블에 등록
-            middleService.reg(milesImgMidDto);
-        }
+		
 	}
 }
