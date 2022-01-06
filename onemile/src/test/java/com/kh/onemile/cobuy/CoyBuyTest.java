@@ -42,7 +42,7 @@ public class CoyBuyTest {
 		cobuyVO.setPrice(15000);
 		cobuyVO.setDescript("이 테스트글은 자바로 작성되었습니다.");
 		cobuyVO.setPName("아무도 먹지 않는 민트초코");
-		cobuyService.reg(cobuyVO);
+//		cobuyService.reg(cobuyVO);
 	}
 //	@Test
 	public void modifyCoyBuy() throws IllegalStateException, IOException, ParseException {
@@ -55,7 +55,7 @@ public class CoyBuyTest {
 		cobuyVO.setPrice(16000);
 		cobuyVO.setDescript("이 테스트글은 자바로 작성되었습니다.333");
 		cobuyVO.setPName("아무도 먹지 않는 민트초코333");
-		cobuyService.reg(cobuyVO);
+//		cobuyService.reg(cobuyVO);
 	}
 	@Test
 	public void getListCoyBuy(){
