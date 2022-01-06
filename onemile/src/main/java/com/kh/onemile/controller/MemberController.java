@@ -26,12 +26,12 @@ import com.kh.onemile.entity.image.middle.MemberProfileMidDTO;
 import com.kh.onemile.entity.member.MemberDTO;
 import com.kh.onemile.entity.member.certi.CertiDTO;
 import com.kh.onemile.entity.product.MembershipBuyDTO;
-import com.kh.onemile.repository.image.middle.MemberImageDao;
 import com.kh.onemile.repository.product.MembershipBuyDao;
 import com.kh.onemile.repository.product.MembershipDao;
 import com.kh.onemile.service.admin.AdminService;
 import com.kh.onemile.service.category.CategoryService;
 import com.kh.onemile.service.email.EmailService;
+import com.kh.onemile.service.image.ImageService;
 import com.kh.onemile.service.kakaopay.KakaoPayService;
 import com.kh.onemile.service.member.MemberService;
 import com.kh.onemile.vo.MemberJoinVO;
@@ -45,10 +45,9 @@ public class MemberController {
 	@Autowired
 	private EmailService emailService;
 	@Autowired
-	private MemberImageDao memberImageDao;
-	@Autowired
 	private MembershipDao membershipDao;
-	
+	@Autowired
+	private ImageService imageService;
 	//회원가입
 	@GetMapping("/join")
 	public String getJoin(Model model) {
@@ -204,9 +203,9 @@ public class MemberController {
 		//회원정보 불러오기
 		MemberDTO memberDTO = memberService.profile(memberNo);
 		//회원이미지 불러오기
-		MemberProfileMidDTO memberProfileMidDTO = memberImageDao.get(memberNo);
+//		MemberProfileMidDTO memberProfileMidDTO = imageService.getImage(imageNo);
 		model.addAttribute("memberDTO",memberDTO);
-		model.addAttribute("memberProfileMidDTO",memberProfileMidDTO);
+//		model.addAttribute("memberProfileMidDTO",memberProfileMidDTO);
 		return "member/mypage";
 	}
 	

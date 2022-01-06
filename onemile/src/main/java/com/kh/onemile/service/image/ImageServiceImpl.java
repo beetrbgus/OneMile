@@ -1,15 +1,12 @@
 package com.kh.onemile.service.image;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ByteArrayResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import com.kh.onemile.entity.image.ImageDTO;
-import com.kh.onemile.entity.image.middle.MemberProfileMidDTO;
 import com.kh.onemile.repository.image.ImageDao;
 import com.kh.onemile.util.SaveFile;
 import com.kh.onemile.util.Sequence;
@@ -27,38 +24,39 @@ public class ImageServiceImpl implements ImageService {
 	private final String path = "D:/upload";
 
 	@Override
-	public int regImage(MultipartFile attach, String savePath) throws IllegalStateException, IOException {
-
-		int imageNo = seq.nextSequence("image_seq");
-		String saveName = String.valueOf(imageNo);
-
-		if (!attach.isEmpty()) {
+	public List<Integer> regImage(List<MultipartFile> attach, String savePath) throws IllegalStateException, IOException {
+		List<Integer> imageNoList = new ArrayList<Integer>();
+		
+		for (MultipartFile multipartFile : attach) {
+			int imageNo = seq.nextSequence("image_seq");
+			String saveName = String.valueOf(imageNo);
+			
 			ImageDTO imageDto = new ImageDTO();
 
 			// 이미지 테이블
 			imageDto.setImageNo(imageNo);
-			imageDto.setUploadName(attach.getOriginalFilename());// 회원이 올린 이름.
-			imageDto.setFileSize(attach.getSize());
+			imageDto.setUploadName(multipartFile.getOriginalFilename());// 회원이 올린 이름.
+			imageDto.setFileSize(multipartFile.getSize());
 			imageDto.setSaveName(saveName);
-			imageDto.setFileType(attach.getContentType());
+			imageDto.setFileType(multipartFile.getContentType());
 
 			// 실제 D드라이브에 저장되는 메서드
 			String realPath = path + "/" + savePath;
-			saveFile.saveImg(realPath, attach, saveName);
+			saveFile.saveImg(realPath, multipartFile, saveName);
 			// DB에 파일 정보 넣는 메서드
 			imageDao.regImage(imageDto);
+			imageNoList.add(imageNo);
 		}
-
-		return imageNo;
+		return imageNoList;
 	}
 
 	@Override
 	public ImageDownloadVO download(int imageNo, String folder) throws IOException {
-		String savePath = path +"/"+ folder;
-		ImageDownloadVO imageDownloadVO = new ImageDownloadVO(); 
+		String savePath = path + "/" + folder;
+		ImageDownloadVO imageDownloadVO = new ImageDownloadVO();
 		ImageDTO imageDTO = imageDao.get(imageNo);
 		byte[] data = saveFile.downImg(savePath, imageNo);
-		
+
 		imageDownloadVO.setImageDTO(imageDTO);
 		imageDownloadVO.setData(data);
 

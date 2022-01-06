@@ -5,25 +5,15 @@
 <mapper namespace="mei">
 	
 	<!-- 사진 추가 -->
-	<insert id="regMei" parameterType="memberProfileMidDTO">
+	<insert id="reg" parameterType="memberProfileMidDTO">
 		insert into mei
 		values(
-			mei_seq.nextval, #{imageNo}, #{memberNo},'구분' <!-- ,#{imageDivision} -->
+			mei_seq.nextval, #{imgNo}, #{connTableNo}
 		)
 	</insert>
-	
-	<!-- 단일조회 -->
-	<select id="getMei" parameterType="int" resultType="memberProfileMidDTO">
-		select * from mei where member_no = #{memberNo}
-	</select>
-	
 	<!-- 삭제하기 -->
-	<delete id="deleteImage">
-		delete mei where image_no = #{imageNo}
+	<delete id="delete">
+		delete from mei where member_no = #{memberNo}
 	</delete>
-	
-	<!-- 조회 -->
-	<select id="getImage" parameterType="int" resultType="ImageDTO">
-		select * from image where image_no = #{imageNo}
-	</select>
+
 </mapper>
