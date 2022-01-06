@@ -1,15 +1,22 @@
 package com.kh.onemile.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.onemile.service.notice.NoticeService;
+import com.kh.onemile.entity.notice.NoticeDTO;
+
 
 
 @Controller
@@ -23,10 +30,43 @@ public class NoticeController {
 	 private NoticeService noticeService;
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public void list(Locale locale, Model model) throws Exception {
+	public String list(Locale locale, Model model) throws Exception {
 		  List list = noticeService.list();
 		  model.addAttribute("list", list);
+		  
+		  return "/notice/list";
 
 	}
+	
+	
+	//공지 등록
+	@RequestMapping(value = "/writeView", method = RequestMethod.GET)
+	public String regiView(Locale locale, Model model, HttpServletRequest request) throws Exception {
+		return "/notice/write";
+	}
+	
+	
+	
 
-} 
+	@ResponseBody
+	@RequestMapping(value = "/write", method = RequestMethod.POST)
+	public  String write(Locale locale, Model model, NoticeDTO noticedto) throws Exception {
+		
+		Date date = new Date(System.currentTimeMillis());
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss"); 
+		
+		
+
+		noticedto.setPostDate(format.format(date));
+		
+		if(noticeService.write(noticedto) == 1) {
+			return "Y";
+		}else {
+			return "N";
+		}
+	}
+	
+}
+	
+	
+

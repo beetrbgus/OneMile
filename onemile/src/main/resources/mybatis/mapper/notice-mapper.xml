@@ -4,11 +4,37 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="notice">
 	<select id="list" resultType="NoticeDTO">
-		<!-- 공지리스트 -->
+	<!-- 공지리스트 -->
 	 	select 
  			nt_no, title, cont, nt_writer, postdate
 		from 
  			notice
 	</select>
+	
+	<!-- 작성글마지막번호 -->
+	<select id="maxSeq" resultType="java.lang.Integer">
+	select max(SEQ) from board
+	</select>
+	
+	<!-- 등록시전송하는데이터 -->
+	<insert id="write">
+	 	INSERT INTO 
+	 	BOARD(
+	 		nt_no,
+	 		title,
+	 		cont,
+	 		nt_writer,
+	 		postdate
 
-</mapper> 
+	 	) 
+	 	VALUES(
+	 		#{nt_no},
+	 		#{title},
+	 		#{cont},
+	 		#{nt_writer},
+	 		#{postdate},
+
+
+	 	) 
+	</insert>
+</mapper>

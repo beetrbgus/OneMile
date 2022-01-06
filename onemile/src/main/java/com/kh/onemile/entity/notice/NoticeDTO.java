@@ -21,6 +21,9 @@ public class NoticeDTO {
 	private String title;
 	private String cont;
 	private String nt_writer;
-	private Date postDate;
+	private String postDate;
+
+		
+	}
 
 }
