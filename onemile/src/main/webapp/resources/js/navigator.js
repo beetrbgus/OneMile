@@ -1,5 +1,5 @@
 $(function(){
-	$("#confirmbtn").click(function(){
+	$(".confirmbtn").click(function(){
 		if('geolocation' in navigator){
 		    navigator.geolocation.getCurrentPosition((position) => {
 		    	
@@ -35,7 +35,7 @@ $(function(){
 	        if (status === kakao.maps.services.Status.OK) {
 	        	console.log(result[0]);
 	        	let dong = result[0].region_3depth_name;
-	        	$("#dong").val(dong);
+	        	$(".dong").val(dong);
 	        }
 	        return result[0];
 	    };

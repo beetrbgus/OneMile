@@ -14,4 +14,4 @@ public class AdminSettingDTO {
 	private int sRegCnt;
 	private int sMaxCnt;
 	private int nModTime;
-}
+} 

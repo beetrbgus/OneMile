@@ -10,8 +10,8 @@
 <c:forEach var="membershipBuyDTO" items="${list}">
 	<div>
 		${membershipBuyDTO.itemName} / ${membershipBuyDTO.totalAmount} / ${membershipBuyDTO.buyTime} / ${membershipBuyDTO.buyEndtime}
-		${membershipBuyDTO.status}
-		<a href="${pageContext.request.contextPath}/pay/reguler/disabled?sid=${membershipBuyDTO.sid}">중지</a>
+		${membershipBuyDTO.status} / ${membershipBuyDTO.sid}
+		<a href="${pageContext.request.contextPath}/pay/regular/disabled?sid=${membershipBuyDTO.sid}">중지</a>
 	</div>
 </c:forEach>
 	

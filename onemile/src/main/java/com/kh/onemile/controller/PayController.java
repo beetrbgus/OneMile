@@ -87,9 +87,9 @@ public class PayController {
 		}
 		
 		//정기결제 비활성화 요청
-		@GetMapping("/reguler/disabled")
-		public String autoInactive(@RequestParam String sid, Model model) throws URISyntaxException {
-			KakaoPayAutoPayMentInactiveResponseVO responseVo = kakaoPayService.autoInactive(sid);
+		@GetMapping("/regular/disabled")
+		public String autoInactive(@RequestParam String sid) throws URISyntaxException {
+			kakaoPayService.regularInactive(sid);
 			membershipBuyDao.regularPayDelete(sid);
 			return "redirect:/member/reg_membership";
 		}

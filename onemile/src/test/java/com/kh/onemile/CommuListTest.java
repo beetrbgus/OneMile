@@ -25,6 +25,6 @@ public class CommuListTest {
 	
 	@Test
 	public void test() {
-		log.debug("리스트 = {}", commuService.menuList("질문"));
+		
 	}
 }

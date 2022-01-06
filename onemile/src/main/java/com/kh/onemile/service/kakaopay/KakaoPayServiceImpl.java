@@ -129,8 +129,8 @@ public class KakaoPayServiceImpl implements KakaoPayService{
 	
 	//정기결제 비활성화
 	@Override
-	public KakaoPayAutoPayMentInactiveResponseVO autoInactive(String sid) throws URISyntaxException {
-RestTemplate template = new RestTemplate();
+	public KakaoPayAutoPayMentInactiveResponseVO regularInactive(String sid) throws URISyntaxException {
+		RestTemplate template = new RestTemplate();
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Authorization",  "KakaoAK "+Auth);
@@ -141,7 +141,6 @@ RestTemplate template = new RestTemplate();
 		body.add("sid", sid);
 		
 		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
-		
 		
 		URI uri = new URI("https://kapi.kakao.com/v1/payment/manage/subscription/inactive");
 		
