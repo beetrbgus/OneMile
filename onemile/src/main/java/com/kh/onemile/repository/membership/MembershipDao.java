@@ -11,7 +11,7 @@ public interface MembershipDao {
 	List<MembershipListVO> list();
 	
 	//결제 상품 확인
-	List<MembershipDTO> search(int mspNo);
+	MembershipDTO search(int mspNo);
 	
 	//내가 가입한 멤버십
 	List<MembershipBuyDTO> joinMembership(int memberNo);

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.kh.onemile.entity.cobuy.CobuyModDTO;
 import com.kh.onemile.entity.image.middle.MiddleImgTableDTO;
 import com.kh.onemile.entity.map.MapDTO;
 import com.kh.onemile.repository.cobuy.CobuyDao;
@@ -19,6 +18,8 @@ import com.kh.onemile.util.Sequence;
 import com.kh.onemile.vo.cobuy.CobuyDetailVO;
 import com.kh.onemile.vo.cobuy.CobuyListVO;
 import com.kh.onemile.vo.cobuy.CobuyRegVO;
+import com.kh.onemile.vo.cobuy.CobuyVO;
+import com.kh.onemile.vo.kakaopay.ConfirmVO;
 import com.kh.onemile.entity.menu.MiddleNameDTO;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -90,7 +91,7 @@ public class CobuyServiceImpl implements CobuyService {
 	}
 
 	@Override
-	public void modify(CobuyModDTO cobuyModDTO) {
+	public void modify(CobuyVO cobuyModDTO) {
 		// 공구 테이블에 수정
 		cobuyDao.modify(cobuyModDTO);
 		MapDTO mapDTO = new MapDTO();
@@ -110,8 +111,21 @@ public class CobuyServiceImpl implements CobuyService {
 
 	@Override
 	public List<MiddleNameDTO> getMiddleName() {
-
 		return cobuyDao.getMiddleName();
+	}
+
+	@Override
+	public ConfirmVO getConfirm(ConfirmVO confirmVO,int memberNo) {
+		CobuyVO cobuyVO =cobuyDao.getConfirm(confirmVO);
+		
+		int totalPrice = confirmVO.getQuantity()*cobuyVO.getPrice();
+		confirmVO.setMemberNo(memberNo);
+		confirmVO.setTotalAmount(totalPrice);
+		confirmVO.setPrice(cobuyVO.getPrice());
+		confirmVO.setProductName(cobuyVO.getPName());
+		confirmVO.setType("단건");
+		
+		return confirmVO;
 	}
 
 }

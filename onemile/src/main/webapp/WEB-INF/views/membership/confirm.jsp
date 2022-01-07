@@ -1,18 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<h1>결제할 상품 정보 확인</h1>
-<form action="${pageContext.request.contextPath}/pay/confirm" method="POST">
-<c:forEach var="membershipDTO" items="${list}">
-	<input type="hidden" name="mspNo" value="${membershipDTO.mspNo}">
-	<input type="hidden" name="partner_user_id" value="${sessionScope.logId}">
-	<input type="hidden" name="total_amount" value="${membershipDTO.mspPrice}">
-	<input type="hidden" name="item_name" value="${membershipDTO.mspProduct}">
+<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<h1>주문서 확인</h1>
+	${confirmVO.productNo} /
+	<input type="hidden" value="${sessionScope.logNo}">
+	<input type="hidden" value="${sessionScope.logId}">
+	<input type="hidden" value="${confirmVO.quantity}">
+	<input type="hidden" name="totalAmount" value="${confirmVO.price}">
+	<input type="hidden" value="${confirmVO.productName}">
+	<input type="hidden" name="type" value="정기">
+	
 	<div>
-		${membershipDTO.mspNo}	/ ${membershipDTO.mspProduct} / ${membershipDTO.mspPrice}
-	</div>
-<input type="submit" value="결제하기">
-</c:forEach>
-
+		${confirmVO.productNo}	/ ${confirmVO.productName} / ${confirmVO.price} / ${confirmVO.quantity}
+	</div> 
+	
+	
+	
+	
+	
+<form action="confirm" method="POST">
+	<input type="hidden" name="productNo" value="${confirmVO.productNo}">
+	<input type="hidden" name="quantity" value="${confirmVO.quantity}">
+	<button type="button" id="btn-submit" onclick="purchaseReservation()" class="wz primary button">결제하기</button>
 </form>

@@ -65,6 +65,8 @@ public class MemberController {
 			session.setAttribute("grade", findDTO.getGrade());
 			session.setAttribute("nick", findDTO.getNick());
 			
+			System.out.println("찾아라~~~~~~~~~~~~~~~~~~~~"+findDTO.getEmail());
+			
 			if(saveId != null) {//쿠키 생성
 				Cookie c = new Cookie("saveId", findDTO.getEmail());
 				c.setMaxAge(4 * 7 * 24 * 60 * 60);
