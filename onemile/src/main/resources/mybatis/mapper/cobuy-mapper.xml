@@ -104,12 +104,17 @@
 		from cbi where cobuy_no = #{cobuyNo})
 		order by image_no
 	</select>
-	<update id="modify" parameterType="CobuyModDTO">
+	<update id="modify" parameterType="CobuyVO">
 		update cobuy set TITLE=#{title},MIDDLE_NAME=#{middleName},
 			PRICE = #{price}, STOCK = #{stock} ,PNAME= #{pName},
 			DESCRIPT=#{descript}, DEADLINE =#{deadLine} 
 		WHERE COBUY_NO = #{cobuyNo} AND MEMBER_NO =#{memberNo}
 	</update>
+	
+	<select id="getforBuy" resultType="CobuyVO"
+		parameterType="ConfirmVO">
+		select * from cobuy where cobuy_no = #{cobuyNo} and stock >= #{quantity};
+	</select>
 </mapper>
 
 

@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.kh.onemile.entity.cobuy.CobuyModDTO;
 import com.kh.onemile.service.cobuy.CobuyService;
 import com.kh.onemile.vo.cobuy.CobuyDetailVO;
 import com.kh.onemile.vo.cobuy.CobuyListVO;
 import com.kh.onemile.vo.cobuy.CobuyRegVO;
+import com.kh.onemile.vo.cobuy.CobuyVO;
+import com.kh.onemile.vo.kakaopay.ConfirmVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -49,7 +51,6 @@ public class CobuyController {
 			log.debug(item.getPName());
 			System.out.println("---------------------------");
 			System.out.println(item.getPName());
-			
 		}
 		model.addAttribute("list", result);
 		
@@ -78,7 +79,7 @@ public class CobuyController {
 		return "detail";
 	}
 	@PostMapping("/modify")
-	public String postModify(@ModelAttribute CobuyModDTO cobuyModDTO,HttpSession session) throws IllegalStateException, IOException{
+	public String postModify(@ModelAttribute CobuyVO cobuyModDTO,HttpSession session) throws IllegalStateException, IOException{
 		int memNo = Integer.parseInt(String.valueOf(session.getAttribute("logNo")));
 		
 		if(memNo ==cobuyModDTO.getMemberNo()) {
@@ -87,10 +88,14 @@ public class CobuyController {
 		
 		return "redirect:detail?cobuyNo="+cobuyModDTO.getCobuyNo();
 	}
-
-	@RequestMapping("/upload")
-	public void uploadTest(@ModelAttribute CobuyDetailVO testVO) {
+	@RequestMapping("/confirm")
+	public String confirm(@ModelAttribute ConfirmVO confirmVO,RedirectAttributes redirectAttributes,HttpSession session) {
+		//상품명 ,  상품 가격 , 상품 수량 , 총 결제금액 , 
 		log.debug(" -------------------------------------------");
-		log.debug(testVO.toString());
+		int memNo = (int) session.getAttribute("logNo");
+		ConfirmVO confirmResultVO  =cobuyService.getConfirm(confirmVO,memNo);
+		redirectAttributes.addFlashAttribute("confirmVO", confirmResultVO);
+		log.debug(confirmVO.toString());
+		return "redirect:/pay/confirm";
 	}
 }

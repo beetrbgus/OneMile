@@ -1,11 +1,11 @@
-package com.kh.onemile.entity.cobuy;
+package com.kh.onemile.vo.cobuy;
 
 import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 import lombok.Data;
 
 @Data
-public class CobuyModDTO {
+public class CobuyVO {
 	private int cobuyNo ;
 	private String title;
 	private String middleName;
