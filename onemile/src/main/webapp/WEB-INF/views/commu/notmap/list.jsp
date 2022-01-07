@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <style>
 .more-btn {
@@ -37,13 +38,18 @@
 					}
 					for (var i = 0; i < resp.length; i++) {
 						var commuVo = resp[i];
+						var c = commuVo.imageNo != 0;
 						var divCol = "<ul>"
 							+ "<li>"
 								+ "<a class='article' href='detail?boardNo="
 								+ resp[i].commuNo
 								+ "'>"
 								+ "<div class='info'>"
-								+ "<div class='thumb' style='background-image: url(${pageContext.request.contextPath}/image/download?imageNo=${imageNo.imageNo}&folder=commu)'></div>"
+								+ "<div class='thumb'>";
+						if(c) {
+							divCol += "<img src='${pageContext.request.contextPath}/image/download?imageNo="+commuVo.imageNo+"&folder=commu'>";  
+							}   
+						divCol +="</div>"
 								+ "<h3 class='title'>" + commuVo.title
 								+ "</h3>" + "<span class='author'>"
 								+ commuVo.nick

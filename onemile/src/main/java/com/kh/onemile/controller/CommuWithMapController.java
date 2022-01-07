@@ -6,7 +6,6 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,10 +21,12 @@ import com.kh.onemile.service.reply.ReplyService;
 import com.kh.onemile.util.Sequence;
 import com.kh.onemile.vo.CommuDetailVO;
 import com.kh.onemile.vo.CommuVO;
-import com.kh.onemile.vo.ImageVO;
+
+import lombok.extern.slf4j.Slf4j;
 
 @RequestMapping("/commu")
 @Controller
+@Slf4j
 public class CommuWithMapController {
 
 	@Autowired
@@ -46,12 +47,11 @@ public class CommuWithMapController {
 	}
 	
 	@PostMapping("/map/write")
-	public String writeMatjip(@ModelAttribute CommuVO commuVo, @ModelAttribute ImageVO imageVo, HttpSession session) throws IllegalStateException, IOException {
+	public String writeMatjip(@ModelAttribute CommuVO commuVo, HttpSession session) throws IllegalStateException, IOException {
 		int memberNo = (int)session.getAttribute("logNo");
 		commuVo.setMemberNo(memberNo);
 		int commuNo = commuService.write(commuVo);
-		
-		return "redirect:commu/detail?boardNo="+commuNo;
+		return "redirect:/commu/map/detail?boardNo="+commuNo;
 	}
 	
 

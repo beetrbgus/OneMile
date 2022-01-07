@@ -21,7 +21,6 @@ import com.kh.onemile.service.reply.ReplyService;
 import com.kh.onemile.vo.CommuDetailVO;
 import com.kh.onemile.vo.CommuVO;
 import com.kh.onemile.vo.ImageVO;
-import com.kh.onemile.vo.reply.ReplyVO;
 
 @RequestMapping("/commu")
 @Controller
@@ -42,11 +41,11 @@ public class CommuController {
 	}
 	
 	@PostMapping("/notmap/write")
-	public String write(@ModelAttribute CommuVO commuVo, @ModelAttribute ImageVO imageVo, HttpSession session) throws IllegalStateException, IOException {
+	public String write(@ModelAttribute CommuVO commuVo, HttpSession session) throws IllegalStateException, IOException {
 		int memberNo = (int)session.getAttribute("logNo");
 		commuVo.setMemberNo(memberNo);
 		int commuNo = commuService.write(commuVo);
-		return "redirect:commu/notmap/detail?boardNo="+commuNo;
+		return "redirect:/commu/notmap/detail?boardNo="+commuNo;
 	}
 	
 	@GetMapping("/notmap/listdetail")
@@ -62,12 +61,7 @@ public class CommuController {
 	}
 	
 	@GetMapping("/notmap/list")
-	public String list(Model model){
-		/*
-		 * List<MemberMiddleImageDTO>
-		 * 
-		 * model.add("list",List<MemberMiddleImageDTO> )
-		 */
+	public String list(){
 		return "commu/notmap/list";
 	}
 	

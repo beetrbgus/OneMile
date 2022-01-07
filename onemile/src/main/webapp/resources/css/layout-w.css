@@ -212,7 +212,7 @@ a.CardType_projectCard__2NZXr {
     height: 48px
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .CardType_projectCard__2NZXr.CardType_cardTypePlanned__1uAVB .CardType_cardContent__oAaTz>.CardType_title__3SIcM {
         line-height: 28px;
         font-size: 21px
@@ -482,7 +482,7 @@ a.CardType_projectCard__2NZXr {
     left: 0
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .commons_content__2nu3V.commons_order__39EoM .commons_orderText__3rUi3 {
         line-height: 28px;
         font-size: 21px
@@ -1215,7 +1215,7 @@ html.commons_msie__Nokmt .commons_content__2nu3V .commons_title___qUBf:after {
     font-weight: 700
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .RegistAccountCompleteBox_container__3l8ou .RegistAccountCompleteBox_title__2djQE {
         line-height: 36px;
         font-size: 28px
@@ -1507,7 +1507,7 @@ body>#root {
     box-sizing: border-box
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .ModalWindow_closeWrap__UJIoM {
         padding: 16px 16px 8px
     }
@@ -1572,7 +1572,7 @@ body>#root {
     }
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .SNSMenu_right__u7jMl {
         left: 50%;
         transform: translateX(-50%)
@@ -1590,7 +1590,7 @@ body>#root {
     left: 16px
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .SNSMenu_left__1djAb {
         left: 50%;
         transform: translateX(-50%)
@@ -1675,7 +1675,7 @@ body>#root {
     left: 0
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .TextContent_content__Bj3lR.TextContent_order__3CXBM .TextContent_orderText__3o1F- {
         line-height: 28px;
         font-size: 21px
@@ -1823,7 +1823,7 @@ a.CardType_projectCard__3VxRw {
     color: rgba(0, 0, 0, .84)
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .title_title__26InF {
         line-height: 36px;
         font-size: 28px
@@ -1858,7 +1858,7 @@ a.CardType_projectCard__3VxRw {
     }
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .title_contentWrapper__3S-G7 {
         line-height: 20px;
         font-size: 15px;
@@ -1889,14 +1889,14 @@ a.CardType_projectCard__3VxRw {
     }
 }
 
-@media screen and (min-width:769px) and (min-width:1097px) {
+@media screen and (min-width:769px) and (min-width:1220px) {
     .title_contentWrapper__3S-G7.title_trend__cqtMi {
         line-height: 28px;
         font-size: 21px
     }
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .title_contentWrapper__3S-G7.title_trend__cqtMi {
         line-height: 20px;
         font-size: 15px;
@@ -1949,7 +1949,7 @@ a.CardType_projectCard__3VxRw {
     right: 100px
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .Search_container__cI4Cx {
         display: inline-block;
         position: static
@@ -1995,7 +1995,7 @@ a.CardType_projectCard__3VxRw {
     margin-top: 0
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .Search_container__cI4Cx .Search_btnSearch__35o0l {
         width: 56px;
         height: 56px
@@ -2013,7 +2013,7 @@ a.CardType_projectCard__3VxRw {
     height: 48px
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .NotificationButton_btnNotification__LNPY3 {
         width: 56px;
         height: 56px
@@ -2052,7 +2052,7 @@ a.CardType_projectCard__3VxRw {
     content: ""
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .NotificationButton_btnNotification__LNPY3 .NotificationButton_badge__3Co-R {
         top: 9px;
         left: 28px
@@ -2206,7 +2206,7 @@ a.CardType_projectCard__3VxRw {
     height: 100vh
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .NotificationList_container__Yrmqb {
         height: auto
     }
@@ -2222,7 +2222,7 @@ a.CardType_projectCard__3VxRw {
     overflow-y: scroll
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .NotificationList_container__Yrmqb .NotificationList_listContainer__c6Nxr {
         position: absolute;
         top: 0;
@@ -3225,7 +3225,7 @@ html.show-footer .GNBMobile_containerHidden__fdwOL {
     font-size: 24px
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .MoreMenuBanner_icon__1HFSa {
         display: inline-block;
         vertical-align: middle
@@ -3248,7 +3248,7 @@ html.show-footer .GNBMobile_containerHidden__fdwOL {
     font-weight: 700
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .MoreMenuBanner_badge__2aiTi {
         position: absolute;
         top: 50%;
@@ -3586,7 +3586,7 @@ html.show-footer .GNBMobile_containerHidden__fdwOL {
     padding-bottom: 8px
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .Header_logo__2P7Mx a {
         padding-bottom: 16px
     }
@@ -3642,7 +3642,7 @@ html.wadiz-app .web-header {
     top: 0
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .web-header {
         position: static
     }
@@ -3702,7 +3702,7 @@ html.wadiz-app .web-header {
     content: ""
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .web-header .web-header-mobile {
         display: none
     }
@@ -3712,7 +3712,7 @@ html.wadiz-app .web-header {
     display: none
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .web-header .web-header-large {
         display: block
     }
@@ -3734,7 +3734,7 @@ html.wadiz-app .web-header {
     }
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .web-header .header-wrapper {
         position: relative;
         border-bottom: 1px solid #f0f2f5;
@@ -3760,7 +3760,7 @@ html.wadiz-app .web-header {
     font-size: 32px
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .web-header .wadiz-logo {
         position: static
     }
@@ -3771,7 +3771,7 @@ html.wadiz-app .web-header {
     padding: 4px
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .web-header .wadiz-logo>a {
         padding: 4px
     }
@@ -3809,7 +3809,7 @@ html.wadiz-app .web-header {
     width: 100%
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .web-header .gnb-large {
         display: inline-block;
         position: relative;
@@ -3856,7 +3856,7 @@ html.wadiz-app .web-header {
     font-size: 10px
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .web-header .gnb-large .item {
         padding: 0 16px
     }
@@ -3889,7 +3889,7 @@ html.wadiz-app .web-header {
     color: #60656a
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .web-header .web-header-simple .header-container .gnb-large {
         display: block
     }
@@ -3916,7 +3916,7 @@ html.wadiz-app .web-header {
     vertical-align: top
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .web-header .web-header-utils {
         position: relative;
         float: right
@@ -4016,7 +4016,7 @@ html.wadiz-app .web-header {
     }
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .LinkMenu_right__L5Pop {
         left: 50%;
         transform: translateX(-50%)
@@ -4034,14 +4034,14 @@ html.wadiz-app .web-header {
     }
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .LinkMenu_left__2ZmXg {
         left: 50%;
         transform: translateX(-50%)
     }
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .LinkMenu_block__pKN3c {
         display: inline-block;
         margin-left: 40px;
@@ -4095,7 +4095,7 @@ html.wadiz-app .web-header {
     }
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .ContactMenu_right__2u_V5 {
         left: 50%;
         transform: translateX(-50%)
@@ -4113,7 +4113,7 @@ html.wadiz-app .web-header {
     left: 16px
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .ContactMenu_left__lCUv1 {
         left: 50%;
         transform: translateX(-50%)
@@ -4175,7 +4175,7 @@ html.wadiz-app .web-header {
     }
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .SNSMenu_right__Ifv-D {
         left: 50%;
         transform: translateX(-50%)
@@ -4193,7 +4193,7 @@ html.wadiz-app .web-header {
     left: 16px
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .SNSMenu_left__3_nnG {
         left: 50%;
         transform: translateX(-50%)
@@ -4245,7 +4245,7 @@ html.wadiz-app .web-header {
     text-align: left
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .FooterMenu_container__15kue {
         height: 56px
     }
@@ -4266,7 +4266,7 @@ html.wadiz-app .web-header {
     float: none
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .FooterMenu_bar__22KhW {
         margin: 8px auto;
         padding: 0 80px;
@@ -4295,7 +4295,7 @@ html.wadiz-app .web-header {
     -webkit-tap-highlight-color: transparent
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .FooterMenu_menu__3nRbk {
         margin-right: 24px;
         padding: 0 8px;
@@ -4336,7 +4336,7 @@ footer.no-bottom-padding .FooterInfo_container__229Pz {
     padding-bottom: 30px
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .FooterInfo_container__229Pz {
         padding: 0
     }
@@ -4346,7 +4346,7 @@ footer.no-bottom-padding .FooterInfo_container__229Pz {
     color: #7c8288 !important
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .FooterInfo_inner__29dOw {
         position: relative;
         margin: 0 auto;
@@ -4365,7 +4365,7 @@ footer.no-bottom-padding .FooterInfo_container__229Pz {
     margin-bottom: 16px
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .FooterInfo_infoSection__3yqPT {
         float: left;
         box-sizing: content-box;
@@ -4378,7 +4378,7 @@ footer.no-bottom-padding .FooterInfo_container__229Pz {
     margin-bottom: 24px
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .FooterInfo_firstInfoSection__11jAQ {
         margin-bottom: 0;
         width: calc(50% - 90px);
@@ -4386,7 +4386,7 @@ footer.no-bottom-padding .FooterInfo_container__229Pz {
     }
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .FooterInfo_secondInfoSection__1mq7x {
         padding-right: 20px;
         width: 50%;
@@ -4418,7 +4418,7 @@ footer.no-bottom-padding .FooterInfo_container__229Pz {
     vertical-align: middle
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .FooterInfo_sectionInner__2u_LK .FooterInfo_channelTalkBtn__2OkPb {
         line-height: 28px;
         letter-spacing: -.3px;
@@ -4442,20 +4442,20 @@ footer.no-bottom-padding .FooterInfo_container__229Pz {
     max-width: 320px
 }
 
-@media screen and (min-width:1097px) and (max-width:1341px) {
+@media screen and (min-width:1220px) and (max-width:1341px) {
     .FooterInfo_sectionInner__2u_LK .FooterInfo_callCenter__2k-Qa {
         margin-top: 12px
     }
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .FooterInfo_sectionInner__2u_LK .FooterInfo_callCenter__2k-Qa {
         display: inline-block;
         width: 295px
     }
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .FooterInfo_sectionInner__2u_LK {
         padding: 32px 0
     }
@@ -4570,7 +4570,7 @@ footer.no-bottom-padding .FooterInfo_container__229Pz {
     content: ""
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .FooterInfo_infoCorp__3hy4a .FooterInfo_infoCorpItem__1dKaV:not(:last-child):after {
         margin: 0 7px
     }
@@ -4594,7 +4594,7 @@ footer.no-bottom-padding .FooterInfo_container__229Pz {
     font-weight: 900
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .FooterInfo_copyright__802qi {
         margin-top: 0
     }
@@ -4608,7 +4608,7 @@ footer.no-bottom-padding .FooterInfo_container__229Pz {
     color: rgba(0, 0, 0, .84)
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .FooterInfo_mobileInfoSection__rxKd0 a {
         width: 120px
     }
@@ -4618,7 +4618,7 @@ footer.no-bottom-padding .FooterInfo_container__229Pz {
     margin-right: 8px
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .FooterInfo_mobileInfoSection__rxKd0 .FooterInfo_sectionInner__2u_LK {
         position: absolute;
         top: 30px
@@ -4631,7 +4631,7 @@ footer.no-bottom-padding .FooterInfo_container__229Pz {
     color: #90949c
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .FooterNotice_container__2mBPW {
         padding: 24px 16px 40px
     }
@@ -4647,7 +4647,7 @@ footer.no-bottom-padding .FooterInfo_container__229Pz {
     margin: 0 auto
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .FooterNotice_inner__2fITS {
         max-width: 1440px;
         text-align: center
@@ -4660,7 +4660,7 @@ footer.no-bottom-padding .FooterInfo_container__229Pz {
     font-weight: 700
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .FooterNotice_title__3c4-1 {
         display: inline-block;
         padding-right: 8px
@@ -4691,7 +4691,7 @@ footer.no-bottom-padding .FooterInfo_container__229Pz {
     -webkit-text-size-adjust: none
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .web-footer {
         padding-right: 15px;
         padding-left: 15px
@@ -6551,7 +6551,7 @@ label.Radio_radio__1HRmc.Radio_error__2W1Kq>.Radio_icon__22sdu {
     -moz-appearance: none
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .Tabs_tabs__3xNSw li {
         flex-shrink: 0;
         margin-right: 32px
@@ -7307,14 +7307,14 @@ label.Radio_radio__1HRmc.Radio_error__2W1Kq>.Radio_icon__22sdu {
     margin-top: 1px
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .MessageBox_messageBox__31hHu:not(.MessageBox_vertical__2uwET) .MessageBox_content__3CR_G {
         display: flex;
         align-items: baseline
     }
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .MessageBox_messageBox__31hHu:not(.MessageBox_vertical__2uwET) .MessageBox_title__3Dvqm {
         margin-right: 16px;
         margin-bottom: 0;
@@ -7821,7 +7821,7 @@ label.Radio_radio__1HRmc.Radio_error__2W1Kq>.Radio_icon__22sdu {
     color: #f25555
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .Toast_container__3cdqj {
         top: auto;
         bottom: 0;
@@ -7845,7 +7845,7 @@ label.Radio_radio__1HRmc.Radio_error__2W1Kq>.Radio_icon__22sdu {
     pointer-events: none
 }
 
-@media screen and (min-width:1097px) {
+@media screen and (min-width:1220px) {
     .ToastContainer_container__2objg {
         top: auto;
         bottom: 0;

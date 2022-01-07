@@ -24,8 +24,8 @@ public class CommuVO {
 	
 	//지도
 	private double lat;
-	private double lon;
-	private String detailaddress;
+	private double lng;
+	private String detailAddress;
 	
 	//이미지
 	private List<MultipartFile> attach;

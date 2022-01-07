@@ -13,5 +13,6 @@ public interface ImageService {
 	List<ImageDTO> listByBoardNo(int boardNo);
 	ImageDTO getImage(int imageNo);
 	ImageDownloadVO download(int imageNo, String folder) throws IOException;
+	List<ImageDTO> listByMenu(String middleName);
 
 }

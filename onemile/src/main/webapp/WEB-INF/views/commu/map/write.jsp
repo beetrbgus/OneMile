@@ -72,6 +72,11 @@ textarea {
 }
 </style>
 <script type="text/javascript"src="${root}/onemile/resources/js/commu-map.js"></script>
+<script>
+	$(function(){
+		
+	});
+</script>
 <div class="page-container">
 	<div class="ui-header">
 		<h2 class="title">커뮤니티</h2>
@@ -79,9 +84,9 @@ textarea {
 	<form action="write" method="post" enctype="multipart/form-data">
 		<select name="middleName" class="category">
 			<option value="" class="label category">카테고리 선택</option>
-			<option value="맛집" class="label category">동네맛집</option>
-			<option value="사건" class="label category">동네사건/사고</option>
-			<option value="얌얌" class="label category">얌세권</option>
+			<option value="동네맛집" class="label category">동네맛집</option>
+			<option value="동네사건사고" class="label category">동네 사건사고</option>
+			<option value="얌세권" class="label category">얌세권</option>
 		</select>
 		<textarea rows="1" maxlength="100" name="title" class="post-title"
 			placeholder="제목을 입력하세요."></textarea>
