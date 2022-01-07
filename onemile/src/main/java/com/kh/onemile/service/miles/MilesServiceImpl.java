@@ -4,10 +4,11 @@ import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.kh.onemile.entity.image.middle.MilesImgMidDTO;
-import com.kh.onemile.repository.image.middle.MilesImageDao;
+import com.kh.onemile.repository.image.middle.MiddleImageDAO;
 import com.kh.onemile.repository.miles.MilesDao;
 import com.kh.onemile.service.image.ImageService;
 import com.kh.onemile.util.Sequence;
@@ -26,8 +27,8 @@ public class MilesServiceImpl implements MilesService{
 	private MilesDao milesDao;
 	@Autowired
 	private ImageService imageService; //이미지 서비스
-	@Autowired
-	private MilesImageDao middleService; // 이미지 중간 테이블 서비스
+	@Autowired @Qualifier("miDAO")
+	private MiddleImageDAO middleImageDao; // 공동구매 중간 테이블
 	
 	//마일즈 생성
 	@Override

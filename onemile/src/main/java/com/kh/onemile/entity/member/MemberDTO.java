@@ -29,11 +29,10 @@ public class MemberDTO {
 	@DateTimeFormat(pattern="YYYY-MM-DD HH24:mm:ss")
 	private Date exitDate;
 	
+	public String getRealBirth() {
+		SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd"); 
+		String to = fmt.format(birth);
 	
-//	SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd"); 
-//	String to = fmt.format(this.getBirth());
-//		
-//	public String getRealBirth() {
-//		return to;
-//	}
+		return to;
+	}
 }

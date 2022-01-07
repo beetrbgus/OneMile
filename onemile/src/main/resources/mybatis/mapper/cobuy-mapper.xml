@@ -76,7 +76,7 @@
 		c.cobuy_no = cbi.cobuy_no
 		inner join
 		member m on m.member_no = c.member_no
-		where c.hiddenyn = 'N'
+		where c.hiddenyn = 'N' order by c.cobuy_no
 	</select>
 	<!-- 상세 조회 구문 (메인) 상품테이블 , 구매자 테이블, 회원테이블, 회원이미지 테이블,지도 -->
 	<select id="getDetail" parameterType="int"

@@ -1,17 +1,13 @@
 package com.kh.onemile.controller;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URLEncoder;
 import java.util.List;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,23 +15,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.kh.onemile.entity.image.ImageDTO;
-import com.kh.onemile.entity.image.middle.MemberProfileMidDTO;
 import com.kh.onemile.entity.member.MemberDTO;
 import com.kh.onemile.entity.member.certi.CertiDTO;
 import com.kh.onemile.entity.product.MembershipBuyDTO;
-import com.kh.onemile.repository.image.middle.MemberImageDao;
-import com.kh.onemile.repository.product.MembershipBuyDao;
-import com.kh.onemile.repository.product.MembershipDao;
-import com.kh.onemile.service.admin.AdminService;
-import com.kh.onemile.service.category.CategoryService;
+import com.kh.onemile.repository.membership.MembershipDao;
 import com.kh.onemile.service.email.EmailService;
-import com.kh.onemile.service.kakaopay.KakaoPayService;
 import com.kh.onemile.service.member.MemberService;
 import com.kh.onemile.vo.MemberJoinVO;
-import com.kh.onemile.vo.kakaopay.KakaoPayAutoPayMentInactiveResponseVO;
 
 @RequestMapping("/member")
 @Controller
@@ -44,8 +30,6 @@ public class MemberController {
 	private MemberService memberService;
 	@Autowired
 	private EmailService emailService;
-	@Autowired
-	private MemberImageDao memberImageDao;
 	@Autowired
 	private MembershipDao membershipDao;
 	
@@ -204,9 +188,9 @@ public class MemberController {
 		//회원정보 불러오기
 		MemberDTO memberDTO = memberService.profile(memberNo);
 		//회원이미지 불러오기
-		MemberProfileMidDTO memberProfileMidDTO = memberImageDao.get(memberNo);
+//		MemberProfileMidDTO memberProfileMidDTO = imageService.getImage(imageNo);
 		model.addAttribute("memberDTO",memberDTO);
-		model.addAttribute("memberProfileMidDTO",memberProfileMidDTO);
+//		model.addAttribute("memberProfileMidDTO",memberProfileMidDTO);
 		return "member/mypage";
 	}
 	

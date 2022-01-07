@@ -1,23 +1,30 @@
 package com.kh.onemile.repository.image.middle;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
-import com.kh.onemile.entity.image.middle.MilesImgMidDTO;
 
+import com.kh.onemile.entity.image.ImageDTO;
+import com.kh.onemile.entity.image.middle.MiddleImgTableDTO;
+
+@Qualifier("miDAO")
 @Repository
-public class MilesImageDaoImpl implements MilesImageDao{
+public class MilesImageDaoImpl implements MiddleImageDAO{
 
 	@Autowired
 	private SqlSession sqlSession;
-	
-	//마일지 이미지
-	@Override
-	public void reg(MilesImgMidDTO milesImgMidDto) {
-		for(int imgIdx : milesImgMidDto.getImgNoList()) {
-			milesImgMidDto.setImageNo(imgIdx); //이미지 번호를 한개씩 풀어줌
 
-			sqlSession.insert("mi.reg", milesImgMidDto);
-		}
+	@Override
+	public void reg(MiddleImgTableDTO middleImgTableDTO) {
+		sqlSession.insert("mi.reg", middleImgTableDTO);
 	}
+
+	@Override
+	public void delete(int milesNo) {
+		sqlSession.delete("mi.delete", milesNo);
+	}
+
 }

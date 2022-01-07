@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +17,7 @@ import com.kh.onemile.entity.member.certi.CertiDTO;
 import com.kh.onemile.entity.member.membership.AdDTO;
 import com.kh.onemile.entity.social.SocialBigCategoryDTO;
 import com.kh.onemile.repository.certi.CertiDao;
-import com.kh.onemile.repository.image.middle.MemberImageDao;
+import com.kh.onemile.repository.image.middle.MiddleImageDAO;
 import com.kh.onemile.repository.member.MemberDao;
 import com.kh.onemile.repository.member.membership.IsMembershipDao;
 import com.kh.onemile.service.admin.AdminService;
@@ -52,14 +53,16 @@ public class MemberServiceImpl implements MemberService {
 	private SetDefaut setDefault;
 	@Autowired
 	private AdminService adminService;
+	@Autowired @Qualifier("meiDAO")
+	private MiddleImageDAO middleImageDao; // 회원 이미지 중간 테이블
 	@Autowired
-	private MemberImageDao memberImageDao;
-	
+	private ImageService imageService;
+
 	// 회원가입
 	@Override
 	public void join(MemberJoinVO memberJoinVO) throws IllegalStateException, IOException {
 		setDefault.setMemberCoronaDefault(memberJoinVO.getCorona());
-		
+
 		// 비밀번호 암호화
 		String origin = memberJoinVO.getPw();
 		String encrypt = encoder.encode(origin);
@@ -68,18 +71,26 @@ public class MemberServiceImpl implements MemberService {
 		// 다음 회원번호 가져오기.
 		int memNo = seq.nextSequence(SEQID);
 		memberJoinVO.setMemberNo(memNo);
-		log.debug("가입한 회원번호   " + memNo);
+		
 		// 회원 테이블에 등록
 		memberDao.join(memberJoinVO);
+		// 회원 이미지 테이블에 등록
+		List<Integer> imgNoList = imageService.regImage(memberJoinVO.getAttach(), folderName);
+		// 회원 프로필 테이블에 등록.
+		MiddleImgTableDTO imgMidDTO = new MiddleImgTableDTO();
+		imgMidDTO.setConnTableNo(memNo); // 공구 상품 번호
+		
+		for (int imgNo : imgNoList) {
+			imgMidDTO.setImgNo(imgNo);
+			// 중간 이미지 테이블에 등록
+			middleImageDao.reg(imgMidDTO);
+			log.debug("등록 완료  cobuyImgMidDTO   " + imgMidDTO.toString());
+
+		}
 		// 승인 테이블 등록
 		adminService.regApproveMember(memNo);
-		//관심 카테고리 테이블 전송
+		// 관심 카테고리 테이블 전송
 		categoryService.insert(memberJoinVO, memNo);
-		
-		//중간 테이블 등록해야 함.
-		MiddleImgTableDTO middleImgTableDTO = new MiddleImgTableDTO();
-		
-		
 	}
 
 	// 로그인
@@ -161,7 +172,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public List<SocialBigCategoryDTO> getfavorite() {
-		
+
 		return categoryService.list();
 	}
 
