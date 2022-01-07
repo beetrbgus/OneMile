@@ -8,7 +8,9 @@
     #centerAddr {display:block;margin-top:2px;font-weight: normal;}
     .bAddr {padding:5px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
 </style>
+<br><br><br>
 <form id="cobuyform" method="post" enctype="multipart/form-data">
+	
 	<input type="file" name="attach" required accept="image/jpeg, image/png, image/jpg">
 	<input type="text" name="title" placeholder="공구의 제목을 입력해주세요." required>
 	<select name="middleName" >

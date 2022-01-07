@@ -61,7 +61,6 @@ public class MemberServiceImpl implements MemberService {
 	// 회원가입
 	@Override
 	public void join(MemberJoinVO memberJoinVO) throws IllegalStateException, IOException {
-		setDefault.setMemberCoronaDefault(memberJoinVO.getCorona());
 
 		// 비밀번호 암호화
 		String origin = memberJoinVO.getPw();
@@ -71,18 +70,20 @@ public class MemberServiceImpl implements MemberService {
 		// 다음 회원번호 가져오기.
 		int memNo = seq.nextSequence(SEQID);
 		memberJoinVO.setMemberNo(memNo);
-		
+
 		// 회원 테이블에 등록
 		memberDao.join(memberJoinVO);
-		// 회원 이미지 테이블에 등록
+		// 회원 이미지테이블에 등록
+		log.debug("memberJoinVO    "+memberJoinVO.toString());
 		List<Integer> imgNoList = imageService.regImage(memberJoinVO.getAttach(), folderName);
 		// 회원 프로필 테이블에 등록.
 		MiddleImgTableDTO imgMidDTO = new MiddleImgTableDTO();
-		imgMidDTO.setConnTableNo(memNo); // 공구 상품 번호
-		
+		imgMidDTO.setConnTableNo(memNo); // 회원 번호
+		log.debug("imgNoList   "+imgNoList.toString() );
 		for (int imgNo : imgNoList) {
 			imgMidDTO.setImgNo(imgNo);
 			// 중간 이미지 테이블에 등록
+			log.debug("멤버 서비스   imgMidDTO     "+imgMidDTO.toString());
 			middleImageDao.reg(imgMidDTO);
 			log.debug("등록 완료  cobuyImgMidDTO   " + imgMidDTO.toString());
 
