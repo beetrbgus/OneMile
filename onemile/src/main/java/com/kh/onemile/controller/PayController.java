@@ -1,28 +1,32 @@
 package com.kh.onemile.controller;
 
 import java.net.URISyntaxException;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.kh.onemile.entity.product.MembershipBuyDTO;
 import com.kh.onemile.repository.membership.MembershipBuyDao;
 import com.kh.onemile.service.kakaopay.KakaoPayService;
+import com.kh.onemile.vo.kakaopay.ConfirmVO;
 import com.kh.onemile.vo.kakaopay.KakaoPayApproveRequestVO;
 import com.kh.onemile.vo.kakaopay.KakaoPayApproveResponseVO;
-import com.kh.onemile.vo.kakaopay.KakaoPayAutoPayMentInactiveResponseVO;
 import com.kh.onemile.vo.kakaopay.KakaoPayReadyRequestVO;
 import com.kh.onemile.vo.kakaopay.KakaoPayReadyResponseVO;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 @RequestMapping("/pay")
 public class PayController {
@@ -31,16 +35,26 @@ public class PayController {
 	@Autowired
 	private MembershipBuyDao membershipBuyDao;
 
-	// 정기결제 준비 요청
-	@PostMapping("/confirm/{type}")
-	public String confirm(@PathVariable String type, @RequestParam int mspNo, @ModelAttribute KakaoPayReadyRequestVO requestVO,
+	// 결제 준비 요청
+	@RequestMapping("/confirm")
+	public String confirm(HttpServletRequest request, @ModelAttribute KakaoPayReadyRequestVO requestVO,
 			HttpSession session) throws URISyntaxException {
-		KakaoPayReadyResponseVO responseVO = kakaoPayService.regularReady(requestVO);
+		Map<String, ConfirmVO> confirm = (Map<String, ConfirmVO>)RequestContextUtils.getInputFlashMap(request);
+		ConfirmVO confirmVO = (ConfirmVO) confirm.get("confirmVO");
+		//cid 설정. 정기 TCSUB 단건 TC0
+		String cid= (confirmVO.getType().equals("정기"))?"TCSUBSCRIP":"TC0ONETIME";
+		
+		KakaoPayReadyResponseVO responseVO = kakaoPayService.regularReady(confirmVO);
 		session.setAttribute("tid", responseVO.getTid());
-		session.setAttribute("partner_user_id", requestVO.getPartner_user_id());
-		session.setAttribute("cid", "원마일");
-		session.setAttribute("mspNo", mspNo);
+		session.setAttribute("cid", cid);
+		session.setAttribute("productNo", confirmVO.getProductNo());
+		
+		log.debug("cid   "+ cid);
+		log.debug("tid   "+responseVO.getTid());
+		log.debug("productNo   "+confirmVO.getProductNo());
+
 		return "redirect:" + responseVO.getNext_redirect_pc_url();
+
 	}
 
 	// 카카오페이의 결제가 성공할 경우 다음과 같은 형태로 요청이 발생한다(카카오페이가 발생시키는 요청)
@@ -50,31 +64,43 @@ public class PayController {
 
 		// 변수에 세션값 담고 세션삭제
 		String tid = (String) session.getAttribute("tid");
-		String partnerUserId = (String) session.getAttribute("partner_user_id");
-		Integer mspNo = (int) session.getAttribute("mspNo");
+		String partnerUserId = (String) session.getAttribute("logId");
+		int productNo = (int) session.getAttribute("productNo");
 		int memberNo = (int) session.getAttribute("logNo");
+		String cid = (String) session.getAttribute("cid");
 
+		log.debug("partner_user_id   "+partnerUserId);
+		log.debug("cid   "+ cid);
+		log.debug("tid     "+tid);
+		log.debug("productNo   "+productNo);
+		log.debug("memberNo   "+memberNo);
+		
 		session.removeAttribute("tid");
-		session.removeAttribute("partner_user_id");
-		session.removeAttribute("mspNo");
+		session.removeAttribute("productNo");
+		session.removeAttribute("logNo");
+		session.removeAttribute("cid");
 
 		KakaoPayApproveRequestVO requestVO = new KakaoPayApproveRequestVO();
 		requestVO.setPartner_user_id(partnerUserId);
 		requestVO.setTid(tid);
 		requestVO.setPg_token(pg_token);
-		requestVO.setCid("TCSUBSCRIP");
+		requestVO.setCid(cid);
 
 		KakaoPayApproveResponseVO responseVO = new KakaoPayApproveResponseVO();
 		responseVO = kakaoPayService.approve(requestVO);
-
+		
+		if(cid.equals("TCSUBSCRIP")) {
 		// 결제가 완료된 시점 responseVO를 사용하여 membershipBuyDTO 테이블에 insert를 수행
-		MembershipBuyDTO membershipBuyDTO = new MembershipBuyDTO();
-		membershipBuyDTO.setSid(responseVO.getSid());// 정기결제 고유번호(SID)
-		membershipBuyDTO.setPartnerUserId(partnerUserId);
-		membershipBuyDTO.setTotalAmount(responseVO.getAmount().getTotal());
-		membershipBuyDTO.setMspNo(mspNo);
-		membershipBuyDTO.setMemberNo(memberNo);
-		membershipBuyDao.insert(membershipBuyDTO);
+			MembershipBuyDTO membershipBuyDTO = new MembershipBuyDTO();
+			membershipBuyDTO.setSid(responseVO.getSid());// 정기결제 고유번호(SID)
+			membershipBuyDTO.setPartnerUserId(partnerUserId);
+			membershipBuyDTO.setTotalAmount(responseVO.getAmount().getTotal());
+			membershipBuyDTO.setMspNo(productNo);
+			membershipBuyDTO.setMemberNo(memberNo);
+			membershipBuyDao.insert(membershipBuyDTO);
+		}else {
+			
+		}
 
 		return "redirect:success_result";
 	}
