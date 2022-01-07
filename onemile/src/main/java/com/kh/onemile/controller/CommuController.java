@@ -32,9 +32,6 @@ public class CommuController {
 	@Autowired
 	private ImageService imageService;
 	
-	@Autowired
-	private ReplyService replyService;
-	
 	@GetMapping("/notmap/write")
 	public String write() {
 		return "commu/notmap/write";
@@ -67,11 +64,29 @@ public class CommuController {
 	
 	@RequestMapping("/notmap/detail")
 	public String detail(@RequestParam int boardNo, Model model) throws IOException {
-		//조회 3번 (commu, reply, image)
 		model.addAttribute("commuDetailVO", commuService.detail(boardNo));
 		model.addAttribute("imageNoList", imageService.listByBoardNo(boardNo)); //boardNo로 imageNo list를 불러오는 거 만들기
-//		model.addAttribute("replyVOList", replyService.listByBoardNo(boardNo)); //boardNo로 댓글 찾아주는 거 만들기
 		
 		return "commu/notmap/detail";
+	}
+	
+	@GetMapping("/notmap/edit")
+	public String edit(@RequestParam int boardNo, Model model) throws IOException {
+		model.addAttribute("commuDetailVO", commuService.detail(boardNo));
+		model.addAttribute("imageNoList", imageService.listByBoardNo(boardNo));
+		
+		return "commu/notmap/edit";
+	}
+	
+	@PostMapping("/notmap/edit")
+	public String edit(@ModelAttribute CommuVO commuVo, HttpSession session) throws IllegalStateException, IOException {
+		int commuNo = commuService.edit(commuVo);
+		return "redirect:/commu/notmap/detail?boardNo="+commuNo;
+	}
+	
+	@RequestMapping("/notmap/delete")
+	public String delete(@RequestParam int boardNo) throws IOException {
+		commuService.hide(boardNo);
+		return "commu/notmap/list";
 	}
 }

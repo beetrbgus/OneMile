@@ -36,9 +36,6 @@ public class CommuWithMapController {
 	private ImageService imageService;
 	
 	@Autowired
-	private ReplyService replyService;
-	
-	@Autowired
 	private Sequence seq;
 	
 	@GetMapping("/map/write")

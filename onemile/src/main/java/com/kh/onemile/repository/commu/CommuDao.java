@@ -8,7 +8,7 @@ import com.kh.onemile.vo.CommuDetailVO;
 
 public interface CommuDao {
 	void write(CommuDTO commuDto);
-	boolean hide(String viewYN);
+	boolean hide(int boardNo);
 	List<CommuDetailVO> menuList(String middleName, int startRow, int endRow);
 	List<CommuDTO> List();
 	//CommuDTO detail(int commuNo);

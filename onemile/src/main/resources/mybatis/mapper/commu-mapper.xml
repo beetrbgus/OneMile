@@ -65,9 +65,9 @@
 	</update>
 	
 	<!-- 숨김처리 -->
-	<update id="hide">
-		update comu set
-			viewyn = #{viewYN}
+	<update id="hide" parameterType="int">
+		update commu set
+			viewyn = 'Y'
 		where commu_no = #{commuNo}
 	</update>
 </mapper>

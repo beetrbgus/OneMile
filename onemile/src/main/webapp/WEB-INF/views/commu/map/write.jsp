@@ -71,6 +71,10 @@ textarea {
 	font-size:22px;
 }
 </style>
+<script>
+var text=document.querySelector('#content').val();
+text=text.replace(/(?:\r\n|\r|\n)/g,'<br/>');
+</script>
 <div class="page-container">
 	<div class="ui-header">
 		<h2 class="title">커뮤니티</h2>
@@ -89,7 +93,7 @@ textarea {
 		<label class="label">상세주소 : </label><input class="form-input" type="text" name="detailAddress" placeholder="상세주소를 입력하세요.">
 		<input type="hidden" name="lat">
 		<input type="hidden" name="lng">
-		<textarea cols="100" rows="20" name="content" class="post-content"
+		<textarea cols="100" rows="20" id="content" name="content" class="post-content"
 		placeholder="내용을 입력하세요."></textarea>
 		<input type="file" name="attach" class="file-choose">
 		<input type="submit" value="등록하기" class="myButton">

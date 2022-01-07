@@ -20,7 +20,7 @@ public class CommuDetailVO {
 	private String content;
 	@DateTimeFormat(pattern="YYYY-MM-DD HH24:mm:ss")
 	private Date regDate;
-	public String getRegDate() {
+	private String getRegDate() {
 		Format f = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		return f.format(this.regDate);
 	}

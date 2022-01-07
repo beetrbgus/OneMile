@@ -60,7 +60,6 @@ public class CommuServiceImpl implements CommuService {
 		boolean isMap = lat != 0 && lng != 0; // map 좌표가 0이 아니면
 
 		if (isMap) { // 지도가 있으면
-			System.err.println("지도 실행");
 			MapDTO mapDto = new MapDTO();
 			
 			int mapNo = seq.nextSequence("map_seq");
@@ -73,7 +72,6 @@ public class CommuServiceImpl implements CommuService {
 			mapDao.regMap(mapDto);
 			
 			commuDto.setMapNo(mapNo);
-			System.err.println(commuDto.getMapNo());
 		}
 		commuDao.write(commuDto);
 
@@ -95,7 +93,7 @@ public class CommuServiceImpl implements CommuService {
 
 	// 수정하기
 	@Override
-	public void change(CommuVO commuVo) throws IllegalStateException, IOException {
+	public int edit(CommuVO commuVo) throws IllegalStateException, IOException {
 
 		// 게시글 Dto 설정
 		CommuDTO commuDto = new CommuDTO();
@@ -120,16 +118,17 @@ public class CommuServiceImpl implements CommuService {
 			mapDto.setMapNo(mapNo);
 			mapDto.setDetailAddress(commuVo.getDetailAddress());
 
-			mapDao.regMap(mapDto);
-			// commuDto.setMapNo(mapNo);
+			mapDao.modify(mapDto);
 		}
-		commuDao.write(commuDto);
+		commuDao.changeCommu(commuDto);
+		
+		return commuDto.getCommuNo();
 	}
 
 	// 숨김처리
 	@Override
-	public void hide(String viewYN) {
-		// TODO Auto-generated method stub
+	public void hide(int boardNo) {
+		commuDao.hide(boardNo);
 	}
 
 	// 카테고리별 리스트

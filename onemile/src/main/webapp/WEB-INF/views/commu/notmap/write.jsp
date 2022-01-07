@@ -60,6 +60,10 @@ textarea {
 	background-color:#dde2e6;
 }
 </style>
+<script>
+var text=document.querySelector('#content').val();
+text=text.replace(/(?:\r\n|\r|\n)/g,'<br/>');
+</script>
 <div class="page-container">
 	<div class="ui-header">
 		<h2 class="title">커뮤니티</h2>
@@ -73,7 +77,7 @@ textarea {
 		</select>
 		<textarea rows="1" maxlength="100" name="title" class="post-title"
 			placeholder="제목을 입력하세요."></textarea>
-		<textarea cols="100" rows="20" name="content" class="post-content"
+		<textarea cols="100" rows="20" id="content" name="content" class="post-content"
 			placeholder="내용을 입력하세요."></textarea>
 		<input type="file" name="attach" class="file-choose">
 		<input type="submit" value="등록하기" class="myButton">
