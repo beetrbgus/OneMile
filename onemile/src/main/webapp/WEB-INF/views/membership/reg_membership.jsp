@@ -4,7 +4,7 @@
 <c:set var="root" value="${pageContext.request.contextPath }"></c:set>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<h1>멤버십 구매 목록</h1>
+<h1>결제 내역</h1>
 
 <form action="confirm" method="get">
 <c:forEach var="membershipBuyDTO" items="${list}">

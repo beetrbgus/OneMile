@@ -79,17 +79,14 @@
 			<if test="nick != null">
 				nick = #{nick},
 			</if>
-			<if test="memberBirth != null">
-				member_birth = #{memberBirth},
-			</if>
 			<if test="phone != null">
 				phone = #{phone},
 			</if>
 			<if test="birth != null">
-				birth = #{birth},
+				birth = to_date(#{birth}, 'YYYY-MM-DD'),
 			</if>
-			
 		</set>
 		where member_no = #{memberNo}
 	</update>
+	
 </mapper>

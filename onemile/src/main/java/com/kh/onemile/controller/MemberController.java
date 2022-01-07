@@ -1,8 +1,6 @@
 package com.kh.onemile.controller;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.kh.onemile.entity.member.MemberDTO;
 import com.kh.onemile.entity.member.certi.CertiDTO;
-import com.kh.onemile.entity.product.MembershipBuyDTO;
-import com.kh.onemile.repository.membership.MembershipDao;
 import com.kh.onemile.service.email.EmailService;
 import com.kh.onemile.service.member.MemberService;
 import com.kh.onemile.vo.MemberJoinVO;
@@ -30,8 +26,6 @@ public class MemberController {
 	private MemberService memberService;
 	@Autowired
 	private EmailService emailService;
-	@Autowired
-	private MembershipDao membershipDao;
 	
 	//회원가입
 	@GetMapping("/join")
@@ -206,6 +200,7 @@ public class MemberController {
 	public String edit(@ModelAttribute MemberDTO memberDTO, HttpSession session) {
 		int memberNo = (int)session.getAttribute("logNo");
 		memberDTO.setMemberNo(memberNo);
+		System.out.println("멤버변경 찾기"+memberDTO);
 		boolean result = memberService.changeInformation(memberDTO);
 		if(result) {
 			return "redirect:edit_success";
@@ -214,12 +209,5 @@ public class MemberController {
 			return "redirect:edit?error";
 		}
 	}
-	//구매한 멤버십 목록
-	@GetMapping("reg_membership")
-	public String membershipList(Model model, HttpSession session) {
-		int memberNo = (int)session.getAttribute("logNo");
-		List<MembershipBuyDTO> membershipBuyDTO = membershipDao.joinMembership(memberNo);
-		model.addAttribute("list",membershipBuyDTO);
-		return "member/reg_membership";
-	}
+	
 }

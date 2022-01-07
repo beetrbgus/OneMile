@@ -1,23 +1,26 @@
 package com.kh.onemile.repository.membership;
 
 import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.onemile.entity.product.MembershipBuyDTO;
 import com.kh.onemile.entity.product.MembershipDTO;
+import com.kh.onemile.vo.membership.MembershipListVO;
 
 @Repository
 public class MembershipDaoImpl implements MembershipDao{
 	@Autowired
 	private SqlSession sqlSession;
 	
-	//멤버십 상품 리스트
+	//멤버십 상품 리스트(혜택포함)
 	@Override
-	public List<MembershipDTO> list() {
+	public List<MembershipListVO> list() {
 		return sqlSession.selectList("membership.membershipList");
 	}
+	
 	//결제 상품 정보 확인
 	@Override
 	public List<MembershipDTO> search(int mspNo) {

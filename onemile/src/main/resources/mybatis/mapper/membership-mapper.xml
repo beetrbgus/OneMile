@@ -4,9 +4,8 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="membership">
 	<!-- 멤버십 상품 목록 -->
-	<select id="membershipList" resultType="MembershipDTO">
-		 select * from msp
-	<!-- select msp.*, ad.* from msp inner join ad on msp.msp_no = ad.msp_no-->
+	<select id="membershipList" resultType="MembershipListVO">
+		select * from msp m inner join ad a on a.msp_no = m.msp_no
 	</select>
 	
 	<!-- 결제 상품 확인(단일 조회) -->

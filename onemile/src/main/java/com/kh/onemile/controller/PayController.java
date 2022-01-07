@@ -37,7 +37,7 @@ public class PayController {
 	public String groupConfirm(@RequestParam int productNo, @ModelAttribute KakaoPayReadyRequestVO requestVO,
 			HttpSession session) throws URISyntaxException {
 		KakaoPayReadyResponseVO responseVO = kakaoPayService.ready(requestVO);
-
+		
 		session.setAttribute("tid", responseVO.getTid());
 		session.setAttribute("partner_user_id", requestVO.getPartner_user_id());
 		session.setAttribute("productNo", productNo);
