@@ -24,11 +24,13 @@
 	<!-- 상세조회 -->
 	<select id="detail" parameterType="int" resultType="CommuDetailVO">
 		select 
-				co.*, cmc.large_name, me.nick, map.lat, map.lng, map.detailaddress
+            co.*, cmc.large_name, me.nick, map.lat, map.lng, map.detailaddress, img.image_no
 		from
 				commu co left join cmc cmc on co.middlename = cmc.middle_name
 				left join member me on co.member_no = me.member_no
 				left join map map on co.map_no = map.map_no
+                left join mei mei on co.member_no = mei.member_no
+                left join image img on img.image_no = mei.image_no
 		where
 				commu_no = #{commuNo}
 	</select>
