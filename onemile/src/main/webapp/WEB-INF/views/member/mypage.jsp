@@ -82,7 +82,6 @@
 						<tr>
 							<th>생년월일</th>
 							<td>${memberDTO.birth}</td>
-							<input id="birth"  type="date" value="${memberDTO.birth}">
 						</tr>
 						
 						<tr>

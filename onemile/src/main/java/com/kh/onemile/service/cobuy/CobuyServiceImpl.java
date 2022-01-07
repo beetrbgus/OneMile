@@ -14,6 +14,7 @@ import com.kh.onemile.repository.cobuy.CobuyDao;
 import com.kh.onemile.repository.image.middle.MiddleImageDAO;
 import com.kh.onemile.service.image.ImageService;
 import com.kh.onemile.service.map.MapService;
+import com.kh.onemile.util.DateToString;
 import com.kh.onemile.util.Sequence;
 import com.kh.onemile.vo.cobuy.CobuyDetailVO;
 import com.kh.onemile.vo.cobuy.CobuyListVO;
@@ -42,22 +43,12 @@ public class CobuyServiceImpl implements CobuyService {
 	private MapService mapService;
 	@Autowired
 	private Sequence seq;
-
+	@Autowired
+	private DateToString dateToString;
 	@Override
 	public int reg(CobuyRegVO cobuyRegVO) throws IllegalStateException, IOException {
 		int cbNo = seq.nextSequence(seqName); // 공동구매 상품 번호
-		MiddleImgTableDTO imgMidDTO = new MiddleImgTableDTO();
-		imgMidDTO.setConnTableNo(cbNo); // 공구 상품 번호
-
-		List<Integer> imgNoList = imageService.regImage(cobuyRegVO.getAttach(), folderName);
-		for (int imgNo : imgNoList) {
-			// 연결 테이블
-			imgMidDTO.setImgNo(imgNo);
-			// 중간 이미지 테이블에 등록
-			middleImageDao.reg(imgMidDTO);
-			log.debug("등록 완료  cobuyImgMidDTO   " + imgMidDTO.toString());
-
-		}
+		
 		// 지도 등록
 		MapDTO mapDTO = new MapDTO();
 		mapDTO.setLat(cobuyRegVO.getLat());
@@ -70,6 +61,18 @@ public class CobuyServiceImpl implements CobuyService {
 		cobuyRegVO.setMapNo(mapNo);
 		cobuyRegVO.setCobuyNo(cbNo);
 		cobuyDao.reg(cobuyRegVO);
+		
+		MiddleImgTableDTO imgMidDTO = new MiddleImgTableDTO();
+		imgMidDTO.setConnTableNo(cbNo); // 공구 상품 번호
+		
+		List<Integer> imgNoList = imageService.regImage(cobuyRegVO.getAttach(), folderName);
+		for (int imgNo : imgNoList) {
+			// 연결 테이블
+			imgMidDTO.setImgNo(imgNo);
+			// 중간 이미지 테이블에 등록
+			middleImageDao.reg(imgMidDTO);
+			log.debug("등록 완료  cobuyImgMidDTO   " + imgMidDTO.toString());
+		}
 
 		return cbNo;
 	}
@@ -81,7 +84,9 @@ public class CobuyServiceImpl implements CobuyService {
 
 	@Override
 	public CobuyDetailVO getDetail(int cobuyNo) {
-		return cobuyDao.detail(cobuyNo);
+		CobuyDetailVO result = cobuyDao.detail(cobuyNo);
+		result.setDeadLinestr(dateToString.dateToString(result.getDeadLine()));
+		return result;
 	}
 
 	@Override

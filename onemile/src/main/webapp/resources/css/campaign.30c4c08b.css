@@ -17065,7 +17065,7 @@ forward "strip-unit ";@forward "color ";@forward "em ";@forward "max
 
 .reward-not-story .slick-prev, .reward .slick-prev {
 	left: 0;
-	background: url(/assets/slick/btn_bn_arrow_l.png) no-repeat 0 0
+	background: url(/assets/btn_bn_arrow_l.png) no-repeat 0 0
 }
 
 .reward-not-story :global (html.focus-input ) .campaign-action-container,

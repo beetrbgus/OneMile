@@ -56,8 +56,8 @@ public class ImageController {
 //		if (attach.isEmpty()) {
 //			throw new FileNotFoundException("업로드된 파일이 존재하지 않습니다");
 //		}
-////		int imageNo = imageService.regImage(attach, folder);
+//		int imageNo = imageService.regImage(attach, folder);
 //
-////		return imageNo;
+//		return imageNo;
 //	}
 }

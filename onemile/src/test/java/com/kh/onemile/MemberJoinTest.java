@@ -42,7 +42,6 @@ public class MemberJoinTest {
 			memberDTO.setBirth(a);
 			memberDTO.setMbti("INFP");
 			memberDTO.setIntro(" 1");
-			memberDTO.setCorona("Y");
 			memberDTO.setGender("남자");
 			memberService.join(memberDTO);
 		} catch (Exception e) {

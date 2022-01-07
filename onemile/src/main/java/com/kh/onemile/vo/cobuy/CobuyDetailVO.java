@@ -1,12 +1,15 @@
 package com.kh.onemile.vo.cobuy;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
-import com.kh.onemile.entity.image.ImageDTO;
+
 import com.kh.onemile.vo.reply.ReplyVO;
+
 import lombok.Data;
 
 @Data
@@ -23,6 +26,7 @@ public class CobuyDetailVO {
 	private Date regDate;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date deadLine;
+	private String deadLinestr;
 	private String descript;
 	private String pName;
 	
@@ -35,7 +39,7 @@ public class CobuyDetailVO {
 	private int memberImageNo;
 	
 	private int imageNo;
-	private List<ImageDTO> imageList; //가져올 때 이미지 번호들
+	private List<Integer> imageList; //가져올 때 이미지 번호들
 	private List<ReplyVO> replyList;
 	private int customerCnt;
 	private int stock;
