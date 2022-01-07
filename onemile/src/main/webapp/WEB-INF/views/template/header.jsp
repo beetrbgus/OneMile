@@ -20,7 +20,10 @@
     <script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/sha1.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" ></script>
-	<script src="${pageContext.request.contextPath}/resources/js/join.js" ></script>
+    <script src="${pageContext.request.contextPath}/resources/js/join.js" ></script>
+
+	<link rel="stylesheet" href="${root}/resources/css/10.458392b3.chunk.css">
+	<link rel="stylesheet" href="${root}/resources/css/2.680dde46.chunk.css">
 	<link rel="stylesheet" href="${root}/resources/css/board.ace40453.css">
 	<link rel="stylesheet" href="${root}/resources/css/campaign.30c4c08b.css">
 	<link rel="stylesheet" href="${root}/resources/css/commons-w.css">
@@ -29,6 +32,7 @@
 	<link rel="stylesheet" href="${root}/resources/css/layout-w.css">
 	<link rel="stylesheet" href="${root}/resources/css/main.19e53e7f.css">
 	<link rel="stylesheet" href="${root}/resources/css/main.3208b694.css">
+	<link rel="stylesheet" href="${root}/resources/css/main.d00f8dbd.css">
 	<link rel="stylesheet" href="${root}/resources/css/main.e49dc743.css">
 	<link rel="stylesheet" href="${root}/resources/css/mobile-w.css">
 	<link rel="stylesheet" href="${root}/resources/css/partners.e0da7bd4.css">
@@ -49,7 +53,51 @@
 	width:80px;
 	text-align:center;
 }
+.onemile-logo{
+	padding:4px;
+}
+.dark{
+	opacity: 1;
+    pointer-events: all;
+}
 </style>
+<script>
+$(function () {
+    //메뉴 ajax
+        $.ajax({
+            url: "${root}/menu/",
+            type: "post",
+            data: {},
+            success: function (resp) {
+            	console.log(resp);
+            	
+            	for(var i = 0; i<resp.length; i++){
+            		var menuDto = resp[i];
+            		
+            		var divBig =
+            			"<div class='MenuList_container__3ofD- MoreMenuDesktop_moreMenuList__11cPX'><h4 class='MenuList_label__qSsts'>"+
+            			menuDto.largeName+
+            			"</h4>";
+            		for(var k =0; k<menuDto.middleDTO.length; k++){
+            			var middleDto = menuDto.middleDTO[k];
+
+                		divBig += "<a class='MenuListItem_button__8-ecU' href='${root}"+menuDto.mainPath+middleDto.urlPath+"'>"+
+                			middleDto.middleName+"<i class='icon chevron-rigth' aria-hidden='true'></i></a>";
+                	}
+            			divBig += "</div>"
+            			$(".MoreMenuDesktop_innerContainer__xecjO").append(divBig);
+                }
+            	
+            },
+            error: function (err) {}
+        });
+    
+    $(".GNBDesktop_more__39gyV").click(function(){
+    	$(".Backdrop_backDrop__3v5kD").toggleClass("dark")
+    	$(".MoreMenuDesktop_container__1I6Al").toggleClass("MoreMenuDesktop_active__3wtR4");
+    });
+    });
+</script>
 <body>
 	<div id="page-container"> 
 		<div class="black-bg-wrap" style="display: none;"></div>
@@ -59,7 +107,7 @@
 					<header class="header-wrapper">
 						<div class="header-container">
 							<h1 class="wadiz-logo">
-								<a href="/onemile"><span class="label">원마일</span>
+								<a href="/onemile" class="onemile-logo"><span class="label">원마일</span>
 								 	<img src="${root}/resources/image/OM_logo.jpg" width="48" height="48" viewBox="0 0 85 25">
 										<path fill="#1D2129" fill-rule="nonzero"
 											d="M58.49 2.23h2.11v21.29H59a1.73 1.73 0 0 1-1.62-1.16 9 9 0 0 1-10.93-.28 7.48 7.48 0 0 1-2.75-6.29 7.65 7.65 0 0 1 12.79-5.07V4.23a2 2 0 0 1 2-2zm-6.3 18.62a4.36 4.36 0 0 0 4.16-4.52 4.19 4.19 0 1 0-8.35 0 4.36 4.36 0 0 0 4.19 4.52zM42 23.52h-1.52a1.73 1.73 0 0 1-1.64-1.16 9 9 0 0 1-10.93-.28 7.48 7.48 0 0 1-2.75-6.29A7.65 7.65 0 0 1 38 10.72a2 2 0 0 1 1.9-1.79H42v14.59zm-8.41-2.67h.02a4.35 4.35 0 0 0 4.15-4.52 4.35 4.35 0 0 0-4.17-4.51 4.35 4.35 0 0 0-4.17 4.51 4.36 4.36 0 0 0 4.17 4.52zM83.47 8.94v2.11l-7.07 9.06h7.06v3.47h-13v-2.1l7.08-9.07h-6.62v-1.47a2 2 0 0 1 2-2h10.55zM65.86 7.3a2.48 2.48 0 1 1 0-4.96 2.48 2.48 0 0 1 0 4.96zM21.21 8.94h4.14l-4.86 14.59h-4.15l-3.21-9.36-3.21 9.36H5.77L.92 8.94h4.13L8 18l2.5-7.74a2 2 0 0 1 1.86-1.34h2.9l3 9.08 2.95-9.06zm42.65 14.59l-.04-12.59a2 2 0 0 1 2-2h2.11v14.59h-4.07z">
@@ -145,11 +193,11 @@
 								<li class="GNBDesktop_item__H8bay confirmbtn GNBDesktop_link__1AP6q"><span>동네인증</span></li>
 								<li class="GNBDesktop_item__H8bay GNBDesktop_link__1AP6q"><input type="text" class="dong"></li>
 								<li class="GNBDesktop_item__H8bay"><a class="GNBDesktop_link__1AP6q"
-										href="/web/wreward/comingsoon"><span>펀딩예정</span></a></li>
+										href="/web/wreward/comingsoon"><span>마일즈</span></a></li>
 								<li class="GNBDesktop_item__H8bay"><a class="GNBDesktop_link__1AP6q"
-										href="/web/wreward/main"><span>펀딩하기</span></a></li>
+										href="/web/wreward/main"><span>소셜링</span></a></li>
 								<li class="GNBDesktop_item__H8bay"><a href="/web/store/main"
-										class="GNBDesktop_link__1AP6q"><span>구매하기</span></a></li>
+										class="GNBDesktop_link__1AP6q"><span>공동구매</span></a></li>
 								<li class="GNBDesktop_item__H8bay">
 									<div>
 										<button class="GNBDesktop_link__1AP6q GNBDesktop_more__39gyV">
@@ -159,98 +207,12 @@
 												<path d="M28 20L15 33l-1.4-1.4L25.2 20 13.6 8.4 15 7l13 13z"></path>
 											</svg>
 										</button>
-										<div class="MoreMenuDesktop_container__1I6Al" role="navigation">
+										<div class="MoreMenuDesktop_container__1I6Al" role="navigation" id="navigation">
 											<div class="MoreMenuDesktop_innerContainer__xecjO">
-												<div class="MoreMenuDesktop_bannerContainer__2XDgI">
-													<div class="MoreMenuBanner_container__320Tc" tabindex="0"
-														style="background-color: rgb(239, 243, 253);">
-														<div class="MoreMenuBanner_icon__pjjkW">
-															<i class="icon invest-o" aria-hidden="true"></i>
-														</div>
-														<div class="MoreMenuBanner_text__16n5f">
-															<div class="MoreMenuBanner_label__1i2Cx">투자하기</div>
-															<span
-																class="Badge_container__3ioDw Badge_visible__n2Hg1 MoreMenuBanner_badge__vO6gM"><span
-																	class="Badge_badge__2h6cT Badge_label__VC3QR Badge_sm__1ia4P Badge_info__2ivul Badge_circular__nBLvt Badge_contained__Q3unx">진행
-																	중</span></span>
-														</div>
-													</div>
-													<div class="MoreMenuBanner_container__320Tc" tabindex="0"
-														style="background-color: rgb(230, 246, 255);">
-														<div class="MoreMenuBanner_icon__pjjkW">
-															<i class="icon startup-o" aria-hidden="true"></i>
-														</div>
-														<div class="MoreMenuBanner_text__16n5f">
-															<div class="MoreMenuBanner_label__1i2Cx">스타트업 찾기</div>
-															<span
-																class="Badge_container__3ioDw MoreMenuBanner_badge__vO6gM"></span>
-														</div>
-													</div>
-												</div>
-												<div
-													class="MenuList_container__3ofD- MoreMenuDesktop_moreMenuList__11cPX">
-													<h4 class="MenuList_label__qSsts">바로 가기</h4>
-													<a href="/web/wsub/openfunding"
-														class="MenuListItem_button__8-ecU">와디즈 메이커 시작하기<i
-															class="icon chevron-right" aria-hidden="true"></i></a><a
-														href="https://fundingmate.wadiz.kr"
-														class="MenuListItem_button__8-ecU">펀딩메이트<i
-															class="icon chevron-right" aria-hidden="true"></i></a><a
-														href="/web/school/main" class="MenuListItem_button__8-ecU">와디즈
-														스쿨<i class="icon chevron-right" aria-hidden="true"></i>
-													</a><a href="/web/wcast/main"
-														class="MenuListItem_button__8-ecU">캐스트<i
-															class="icon chevron-right" aria-hidden="true"></i></a><a
-														href="http://help.wadiz.kr/"
-														class="MenuListItem_button__8-ecU">이용 가이드<i
-															class="icon chevron-right" aria-hidden="true"></i></a><a
-														href="/web/supporter-club/intro"
-														class="MenuListItem_button__8-ecU">서포터클럽 멤버십<i
-															class="icon chevron-right" aria-hidden="true"></i></a>
-												</div>
-												<div
-													class="MenuList_container__3ofD- MoreMenuDesktop_moreMenuList__11cPX">
-													<h4 class="MenuList_label__qSsts">와디즈 소개</h4>
-													<a href="https://blog.wadiz.kr"
-														class="MenuListItem_button__8-ecU">와디즈 블로그<i
-															class="icon chevron-right" aria-hidden="true"></i></a><a
-														href="/web/wsub/wadizstory"
-														class="MenuListItem_button__8-ecU">와디즈 이야기<i
-															class="icon chevron-right" aria-hidden="true"></i></a><a
-														href="https://spacewadiz.com"
-														class="MenuListItem_button__8-ecU">공간 와디즈<i
-															class="icon chevron-right" aria-hidden="true"></i></a><a
-														href="/web/wpartner/main" class="MenuListItem_button__8-ecU">와디즈
-														파트너<i class="icon chevron-right" aria-hidden="true"></i></a><a
-														href="/web/wpage/makerAwards"
-														class="MenuListItem_button__8-ecU">와디즈 어워즈<i
-															class="icon chevron-right" aria-hidden="true"></i></a><a
-														href="/web/wsub/successstory"
-														class="MenuListItem_button__8-ecU">성공 프로젝트<i
-															class="icon chevron-right" aria-hidden="true"></i></a>
-												</div>
-												<div
-													class="MenuList_container__3ofD- MoreMenuDesktop_moreMenuList__11cPX">
-													<h4 class="MenuList_label__qSsts">공지</h4>
-													<a href="/web/wboard/newsBoardList"
-														class="MenuListItem_button__8-ecU">공지 사항<i
-															class="icon chevron-right" aria-hidden="true"></i></a><a
-														href="/web/wboard/newsBoardList/2"
-														class="MenuListItem_button__8-ecU">이벤트<span
-															class="NewBadge_badge__28THw">New</span><i
-															class="icon chevron-right" aria-hidden="true"></i></a><a
-														href="https://www.wadiz.kr/link/wadiznews"
-														class="MenuListItem_button__8-ecU">보도 자료<i
-															class="icon chevron-right" aria-hidden="true"></i></a><a
-														href="https://job.wadiz.kr/"
-														class="MenuListItem_button__8-ecU">채용<i
-															class="icon chevron-right" aria-hidden="true"></i></a>
-												</div>
+												
 											</div>
 										</div>
-										<div
-											class="Backdrop_backDrop__3v5kD Backdrop_dimmed__23l4b GNBDesktop_backdrop__3h5Cq">
-										</div>
+										<div class="Backdrop_backDrop__3v5kD Backdrop_dimmed__23l4b GNBDesktop_backdrop__3h5Cq"></div>
 									</div>
 								</li>
 							</ul>

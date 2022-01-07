@@ -48,7 +48,7 @@ public class ImageController {
 				.contentLength(imageDTO.getFileSize())
 				.body(resource);
 	}
-//
+
 //	// 파일 업로드
 //	@PostMapping("/upload")
 //	public int data9(@RequestParam MultipartFile attach, @RequestParam String folder)
@@ -56,8 +56,8 @@ public class ImageController {
 //		if (attach.isEmpty()) {
 //			throw new FileNotFoundException("업로드된 파일이 존재하지 않습니다");
 //		}
-////		int imageNo = imageService.regImage(attach, folder);
+//		int imageNo = imageService.regImage(attach, folder);
 //
-////		return imageNo;
+//		return imageNo;
 //	}
 }

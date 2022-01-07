@@ -461,7 +461,12 @@ function lengCheck() {
 					<option value="ENTJ">ENTJ</option>
 				</select>
 			</div>
-			
+
+			<div class="row">
+				<label>코로나 백신접종여부</label> <input type="file" name="corona"
+					accept="image/*" class="form-input">
+			</div>
+
 			<button type="button" class="form-btn prev">이전 단계로</button>
 			<div class="row">
 				<input type="submit" value="가입" class="form-btn">

@@ -113,6 +113,7 @@ public class PayController {
 
 			productBuyDao.insert(productBuyDTO);
 		}
+
 		return "redirect:success_result";
 	}
 
