@@ -14,7 +14,7 @@
 <!-- Added by HTTrack -->
 <head>
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b89479d3bf4f702a0c7b99d5edfb1391&libraries=services" charset="utf-8"></script> 
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b89479d3bf4f702a0c7b99d5edfb1391&libraries=services&autoload=false" charset="utf-8"></script> 
     <script type="text/javascript"src="${root}/resources/js/navigator.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.2/sockjs.min.js"></script>
     <script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
@@ -69,7 +69,6 @@ $(function () {
             type: "post",
             data: {},
             success: function (resp) {
-            	console.log(resp);
             	
             	for(var i = 0; i<resp.length; i++){
             		var menuDto = resp[i];
@@ -121,7 +120,7 @@ $(function () {
 							<ul class="GNBMobile_container__1OTMW">
 								<li class="GNBMobile_item__1b4ZL"><a aria-current="page"
 										class="GNBMobile_link__t1Y9t GNBMobile_active__3WNf8 GNBMobile_active__3WNf8"
-										href="/web/main">
+										href="${root}/">
 										<div class="GNBMobile_icon__3OOAF GNBMobile_active__3WNf8"
 											style="background-image: url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGc+CiAgICAgICAgICAgIDxnPgogICAgICAgICAgICAgICAgPHBhdGggZD0iTTAgMEgyNFYyNEgweiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTQ3NjggLTE5ODUpIHRyYW5zbGF0ZSg0NzY4IDE5ODUpIi8+CiAgICAgICAgICAgICAgICA8cGF0aCBmaWxsPSIjMjEyNTI5IiBkPSJNMTIgMS41NDJMMS45OCA4LjMxNiAxLjk4IDIxLjYgOS40MzggMjEuNiA5LjQzOCAxMy4yNiAxNC41NjIgMTMuMjYgMTQuNTYyIDIxLjYgMjIuMDIgMjEuNiAyMi4wMiA4LjMxNnoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC00NzY4IC0xOTg1KSB0cmFuc2xhdGUoNDc2OCAxOTg1KSIvPgogICAgICAgICAgICA8L2c+CiAgICAgICAgPC9nPgogICAgPC9nPgo8L3N2Zz4K&quot;);">
 										</div>
@@ -132,14 +131,14 @@ $(function () {
 										<div class="GNBMobile_icon__3OOAF"
 											style="background-image: url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGc+CiAgICAgICAgICAgIDxnPgogICAgICAgICAgICAgICAgPHBhdGggZD0iTTAgMEgyNFYyNEgweiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTQ5MDggLTE5ODUpIHRyYW5zbGF0ZSg0OTA4IDE5ODUpIi8+CiAgICAgICAgICAgICAgICA8cGF0aCBmaWxsPSIjODY4RTk2IiBkPSJNMTIgMi4yNWMyLjQ4NiAwIDQuNzY4Ljg3NyA2LjU1MyAyLjMzOGwxLjI4LTEuNDc5IDEuMTM0Ljk4Mi0xLjMyNCAxLjUzYzEuNjgyIDEuODQgMi43MDcgNC4yOSAyLjcwNyA2Ljk3OSAwIDUuNzE2LTQuNjM0IDEwLjM1LTEwLjM1IDEwLjM1LTUuNzE2IDAtMTAuMzUtNC42MzQtMTAuMzUtMTAuMzUgMC0yLjY5MiAxLjAyOC01LjE0NCAyLjcxMi02Ljk4NUwzLjAzNSA0LjA5M2wxLjEzLS45ODYgMS4yODcgMS40NzdDNy4yMzYgMy4xMjUgOS41MTYgMi4yNSAxMiAyLjI1em0wIDEuNWMtNC44ODggMC04Ljg1IDMuOTYyLTguODUgOC44NXMzLjk2MiA4Ljg1IDguODUgOC44NSA4Ljg1LTMuOTYyIDguODUtOC44NVMxNi44ODggMy43NSAxMiAzLjc1em0uNzUgMy41NTZ2NC44Nmw0LjM4OSAyLjUyNi0uNzQ4IDEuMy01LjE0MS0yLjk1OFY3LjMwNmgxLjV6IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNDkwOCAtMTk4NSkgdHJhbnNsYXRlKDQ5MDggMTk4NSkiLz4KICAgICAgICAgICAgPC9nPgogICAgICAgIDwvZz4KICAgIDwvZz4KPC9zdmc+Cg==&quot;);">
 										</div>
-										<span class="GNBMobile_text__2-voS">펀딩예정</span>
+										<span class="GNBMobile_text__2-voS">마일즈</span>
 									</a></li>
 								<li class="GNBMobile_item__1b4ZL"><a class="GNBMobile_link__t1Y9t"
 										href="/web/wreward/main">
 										<div class="GNBMobile_icon__3OOAF"
 											style="background-image: url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGc+CiAgICAgICAgICAgIDxnPgogICAgICAgICAgICAgICAgPHBhdGggZD0iTTAgMEgyNFYyNEgweiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTQ4MTggLTE5ODUpIHRyYW5zbGF0ZSg0ODE4IDE5ODUpIi8+CiAgICAgICAgICAgICAgICA8cGF0aCBmaWxsPSIjODY4RTk2IiBkPSJNMTQuMzQ1IDIuOTE1Yy45MTYtLjczNyAxLjgyNC0uOTc2IDIuNjg5LS43MTMuNTk2LjE5IDEuMDgxLjYyNyAxLjMzMiAxLjIuMjkuNjM0LjI5IDEuMzY0IDAgMS45OTgtLjIwNi40NDgtLjUyOC44My0uOTMgMS4xMWwtLjEzOC4wOWg0LjcyMnYxNS4wOWgtMS40NFY4LjAyOEgzLjQyVjIxLjY5SDEuOThWNi42aDQuNzIyYy0uNDY3LS4yODUtLjg0LS43MDMtMS4wNjgtMS4yLS4yOTQtLjYyNy0uMzAzLTEuMzUyLS4wMjQtMS45ODYuMjUtLjU3NC43MzUtMS4wMTIgMS4zMzItMS4yLjg2NS0uMjcgMS43NzMtLjAzIDIuNjkuNzEzbC4xMy4xMDkuMjIzLjIwOUMxMC43OTIgNC4wMiAxMS40NzIgNC45MiAxMiA1LjkxYy41Mi0uOTkyIDEuMTkzLTEuODk0IDEuOTkzLTIuNjc2bC4yMjEtLjIxLjEzLS4xMDl6TTEyLjcyIDkuOTQydjExLjY0aC0xLjQ0VjkuOTQyaDEuNDR6TTcuNjU2IDMuMzA2Yy0uMTIgMC0uMjQuMDE4LS4zNTQuMDU0LS4yNjguMDktLjQ4NS4yODgtLjYuNTQ2LS4xMzMuMzI3LS4xMTUuNjk1LjA0OCAxLjAwOC4zNzguODQ2IDEuOTUgMS40MSA0LjIgMS41NDgtLjQ2LS44NTctMS4wNDYtMS42MzgtMS43MzktMi4zMTlMOC45IDMuODQ2Yy0uMzQ0LS4zMS0uNzgtLjUtMS4yNDQtLjU0em05LjAzNi4wMzZsLS4wODktLjAyYy0uMzEyLS4wNTgtLjc3OC0uMDQ0LTEuNDk0LjUzbC0uMTA5LjA5LS4yMDcuMmMtLjY3OC42NzgtMS4yNTEgMS40NTQtMS43MDEgMi4zMDIgMi4yNDQtLjEzOCAzLjgyMi0uNzAyIDQuMi0xLjU0OC4xNDgtLjMyLjE0OC0uNjg4IDAtMS4wMDgtLjExNS0uMjU4LS4zMzItLjQ1Ni0uNi0uNTQ2eiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTQ4MTggLTE5ODUpIHRyYW5zbGF0ZSg0ODE4IDE5ODUpIi8+CiAgICAgICAgICAgIDwvZz4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPgo=&quot;);">
 										</div>
-										<span class="GNBMobile_text__2-voS">펀딩하기</span>
+										<span class="GNBMobile_text__2-voS">소셜링</span>
 									</a></li>
 								<li class="GNBMobile_item__1b4ZL"><a href="/web/store/main"
 										class="GNBMobile_link__t1Y9t">
@@ -147,7 +146,7 @@ $(function () {
 										<div class="GNBMobile_icon__3OOAF"
 											style="background-image: url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGc+CiAgICAgICAgICAgIDxnPgogICAgICAgICAgICAgICAgPGc+CiAgICAgICAgICAgICAgICAgICAgPHBhdGggZmlsbD0iIzg2OEU5NiIgZmlsbC1ydWxlPSJub256ZXJvIiBkPSJNMjMuMDM1IDMuNmwuMDU5IDMuOTcydjEuNTIyYy0uMDI3IDEuMjkyLS42NDQgMi40MzQtMS41ODQgMy4xNzR2OS40N2gtMS41di04LjcyM2MtLjMwOS4wOC0uNjMxLjEyNi0uOTYyLjEzMWgtLjE0Yy0xLjQyMi4wMjUtMi42OS0uNjY5LTMuNDU1LTEuNzUyLS4xNS4yMTctLjMyMi40Mi0uNTE1LjYwNy0uNzQ2LjcyMi0xLjczNSAxLjEzNS0yLjc0NiAxLjE2MmgtLjE3OWMtMS4wOTkuMDItMi4xNi0uMzk4LTIuOTUtMS4xNjMtLjE5Mi0uMTg2LS4zNjQtLjM4OS0uNTE1LS42MDUtLjczNCAxLjA0NC0xLjkzOCAxLjczLTMuMjg4IDEuNzUxaC0uMTRjLS4zOTEuMDA3LS43Ny0uMDQtMS4xMy0uMTM1djguNzI3aC0xLjV2LTkuNDc1QzEuNTgzIDExLjU0OS45OCAxMC40Ni45MTEgOS4yMmwtLjAwNS0uMTQzVjcuNTYxTC45NjYgMy42aDIyLjA2OXpNMTUuNDcgMTUuNTM3djYuMjAxaC0xLjQ4MnYtNC43MTloLTMuOTc4djQuNzE5SDguNTI5di02LjIwMWg2Ljk0MnpNMTQuNjggNS4xSDkuMzE5bC0uMDE0IDIuNDcxLjAwMS4wMDF2MS40OTVjLjAxLjcuMjk4IDEuMzY4LjgwMSAxLjg1NS41MDMuNDg4IDEuMTguNzU1IDEuOTA2Ljc0Mi43MDEuMDEzIDEuMzc5LS4yNTQgMS44ODMtLjc0Mi40Ny0uNDU0Ljc1My0xLjA2Ny43OTgtMS43MTZsLjAwMi0uMDU4LS4wMDItLjA3VjcuNTcyTDE0LjY4IDUuMXptLTYuODYgMEgyLjQ0M2wtLjAzNyAyLjQ3MnYxLjQ5Yy4wMyAxLjQ1NSAxLjIzMiAyLjYxIDIuNzEzIDIuNTg0IDEuNDEyLjAyNSAyLjU4Ni0xLjA2MiAyLjY4MS0yLjQ0MmwuMDA2LS4xMjZWNy41NzJsLjY2Ni0uMDAxLS42NjYtLjAwM0w3LjgyIDUuMXptMTMuNzM3IDBoLTUuMzc4bC4wMTUgMi40NjgtLjgzNC4wMDRoLjgzNHYxLjUxN2guMDA2bC0uMDAzLjA0Ny4wMDYuMDkzYy4xMTQgMS4zNzUgMS4yOCAyLjQ0MiAyLjcwNCAyLjQxNyAxLjQxMi4wMjUgMi41ODYtMS4wNjIgMi42ODEtMi40NDJsLjAwNi0uMTI2VjcuNTgzTDIxLjU1NyA1LjF6IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMzI2LjAwMDAwMCwgLTI3OC4wMDAwMDApIHRyYW5zbGF0ZSg3Ni4wMDAwMDAsIDI3MS4wMDAwMDApIHRyYW5zbGF0ZSgyNTAuMDAwMDAwLCA3LjAwMDAwMCkiLz4KICAgICAgICAgICAgICAgICAgICA8cGF0aCBkPSJNMCAwSDI0VjI0SDB6IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMzI2LjAwMDAwMCwgLTI3OC4wMDAwMDApIHRyYW5zbGF0ZSg3Ni4wMDAwMDAsIDI3MS4wMDAwMDApIHRyYW5zbGF0ZSgyNTAuMDAwMDAwLCA3LjAwMDAwMCkiLz4KICAgICAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgPC9nPgogICAgICAgIDwvZz4KICAgIDwvZz4KPC9zdmc+Cg==&quot;);">
 										</div>
-										<span class="GNBMobile_text__2-voS">구매하기</span>
+										<span class="GNBMobile_text__2-voS">공동구매</span>
 									</a></li>
 								<li class="GNBMobile_item__1b4ZL"><a class="GNBMobile_link__t1Y9t"
 										href="/web/main/more">
@@ -160,12 +159,6 @@ $(function () {
 							<div class="HeaderMobile_myButton__32Bob">
 								<button type="button">
 									<i class="icon my" aria-hidden="true"></i>
-								</button>
-							</div>
-							<div class="NotificationButton_container__2nhhV HeaderMobile_notification__2H-xt">
-								<button class="NotificationButton_btnNotification__2fRCj" aria-label="알림">
-									<i class="icon notifications-o NotificationButton_icon__3bvJj"
-										aria-hidden="true"></i>
 								</button>
 							</div>
 							<div class="Search_container__3gq0K">
@@ -219,23 +212,29 @@ $(function () {
 								</li>
 							</ul>
 							<div class="web-header-utils">
-								<div
-									class="SearchInput_container__gZaY5 HeaderDesktop_search__3TGkY HeaderDesktop_iconButton__3kwGA">
-									<button type="button" class="SearchButton_search__JF4Op" aria-label="검색하기">
-										<i class="icon search SearchButton_icon__2pNKt" aria-hidden="true"></i>
-									</button>
-								</div>
 								<div class="HeaderDesktop_user__3zGmM">
 									<div class="User_container__bqVd2">
-										<button type="button" class="User_btnSign__1URTs" ><a href="${root}/member/login">로그인</a></button>
-										<button data-event="iam.signup" class="User_btnSign__1URTs" ><a href="${root}/member/join">회원가입</a></button>
+									
+									<c:choose>
+										<c:when test="${login}">
+											<button type="button" class="User_btnSign__1URTs" ><a href="${root}/member/logout">로그아웃</a></button>
+											<button data-event="iam.signup" class="User_btnSign__1URTs" ><a href="${root}/member/mypage">마이페이지</a></button>
+										</c:when>
+										<c:otherwise>
+											<button type="button" class="User_btnSign__1URTs" ><a href="${root}/member/login">로그인</a></button>
+											<button data-event="iam.signup" class="User_btnSign__1URTs" ><a href="${root}/member/join">회원가입</a></button>
+										</c:otherwise>
+									</c:choose>
+									
+										
+										
 									</div>
 								</div>
 								<div class="web-header-funding-open funding-open">
 									<div>
 										<div>
 											<button class="wz button funding-open-button dense primary-outline"
-												aria-label="프로젝트 오픈 신청">프로젝트 오픈 신청</button>
+												aria-label="프로젝트 오픈 신청">공동구매 오픈 신청</button>
 											<div class="FundingOpen_fundingOpenContainer__2GDma">
 												<a class="FundingOpen_btnLink__11tnC" href="/web/wsub/openfunding">와디즈
 													메이커 시작하기

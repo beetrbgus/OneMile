@@ -174,15 +174,26 @@
     background-position: 50%;
     background-size: cover;
     padding-bottom: 75px;
-    width: 100px
+    width: 100px;
+    height: 100px;
+}
+
+.board-main .article .thumb > img {
+    width: 100px;
+    height: 100px;
+}
+
+@media screen and (min-width:769px) {
+    .board-main .article .thumb img{
+        width: 144px;
+        height: 144px;
+    }
 }
 
 @media screen and (min-width:769px) {
     .board-main .article .thumb {
-        margin-top: 0;
-        margin-bottom: 20px;
-        padding-bottom: 108px;
-        width: 144px
+        width: 144px;
+        height: 144px;
     }
 }
 

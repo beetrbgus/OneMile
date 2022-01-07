@@ -10,20 +10,28 @@
 				<div class="article-top">
 					<p class="title">${commuDetailVO.title}</p>
 					<div class="info">
-						<em class="user-img" style="background-image:url(https://static.wadiz.kr/assets/icon/apple-touch-icon.png)"></em>
+						<c:if test="${commuDetailVO.imageNo} != null">
+						<em class="user-img" style="background-image:url(${pageContext.request.contextPath}/image/download?imageNo=${commuDetailVO.imageNo}&folder=member)"></em>
+						</c:if>
+						<em class="user-img" style="background-image:url(https://via.placeholder.com/300x300?text=User)"></em>
 						<span class="user-info">${commuDetailVO.nick}
 						<br>${commuDetailVO.regDate}</span>
 					</div>
 				</div>
 				<div class="inner-contents">
-					<p><img src="https://cdn.wadiz.kr/ft/images/green001/2021/1228/20211228100127501_120.jpg/wadiz/format/jpg/quality/80/optimize"class="fr-fic fr-dib">
+					<c:forEach var="imageNo" items="${imageNoList}">
+					<p><img src="${pageContext.request.contextPath}/image/download?imageNo=${imageNo.imageNo}&folder=commu"class="fr-fic fr-dib">
+					</p>
+					</c:forEach>
 					${commuDetailVO.content}
 				</div>
 			</div>
 		</div>
 		<div class="wboard-detail-bottom">
 			<div class="wboard-detail-btn-wrap">
-				<a class="wz button" href="http://localhost:8080/onemile/commu/questions/list?middleName=질문">목록으로 돌아가기</a>
+				<a class="wz button" href="http://localhost:8080/onemile/commu/notmap/list?middleName=${commuDetailVO.middleName}">목록으로 돌아가기</a>
+				<a class="wz button" href="http://localhost:8080/onemile/commu/notmap/edit?boardNo=${commuDetailVO.commuNo}">수정하기</a>
+				<a class="wz button" href="http://localhost:8080/onemile/commu/notmap/list?middleName=${commuDetailVO.middleName}">삭제하기</a>
 			</div>
 		</div>
 	</div>

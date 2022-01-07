@@ -63,7 +63,7 @@ public class MemberController {
 			HttpServletResponse response, HttpSession session) {
 			
 			MemberDTO findDTO = memberService.login(memberDTO);
-			
+			System.err.println("findDTo======================"+findDTO);
 			//정보가 있으면 세션저장
 			if(findDTO != null) {
 			session.setAttribute("logNo", findDTO.getMemberNo());
