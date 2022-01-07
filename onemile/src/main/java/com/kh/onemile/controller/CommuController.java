@@ -21,7 +21,6 @@ import com.kh.onemile.service.reply.ReplyService;
 import com.kh.onemile.vo.CommuDetailVO;
 import com.kh.onemile.vo.CommuVO;
 import com.kh.onemile.vo.ImageVO;
-import com.kh.onemile.vo.reply.ReplyVO;
 
 @RequestMapping("/commu")
 @Controller
@@ -33,28 +32,17 @@ public class CommuController {
 	@Autowired
 	private ImageService imageService;
 	
-	@Autowired
-	private ReplyService replyService;
-	
 	@GetMapping("/notmap/write")
 	public String write() {
 		return "commu/notmap/write";
 	}
 	
 	@PostMapping("/notmap/write")
-	public String write(@ModelAttribute CommuVO commuVo, @ModelAttribute ImageVO imageVo, HttpSession session) throws IllegalStateException, IOException {
+	public String write(@ModelAttribute CommuVO commuVo, HttpSession session) throws IllegalStateException, IOException {
 		int memberNo = (int)session.getAttribute("logNo");
 		commuVo.setMemberNo(memberNo);
 		int commuNo = commuService.write(commuVo);
-		
-		commuVo.setMemberNo(memberNo);
-		commuVo.setCommuNo(commuNo);
-		commuService.write(commuVo);
-		if(imageVo!=null) {
-			imageVo.setCommuNo(commuNo);
-//			imageService.regImage(imageVo);
-		}
-		return "redirect:commu/notmap/detail?commuNo="+commuNo;
+		return "redirect:/commu/notmap/detail?boardNo="+commuNo;
 	}
 	
 	@GetMapping("/notmap/listdetail")
@@ -70,22 +58,35 @@ public class CommuController {
 	}
 	
 	@GetMapping("/notmap/list")
-	public String list(Model model){
-		/*
-		 * List<MemberMiddleImageDTO>
-		 * 
-		 * model.add("list",List<MemberMiddleImageDTO> )
-		 */
+	public String list(){
 		return "commu/notmap/list";
 	}
 	
 	@RequestMapping("/notmap/detail")
 	public String detail(@RequestParam int boardNo, Model model) throws IOException {
-		//조회 3번 (commu, reply, image)
 		model.addAttribute("commuDetailVO", commuService.detail(boardNo));
 		model.addAttribute("imageNoList", imageService.listByBoardNo(boardNo)); //boardNo로 imageNo list를 불러오는 거 만들기
-//		model.addAttribute("replyVOList", replyService.listByBoardNo(boardNo)); //boardNo로 댓글 찾아주는 거 만들기
 		
 		return "commu/notmap/detail";
+	}
+	
+	@GetMapping("/notmap/edit")
+	public String edit(@RequestParam int boardNo, Model model) throws IOException {
+		model.addAttribute("commuDetailVO", commuService.detail(boardNo));
+		model.addAttribute("imageNoList", imageService.listByBoardNo(boardNo));
+		
+		return "commu/notmap/edit";
+	}
+	
+	@PostMapping("/notmap/edit")
+	public String edit(@ModelAttribute CommuVO commuVo, HttpSession session) throws IllegalStateException, IOException {
+		int commuNo = commuService.edit(commuVo);
+		return "redirect:/commu/notmap/detail?boardNo="+commuNo;
+	}
+	
+	@RequestMapping("/notmap/delete")
+	public String delete(@RequestParam int boardNo) throws IOException {
+		commuService.hide(boardNo);
+		return "commu/notmap/list";
 	}
 }

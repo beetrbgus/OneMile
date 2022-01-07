@@ -71,7 +71,10 @@ textarea {
 	font-size:22px;
 }
 </style>
-<script type="text/javascript"src="${root}/onemile/resources/js/commu-map.js"></script>
+<script>
+var text=document.querySelector('#content').val();
+text=text.replace(/(?:\r\n|\r|\n)/g,'<br/>');
+</script>
 <div class="page-container">
 	<div class="ui-header">
 		<h2 class="title">커뮤니티</h2>
@@ -79,9 +82,9 @@ textarea {
 	<form action="write" method="post" enctype="multipart/form-data">
 		<select name="middleName" class="category">
 			<option value="" class="label category">카테고리 선택</option>
-			<option value="맛집" class="label category">동네맛집</option>
-			<option value="사건" class="label category">동네사건/사고</option>
-			<option value="얌얌" class="label category">얌세권</option>
+			<option value="동네맛집" class="label category">동네맛집</option>
+			<option value="동네사건사고" class="label category">동네 사건사고</option>
+			<option value="얌세권" class="label category">얌세권</option>
 		</select>
 		<textarea rows="1" maxlength="100" name="title" class="post-title"
 			placeholder="제목을 입력하세요."></textarea>
@@ -90,10 +93,11 @@ textarea {
 		<label class="label">상세주소 : </label><input class="form-input" type="text" name="detailAddress" placeholder="상세주소를 입력하세요.">
 		<input type="hidden" name="lat">
 		<input type="hidden" name="lng">
-		<textarea cols="100" rows="20" name="content" class="post-content"
+		<textarea cols="100" rows="20" id="content" name="content" class="post-content"
 		placeholder="내용을 입력하세요."></textarea>
 		<input type="file" name="attach" class="file-choose">
 		<input type="submit" value="등록하기" class="myButton">
 	</form>
 </div>
+<script type="text/javascript"src="${root}/onemile/resources/js/commu-map.js"></script>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

@@ -31,4 +31,14 @@
 		where
 			co.commu_no = #{commuNo}
 	</select>
+	
+	<select id="listByMenu" parameterType="String" resultType="imageVO">
+		select 
+			co.middlename,cmi.cmi_no, img.* 
+		from image img
+			left join cmi cmi on cmi.image_no = img.image_no
+			left join commu co on co.commu_no = cmi.commu_no
+		where
+			co.middlename = #{middleName}
+	</select>
 </mapper>
