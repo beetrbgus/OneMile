@@ -17,7 +17,7 @@
 				</div>
 				<div class="inner-contents">
 					<c:forEach var="imageNo" items="${imageNoList}">
-					<p><img src="${pageContext.request.contextPath}/image/download?imageNo=${imageNo}&folder=commu"class="fr-fic fr-dib">
+					<p><img src="${pageContext.request.contextPath}/image/download?imageNo=${imageNo.imageNo}&folder=commu"class="fr-fic fr-dib">
 					</p>
 					</c:forEach>
 					${commuDetailVO.content}

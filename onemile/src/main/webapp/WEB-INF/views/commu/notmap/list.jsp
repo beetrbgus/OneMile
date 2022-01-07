@@ -31,13 +31,11 @@
 					size : size
 				},
 				success : function(resp) {
-					console.log("성공", resp);
 
 					if (resp.length < size) {
 						$(".more-btn").remove();
 					}
 					for (var i = 0; i < resp.length; i++) {
-						console.log(i, "번째 실행");
 						var commuVo = resp[i];
 						var divCol = "<ul>"
 							+ "<li>"
@@ -45,7 +43,7 @@
 								+ resp[i].commuNo
 								+ "'>"
 								+ "<div class='info'>"
-								+ "<div class='thumb' style='background-image: url(${pageContext.request.contextPath}/image/download?imageNo=${commuVo.imageNo}&folder=commu)'></div>"
+								+ "<div class='thumb' style='background-image: url(${pageContext.request.contextPath}/image/download?imageNo=${imageNo.imageNo}&folder=commu)'></div>"
 								+ "<h3 class='title'>" + commuVo.title
 								+ "</h3>" + "<span class='author'>"
 								+ commuVo.nick

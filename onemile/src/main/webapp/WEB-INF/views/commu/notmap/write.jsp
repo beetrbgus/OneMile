@@ -64,11 +64,12 @@ textarea {
 	<div class="ui-header">
 		<h2 class="title">커뮤니티</h2>
 	</div>
-	<form action="write" method="post" enctype="multipart/form-data">
+	<form  method="post" enctype="multipart/form-data">
+		<input type="hidden" name="mapNo" value=0>
 		<select name="middleName" class="category">
 			<option value="" class="label category">카테고리 선택</option>
-			<option value="질문" class="label category">동네질문</option>
-			<option value="분실" class="label category">분실/실종센터</option>
+			<option value="동네질문" class="label category">동네질문</option>
+			<option value="분실/실종센터" class="label category">분실/실종센터</option>
 		</select>
 		<textarea rows="1" maxlength="100" name="title" class="post-title"
 			placeholder="제목을 입력하세요."></textarea>

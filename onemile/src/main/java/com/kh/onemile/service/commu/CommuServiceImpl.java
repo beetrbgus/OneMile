@@ -55,9 +55,9 @@ public class CommuServiceImpl implements CommuService {
 		// 게시글 Dto 설정
 		CommuDTO commuDto = new CommuDTO();
 
-		commuDto.setCommuNo(commuVo.getCommuNo());
+		commuDto.setCommuNo(commuNo);
 		commuDto.setMemberNo(commuVo.getMemberNo());
-		commuDto.setMiddleName(commuVo.getMiddleName());
+		commuDto.setMiddlename(commuVo.getMiddleName());
 		commuDto.setTitle(commuVo.getTitle());
 		commuDto.setContent(commuVo.getContent());
 
@@ -92,7 +92,6 @@ public class CommuServiceImpl implements CommuService {
 				imgMidDTO.setImgNo(imgNo);
 				// 중간 이미지 테이블에 등록
 				middleImageDao.reg(imgMidDTO);
-				log.debug("등록 완료  cobuyImgMidDTO   " + imgMidDTO.toString());
 			}
 		}
 		return commuNo;
@@ -106,7 +105,7 @@ public class CommuServiceImpl implements CommuService {
 		CommuDTO commuDto = new CommuDTO();
 		commuDto.setCommuNo(commuVo.getCommuNo());
 		commuDto.setMemberNo(commuVo.getMemberNo());
-		commuDto.setMiddleName(commuVo.getMiddleName());
+		commuDto.setMiddlename(commuVo.getMiddleName());
 		commuDto.setTitle(commuVo.getTitle());
 		commuDto.setContent(commuVo.getTitle());
 

@@ -10,13 +10,13 @@
 	</select>
 	
 	<!-- 글쓰기 -->
-	<insert id="write" parameterType="commuDto">
+	<insert id="write" parameterType="CommuDto">
 		insert into commu(
 			commu_no, member_no, middlename, map_no,
 			title, content
 		)
 		values(
-			#{commuNo}, #{memberNo},#{middleName},#{mapNo},
+			#{commuNo}, #{memberNo},#{middlename},#{mapNo},
 			#{title}, #{content}
 		)
 	</insert>

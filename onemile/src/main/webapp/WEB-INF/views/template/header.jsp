@@ -69,7 +69,6 @@ $(function () {
             type: "post",
             data: {},
             success: function (resp) {
-            	console.log(resp);
             	
             	for(var i = 0; i<resp.length; i++){
             		var menuDto = resp[i];

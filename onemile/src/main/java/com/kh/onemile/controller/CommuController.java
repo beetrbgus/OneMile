@@ -46,15 +46,7 @@ public class CommuController {
 		int memberNo = (int)session.getAttribute("logNo");
 		commuVo.setMemberNo(memberNo);
 		int commuNo = commuService.write(commuVo);
-		
-		commuVo.setMemberNo(memberNo);
-		commuVo.setCommuNo(commuNo);
-		commuService.write(commuVo);
-		if(imageVo!=null) {
-			imageVo.setCommuNo(commuNo);
-//			imageService.regImage(imageVo);
-		}
-		return "redirect:commu/notmap/detail?commuNo="+commuNo;
+		return "redirect:commu/notmap/detail?boardNo="+commuNo;
 	}
 	
 	@GetMapping("/notmap/listdetail")
