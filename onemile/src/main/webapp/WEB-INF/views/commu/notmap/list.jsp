@@ -45,7 +45,7 @@
 								+ resp[i].commuNo
 								+ "'>"
 								+ "<div class='info'>"
-								+ "<div class='thumb' style='background-image: url(https://cdn.wadiz.kr/ft/images/green001/2021/1228/20211228095651665_0.jpg/wadiz/resize/400/format/jpg/quality/80/optimize)'></div>"
+								+ "<div class='thumb' style='background-image: url(${pageContext.request.contextPath}/image/download?imageNo=${commuVo.imageNo}&folder=commu)'></div>"
 								+ "<h3 class='title'>" + commuVo.title
 								+ "</h3>" + "<span class='author'>"
 								+ commuVo.nick
@@ -75,11 +75,11 @@
 		</div>
 			<div class="ui-tabs LeadMakerShortcutLinkSection_linkGroup__2XM2N">
 				<ul>
-					<li><a href="?middleName=질문" ${param.middleName == "질문" ? "style='color:#00b2b2;'" : ""} >동네질문</a></li>
-					<li><a href="?middleName=분실" ${param.middleName == "분실" ? "style='color:#00b2b2;'" : ""}>분실/실종센터</a></li>
-					<li><a href="../map/list?middleName=맛집" ${param.middleName == "맛집" ? "style='color:#00b2b2;'" : ""}>동네맛집</a></li>
-					<li><a href="../map/list?middleName=사건" ${param.middleName == "사건" ? "style='color:#00b2b2;'" : ""}>동네 사건사고</a></li>
-					<li><a href="../map/list?middleName=얌얌" ${param.middleName == "얌얌" ? "style='color:#00b2b2;'" : ""}>얌세권</a></li>
+					<li><a href="?middleName=동네질문" ${param.middleName == "동네질문" ? "style='color:#00b2b2;'" : ""} >동네질문</a></li>
+					<li><a href="?middleName=분실/실종센터" ${param.middleName == "분실/실종센터" ? "style='color:#00b2b2;'" : ""}>분실/실종센터</a></li>
+					<li><a href="../map/list?middleName=동네맛집" ${param.middleName == "동네맛집" ? "style='color:#00b2b2;'" : ""}>동네맛집</a></li>
+					<li><a href="../map/list?middleName=동네사건사고" ${param.middleName == "동네사건사고" ? "style='color:#00b2b2;'" : ""}>동네 사건사고</a></li>
+					<li><a href="../map/list?middleName=얌세권" ${param.middleName == "얌세권" ? "style='color:#00b2b2;'" : ""}>얌세권</a></li>
 				</ul>
 			</div>
 		
