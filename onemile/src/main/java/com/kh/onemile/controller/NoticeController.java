@@ -66,6 +66,39 @@ public class NoticeController {
 		}
 	}
 	
+	@RequestMapping(value = "/view", method = RequestMethod.POST)
+	public String view(Locale locale, Model model, HttpServletRequest request) throws Exception {
+		BoardDTO dto = service.view(Integer.parseInt((String)request.getParameter("seq")));
+		model.addAttribute("view", dto);
+		return "/board/view";
+	}
+	
+	@RequestMapping(value = "/goEditView", method = RequestMethod.POST)
+	public String updateView(Locale locale, Model model, HttpServletRequest request) throws Exception {
+		BoardDTO dto = service.view(Integer.parseInt((String)request.getParameter("seq")));
+		model.addAttribute("view", dto);
+		return "/board/update";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/edit", method = RequestMethod.POST)
+	public String update(Locale locale, Model model, BoardDTO dto) throws Exception {
+		if(service.update(dto) == 1) {
+			return "Y";
+		}else {
+			return "N";
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	public String delete(Locale locale, Model model, HttpServletRequest request) throws Exception {
+		if(service.delete(Integer.parseInt((String)request.getParameter("seq"))) == 1) {
+			return "Y";
+		}else {
+			return "N";
+		}
+	}
 }
 	
 	

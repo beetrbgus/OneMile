@@ -35,7 +35,28 @@ public class NoticeDaoImpl implements NoticeDao{
 		return sqlSession.insert(namespace+".write", noticedto);
 	}
 	
+
+	@Override
+	public BoardDTO view(int seq) {
+		return sqlSession.selectOne(namespace+".view", seq);
+	}
+
+	@Override
+	public void updateReadCount(int seq) {
+		sqlSession.update(namespace+".updateReadCount", seq);
+	}
+
+	@Override
+	public int update(BoardDTO dto) {
+		return sqlSession.update(namespace+".update", dto);
+	}
+
+	@Override
+	public int delete(int seq) {
+		return sqlSession.update(namespace+".delete", seq);
+	}
+
+}
 	
 		
-	}
 

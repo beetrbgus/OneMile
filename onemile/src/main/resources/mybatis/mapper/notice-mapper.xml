@@ -37,4 +37,41 @@
 
 	 	) 
 	</insert>
+	
+	<select id="view" resultType="com.board.domain.BoardDTO">
+	 	SELECT 
+ 			SEQ,
+ 			SUBJECT,
+ 			CONTENT,
+ 			NAME,
+ 			REG_DATE,
+ 			READCOUNT
+		FROM
+ 			BOARD
+ 		WHERE
+ 			SEQ = #{seq}
+	</select>
+	
+	<update id="updateReadCount">
+		UPDATE BOARD
+		SET 
+			READCOUNT = READCOUNT + 1
+		WHERE
+			SEQ = #{seq}	 
+	</update>
+	
+	<update id="update">
+		UPDATE BOARD
+		SET
+			SUBJECT = #{subject},
+			CONTENT = #{content}
+		WHERE
+			SEQ = #{seq}
+	</update>
+	<delete id="delete">
+		DELETE FROM BOARD
+		WHERE 
+			SEQ = #{seq}
+	</delete>
 </mapper>
+
