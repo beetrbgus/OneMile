@@ -71,12 +71,6 @@ textarea {
 	font-size:22px;
 }
 </style>
-<script type="text/javascript"src="${root}/onemile/resources/js/commu-map.js"></script>
-<script>
-	$(function(){
-		
-	});
-</script>
 <div class="page-container">
 	<div class="ui-header">
 		<h2 class="title">커뮤니티</h2>
@@ -101,4 +95,5 @@ textarea {
 		<input type="submit" value="등록하기" class="myButton">
 	</form>
 </div>
+<script type="text/javascript"src="${root}/onemile/resources/js/commu-map.js"></script>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

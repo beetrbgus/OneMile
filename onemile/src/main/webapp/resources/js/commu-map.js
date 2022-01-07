@@ -1,3 +1,4 @@
+window.kakao.maps.load(function() {
 $(function() {
 
     // 지도 생성 준비 코드
@@ -9,42 +10,6 @@ $(function() {
 
     // 지도 생성 코드
     var map = new kakao.maps.Map(container, options);
-
-    // HTML5의 geolocation으로 사용할 수 있는지 확인합니다
-    if (navigator.geolocation) {
-
-        // GeoLocation을 이용해서 접속 위치를 얻어옵니다
-        navigator.geolocation.getCurrentPosition(function(position) {
-
-        var lat = position.coords.latitude, // 위도
-        lon = position.coords.longitude; // 경도
-
-        });
-    }else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
-
-        message = 'geolocation을 사용할수 없어요..'
-
-        displayMarker(message);
-    }
-
-    // 지도에 마커와 인포윈도우를 표시하는 함수입니다
-    function displayMarker(message) {
-
-        var iwContent = message; // 인포윈도우에 표시할 내용
-        iwRemoveable = true;
-
-        // 인포윈도우를 생성합니다
-        var infowindow = new kakao.maps.InfoWindow({
-            content : iwContent,
-            removable : iwRemoveable
-        });
-
-        // 인포윈도우를 마커위에 표시합니다
-        infowindow.open(map);
-
-        // 지도 중심좌표를 접속위치로 변경합니다
-        map.setCenter(locPosition);
-    }
 
     // 주소-좌표 변환 객체를 생성합니다
     var geocoder = new kakao.maps.services.Geocoder();
@@ -122,3 +87,4 @@ $(function() {
         }
     }
 });
+}); 
