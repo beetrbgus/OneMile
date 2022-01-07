@@ -23,7 +23,7 @@ public class MemberJoinVO {
 	
 	//두번째 페이지
 	private String mbti;
-	private String corona;
+	private MultipartFile corona;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH24:mm:ss")
 	private Date nickModi;
 	private String exitYN;

@@ -26,7 +26,7 @@ public class KakaoPayServiceImpl implements KakaoPayService{
 	@Value("${user.kakaopay.contenttype}")
 	public String ContentType;
 	
-	//정기결제(멤버십) 준비
+	//결제 준비
 	@Override
 	public KakaoPayReadyResponseVO regularReady(KakaoPayReadyRequestVO requestVO) throws URISyntaxException {
 		

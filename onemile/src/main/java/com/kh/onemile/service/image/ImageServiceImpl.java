@@ -12,6 +12,9 @@ import com.kh.onemile.util.SaveFile;
 import com.kh.onemile.util.Sequence;
 import com.kh.onemile.vo.ImageDownloadVO;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class ImageServiceImpl implements ImageService {
 	@Autowired
@@ -24,29 +27,40 @@ public class ImageServiceImpl implements ImageService {
 	private final String path = "D:/upload";
 
 	@Override
-	public List<Integer> regImage(List<MultipartFile> attach, String savePath) throws IllegalStateException, IOException {
-		List<Integer> imageNoList = new ArrayList<Integer>();
+	public List<Integer> regImage(List<MultipartFile> attach, String savePath)
+			throws IllegalStateException, IOException {
 		
+		List<Integer> imageNoList = new ArrayList<Integer>();
+		log.debug(" List<MultipartFile>   " + attach.toString());
 		for (MultipartFile multipartFile : attach) {
-			int imageNo = seq.nextSequence("image_seq");
-			String saveName = String.valueOf(imageNo);
-			
-			ImageDTO imageDto = new ImageDTO();
+			if (!multipartFile.isEmpty()&&multipartFile.getSize()!=0) {
+				int imageNo = seq.nextSequence("image_seq");
+				log.debug("imageNo    " + imageNo);
+				String saveName = String.valueOf(imageNo);
 
-			// 이미지 테이블
-			imageDto.setImageNo(imageNo);
-			imageDto.setUploadName(multipartFile.getOriginalFilename());// 회원이 올린 이름.
-			imageDto.setFileSize(multipartFile.getSize());
-			imageDto.setSaveName(saveName);
-			imageDto.setFileType(multipartFile.getContentType());
+				ImageDTO imageDto = new ImageDTO();
 
-			// 실제 D드라이브에 저장되는 메서드
-			String realPath = path + "/" + savePath;
-			saveFile.saveImg(realPath, multipartFile, saveName);
-			// DB에 파일 정보 넣는 메서드
-			imageDao.regImage(imageDto);
-			imageNoList.add(imageNo);
+				// 이미지 테이블
+				imageDto.setImageNo(imageNo);
+				imageDto.setUploadName(multipartFile.getOriginalFilename());// 회원이 올린 이름.
+				imageDto.setFileSize(multipartFile.getSize());
+				imageDto.setSaveName(saveName);
+				imageDto.setFileType(multipartFile.getContentType());
+
+				log.debug("imageNo    " + imageNo);
+				log.debug("setUploadName    " + multipartFile.getOriginalFilename());
+				log.debug("setFileSize    " + multipartFile.getSize());
+				log.debug("setFileType    " + multipartFile.getContentType());
+
+				// 실제 D드라이브에 저장되는 메서드
+				String realPath = path + "/" + savePath;
+				saveFile.saveImg(realPath, multipartFile, saveName);
+				// DB에 파일 정보 넣는 메서드
+				imageDao.regImage(imageDto);
+				imageNoList.add(imageNo);
+			}
 		}
+		log.debug("imageNoList        " + imageNoList);
 		return imageNoList;
 	}
 
