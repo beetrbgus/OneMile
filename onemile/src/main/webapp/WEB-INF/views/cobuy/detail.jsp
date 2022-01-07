@@ -26,13 +26,13 @@
 			<div class="wd-ui-info-wrap">
 				<!-- S : 우측 캠페인 관련 정보 -->
 				<div class="wd-ui-sub-opener-info" style="padding-top: 0;">
+					<input type="hidden" id="dueDate"value="${detail.deadLinestr}">
 					<!-- S : 프로젝트 정보 **** 웹 -->
 					<h3 class="text-hidden">프로젝트 정보</h3>
 					<div class="project-state-info">
 						<div class="state-box">
 
-							<p class="remaining-day">20일 남음</p>
-
+							<p class="remaining-day"></p>
 							<p class="rate-bar">
 								<em style="width: 4748%"></em>
 							</p>
@@ -44,14 +44,17 @@
 								<strong>${detail.price}</strong>원
 							</p>
 							<p class="total-supporter" style="margin-bottom: 16px;">
-								<strong>수량</strong><input type="number" max="${detail.stock}">${detail.stock}
+								<strong>수량</strong>
+								<input class="quantity" type="number" style="width:30%; border: 1px solid black;"
+									max="${detail.stock}">
+								<strong style="color:red;"> ${detail.stock}개 남음!</strong> 
 							</p>
 						</div>
 
 						<!-- 프로젝트 유형이 글로벌/앵콜 프로젝트가 아닌경우: 기존과 동일하게 처리 -->
 						<div class="btn-wrap funding">
 							<button type="submit"
-								class="wz button primary block btn-reward-funding">구매하기</button>
+								class="buyBtn wz button primary block btn-reward-funding">구매하기</button>
 						</div>
 					</div>
 
@@ -125,11 +128,11 @@
 											<tbody>
 												<tr>
 													<th>이메일</th>
-													<td>philotation@gmail.com</td>
+													<td>${detail.email}</td>
 												</tr>
-												<tr>
+												<tr> 
 													<th>문의전화</th>
-													<td>050713980811</td>
+													<td>${detail.phone}</td>
 												</tr>
 											</tbody>
 										</table>
@@ -195,73 +198,25 @@
 										src="https://cdn.wadiz.kr/wwwwadiz/green001/2021/1209/20211209155515289_135101.jpg/wadiz/format/jpg/quality/80/optimize"
 										alt=""></li>
 								</ul>
-								<script>
-									jQuery(function($) {
-										$('.view-slide-big.image-slide').show()
-												.slick({
-													slidesToShow : 1,
-													slidesToScroll : 1,
-													adaptiveHeight : true,
-													fade : true,
-													focusOnSelect : true
-												});
-
-										// 공간 팝업 show hide
-										$(
-												'.space-box-container, .space-box-container-small')
-												.on(
-														'click',
-														function() {
-															$(
-																	'#spaceModalContainer')
-																	.css(
-																			'display',
-																			'block');
-														});
-
-										$('.btn-cancel').on(
-												'click',
-												function() {
-													$('#spaceModalContainer')
-															.css('display',
-																	'none');
-												});
-									});
-
-									function copy() {
-										var inp = document
-												.createElement('input');
-										document.body.appendChild(inp);
-										inp.value = document
-												.getElementById("addressText").innerText;
-										inp.select();
-										document.execCommand('copy', false);
-										inp.remove();
-										alertify.alert('주소가 복사되었습니다.');
-									}
-								</script>
-								<script src="/resources/static/js/lazysizes.min.js"></script>
 								<div class="campaign-title">
 									<strong class="title"> ${detail.title}</strong> <span
 										class="category icon-label-o" style="color: #495057;">
 										<em>${detail.middleName}</em>
 									</span>
-								</div>
-								<div class="campaign-summary"
-									style="background-color: #ffffff; color: #495057;">${detail.descript}</div>
-
+								</div> 
 								<!-- S : 예약구매 중 글로벌/앵콜 일 경우 노출 -->
-
+ 
 								<!-- E : 예약구매 중 글로벌/앵콜 일 경우 노출 -->
 
 								<!-- S : campaign 컨텐츠 -->
+
 								<div class="wd-ui-campaign-content">
 									<div class="wd-ui-cont" style="padding-top: 24px;">
 										<!-- S : 프로젝트 정보 -->
 										<div class="project-state-info">
 											<div class="state-box">
 												<p class="remaining-day"
-													style="margin-bottom: 16px; color: #495057;">${detail.deadLinestr}까지</p>
+													style="margin-bottom: 16px; color: #495057;"></p>
 
 												<p class="achievement-rate"
 													style="margin-bottom: 8px; line-height: 30px; color: #495057;">
@@ -273,24 +228,22 @@
 												</p>
 												<p class="total-supporter"
 													style="margin-bottom: 6px; line-height: 30px; color: #495057;">
-													<strong>수량</strong><input type="number"
-														max="${detail.stock}">${detail.stock}
+													<strong>수량</strong><input class="quantity" type="number" style="border: 1px solid black;"
+														max="${detail.stock}">
+														<strong style="color:red;">${detail.stock}개 남음!</strong>
 												</p>
 											</div>
-											<script>
-												$(function(){
-													let deadLine = $(".remaining-day").text();
-													console.log("deadLine    "+deadLine);
-													let deadLineDate = new Date(deadLine);
-													
-													console.log("deadLineDate    "+deadLineDate);
-												});
-											</script>
+											<form id="buyForm" action="cobuyBuy" method="post">
+												<input type="hidden" name="type" value="단건결제">
+												<input type="hidden" name="productNo" value="${detail.cobuyNo}">
+												<input type="hidden" name="productName" value="${detail.PName}">
+												<input class="quantity" type="hidden" name="quantity" value="0">
+												<input type="hidden" name="stock" value="${detail.stock}">
+											</form>
+											<script src="${pageContext.request.contextPath}/resources/js/cobuy/detail.js" ></script>
 											<!-- 프로젝트 유형이 글로벌/앵콜 프로젝트가 아닌경우: 기존과 동일하게 처리 -->
 											<div class="btn-wrap funding">
-												<button onclick="backMoney('backing', 'false');"
-													data-event="button-reward-funding"
-													class="wz button primary block btn-reward-funding">구매하기</button>
+												<button class="buyBtn wz button primary block btn-reward-funding">구매하기</button>
 											</div>
 										</div>
 										<!-- E : 프로젝트 정보 -->
@@ -331,7 +284,6 @@
 												</div>
 											</div>
 										</div>
-
 										<!-- S : 프로젝트 신고하기 -->
 										<div class="wz-message-box project-report-mobile">
 											<div id="reward-report-content2" data-campaign-id="135101"
@@ -347,9 +299,6 @@
 												</div>
 											</div>
 										</div>
-										<!-- E : 프로젝트 신고하기 -->
-
-										<!-- S : 프로젝트 내용 -->
 										<div id="introdetails" style="height: auto;" class="story">
 											<strong class="title">물품 설명</strong>
 											<div class="delivery-info">
@@ -361,71 +310,52 @@
 												<c:forEach items="${detail.imageList}" var="item">
 													<p>
 														<img class="fr-fic fr-dib lazyloaded" data-width="750"
-															data-height="400" style=""
-															src="${pageContext.request.contextPath}/image/download?imageNo=${item}&folder=cobuy">
+															data-height="400" width = "750" height="400" 
+															src="${pageContext.request.contextPath}/image/download?imageNo=${item.imageNo}&folder=cobuy">
 													</p>
 												</c:forEach>
+												<p style="font: bold;">수령 장소 </p>
+												<p style="font: bold;"> ${detail.detailAddress}</p>
 											</div>
 										</div>
-										<!-- E : 프로젝트 내용 -->
-
-										<!-- 공간 노출 배너 -->
-
-										<!-- 공간 노출 배너 -->
 									</div>
 								</div>
+								<div id="map" style="width:500px;height:400px;"></div>
 								<!-- E : campaign 컨텐츠 -->
 								<div class="banner-section-RB1"></div>
 								<input type="hidden" id="movieembed" value="">
 							</section>
 						</div>
-
 					</div>
-					<!-- E : 탭 주요 콘텐츠 -->
 				</div>
 			</div>
 		</div>
-		<!-- E : 페이지 레이아웃 컨테이너 -->
 	</div>
-	<!-- E : 서브 컨텐트 영역 -->
 </div>
-
+<!-- 상품 번호 -->
 <input type="hidden" name="cobuyNo" value="${detail.getCobuyNo()}">
-<input type="text" name="cobuyNo" value="${detail.getCobuyNo()}">
-<!-- 대표 이미지 , 나머지 이미지 -->
-<!-- 상품 테이블 -  제목 , 마감기한 , 구매자 명수 , 가격  
-	상품 설명 , 상품 이미지 나머지. -->
-<!-- 판매자 테이블 - 프로필 사진 ,회원번호 닉네임 , 이메일  , 전화 -->
-<!-- 지도 테이블 - 위도,경도 ,상세주소 -->
 
-<!-- 판매자 영역 -->
-<p>${detail.memberImageNo}</p>
-<p>${detail.nick}</p>
-<p>${detail.email}</p>
-<p>${detail.phone}</p>
 <!-- 지도 영역 -->
-<p>${detail.lat}</p>
-<p>${detail.lng}</p>
-<p>수령 장소 : ${detail.detailAddress}</p>
-<p>${detail.lat}</p>
-
+<input type="hidden" id="lat" value="${detail.lat}">
+<input type="hidden" id="lng" value="${detail.lng}">
 <script>
-	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-	mapOption = {
-		center : new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-		level : 1
-	// 지도의 확대 레벨
+	var lat = $("#lat").val();
+	var lng = $("#lng").val();
+	console.log("lat    "+lat);
+	console.log("lng    "+lng);
+	var mapContainer = document.getElementById("map"), // 지도를 표시할 div 
+	mapOption = { 
+		center : new kakao.maps.LatLng(lat, lng), // 지도의 중심좌표
+		level : 2 
 	};
-
-	//지도를 생성합니다    
+	//지도를 생성합니다.
 	var map = new kakao.maps.Map(mapContainer, mapOption);
-
-	//주소-좌표 변환 객체를 생성합니다
-	var geocoder = new kakao.maps.services.Geocoder();
-
-	var marker = new kakao.maps.Marker(), // 클릭한 위치를 표시할 마커입니다
-	infowindow = new kakao.maps.InfoWindow({
-		zindex : 1
-	}); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
+	var markerPosition = new kakao.maps.LatLng(lat, lng); 
+	// 마커를 생성합니다
+	var marker = new kakao.maps.Marker({
+	    position: markerPosition 
+	});
+	// 마커가 지도 위에 표시되도록 설정합니다
+	marker.setMap(map); 
 </script>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

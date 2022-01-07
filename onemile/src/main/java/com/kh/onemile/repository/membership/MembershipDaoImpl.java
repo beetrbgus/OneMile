@@ -20,8 +20,8 @@ public class MembershipDaoImpl implements MembershipDao{
 	}
 	//결제 상품 정보 확인
 	@Override
-	public List<MembershipDTO> search(int mspNo) {
-		return sqlSession.selectList("membership.get", mspNo);
+	public MembershipDTO search(int mspNo) {
+		return sqlSession.selectOne("membership.get", mspNo);
 	}
 	@Override
 	public List<MembershipBuyDTO> joinMembership(int memberNo) {
