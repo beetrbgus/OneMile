@@ -20,12 +20,44 @@ import com.kh.onemile.vo.kakaopay.KakaoPayRegularApproveRequestVO;
 
 @Service
 public class KakaoPayServiceImpl implements KakaoPayService{
-	
 	@Value("${user.kakaopay.key}")
 	public String Auth;
 	@Value("${user.kakaopay.contenttype}")
 	public String ContentType;
 	
+	//단건 결제 준비
+		@Override
+		public KakaoPayReadyResponseVO ready(KakaoPayReadyRequestVO requestVO) throws URISyntaxException {
+			RestTemplate template = new RestTemplate();
+			
+			HttpHeaders headers = new HttpHeaders();
+			headers.add("Authorization", "KakaoAK "+Auth);
+			headers.add("Content-type", ContentType);
+			
+			MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
+			body.add("cid", "TC0ONETIME");
+			body.add("partner_order_id", "원마일");
+			body.add("partner_user_id", requestVO.getPartner_user_id());
+			
+			body.add("item_name", requestVO.getItem_name());
+			body.add("quantity", requestVO.getQuantity_string());
+			body.add("total_amount", requestVO.getTotal_amount_string());
+			body.add("tax_free_amount", "0");
+			
+			
+			body.add("approval_url", "http://localhost:8080/onemile/pay/success");
+			body.add("cancel_url", "http://localhost:8080/onemile/pay/cancel");
+			body.add("fail_url", "http://localhost:8080/onemile/pay/fail");
+			
+			HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
+			
+			URI uri = new URI("https://kapi.kakao.com/v1/payment/ready");
+			
+			KakaoPayReadyResponseVO responseVO = template.postForObject(uri, entity, KakaoPayReadyResponseVO.class);
+			
+			return responseVO;
+		}
+		
 	//정기결제(멤버십) 준비
 	@Override
 	public KakaoPayReadyResponseVO regularReady(KakaoPayReadyRequestVO requestVO) throws URISyntaxException {
@@ -111,17 +143,15 @@ public class KakaoPayServiceImpl implements KakaoPayService{
 		
 		MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
 		body.add("cid", requestVO.getCid());
-		body.add("tid", requestVO.getTid());//담겨왔는데 왜
+		body.add("tid", requestVO.getTid());
 		body.add("partner_order_id", "원마일");
 		body.add("partner_user_id", requestVO.getPartner_user_id());
 		body.add("pg_token", requestVO.getPg_token());
 		
 		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
 		
-		//3. 목적지 설정
 		URI uri = new URI("https://kapi.kakao.com/v1/payment/approve");
 		
-		//4. 요청방식에 따라 다른 명령으로 전송
 		KakaoPayApproveResponseVO responseVO = template.postForObject(uri, entity, KakaoPayApproveResponseVO.class);//응답을 기대하는 요청(Json)
 		
 		return responseVO;
@@ -148,4 +178,6 @@ public class KakaoPayServiceImpl implements KakaoPayService{
 		
 		return responseVO;
 	}
+	
+	
 }

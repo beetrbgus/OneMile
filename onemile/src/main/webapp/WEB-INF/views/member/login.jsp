@@ -4,6 +4,9 @@
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <style>
+	.notice {
+	color: red;
+	}
 	.page-body{
 		width:400px;
 	}
@@ -60,8 +63,7 @@
             <div class="wz input">
               <input type="email" id="userName" name="email" class="input-text" placeholder="이메일 아이디" title="이메일 아이디" autocomplete="off" value="${cookie.saveId.value}"/>
             </div>
-            <!-- <em id="emailError" class="error-text helper error">이메일 형식이 올바르지 않습니다.</em> -->
-          </div>
+            </div>
           <div class="field">
             <div class="wz input">
               <input type="password" id="password" name="pw" class="input-text" placeholder="비밀번호(영문, 숫자, 특수 문자 포함 8자 이상)" title="비밀번호(영문, 숫자, 특수 문자 포함 8자 이상)" />
@@ -74,10 +76,11 @@
           </div>
           <input type="submit" id="btnLogin" class="wz button primary block submit-button" value="로그인"/>
           <input type="hidden" name="returnURL" value="wAccountLogin07d0.html">
-        </form>
+        
         <div class="bottom-message">
           <p>아직 원마일 계정이 없나요? <a href="${root}/member/join">회원가입</a></p>
         </div>
+        
         <div class="login-action">
         	<label>
 			<c:choose>
@@ -93,8 +96,10 @@
             <p class="forgot"><a class="wz text" href="${root}/member/find_id">아이디 찾기<i class="icon chevron-right"></i></a></p>
           	<p class="forgot"><a class="wz text" href="${root}/member/find_pw">비밀번호 찾기<i class="icon chevron-right"></i></a></p>
           </div>
+          </form>
       </div>
      </div>
   </main>
 </div>
+
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

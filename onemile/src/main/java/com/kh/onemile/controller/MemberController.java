@@ -63,7 +63,7 @@ public class MemberController {
 			HttpServletResponse response, HttpSession session) {
 			
 			MemberDTO findDTO = memberService.login(memberDTO);
-			
+			System.out.println(findDTO);
 			//정보가 있으면 세션저장
 			if(findDTO != null) {
 			session.setAttribute("logNo", findDTO.getMemberNo());
@@ -73,7 +73,7 @@ public class MemberController {
 			
 			if(saveId != null) {//쿠키 생성
 				Cookie c = new Cookie("saveId", findDTO.getEmail());
-				c.setMaxAge(4 * 7 * 24 * 60 * 60);//4주
+				c.setMaxAge(4 * 7 * 24 * 60 * 60);
 				response.addCookie(c);
 			}else {//쿠키 삭제
 				Cookie c = new Cookie("saveId", findDTO.getEmail());

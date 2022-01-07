@@ -8,15 +8,9 @@
 	color: red;
 }
 </style>
-<!-- 1. 맘껏 사진을 올린다. 
-2. 사진 올릴 때 이미지 번호를 배열에 담는다.
-3. 배열을 같이 보내서 회원가입을 한다.
-4. 멤버컨트롤러에서 배열의 길이만큼 이미지 삭제하는 서비스를 호출한다. -->
-
 <!-- <script>
 let imgList = new Array();
 let folder = "member";
-
 	$(function(){
 		$("input[name=attach]").on("input", function(e){
 			
@@ -24,7 +18,6 @@ let folder = "member";
 			if(!this.files || !this.files[0]) {
 				return;
 			}
-
 // 			2. 낱개 데이터를 업로드
 			var formData = new FormData();
 			formData.append("attach", this.files[0]);
@@ -41,7 +34,6 @@ let folder = "member";
 				success:function(resp){
 					console.log("성공", resp);
 					console.log("resp    "+resp);
-
 					var tag = $("<img>").attr("src", "${pageContext.request.contextPath}/image/download?imageNo="+resp+"&folder="+folder)
 													.addClass("preview");
 					$("#result").append(tag);
@@ -57,7 +49,6 @@ let folder = "member";
 	});
 </script> -->
 <script>
-
 function readURL(input) {
     if (input.files && input.files[0]) {
        var reader = new FileReader();
@@ -70,7 +61,6 @@ function readURL(input) {
        reader.readAsDataURL(input.files[0]);
     }
 }
-
  $(function () {
 	 //파일이 선택되면 3개 이상인지 확인해서 차단
     $("input[name=attach]").on("input", function () {
@@ -89,7 +79,6 @@ function readURL(input) {
         console.log(fileList);  
 		
     });
-
 		function setThumbnail(imagefile) {
 			console.log("썸네일    "+imagefile)
             var reader = new FileReader();
@@ -104,6 +93,17 @@ function readURL(input) {
  }); 		
 </script>
 <script>
+function getToday(){
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = ("0" + (1 + date.getMonth())).slice(-2);
+    var day = ("0" + date.getDate()).slice(-2);
+
+    return year + "-" + month + "-" + day;
+}
+let birth = $("#birth"); 
+birth.attr("min",getToday);
+
 $(function(){
 	//아이디 중복확인 Ajax
    	$("input[name=email]").on("blur", function(){
@@ -209,7 +209,6 @@ function pw2Check(){
         return false;
     }
 }	
-
 //닉네임 정규표현식
 function nickCheck(){
 	var regex = /^[가-힣0-9]{2,10}$/;
@@ -242,20 +241,19 @@ function phoneCheck(){
 } 
 //생년월일 정규표현식
 function birthCheck(){
-    //입력이 되어있는지만 확인
-    var input = document.querySelector("input[name=birth]");
-    var notice = input.nextElementSibling;
+  	var regex = /^(19[0-9][0-9]|20\d{2})-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
+	var input = document.querySelector("input[name=birth]");
+   	var notice = input.nextElementSibling;
 
-    if(input.value.length > 0){
+    if(input.value.length > 0 && regex.text(input.value)){
         notice.textContent = "";
         return true;
     }
     else{
-        notice.textContent = "생년월일을 선택하세요";
+        notice.textContent = "올바른 날짜를 선택해주세요";
         return false;
     }
 }
-
 //정규식들 종합체크
 function formCheck(){
     return emailCheck() && pwCheck() && pw2Check() && nickCheck() && birthCheck() && phoneCheck();
@@ -330,35 +328,26 @@ $(function(){
 		div.append(select);
 		div.append(select2);
 	});
+	
 		/* 버튼누르면 해당 카테고리 삭제 */
 		$(".delete").on("click", function () {
     	$(this).parent().remove();
     });
 });
 
+/* 자기소개 글자수 체크 */
 function lengCheck() {
- 
-    var input = document.querySelector("#intro");
+	var input = document.querySelector("#intro");
     var output = document.querySelector("#intro-length");
-
     var len = input.value.length;
-    
     //만약 1000글자가 넘어간다면 넘어간 만큼 글자를 제거
     while(len > 100) {
         input.value = input.value.substring(0,input.value.length-1);
         len--;
     }
-
     //글자 정리 후 길이 설정
     output.textContent = len;
 }
-$(document).ready(function(){
-	let mbti  = $("select[name=mbti]");
-	mbti.append("<option>ㅋㅋㅋㅋ</option>");
-	console.log("mbti   "+mbti);
-});
-
-
 </script>
 
 <form method="post" enctype="multipart/form-data"
@@ -373,12 +362,7 @@ $(document).ready(function(){
 			</div>
 			<div class="row">
 				<label>프로필 사진</label> <input type="file" name="attach" multiple>
-				<div id="preview">
-					<img id="img1"></img> <img id="img2"></img> <img id="img3"></img>
-				</div>
 			</div>
-
-
 			<div class="row">
 				<label>이메일</label> <input type="email" name="email" required
 					class="form-input" autocomplete="off" onblur="emailCheck();">
@@ -406,11 +390,10 @@ $(document).ready(function(){
 				<div class="notice"></div>
 			</div>
 			<div class="row">
-				<label>생년월일</label> <input type="date" name="birth" required
-					class="form-input form-inline" autocomplete="off"
+				<label>생년월일</label> <input type="date" name="birth" id="birth"
+					required class="form-input form-inline" autocomplete="off"
 					onblur="birthCheck();">
 			</div>
-
 			<div class="row">
 				<label>성별</label> <select name="gender">
 					<option value="남자">남자</option>
@@ -418,23 +401,24 @@ $(document).ready(function(){
 					<option value="기타">기타</option>
 				</select>
 			</div>
-
 			<div class="row">
-				<textarea name="intro" rows="5" cols="50" placeholder="자기소개"
+				<textarea name="intro" rows="5" cols="50" placeholder="자기소개를 작성해주세요"
 					id="intro" oninput="lengCheck();"></textarea>
 			</div>
 			<div class="row reft">
 				<span id="intro-length">0</span> / 100
 			</div>
 			<div class="row">
-				<input type="checkbox"> [필수]이용약관과 개인정보처리방침에 동의
+				<input type="checkbox" required>[필수]이용약관과 개인정보처리방침에 동의
 			</div>
+
 			<div class="row">
 				<button type="button" class="form-btn next">다음으로</button>
 			</div>
 		</div>
 	</div>
 
+	<!-- 2페이지 -->
 	<div class="page">
 		<div class="container-400 container-center">
 			<div class="row center">
@@ -445,36 +429,46 @@ $(document).ready(function(){
 			</div>
 
 			<div class="row">
-				<select class="big" required name="location">
-					<option value="">카테고리선택</option>
+				<select class="big" name="location">
+					<option value="">관심사 선택</option>
 					<c:forEach var="category" items="${category}">
 						<option value="${category.bigType}">${category.bigType}</option>
 					</c:forEach>
-				</select> <select class="middle" name="smalltype"></select>
+				</select> 
+				<select class="middle" name="smalltype"></select>
 			</div>
-
 			<div id="category-select"></div>
+
 			<div class="row">
-				<label>MBTI</label> <br> <select name="mbti">
-					<option value="INFP">INFP
-					<option>
+				<label>MBTI</label> 
+				<br> 
+				<select name="mbti">
+					<option value="ISTJ">ISTJ</option>
+					<option value="ISFJ">ISFJ</option>
+					<option value="INFJ">INFJ</option>
+					<option value="INTJ">INTJ</option>
+					<option value="ISTP">ISTP</option>
+					<option value="ISFP">ISFP</option>
+					<option value="INFP">INFP</option>
+					<option value="INTP">INTP</option>
+					<option value="ESTP">ESTP</option>
+					<option value="ESFP">ESFP</option>
+					<option value="ENFP">ENFP</option>
+					<option value="ENTP">ENTP</option>
+					<option value="ESTJ">ESTJ</option>
+					<option value="ESFJ">ESFJ</option>
+					<option value="ENFJ">ENFJ</option>
+					<option value="ENTJ">ENTJ</option>
 				</select>
-
 			</div>
-
-			<div class="row">
-				<label>코로나 백신접종여부</label> <input type="file" name="attach"
-					accept="image/*" class="form-input">
-			</div>
+			
 			<button type="button" class="form-btn prev">이전 단계로</button>
-
 			<div class="row">
 				<input type="submit" value="가입" class="form-btn">
 			</div>
 
 		</div>
 	</div>
-
 </form>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
