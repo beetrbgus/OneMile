@@ -12,7 +12,7 @@ public class CommuDTO {
 	private int commuNo;
 	private int memberNo;
 	private int mapNo;
-	private String middleName;
+	private String middlename;
 	private String title;
 	private String content;
 	@DateTimeFormat(pattern="YYYY-MM-DD HH24:mm:ss")

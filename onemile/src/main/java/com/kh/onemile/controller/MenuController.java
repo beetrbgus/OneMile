@@ -22,7 +22,6 @@ public class MenuController {
 	public List<MenuDTO> getMenu(Model model) {
 		List<MenuDTO> list= menuDao.getmenuList();
 		model.addAttribute("list", list);
-		System.out.println(list);
 		return list;
 	}
 }

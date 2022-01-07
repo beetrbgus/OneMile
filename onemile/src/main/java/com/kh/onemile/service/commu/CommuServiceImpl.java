@@ -1,30 +1,23 @@
 package com.kh.onemile.service.commu;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.kh.onemile.entity.commu.CommuDTO;
-import com.kh.onemile.entity.image.middle.CommuImgMidDTO;
 import com.kh.onemile.entity.image.middle.MiddleImgTableDTO;
 import com.kh.onemile.entity.map.MapDTO;
 import com.kh.onemile.repository.commu.CommuDao;
 import com.kh.onemile.repository.image.middle.MiddleImageDAO;
 import com.kh.onemile.repository.map.MapDao;
-import com.kh.onemile.repository.member.MemberDao;
 import com.kh.onemile.service.image.ImageService;
 import com.kh.onemile.util.Sequence;
 import com.kh.onemile.vo.CommuDetailVO;
 import com.kh.onemile.vo.CommuVO;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @Service
 public class CommuServiceImpl implements CommuService {
 
@@ -55,28 +48,29 @@ public class CommuServiceImpl implements CommuService {
 		// 게시글 Dto 설정
 		CommuDTO commuDto = new CommuDTO();
 
-		commuDto.setCommuNo(commuVo.getCommuNo());
+		commuDto.setCommuNo(commuNo);
 		commuDto.setMemberNo(commuVo.getMemberNo());
-		commuDto.setMiddleName(commuVo.getMiddleName());
+		commuDto.setMiddlename(commuVo.getMiddleName());
 		commuDto.setTitle(commuVo.getTitle());
 		commuDto.setContent(commuVo.getContent());
 
 		double lat = commuVo.getLat();
-		double lon = commuVo.getLon();
+		double lng = commuVo.getLng();
 
-		boolean isMap = lat != 0 && lon != 0; // map 좌표가 0이 아니면
+		boolean isMap = lat != 0 && lng != 0; // map 좌표가 0이 아니면
 
 		if (isMap) { // 지도가 있으면
 			MapDTO mapDto = new MapDTO();
-
-			int mapNo = mapDao.getSeq();
-
-			mapDto.setLat(lat);
-			mapDto.setLng(lon);
+			
+			int mapNo = seq.nextSequence("map_seq");
+			
 			mapDto.setMapNo(mapNo);
-			mapDto.setDetailAddress(commuVo.getDetailaddress());
+			mapDto.setLat(lat);
+			mapDto.setLng(lng);
+			mapDto.setDetailAddress(commuVo.getDetailAddress());
 
 			mapDao.regMap(mapDto);
+			
 			commuDto.setMapNo(mapNo);
 		}
 		commuDao.write(commuDto);
@@ -92,7 +86,6 @@ public class CommuServiceImpl implements CommuService {
 				imgMidDTO.setImgNo(imgNo);
 				// 중간 이미지 테이블에 등록
 				middleImageDao.reg(imgMidDTO);
-				log.debug("등록 완료  cobuyImgMidDTO   " + imgMidDTO.toString());
 			}
 		}
 		return commuNo;
@@ -100,20 +93,20 @@ public class CommuServiceImpl implements CommuService {
 
 	// 수정하기
 	@Override
-	public void change(CommuVO commuVo) throws IllegalStateException, IOException {
+	public int edit(CommuVO commuVo) throws IllegalStateException, IOException {
 
 		// 게시글 Dto 설정
 		CommuDTO commuDto = new CommuDTO();
 		commuDto.setCommuNo(commuVo.getCommuNo());
 		commuDto.setMemberNo(commuVo.getMemberNo());
-		commuDto.setMiddleName(commuVo.getMiddleName());
+		commuDto.setMiddlename(commuVo.getMiddleName());
 		commuDto.setTitle(commuVo.getTitle());
 		commuDto.setContent(commuVo.getTitle());
 
 		double lat = commuVo.getLat();
-		double lon = commuVo.getLon();
+		double lng = commuVo.getLng();
 
-		boolean map = lat != 0 && lon != 0; // map 좌표가 0이 아니면
+		boolean map = lat != 0 && lng != 0; // map 좌표가 0이 아니면
 
 		if (map) { // 지도가 있으면
 			MapDTO mapDto = new MapDTO();
@@ -121,20 +114,21 @@ public class CommuServiceImpl implements CommuService {
 			int mapNo = mapDao.getSeq();
 
 			mapDto.setLat(lat);
-			mapDto.setLng(lon);
+			mapDto.setLng(lng);
 			mapDto.setMapNo(mapNo);
-			mapDto.setDetailAddress(commuVo.getDetailaddress());
+			mapDto.setDetailAddress(commuVo.getDetailAddress());
 
-			mapDao.regMap(mapDto);
-			// commuDto.setMapNo(mapNo);
+			mapDao.modify(mapDto);
 		}
-		commuDao.write(commuDto);
+		commuDao.changeCommu(commuDto);
+		
+		return commuDto.getCommuNo();
 	}
 
 	// 숨김처리
 	@Override
-	public void hide(String viewYN) {
-		// TODO Auto-generated method stub
+	public void hide(int boardNo) {
+		commuDao.hide(boardNo);
 	}
 
 	// 카테고리별 리스트

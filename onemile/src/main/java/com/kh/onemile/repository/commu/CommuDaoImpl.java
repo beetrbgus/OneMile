@@ -28,8 +28,8 @@ public class CommuDaoImpl implements CommuDao{
 	}
 
 	@Override
-	public boolean hide(String viewYN) {
-		int count = sqlSession.update("commu.hide", viewYN);
+	public boolean hide(int boardNo) {
+		int count = sqlSession.update("commu.hide", boardNo);
 		return count > 0;
 	}
 

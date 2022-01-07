@@ -61,26 +61,23 @@ textarea {
 }
 </style>
 <script>
-var text=document.querySelector('#content').val();
-text=text.replace(/(?:\r\n|\r|\n)/g,'<br/>');
+
 </script>
 <div class="page-container">
 	<div class="ui-header">
 		<h2 class="title">커뮤니티</h2>
 	</div>
-	<form  method="post" enctype="multipart/form-data">
+	<form method="post" enctype="multipart/form-data">
 		<input type="hidden" name="mapNo" value=0>
-		<select name="middleName" class="category">
-			<option value="" class="label category">카테고리 선택</option>
-			<option value="동네질문" class="label category">동네질문</option>
-			<option value="분실/실종센터" class="label category">분실/실종센터</option>
-		</select>
-		<textarea rows="1" maxlength="100" name="title" class="post-title"
-			placeholder="제목을 입력하세요."></textarea>
-		<textarea cols="100" rows="20" id="content" name="content" class="post-content"
-			placeholder="내용을 입력하세요."></textarea>
+		<input type="text" name="middleName" class="category" readonly value="${commuEditVO.middleName}">
+		<textarea rows="1" maxlength="100" name="title" class="post-title" placeholder="제목을 입력하세요.">
+		${commuEditVO.title}
+		</textarea>
+		<textarea cols="100" rows="20" name="content" class="post-content"
+			placeholder="내용을 입력하세요.">${commuEditVO.title}</textarea>
+		<label class="danger">※사진을 새로 추가하면 기존사진은 모두 삭제됩니다.(미리보기 사진을 클릭하면 모두 삭제됩니다.)</label>
 		<input type="file" name="attach" class="file-choose">
-		<input type="submit" value="등록하기" class="myButton">
+		<input type="submit" value="수정하기" class="myButton">
 	</form>
 </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

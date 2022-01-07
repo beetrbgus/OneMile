@@ -35,4 +35,10 @@ public class ImageDaoImpl implements ImageDao{
 		List<ImageDTO> list = sqlSession.selectList("image.listByBoardNo", boardNo);
 		return list;
 	}
+
+	@Override
+	public List<ImageDTO> listByMenu(String middleName) {
+		List<ImageDTO> list = sqlSession.selectList("image.listByMenu", middleName);
+		return list;
+	}
 }

@@ -29,7 +29,7 @@ public class ImageServiceImpl implements ImageService {
 	@Override
 	public List<Integer> regImage(List<MultipartFile> attach, String savePath)
 			throws IllegalStateException, IOException {
-		
+		log.debug("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ들어옴 ");
 		List<Integer> imageNoList = new ArrayList<Integer>();
 		log.debug(" List<MultipartFile>   " + attach.toString());
 		for (MultipartFile multipartFile : attach) {
@@ -92,6 +92,12 @@ public class ImageServiceImpl implements ImageService {
 	@Override
 	public List<ImageDTO> listByBoardNo(int boardNo) {
 		List<ImageDTO> list = imageDao.listByBoardNo(boardNo);
+		return list;
+	}
+	
+	@Override
+	public List<ImageDTO> listByMenu(String middleName) {
+		List<ImageDTO> list = imageDao.listByMenu(middleName);
 		return list;
 	}
 

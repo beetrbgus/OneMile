@@ -16,7 +16,7 @@ public class CommuImageDaoImpl implements MiddleImageDAO{
 
 	@Override
 	public void reg(MiddleImgTableDTO middleImgTableDTO) {
-		sqlSession.insert("cmi.regCmi", middleImgTableDTO);
+		sqlSession.insert("cmi.reg", middleImgTableDTO);
 	}
 
 	@Override
