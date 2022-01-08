@@ -63,7 +63,7 @@
 $(function () {
     //메뉴 ajax
         $.ajax({
-            url: "${root}/menu/",
+            url: "${pageContext.request.contextPath}/menu/",
             type: "post",
             data: {},
             success: function (resp) {
@@ -86,7 +86,9 @@ $(function () {
                 }
             	
             },
-            error: function (err) {}
+            error: function (err) {
+            	
+            }
         });
     
     $(".GNBDesktop_more__39gyV").click(function(){
@@ -233,11 +235,17 @@ $(function () {
 												aria-label="프로젝트 오픈 신청">공동구매 오픈 신청</button>
 											<div class="FundingOpen_fundingOpenContainer__2GDma">
 												<a class="FundingOpen_btnLink__11tnC" href="/web/wsub/openfunding">와디즈
-													메이커 시작하기<small class="FundingOpen_desc__UdPr4">와디즈 서비스를 알아보고 정보를
-														구독합니다.</small></a><a class="FundingOpen_btnLink__11tnC"
-													href="/web/wsub/openfunding/reward">펀딩 오픈 신청하기<small
-														class="FundingOpen_desc__UdPr4">서포터에게 '제품'이나 '서비스'를
-														선물합니다.</small></a><a class="FundingOpen_btnLink__11tnC"
+													메이커 시작하기
+													<small class="FundingOpen_desc__UdPr4">와디즈 서비스를 알아보고 정보를
+														구독합니다.
+													</small>
+												</a>
+												<a class="FundingOpen_btnLink__11tnC"
+													href="/web/wsub/openfunding/reward">펀딩 오픈 신청하기
+													<small class="FundingOpen_desc__UdPr4">
+														서포터에게 '제품'이나 '서비스'를 선물합니다.</small>
+												</a>
+												<a class="FundingOpen_btnLink__11tnC"
 													href="/web/wsub/openfunding/equity">투자 오픈 신청하기<small
 														class="FundingOpen_desc__UdPr4">투자자에게 기업의 주식이나 채권을
 														발행합니다.</small></a><a class="FundingOpen_btnLink__11tnC"

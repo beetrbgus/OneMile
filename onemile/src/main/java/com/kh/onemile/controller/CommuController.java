@@ -62,7 +62,7 @@ public class CommuController {
 		return "commu/notmap/list";
 	}
 	
-	@RequestMapping("/notmap/detail")
+	@GetMapping("/notmap/detail")
 	public String detail(@RequestParam int boardNo, Model model) throws IOException {
 		model.addAttribute("commuDetailVO", commuService.detail(boardNo));
 		model.addAttribute("imageNoList", imageService.listByBoardNo(boardNo)); //boardNo로 imageNo list를 불러오는 거 만들기
