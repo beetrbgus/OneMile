@@ -4,10 +4,16 @@ $(function(){
 		    navigator.geolocation.getCurrentPosition((position) => {
 		    	let lat = position.coords.latitude;
 		    	let lng = position.coords.longitude;
+		    	
+		    	console.log(lat);
+		    	console.log(lng);
 		    	//세션이 있으면 세션 지우고  세션에 저장.
 		    	if(removeSession()){
 		    		setSession(lat,lng);
+		    		console.log('들어왔다.');
 		    	}
+		    	
+		    	console.log('안들어왔다.');
 		    	let region = getAddr(lat,lng);
 		    });
 
@@ -33,8 +39,8 @@ $(function(){
     	
 		if(sessionlat ==0 ||sessionlat ==undefined || sessionlat == null
 				|| sessionlng ==0 ||sessionlng ==undefined || sessionlng == null){
-	    	removeItem(lat);
-	    	removeItem(lng);
+			sessionStorage.removeItem("lat");
+			sessionStorage.removeItem("lng");
 	    	//지웠으면 트루 반환
 	    	return true;
 		}
