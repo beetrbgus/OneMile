@@ -189,7 +189,7 @@ $(function () {
 										href="/web/wreward/comingsoon"><span>마일즈</span></a></li>
 								<li class="GNBDesktop_item__H8bay"><a class="GNBDesktop_link__1AP6q"
 										href="/web/wreward/main"><span>소셜링</span></a></li>
-								<li class="GNBDesktop_item__H8bay"><a href="/web/store/main"
+								<li class="GNBDesktop_item__H8bay"><a href="${root}/cobuy/list"
 										class="GNBDesktop_link__1AP6q"><span>공동구매</span></a></li>
 								<li class="GNBDesktop_item__H8bay">
 									<div>
