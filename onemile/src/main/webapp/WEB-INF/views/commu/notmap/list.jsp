@@ -24,7 +24,7 @@
 		function loadData(page, size, middleName) {
 
 			$.ajax({
-				url : "http://localhost:8080/onemile/commu/notmap/listdetail",
+				url : "${pageContext.request.contextPath}/commu/notmap/listdetail",
 				type : "get",
 				data : {
 					middleName : middleName,
@@ -89,7 +89,7 @@
 		
 		<div class="board-main">
 			<div class="board-write" align="right">
-				<button type="button" class="wz button write-btn"><a href="./write">글쓰기</a></button>
+				<a href="./write"><button type="button" class="wz button write-btn">글쓰기</button></a>
 			</div>
 		</div>
 		<div class="board-footer">

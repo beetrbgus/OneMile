@@ -23,7 +23,7 @@
 		function loadData(page, size, middleName) {
 
 			$.ajax({
-				url : "http://localhost:8080/onemile/commu/notmap/listdetail",
+				url : "${pageContext.request.contextPath}/commu/notmap/listdetail",
 				type : "get",
 				data : {
 					middleName : middleName,
