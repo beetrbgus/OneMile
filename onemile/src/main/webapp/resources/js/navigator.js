@@ -11,8 +11,7 @@ $(function(){
 		    	if(removeSession()){
 		    		setSession(lat,lng);
 		    	}
-
-		    	let region = getAddr(lat,lng);
+		    	let region = getAddr(lat,lng);		    		
 		    });
 
 		}

@@ -18,4 +18,5 @@ public interface CobuyService {
 	public List<MiddleNameDTO> getMiddleName();
 	public ConfirmVO getConfirm(ConfirmVO confirmVO);
 	public List<CobuyListVO> getList(int startRow, int endRow);
+
 }
