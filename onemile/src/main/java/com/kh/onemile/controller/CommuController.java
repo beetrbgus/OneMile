@@ -17,10 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.onemile.service.commu.CommuService;
 import com.kh.onemile.service.image.ImageService;
-import com.kh.onemile.service.reply.ReplyService;
 import com.kh.onemile.vo.CommuDetailVO;
 import com.kh.onemile.vo.CommuVO;
-import com.kh.onemile.vo.ImageVO;
 
 @RequestMapping("/commu")
 @Controller

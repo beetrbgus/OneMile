@@ -14,8 +14,7 @@
 						<em class="user-img" style="background-image:url(${pageContext.request.contextPath}/image/download?imageNo=${commuDetailVO.imageNo}&folder=member)"></em>
 						</c:if>
 						<em class="user-img" style="background-image:url(https://via.placeholder.com/300x300?text=User)"></em>
-						<span class="user-info">${commuDetailVO.nick}
-						<br>${commuDetailVO.regDate}</span>
+						<span class="user-info">${commuDetailVO.nick}<br>${commuDetailVO.regDate}</span>
 					</div>
 				</div>
 				<div class="inner-contents">
