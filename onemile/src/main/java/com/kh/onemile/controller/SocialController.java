@@ -1,17 +1,22 @@
 package com.kh.onemile.controller;
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.onemile.entity.social.SocialBigCategoryDTO;
 import com.kh.onemile.service.category.CategoryService;
 import com.kh.onemile.service.social.SocialService;
+import com.kh.onemile.vo.social.SocialRegVO;
 import com.kh.onemile.vo.social.like.SocialLikeCategoryVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -36,7 +41,10 @@ public class SocialController {
 		return "social/reg2";
 	}
 	@PostMapping("/reg")
-	public String postReg(Model model) {
+	public String postReg(@ModelAttribute SocialRegVO socialRegVO,HttpSession session) throws IllegalStateException, IOException{
+		int memNo = Integer.parseInt(String.valueOf(session.getAttribute("logNo")));
+		socialRegVO.setMemberNo(memNo);
+		socialService.reg(socialRegVO);
 		return "social/detail";
 	}
 }

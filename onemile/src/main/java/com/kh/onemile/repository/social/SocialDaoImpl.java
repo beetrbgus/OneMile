@@ -15,8 +15,8 @@ public class SocialDaoImpl implements SocialDao{
 	SqlSession sqlSession;
 	
 	@Override
-	public void regSocial(SocialDTO socialDto) {
-		sqlSession.insert("social.regSocial", socialDto);
+	public void reg(SocialDTO socialDto) {
+		sqlSession.insert("social.reg", socialDto);
 	}
 
 	@Override

@@ -5,7 +5,7 @@ import java.util.List;
 import com.kh.onemile.entity.social.SocialDTO;
 
 public interface SocialDao {
-	void regSocial(SocialDTO socialDto);
+	void reg(SocialDTO socialDto);
 	List<SocialDTO> list();
 	boolean changeSocial(SocialDTO socialDto);
 	SocialDTO detail(int socialNo);

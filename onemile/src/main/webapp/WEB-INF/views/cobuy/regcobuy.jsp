@@ -35,7 +35,7 @@
 	<!--  지도 영역 -->
 
 	<div class="map_wrap">
-		<div id="map"
+		<div id="map" 
 			style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
 	</div>
 	<input id="location" type="hidden" name="detailAddress" required>
