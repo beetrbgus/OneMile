@@ -10,7 +10,6 @@ $(function(){
 		    	//세션이 있으면 세션 지우고  세션에 저장.
 		    	if(removeSession()){
 		    		setSession(lat,lng);
-		    		console.log('들어왔다.');
 		    	}
 		    	let region = getAddr(lat,lng);		    		
 		    });
