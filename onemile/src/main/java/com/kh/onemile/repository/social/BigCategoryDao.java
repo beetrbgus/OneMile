@@ -5,6 +5,7 @@ import java.util.List;
 import com.kh.onemile.entity.social.SocialBigCategoryDTO;
 import com.kh.onemile.entity.social.SocialCategoryDTO;
 import com.kh.onemile.vo.MemberJoinVO;
+import com.kh.onemile.vo.social.like.SocialLikeCategoryVO;
 
 public interface BigCategoryDao {
 	
@@ -16,5 +17,7 @@ public interface BigCategoryDao {
 	
 	//회원 관심 카테고리 
 	void insert(MemberJoinVO memberJoinVO, int memNo);
+
+	List<SocialLikeCategoryVO> getLikeCategory();
 
 }
