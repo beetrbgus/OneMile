@@ -12,9 +12,7 @@ $(function(){
 		    		setSession(lat,lng);
 		    		console.log('들어왔다.');
 		    	}
-		    	
-		    	console.log('안들어왔다.');
-		    	let region = getAddr(lat,lng);
+		    	let region = getAddr(lat,lng);		    		
 		    });
 
 		}
@@ -28,6 +26,7 @@ $(function(){
 	        	console.log(result[0]);
 	        	let dong = result[0].region_3depth_name;
 	        	$(".dong").val(dong);
+	        	 sessionStorage.setItem("dong", dong);
 	        }
 	        return result[0];
 	    };
