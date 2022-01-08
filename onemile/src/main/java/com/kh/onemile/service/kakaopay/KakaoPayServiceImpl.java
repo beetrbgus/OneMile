@@ -2,7 +2,6 @@ package com.kh.onemile.service.kakaopay;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -10,12 +9,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
-
 import com.kh.onemile.vo.kakaopay.ConfirmVO;
+import com.kh.onemile.vo.kakaopay.KaKaoPayRegularPayMentStateResponseVO;
 import com.kh.onemile.vo.kakaopay.KakaoPayApproveRequestVO;
 import com.kh.onemile.vo.kakaopay.KakaoPayApproveResponseVO;
 import com.kh.onemile.vo.kakaopay.KakaoPayAutoPayMentInactiveResponseVO;
-import com.kh.onemile.vo.kakaopay.KakaoPayReadyRequestVO;
 import com.kh.onemile.vo.kakaopay.KakaoPayReadyResponseVO;
 import com.kh.onemile.vo.kakaopay.KakaoPayRegularApproveRequestVO;
 
@@ -112,7 +110,7 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 
 		MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
 		body.add("cid", requestVO.getCid());
-		body.add("tid", requestVO.getTid());// 담겨왔는데 왜
+		body.add("tid", requestVO.getTid());
 		body.add("partner_order_id", "원마일");
 		body.add("partner_user_id", requestVO.getPartner_user_id());
 		body.add("pg_token", requestVO.getPg_token());
@@ -125,9 +123,7 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 
 		// 4. 요청방식에 따라 다른 명령으로 전송
 		KakaoPayApproveResponseVO responseVO = template.postForObject(uri, entity, KakaoPayApproveResponseVO.class);// 응답을
-																													// 기대하는
-																													// 요청(Json)
-
+																													
 		return responseVO;
 	}
 
@@ -151,6 +147,29 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 		KakaoPayAutoPayMentInactiveResponseVO responseVO = template.postForObject(uri, entity,
 				KakaoPayAutoPayMentInactiveResponseVO.class);
 
+		return responseVO;
+	}
+	
+	// 정기결제 상태 조회
+	@Override
+	public KaKaoPayRegularPayMentStateResponseVO regularState(String sid) throws URISyntaxException {
+		RestTemplate template = new RestTemplate();
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Authorization",  "KakaoAK "+Auth);
+		headers.add("Content-type", ContentType);
+		
+		MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
+		body.add("cid", "TCSUBSCRIP");
+		body.add("sid", sid);
+		
+		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
+		
+		
+		URI uri = new URI("https://kapi.kakao.com/v1/payment/manage/subscription/status");
+		
+		KaKaoPayRegularPayMentStateResponseVO responseVO = template.postForObject(uri, entity, KaKaoPayRegularPayMentStateResponseVO.class);
+		
 		return responseVO;
 	}
 }

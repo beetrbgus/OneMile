@@ -3,7 +3,7 @@
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="membership">
-	<!-- 멤버십 상품 목록 -->
+	<!-- 멤버십 상품 목록(혜택포함) -->
 	<select id="membershipList" resultType="MembershipListVO">
 		select * from msp m inner join ad a on a.msp_no = m.msp_no
 	</select>
@@ -46,6 +46,7 @@
 		where me.member_no = #{memberNo}
 	</select>
 	
+	<!-- 내가 가입한 멤버십  -->
 	<select id="joinMembership" parameterType="int" resultType="MembershipBuyDTO">
 		select * from msb where member_no = #{memberNo}
 	</select>	

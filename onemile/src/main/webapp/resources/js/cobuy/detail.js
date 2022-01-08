@@ -21,7 +21,7 @@ $(function() {
 	function cnt() {
 		let count = $("#buyForm").find("input[name='quantity']").val();
 		let left = $("#buyForm").find("input[name='stock']").val();
-		if (count == 0) {
+		if (count == 0 || count==undefined) {
 			alert("수량을 선택해주세요.");
 			return false;
 		}
@@ -30,6 +30,7 @@ $(function() {
 			$("#buyForm").find("input[name='quantity']").val(left);
 			return false;
 		}
+			return true;
 	}
 	function dontBuy() {
 		let stock = $("input[name=stock]").val();

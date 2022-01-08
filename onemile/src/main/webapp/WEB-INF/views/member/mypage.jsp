@@ -58,7 +58,9 @@
 				<a href="edit_pw" class="link-btn-block">비밀번호 변경</a>
 			</div>
 			<div class="row center">
-				<a href="reg_membership" class="link-btn-block">멤버십 구매목록</a>
+				<a href="${pageContext.request.contextPath}/membership/reg_membership" class="link-btn-block">멤버십 구매목록</a>
+				<a href="${pageContext.request.contextPath}/pay/state" class="link-btn-block">정기결제 조회</a>
+			
 			</div>
 			
 		</div>

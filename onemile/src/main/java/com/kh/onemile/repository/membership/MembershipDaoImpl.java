@@ -26,6 +26,8 @@ public class MembershipDaoImpl implements MembershipDao{
 	public MembershipDTO search(int mspNo) {
 		return sqlSession.selectOne("membership.get", mspNo);
 	}
+	
+	//내가 가입한 멤버십
 	@Override
 	public List<MembershipBuyDTO> joinMembership(int memberNo) {
 		return sqlSession.selectList("membership.joinMembership", memberNo);

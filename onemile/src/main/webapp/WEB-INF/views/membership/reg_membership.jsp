@@ -12,6 +12,7 @@
 		${membershipBuyDTO.itemName} / ${membershipBuyDTO.totalAmount} / ${membershipBuyDTO.buyTime} / ${membershipBuyDTO.buyEndtime}
 		${membershipBuyDTO.status} / ${membershipBuyDTO.sid}
 		<a href="${pageContext.request.contextPath}/pay/regular/disabled?sid=${membershipBuyDTO.sid}">중지</a>
+	<a href="${pageContext.request.contextPath}/pay/state?sid=${membershipBuyDTO.sid}">조회</a>
 	</div>
 </c:forEach>
 	
