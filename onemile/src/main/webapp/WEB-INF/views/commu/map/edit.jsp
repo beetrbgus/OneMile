@@ -84,8 +84,7 @@ textarea {
 		<input class="form-input" type="text" name="detailAddress" placeholder="상세주소를 입력하세요." value="${commuEditVO.detailAddress}">
 		<input type="hidden" name="lat" value="${commuEditVO.lat}">
 		<input type="hidden" name="lng" value="${commuEditVO.lng}">
-		<textarea rows="1" maxlength="100" name="title" class="post-title">${commuEditVO.title}
-		</textarea>
+		<textarea rows="1" maxlength="100" name="title" class="post-title">${commuEditVO.title}</textarea>
 		<textarea cols="100" rows="20" name="content" class="post-content">${commuEditVO.content}</textarea>
 		<label class="danger">※사진을 새로 추가하면 기존사진은 삭제됩니다.</label>
 		<input type="file" name="attach" class="file-choose">
