@@ -46,7 +46,7 @@
                         on co.commu_no = CIF.commu_no
                         left join member me on co.member_no = me.member_no
 					where
-						middlename = #{middleName} order by commu_no desc
+						middlename = #{middleName} and co.hiddenyn = 'N' order by commu_no desc
 			)TMP
 		) where rn between ${startRow} and ${endRow}
 	</select>
@@ -57,7 +57,7 @@
 	</select>
 	
 	<!-- 수정하기 -->
-	<update id="change">
+	<update id="change" parameterType="commuDto">
 		update commu set
 			title = #{title}, content = #{content}
 		where
@@ -67,7 +67,7 @@
 	<!-- 숨김처리 -->
 	<update id="hide" parameterType="int">
 		update commu set
-			viewyn = 'Y'
+			hiddenyn = 'Y'
 		where commu_no = #{commuNo}
 	</update>
 </mapper>

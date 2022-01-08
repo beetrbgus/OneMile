@@ -20,7 +20,7 @@ public class CommuDetailVO {
 	private String content;
 	@DateTimeFormat(pattern="YYYY-MM-DD HH24:mm:ss")
 	private Date regDate;
-	private String getRegDate() {
+	public String getRegDate() {
 		Format f = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		return f.format(this.regDate);
 	}
@@ -32,7 +32,7 @@ public class CommuDetailVO {
 	private String nick;
 	private double lat;
 	private double lng;
-	private String detailaddress;
+	private String detailAddress;
 	
 	private int cmiNo;
 	private List<ImageDTO> imgNoList;

@@ -59,6 +59,15 @@ textarea {
 .myButton:hover {
 	background-color:#dde2e6;
 }
+.form-input {
+	width:500px;
+	font-size:20px;
+	margin-top:1rem;
+	margin-bottom:1rem;
+}
+.label{
+	font-size:22px;
+}
 </style>
 <div class="page-container">
 	<div class="ui-header">
@@ -68,8 +77,13 @@ textarea {
 		<select name="middleName" class="category">
 			<option value="${commuEditVO.middleName}" class="label category">${commuEditVO.middleName}</option>
 		</select>
-		<input type="hidden" name="mapNo" value=0>
 		<input type="hidden" name="commuNo" value="${commuEditVO.commuNo}">
+		<div id="map" style="width: 100%; height: 350px;"></div>
+		<input class="form-input" type="text" name="fgLocation" readonly placeholder="위치를 선택하지 않으시면 기존 위치에 저장됩니다."><br>
+		<label class="label">상세주소 : </label>
+		<input class="form-input" type="text" name="detailAddress" placeholder="상세주소를 입력하세요." value="${commuEditVO.detailAddress}">
+		<input type="hidden" name="lat" value="${commuEditVO.lat}">
+		<input type="hidden" name="lng" value="${commuEditVO.lng}">
 		<textarea rows="1" maxlength="100" name="title" class="post-title">${commuEditVO.title}
 		</textarea>
 		<textarea cols="100" rows="20" name="content" class="post-content">${commuEditVO.content}</textarea>
@@ -78,4 +92,5 @@ textarea {
 		<input type="submit" value="수정하기" class="myButton">
 	</form>
 </div>
+<script type="text/javascript"src="${root}/onemile/resources/js/commu-map.js"></script>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

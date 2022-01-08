@@ -1,6 +1,7 @@
 package com.kh.onemile.controller;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -17,10 +18,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.onemile.service.commu.CommuService;
 import com.kh.onemile.service.image.ImageService;
-import com.kh.onemile.service.reply.ReplyService;
 import com.kh.onemile.vo.CommuDetailVO;
+import com.kh.onemile.vo.CommuEditVO;
 import com.kh.onemile.vo.CommuVO;
-import com.kh.onemile.vo.ImageVO;
 
 @RequestMapping("/commu")
 @Controller
@@ -72,21 +72,22 @@ public class CommuController {
 	
 	@GetMapping("/notmap/edit")
 	public String edit(@RequestParam int boardNo, Model model) throws IOException {
-		model.addAttribute("commuDetailVO", commuService.detail(boardNo));
+		model.addAttribute("commuEditVO", commuService.detail(boardNo));
 		model.addAttribute("imageNoList", imageService.listByBoardNo(boardNo));
 		
 		return "commu/notmap/edit";
 	}
 	
 	@PostMapping("/notmap/edit")
-	public String edit(@ModelAttribute CommuVO commuVo, HttpSession session) throws IllegalStateException, IOException {
-		int commuNo = commuService.edit(commuVo);
+	public String edit(@ModelAttribute CommuEditVO commuEditVo, HttpSession session) throws IllegalStateException, IOException {
+		int commuNo = commuService.edit(commuEditVo);
 		return "redirect:/commu/notmap/detail?boardNo="+commuNo;
 	}
 	
 	@RequestMapping("/notmap/delete")
-	public String delete(@RequestParam int boardNo) throws IOException {
+	public String delete(@RequestParam int boardNo, @RequestParam String middleName) throws IOException {
 		commuService.hide(boardNo);
-		return "commu/notmap/list";
+		String encodedParam = URLEncoder.encode(middleName, "UTF-8");
+		return "redirect:/commu/notmap/list?middleName="+encodedParam;
 	}
 }
