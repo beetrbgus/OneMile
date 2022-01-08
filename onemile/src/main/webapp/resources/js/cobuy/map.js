@@ -48,9 +48,10 @@ window.kakao.maps.load(function() {
 					// 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
 					infowindow.setContent(content);
 					infowindow.open(map, marker);
-					$("input[name=fgLocation]").val(
+					$("#location").val(
 							result[0].address.address_name);
-					var address = $("input[name=fgLocation]").val();
+					var address = $("#location").val();
+					console.log("address    "+address);
 					// 2. 카카오 장소변환 샘플 코드를 복사 후 일부 수정
 					// 주소-좌표 변환 객체를 생성합니다
 					var geocoder = new kakao.maps.services.Geocoder();

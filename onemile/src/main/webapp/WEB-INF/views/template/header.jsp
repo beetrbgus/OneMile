@@ -90,6 +90,9 @@ $(function () {
             	
             }
         });
+    if(sessionStorage.getItem("dong")!=null||sessionStorage.getItem("dong")!=undefined||sessionStorage.getItem("dong")!=""){
+	    $(".dong").val(sessionStorage.getItem("dong"));
+    } 
     
     $(".GNBDesktop_more__39gyV").click(function(){
     	$(".Backdrop_backDrop__3v5kD").toggleClass("dark")
