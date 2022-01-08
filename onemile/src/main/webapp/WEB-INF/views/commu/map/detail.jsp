@@ -43,11 +43,11 @@
 		<div class="wboard-detail-bottom">
 			<div class="wboard-detail-btn-wrap">
 				<a class="wz button"
-					href="http://localhost:8080/onemile/commu/map/list?middleName=${commuDetailVO.middleName}">목록으로 돌아가기</a>
+					href="${root}/commu/map/list?middleName=${commuDetailVO.middleName}">목록으로 돌아가기</a>
 				<a class="wz button"
-					href="http://localhost:8080/onemile/commu/map/edit?boardNo=${commuDetailVO.commuNo}">수정하기</a>
+					href="${root}/commu/map/edit?boardNo=${commuDetailVO.commuNo}">수정하기</a>
 				<a class="wz button"
-					href="http://localhost:8080/onemile/commu/map/delete?boardNo=${commuDetailVO.commuNo}&middleName=${commuDetailVO.middleName}">삭제하기</a>
+					href="${root}/commu/map/delete?boardNo=${commuDetailVO.commuNo}&middleName=${commuDetailVO.middleName}">삭제하기</a>
 			</div>
 		</div>
 	</div>
