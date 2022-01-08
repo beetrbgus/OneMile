@@ -16,6 +16,7 @@ import com.kh.onemile.repository.map.MapDao;
 import com.kh.onemile.service.image.ImageService;
 import com.kh.onemile.util.Sequence;
 import com.kh.onemile.vo.CommuDetailVO;
+import com.kh.onemile.vo.CommuEditVO;
 import com.kh.onemile.vo.CommuVO;
 
 @Service
@@ -93,7 +94,7 @@ public class CommuServiceImpl implements CommuService {
 
 	// 수정하기
 	@Override
-	public int edit(CommuVO commuVo) throws IllegalStateException, IOException {
+	public int edit(CommuEditVO commuVo) throws IllegalStateException, IOException {
 
 		// 게시글 Dto 설정
 		CommuDTO commuDto = new CommuDTO();
@@ -120,8 +121,25 @@ public class CommuServiceImpl implements CommuService {
 
 			mapDao.modify(mapDto);
 		}
+		System.err.println("내용 수정 완료");
 		commuDao.changeCommu(commuDto);
 		
+		MiddleImgTableDTO imgMidDTO = new MiddleImgTableDTO();
+		imgMidDTO.setConnTableNo(commuVo.getCommuNo());
+		
+		if (commuVo.getAttach() != null) {
+			System.err.println("if문 시작");
+			middleImageDao.delete(commuDto.getCommuNo());
+			System.err.println("삭제실행");
+			List<Integer> imgNoList = imageService.regImage(commuVo.getAttach(), folderName);
+			
+			for (int imgNo : imgNoList) {
+				// 연결 테이블
+				imgMidDTO.setImgNo(imgNo);
+				// 중간 이미지 테이블에 등록
+				middleImageDao.reg(imgMidDTO);
+			}
+		}
 		return commuDto.getCommuNo();
 	}
 

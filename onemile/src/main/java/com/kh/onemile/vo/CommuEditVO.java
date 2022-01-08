@@ -30,5 +30,6 @@ public class CommuEditVO {
 	
 	//이미지
 	private List<MultipartFile> attach;
-	
+	private int cmiNo;
+	private int imageNo;
 }

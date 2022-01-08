@@ -2,6 +2,14 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<style>
+.detailAddress {
+	width:500px;
+	font-size:20px;
+	margin-top:1rem;
+	margin-bottom:1rem;
+}
+</style>
 <div id="newContainer">
 	<div id="wBoardWrap">
 		<div class="wboard-wrap">
@@ -18,9 +26,8 @@
 						<span class="user-info">${commuDetailVO.nick}<br>${commuDetailVO.regDate}</span>
 					</div>
 				</div>
-				<c:if test="${commuDetailVO.lat} != 0">
-				<div id="resultMap" style="width: 100%; height: 350px;"></div>
-				</c:if>
+				<div id="map" style="width: 100%; height: 350px;"></div>
+				<div class="detailAddress">상세주소 : ${commuDetailVO.detailAddress}</div>
 				<div class="inner-contents">
 					<c:forEach var="imageNo" items="${imageNoList}">
 						<p>
@@ -36,38 +43,37 @@
 		<div class="wboard-detail-bottom">
 			<div class="wboard-detail-btn-wrap">
 				<a class="wz button"
-					href="http://localhost:8080/onemile/commu/notmap/list?middleName=${commuDetailVO.middleName}">목록으로 돌아가기</a> <a class="wz button"
-					href="http://localhost:8080/onemile/commu/notmap/edit?boardNo=${commuDetailVO.commuNo}">수정하기</a>
+					href="http://localhost:8080/onemile/commu/map/list?middleName=${commuDetailVO.middleName}">목록으로 돌아가기</a>
 				<a class="wz button"
-					href="http://localhost:8080/onemile/commu/notmap/list">삭제하기</a>
+					href="http://localhost:8080/onemile/commu/map/edit?boardNo=${commuDetailVO.commuNo}">수정하기</a>
+				<a class="wz button"
+					href="http://localhost:8080/onemile/commu/map/delete?boardNo=${commuDetailVO.commuNo}&middleName=${commuDetailVO.middleName}">삭제하기</a>
 			</div>
 		</div>
 	</div>
-</div>
 <script>
-	kakao.maps.load(function() {
-		var lat = parseFloat('${commuDetailVO.lat}');
-		var lng = parseFloat('${commuDetailVO.lng}');
-		console.log(lat);
-		console.log(lng);
-		var mapContainer = document.getElementById('resultMap'), // 지도를 표시할 div 
-		mapOption = {
-			center : new kakao.maps.LatLng(lat, lng), // 지도의 중심좌표
-			level : 3
-		// 지도의 확대 레벨
-		};
+		kakao.maps.load(function() {
+			var lat = parseFloat('${commuDetailVO.lat}');
+			var lng = parseFloat('${commuDetailVO.lng}');
 
-		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-		// 마커가 표시될 위치입니다 
-		var markerPosition = new kakao.maps.LatLng(lat, lng);
+			var mapContainer = document.getElementById("map"), // 지도를 표시할 div 
+			mapOption = {
+				center : new kakao.maps.LatLng(lat, lng), // 지도의 중심좌표
+				level : 3// 지도의 확대 레벨
+			};
 
-		// 마커를 생성합니다
-		var marker = new kakao.maps.Marker({
-			position : markerPosition
+			var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+			// 마커가 표시될 위치입니다 
+			var markerPosition = new kakao.maps.LatLng(lat, lng);
+
+			// 마커를 생성합니다
+			var marker = new kakao.maps.Marker({
+				position : markerPosition
+			});
+
+			// 마커가 지도 위에 표시되도록 설정합니다
+			marker.setMap(map);
 		});
-
-		// 마커가 지도 위에 표시되도록 설정합니다
-		marker.setMap(map);
-	});
 </script>
+</div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

@@ -30,7 +30,7 @@
 			<div class="wboard-detail-btn-wrap">
 				<a class="wz button" href="http://localhost:8080/onemile/commu/notmap/list?middleName=${commuDetailVO.middleName}">목록으로 돌아가기</a>
 				<a class="wz button" href="http://localhost:8080/onemile/commu/notmap/edit?boardNo=${commuDetailVO.commuNo}">수정하기</a>
-				<a class="wz button" href="http://localhost:8080/onemile/commu/notmap/list?middleName=${commuDetailVO.middleName}">삭제하기</a>
+				<a class="wz button" href="http://localhost:8080/onemile/commu/notmap/delete?boardNo=${commuDetailVO.commuNo}&middleName=${commuDetailVO.middleName}">삭제하기</a>
 			</div>
 		</div>
 	</div>

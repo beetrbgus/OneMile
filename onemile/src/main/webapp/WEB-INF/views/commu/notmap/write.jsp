@@ -60,10 +60,6 @@ textarea {
 	background-color:#dde2e6;
 }
 </style>
-<script>
-var text=document.querySelector('#content').val();
-text=text.replace(/(?:\r\n|\r|\n)/g,'<br/>');
-</script>
 <div class="page-container">
 	<div class="ui-header">
 		<h2 class="title">커뮤니티</h2>

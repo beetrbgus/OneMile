@@ -32,7 +32,7 @@ public class CommuDetailVO {
 	private String nick;
 	private double lat;
 	private double lng;
-	private String detailaddress;
+	private String detailAddress;
 	
 	private int cmiNo;
 	private List<ImageDTO> imgNoList;

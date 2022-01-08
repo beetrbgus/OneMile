@@ -71,10 +71,6 @@ textarea {
 	font-size:22px;
 }
 </style>
-<script>
-var text=document.querySelector('#content').val();
-text=text.replace(/(?:\r\n|\r|\n)/g,'<br/>');
-</script>
 <div class="page-container">
 	<div class="ui-header">
 		<h2 class="title">커뮤니티</h2>
@@ -88,7 +84,7 @@ text=text.replace(/(?:\r\n|\r|\n)/g,'<br/>');
 		</select>
 		<textarea rows="1" maxlength="100" name="title" class="post-title"
 			placeholder="제목을 입력하세요."></textarea>
-		<div id="map"></div>
+		<div id="map" style="width: 100%; height: 350px;"></div>
 		<input class="form-input" type="text" name="fgLocation" readonly placeholder="참조할 위치를 클릭하세요."><br>
 		<label class="label">상세주소 : </label><input class="form-input" type="text" name="detailAddress" placeholder="상세주소를 입력하세요.">
 		<input type="hidden" name="lat">

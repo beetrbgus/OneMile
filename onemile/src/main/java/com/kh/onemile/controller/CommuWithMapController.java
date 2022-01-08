@@ -1,6 +1,7 @@
 package com.kh.onemile.controller;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -19,6 +20,7 @@ import com.kh.onemile.service.commu.CommuService;
 import com.kh.onemile.service.image.ImageService;
 import com.kh.onemile.util.Sequence;
 import com.kh.onemile.vo.CommuDetailVO;
+import com.kh.onemile.vo.CommuEditVO;
 import com.kh.onemile.vo.CommuVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -78,5 +80,26 @@ public class CommuWithMapController {
 		model.addAttribute("commuDetailVO", commuService.detail(boardNo));
 		model.addAttribute("imageNoList", imageService.listByBoardNo(boardNo)); //boardNo로 imageNo list를 불러오는 거 만들기
 		return "commu/map/detail";
+	}
+	
+	@GetMapping("/map/edit")
+	public String edit(@RequestParam int boardNo, Model model) throws IOException {
+		model.addAttribute("commuEditVO", commuService.detail(boardNo));
+		model.addAttribute("imageNoList", imageService.listByBoardNo(boardNo));
+		
+		return "commu/map/edit";
+	}
+	
+	@PostMapping("/map/edit")
+	public String edit(@ModelAttribute CommuEditVO commuEditVo, HttpSession session) throws IllegalStateException, IOException {
+		int commuNo = commuService.edit(commuEditVo);
+		return "redirect:/commu/map/detail?boardNo="+commuNo;
+	}
+	
+	@RequestMapping("/map/delete")
+	public String delete(@RequestParam int boardNo, @RequestParam String middleName) throws IOException {
+		commuService.hide(boardNo);
+		String encodedParam = URLEncoder.encode(middleName, "UTF-8");
+		return "redirect:/commu/map/list?middleName="+encodedParam;
 	}
 }
