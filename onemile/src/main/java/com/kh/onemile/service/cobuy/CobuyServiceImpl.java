@@ -113,17 +113,15 @@ public class CobuyServiceImpl implements CobuyService {
 	public List<MiddleNameDTO> getMiddleName() {
 		return cobuyDao.getMiddleName();
 	}
-
 	@Override
-	public ConfirmVO getConfirm(ConfirmVO confirmVO,int memberNo) {
+	public ConfirmVO getConfirm(ConfirmVO confirmVO) {
 		CobuyVO cobuyVO =cobuyDao.getConfirm(confirmVO);
-		
+	
 		int totalPrice = confirmVO.getQuantity()*cobuyVO.getPrice();
-		confirmVO.setMemberNo(memberNo);
 		confirmVO.setTotalAmount(totalPrice);
 		confirmVO.setPrice(cobuyVO.getPrice());
 		confirmVO.setProductName(cobuyVO.getPName());
-		confirmVO.setType("단건");
+		confirmVO.setType("TC0ONETIME");
 		
 		return confirmVO;
 	}

@@ -4,36 +4,38 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-
-제목 :
-<input type="text" name="name">
-<select class="big" name="type" required >
-	<option value="">카테고리선택</option>
-	<c:forEach var="category" items="${bigCategory}">
-		<option value="${category.bigType}">${category.bigType}</option>
-	</c:forEach>
-</select>
-<select class="middle" name="smalltype"></select>
-
-소분류 :
-<input type="text" name="smalltype">
-설명 :
-<input type="text" name="context">
-시작일 :
-<input type="text" name="stratDate">
-종료일 :
-<input type="text" name="endDate">
-위도 :
-<input type="text" name="lat">
-경도 :
-<input type="text" name="lng">
-경도 :
-<input type="text" name="detailaddress">
-이미지 :
-<input type="file" name="attach">
-
-<div id="map" style="width: 500px; height: 400px;"></div>
-
+<form action="reg" method="post">
+	제목 :
+	<input type="text" name="title">
+	관심 카테고리.
+	<select class="big" required >
+		<option value="">카테고리선택</option>
+		<c:forEach var="category" items="${bigCategory}">
+			<option value="${category.bigType}">${category.bigType}</option>
+		</c:forEach>
+	</select>
+	<select class="middle" name="smallType" required></select>
+	
+	설명 :
+	<input type="text" name="context">
+	시작일 :
+	<input type="text" name="startDate">
+	종료일 :
+	<input type="text" name="endDate">
+	위도 :
+	<input type="hidden" name="lat">
+	경도 :
+	<input type="hidden" name="lng">
+	상세주소 :
+	<input type="text" name="location">
+	이미지 :
+	<input type="file" name="attach">
+	
+	<input type="number" name="minpeople">
+	<input type="number" name="maxpeople">
+	
+	<div id="map" style="width: 500px; height: 400px;"></div>
+</form>
 <script>
 	$(function(){
 		$("select[name=type]").on("change",function(){
@@ -62,23 +64,8 @@
 	  		  }
 	  		});
 		});
-	});
-</script>
-<script>
-	var mapContainer = document.getElementById("map"), // 지도를 표시할 div 
-	mapOption = {
-		center : new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-		level : 2
-	};
-	//지도를 생성합니다.
-	var map = new kakao.maps.Map(mapContainer, mapOption);
-	var markerPosition = new kakao.maps.LatLng(37.566826, 126.9786567);
-	// 마커를 생성합니다
-	var marker = new kakao.maps.Marker({
-		position : markerPosition
-	});
-	// 마커가 지도 위에 표시되도록 설정합니다
-	marker.setMap(map);
-</script>
-
+	}); 
+ 
+</script> 
+<script type="text/javascript"src="${root}/onemile/resources/js/cobuy/map.js"></script>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

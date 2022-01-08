@@ -8,7 +8,7 @@ $(function(){
 		    	if(removeSession()){
 		    		setSession(lat,lng);
 		    	}
-		    	let region = getAddr(lat,lng);
+		    	let region = getAddr(lat,lng);		    		
 		    });
 
 		}
@@ -22,6 +22,7 @@ $(function(){
 	        	console.log(result[0]);
 	        	let dong = result[0].region_3depth_name;
 	        	$(".dong").val(dong);
+	        	 sessionStorage.setItem("dong", dong);
 	        }
 	        return result[0];
 	    };
@@ -33,8 +34,8 @@ $(function(){
     	
 		if(sessionlat ==0 ||sessionlat ==undefined || sessionlat == null
 				|| sessionlng ==0 ||sessionlng ==undefined || sessionlng == null){
-	    	removeItem(lat);
-	    	removeItem(lng);
+			sessionStorage.removeItem("lat");
+			sessionStorage.removeItem("lng");
 	    	//지웠으면 트루 반환
 	    	return true;
 		}

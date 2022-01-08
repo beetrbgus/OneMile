@@ -16,5 +16,5 @@ public interface CobuyService {
 	public void modify(CobuyVO cobuyModDTO);
 	public void delete(int cobuyNo);
 	public List<MiddleNameDTO> getMiddleName();
-	public ConfirmVO getConfirm(ConfirmVO confirmVO,int memNo);
+	public ConfirmVO getConfirm(ConfirmVO confirmVO);
 }
