@@ -11,10 +11,11 @@ import com.kh.onemile.vo.kakaopay.ConfirmVO;
 
 public interface CobuyService {
 	public int reg(CobuyRegVO cobuyRegDTO) throws IllegalStateException, IOException;
-	public List<CobuyListVO> getList();
+//	public List<CobuyListVO> getList();
 	public CobuyDetailVO getDetail(int cobuyNo);
 	public void modify(CobuyVO cobuyModDTO);
 	public void delete(int cobuyNo);
 	public List<MiddleNameDTO> getMiddleName();
 	public ConfirmVO getConfirm(ConfirmVO confirmVO,int memNo);
+	public List<CobuyListVO> getList(int startRow, int endRow);
 }

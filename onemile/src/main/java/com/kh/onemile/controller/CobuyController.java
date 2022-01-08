@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.onemile.service.cobuy.CobuyService;
+import com.kh.onemile.vo.CommuDetailVO;
 import com.kh.onemile.vo.cobuy.CobuyDetailVO;
 import com.kh.onemile.vo.cobuy.CobuyListVO;
 import com.kh.onemile.vo.cobuy.CobuyRegVO;
@@ -44,17 +46,32 @@ public class CobuyController {
 		return "redirect:detail?cobuyNo="+cobuyNo;
 	}
 	@GetMapping("/list")
-	public String list(Model model) {
-		List<CobuyListVO> result = cobuyService.getList();
-		for(CobuyListVO item :result) {
-			log.debug("---------------------------");
-			log.debug(item.getPName());
-			System.out.println("---------------------------");
-			System.out.println(item.getPName());
-		}
-		model.addAttribute("list", result);
-		
+	public String list() {
 		return "/cobuy/list";
+	}
+	
+//	@GetMapping("/list")
+//	public String list(Model model) {
+//		List<CobuyListVO> result = cobuyService.getList();
+//		for(CobuyListVO item :result) {
+//			log.debug("---------------------------");
+//			log.debug(item.getPName());
+//			System.out.println("---------------------------");
+//			System.out.println(item.getPName());
+//		}
+//		model.addAttribute("list", result);
+//		
+//		return "/cobuy/list";
+//	}
+	@GetMapping("/listdetail")
+	@ResponseBody
+	public List<CobuyListVO> list(
+			@RequestParam(required =false, defaultValue = "1") int page,
+			@RequestParam(required =false, defaultValue = "10") int size
+			) {
+		int endRow = page* size;
+		int startRow = endRow - (size - 1);
+		return cobuyService.getList(startRow, endRow);
 	}
 	@GetMapping("/detail") 
 	public String detail(@RequestParam int cobuyNo , Model model) {

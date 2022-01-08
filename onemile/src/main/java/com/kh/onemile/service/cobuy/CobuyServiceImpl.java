@@ -79,8 +79,8 @@ public class CobuyServiceImpl implements CobuyService {
 	}
 
 	@Override
-	public List<CobuyListVO> getList() {
-		return cobuyDao.cobuyList();
+	public List<CobuyListVO> getList(int startRow, int endRow) {
+		return cobuyDao.cobuyList(startRow, endRow);
 	}
 
 	@Override
