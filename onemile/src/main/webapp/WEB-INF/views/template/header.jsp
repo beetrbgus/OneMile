@@ -8,7 +8,7 @@
 <c:set var="login" value="${logId != null}"></c:set>
 <c:set var="admin" value="${grade == '관리자'}"></c:set>
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
-
+  
 <!DOCTYPE html>
 <html lang="ko" class="show-footer">
 <!-- Mirrored from www.wadiz.kr/web/wpartner/main by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 31 Dec 2021 09:26:35 GMT -->
