@@ -23,7 +23,7 @@ public class SocialVO {
 	private String smalltype;
 	private String context;
 	@DateTimeFormat(pattern="YYYY-MM-DD HH24:mm:ss")
-	private Date stratDate;
+	private Date startDate;
 	@DateTimeFormat(pattern="YYYY-MM-DD HH24:mm:ss")
 	private Date endDate;
 	
