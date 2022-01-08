@@ -1,10 +1,20 @@
 window.kakao.maps.load(function() {
 $(function() {
-
+	
+	let lat= sessionStorage.getItem("lat");
+	let lng= sessionStorage.getItem("lng");	
+	
+	if(lat ==0 ||lat ==undefined || lat == null){
+		lat= 37.5339851357212;
+		lng= 126.897094049199;
+		
+		console.log(lat);
+		console.log(lng);
+	}
     // 지도 생성 준비 코드
     var container = document.querySelector("#map");
     var options = {
-        center : new kakao.maps.LatLng(37.5339851357212, 126.897094049199),
+        center : new kakao.maps.LatLng(lat, lng),
         level : 4
     };
 

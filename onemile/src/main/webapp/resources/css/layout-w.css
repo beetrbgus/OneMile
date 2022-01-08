@@ -3768,12 +3768,11 @@ html.wadiz-app .web-header {
 
 .web-header .wadiz-logo>a {
     display: block;
-    padding: 4px
 }
 
 @media screen and (min-width:1220px) {
     .web-header .wadiz-logo>a {
-        padding: 4px
+        padding: 0;
     }
 }
 
