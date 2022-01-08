@@ -102,7 +102,7 @@ public class CommuServiceImpl implements CommuService {
 		commuDto.setMemberNo(commuVo.getMemberNo());
 		commuDto.setMiddlename(commuVo.getMiddleName());
 		commuDto.setTitle(commuVo.getTitle());
-		commuDto.setContent(commuVo.getTitle());
+		commuDto.setContent(commuVo.getContent());
 
 		double lat = commuVo.getLat();
 		double lng = commuVo.getLng();
