@@ -13,19 +13,17 @@ import com.kh.onemile.service.admin.AdminService;
 public class AdminController {
 	@Autowired 
 	private AdminService adminService;
+
 	//회원 승인
 	@GetMapping("/approve")
-	public String approve() {
-		return "approve";
-	}
-	@PostMapping("/approve")
-	public String approve(Model model) {
-		return "";
-	}
-	//회원 승인
-	@GetMapping("/approve/member")
 	public String memberList(Model model) {
 		model.addAttribute("memberList",adminService.memberList());
 		return "approve";
 	}
+	
+	@PostMapping("/approve")
+	public String approve(Model model) {
+		return "admin/approve";
+	}
+
 }

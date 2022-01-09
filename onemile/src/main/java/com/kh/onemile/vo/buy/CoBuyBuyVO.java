@@ -9,7 +9,6 @@ public class CoBuyBuyVO {
 	private int buyNo;
 	private int memberNo;
 	private int productNo;
-	//단건
 	private String tid;
 	private String itemName; //물건이름
 	private int totalAmount; //거래금액

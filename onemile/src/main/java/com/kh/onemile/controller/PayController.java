@@ -78,7 +78,6 @@ public class PayController {
 		
 		session.removeAttribute("tid");
 		session.removeAttribute("productNo");
-		session.removeAttribute("logNo");
 		session.removeAttribute("cid");
 
 		KakaoPayApproveRequestVO requestVO = new KakaoPayApproveRequestVO();
@@ -89,7 +88,9 @@ public class PayController {
 		requestVO.setMemberNo(memberNo);
 		requestVO.setProductNo(productNo);
 
-		KakaoPayApproveResponseVO responseVO = new KakaoPayApproveResponseVO();
+		log.debug("tid   :"+tid);
+		log.debug("requestVO.getTid()   :"+requestVO.getTid());
+		
 		kakaoPayService.approve(requestVO);
 
 		return "redirect:success_result";

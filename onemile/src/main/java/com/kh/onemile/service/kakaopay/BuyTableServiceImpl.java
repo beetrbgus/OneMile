@@ -37,7 +37,9 @@ public class BuyTableServiceImpl implements BuyTableService {
 			coBuyBuyVO.setItemName(responseVO.getItem_name());
 			coBuyBuyVO.setTotalAmount(responseVO.getAmount().getTotal());
 			coBuyBuyVO.setStatus("결제완료");
+			
 			cobuyBuyDao.reg(coBuyBuyVO);
+			cobuyBuyDao.reduceStock(responseVO.getProductNo(), responseVO.getQuantity());
 		}
 	}
 
