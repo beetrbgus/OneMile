@@ -3,6 +3,7 @@ package com.kh.onemile.service.kakaopay;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -26,6 +27,8 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 	public String Auth;
 	@Value("${user.kakaopay.contenttype}")
 	public String ContentType;
+	@Autowired
+	private BuyTableService buyTableService;
 
 	// 결제 준비
 	@Override
@@ -103,7 +106,7 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 
 	// 결제 승인
 	@Override
-	public KakaoPayApproveResponseVO approve(KakaoPayApproveRequestVO requestVO) throws URISyntaxException {
+	public void approve(KakaoPayApproveRequestVO requestVO) throws URISyntaxException {
 		RestTemplate template = new RestTemplate();
 
 		HttpHeaders headers = new HttpHeaders();
@@ -124,10 +127,9 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 
 		// 4. 요청방식에 따라 다른 명령으로 전송
 		KakaoPayApproveResponseVO responseVO = template.postForObject(uri, entity, KakaoPayApproveResponseVO.class);// 응답을
-																													// 기대하는
-																													// 요청(Json)
-
-		return responseVO;
+		responseVO.setMemberNo(requestVO.getMemberNo());
+		// 결제 내역 테이블에 저장
+		buyTableService.reg(responseVO);
 	}
 
 	// 정기결제 비활성화
