@@ -66,6 +66,7 @@ public class CobuyController {
 //		
 //		return "/cobuy/list";
 //	}
+	
 	@GetMapping("/listdetail")
 	@ResponseBody
 	public List<CobuyListVO> list(
