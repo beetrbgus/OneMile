@@ -23,10 +23,10 @@ public class CobuyDaoImpl implements CobuyDao{
 	public void reg(CobuyRegVO cobuyRegVO) {
 		sqlSession.insert("cobuy.reg",cobuyRegVO);
 	}
-	@Override //List<CobuyDTO>
-	public List<CobuyListVO> cobuyList() {
-		return sqlSession.selectList("cobuy.getList");
-	}
+//	@Override //List<CobuyDTO>
+//	public List<CobuyListVO> cobuyList() {
+//		return sqlSession.selectList("cobuy.getList");
+//	}
 	@Override 
 	public CobuyDetailVO detail(int cobuyNo) {
 		return sqlSession.selectOne("cobuy.getDetail",cobuyNo);
@@ -49,6 +49,13 @@ public class CobuyDaoImpl implements CobuyDao{
 	@Override
 	public CobuyVO getConfirm(ConfirmVO confirmVO) {
 		return sqlSession.selectOne("cobuy.getforBuy", confirmVO);
+	}
+	@Override
+	public List<CobuyListVO> cobuyList(int startRow, int endRow) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+		return sqlSession.selectList("cobuy.getList", map);
 	}
 
 }

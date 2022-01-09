@@ -4,10 +4,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%-- 페이지에서 사용할 JSTL 변수 --%>
+<!-- jstl 변수 틀렸음. 수정 필요. -->
 <c:set var="login" value="${logId != null}"></c:set>
 <c:set var="admin" value="${grade == '관리자'}"></c:set>
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
-
+  
 <!DOCTYPE html>
 <html lang="ko" class="show-footer">
 <!-- Mirrored from www.wadiz.kr/web/wpartner/main by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 31 Dec 2021 09:26:35 GMT -->
@@ -18,7 +19,7 @@
     <script type="text/javascript"src="${root}/resources/js/navigator.js"></script>
     <script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/sha1.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/join.js" ></script>
+    <script src="${root}/resources/js/join.js" ></script>
 
 	<link rel="stylesheet" href="${root}/resources/css/10.458392b3.chunk.css">
 	<link rel="stylesheet" href="${root}/resources/css/2.680dde46.chunk.css">
@@ -50,9 +51,6 @@
 	border-radius:30px;
 	width:80px;
 	text-align:center;
-}
-.onemile-logo{
-	padding:4px;
 }
 .dark{
 	opacity: 1;
@@ -116,8 +114,6 @@ $(function () {
 										</path>
 									</a>
 							</h1>
-							<input type="button" class="confirmbtn" value="동네인증">
-			                <input type="text" class="dong">
 							<ul class="GNBMobile_container__1OTMW">
 								<li class="GNBMobile_item__1b4ZL"><a aria-current="page"
 										class="GNBMobile_link__t1Y9t GNBMobile_active__3WNf8 GNBMobile_active__3WNf8"
@@ -127,13 +123,12 @@ $(function () {
 										</div>
 										<span class="GNBMobile_text__2-voS">홈</span>
 									</a></li>
-								<li class="GNBMobile_item__1b4ZL"><a class="GNBMobile_link__t1Y9t"
-										href="/web/wreward/comingsoon">
+								<li class="GNBMobile_item__1b4ZL">
 										<div class="GNBMobile_icon__3OOAF"
 											style="background-image: url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGc+CiAgICAgICAgICAgIDxnPgogICAgICAgICAgICAgICAgPHBhdGggZD0iTTAgMEgyNFYyNEgweiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTQ5MDggLTE5ODUpIHRyYW5zbGF0ZSg0OTA4IDE5ODUpIi8+CiAgICAgICAgICAgICAgICA8cGF0aCBmaWxsPSIjODY4RTk2IiBkPSJNMTIgMi4yNWMyLjQ4NiAwIDQuNzY4Ljg3NyA2LjU1MyAyLjMzOGwxLjI4LTEuNDc5IDEuMTM0Ljk4Mi0xLjMyNCAxLjUzYzEuNjgyIDEuODQgMi43MDcgNC4yOSAyLjcwNyA2Ljk3OSAwIDUuNzE2LTQuNjM0IDEwLjM1LTEwLjM1IDEwLjM1LTUuNzE2IDAtMTAuMzUtNC42MzQtMTAuMzUtMTAuMzUgMC0yLjY5MiAxLjAyOC01LjE0NCAyLjcxMi02Ljk4NUwzLjAzNSA0LjA5M2wxLjEzLS45ODYgMS4yODcgMS40NzdDNy4yMzYgMy4xMjUgOS41MTYgMi4yNSAxMiAyLjI1em0wIDEuNWMtNC44ODggMC04Ljg1IDMuOTYyLTguODUgOC44NXMzLjk2MiA4Ljg1IDguODUgOC44NSA4Ljg1LTMuOTYyIDguODUtOC44NVMxNi44ODggMy43NSAxMiAzLjc1em0uNzUgMy41NTZ2NC44Nmw0LjM4OSAyLjUyNi0uNzQ4IDEuMy01LjE0MS0yLjk1OFY3LjMwNmgxLjV6IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNDkwOCAtMTk4NSkgdHJhbnNsYXRlKDQ5MDggMTk4NSkiLz4KICAgICAgICAgICAgPC9nPgogICAgICAgIDwvZz4KICAgIDwvZz4KPC9zdmc+Cg==&quot;);">
 										</div>
-										<span class="GNBMobile_text__2-voS">마일즈</span>
-									</a></li>
+										<span class="GNBMobile_text__2-voS confirmbtn">커뮤니티</span>
+									</li>
 								<li class="GNBMobile_item__1b4ZL"><a class="GNBMobile_link__t1Y9t"
 										href="/web/wreward/main">
 										<div class="GNBMobile_icon__3OOAF"
@@ -149,27 +144,31 @@ $(function () {
 										</div>
 										<span class="GNBMobile_text__2-voS">공동구매</span>
 									</a></li>
-								<li class="GNBMobile_item__1b4ZL"><a class="GNBMobile_link__t1Y9t"
-										href="/web/main/more">
-										<div class="GNBMobile_icon__3OOAF"
+								<li class="GNBMobile_item__1b4ZL confirmbtn">
+										<div class="GNBMobile_icon__3OOAF confirmbtn"
 											style="background-image: url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGc+CiAgICAgICAgICAgIDxnPgogICAgICAgICAgICAgICAgPHBhdGggZD0iTTAgMEgyNFYyNEgweiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTUwODggLTE5ODUpIHRyYW5zbGF0ZSg1MDg4IDE5ODUpIi8+CiAgICAgICAgICAgICAgICA8cGF0aCBmaWxsPSIjODY4RTk2IiBkPSJNMy4zNiA5LjEyYy43NjUtLjAwMiAxLjQ5OS4zMDEgMi4wNC44NDEuNTQyLjU0Ljg0NiAxLjI3NC44NDYgMi4wMzkgMCAxLjU5LTEuMjg4IDIuODc5LTIuODc4IDIuODgtMS41OS4wMDEtMi44OC0xLjI4Ni0yLjg4Mi0yLjg3Ni0uMDAyLTEuNTkgMS4yODQtMi44OCAyLjg3NC0yLjg4NHptMTcuMjggMGMuNzY0IDAgMS40OTYuMzAzIDIuMDM2Ljg0NC41NC41NC44NDQgMS4yNzIuODQ0IDIuMDM2IDAgMS41OS0xLjI5IDIuODgtMi44OCAyLjg4LTEuNTkgMC0yLjg4LTEuMjktMi44OC0yLjg4IDAtMS41OSAxLjI5LTIuODggMi44OC0yLjg4em0tOC41NzQgMGMxLjU5IDAgMi44OCAxLjI5IDIuODggMi44OCAwIDEuNTktMS4yOSAyLjg4LTIuODggMi44OC0xLjU5IDAtMi44OC0xLjI5LTIuODgtMi44OCAwLTEuNTkgMS4yOS0yLjg4IDIuODgtMi44OHpNMy4zNiAxMC41NmMtLjc5NSAwLTEuNDQuNjQ1LTEuNDQgMS40NCAwIC43OTUuNjQ1IDEuNDQgMS40NCAxLjQ0Ljc5NC0uMDAzIDEuNDM3LS42NDYgMS40NC0xLjQ0IDAtLjc5NS0uNjQ1LTEuNDQtMS40NC0xLjQ0em0xNy44MzEuMTFjLS41MzgtLjIyMy0xLjE1Ny0uMS0xLjU3LjMxMi0uNDExLjQxMi0uNTM0IDEuMDMxLS4zMTEgMS41Ny4yMjIuNTM3Ljc0OC44ODggMS4zMy44ODguNzk1IDAgMS40NC0uNjQ1IDEuNDQtMS40NCAwLS41ODItLjM1LTEuMTA4LS44ODktMS4zM3ptLTkuMTI1LS4xMWMtLjc5NSAwLTEuNDQuNjQ1LTEuNDQgMS40NCAwIC43OTUuNjQ1IDEuNDQgMS40NCAxLjQ0Ljc5NC0uMDAzIDEuNDM3LS42NDYgMS40NC0xLjQ0IDAtLjc5NS0uNjQ1LTEuNDQtMS40NC0xLjQ0eiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTUwODggLTE5ODUpIHRyYW5zbGF0ZSg1MDg4IDE5ODUpIi8+CiAgICAgICAgICAgIDwvZz4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPgo=&quot;);">
 										</div>
-										<span class="GNBMobile_text__2-voS">더보기</span>
-									</a></li>
+										<span class="GNBMobile_text__2-voS confirmbtn">동네인증</span>
+								</li>
 							</ul>
 							<div class="HeaderMobile_myButton__32Bob">
-								<button type="button">
-									<i class="icon my" aria-hidden="true"></i>
-								</button>
-							</div>
-							<div class="Search_container__3gq0K">
-								<button type="button" class="Search_btnSearch__3M_KA">
-									<i class="icon search Search_icon__1XGj4" aria-hidden="true"></i>
-								</button>
-								<form action="/web/wcampaign/search" method="get">
-									<input class="Search_inputSearch__3DZcD" name="keyword" type="text"
-										title="프로젝트 검색하기" placeholder="프로젝트 검색하기">
-								</form>
+							<c:choose>
+								<c:when test="${1 eq 1}">
+									<a href="${root}/member/mypage">
+									<button type="button">
+										<i class="icon my" aria-hidden="true"></i>
+									</button>
+									</a>
+								</c:when>
+								<c:otherwise>
+									<a href="${root}/member/mypage">
+									<button type="button">
+										<i class="icon my" aria-hidden="true"></i>
+									</button>
+									</a>
+								</c:otherwise>
+								</c:choose>
+								<input type="text" class="dong">
 							</div>
 						</div>
 					</header>

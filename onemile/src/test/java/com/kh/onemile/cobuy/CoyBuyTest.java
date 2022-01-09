@@ -56,13 +56,13 @@ public class CoyBuyTest {
 		cobuyVO.setPName("아무도 먹지 않는 민트초코333");
 //		cobuyService.reg(cobuyVO);
 	}
-	@Test
-	public void getListCoyBuy(){
-		List<CobuyListVO> result=cobuyService.getList();
-		for(CobuyListVO cobuyDTO:result) {
-			log.debug(cobuyDTO.toString());
-		}
-	}
+//	@Test
+//	public void getListCoyBuy(){
+//		List<CobuyListVO> result=cobuyService.getList();
+//		for(CobuyListVO cobuyDTO:result) {
+//			log.debug(cobuyDTO.toString());
+//		}
+//	}
 	@Test
 	public void getCoyBuy(){
 		CobuyDetailVO result=cobuyService.getDetail(60);
