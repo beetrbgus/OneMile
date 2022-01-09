@@ -1,41 +1,35 @@
 package com.kh.onemile.vo;
 
-import java.text.Format;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
-
-import com.kh.onemile.entity.image.ImageDTO;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Data;
 @Data
-public class CommuDetailVO {
+public class CommuEditVO {
+	
+	private int commuNo;
+	
+	//외래키
+	private int memberNo;
+	private int mapNo;
 	
 	//기본 게시판
-	private int commuNo;
 	private String middleName;
 	private String title;
 	private String content;
 	@DateTimeFormat(pattern="YYYY-MM-DD HH24:mm:ss")
 	private Date regDate;
-	public String getRegDate() {
-		Format f = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		return f.format(this.regDate);
-	}
-	private int hit;
-	private String viewYN;
 	
-	private int mapNo;
-	private String lagname;
-	private String nick;
+	//지도
 	private double lat;
 	private double lng;
 	private String detailAddress;
 	
+	//이미지
+	private List<MultipartFile> attach;
 	private int cmiNo;
-	private List<ImageDTO> imgNoList;
-	private int memberNo;
 	private int imageNo;
 }

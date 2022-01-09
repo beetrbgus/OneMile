@@ -2,27 +2,13 @@ $(function(){
 	$(".confirmbtn").click(function(){
 		if('geolocation' in navigator){
 		    navigator.geolocation.getCurrentPosition((position) => {
-		    	
 		    	let lat = position.coords.latitude;
 		    	let lng = position.coords.longitude;
-		    	
+		    	//세션이 있으면 세션 지우고  세션에 저장.
+		    	if(removeSession()){
+		    		setSession(lat,lng);
+		    	}
 		    	let region = getAddr(lat,lng);
-		    	/*$.ajax({
-		    		url:"/AjaxTest/ex01.do",
-		    		type: "POST", //요청 메소드 방식
-		    		dataType:"json", //서버가 요청 URL을 통해서 응답하는 내용의 타입
-		    		data : region,
-		    		success : function(result){
-		    			//서버의 응답데이터가 클라이언트에게 도착하면 자동으로 실행되는함수(콜백)
-		    			//result - 응답데이터
-		    			//$('#result').text(result);
-		    			alert(result);
-		    		},
-		    		error : function(a, b, c){
-		    			//통신 실패시 발생하는 함수(콜백)
-		    			alert(a + b + c);
-		    		}
-		    	});*/
 		    });
 
 		}
@@ -40,6 +26,27 @@ $(function(){
 	        return result[0];
 	    };
 	    geocoder.coord2RegionCode(lng,lat,callback);
+	}
+	function removeSession(){
+    	let sessionlat= sessionStorage.getItem("lat");
+		let sessionlng= sessionStorage.getItem("lng");		
+    	
+		if(sessionlat ==0 ||sessionlat ==undefined || sessionlat == null
+				|| sessionlng ==0 ||sessionlng ==undefined || sessionlng == null){
+			sessionStorage.removeItem("lat");
+			sessionStorage.removeItem("lng");
+	    	//지웠으면 트루 반환
+	    	return true;
+		}
+		return false;
+	}
+	function setSession(lat,lng){
+    	let sessionlat= sessionStorage.getItem("lat");
+		let sessionlng= sessionStorage.getItem("lng");		
+    	
+	    sessionStorage.setItem("lat", lat );
+	    sessionStorage.setItem("lng", lng );
+
 	}
 
 });

@@ -15,15 +15,15 @@ public class SocialVO {
 	//외래키
 	private int memberNo;
 	private int mapNo;
-	private String smalltype;
 	private int adNo;
 	
 	//기본 소셜링
 	private String name;
 	private String type;
+	private String smalltype;
 	private String context;
 	@DateTimeFormat(pattern="YYYY-MM-DD HH24:mm:ss")
-	private Date stratDate;
+	private Date startDate;
 	@DateTimeFormat(pattern="YYYY-MM-DD HH24:mm:ss")
 	private Date endDate;
 	

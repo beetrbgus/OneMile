@@ -14,6 +14,6 @@
 
 	<!--삭제  -->
 	<delete id="delete" parameterType="int">
-		delete from cbi where commu_no = #{commuNo}
+		delete from cmi where commu_no = #{commuNo}
 	</delete>
 </mapper>

@@ -10,6 +10,7 @@ import com.kh.onemile.entity.social.SocialCategoryDTO;
 import com.kh.onemile.repository.social.BigCategoryDao;
 import com.kh.onemile.util.Sequence;
 import com.kh.onemile.vo.MemberJoinVO;
+import com.kh.onemile.vo.social.like.SocialLikeCategoryVO;
 
 @Service
 public class CategoryServiceImpl implements CategoryService{
@@ -31,7 +32,10 @@ public class CategoryServiceImpl implements CategoryService{
 	public List<SocialCategoryDTO> listBySuper(String categorySuper) {
 		return bigCategoryDao.listBySuper(categorySuper);
 	}
-	
+	@Override
+	public List<SocialLikeCategoryVO> getLikeCategory() {
+		return bigCategoryDao.getLikeCategory();
+	}
 	//관심 카테고리 넣기
 	@Override
 	public void insert(MemberJoinVO memberJoinVO, int memNo) {

@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.onemile.service.cobuy.CobuyService;
+import com.kh.onemile.vo.CommuDetailVO;
 import com.kh.onemile.vo.cobuy.CobuyDetailVO;
 import com.kh.onemile.vo.cobuy.CobuyListVO;
 import com.kh.onemile.vo.cobuy.CobuyRegVO;
@@ -28,33 +30,52 @@ import lombok.extern.slf4j.Slf4j;
 public class CobuyController {
 	@Autowired
 	private CobuyService cobuyService;
-	
+
 	@GetMapping("/regcobuy")
 	public String getreg(Model model) throws IllegalStateException, IOException {
-		model.addAttribute("","");
-		
+		model.addAttribute("", "");
+
 		return "/cobuy/regcobuy";
 	}
+
 	@PostMapping("/regcobuy")
-	public String postreg(@ModelAttribute CobuyRegVO cobuyRegVO,HttpSession session) throws IllegalStateException, IOException {
+	public String postreg(@ModelAttribute CobuyRegVO cobuyRegVO, HttpSession session)
+			throws IllegalStateException, IOException {
 		int memNo = Integer.parseInt(String.valueOf(session.getAttribute("logNo")));
 		cobuyRegVO.setMemberNo(memNo);
 		int cobuyNo = cobuyService.reg(cobuyRegVO);
 
-		return "redirect:detail?cobuyNo="+cobuyNo;
+		return "redirect:detail?cobuyNo=" + cobuyNo;
 	}
+
 	@GetMapping("/list")
-	public String list(Model model) {
-		List<CobuyListVO> result = cobuyService.getList();
-		for(CobuyListVO item :result) {
-			log.debug("---------------------------");
-			log.debug(item.getPName());
-			System.out.println("---------------------------");
-			System.out.println(item.getPName());
-		}
-		model.addAttribute("list", result);
-		
+	public String list() {
 		return "/cobuy/list";
+	}
+	
+//	@GetMapping("/list")
+//	public String list(Model model) {
+//		List<CobuyListVO> result = cobuyService.getList();
+//		for(CobuyListVO item :result) {
+//			log.debug("---------------------------");
+//			log.debug(item.getPName());
+//			System.out.println("---------------------------");
+//			System.out.println(item.getPName());
+//		}
+//		model.addAttribute("list", result);
+//		
+//		return "/cobuy/list";
+//	}
+	
+	@GetMapping("/listdetail")
+	@ResponseBody
+	public List<CobuyListVO> list(
+			@RequestParam(required =false, defaultValue = "1") int page,
+			@RequestParam(required =false, defaultValue = "10") int size
+			) {
+		int endRow = page* size;
+		int startRow = endRow - (size - 1);
+		return cobuyService.getList(startRow, endRow);
 	}
 	@GetMapping("/detail") 
 	public String detail(@RequestParam int cobuyNo , Model model) {
@@ -68,34 +89,58 @@ public class CobuyController {
 		model.addAttribute("detail", cobuyDetailVO);
 		return "/cobuy/detail";
 	}
+
 	@PostMapping("/delete")
 	public String delete(@RequestParam int cobuyNo) {
 		cobuyService.delete(cobuyNo);
 		return "redirect:/list";
 	}
+
 	@GetMapping("/modify")
-	public String getModify(@RequestParam int cobuyNo , Model model) {
+	public String getModify(@RequestParam int cobuyNo, Model model) {
 		model.addAttribute("detail", cobuyService.getDetail(cobuyNo));
 		return "detail";
 	}
+
 	@PostMapping("/modify")
-	public String postModify(@ModelAttribute CobuyVO cobuyModDTO,HttpSession session) throws IllegalStateException, IOException{
+	public String postModify(@ModelAttribute CobuyVO cobuyModDTO, HttpSession session)
+			throws IllegalStateException, IOException {
 		int memNo = Integer.parseInt(String.valueOf(session.getAttribute("logNo")));
-		
-		if(memNo ==cobuyModDTO.getMemberNo()) {
+
+		if (memNo == cobuyModDTO.getMemberNo()) {
 			cobuyService.modify(cobuyModDTO);
 		}
-		
-		return "redirect:detail?cobuyNo="+cobuyModDTO.getCobuyNo();
+
+		return "redirect:detail?cobuyNo=" + cobuyModDTO.getCobuyNo();
 	}
-	@RequestMapping("/confirm")
-	public String confirm(@ModelAttribute ConfirmVO confirmVO,RedirectAttributes redirectAttributes,HttpSession session) {
-		//상품명 ,  상품 가격 , 상품 수량 , 총 결제금액 , 
-		log.debug(" -------------------------------------------");
-		int memNo = (int) session.getAttribute("logNo");
-		ConfirmVO confirmResultVO  =cobuyService.getConfirm(confirmVO,memNo);
-		redirectAttributes.addFlashAttribute("confirmVO", confirmResultVO);
+
+	@GetMapping("/confirm")
+	public String confirm(@RequestParam int productNo, @RequestParam int quantity, Model model, HttpSession session) {
+		// 상품명 , 상품 가격 , 상품 수량 , 총 결제금액 ,
+		ConfirmVO confirmVO = new ConfirmVO();
+		confirmVO.setProductNo(productNo);
+		confirmVO.setQuantity(quantity);
+		confirmVO = cobuyService.getConfirm(confirmVO);
+
+		model.addAttribute("confirmVO", confirmVO);
 		log.debug(confirmVO.toString());
+		return "/pay/confirm";
+	}
+
+	// 결제할 상품 확인
+	@PostMapping("/confirm")
+	public String confirm(@RequestParam int productNo, @RequestParam int quantity,
+			RedirectAttributes redirectAttributes, HttpSession session) {
+		// 상품명 , 상품 가격 , 상품 수량 , 총 결제금액 ,
+		ConfirmVO confirmVO = new ConfirmVO();
+		confirmVO.setProductNo(productNo);
+		confirmVO.setQuantity(quantity);
+		
+		int memNo = (int) session.getAttribute("logNo");
+		ConfirmVO confirmResultVO = cobuyService.getConfirm(confirmVO);
+		confirmResultVO.setMemberNo(memNo);
+		redirectAttributes.addFlashAttribute("confirmVO", confirmResultVO);
+		
 		return "redirect:/pay/confirm";
 	}
 }

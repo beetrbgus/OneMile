@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <style>
 .more-btn {
@@ -23,7 +24,7 @@
 		function loadData(page, size, middleName) {
 
 			$.ajax({
-				url : "http://localhost:8080/onemile/commu/notmap/listdetail",
+				url : "${pageContext.request.contextPath}/commu/notmap/listdetail",
 				type : "get",
 				data : {
 					middleName : middleName,
@@ -31,21 +32,24 @@
 					size : size
 				},
 				success : function(resp) {
-					console.log("성공", resp);
 
 					if (resp.length < size) {
 						$(".more-btn").remove();
 					}
 					for (var i = 0; i < resp.length; i++) {
-						console.log(i, "번째 실행");
 						var commuVo = resp[i];
+						var c = commuVo.imageNo != 0;
 						var divCol = "<ul>"
 							+ "<li>"
 								+ "<a class='article' href='detail?boardNo="
 								+ resp[i].commuNo
 								+ "'>"
 								+ "<div class='info'>"
-								+ "<div class='thumb' style='background-image: url(https://cdn.wadiz.kr/ft/images/green001/2021/1228/20211228095651665_0.jpg/wadiz/resize/400/format/jpg/quality/80/optimize)'></div>"
+								+ "<div class='thumb'>";
+						if(c) {
+							divCol += "<img src='${pageContext.request.contextPath}/image/download?imageNo="+commuVo.imageNo+"&folder=commu'>";  
+							}   
+						divCol +="</div>"
 								+ "<h3 class='title'>" + commuVo.title
 								+ "</h3>" + "<span class='author'>"
 								+ commuVo.nick
@@ -75,17 +79,17 @@
 		</div>
 			<div class="ui-tabs LeadMakerShortcutLinkSection_linkGroup__2XM2N">
 				<ul>
-					<li><a href="?middleName=질문" ${param.middleName == "질문" ? "style='color:#00b2b2;'" : ""} >동네질문</a></li>
-					<li><a href="?middleName=분실" ${param.middleName == "분실" ? "style='color:#00b2b2;'" : ""}>분실/실종센터</a></li>
-					<li><a href="../map/list?middleName=맛집" ${param.middleName == "맛집" ? "style='color:#00b2b2;'" : ""}>동네맛집</a></li>
-					<li><a href="../map/list?middleName=사건" ${param.middleName == "사건" ? "style='color:#00b2b2;'" : ""}>동네 사건사고</a></li>
-					<li><a href="../map/list?middleName=얌얌" ${param.middleName == "얌얌" ? "style='color:#00b2b2;'" : ""}>얌세권</a></li>
+					<li><a href="?middleName=동네질문" ${param.middleName == "동네질문" ? "style='color:#00b2b2;'" : ""} >동네질문</a></li>
+					<li><a href="?middleName=분실/실종센터" ${param.middleName == "분실/실종센터" ? "style='color:#00b2b2;'" : ""}>분실/실종센터</a></li>
+					<li><a href="../map/list?middleName=동네맛집" ${param.middleName == "동네맛집" ? "style='color:#00b2b2;'" : ""}>동네맛집</a></li>
+					<li><a href="../map/list?middleName=동네사건사고" ${param.middleName == "동네사건사고" ? "style='color:#00b2b2;'" : ""}>동네 사건사고</a></li>
+					<li><a href="../map/list?middleName=얌세권" ${param.middleName == "얌세권" ? "style='color:#00b2b2;'" : ""}>얌세권</a></li>
 				</ul>
 			</div>
 		
 		<div class="board-main">
 			<div class="board-write" align="right">
-				<button type="button" class="wz button write-btn"><a href="./write">글쓰기</a></button>
+				<a href="./write"><button type="button" class="wz button write-btn">글쓰기</button></a>
 			</div>
 		</div>
 		<div class="board-footer">

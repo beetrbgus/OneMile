@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.onemile.entity.social.SocialBigCategoryDTO;
 import com.kh.onemile.entity.social.SocialCategoryDTO;
 import com.kh.onemile.vo.MemberJoinVO;
+import com.kh.onemile.vo.social.like.SocialLikeCategoryVO;
 
 @Repository
 public class BigCategoryDaoImpl implements BigCategoryDao{
@@ -38,5 +39,10 @@ public class BigCategoryDaoImpl implements BigCategoryDao{
 		param.put("smalltype", memberJoinVO.getSmalltype());
 		param.put("memNo", memNo);
 		sqlSession.insert("category.insert",param);
+	}
+
+	@Override
+	public List<SocialLikeCategoryVO> getLikeCategory() {
+		return sqlSession.selectList("smc.getLarge");
 	}
 }
