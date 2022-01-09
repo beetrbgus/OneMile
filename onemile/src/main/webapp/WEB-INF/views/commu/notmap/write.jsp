@@ -66,7 +66,7 @@ textarea {
 	</div>
 	<form  method="post" enctype="multipart/form-data">
 		<input type="hidden" name="mapNo" value=0>
-		<select name="middleName" class="category">
+		<select name="middleName" class="category" required>
 			<option value="" class="label category">카테고리 선택</option>
 			<option value="동네질문" class="label category">동네질문</option>
 			<option value="분실/실종센터" class="label category">분실/실종센터</option>
