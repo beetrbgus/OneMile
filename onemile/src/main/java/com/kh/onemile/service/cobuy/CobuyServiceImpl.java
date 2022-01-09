@@ -38,7 +38,8 @@ public class CobuyServiceImpl implements CobuyService {
 	private CobuyDao cobuyDao; // 공동 구매 서비스
 	@Autowired
 	private ImageService imageService; // 이미지 서비스
-	@Autowired @Qualifier("cbiDAO")
+	@Autowired
+	@Qualifier("cbiDAO")
 	private MiddleImageDAO middleImageDao; // 공동구매 중간 테이블
 	@Autowired
 	private MapService mapService;
@@ -46,10 +47,11 @@ public class CobuyServiceImpl implements CobuyService {
 	private Sequence seq;
 	@Autowired
 	private DateToString dateToString;
+
 	@Override
 	public int reg(CobuyRegVO cobuyRegVO) throws IllegalStateException, IOException {
 		int cbNo = seq.nextSequence(seqName); // 공동구매 상품 번호
-		
+
 		// 지도 등록
 		MapDTO mapDTO = new MapDTO();
 		mapDTO.setLat(cobuyRegVO.getLat());
@@ -57,15 +59,15 @@ public class CobuyServiceImpl implements CobuyService {
 		mapDTO.setDetailAddress(cobuyRegVO.getDetailAddress());
 
 		int mapNo = mapService.regMap(mapDTO);
-		
+
 		// 공구 테이블에 등록
 		cobuyRegVO.setMapNo(mapNo);
 		cobuyRegVO.setCobuyNo(cbNo);
 		cobuyDao.reg(cobuyRegVO);
-		
+
 		MiddleImgTableDTO imgMidDTO = new MiddleImgTableDTO();
 		imgMidDTO.setConnTableNo(cbNo); // 공구 상품 번호
-		
+
 		List<Integer> imgNoList = imageService.regImage(cobuyRegVO.getAttach(), folderName);
 		for (int imgNo : imgNoList) {
 			// 연결 테이블
@@ -113,16 +115,17 @@ public class CobuyServiceImpl implements CobuyService {
 	public List<MiddleNameDTO> getMiddleName() {
 		return cobuyDao.getMiddleName();
 	}
+
 	@Override
 	public ConfirmVO getConfirm(ConfirmVO confirmVO) {
-		CobuyVO cobuyVO =cobuyDao.getConfirm(confirmVO);
-	
-		int totalPrice = confirmVO.getQuantity()*cobuyVO.getPrice();
+		CobuyVO cobuyVO = cobuyDao.getConfirm(confirmVO);
+
+		int totalPrice = confirmVO.getQuantity() * cobuyVO.getPrice();
 		confirmVO.setTotalAmount(totalPrice);
 		confirmVO.setPrice(cobuyVO.getPrice());
 		confirmVO.setProductName(cobuyVO.getPName());
 		confirmVO.setType("TC0ONETIME");
-		
+
 		return confirmVO;
 	}
 
