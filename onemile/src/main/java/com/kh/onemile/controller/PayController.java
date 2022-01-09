@@ -35,8 +35,7 @@ public class PayController {
 	private KakaoPayService kakaoPayService;
 	@Autowired
 	private MembershipBuyDao membershipBuyDao;
-	@Autowired
-private BuyTableService buyTableService;
+
 	// 결제 준비 요청
 	@RequestMapping("/confirm")
 	public String confirm(HttpServletRequest request, @ModelAttribute KakaoPayReadyRequestVO requestVO,
@@ -92,19 +91,6 @@ private BuyTableService buyTableService;
 
 		KakaoPayApproveResponseVO responseVO = new KakaoPayApproveResponseVO();
 		kakaoPayService.approve(requestVO);
-		
-		if(cid.equals("TCSUBSCRIP")) {
-		// 결제가 완료된 시점 responseVO를 사용하여 membershipBuyDTO 테이블에 insert를 수행
-			MembershipBuyDTO membershipBuyDTO = new MembershipBuyDTO();
-			membershipBuyDTO.setSid(responseVO.getSid());// 정기결제 고유번호(SID)
-			membershipBuyDTO.setPartnerUserId(partnerUserId);
-			membershipBuyDTO.setTotalAmount(responseVO.getAmount().getTotal());
-			membershipBuyDTO.setMspNo(productNo);
-			membershipBuyDTO.setMemberNo(memberNo);
-			membershipBuyDao.insert(membershipBuyDTO);
-		}else {
-			
-		}
 
 		return "redirect:success_result";
 	}
