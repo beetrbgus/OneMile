@@ -43,7 +43,7 @@ public class CobuyDaoImpl implements CobuyDao{
 		return sqlSession.selectList("cobuy.getMiddleName");
 	}
 	@Override
-	public void modify(CobuyVO cobuyModDTO) {
+	public void modify(CobuyDetailVO cobuyModDTO) {
 		sqlSession.update("cobuy.modify", cobuyModDTO);
 	}
 	@Override

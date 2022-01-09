@@ -13,7 +13,7 @@ public interface CobuyService {
 	public int reg(CobuyRegVO cobuyRegDTO) throws IllegalStateException, IOException;
 //	public List<CobuyListVO> getList();
 	public CobuyDetailVO getDetail(int cobuyNo);
-	public void modify(CobuyVO cobuyModDTO);
+	public void modify(CobuyDetailVO cobuyModDTO) throws IllegalStateException, IOException;
 	public void delete(int cobuyNo);
 	public List<MiddleNameDTO> getMiddleName();
 	public ConfirmVO getConfirm(ConfirmVO confirmVO);

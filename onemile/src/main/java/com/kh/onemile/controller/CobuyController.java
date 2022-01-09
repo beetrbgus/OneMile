@@ -99,11 +99,11 @@ public class CobuyController {
 	@GetMapping("/modify")
 	public String getModify(@RequestParam int cobuyNo, Model model) {
 		model.addAttribute("detail", cobuyService.getDetail(cobuyNo));
-		return "detail";
+		return "/cobuy/modcobuy";
 	}
 
 	@PostMapping("/modify")
-	public String postModify(@ModelAttribute CobuyVO cobuyModDTO, HttpSession session)
+	public String postModify(@ModelAttribute CobuyDetailVO cobuyModDTO, HttpSession session)
 			throws IllegalStateException, IOException {
 		int memNo = Integer.parseInt(String.valueOf(session.getAttribute("logNo")));
 

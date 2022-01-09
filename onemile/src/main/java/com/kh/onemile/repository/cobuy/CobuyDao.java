@@ -15,6 +15,6 @@ public interface CobuyDao {
 	public CobuyDetailVO detail(int cobuyNo);
 	public void delete(int cobuyNo);
 	public List<MiddleNameDTO> getMiddleName();
-	public void modify(CobuyVO cobuyModDTO);
+	public void modify(CobuyDetailVO cobuyModDTO);
 	public CobuyVO getConfirm(ConfirmVO confirmVO);
 }

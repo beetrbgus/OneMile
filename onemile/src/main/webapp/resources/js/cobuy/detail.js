@@ -13,7 +13,7 @@ $(function() {
 	$(".quantity").on("change", function() {
 		$(".quantity").val($(this).val());
 	});
-	$(".buyBtn").on("click", function() {
+	$("#buyBtn").on("click", function() {
 		if (cnt()) {
 			$("#buyForm").submit();
 		}
