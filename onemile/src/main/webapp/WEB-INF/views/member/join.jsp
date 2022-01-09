@@ -3,11 +3,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+
 <style>
 .notice {
 	color: red;
 }
+.outer2 {
+	display: flex;
+	justify-content: center;
+}
 </style>
+
 <!-- <script>
 let imgList = new Array();
 let folder = "member";
@@ -47,8 +53,6 @@ let folder = "member";
 			});
 		});
 	});
-</script> -->
-<script>
 function readURL(input) {
     if (input.files && input.files[0]) {
        var reader = new FileReader();
@@ -90,23 +94,69 @@ function readURL(input) {
             reader.readAsDataURL(event.target.files[0]); }
         
 		 
- }); 		
+ });  -->
+ 
+ <script>
+ //이미지 미리보기
+ var sel_files = [];
+ $(document).ready(function(){
+     $("input[name=attach]").on("change", handleImgsFilesSelect);
+ });
+ function handleImgsFilesSelect(e) {
+     sel_files = [];
+     $("#result").empty();
+     var files = e.target.files;
+     var filesArr = Array.prototype.slice.call(files);
+     var index = 0;
+     filesArr.forEach(function(f){
+         if(!f.type.match("image.*")){
+             alert("확장자는 이미지 확장자만 가능합니다.");
+             return;
+         }
+         sel_files.push(f);
+         var reader = new FileReader();
+         reader.onload = function(e) {
+             var html = "<a href=\"javascript:void(0);\" onclick=\"deleteImageAction("+index+")\" id=\"img_id_"+index+"\"><img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selProductFile' title='Click to remove'></a>";
+             $("#result").append(html);
+             index++;
+           }
+            reader.readAsDataURL(f);
+            });
+        }
+function deleteImageAction(index){
+	  console.log("index : " + index);
+	  sel_files.splice();
+		
+	  var img_id = "#img_id_" + index;
+	  var del = $(img_id).remove();
+	  if(del){
+		  $("input[name=attach]").val("");
+		  $("#result").empty();
+	  }
+	  console.log(sel_files);
+}
 </script>
+
 <script>
+//기본 날짜 설정
 function getToday(){
     var date = new Date();
-    var year = date.getFullYear();
+    var year = date.getFullYear()-20;
     var month = ("0" + (1 + date.getMonth())).slice(-2);
     var day = ("0" + date.getDate()).slice(-2);
-
-    return year + "-" + month + "-" + day;
-}
-let birth = $("#birth"); 
-birth.attr("min",getToday);
+    date = year+'-'+month+'-'+day;
+    $("#birth").val(date);
+	$("#birth").attr("value",date);
+	$("#birth").attr("max",date);
+    return date;
+  } 
 
 $(function(){
+	$("#birth").attr("value");
+	$("#birth").attr("max",getToday);
+	
 	//아이디 중복확인 Ajax
-   	$("input[name=email]").on("blur", function(){
+	$("input[name=email]").on("blur", function(){
    		var input = $("input[name=email]").val();
    		$.ajax({
    			url : "${root}/member/emailcheck",
@@ -315,25 +365,6 @@ $(function(){
 	});
 });
 
-/* 선택한 카테고리 출력하기 */
-$(function(){
-	$(".middle").change(function(){
-		var div = $("#category-select");
-		var big = $("select[name=location] option:selected").val();
-		var middle = $(this).val();
-		
-		var select = $("<input type='text' placeholder=' "+big+""+middle+" '>");
-		var select2 = $("<button type='button' class='delete'>x</button>");
-		
-		div.append(select);
-		div.append(select2);
-	});
-	
-		/* 버튼누르면 해당 카테고리 삭제 */
-		$(".delete").on("click", function () {
-    	$(this).parent().remove();
-    });
-});
 
 /* 자기소개 글자수 체크 */
 function lengCheck() {
@@ -351,98 +382,130 @@ function lengCheck() {
 </script>
 
 <form method="post" enctype="multipart/form-data"
-	onsubmit="return formCheck();">
+onsubmit="return formCheck();" name="frm_join" id="frm_join"
+class="wz form" novalidate="novalidate">
 
-	<!-- 1페이지 -->
-	<div class="page">
-		<div class="container-400 container-center">
-
-			<div class="row center">
-				<h1>회원가입</h1>
+<div class="page">
+<div class="outer2">
+	<div class="wz container form-container" style="width: 500px">
+		<h2 class="wz text display2 page-title">회원가입</h2>
+		<p class="page-description">고객님의 회원가입을 환영합니다!</p>
+		
+			<div class="field name-field ">
+				<label>프로필 사진</label> 
+				<input type="file" name="attach" multiple>
 			</div>
-			<div class="row">
-				<label>프로필 사진</label> <input type="file" name="attach" multiple>
+			
+			<div id="result" style="width: 5px"></div>
+		
+			<div class="field name-field ">
+				<label class="label">이메일</label>
+				<div class="wz input">
+					<input id="nickName" class="input text block large" type="email"
+						placeholder="이메일 입력" name="email" required aria-required="true"
+						autocomplete="off" onblur="emailCheck();">
+						<div class="notice"></div>
+				</div>
 			</div>
-			<div class="row">
-				<label>이메일</label> <input type="email" name="email" required
-					class="form-input" autocomplete="off" onblur="emailCheck();">
-				<div class="notice"></div>
+			
+			<div class="field password-field group">
+				<div class="field">
+					<label class="label">비밀번호</label>
+					<div class="wz input">
+						<input id="pwd1" type="password" name="pw" class="input large"
+							placeholder="비밀번호" required aria-required="true"
+							autocomplete="off" onblur="pwCheck();">
+							<div class="notice"></div>
+					</div>
+				</div>
+				<div class="field">
+					<div class="wz input">
+						<input id="pwd2" type="password" name="pw2" class="input large"
+							placeholder="비밀번호 확인" required aria-required="true"
+							autocomplete="off" onblur="pw2Check();">
+							<div class="notice"></div>
+					</div>
+				</div>
 			</div>
-			<div class="row">
-				<label>비밀번호</label> <input type="password" name="pw" required
-					class="form-input" autocomplete="off" onblur="pwCheck();">
-				<div class="notice"></div>
+			
+			<div class="field password-field group">
+				<label class="label">닉네임</label>
+				<div class="wz input">
+					<input id="nickName" class="input text block large" type="text"
+						placeholder="닉네임 입력" name="nick" required aria-required="true"
+						autocomplete="off" onblur="nickCheck();">
+						<div class="notice"></div>
+				</div>
 			</div>
-			<div class="row">
-				<label>비밀번호 확인</label> <input type="password" name="pw2" required
-					class="form-input" autocomplete="off" onblur="pw2Check();">
-				<div class="notice"></div>
+			
+			<div class="field password-field group">
+				<label class="label">연락처</label>
+				<div class="wz input">
+					<input id="nickName" class="input text block large" type="tel"
+						placeholder="-포함 13자리를 입력해주세요." name="phone" required
+						aria-required="true" autocomplete="off" onblur="phoneCheck();">
+						<div class="notice"></div>
+				</div>
 			</div>
-			<div class="row">
-				<label>닉네임</label> <input type="text" name="nick" required
-					class="form-input" autocomplete="off" onblur="nickCheck();">
-				<div class="notice"></div>
+			
+			<div class="field password-field group">
+				<label class="label">생년월일</label>
+				<div class="wz input">
+					<input id="birth" class="input text block large" type="date"
+						name="birth"  required aria-required="true">
+						<div class="notice"></div>
+				</div>
 			</div>
-			<div class="row">
-				<label>연락처</label> <input type="tel" name="phone" class="form-input"
-					autocomplete="off" onblur="phoneCheck();"
-					placeholder="전화번호 -포함 13자리를 입력해주세요.">
-				<div class="notice"></div>
+			
+			<div class="field password-field group">
+				<div class="wz input">
+					<label class="label">성별</label> <select name="gender">
+						<option value="남자">남자</option>
+						<option value="여자">여자</option>
+						<option value="기타">기타</option>
+					</select>
+				</div>
 			</div>
-			<div class="row">
-				<label>생년월일</label> <input type="date" name="birth" id="birth"
-					required class="form-input form-inline" autocomplete="off"
-					onblur="birthCheck();">
-			</div>
-			<div class="row">
-				<label>성별</label> <select name="gender">
-					<option value="남자">남자</option>
-					<option value="여자">여자</option>
-					<option value="기타">기타</option>
-				</select>
-			</div>
-			<div class="row">
-				<textarea name="intro" rows="5" cols="50" placeholder="자기소개를 작성해주세요"
-					id="intro" oninput="lengCheck();"></textarea>
-			</div>
-			<div class="row reft">
-				<span id="intro-length">0</span> / 100
-			</div>
-			<div class="row">
-				<input type="checkbox" required>[필수]이용약관과 개인정보처리방침에 동의
-			</div>
-
-			<div class="row">
-				<button type="button" class="form-btn next">다음으로</button>
-			</div>
+			
+			<button type="button" id="btnJoin" class="wz button primary block next">다음으로</button>
 		</div>
 	</div>
-
-	<!-- 2페이지 -->
-	<div class="page">
-		<div class="container-400 container-center">
-			<div class="row center">
-				<h1>회원가입</h1>
+</div>	
+			
+<!-- 2페이지 -->
+<div class="page">
+	<div class="outer2">
+		<div class="wz container form-container" style="width: 500px">
+			
+			<div class="field password-field group">
+				<label class="label">자기소개</label>
+				<div class="wz input">
+				<textarea name="intro" rows="5" cols="50"
+						placeholder="자기소개를 작성해주세요" id="intro" oninput="lengCheck();"
+						class="input text block large"></textarea>
+				</div>
 			</div>
-			<div class="row">
-				<label>관심사 설정</label>
-			</div>
-
+			<div class="field password-field group">
+				<div class="wz input">
+					<label>관심사 설정</label>
 			<div class="row">
 				<select class="big" name="location">
 					<option value="">관심사 선택</option>
 					<c:forEach var="category" items="${category}">
 						<option value="${category.bigType}">${category.bigType}</option>
 					</c:forEach>
-				</select> 
-				<select class="middle" name="smalltype"></select>
+				</select> <select class="middle" name="smalltype"></select>
 			</div>
 			<div id="category-select"></div>
-
-			<div class="row">
+			</div>
+			</div>
+			
+			<div class="field password-field group">
+				<div class="wz input">
 				<label>MBTI</label> 
 				<br> 
 				<select name="mbti">
+					<option value="없음">없음</option>
 					<option value="ISTJ">ISTJ</option>
 					<option value="ISFJ">ISFJ</option>
 					<option value="INFJ">INFJ</option>
@@ -459,21 +522,31 @@ function lengCheck() {
 					<option value="ESFJ">ESFJ</option>
 					<option value="ENFJ">ENFJ</option>
 					<option value="ENTJ">ENTJ</option>
+					
 				</select>
 			</div>
-
-			<div class="row">
-				<label>코로나 백신접종여부</label> <input type="file" name="corona"
-					accept="image/*" class="form-input">
 			</div>
-
-			<button type="button" class="form-btn prev">이전 단계로</button>
-			<div class="row">
-				<input type="submit" value="가입" class="form-btn">
+			<div class="terms-check-all">
+				<label class="wz checkbox"> <input type="checkbox"
+					id="agreeAllCheckPage" name="agreeAllCheckPage" value="Y"
+					style="padding-right: 15px;" required> <span
+					class="wz text subtext1">전체동의<br> <span
+						class="wz text caption1"> 원마일·회원 서비스(필수), KH정보교육원 서비스 (필수),
+						파이널프로젝트 서비스 (필수)</span>
+				</span> <em class="helper error"></em>
+				</label>
 			</div>
-
+			<div class="field password-field group">
+				<div class="wz input">
+			<button type="button" id="btnJoin" class="wz button primary block prev">이전 단계로</button>
+			</div>
+			</div>
+			<input type="submit" id="btnJoin" class="wz button primary block" value="가입하기">
+			
 		</div>
 	</div>
+</div>
+		
 </form>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

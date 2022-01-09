@@ -106,12 +106,12 @@ public class PayController {
 			//대표 결제정보가 등록된 다음 상세 결제정보를 등록
 		}else {
 			//단건결제라면 상품구매 테이블에 insert를 수행
-			ProductBuyDTO productBuyDTO = new ProductBuyDTO();
-			productBuyDTO.setMemberNo(memberNo);
-			productBuyDTO.setProductNo(productNo);
-			productBuyDTO.setTid(tid);
-			productBuyDTO.setItemName(responseVO.getItem_name());
-			productBuyDTO.setTotalAmount(responseVO.getAmount().getTotal());
+//			ProductBuyDTO productBuyDTO = new ProductBuyDTO();
+//			productBuyDTO.setMemberNo(memberNo);
+//			productBuyDTO.setProductNo(productNo);
+//			productBuyDTO.setTid(tid);
+//			productBuyDTO.setItemName(responseVO.getItem_name());
+//			productBuyDTO.setTotalAmount(responseVO.getAmount().getTotal());
 			
 		}
 

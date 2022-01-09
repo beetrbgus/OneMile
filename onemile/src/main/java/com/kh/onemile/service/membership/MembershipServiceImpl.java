@@ -26,7 +26,7 @@ public class MembershipServiceImpl implements MembershipService{
 		confirmVO.setQuantity(1);
 		confirmVO.setType("TCSUBSCRIP");
 		confirmVO.setProductName(membershipDTO.getMspProduct());
-		
+		log.debug("````````confirmVO : confirmVO        "+confirmVO);
 		return confirmVO;
 	}
 }

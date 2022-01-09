@@ -28,7 +28,7 @@
 	<!-- 결제일 비교하기-->
 	<select id="dayCheck" resultType="MembershipBuyDTO">
 	<![CDATA[
-		 select  * from msb where buy_endtime <= sysdate
+		 select  * from msb where buy_endtime <= sysdate and status = '결제완료'
 		 ]]>
 	</select>
 	

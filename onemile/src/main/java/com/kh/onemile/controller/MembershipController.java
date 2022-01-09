@@ -51,7 +51,7 @@ public class MembershipController {
 		ConfirmVO confirmVO  =membershipService.getConfirm(productNo,quantity);
 		
 		redirectAttributes.addFlashAttribute("confirmVO", confirmVO);
-		log.debug(confirmVO.toString());
+		log.debug("~~~~~~~~~~~~~~~~~~~~~~~~~~"+confirmVO.toString());
 		return "redirect:/pay/confirm";
 	}
 
