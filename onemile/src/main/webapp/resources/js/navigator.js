@@ -4,14 +4,11 @@ $(function(){
 		    navigator.geolocation.getCurrentPosition((position) => {
 		    	let lat = position.coords.latitude;
 		    	let lng = position.coords.longitude;
-		    	
-		    	console.log(lat);
-		    	console.log(lng);
 		    	//세션이 있으면 세션 지우고  세션에 저장.
 		    	if(removeSession()){
 		    		setSession(lat,lng);
 		    	}
-		    	let region = getAddr(lat,lng);		    		
+		    	let region = getAddr(lat,lng);
 		    });
 
 		}
@@ -25,7 +22,6 @@ $(function(){
 	        	console.log(result[0]);
 	        	let dong = result[0].region_3depth_name;
 	        	$(".dong").val(dong);
-	        	 sessionStorage.setItem("dong", dong);
 	        }
 	        return result[0];
 	    };
