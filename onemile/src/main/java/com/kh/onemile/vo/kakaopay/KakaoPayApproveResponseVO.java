@@ -15,7 +15,9 @@ public class KakaoPayApproveResponseVO {
 	private CardInfo card_info;//결제 상세 정보(카드일 경우)
 	private String item_name;//상품 이름
 	private String item_code;//상품 코드
+	private int productNo;
 	private int quantity;//상품 수량
+	private int memberNo;
 	private String created_at;
 	private String approved_at;
 	private String payload;

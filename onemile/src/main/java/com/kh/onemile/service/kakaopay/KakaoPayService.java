@@ -18,6 +18,6 @@ public interface KakaoPayService {
 	KakaoPayApproveResponseVO regularApprove(KakaoPayRegularApproveRequestVO requestVO) throws URISyntaxException;
 	
 	//결제 승인
-	KakaoPayApproveResponseVO approve(KakaoPayApproveRequestVO requestVO) throws URISyntaxException;
+	void approve(KakaoPayApproveRequestVO requestVO) throws URISyntaxException;
 	KakaoPayAutoPayMentInactiveResponseVO regularInactive(String sid) throws URISyntaxException;
 }

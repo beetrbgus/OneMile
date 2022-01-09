@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.kh.onemile.entity.cobuy.CobuyDTO;
 import com.kh.onemile.entity.image.middle.MiddleImgTableDTO;
 import com.kh.onemile.entity.map.MapDTO;
 import com.kh.onemile.repository.cobuy.CobuyDao;
@@ -118,12 +119,13 @@ public class CobuyServiceImpl implements CobuyService {
 
 	@Override
 	public ConfirmVO getConfirm(ConfirmVO confirmVO) {
-		CobuyVO cobuyVO = cobuyDao.getConfirm(confirmVO);
+		CobuyDTO cobuyDTO = cobuyDao.getConfirm(confirmVO);
 
-		int totalPrice = confirmVO.getQuantity() * cobuyVO.getPrice();
+		int totalPrice = confirmVO.getQuantity() * cobuyDTO.getPrice();
+		confirmVO.setProductNo(cobuyDTO.getCobuyNo());
 		confirmVO.setTotalAmount(totalPrice);
-		confirmVO.setPrice(cobuyVO.getPrice());
-		confirmVO.setProductName(cobuyVO.getPName());
+		confirmVO.setPrice(cobuyDTO.getPrice());
+		confirmVO.setProductName(cobuyDTO.getPname());
 		confirmVO.setType("TC0ONETIME");
 
 		return confirmVO;

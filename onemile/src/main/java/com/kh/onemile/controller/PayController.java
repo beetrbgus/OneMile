@@ -17,6 +17,7 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.kh.onemile.entity.product.MembershipBuyDTO;
 import com.kh.onemile.repository.membership.MembershipBuyDao;
+import com.kh.onemile.service.kakaopay.BuyTableService;
 import com.kh.onemile.service.kakaopay.KakaoPayService;
 import com.kh.onemile.vo.kakaopay.ConfirmVO;
 import com.kh.onemile.vo.kakaopay.KakaoPayApproveRequestVO;
@@ -85,22 +86,11 @@ public class PayController {
 		requestVO.setTid(tid);
 		requestVO.setPg_token(pg_token);
 		requestVO.setCid(cid);
+		requestVO.setMemberNo(memberNo);
+		requestVO.setProductNo(productNo);
 
 		KakaoPayApproveResponseVO responseVO = new KakaoPayApproveResponseVO();
-		responseVO = kakaoPayService.approve(requestVO);
-		
-		if(cid.equals("TCSUBSCRIP")) {
-		// 결제가 완료된 시점 responseVO를 사용하여 membershipBuyDTO 테이블에 insert를 수행
-			MembershipBuyDTO membershipBuyDTO = new MembershipBuyDTO();
-			membershipBuyDTO.setSid(responseVO.getSid());// 정기결제 고유번호(SID)
-			membershipBuyDTO.setPartnerUserId(partnerUserId);
-			membershipBuyDTO.setTotalAmount(responseVO.getAmount().getTotal());
-			membershipBuyDTO.setMspNo(productNo);
-			membershipBuyDTO.setMemberNo(memberNo);
-			membershipBuyDao.insert(membershipBuyDTO);
-		}else {
-			
-		}
+		kakaoPayService.approve(requestVO);
 
 		return "redirect:success_result";
 	}

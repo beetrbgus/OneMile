@@ -2,20 +2,16 @@
 <!DOCTYPE mapper
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cobuy">
+<mapper namespace="cobuybuy">
 
 	<!-- 글쓰기 -->
-	<insert id="reg" parameterType="CobuyRegVO">
-		insert into cobuy(
-		COBUY_NO,
-		MEMBER_NO, TITLE,
-		PRICE,DESCRIPT, PNAME,DEADLINE ,MAP_NO ,MIDDLE_NAME ,STOCK
-		)values(
-		#{cobuyNo},
-		#{memberNo},#{title},
-		#{price},#{descript},#{pName},
-		#{deadLine}
-		,#{mapNo} ,#{middleName} ,#{stock}
+	<insert id="reg" parameterType="CoBuyBuyVO">
+		insert into pb(
+			PB_NO, MEMBER_NO, PRODUCT_NO,
+			TID,ITEM_NAME, TOTAL_AMOUNT,STATUS)
+		values(
+			PB_SEQ.nextval, #{memberNo},#{productNo},
+			#{tid},#{itemName},#{totalAmount},#{status} 
 		)
 	</insert>
 	<!-- 숨김 변경 -->

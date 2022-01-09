@@ -234,12 +234,9 @@
 												</p>
 											</div>
 											<script src="${pageContext.request.contextPath}/resources/js/cobuy/detail.js" ></script>
-											<form id="buyForm" action="cobuyBuy" method="post">
-												<input type="hidden" name="type" value="단건결제">
+											<form id="buyForm" action="confirm" method="post">
 												<input type="hidden" name="productNo" value="${detail.cobuyNo}">
-												<input type="hidden" name="productName" value="${detail.PName}">
 												<input class="quantity" type="hidden" name="quantity" value="0">
-												<input type="hidden" name="stock" value="${detail.stock}">
 												<!-- 프로젝트 유형이 글로벌/앵콜 프로젝트가 아닌경우: 기존과 동일하게 처리 -->
 												<div class="btn-wrap funding">
 													<button class="buyBtn wz button primary block btn-reward-funding">구매하기</button>
