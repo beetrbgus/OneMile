@@ -3,6 +3,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<style>
+.d-block{
+	width:100%;
+	height:450px;
+}
+img{
+	object-fit: cover;
+}
+.b{
+	color:black;
+}
+.w{
+	color:white;
+}
+</style>
 <script>
 	$(function () {
 		var page = 1;
@@ -78,222 +93,82 @@
 </script>
 
 <div class="RewardMainWrapper_container__2HR7Y">
-	<div class="VisualSlider_container__1pJYR">
-		<div class="slick-slider slick-initialized" dir="ltr">
-			<div class="slick-list">
-				<div class="slick-track" style="width: 14170px; opacity: 1; transform: translate3d(-3270px, 0px, 0px);">
-					<div data-index="-1" tabindex="-1" class="slick-slide slick-cloned" aria-hidden="true"
-						style="width: 1090px;">
-						<div>
-							<div><a href="https://www.wadiz.kr/web/wreward/collection/selfdevelopment?order=recommend&amp;endYn=N&amp;_refer_section_st=RMK_5"
-									class="VisualSlide_container__1lgSN"
-									style="background-image: url(&quot;https://cdn.wadiz.kr/ft/images/green001/2022/0107/20220107170626735_4674.jpg/wadiz/optimize/&quot;);">
-									<div class="VisualSlide_wrap__11Qnk">
-										<div class="VisualSlide_text__1vRyr">
-											<p class="VisualSlide_title__gELf9">새해 자기계발을 위한<br>출판 클래스 기획전</p>
-											<p class="VisualSlide_badge__HWnUy">펀딩으로 이루는 새해 계획</p>
-										</div>
-									</div>
-								</a></div>
-						</div>
-					</div>
-					<div data-index="0" class="slick-slide" tabindex="-1" aria-hidden="true"
-						style="outline: none; width: 1090px;">
-						<div>
-							<div><a href="https://www.wadiz.kr/web/wcomingsoon/rwd/135211?acid=10013966&amp;_refer_section_st=RMK_0"
-									class="VisualSlide_container__1lgSN"
-									style="background-image: url(&quot;https://cdn1.wadiz.kr/images/20220107/1641513132430.png/wadiz/optimize&quot;);">
-									<div class="VisualSlide_wrap__11Qnk">
-										<div class="VisualSlide_text__1vRyr">
-											<p class="VisualSlide_title__gELf9">NEW 특대형 카본핸들<br>10년 쓰는 풀카본 우산</p>
-											<p class="VisualSlide_badge__HWnUy">가벼운 무게로 장시간 들어도 부담 없어요</p>
-										</div>
-									</div>
-									<div class="banner_adBadge__2iyux banner_keyVisual__1TLsm">AD</div>
-								</a></div>
-						</div>
-					</div>
-					<div data-index="1" class="slick-slide" tabindex="-1" aria-hidden="true"
-						style="outline: none; width: 1090px;">
-						<div>
-							<div><a href="https://www.wadiz.kr/web/campaign/detail/124953?_refer_section_st=RMK_1"
-									class="VisualSlide_container__1lgSN"
-									style="background-image: url(&quot;https://cdn.wadiz.kr/ft/images/green001/2022/0107/20220107170733696_4674.jpg/wadiz/optimize/&quot;);">
-									<div class="VisualSlide_wrap__11Qnk">
-										<div class="VisualSlide_text__1vRyr">
-											<p class="VisualSlide_title__gELf9">탄산 조절 가능한 <br>필립스 소다메이커</p>
-											<p class="VisualSlide_badge__HWnUy">집에서 내려마시는 이태리 탄산수</p>
-										</div>
-									</div>
-								</a></div>
-						</div>
-					</div>
-					<div data-index="2" class="slick-slide slick-active slick-current" tabindex="-1" aria-hidden="false"
-						style="outline: none; width: 1090px;">
-						<div>
-							<div><a href="https://www.wadiz.kr/web/campaign/detail/111414?_refer_section_st=RMK_2"
-									class="VisualSlide_container__1lgSN"
-									style="background-image: url(&quot;https://cdn.wadiz.kr/ft/images/green001/2022/0107/20220107170822923_4674.jpg/wadiz/optimize/&quot;);">
-									<div class="VisualSlide_wrap__11Qnk">
-										<div class="VisualSlide_text__1vRyr">
-											<p class="VisualSlide_title__gELf9">[50주년 한정판]<br>올드 성음기타 복각 프로젝트</p>
-											<p class="VisualSlide_badge__HWnUy">빈티지 감성과 기술력의 만남</p>
-										</div>
-									</div>
-								</a></div>
-						</div>
-					</div>
-					<div data-index="3" class="slick-slide" tabindex="-1" aria-hidden="true"
-						style="outline: none; width: 1090px;">
-						<div>
-							<div><a href="https://www.wadiz.kr/web/campaign/detail/121576?acid=10013914&amp;_refer_section_st=RMK_3"
-									class="VisualSlide_container__1lgSN"
-									style="background-image: url(&quot;https://cdn1.wadiz.kr/images/20220104/1641276801405.png/wadiz/optimize&quot;);">
-									<div class="VisualSlide_wrap__11Qnk">
-										<div class="VisualSlide_text__1vRyr">
-											<p class="VisualSlide_title__gELf9">미국 실리콘밸리에서<br>소문난 그 백팩</p>
-											<p class="VisualSlide_badge__HWnUy">마그네틱 기능을 탑재한 원터치 사이드 포켓</p>
-										</div>
-									</div>
-									<div class="banner_adBadge__2iyux banner_keyVisual__1TLsm">AD</div>
-								</a></div>
-						</div>
-					</div>
-					<div data-index="4" class="slick-slide" tabindex="-1" aria-hidden="true"
-						style="outline: none; width: 1090px;">
-						<div>
-							<div><a href="https://www.wadiz.kr/web/campaign/detail/127645?_refer_section_st=RMK_4"
-									class="VisualSlide_container__1lgSN"
-									style="background-image: url(&quot;https://cdn.wadiz.kr/ft/images/green001/2022/0107/20220107170948420_4674.jpg/wadiz/optimize/&quot;);">
-									<div class="VisualSlide_wrap__11Qnk">
-										<div class="VisualSlide_text__1vRyr">
-											<p class="VisualSlide_title__gELf9">세균과 냄새 잡는<br>UV 공기청정 고양이 화장실</p>
-											<p class="VisualSlide_badge__HWnUy">모든 모래를 거침없이 살균</p>
-										</div>
-									</div>
-								</a></div>
-						</div>
-					</div>
-					<div data-index="5" class="slick-slide" tabindex="-1" aria-hidden="true"
-						style="outline: none; width: 1090px;">
-						<div>
-							<div><a href="https://www.wadiz.kr/web/wreward/collection/selfdevelopment?order=recommend&amp;endYn=N&amp;_refer_section_st=RMK_5"
-									class="VisualSlide_container__1lgSN"
-									style="background-image: url(&quot;https://cdn.wadiz.kr/ft/images/green001/2022/0107/20220107170626735_4674.jpg/wadiz/optimize/&quot;);">
-									<div class="VisualSlide_wrap__11Qnk">
-										<div class="VisualSlide_text__1vRyr">
-											<p class="VisualSlide_title__gELf9">새해 자기계발을 위한<br>출판 클래스 기획전</p>
-											<p class="VisualSlide_badge__HWnUy">펀딩으로 이루는 새해 계획</p>
-										</div>
-									</div>
-								</a></div>
-						</div>
-					</div>
-					<div data-index="6" tabindex="-1" class="slick-slide slick-cloned" aria-hidden="true"
-						style="width: 1090px;">
-						<div>
-							<div><a href="https://www.wadiz.kr/web/wcomingsoon/rwd/135211?acid=10013966&amp;_refer_section_st=RMK_0"
-									class="VisualSlide_container__1lgSN"
-									style="background-image: url(&quot;https://cdn1.wadiz.kr/images/20220107/1641513132430.png/wadiz/optimize&quot;);">
-									<div class="VisualSlide_wrap__11Qnk">
-										<div class="VisualSlide_text__1vRyr">
-											<p class="VisualSlide_title__gELf9">NEW 특대형 카본핸들<br>10년 쓰는 풀카본 우산</p>
-											<p class="VisualSlide_badge__HWnUy">가벼운 무게로 장시간 들어도 부담 없어요</p>
-										</div>
-									</div>
-									<div class="banner_adBadge__2iyux banner_keyVisual__1TLsm">AD</div>
-								</a></div>
-						</div>
-					</div>
-					<div data-index="7" tabindex="-1" class="slick-slide slick-cloned" aria-hidden="true"
-						style="width: 1090px;">
-						<div>
-							<div><a href="https://www.wadiz.kr/web/campaign/detail/124953?_refer_section_st=RMK_1"
-									class="VisualSlide_container__1lgSN"
-									style="background-image: url(&quot;https://cdn.wadiz.kr/ft/images/green001/2022/0107/20220107170733696_4674.jpg/wadiz/optimize/&quot;);">
-									<div class="VisualSlide_wrap__11Qnk">
-										<div class="VisualSlide_text__1vRyr">
-											<p class="VisualSlide_title__gELf9">탄산 조절 가능한 <br>필립스 소다메이커</p>
-											<p class="VisualSlide_badge__HWnUy">집에서 내려마시는 이태리 탄산수</p>
-										</div>
-									</div>
-								</a></div>
-						</div>
-					</div>
-					<div data-index="8" tabindex="-1" class="slick-slide slick-cloned" aria-hidden="true"
-						style="width: 1090px;">
-						<div>
-							<div><a href="https://www.wadiz.kr/web/campaign/detail/111414?_refer_section_st=RMK_2"
-									class="VisualSlide_container__1lgSN"
-									style="background-image: url(&quot;https://cdn.wadiz.kr/ft/images/green001/2022/0107/20220107170822923_4674.jpg/wadiz/optimize/&quot;);">
-									<div class="VisualSlide_wrap__11Qnk">
-										<div class="VisualSlide_text__1vRyr">
-											<p class="VisualSlide_title__gELf9">[50주년 한정판]<br>올드 성음기타 복각 프로젝트</p>
-											<p class="VisualSlide_badge__HWnUy">빈티지 감성과 기술력의 만남</p>
-										</div>
-									</div>
-								</a></div>
-						</div>
-					</div>
-					<div data-index="9" tabindex="-1" class="slick-slide slick-cloned" aria-hidden="true"
-						style="width: 1090px;">
-						<div>
-							<div><a href="https://www.wadiz.kr/web/campaign/detail/121576?acid=10013914&amp;_refer_section_st=RMK_3"
-									class="VisualSlide_container__1lgSN"
-									style="background-image: url(&quot;https://cdn1.wadiz.kr/images/20220104/1641276801405.png/wadiz/optimize&quot;);">
-									<div class="VisualSlide_wrap__11Qnk">
-										<div class="VisualSlide_text__1vRyr">
-											<p class="VisualSlide_title__gELf9">미국 실리콘밸리에서<br>소문난 그 백팩</p>
-											<p class="VisualSlide_badge__HWnUy">마그네틱 기능을 탑재한 원터치 사이드 포켓</p>
-										</div>
-									</div>
-									<div class="banner_adBadge__2iyux banner_keyVisual__1TLsm">AD</div>
-								</a></div>
-						</div>
-					</div>
-					<div data-index="10" tabindex="-1" class="slick-slide slick-cloned" aria-hidden="true"
-						style="width: 1090px;">
-						<div>
-							<div><a href="https://www.wadiz.kr/web/campaign/detail/127645?_refer_section_st=RMK_4"
-									class="VisualSlide_container__1lgSN"
-									style="background-image: url(&quot;https://cdn.wadiz.kr/ft/images/green001/2022/0107/20220107170948420_4674.jpg/wadiz/optimize/&quot;);">
-									<div class="VisualSlide_wrap__11Qnk">
-										<div class="VisualSlide_text__1vRyr">
-											<p class="VisualSlide_title__gELf9">세균과 냄새 잡는<br>UV 공기청정 고양이 화장실</p>
-											<p class="VisualSlide_badge__HWnUy">모든 모래를 거침없이 살균</p>
-										</div>
-									</div>
-								</a></div>
-						</div>
-					</div>
-					<div data-index="11" tabindex="-1" class="slick-slide slick-cloned" aria-hidden="true"
-						style="width: 1090px;">
-						<div>
-							<div><a href="https://www.wadiz.kr/web/wreward/collection/selfdevelopment?order=recommend&amp;endYn=N&amp;_refer_section_st=RMK_5"
-									class="VisualSlide_container__1lgSN"
-									style="background-image: url(&quot;https://cdn.wadiz.kr/ft/images/green001/2022/0107/20220107170626735_4674.jpg/wadiz/optimize/&quot;);">
-									<div class="VisualSlide_wrap__11Qnk">
-										<div class="VisualSlide_text__1vRyr">
-											<p class="VisualSlide_title__gELf9">새해 자기계발을 위한<br>출판 클래스 기획전</p>
-											<p class="VisualSlide_badge__HWnUy">펀딩으로 이루는 새해 계획</p>
-										</div>
-									</div>
-								</a></div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="VisualSlider_wrap__3EXSw">
-			<div class="VisualSlider_arrows__1fumY"><button type="button" class="VisualSlider_prev__Pmrvq"><i
-						class="icon chevron-left VisualSlider_icon__23oWk" aria-hidden="true"></i></button><button
-					type="button" class="VisualSlider_next__3BJKN"><i
-						class="icon chevron-right VisualSlider_icon__23oWk" aria-hidden="true"></i></button></div>
-			<div class="VisualSlider_active__2izqv">
-				<div style="width: 50%;"></div>
-			</div>
-		</div>
+
+	<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+	  <div class="carousel-indicators">
+	    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+	    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+	    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+	    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
+	    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4" aria-label="Slide 5"></button>
+	    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="5" aria-label="Slide 6"></button>
+	  </div>
+	  <div class="carousel-inner">
+	    <div class="carousel-item active" data-bs-interval="3000">
+	     <a href="${root}/cobuy/list">
+	      <img src="${root}/resources/image/beauty.jpg" class="d-block w-100">
+	      <div class="carousel-caption d-none d-md-block">
+	        <h3 class="b">[공동구매율 1위]</h3>
+	        <p class="b">정말 좋은 제품만 다같이 나누니까.</p>
+	      </div>
+	      </a>
+	    </div>
+	    <div class="carousel-item" data-bs-interval="3000">
+	     <a href="${root}/cobuy/list">
+	      <img src="${root}/resources/image/fashion.jpg" class="d-block w-100">
+	      <div class="carousel-caption d-none d-md-block">
+	        <h3 class="w">해외직구 어려워서 고민이었다면.</h3>
+	        <p class="w">내가 찾던 그 옷 여기 있었네?</p>
+	      </div>
+	      </a>
+	    </div>
+	    <div class="carousel-item" data-bs-interval="3000">
+	     <a href="${root}/cobuy/list">
+	      <img src="${root}/resources/image/food.jpg" class="d-block w-100">
+	      <div class="carousel-caption d-none d-md-block">
+	        <h3 class="w">자취 필수품 모음전</h3>
+	        <p class="w">혼자 먹기엔 많고 비싸잖아요~</p>
+	      </div>
+	      </a>
+	    </div>
+	    <div class="carousel-item" data-bs-interval="3000">
+	     <a href="${root}/cobuy/list">
+	      <img src="${root}/resources/image/kids.jpg" class="d-block w-100">
+	      <div class="carousel-caption d-none d-md-block">
+	        <h3 class="w">[육아9단 PICK!]</h3>
+	        <p class="W">아이의 몸에도, 환경에도 좋은 것만 모았어요.</p>
+	      </div>
+	      </a>
+	    </div>
+	    <div class="carousel-item" data-bs-interval="3000">
+	     <a href="${root}/cobuy/list">
+	      <img src="${root}/resources/image/living.jpg" class="d-block w-100">
+	      <div class="carousel-caption d-none d-md-block">
+	        <h3 class="b">겨울철 나만의 따듯함을 위해.</h3>
+	        <p class="b">따듯한 나만의 공간에서 맛있는 귤이라도 먹어요, 우리</p>
+	      </div>
+	      </a>
+	    </div>
+	    <div class="carousel-item" data-bs-interval="3000">
+	     <a href="${root}/cobuy/list">
+	      <img src="${root}/resources/image/pet.jpg" class="d-block w-100">
+	      <div class="carousel-caption d-none d-md-block">
+	        <h3 class="w">루비도 좋아하는 모래</h3>
+	        <p class="w">집사님들의 생생후기도 모았습니다!</p>
+	      </div>
+	      </a>
+	    </div>
+	  </div>
+	  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+	    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+	    <span class="visually-hidden">Previous</span>
+	  </button>
+	  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+	    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+	    <span class="visually-hidden">Next</span>
+	  </button>
 	</div>
+	
 	<div class="RewardCategoryCircleList_container__1GDge">
 		<div class="CategoryCircleList_container__3fAVd"><button
 				class="CategoryCircleList_previous__xJMxg CategoryCircleList_hidden__2fdvp" type="button" data-dir="이전"><i
@@ -365,5 +240,18 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+$('.item').carousel({ interval:1000 });
+
+$("#myCarousel").click(function(){
+    $("#item-1").carousel(0);
+});
+  $("#myCarousel").click(function(){
+    $("#item-2").carousel(1);
+});
+  $("#myCarousel").click(function(){
+    $("#item-3").carousel(2);
+});
+</script>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

@@ -17,6 +17,12 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b89479d3bf4f702a0c7b99d5edfb1391&libraries=services" charset="utf-8"></script> 
     <script type="text/javascript"src="${root}/resources/js/navigator.js"></script>
+    <!-- Bootstrap CSS CDN-->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<!-- boorStrap Skin cdn -->
+	<link href="https://bootswatch.com/5/journal/bootstrap.css" type="text/css" rel="stylesheet">
+	<!--Bootstrap bundle CSS CDN -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/sha1.min.js"></script>
     <script src="${root}/resources/js/join.js" ></script>
