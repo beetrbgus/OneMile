@@ -24,6 +24,11 @@ public class AdminController {
 	@PostMapping("/approve")
 	public String approve(Model model) {
 		return "admin/approve";
+		}
+	@GetMapping("/list")
+	public String list(Model model) {
+		return "admin/approve";
+	
 	}
 
 }

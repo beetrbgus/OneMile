@@ -14,11 +14,13 @@ public class SocialDTO {
 	private int mapNo; // 지도 번호
 	
 	private String title; //소모임 이름
-	private String smallType;
+	private String smalltype;
 	private String type; //모임 분류( 정모 , 소모임)
 	private String context; //모임 소개 내용
-	private String startDate; //시작시각
-	private String endDate; // 종료시각
+	@DateTimeFormat(pattern="yyyy-MM-dd HH24:mm:ss")
+	private Date startDate; //시작시각
+	@DateTimeFormat(pattern="yyyy-MM-dd HH24:mm:ss") 
+	private Date endDate; // 종료시각
 	private String HIDDENYN; //숨김여부
 
 	private int minpeople; 

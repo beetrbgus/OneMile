@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.onemile.entity.image.middle.MiddleImgTableDTO;
 import com.kh.onemile.entity.map.MapDTO;
@@ -20,6 +21,7 @@ import com.kh.onemile.vo.social.SocialRegVO;
 
 import lombok.extern.slf4j.Slf4j;
 
+@Transactional
 @Service
 @Slf4j
 public class SocialServiceImpl implements SocialService{
@@ -52,19 +54,22 @@ public class SocialServiceImpl implements SocialService{
 		int mapNo = mapService.regMap(mapDTO);		
 		//소셜링 시퀀스 생성
 		int socialNo = seq.nextSequence(seqName);
-		
+		log.debug("socialNo " + socialNo);
 		//이렇게 해야되나??
 		SocialDTO socialDto = new SocialDTO();
 		socialDto.setSocialNo(socialNo);
 		socialDto.setMemberNo(socialRegVO.getMemberNo());
 		socialDto.setTitle(socialRegVO.getTitle());
-		socialDto.setSmallType(socialRegVO.getSmallType());
+		socialDto.setSmalltype(socialRegVO.getSmalltype());
 		socialDto.setContext(socialRegVO.getContext());
 		socialDto.setStartDate(socialRegVO.getStartDate());
 		socialDto.setEndDate(socialRegVO.getEndDate());
 		socialDto.setMapNo(mapNo);
-		
+		socialDto.setMinpeople(socialRegVO.getMinpeople());
+		socialDto.setMaxpeople(socialRegVO.getMaxpeople());
+		log.debug("SocialDTO     "+socialDto.toString());
 		socialDao.reg(socialDto);
+		
 		//중간 테이블 DTO에 데이터 저장.
 		MiddleImgTableDTO imgMidDTO = new MiddleImgTableDTO();
 		imgMidDTO.setConnTableNo(socialNo); // 소셜링 번호
