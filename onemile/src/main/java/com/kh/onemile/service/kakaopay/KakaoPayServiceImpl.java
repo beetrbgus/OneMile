@@ -17,6 +17,7 @@ import com.kh.onemile.vo.kakaopay.KaKaoPayRegularPayMentStateResponseVO;
 import com.kh.onemile.vo.kakaopay.KakaoPayApproveRequestVO;
 import com.kh.onemile.vo.kakaopay.KakaoPayApproveResponseVO;
 import com.kh.onemile.vo.kakaopay.KakaoPayAutoPayMentInactiveResponseVO;
+import com.kh.onemile.vo.kakaopay.KakaoPayCancelResponseVO;
 import com.kh.onemile.vo.kakaopay.KakaoPayReadyResponseVO;
 import com.kh.onemile.vo.kakaopay.KakaoPayRegularApproveRequestVO;
 
@@ -175,6 +176,31 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 			URI uri = new URI("https://kapi.kakao.com/v1/payment/manage/subscription/status");
 			
 			KaKaoPayRegularPayMentStateResponseVO responseVO = template.postForObject(uri, entity, KaKaoPayRegularPayMentStateResponseVO.class);
+			
+			return responseVO;
+		}
+		
+		//결제 취소
+		@Override
+		public KakaoPayCancelResponseVO cancel(String tid, int amount) throws URISyntaxException {
+			RestTemplate template = new RestTemplate();
+			
+			HttpHeaders headers = new HttpHeaders();
+			headers.add("Authorization",  "KakaoAK "+Auth);
+			headers.add("Content-type", ContentType);
+			
+			MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
+			body.add("cid", "TC0ONETIME");
+			body.add("tid", tid);
+			body.add("cancel_amount", String.valueOf(amount));
+			body.add("cancel_tax_free_amount", "0");
+			
+			HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
+			
+			
+			URI uri = new URI("https://kapi.kakao.com/v1/payment/cancel");
+			
+			KakaoPayCancelResponseVO responseVO = template.postForObject(uri, entity, KakaoPayCancelResponseVO.class);
 			
 			return responseVO;
 		}

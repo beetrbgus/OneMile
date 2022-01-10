@@ -1,7 +1,6 @@
 package com.kh.onemile.controller;
 
 import java.net.URISyntaxException;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -10,18 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.kh.onemile.repository.membership.MembershipBuyDao;
 import com.kh.onemile.service.kakaopay.KakaoPayService;
 import com.kh.onemile.vo.kakaopay.ConfirmVO;
 import com.kh.onemile.vo.kakaopay.KaKaoPayRegularPayMentStateResponseVO;
 import com.kh.onemile.vo.kakaopay.KakaoPayApproveRequestVO;
-import com.kh.onemile.vo.kakaopay.KakaoPayApproveResponseVO;
-import com.kh.onemile.vo.kakaopay.KakaoPayReadyRequestVO;
+import com.kh.onemile.vo.kakaopay.KakaoPayCancelResponseVO;
 import com.kh.onemile.vo.kakaopay.KakaoPayReadyResponseVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -127,5 +123,19 @@ public class PayController {
 		model.addAttribute("state", responseVO);
 		return "pay/state";
 	}
-
+	
+	/*
+	 * //결제 취소 요청
+	 * 
+	 * @GetMapping("/cancel") public String cancel(@RequestParam String
+	 * tid, @RequestParam int amount,
+	 * 
+	 * @RequestParam int msbNo,Model model) throws URISyntaxException {
+	 * KakaoPayCancelResponseVO responseVO = kakaoPayService.cancel(tid, amount);
+	 * 
+	 * payDao.cancelDonation(payNo); donationService.updatePrice(payNo);
+	 * model.addAttribute("cancelList", responseVo);
+	 * 
+	 * return "donation/kakao/cancel"; }
+	 */
 }

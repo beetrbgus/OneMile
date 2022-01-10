@@ -7,6 +7,7 @@ import com.kh.onemile.vo.kakaopay.KaKaoPayRegularPayMentStateResponseVO;
 import com.kh.onemile.vo.kakaopay.KakaoPayApproveRequestVO;
 import com.kh.onemile.vo.kakaopay.KakaoPayApproveResponseVO;
 import com.kh.onemile.vo.kakaopay.KakaoPayAutoPayMentInactiveResponseVO;
+import com.kh.onemile.vo.kakaopay.KakaoPayCancelResponseVO;
 import com.kh.onemile.vo.kakaopay.KakaoPayReadyResponseVO;
 import com.kh.onemile.vo.kakaopay.KakaoPayRegularApproveRequestVO;
 
@@ -23,4 +24,7 @@ public interface KakaoPayService {
 	
 	//정기결제 상태 조회
 	KaKaoPayRegularPayMentStateResponseVO regularState(String sid) throws URISyntaxException;
+	
+	//결제 취소
+	KakaoPayCancelResponseVO cancel(String tid, int amount) throws URISyntaxException;
 }
