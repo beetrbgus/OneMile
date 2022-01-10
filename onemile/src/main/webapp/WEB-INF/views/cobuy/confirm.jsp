@@ -213,3 +213,4 @@
 	<input type="hidden" name="quantity" value="${confirmVO.quantity}">
 	<button type="submit" id="btn-submit" onclick="purchaseReservation()" class="wz primary button">결제하기</button>
 </form>
+

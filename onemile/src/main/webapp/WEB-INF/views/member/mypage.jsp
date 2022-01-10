@@ -26,17 +26,19 @@
 	<div class="float-item-left">
 		<!-- 회원 프로필 이미지 -->
 		<div class="row">	
-			<c:choose> 
-				<c:when test="${memberProfileMidDTO.imageNo == null||memberProfileMidDTO.imageNo==0}">
+			<%-- <c:choose>  --%>
+				<%-- <c:when test="${memberVO.imageNo==0}">
 				<img src="https://via.placeholder.com/300x300?text=User" width="100%" class="image image-round image-border">
-				</c:when>
-				<c:otherwise>
-				<img src="${pageContext.request.contextPath}/image/download?imageNo=${memberProfileMidDTO.imageNo}&folder=member" width="100%" height="100%" class="image image-round image-border">
+				</c:when> --%>
+			<%-- 	<c:otherwise> --%>
+			<c:forEach var="memberVO" items="${memberVO}">
+				<img src="${pageContext.request.contextPath}/image/download?imageNo=${memberVO.imageNo}&folder=member" width="100%" height="100%" class="image image-round image-border">
 				<%-- <img src="profile?imageNo=${memberProfileMidDTO.imageNo}&folderName=member" width="100%" class="image image-round image-border"> --%>
-				</c:otherwise>
-			</c:choose>
+				<%-- </c:otherwise>
+			</c:choose> --%>
+			</c:forEach>
 		</div> 
-			<button id="byn" type="button">버튼 </button>
+			
 			<!-- 회원 정보 -->
 			<div class="row center">
 				<h2>${memberDTO.nick}</h2>

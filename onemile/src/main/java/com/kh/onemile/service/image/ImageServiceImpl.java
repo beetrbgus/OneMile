@@ -3,14 +3,18 @@ package com.kh.onemile.service.image;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
 import com.kh.onemile.entity.image.ImageDTO;
 import com.kh.onemile.repository.image.ImageDao;
 import com.kh.onemile.util.SaveFile;
 import com.kh.onemile.util.Sequence;
 import com.kh.onemile.vo.ImageDownloadVO;
+import com.kh.onemile.vo.ImageVO;
+import com.kh.onemile.vo.MemberVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -104,5 +108,11 @@ public class ImageServiceImpl implements ImageService {
 	@Override
 	public ImageDTO getImage(int imageNo) {
 		return imageDao.get(imageNo);
+	}
+
+	@Override
+	public List<MemberVO> listByMember(int memberNo) {
+		List<MemberVO> list  = imageDao.listByMember(memberNo);
+		return list;
 	}
 }

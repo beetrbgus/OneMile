@@ -5,7 +5,9 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 import com.kh.onemile.entity.image.ImageDTO;
+import com.kh.onemile.vo.MemberVO;
 
 @Repository
 public class ImageDaoImpl implements ImageDao{
@@ -40,5 +42,16 @@ public class ImageDaoImpl implements ImageDao{
 	public List<ImageDTO> listByMenu(String middleName) {
 		List<ImageDTO> list = sqlSession.selectList("image.listByMenu", middleName);
 		return list;
+	}
+
+	@Override
+	public ImageDTO get2(int memberNo) {
+		return sqlSession.selectOne("image.getByMember",memberNo);
+	}
+
+	@Override
+	public List<MemberVO> listByMember(int memberNo) {
+		return sqlSession.selectList("image.listByMember",memberNo);
+		
 	}
 }

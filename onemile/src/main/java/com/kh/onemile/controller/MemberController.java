@@ -18,12 +18,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.onemile.entity.member.MemberDTO;
 import com.kh.onemile.entity.member.certi.CertiDTO;
-import com.kh.onemile.entity.product.MembershipBuyDTO;
 import com.kh.onemile.repository.membership.MembershipDao;
 import com.kh.onemile.service.email.EmailService;
+import com.kh.onemile.service.image.ImageService;
+import com.kh.onemile.service.image.MiddleImageService;
 import com.kh.onemile.service.member.MemberService;
 import com.kh.onemile.vo.MemberJoinVO;
+import com.kh.onemile.vo.MemberVO;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RequestMapping("/member")
 @Controller
 public class MemberController {
@@ -33,6 +38,10 @@ public class MemberController {
 	private EmailService emailService;
 	@Autowired
 	private MembershipDao membershipDao;
+	@Autowired
+	private ImageService imageService;
+	@Autowired
+	private MiddleImageService middelImageService;
 	
 	//회원가입
 	@GetMapping("/join")
@@ -155,11 +164,13 @@ public class MemberController {
 
 	//비밀번호찾기(이메일 체크)
 	@PostMapping("/emailCheck")
-	public String emailCheck(@ModelAttribute CertiDTO certiDTO,HttpSession session) {
+	public String emailCheck(@ModelAttribute CertiDTO certiDTO,HttpSession session, Model model) {
 		boolean success = memberService.emailCheck(certiDTO);
 		
 		if(success) {
+			model.addAttribute("email",certiDTO.getEmail());
 			return "member/edit_pw";
+			
 		}
 		else {
 			return "redirect:/";
@@ -189,13 +200,16 @@ public class MemberController {
 	@RequestMapping("/mypage")
 	public String mypage(HttpSession session,Model model) {
 		int memberNo =(int) session.getAttribute("logNo");
-		
 		//회원정보 불러오기
 		MemberDTO memberDTO = memberService.profile(memberNo);
 		//회원이미지 불러오기
-//		MemberProfileMidDTO memberProfileMidDTO = imageService.getImage(imageNo);
+		List<MemberVO> MemberVO = imageService.listByMember(memberNo);
+		log.debug("내정보 = MemberVO"+MemberVO);
+		
+//		MemberProfileMidDTO memberProfileMidDTO = imageService.getImage();
+		
 		model.addAttribute("memberDTO",memberDTO);
-//		model.addAttribute("memberProfileMidDTO",memberProfileMidDTO);
+		model.addAttribute("memberVO",MemberVO);
 		return "member/mypage";
 	}
 	
@@ -221,6 +235,17 @@ public class MemberController {
 		}
 	}
 	
-	
+//	//결제 취소 요청
+//	@GetMapping("/cancel")
+//	public String cancel(@RequestParam String tid, @RequestParam int amount,
+//								@RequestParam int payNo,Model model) throws URISyntaxException {
+//		KakaoPayCancelResponseVo responseVo = kakaoService.cancel(tid, amount);
+//		
+//		payDao.cancelDonation(payNo);
+//		donationService.updatePrice(payNo);
+//		model.addAttribute("cancelList", responseVo);
+//		
+//		return "donation/kakao/cancel";
+//	}
 	
 }

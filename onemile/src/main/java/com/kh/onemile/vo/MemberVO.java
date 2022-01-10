@@ -24,10 +24,10 @@ public class MemberVO {
 	private Date joinDate;
 	private String mbti;
 	private String intro;
-	private String corona;
 	@DateTimeFormat(pattern="YYYY-MM-DD HH24:mm:ss")
 	private Date nickModi;
 	private String exitYN;
 	@DateTimeFormat(pattern="YYYY-MM-DD HH24:mm:ss")
 	private Date exitDate;
+	private int imageNo;
 }
