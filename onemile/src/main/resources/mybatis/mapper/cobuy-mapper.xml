@@ -119,6 +119,14 @@
 		parameterType="ConfirmVO">
 		select * from cobuy where cobuy_no = #{cobuyNo} and stock >= #{quantity};
 	</select>
+	
+	<select id="getMiddleName" resultType="CobuyCatVO">
+		select * from (
+			select rownum rn, TMP.* from (
+				select * from cobuy_menu
+			)TMP
+		) where rn between 1 and 10
+	</select>
 </mapper>
 
 

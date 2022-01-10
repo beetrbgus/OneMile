@@ -6,7 +6,7 @@
 <style>
 .d-block{
 	width:100%;
-	height:450px;
+	height:300px;
 }
 img{
 	object-fit: cover;
@@ -18,82 +18,79 @@ img{
 	color:white;
 }
 </style>
+
 <script>
-	$(function () {
-		var page = 1;
-		var size = 20;
-
-		$(".ProjectListMoreButton_button__27eTb").click(function () {
-			loadData(page, size);
-			page++;
-		});
-
-		$(".ProjectListMoreButton_button__27eTb").click();
-
-		function loadData(page, size, middleName) {
-
-			$.ajax({
-				url: "${pageContext.request.contextPath}/cobuy/listdetail",
-				type: "get",
-				data: {
-					page: page,
-					size: size
-				},
-				success: function (resp) {
-					if (resp.length < size) {
-						$(".more-btn").remove();
-					}
-					for (var i = 0; i < resp.length; i++) {
-						var date = new Date(resp[i].deadLine);
-						var dateString = date.getFullYear()+"년 "+date.getMonth()+1+"월 "+date.getDate()+"일 "+date.getHours()+"시 "+date.getMinutes()+"분 "+date.getSeconds()+"초";
-
-						var CobuyListVO = resp[i];
-						console.log(CobuyListVO.cobuyNo);
-						console.log(typeof CobuyListVO.cobuyNo);
-						var divCol=
-							"<div class='ProjectCardList_item__1owJa'>"+
-							"<div>"+
-							"<div class='CommonCard_container__e_ebQ CommonCard_squareSmall__1Cdkn'>"+
-							"<a href='detail?cobuyNo="+CobuyListVO.cobuyNo+
-							"' class='CardLink_link__1k83H CommonCard_image__vaqkf' aria-hidden='true' tabindex='-1'>"+
-							"<div class='CommonCard_rect__2wpm4'>"+
-							"<span class='CommonCard_background__3toTR CommonCard_visible__ABkYx'"+
-							"style='background-image: url(${pageContext.request.contextPath}/image/download?imageNo=${CobuyListVO.imgNo}&folder=cobuy)'></span>"+
-							"</div>"+
-							"</a>"+
-							"<div class='CommonCard_info__1f4kq'>"+
-							"<div class='RewardProjectCard_info__3JFub'>"+
-							"<div class='RewardProjectCard_infoTop__3QR5w'>"+
-							"<a href='detail?cobuyNo="+CobuyListVO.cobuyNo+
-							"' class='CardLink_link__1k83H'>"+
-							"<p class='CommonCard_title__1oKJY RewardProjectCard_title__iUtvs'>"+
-							"<strong>"+CobuyListVO.pname+"<br>"+CobuyListVO.title+"</strong>"+
-							"</p>"+
-							"</a>"+
-							"<div>"+
-							"<span class='RewardProjectCard_makerName__2q4oH'>"+CobuyListVO.nick+"</span>"+		
-							"</div></div><div class='RewardProjectCard_gauge__3p9US'>"+		
-							"<span style='width: 100%;'></span>"+
-							"</div>"+
-							"<span class='RewardProjectCard_percent__3TW4_'>"+CobuyListVO.stock+"개 남음</span>"+
-							"<span class='RewardProjectCard_amount__2AyJF'>"+CobuyListVO.price+"원</span>"+
-							"<span class='RewardProjectCard_days__3eece RewardProjectCard_isAchieve__1LcUu'>"+
-							"<span class='RewardProjectCard_remainingDay__2TqyN'>"+dateString+"</span>"+
-							"<span class='RewardProjectCard_remainingDayText__2sRLV'>마감</span>"+
-							"<span class='RewardProjectCard_isAchieve__1LcUu'></span></span></div></div></div></div></div>";
-						$(".ProjectCardList_list__1YBa2").append(divCol);
-					}
-				},
-				error: function (e) {
-					console.log("실패", e);
-				}
-			});
-		}
+$(function () {
+	var page = 1;
+	var size = 20;
+	$(".ProjectListMoreButton_button__27eTb").click(function () {
+		loadData(page, size);
+		page++;
 	});
+	$(".ProjectListMoreButton_button__27eTb").click();
+	function loadData(page, size, middleName) {
+		$.ajax({
+			url: "${pageContext.request.contextPath}/cobuy/listdetail",
+			type: "get",
+			data: {
+				page: page,
+				size: size
+			},
+			success: function (resp) {
+				if (resp.length < size) {
+					$(".more-btn").remove();
+				}
+				for (var i = 0; i < resp.length; i++) {
+					var date = new Date(resp[i].deadLine);
+					var dateString = date.getFullYear()+"년 "+date.getMonth()+1+"월 "+date.getDate()+"일 "+date.getHours()+"시 "+date.getMinutes()+"분 "+date.getSeconds()+"초";
+					var CobuyListVO = resp[i];
+					var divCol=
+						"<div class='ProjectCardList_item__1owJa'>"+
+						"<div>"+
+						"<div class='CommonCard_container__e_ebQ CommonCard_squareSmall__1Cdkn'>"+
+						"<a href='detail?cobuyNo="+CobuyListVO.cobuyNo+
+						"' class='CardLink_link__1k83H CommonCard_image__vaqkf' aria-hidden='true' tabindex='-1'>"+
+						"<div class='CommonCard_rect__2wpm4'>"+
+						"<span class='CommonCard_background__3toTR CommonCard_visible__ABkYx'"+
+						"style='background-image: url(${pageContext.request.contextPath}/image/download?imageNo=${CobuyListVO.imgNo}&folder=cobuy)'></span>"+
+						"</div>"+
+						"</a>"+
+						"<div class='CommonCard_info__1f4kq'>"+
+						"<div class='RewardProjectCard_info__3JFub'>"+
+						"<div class='RewardProjectCard_infoTop__3QR5w'>"+
+						"<a href='detail?cobuyNo="+CobuyListVO.cobuyNo+
+						"' class='CardLink_link__1k83H'>"+
+						"<p class='CommonCard_title__1oKJY RewardProjectCard_title__iUtvs'>"+
+						"<strong>"+CobuyListVO.pname+"<br>"+CobuyListVO.title+"</strong>"+
+						"</p>"+
+						"</a>"+
+						"<div>"+
+						"<span class='RewardProjectCard_makerName__2q4oH'>"+CobuyListVO.nick+"</span>"+		
+						"</div></div><div class='RewardProjectCard_gauge__3p9US'>"+		
+						"<span style='width: 100%;'></span>"+
+						"</div>"+
+						"<span class='RewardProjectCard_percent__3TW4_'>"+CobuyListVO.stock+"개 남음</span>"+
+						"<span class='RewardProjectCard_amount__2AyJF'>"+CobuyListVO.price+"원</span>"+
+						"<span class='RewardProjectCard_days__3eece RewardProjectCard_isAchieve__1LcUu'>"+
+						"<span class='RewardProjectCard_remainingDay__2TqyN'>"+dateString+"</span>"+
+						"<span class='RewardProjectCard_remainingDayText__2sRLV'>마감</span>"+
+						"<span class='RewardProjectCard_isAchieve__1LcUu'></span></span></div></div></div></div></div>";
+					$(".ProjectCardList_list__1YBa2").append(divCol);
+				}
+			},
+			error: function (e) {
+				console.log("실패", e);
+			}
+		});
+	}
+});
 </script>
 
 <div class="RewardMainWrapper_container__2HR7Y">
-
+	
+	<ul class="RewardMainTab_container__geHTr">
+		<li><a aria-current="page" class="RewardMainTab_link___1r2a RewardMainTab_active__1zRir" href="/web/wreward/main"><span>공동구매 홈</span></a>
+	</ul>
 	<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
 	  <div class="carousel-indicators">
 	    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -174,21 +171,27 @@ img{
 				class="CategoryCircleList_previous__xJMxg CategoryCircleList_hidden__2fdvp" type="button" data-dir="이전"><i
 					class="icon chevron-left CategoryCircleList_icon__13sH8" aria-hidden="true"></i></button>
 			<!-- 카테고리 시작지점 -->
-			<div class="CategoryCircleList_wrap__3jHrp">
+			
+				<div class="CategoryCircleList_wrap__3jHrp">
 				<div class="CategoryCircleList_list__2YBF3">
+				<c:forEach var="cobuyCatVO" items="${category}">
 					<a class="CategoryCircleList_item__2_QZ3 RewardCategoryCircleList_item__2JEvT"
-						href="/web/wreward/category/categorybanner?category_name=%EC%97%B0%ED%9C%B4%20%EC%A0%84%20%EB%B0%B0%EC%86%A1">
+						href="${root}/cobuy${cobuyCatVO.urlPath}">
 						<span class="CategoryCircle_container__2rZ3a">
 							<span class="CategoryCircle_circle__3khwj"
-								style="background-image: url(&quot;https://www.wadiz.kr/ft/images/green001/2022/0107/20220107113912194_null.jpg&quot;);"></span>
-							<span class="CategoryCircle_name__3Ca9T">연휴 전 배송</span>
+								style="background-image: url(${root}/resources/image/cobuy/${cobuyCatVO.middleName}.jpg);"></span>
+							<span class="CategoryCircle_name__3Ca9T">${cobuyCatVO.middleName}</span>
 						</span>
 					</a>
+					</c:forEach>
 				</div>
-			</div>
+				</div>
 			<!-- 카테고리 끝지점 -->
-			<button class="CategoryCircleList_next__1mHyX" type="button" data-dir="다음"><i
-					class="icon chevron-right CategoryCircleList_icon__13sH8" aria-hidden="true"></i></button>
+			<c:if test="${category} > 10">
+			<button class="CategoryCircleList_next__1mHyX" type="button" data-dir="다음">
+			<i class="icon chevron-right CategoryCircleList_icon__13sH8" aria-hidden="true"></i>
+			</button>
+			</c:if>
 		</div>
 	</div>
 	<div class="RewardProjectListApp_container__1ZYeD">
@@ -240,18 +243,4 @@ img{
 		</div>
 	</div>
 </div>
-<script type="text/javascript">
-$('.item').carousel({ interval:1000 });
-
-$("#myCarousel").click(function(){
-    $("#item-1").carousel(0);
-});
-  $("#myCarousel").click(function(){
-    $("#item-2").carousel(1);
-});
-  $("#myCarousel").click(function(){
-    $("#item-3").carousel(2);
-});
-</script>
-
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

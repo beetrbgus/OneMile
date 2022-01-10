@@ -8,12 +8,12 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.kh.onemile.entity.menu.MiddleNameDTO;
+import com.kh.onemile.vo.cobuy.CobuyCatVO;
 import com.kh.onemile.vo.cobuy.CobuyDetailVO;
 import com.kh.onemile.vo.cobuy.CobuyListVO;
+import com.kh.onemile.vo.cobuy.CobuyRegVO;
 import com.kh.onemile.vo.cobuy.CobuyVO;
 import com.kh.onemile.vo.kakaopay.ConfirmVO;
-import com.kh.onemile.vo.cobuy.CobuyRegVO;
 
 @Repository
 public class CobuyDaoImpl implements CobuyDao{
@@ -39,7 +39,7 @@ public class CobuyDaoImpl implements CobuyDao{
 		sqlSession.update("cobuy.hide",map);
 	}
 	@Override
-	public List<MiddleNameDTO> getMiddleName() {
+	public List<CobuyCatVO> getMiddleName() {
 		return sqlSession.selectList("cobuy.getMiddleName");
 	}
 	@Override

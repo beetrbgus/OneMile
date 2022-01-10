@@ -2,10 +2,10 @@ package com.kh.onemile.service.cobuy;
 
 import java.io.IOException;
 import java.util.List;
-import com.kh.onemile.entity.menu.MiddleNameDTO;
+
+import com.kh.onemile.vo.cobuy.CobuyCatVO;
 import com.kh.onemile.vo.cobuy.CobuyDetailVO;
 import com.kh.onemile.vo.cobuy.CobuyListVO;
-import com.kh.onemile.vo.cobuy.CobuyVO;
 import com.kh.onemile.vo.cobuy.CobuyRegVO;
 import com.kh.onemile.vo.kakaopay.ConfirmVO;
 
@@ -15,8 +15,7 @@ public interface CobuyService {
 	public CobuyDetailVO getDetail(int cobuyNo);
 	public void modify(CobuyDetailVO cobuyModDTO) throws IllegalStateException, IOException;
 	public void delete(int cobuyNo);
-	public List<MiddleNameDTO> getMiddleName();
+	public List<CobuyCatVO> getMiddleName();
 	public ConfirmVO getConfirm(ConfirmVO confirmVO);
 	public List<CobuyListVO> getList(int startRow, int endRow);
-
 }
