@@ -48,8 +48,8 @@ window.kakao.maps.load(function() {
 					// 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
 					infowindow.setContent(content);
 					infowindow.open(map, marker);
-					$("#location").val(
-							result[0].address.address_name);
+					$("#location").val(result[0].address.address_name);
+					
 					var address = $("#location").val();
 					console.log("address    "+address);
 					// 2. 카카오 장소변환 샘플 코드를 복사 후 일부 수정
@@ -62,6 +62,8 @@ window.kakao.maps.load(function() {
 								result[0].x);
 						$("input[name=lat]").val(result[0].y);
 						$("input[name=lng]").val(result[0].x);
+						
+						console.log($("input[name=lat]").val());
 
 					});
 				}

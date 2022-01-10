@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.onemile.entity.admin.ApproveDTO;
-import com.kh.onemile.entity.admin.MemberListDTO;
+import com.kh.onemile.entity.member.MemberDTO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,7 +31,7 @@ public class AdminDaoImpl implements AdminDao{
 		sqlSession.update("admin.approveMember", memberNo);
 	}
 	@Override
-	public List<MemberListDTO> memberList() {
-		return sqlSession.selectList("admin.memberSearchList");
+	public List<MemberDTO> memberList() {
+		return sqlSession.selectList("admin.approveMemberList");
 	}
 }

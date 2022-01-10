@@ -16,6 +16,11 @@
 	</update>
 	
 	<!-- 회원 목록 가져오기 -->
+	<select id="approveMemberList" resultType="MemberDTO">
+		select * from Approve where HIDDENYN != 'N'
+	</select>
+	
+	<!-- 회원 목록 가져오기 -->
 	<select id="memberSearchList" resultType="List">
 		select * from member m inner join msp where m.member_no = msp.member_no
 	</select>

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.kh.onemile.entity.cobuy.CobuyDTO;
 import com.kh.onemile.entity.image.middle.MiddleImgTableDTO;
 import com.kh.onemile.entity.map.MapDTO;
+import com.kh.onemile.repository.cobuy.CobuyBuyDao;
 import com.kh.onemile.repository.cobuy.CobuyDao;
 import com.kh.onemile.repository.image.middle.MiddleImageDAO;
 import com.kh.onemile.service.image.ImageService;
@@ -48,7 +49,8 @@ public class CobuyServiceImpl implements CobuyService {
 	private Sequence seq;
 	@Autowired
 	private DateToString dateToString;
-
+	@Autowired
+	private CobuyBuyDao cobuyBuyDao; 
 	@Override
 	public int reg(CobuyRegVO cobuyRegVO) throws IllegalStateException, IOException {
 		int cbNo = seq.nextSequence(seqName); // 공동구매 상품 번호
@@ -90,6 +92,7 @@ public class CobuyServiceImpl implements CobuyService {
 	public CobuyDetailVO getDetail(int cobuyNo) {
 		CobuyDetailVO result = cobuyDao.detail(cobuyNo);
 		result.setDeadLinestr(dateToString.dateToString(result.getDeadLine()));
+		result.setCountConstomer(cobuyBuyDao.countConstomer(cobuyNo));
 		return result;
 	}
 

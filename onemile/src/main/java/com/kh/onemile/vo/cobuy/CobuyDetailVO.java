@@ -30,7 +30,7 @@ public class CobuyDetailVO {
 	private String deadLinestr;
 	private String descript;
 	private String pName;
-	
+	private int countConstomer;
 	
 	// 회원 정보 부분.
 	private int memberNo;
