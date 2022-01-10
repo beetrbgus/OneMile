@@ -18,6 +18,7 @@ public class MembershipServiceImpl implements MembershipService{
 		
 		log.debug("````````상품번호 : productNo        "+productNo);
 		MembershipDTO membershipDTO =membershipDao.search(productNo);
+		log.debug("`````````````서치"+membershipDTO.toString());
 		
 		ConfirmVO confirmVO= new ConfirmVO();
 		confirmVO.setTotalAmount(membershipDTO.getMspPrice());

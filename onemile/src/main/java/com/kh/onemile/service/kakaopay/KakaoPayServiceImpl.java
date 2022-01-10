@@ -45,9 +45,9 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 
 		// 2-2. HTTP Body 정보 생성
 		MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
-		body.add("cid", "TCSUBSCRIP");
+		body.add("cid", requestVO.getType());
 		body.add("partner_order_id", "원마일");
-		body.add("partner_user_id", String.valueOf(requestVO.getMemberNo()));
+		body.add("partner_user_id", requestVO.getPartner_user_id());
 
 		body.add("item_name", requestVO.getProductName());
 		body.add("quantity", String.valueOf(requestVO.getQuantity()));
@@ -128,7 +128,7 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 		// 4. 요청방식에 따라 다른 명령으로 전송
 		KakaoPayApproveResponseVO responseVO = template.postForObject(uri, entity, KakaoPayApproveResponseVO.class);// 응답을
 		responseVO.setMemberNo(requestVO.getMemberNo());
-		
+		responseVO.setProductNo(requestVO.getProductNo());
 		// 결제 내역 테이블에 저장
 		buyTableService.reg(responseVO);
 	}

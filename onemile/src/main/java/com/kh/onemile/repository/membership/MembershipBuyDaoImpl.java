@@ -8,6 +8,9 @@ import org.springframework.stereotype.Repository;
 import com.kh.onemile.entity.product.MembershipBuyDTO;
 import com.kh.onemile.util.Sequence;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Repository
 public class MembershipBuyDaoImpl implements MembershipBuyDao{
 	final String SEQID = "msb_seq";
@@ -21,7 +24,7 @@ public class MembershipBuyDaoImpl implements MembershipBuyDao{
 	public void insert(MembershipBuyDTO membershipBuyDTO) {
 	int msbNo = seq.nextSequence(SEQID);
 	membershipBuyDTO.setMsbNo(msbNo);
-	
+	log.debug("진짜 찾아라!!"+membershipBuyDTO);
 	sqlSession.insert("membership.join",membershipBuyDTO);
 	}
 	

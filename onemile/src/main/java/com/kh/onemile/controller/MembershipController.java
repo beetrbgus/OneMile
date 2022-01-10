@@ -41,6 +41,7 @@ public class MembershipController {
 		log.debug(" -------------------------------------------");
 		
 		ConfirmVO confirmResultVO  =membershipService.getConfirm(productNo,quantity);
+		
 		model.addAttribute("confirmVO", confirmResultVO);
 		
 		return "membership/confirm";
@@ -50,8 +51,11 @@ public class MembershipController {
 		//상품명 ,  상품 가격 , 상품 수량 , 총 결제금액 , 
 		ConfirmVO confirmVO  =membershipService.getConfirm(productNo,quantity);
 		
+		confirmVO.setPartner_user_id(String.valueOf(session.getAttribute("logId")));
 		redirectAttributes.addFlashAttribute("confirmVO", confirmVO);
-		log.debug("~~~~~~~~~~~~~~~~~~~~~~~~~~"+confirmVO.toString());
+		log.debug("after add flash attribute = {}", redirectAttributes.getFlashAttributes());
+		
+		
 		return "redirect:/pay/confirm";
 	}
 

@@ -208,7 +208,7 @@
 		${confirmVO.productNo}	/ ${confirmVO.productName} / ${confirmVO.totalAmount} / ${confirmVO.quantity}
 	</div> 
 	
-<form action="${pageContext.request.contextPath}/membership/confirm" method="POST">
+<form action="${pageContext.request.contextPath}/cobuy/confirm" method="POST">
 	<input type="hidden" name="productNo" value="${confirmVO.productNo}">
 	<input type="hidden" name="quantity" value="${confirmVO.quantity}">
 	<button type="submit" id="btn-submit" onclick="purchaseReservation()" class="wz primary button">결제하기</button>

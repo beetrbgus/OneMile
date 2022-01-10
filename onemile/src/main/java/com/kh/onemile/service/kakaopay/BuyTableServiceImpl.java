@@ -26,6 +26,7 @@ public class BuyTableServiceImpl implements BuyTableService {
 			membershipBuyDTO.setPartnerUserId(responseVO.getPartner_user_id());
 			membershipBuyDTO.setTotalAmount(responseVO.getAmount().getTotal());
 			membershipBuyDTO.setMspNo(responseVO.getProductNo());
+			System.out.println("프로덕트no"+responseVO.getProductNo());
 			membershipBuyDTO.setMemberNo(responseVO.getMemberNo());
 			
 			membershipBuyDao.insert(membershipBuyDTO);

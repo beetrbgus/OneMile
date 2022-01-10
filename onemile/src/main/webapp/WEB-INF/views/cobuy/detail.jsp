@@ -236,7 +236,7 @@
 												</p>
 											</div>
 											<script src="${pageContext.request.contextPath}/resources/js/cobuy/detail.js" ></script>
-											<form id="buyForm" action="confirm" method="post">
+											<form id="buyForm" action="${pageContext.request.contextPath}/cobuy/confirm" method="get">
 												<input type="hidden" name="productNo" value="${detail.cobuyNo}">
 												<input class="quantity" type="hidden" name="quantity" value="0">
 												<!-- 프로젝트 유형이 글로벌/앵콜 프로젝트가 아닌경우: 기존과 동일하게 처리 -->

@@ -37,18 +37,29 @@ public class PayController {
 
 	// 결제 준비 요청
 	@RequestMapping("/confirm")
-	public String confirm(HttpServletRequest request, @ModelAttribute KakaoPayReadyRequestVO requestVO,
-			HttpSession session) throws URISyntaxException {
-		Map<String, ConfirmVO> confirm = (Map<String, ConfirmVO>) RequestContextUtils.getInputFlashMap(request);
-		ConfirmVO confirmVO = (ConfirmVO) confirm.get("confirmVO");
+	public String confirm(Model model, HttpServletRequest request, HttpSession session) throws URISyntaxException {
+		log.debug("model = {}", model);
+		log.debug("model map = {}", model.asMap());
+		
+		ConfirmVO confirmVO = (ConfirmVO)model.asMap().get("confirmVO");
+		log.debug("confirmVO = {}", confirmVO);
+		
+//		Map<String, ?> confirm = RequestContextUtils.getInputFlashMap(request);
+//		log.debug("```````confirm"+confirm);
+//		ConfirmVO confirmVO = null; 
+//		if(confirm != null) {
+//			 confirmVO = (ConfirmVO) confirm.get("confirmVO");			
+//		}
 		// cid 설정. 정기 TCSUB 단건 TC0
-		String cid = (confirmVO.getType().equals("정기")) ? "TCSUBSCRIP" : "TC0ONETIME";
+		String cid = (confirmVO.getType().equals("TCSUBSCRIP")) ? "TCSUBSCRIP" : "TC0ONETIME";
 
 		KakaoPayReadyResponseVO responseVO = kakaoPayService.regularReady(confirmVO);
+		log.debug("컨펌VO confirmVO"+confirmVO.toString());
 		session.setAttribute("tid", responseVO.getTid());
 		session.setAttribute("cid", cid);
 		session.setAttribute("productNo", confirmVO.getProductNo());
-
+		
+		
 		log.debug("cid   " + cid);
 		log.debug("tid   " + responseVO.getTid());
 		log.debug("productNo   " + confirmVO.getProductNo());
@@ -72,7 +83,7 @@ public class PayController {
 		log.debug("partner_user_id   " + partnerUserId);
 		log.debug("cid   " + cid);
 		log.debug("tid     " + tid);
-		log.debug("productNo   " + productNo);
+		log.debug("`````````````````````productNo   " + productNo);
 		log.debug("memberNo   " + memberNo);
 
 		session.removeAttribute("tid");
