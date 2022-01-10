@@ -80,9 +80,10 @@
 		</div>
 			<div class="ui-tabs LeadMakerShortcutLinkSection_linkGroup__2XM2N">
 				<ul>
-					<li><a href="./board" ${parameter == "board" ? "style='color:#00b2b2;'" : ""} >공지사항</a></li>
-					<li><a href="./rule" ${parameter == "rule" ? "style='color:#00b2b2;'" : ""}>운영규칙</a></li>
-					<li><a href="./faq" ${parameter == "faq" ? "style='color:#00b2b2;'" : ""}>자주하는질문</a></li>
+					<li><a href="${root}/notice/list/board" ${parameter == "board" ? "style='color:#00b2b2;'" : ""} >공지사항</a></li>
+					<li><a href="${root}/notice/list/rule" ${parameter == "rule" ? "style='color:#00b2b2;'" : ""}>운영규칙</a></li>
+					<li><a href="${root}/notice/list/faq" ${parameter == "faq" ? "style='color:#00b2b2;'" : ""}>자주하는질문</a></li>
+					<li><a href="${root}/notice/contact" ${parameter == "contact" ? "style='color:#00b2b2;'" : ""}>1:1문의하기</a></li>
 				</ul>
 			</div>
 		
