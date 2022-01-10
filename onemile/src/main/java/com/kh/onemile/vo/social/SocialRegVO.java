@@ -1,5 +1,6 @@
 package com.kh.onemile.vo.social;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -14,12 +15,12 @@ public class SocialRegVO {
 	
 	private String title;
 	private String type;
-	private String smallType;
+	private String smalltype;
 	private String context;
-	@DateTimeFormat(pattern="yyyy-MM-dd HH24:mm")
-	private String startDate;
-	@DateTimeFormat(pattern="yyyy-MM-dd HH24:mm")
-	private String endDate;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	private Date startDate;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") 
+	private Date endDate;
 	private int minpeople;
 	private int maxpeople;
 	//지도 테이블

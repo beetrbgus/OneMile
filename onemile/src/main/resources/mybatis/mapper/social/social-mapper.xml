@@ -4,11 +4,16 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="social">
 	<!-- 승인 등록 -->
-	<insert id="reg"  parameterType="SocialRegVO">
-		insert into social values(
-		#{socialNo},#{memberNo},#{mapNo},#{smallType}
-		,#{title},#{context},#{startDate},#{endDate},
-		'N',#{minpeople},#{maxpeople},sysdate,sysdate)
+	
+	<insert id="reg"  parameterType="SocialDTO">
+		insert into SOCIAL(
+			SOCIAL_NO ,MEMBER_NO ,MAP_NO ,SMALLTYPE ,TITLE,
+			CONTEXT,STARTDATE,ENDDATE,MINPEOPLE,MAXPEOPLE
+		) values(
+			#{socialNo},#{memberNo},#{mapNo},#{smalltype},
+			#{title},#{context},#{startDate},#{endDate},
+			#{minpeople},#{maxpeople}
+		)
 	</insert>
 	<delete id="denied" parameterType="int">
 		delete from approve where member_no=#{memerNo} 
