@@ -87,6 +87,7 @@ public class CobuyController {
 		System.out.println("cobuyDetailVO.getTitle()   "+cobuyDetailVO.getTitle());
 		
 		model.addAttribute("detail", cobuyDetailVO);
+		
 		return "/cobuy/detail";
 	}
 

@@ -26,39 +26,22 @@ public class CobuyBuyDaoImpl implements CobuyBuyDao{
 	public void reg(CoBuyBuyVO coBuyBuyVO) {
 		sqlSession.insert("cobuybuy.reg",coBuyBuyVO);
 	}
-//	@Override //List<CobuyDTO>
-//	public List<CobuyListVO> cobuyList() {
-//		return sqlSession.selectList("cobuy.getList");
-//	}
-	@Override 
-	public CobuyDetailVO detail(int cobuyNo) {
-		return sqlSession.selectOne("cobuy.getDetail",cobuyNo);
-	}
 	@Override
-	public void delete(int cobuyNo) {
-		Map<String,Object> map =new HashMap<>();
+	public void reduceStock(int cobuyNo, int quantity) {
+		Map<String, Integer > map = new HashMap<String, Integer>();
 		map.put("cobuyNo", cobuyNo);
-		map.put("hiddenYN", "Y");
-		sqlSession.update("cobuy.hide",map);
+		map.put("quantity", quantity);
+		
+		sqlSession.update("cobuy.reduceStock",map);	
 	}
 	@Override
-	public List<MiddleNameDTO> getMiddleName() {
-		return sqlSession.selectList("cobuy.getMiddleName");
+	public void cancel(int pbNo) {
+		sqlSession.update("cobuybuy.cancel",pbNo);	
 	}
 	@Override
-	public void modify(CobuyVO cobuyModDTO) {
-		sqlSession.update("cobuy.modify", cobuyModDTO);
-	}
-	@Override
-	public CobuyDTO getConfirm(ConfirmVO confirmVO) {
-		return sqlSession.selectOne("cobuy.getforBuy", confirmVO);
-	}
-	@Override
-	public List<CobuyListVO> cobuyList(int startRow, int endRow) {
-		Map<String, Object> map = new HashMap<>();
-		map.put("startRow", startRow);
-		map.put("endRow", endRow);
-		return sqlSession.selectList("cobuy.getList", map);
+	public int countConstomer(int cobuyNo) {
+			
+		return sqlSession.selectOne("cobuybuy.countConstomer",cobuyNo);
 	}
 
 }

@@ -24,7 +24,10 @@
 		HIDDENYN = #{hiddenYN}
 		where COBUY_NO = #{cobuyNo}
 	</update>
-
+	<update id="reduceStock" parameterType="Map">
+		update cobuy set stock = stock - #{quantity} 
+			where cobuy_no = #{quantity}
+	</update>
 
 	<resultMap type="CobuyDetailVO" id="customCobuy">
 		<!-- 상품정보 -->
@@ -78,7 +81,7 @@
 				c.cobuy_no = cbi.cobuy_no
 				inner join
 				member m on m.member_no = c.member_no
-				where c.hiddenyn = 'N' order by c.cobuy_no
+				where c.hiddenyn = 'N' order by c.cobuy_no desc
 			)TMP
 		) where rn between ${startRow} and ${endRow}
 	</select>

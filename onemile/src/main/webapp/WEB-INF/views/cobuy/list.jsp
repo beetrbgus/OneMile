@@ -37,13 +37,13 @@
 						console.log(typeof CobuyListVO.cobuyNo);
 						var divCol=
 							"<div class='ProjectCardList_item__1owJa'>"+
-							"<div>"+
+							"<div>"+ 
 							"<div class='CommonCard_container__e_ebQ CommonCard_squareSmall__1Cdkn'>"+
 							"<a href='detail?cobuyNo="+CobuyListVO.cobuyNo+
 							"' class='CardLink_link__1k83H CommonCard_image__vaqkf' aria-hidden='true' tabindex='-1'>"+
 							"<div class='CommonCard_rect__2wpm4'>"+
 							"<span class='CommonCard_background__3toTR CommonCard_visible__ABkYx'"+
-							"style='background-image: url(${pageContext.request.contextPath}/image/download?imageNo=${CobuyListVO.imgNo}&folder=cobuy)'></span>"+
+							"style='background-image: url(${pageContext.request.contextPath}/image/download?imageNo="+CobuyListVO.imgNo+"&folder=cobuy)'></span>"+
 							"</div>"+
 							"</a>"+
 							"<div class='CommonCard_info__1f4kq'>"+
