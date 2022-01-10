@@ -4,7 +4,7 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<form id="regForm" action="reg" method="post">
+<form id="regForm" action="reg" method="post" enctype="multipart/form-data">
 	<br>
 	이미지 :
 	<input type="file" name="attach" >
@@ -14,13 +14,13 @@
 	<input type="text" name="title" required>
 	<br>
 	관심 카테고리 :
-	<select class="big" name="type" required > 
+	<select class="big" required > 
 		<option value="">카테고리선택</option>
 		<c:forEach var="category" items="${bigCategory}">
 			<option value="${category.bigType}">${category.bigType}</option>
 		</c:forEach>
 	</select>
-	<select class="middle" name="smallType" required></select>
+	<select class="middle" name="smalltype" required></select>
 	<br>
 	설명 :
 	<textarea name="context" placeholder="모임을 설명해주세요." required></textarea>
@@ -59,23 +59,29 @@
 <script>
 	$(function(){
 		function inputDate(day,time){
-			let formdate = day + " "+time;
+			let formdate = day + " "+time+":00";
 				return formdate;
 		}
-
+		
 		$("#submitBtn").on("click",function(){
 			let startDate = inputDate($("#startDay").val(),$("#startTime").val());
 			let endDate = inputDate($("#endDay").val(),$("#endTime").val());
-			
 			console.log("지도      상세주소   "+$("#location").val());
 			$("input[name=endDate]").val(endDate);
 			$("input[name=startDate]").val(endDate);
-			
+			$("input[name=smalltype]").val($(".middle").val());
+		
 			console.log("startDate      :"+ $("input[name=startDate]").val());
 			console.log("EndDate      :"+ $("input[name=endDate]").val());
-			$("#regForm").submit();
+			console.log("startDate      :"+ $("input[name=minpeople]").val());
+			console.log("EndDate      :"+ $("input[name=maxpeople]").val());
+			console.log();
+			console.log($(".big").val());
+			$("#regForm").submit(); 
 		});
-
+		function dateValid(){
+			
+		}
 	});
 
 </script>

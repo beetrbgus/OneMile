@@ -42,6 +42,7 @@ public class SocialController {
 	}
 	@PostMapping("/reg")
 	public String postReg(@ModelAttribute SocialRegVO socialRegVO,HttpSession session) throws IllegalStateException, IOException{
+		log.debug("SocialRegVO  "+socialRegVO.toString());
 		int memNo = Integer.parseInt(String.valueOf(session.getAttribute("logNo")));
 		socialRegVO.setMemberNo(memNo);
 		socialService.reg(socialRegVO);

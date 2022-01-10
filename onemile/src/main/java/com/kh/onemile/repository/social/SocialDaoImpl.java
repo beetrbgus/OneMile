@@ -8,7 +8,10 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.onemile.entity.social.SocialDTO;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Repository
+@Slf4j
 public class SocialDaoImpl implements SocialDao{
 
 	@Autowired
@@ -16,6 +19,7 @@ public class SocialDaoImpl implements SocialDao{
 	
 	@Override
 	public void reg(SocialDTO socialDto) {
+		log.debug("SocialDTO     "+socialDto.toString());
 		sqlSession.insert("social.reg", socialDto);
 	}
 
