@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.onemile.entity.cobuy.CobuyDTO;
 import com.kh.onemile.entity.menu.MiddleNameDTO;
+import com.kh.onemile.vo.buy.CoBuyBuyVO;
 import com.kh.onemile.vo.cobuy.CobuyDetailVO;
 import com.kh.onemile.vo.cobuy.CobuyListVO;
 import com.kh.onemile.vo.cobuy.CobuyVO;
@@ -17,12 +18,13 @@ import com.kh.onemile.vo.kakaopay.ConfirmVO;
 import com.kh.onemile.vo.cobuy.CobuyRegVO;
 
 @Repository
-public class CobuyDaoImpl implements CobuyDao{
+public class CobuyBuyDaoImpl implements CobuyBuyDao{
 	@Autowired
 	private SqlSession sqlSession;
 	@Override
-	public void reg(CobuyRegVO cobuyRegVO) {
-		sqlSession.insert("cobuy.reg",cobuyRegVO);
+	
+	public void reg(CoBuyBuyVO coBuyBuyVO) {
+		sqlSession.insert("cobuybuy.reg",coBuyBuyVO);
 	}
 //	@Override //List<CobuyDTO>
 //	public List<CobuyListVO> cobuyList() {

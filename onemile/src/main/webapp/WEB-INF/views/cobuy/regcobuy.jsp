@@ -57,7 +57,7 @@ function getToday(){
     return year + "-" + month + "-" + day;
 }
 let deadLine = $("#deadLine"); 
-deadLine.attr("min",getToday);
+deadLine.attr("min",getToday());
 $(function(){
 
 	//글 제목 검사.
@@ -122,6 +122,7 @@ $(function(){
 		}
 		return true;
 	}
+	//등록버튼 클릭
 	$("#submitBtn").click(function(e){
 		e.preventDefault(); 
 		

@@ -67,7 +67,7 @@
           <div class="field">
             <div class="wz input">
               <input type="password" id="password" name="pw" class="input-text" placeholder="비밀번호(영문, 숫자, 특수 문자 포함 8자 이상)" title="비밀번호(영문, 숫자, 특수 문자 포함 8자 이상)" />
-            </div>
+            </div>	
            <c:if test="${param.error != null}">
 			<div class="row center"> 
 				<h4 class="error">로그인 정보가 일치하지 않습니다</h4>

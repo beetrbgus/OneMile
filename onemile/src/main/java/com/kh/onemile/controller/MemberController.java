@@ -157,6 +157,7 @@ public class MemberController {
 	@PostMapping("/emailCheck")
 	public String emailCheck(@ModelAttribute CertiDTO certiDTO,HttpSession session) {
 		boolean success = memberService.emailCheck(certiDTO);
+		
 		if(success) {
 			return "member/edit_pw";
 		}
