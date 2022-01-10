@@ -14,4 +14,5 @@ public interface CommuDao {
 	//CommuDTO detail(int commuNo);
 	boolean changeCommu(CommuDTO commuDto);
 	CommuDetailVO detail(int commuNo);
+	List<CommuDetailVO> boardList(String largeName, int startRow, int endRow);
 }

@@ -1,5 +1,6 @@
 package com.kh.onemile.service.admin;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.kh.onemile.entity.admin.ApproveDTO;
 import com.kh.onemile.entity.admin.MemberListDTO;
 import com.kh.onemile.repository.admin.AdminDao;
+import com.kh.onemile.service.commu.CommuService;
 import com.kh.onemile.util.Sequence;
+import com.kh.onemile.vo.CommuDetailVO;
+import com.kh.onemile.vo.CommuEditVO;
+import com.kh.onemile.vo.CommuVO;
 
 import lombok.extern.slf4j.Slf4j;
 @Slf4j
@@ -19,6 +24,8 @@ public class AdminServiceImpl implements AdminService{
 	String approveSeq ="approve_seq";
 	@Autowired
 	private AdminDao adminDao;
+	@Autowired
+	private CommuService commuService;
 	@Autowired
 	private Sequence sequnce;
 	
@@ -56,5 +63,18 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public List<MemberListDTO> memberList() {
 		return adminDao.memberList();
+	}
+	@Override
+	public void hiddenBoard(int no) {
+		commuService.hide(no);
+	}
+	@Override
+	public void modifyBoard(CommuEditVO commuEditVO) throws IllegalStateException, IOException {
+		commuService.edit(commuEditVO);
+	}
+	@Override
+	public List<CommuDetailVO> boardList(String largeName, int startRow, int endRow) {
+		List<CommuDetailVO>list = commuService.menuList(largeName, startRow, endRow);
+		return list;
 	}
 }

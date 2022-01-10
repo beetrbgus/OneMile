@@ -70,4 +70,20 @@
 			hiddenyn = 'Y'
 		where commu_no = #{commuNo}
 	</update>
+	
+	<select id="boardList" parameterType="map" resultType="CommuDetailVo">
+		select * from (
+			select rownum rn, TMP.* from (
+				select 
+			            co.commu_no, co.title, co.regdate, me.nick, CIF.image_no
+			    from
+						commu co left outer join commu_img_first CIF
+                        on co.commu_no = CIF.commu_no
+                        left join member me on co.member_no = me.member_no
+                        left join cmc cmc on co.middlename = cmc.middle_name
+					where
+						cmc.large_name = #{largeName} and co.hiddenyn = 'N' order by commu_no desc
+			)TMP
+		) where rn between ${startRow} and ${endRow}
+	</select>
 </mapper>
