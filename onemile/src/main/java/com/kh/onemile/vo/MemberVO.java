@@ -1,10 +1,9 @@
 package com.kh.onemile.vo;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
-
+import java.util.List;
 import org.springframework.format.annotation.DateTimeFormat;
-
+import com.kh.onemile.entity.image.ImageDTO;
 import lombok.Data;
 
 //회원 DTO
@@ -19,6 +18,7 @@ public class MemberVO {
 	private String gender;
 	@DateTimeFormat(pattern="YYYY-MM-DD")
 	private Date birth;
+	private String birthstr;
 	private String grade;
 	@DateTimeFormat(pattern="YYYY-MM-DD HH24:mm:ss")
 	private Date joinDate;
@@ -29,5 +29,8 @@ public class MemberVO {
 	private String exitYN;
 	@DateTimeFormat(pattern="YYYY-MM-DD HH24:mm:ss")
 	private Date exitDate;
+	
 	private int imageNo;
+	private List<ImageDTO> imageList; //가져올 때 이미지 번호들
+	
 }

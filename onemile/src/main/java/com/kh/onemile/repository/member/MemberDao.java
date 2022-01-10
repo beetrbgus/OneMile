@@ -4,6 +4,7 @@ import java.util.Map;
 
 import com.kh.onemile.entity.member.MemberDTO;
 import com.kh.onemile.vo.MemberJoinVO;
+import com.kh.onemile.vo.MemberVO;
 
 public interface MemberDao {
 	//회원가입
@@ -23,6 +24,10 @@ public interface MemberDao {
 	
 	//단일조회
 	MemberDTO get(String email);
+	//닉네임 중복체크
+	MemberDTO get2(String nick);
+	//전화번호 중복체크
+	MemberDTO get3(String phone);
 	
 	//비밀번호변경
 	boolean changePw(Map<String, Object> param);
@@ -33,11 +38,11 @@ public interface MemberDao {
 	//회원정보 가져오기
 	MemberDTO profile(int memberNo);
 	
-	//닉네임 중복체크
-	MemberDTO get2(String nick);
-	//전화번호 중복체크
-	MemberDTO get3(String phone);
+	
 	//회원정보 수정하기
 	boolean changeInformation(MemberDTO memberDTO);
+	
+	//회원정보 불러오기(사진 포함)
+	MemberVO imageProfile(int memberNo);
 
 }

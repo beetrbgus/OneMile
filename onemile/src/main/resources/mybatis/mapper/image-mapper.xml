@@ -42,7 +42,4 @@
 			co.middlename = #{middleName}
 	</select>
 		
-	<select id="listByMember" parameterType="int" resultType="memberVO">
-		select m.*,mei.image_no from member m left outer join mei mei on m.member_no = mei.member_no where m.member_no = #{memberNo}
-	</select>
 </mapper>

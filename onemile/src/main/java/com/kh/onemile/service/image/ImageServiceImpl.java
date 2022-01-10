@@ -110,9 +110,4 @@ public class ImageServiceImpl implements ImageService {
 		return imageDao.get(imageNo);
 	}
 
-	@Override
-	public List<MemberVO> listByMember(int memberNo) {
-		List<MemberVO> list  = imageDao.listByMember(memberNo);
-		return list;
-	}
 }

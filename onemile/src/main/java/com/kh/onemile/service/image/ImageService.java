@@ -17,7 +17,4 @@ public interface ImageService {
 	ImageDownloadVO download(int imageNo, String folder) throws IOException;
 	List<ImageDTO> listByMenu(String middleName);
 	
-	List<MemberVO> listByMember(int memberNo);
-	
-	
 }

@@ -23,9 +23,10 @@ import com.kh.onemile.repository.member.membership.IsMembershipDao;
 import com.kh.onemile.service.admin.AdminService;
 import com.kh.onemile.service.category.CategoryService;
 import com.kh.onemile.service.image.ImageService;
+import com.kh.onemile.util.DateToString;
 import com.kh.onemile.util.Sequence;
-import com.kh.onemile.util.SetDefaut;
 import com.kh.onemile.vo.MemberJoinVO;
+import com.kh.onemile.vo.MemberVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -50,14 +51,14 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private CategoryService categoryService;
 	@Autowired
-	private SetDefaut setDefault;
-	@Autowired
 	private AdminService adminService;
 	@Autowired @Qualifier("meiDAO")
 	private MiddleImageDAO middleImageDao; // 회원 이미지 중간 테이블
 	@Autowired
 	private ImageService imageService;
-
+	@Autowired
+	private DateToString dateToString;
+	
 	// 회원가입
 	@Override
 	public void join(MemberJoinVO memberJoinVO) throws IllegalStateException, IOException {
@@ -170,11 +171,18 @@ public class MemberServiceImpl implements MemberService {
 	public boolean changeInformation(MemberDTO memberDTO) {
 		return memberDao.changeInformation(memberDTO);
 	}
-
+	
+	//소모임 대분류
 	@Override
 	public List<SocialBigCategoryDTO> getfavorite() {
-
 		return categoryService.list();
 	}
 
+	//회원정보 불러오기(사진 포함)
+	public MemberVO imageProfile(int memberNo) {
+	    MemberVO memberVO = memberDao.imageProfile(memberNo);
+	    memberVO.setBirthstr(dateToString.dateToString(memberVO.getBirth()));
+	    
+	    return memberVO;
+	}
 }

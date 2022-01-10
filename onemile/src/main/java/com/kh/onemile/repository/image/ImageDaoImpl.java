@@ -49,9 +49,4 @@ public class ImageDaoImpl implements ImageDao{
 		return sqlSession.selectOne("image.getByMember",memberNo);
 	}
 
-	@Override
-	public List<MemberVO> listByMember(int memberNo) {
-		return sqlSession.selectList("image.listByMember",memberNo);
-		
-	}
 }

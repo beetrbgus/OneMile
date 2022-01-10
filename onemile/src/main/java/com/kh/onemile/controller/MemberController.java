@@ -1,12 +1,9 @@
 package com.kh.onemile.controller;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,13 +12,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import com.kh.onemile.entity.member.MemberDTO;
 import com.kh.onemile.entity.member.certi.CertiDTO;
-import com.kh.onemile.repository.membership.MembershipDao;
 import com.kh.onemile.service.email.EmailService;
-import com.kh.onemile.service.image.ImageService;
-import com.kh.onemile.service.image.MiddleImageService;
 import com.kh.onemile.service.member.MemberService;
 import com.kh.onemile.vo.MemberJoinVO;
 import com.kh.onemile.vo.MemberVO;
@@ -36,18 +29,12 @@ public class MemberController {
 	private MemberService memberService;
 	@Autowired
 	private EmailService emailService;
-	@Autowired
-	private MembershipDao membershipDao;
-	@Autowired
-	private ImageService imageService;
-	@Autowired
-	private MiddleImageService middelImageService;
 	
 	//회원가입
 	@GetMapping("/join")
 	public String getJoin(Model model) {
-		//소모임 대분류
-		model.addAttribute("category",memberService.getfavorite());
+	//소모임 대분류
+	model.addAttribute("category",memberService.getfavorite());
 		return "member/join";
 	}
 	//가입 후 회원 승인 테이블로 감.
@@ -200,20 +187,18 @@ public class MemberController {
 	@RequestMapping("/mypage")
 	public String mypage(HttpSession session,Model model) {
 		int memberNo =(int) session.getAttribute("logNo");
-		//회원정보 불러오기
-		MemberDTO memberDTO = memberService.profile(memberNo);
-		//회원이미지 불러오기
-		List<MemberVO> MemberVO = imageService.listByMember(memberNo);
-		log.debug("내정보 = MemberVO"+MemberVO);
+		//회원정보 불러오기(이미지 포함)
+		MemberVO memberVO = memberService.imageProfile(memberNo);
+		log.debug("내정보 = MemberVO"+memberVO);		
 		
+//		imageService.listByMember(memberNo);
 //		MemberProfileMidDTO memberProfileMidDTO = imageService.getImage();
-		
-		model.addAttribute("memberDTO",memberDTO);
-		model.addAttribute("memberVO",MemberVO);
+		//		model.addAttribute("memberDTO",memberDTO);
+		model.addAttribute("memberVO",memberVO);
 		return "member/mypage";
 	}
 	
-	//회원정보 수정
+	//회원정보 수정(닉변경일체크 + 자잘한거 추가해야댐)
 	@GetMapping("/edit")
 	public String edit(HttpSession session, Model model) {
 		int memberNo = (int)session.getAttribute("logNo");
@@ -234,18 +219,4 @@ public class MemberController {
 			return "redirect:edit?error";
 		}
 	}
-	
-//	//결제 취소 요청
-//	@GetMapping("/cancel")
-//	public String cancel(@RequestParam String tid, @RequestParam int amount,
-//								@RequestParam int payNo,Model model) throws URISyntaxException {
-//		KakaoPayCancelResponseVo responseVo = kakaoService.cancel(tid, amount);
-//		
-//		payDao.cancelDonation(payNo);
-//		donationService.updatePrice(payNo);
-//		model.addAttribute("cancelList", responseVo);
-//		
-//		return "donation/kakao/cancel";
-//	}
-	
 }

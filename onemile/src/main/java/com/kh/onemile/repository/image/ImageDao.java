@@ -13,5 +13,5 @@ public interface ImageDao {
 	List<ImageDTO> listByBoardNo(int boardNo);
 	List<ImageDTO> listByMenu(String middleName);
 	ImageDTO get2(int memberNo);
-	List<MemberVO> listByMember(int memberNo);
+
 }

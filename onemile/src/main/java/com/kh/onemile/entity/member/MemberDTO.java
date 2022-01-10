@@ -1,10 +1,7 @@
 package com.kh.onemile.entity.member;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import org.springframework.format.annotation.DateTimeFormat;
-
 import lombok.Data;
 
 //회원 DTO
@@ -29,10 +26,4 @@ public class MemberDTO {
 	@DateTimeFormat(pattern="YYYY-MM-DD HH:mm:ss")
 	private Date exitDate;
 	
-//	public String getRealBirth() {
-//		SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd"); 
-//		String to = fmt.format(birth);
-//	
-//		return to;
-//	}
 }
