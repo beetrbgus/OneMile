@@ -23,8 +23,8 @@ public class SocialDTO {
 
 	private int minpeople; 
 	private int maxpeople;
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH24:mm:ss")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH24:mm")
 	private Date regDate;
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH24:mm:ss")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH24:mm")
 	private Date modDate;
 }

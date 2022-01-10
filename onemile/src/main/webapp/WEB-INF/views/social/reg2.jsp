@@ -25,7 +25,7 @@
 	설명 :
 	<textarea name="context" placeholder="모임을 설명해주세요." required></textarea>
 	<br>
-	추가 이미지 등록 :<input type="file" name="attach" >
+	추가 이미지 등록 :<input type="file" name="attach" multiple="multiple">
 	<br>
 	시작일 :
 	<input type="hidden" name="startDate">
@@ -44,7 +44,7 @@
 	<input type="hidden" name="lng" required>
 	<br>
 	상세주소 :
-	<input type="text" name="location" required>
+	<input type="text" id="location" name="location" required>
 	
 	<br>
 	최소인원 :
@@ -73,7 +73,7 @@
 			
 			console.log("startDate      :"+ $("input[name=startDate]").val());
 			console.log("EndDate      :"+ $("input[name=endDate]").val());
-			/* $("#regForm").submit();	 */
+			$("#regForm").submit();
 		});
 
 	});

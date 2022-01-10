@@ -16,9 +16,9 @@ public class SocialRegVO {
 	private String type;
 	private String smallType;
 	private String context;
-	@DateTimeFormat(pattern="yyyy-MM-dd HH24:mm:ss")
+	@DateTimeFormat(pattern="yyyy-MM-dd HH24:mm")
 	private String startDate;
-	@DateTimeFormat(pattern="yyyy-MM-dd HH24:mm:ss")
+	@DateTimeFormat(pattern="yyyy-MM-dd HH24:mm")
 	private String endDate;
 	private int minpeople;
 	private int maxpeople;
