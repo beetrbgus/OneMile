@@ -85,6 +85,25 @@
 			)TMP
 		) where rn between ${startRow} and ${endRow}
 	</select>
+	<select id="getList2" parameterType="map" resultMap="CobuyList">
+	select * from (
+			select rownum rn, TMP.* from (
+				select c.* , m.nick ,cbi.image_no
+				from cobuy c
+				left outer join (select cobuy_no, min(image_no) image_no
+				from cbi group by
+				cobuy_no) cbi on c.cobuy_no = cbi.cobuy_no
+				inner join member m on 
+					m.member_no = c.member_no
+				inner join cmc on cmc.MIDDLE_NAME = c.MIDDLE_NAME
+				where 
+				<if test="category!=''">
+					cmc.URLPATH = #{category} and
+				</if> 
+				c.hiddenyn = 'N' order by c.cobuy_no desc
+			)TMP
+		) where rn between ${startRow} and ${endRow}
+	</select>
 	<!-- 상세 조회 구문 (메인) 상품테이블 , 구매자 테이블, 회원테이블, 회원이미지 테이블,지도 -->
 	<select id="getDetail" parameterType="int"
 		resultMap="customCobuy">

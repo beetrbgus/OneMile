@@ -6,7 +6,7 @@
 <script>
 /* 카테고리 */
 $(function(){
-		$(".big").change(function(){
+		$(".big").on("change",function(){
 			
 		var category = $(this).val();
 		$.ajax({
@@ -63,6 +63,7 @@ $(function(){
 	<input type="hidden" name="startDate">
 	<input type="date" id="startDay" required>
 	<input type="time" id="startTime" required>
+	<input type="datetime-local" id="startTime" required>
 	<br>
 	종료일 :
 	<input type="hidden" name="endDate">

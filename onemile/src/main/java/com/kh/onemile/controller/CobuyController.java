@@ -2,14 +2,13 @@ package com.kh.onemile.controller;
 
 import java.io.IOException;
 import java.util.List;
-
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,10 +16,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.onemile.service.cobuy.CobuyService;
+import com.kh.onemile.vo.CommuDetailVO;
+import com.kh.onemile.vo.PaginationVO;
 import com.kh.onemile.vo.cobuy.CobuyCatVO;
 import com.kh.onemile.vo.cobuy.CobuyDetailVO;
 import com.kh.onemile.vo.cobuy.CobuyListVO;
 import com.kh.onemile.vo.cobuy.CobuyRegVO;
+import com.kh.onemile.vo.cobuy.CobuyVO;
 import com.kh.onemile.vo.kakaopay.ConfirmVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -49,11 +51,39 @@ public class CobuyController {
 		return "redirect:detail?cobuyNo=" + cobuyNo;
 	}
 
-	@GetMapping("/list")
-	public String list(Model model) {
-		List<CobuyCatVO> cobuyCatVO = cobuyService.getMiddleName();
-		System.err.println(cobuyCatVO);
-		model.addAttribute("category", cobuyCatVO);
+//	@GetMapping("/list")
+//	public
+//	String list(Model model) {
+//		List<CobuyCatVO> cobuyCatVO = cobuyService.getMiddleName();
+//	     System.err.println(cobuyCatVO);
+//	     model.addAttribute("category", cobuyCatVO);
+//		return "/cobuy/list";
+//	}
+	@GetMapping({"/list/{category}","/list"})
+	public String list(@PathVariable(required = false) String category,
+			@RequestParam(required =false, defaultValue = "1") int page,
+			@RequestParam(required =false, defaultValue = "10") int size
+			,Model model) {
+		log.warn("page=========="+page);
+		log.warn("size============"+size);
+		PaginationVO paginationVO =new PaginationVO(page,size);
+		if(category==null||category.equals("/")) {
+			category="";
+			paginationVO.setCategory(category);
+		}else {
+			paginationVO.setCategory("/"+category);
+			model.addAttribute("nowcategory", category);
+		}
+
+		List<CobuyListVO> cobuyListVO = cobuyService.getList(paginationVO);
+		
+		for(CobuyListVO cobuy:cobuyListVO) {
+			log.info("cobuyListVO    "+cobuy.toString());
+		}
+	     model.addAttribute("cobuyList", cobuyListVO);
+	     List<CobuyCatVO> cobuyCatVO = cobuyService.getMiddleName();
+	     System.err.println(cobuyCatVO);
+	     model.addAttribute("category", cobuyCatVO);
 		return "/cobuy/list";
 	}
 	
@@ -75,11 +105,12 @@ public class CobuyController {
 	@ResponseBody
 	public List<CobuyListVO> list(
 			@RequestParam(required =false, defaultValue = "1") int page,
-			@RequestParam(required =false, defaultValue = "10") int size
+			@RequestParam(required =false, defaultValue = "10") int size,
+			@RequestParam(required =false) String category
 			) {
-		int endRow = page* size;
-		int startRow = endRow - (size - 1);
-		return cobuyService.getList(startRow, endRow);
+		PaginationVO paginationVO =new PaginationVO(page,size);
+		paginationVO.setCategory(category);
+		return cobuyService.getList(paginationVO);
 	}
 	@GetMapping("/detail") 
 	public String detail(@RequestParam int cobuyNo , Model model) {
@@ -104,7 +135,7 @@ public class CobuyController {
 	@GetMapping("/modify")
 	public String getModify(@RequestParam int cobuyNo, Model model) {
 		model.addAttribute("detail", cobuyService.getDetail(cobuyNo));
-		return "/cobuy/modcobuy";
+		return "detail";
 	}
 
 	@PostMapping("/modify")

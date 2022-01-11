@@ -20,83 +20,7 @@ img{
 </style>
 
 <script>
-	$(function () {
-		var page = 2;
-		var size = 9;
-		var category = "${nowcategory}";
-		$(".ProjectListMoreButton_button__27eTb").click(function () {
-			loadData(page, size,category);
-			page++;
-		});
-		
-		if(cnt() <10){ 
-			$("#moreBtn").remove(); 
-		}
-		function cnt(){
-			let a = $(".ProjectCardList_item__1owJa");
-			return a.length;
-		}
-		function loadData(page, size,category) {
-
-			$.ajax({
-				url: "${pageContext.request.contextPath}/cobuy/listdetail",
-				type: "get",
-				data: {
-					page: page,
-					size: size,
-					category : category
-				},
-				success: function (resp) {
-					if (resp.length < size) {
-						$("#moreBtn").remove();
-					}
-					for (var i = 0; i < resp.length; i++) {
-						var date = new Date(resp[i].deadLine);
-						var dateString = date.getFullYear()+"년 "+date.getMonth()+1+"월 "+date.getDate()+"일 "+date.getHours()+"시 "+date.getMinutes()+"분 "+date.getSeconds()+"초";
-
-						var CobuyListVO = resp[i];
-						console.log(CobuyListVO.cobuyNo);
-						console.log(typeof CobuyListVO.cobuyNo);
-						var divCol=
-							"<div class='ProjectCardList_item__1owJa'>"+
-							"<div>"+ 
-							"<div class='CommonCard_container__e_ebQ CommonCard_squareSmall__1Cdkn'>"+
-							"<a href='detail?cobuyNo="+CobuyListVO.cobuyNo+
-							"' class='CardLink_link__1k83H CommonCard_image__vaqkf' aria-hidden='true' tabindex='-1'>"+
-							"<div class='CommonCard_rect__2wpm4'>"+
-							"<span class='CommonCard_background__3toTR CommonCard_visible__ABkYx'"+
-							"style='background-image: url(${pageContext.request.contextPath}/image/download?imageNo="+CobuyListVO.imgNo+"&folder=cobuy)'></span>"+
-							"</div>"+
-							"</a>"+
-							"<div class='CommonCard_info__1f4kq'>"+
-							"<div class='RewardProjectCard_info__3JFub'>"+
-							"<div class='RewardProjectCard_infoTop__3QR5w'>"+
-							"<a href='detail?cobuyNo="+CobuyListVO.cobuyNo+
-							"' class='CardLink_link__1k83H'>"+
-							"<p class='CommonCard_title__1oKJY RewardProjectCard_title__iUtvs'>"+
-							"<strong>"+CobuyListVO.pname+"<br>"+CobuyListVO.title+"</strong>"+
-							"</p>"+
-							"</a>"+
-							"<div>"+
-							"<span class='RewardProjectCard_makerName__2q4oH'>"+CobuyListVO.nick+"</span>"+		
-							"</div></div><div class='RewardProjectCard_gauge__3p9US'>"+		
-							"<span style='width: 100%;'></span>"+
-							"</div>"+
-							"<span class='RewardProjectCard_percent__3TW4_'>"+CobuyListVO.stock+"개 남음</span>"+
-							"<span class='RewardProjectCard_amount__2AyJF'>"+CobuyListVO.price+"원</span>"+
-							"<span class='RewardProjectCard_days__3eece RewardProjectCard_isAchieve__1LcUu'>"+
-							"<span class='RewardProjectCard_remainingDay__2TqyN'>"+dateString+"</span>"+
-							"<span class='RewardProjectCard_remainingDayText__2sRLV'>마감</span>"+
-							"<span class='RewardProjectCard_isAchieve__1LcUu'></span></span></div></div></div></div></div>";
-						$(".ProjectCardList_list__1YBa2").append(divCol);
-					}
-				},
-				error: function (e) {
-					console.log("실패", e);
-				}
-			});
-		};
-	});
+	
 </script>
 
 <div class="RewardMainWrapper_container__2HR7Y">
@@ -115,7 +39,7 @@ img{
 	  </div>
 	  <div class="carousel-inner">
 	    <div class="carousel-item active" data-bs-interval="3000">
-	     <a href="${root}/cobuy/list/${category}">
+	     <a href="${root}/cobuy/list">
 	      <img src="${root}/resources/image/beauty.jpg" class="d-block w-100">
 	      <div class="carousel-caption d-none d-md-block">
 	        <h3 class="b">[공동구매율 1위]</h3>
@@ -130,7 +54,7 @@ img{
 	        <h3 class="w">해외직구 어려워서 고민이었다면.</h3>
 	        <p class="w">내가 찾던 그 옷 여기 있었네?</p>
 	      </div>
-	      </a>
+	      </a> 
 	    </div>
 	    <div class="carousel-item" data-bs-interval="3000">
 	     <a href="${root}/cobuy/list">
@@ -180,32 +104,31 @@ img{
 	</div>
 	
 	<div class="RewardCategoryCircleList_container__1GDge">
-		<div class="CategoryCircleList_container__3fAVd">
-			<button class="CategoryCircleList_previous__xJMxg CategoryCircleList_hidden__2fdvp" type="button" data-dir="이전">
-				<i class="icon chevron-left CategoryCircleList_icon__13sH8" aria-hidden="true"></i>
-			</button>
+		<div class="CategoryCircleList_container__3fAVd"><button
+				class="CategoryCircleList_previous__xJMxg CategoryCircleList_hidden__2fdvp" type="button" data-dir="이전"><i
+					class="icon chevron-left CategoryCircleList_icon__13sH8" aria-hidden="true"></i></button>
 			<!-- 카테고리 시작지점 -->
 			
-			<div class="CategoryCircleList_wrap__3jHrp">
+				<div class="CategoryCircleList_wrap__3jHrp">
 				<div class="CategoryCircleList_list__2YBF3">
 				<c:forEach var="cobuyCatVO" items="${category}">
 					<a class="CategoryCircleList_item__2_QZ3 RewardCategoryCircleList_item__2JEvT"
-						href="${root}/cobuy/list${cobuyCatVO.urlPath}">
+						href="${root}/cobuy${cobuyCatVO.urlPath}">
 						<span class="CategoryCircle_container__2rZ3a">
 							<span class="CategoryCircle_circle__3khwj"
 								style="background-image: url(${root}/resources/image/cobuy/${cobuyCatVO.middleName}.jpg);"></span>
 							<span class="CategoryCircle_name__3Ca9T">${cobuyCatVO.middleName}</span>
 						</span>
 					</a>
-				</c:forEach>
+					</c:forEach>
 				</div>
-			</div>
-		<!-- 카테고리 끝지점 -->
-		<c:if test="${category} > 10">
-		<button class="CategoryCircleList_next__1mHyX" type="button" data-dir="다음">
-		<i class="icon chevron-right CategoryCircleList_icon__13sH8" aria-hidden="true"></i>
-		</button>
-		</c:if>
+				</div>
+			<!-- 카테고리 끝지점 -->
+			<c:if test="${category} > 10">
+			<button class="CategoryCircleList_next__1mHyX" type="button" data-dir="다음">
+			<i class="icon chevron-right CategoryCircleList_icon__13sH8" aria-hidden="true"></i>
+			</button>
+			</c:if>
 		</div>
 	</div>
 	<div class="RewardProjectListApp_container__1ZYeD">
@@ -246,49 +169,10 @@ img{
 		</div>
 		<div class="ProjectCardList_container__3Y14k">
 			<div class="ProjectCardList_list__1YBa2">
-				<c:forEach items="${cobuyList}" var="CobuyListVO">
-				 	<div class='ProjectCardList_item__1owJa'>
-						<div> 
-							<div class='CommonCard_container__e_ebQ CommonCard_squareSmall__1Cdkn'>
-								<a href='detail?cobuyNo=${CobuyListVO.cobuyNo}' class='CardLink_link__1k83H CommonCard_image__vaqkf' aria-hidden='true' tabindex='-1'>
-									<div class='CommonCard_rect__2wpm4'>
-										<span class='CommonCard_background__3toTR CommonCard_visible__ABkYx'
-											style='background-image: url("${pageContext.request.contextPath}/image/download?imageNo=${CobuyListVO.imgNo}&folder=cobuy")'></span>
-									</div>
-								</a>
-							 	<div class='CommonCard_info__1f4kq'>
-							 		<div class='RewardProjectCard_info__3JFub'>
-							 			<div class='RewardProjectCard_infoTop__3QR5w'>
-							 				<a href='detail?cobuyNo=${CobuyListVO.cobuyNo}' class='CardLink_link__1k83H'>
-							 					<p class='CommonCard_title__1oKJY RewardProjectCard_title__iUtvs'>
-							 						<strong>${CobuyListVO.PName}<br>${CobuyListVO.title}</strong>
-							 					</p>
-							 				</a>
-							 				<div>
-							 				<span class='RewardProjectCard_makerName__2q4oH'>${CobuyListVO.nick}</span>		
-							 				</div>
-							 			</div>
-							 			<div class='RewardProjectCard_gauge__3p9US'>		
-							 				<span style='width: 100%;'></span>
-							 			</div>
-							 			<span class='RewardProjectCard_percent__3TW4_'>${CobuyListVO.stock}개 남음</span>
-							 			<span class='RewardProjectCard_amount__2AyJF'>${CobuyListVO.price}원</span>
-							 			<span class='RewardProjectCard_days__3eece RewardProjectCard_isAchieve__1LcUu'>
-							 				<span class='RewardProjectCard_remainingDay__2TqyN'>${CobuyListVO.deadLine}</span>
-							 				<span class='RewardProjectCard_remainingDayText__2sRLV'>마감</span>
-							 				<span class='RewardProjectCard_isAchieve__1LcUu'></span>
-							 			</span> 
-							 		</div>
-							 	</div>
-							 </div>
-							</div>
-						</div>
-				</c:forEach>
 			</div>
-			
-			<div >
+			<div>
 				<div class="ProjectListMoreButton_container__1JFxX ProjectCardList_more__3AbzT"><button type="button"
-						id="moreBtn" class="ProjectListMoreButton_button__27eTb">더보기<i class="icon expand-more"
+						class="ProjectListMoreButton_button__27eTb">더보기<i class="icon expand-more"
 							aria-hidden="true"></i></button>
 					<div class="wz-loader ProjectListMoreButton_loader__1Kcvt"></div>
 				</div>

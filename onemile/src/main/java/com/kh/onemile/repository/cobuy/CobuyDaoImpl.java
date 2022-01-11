@@ -9,12 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.onemile.entity.cobuy.CobuyDTO;
+import com.kh.onemile.vo.PaginationVO;
 import com.kh.onemile.vo.cobuy.CobuyCatVO;
 import com.kh.onemile.vo.cobuy.CobuyDetailVO;
 import com.kh.onemile.vo.cobuy.CobuyListVO;
 import com.kh.onemile.vo.cobuy.CobuyRegVO;
 import com.kh.onemile.vo.kakaopay.ConfirmVO;
 
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
 @Repository
 public class CobuyDaoImpl implements CobuyDao{
 	@Autowired
@@ -56,6 +59,16 @@ public class CobuyDaoImpl implements CobuyDao{
 		map.put("startRow", startRow);
 		map.put("endRow", endRow);
 		return sqlSession.selectList("cobuy.getList", map);
+	}
+	@Override
+	public List<CobuyListVO> cobuyList(PaginationVO paginationVO) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("startRow", paginationVO.getStartRow());
+		map.put("endRow", paginationVO.getEndRow());
+		map.put("category", paginationVO.getCategory());
+		
+		log.error("map="+map);
+		return sqlSession.selectList("cobuy.getList2", map);
 	}
 
 }
