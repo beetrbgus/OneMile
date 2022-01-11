@@ -3,6 +3,38 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<script>
+/* 카테고리 */
+$(function(){
+		$(".big").change(function(){
+			
+		var category = $(this).val();
+		$.ajax({
+		  url : "${pageContext.request.contextPath}/miles/data/category/child",
+  		  type : "post",
+  		  data : {
+  			  categorySuper : category
+  		  },
+  		  success : function(resp) {
+  			console.log("성공", resp);
+  			
+  			var middle = $(".middle");
+  			middle.find("option").remove();
+  			for (var dto of resp) {
+  				
+				var middleOption = $("<option>");
+				middleOption.val(dto.smallType);
+				middleOption.text(dto.smallType);
+				middle.append(middleOption);
+			}
+  		  },
+  		  error : function(e) {
+			  console.log("실패", e);
+  		  }
+  		});
+	});
+});
+</script>
 
 <form id="regForm" action="reg" method="post" enctype="multipart/form-data">
 	<br>

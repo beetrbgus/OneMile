@@ -79,17 +79,19 @@
 			<if test="nick != null">
 				nick = #{nick},
 			</if>
-			<if test="memberBirth != null">
-				member_birth = #{memberBirth},
-			</if>
 			<if test="phone != null">
 				phone = #{phone},
 			</if>
 			<if test="birth != null">
-				birth = #{birth},
+				birth = to_date(#{birth}, 'YYYY-MM-DD'),
 			</if>
-			
 		</set>
 		where member_no = #{memberNo}
 	</update>
+	
+	<!-- 회원정보 불러오기(사진 포함) -->
+	<select id="imageProfile" parameterType="int" resultType="MemberVO">
+		select m.*,mei.image_no from member m left outer join mei mei on m.member_no = mei.member_no where m.member_no = #{memberNo}
+	</select>
+
 </mapper>

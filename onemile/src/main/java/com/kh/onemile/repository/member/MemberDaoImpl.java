@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.onemile.entity.member.MemberDTO;
 import com.kh.onemile.vo.MemberJoinVO;
+import com.kh.onemile.vo.MemberVO;
 
 @Repository
 public class MemberDaoImpl implements MemberDao{
@@ -90,6 +91,11 @@ public class MemberDaoImpl implements MemberDao{
 	public boolean changeInformation(MemberDTO memberDTO) {
 		int count = sqlSession.update("member.changeInformation", memberDTO);
 		return count > 0;
+	}
+
+	//회원정보 불러오기(사진 포함)
+	public MemberVO imageProfile(int memberNo) {
+		return sqlSession.selectOne("member.imageProfile",memberNo);
 	}
 	
 }

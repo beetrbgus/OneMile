@@ -13,10 +13,11 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import com.kh.onemile.vo.kakaopay.ConfirmVO;
+import com.kh.onemile.vo.kakaopay.KaKaoPayRegularPayMentStateResponseVO;
 import com.kh.onemile.vo.kakaopay.KakaoPayApproveRequestVO;
 import com.kh.onemile.vo.kakaopay.KakaoPayApproveResponseVO;
 import com.kh.onemile.vo.kakaopay.KakaoPayAutoPayMentInactiveResponseVO;
-import com.kh.onemile.vo.kakaopay.KakaoPayReadyRequestVO;
+import com.kh.onemile.vo.kakaopay.KakaoPayCancelResponseVO;
 import com.kh.onemile.vo.kakaopay.KakaoPayReadyResponseVO;
 import com.kh.onemile.vo.kakaopay.KakaoPayRegularApproveRequestVO;
 
@@ -45,9 +46,9 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 
 		// 2-2. HTTP Body 정보 생성
 		MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
-		body.add("cid", "TCSUBSCRIP");
+		body.add("cid", requestVO.getType());
 		body.add("partner_order_id", "원마일");
-		body.add("partner_user_id", String.valueOf(requestVO.getMemberNo()));
+		body.add("partner_user_id", requestVO.getPartner_user_id());
 
 		body.add("item_name", requestVO.getProductName());
 		body.add("quantity", String.valueOf(requestVO.getQuantity()));
@@ -128,7 +129,7 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 		// 4. 요청방식에 따라 다른 명령으로 전송
 		KakaoPayApproveResponseVO responseVO = template.postForObject(uri, entity, KakaoPayApproveResponseVO.class);// 응답을
 		responseVO.setMemberNo(requestVO.getMemberNo());
-		
+		responseVO.setProductNo(requestVO.getProductNo());
 		// 결제 내역 테이블에 저장
 		buyTableService.reg(responseVO);
 	}
@@ -155,4 +156,52 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 
 		return responseVO;
 	}
+	
+	// 정기결제 상태 조회
+		@Override
+		public KaKaoPayRegularPayMentStateResponseVO regularState(String sid) throws URISyntaxException {
+			RestTemplate template = new RestTemplate();
+			
+			HttpHeaders headers = new HttpHeaders();
+			headers.add("Authorization",  "KakaoAK "+Auth);
+			headers.add("Content-type", ContentType);
+			
+			MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
+			body.add("cid", "TCSUBSCRIP");
+			body.add("sid", sid);
+			
+			HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
+			
+			
+			URI uri = new URI("https://kapi.kakao.com/v1/payment/manage/subscription/status");
+			
+			KaKaoPayRegularPayMentStateResponseVO responseVO = template.postForObject(uri, entity, KaKaoPayRegularPayMentStateResponseVO.class);
+			
+			return responseVO;
+		}
+		
+		//결제 취소
+		@Override
+		public KakaoPayCancelResponseVO cancel(String tid, int amount) throws URISyntaxException {
+			RestTemplate template = new RestTemplate();
+			
+			HttpHeaders headers = new HttpHeaders();
+			headers.add("Authorization",  "KakaoAK "+Auth);
+			headers.add("Content-type", ContentType);
+			
+			MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
+			body.add("cid", "TC0ONETIME");
+			body.add("tid", tid);
+			body.add("cancel_amount", String.valueOf(amount));
+			body.add("cancel_tax_free_amount", "0");
+			
+			HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
+			
+			
+			URI uri = new URI("https://kapi.kakao.com/v1/payment/cancel");
+			
+			KakaoPayCancelResponseVO responseVO = template.postForObject(uri, entity, KakaoPayCancelResponseVO.class);
+			
+			return responseVO;
+		}
 }

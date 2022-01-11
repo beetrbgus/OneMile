@@ -4,7 +4,7 @@
 <c:set var="root" value="${pageContext.request.contextPath }"></c:set>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<h1>멤버십 구매 목록</h1>
+<h1>결제 내역</h1>
 
 <form action="confirm" method="get">
 <c:forEach var="membershipBuyDTO" items="${list}">
@@ -12,6 +12,7 @@
 		${membershipBuyDTO.itemName} / ${membershipBuyDTO.totalAmount} / ${membershipBuyDTO.buyTime} / ${membershipBuyDTO.buyEndtime}
 		${membershipBuyDTO.status} / ${membershipBuyDTO.sid}
 		<a href="${pageContext.request.contextPath}/pay/regular/disabled?sid=${membershipBuyDTO.sid}">중지</a>
+	<a href="${pageContext.request.contextPath}/pay/state?sid=${membershipBuyDTO.sid}">조회</a>
 	</div>
 </c:forEach>
 	
