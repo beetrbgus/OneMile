@@ -15,7 +15,7 @@ public class SocialImageDaoImpl implements MiddleImageDAO{
 
 	@Override
 	public void reg(MiddleImgTableDTO middleImgTableDTO) {
-		sqlSession.insert("smi.regSmi",middleImgTableDTO);
+		sqlSession.insert("smi.reg",middleImgTableDTO);
 	}
 	@Override
 	public void delete(int socialNo) {

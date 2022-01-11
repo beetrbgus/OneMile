@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.onemile.entity.admin.ApproveDTO;
 import com.kh.onemile.entity.admin.MemberListDTO;
+import com.kh.onemile.entity.member.MemberDTO;
 import com.kh.onemile.repository.admin.AdminDao;
 import com.kh.onemile.service.commu.CommuService;
 import com.kh.onemile.util.Sequence;
@@ -57,11 +58,11 @@ public class AdminServiceImpl implements AdminService{
 	//회원 승인 거부.
 	@Override
 	public void deniedApproveMember(int memberNo) {
-		adminDao.deniedApproveMember(memberNo);
+		adminDao.deniedApproveMember(memberNo); 
 	}
 	//회원 목록 가져오기
 	@Override
-	public List<MemberListDTO> memberList() {
+	public List<MemberDTO> memberList(){
 		return adminDao.memberList();
 	}
 	@Override

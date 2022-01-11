@@ -88,7 +88,6 @@ $(function () {
             			divBig += "</div>"
             			$(".MoreMenuDesktop_innerContainer__xecjO").append(divBig);
                 }
-            	
             },
             error: function (err) {
             	
@@ -102,7 +101,7 @@ $(function () {
     	$(".Backdrop_backDrop__3v5kD").toggleClass("dark")
     	$(".MoreMenuDesktop_container__1I6Al").toggleClass("MoreMenuDesktop_active__3wtR4");
     });
-    });
+});
 </script>
 <body>
 	<div id="page-container"> 

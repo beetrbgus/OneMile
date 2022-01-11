@@ -3,8 +3,7 @@ package com.kh.onemile.vo.social;
 import java.util.Date;
 import java.util.List;
 
-import javax.mail.Multipart;
-
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Data;
@@ -14,11 +13,14 @@ public class SocialRegVO {
 	private int socialNo;
 	private int memberNo;
 	
-	private String smallType;
 	private String title;
+	private String type;
+	private String smalltype;
 	private String context;
-	private String startDate;
-	private String endDate;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	private Date startDate;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") 
+	private Date endDate;
 	private int minpeople;
 	private int maxpeople;
 	//지도 테이블

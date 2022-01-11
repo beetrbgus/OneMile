@@ -91,6 +91,7 @@ public class CobuyController {
 		System.out.println("cobuyDetailVO.getTitle()   "+cobuyDetailVO.getTitle());
 		
 		model.addAttribute("detail", cobuyDetailVO);
+		
 		return "/cobuy/detail";
 	}
 
@@ -128,7 +129,7 @@ public class CobuyController {
 
 		model.addAttribute("confirmVO", confirmVO);
 		log.debug(confirmVO.toString());
-		return "/pay/confirm";
+		return "cobuy/confirm";
 	}
 
 	// 결제할 상품 확인
@@ -143,6 +144,7 @@ public class CobuyController {
 		int memNo = (int) session.getAttribute("logNo");
 		ConfirmVO confirmResultVO = cobuyService.getConfirm(confirmVO);
 		confirmResultVO.setMemberNo(memNo);
+		confirmResultVO.setPartner_user_id(String.valueOf(session.getAttribute("logId")));
 		redirectAttributes.addFlashAttribute("confirmVO", confirmResultVO);
 		
 		return "redirect:/pay/confirm";

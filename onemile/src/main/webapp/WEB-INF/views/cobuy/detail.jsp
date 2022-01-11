@@ -43,7 +43,7 @@
 							</p>
 
 							<p class="achievement-rate" style="margin-bottom: 16px;">
-								<strong>N명</strong> 구매
+								<strong>${detail.countConstomer}명 </strong> 구매 
 							</p>
 							<p class="total-amount" style="margin-bottom: 16px;">
 								<strong>${detail.price}</strong>원
@@ -51,7 +51,7 @@
 							<p class="total-supporter" style="margin-bottom: 16px;">
 								<strong>수량</strong>
 								<input class="quantity" type="number" style="width:30%; border: 1px solid black;"
-									max="${detail.stock}">
+									max="${detail.stock}" min="0" value="1">
 								<strong style="color:red;"> ${detail.stock}개 남음!</strong> 
 							</p>
 						</div>
@@ -185,7 +185,7 @@
 											aria-label="Previous" role="button" style="display: block;">Previous</button>
 										<!-- 상품 이미지 목록 -->
 										<div aria-live="polite" class="slick-list draggable"
-											style="height: 401px;">
+											style="height: 401px;"> 
 											<div class="slick-track" style="opacity: 1; width: 3160px;"
 												role="listbox">
 												<li class="slick-slide slick-current slick-active"
@@ -194,9 +194,11 @@
 													tabindex="-1" role="option"
 													aria-describedby="slick-slide00">
 													<div class="img-responsive"
-														style="background: url('${pageContext.request.contextPath}/image/download?imageNo=${detail.imageList[0].imageNo}&folder=cobuy'); background-size: contain; background-position: center 0; width: 100%; height: 0; padding-bottom: 63.49%;">
+														style="background: url(''); background-size: contain; background-position: center 0; width: 100%; height: 0; padding-bottom: 63.49%;">
+														<img src="${pageContext.request.contextPath}/image/download?imageNo=${detail.imageList[0].imageNo}&folder=cobuy"
+															style="align-content:center; overflow:hidden; object-fit:cover; width: 400px; height: 400px;"> 
 													</div>
-												</li>
+												</li> 
 											</div>
 										</div>
 										<button type="button" data-role="none"
@@ -245,12 +247,9 @@
 												</p>
 											</div>
 											<script src="${pageContext.request.contextPath}/resources/js/cobuy/detail.js" ></script>
-											<form id="buyForm" action="cobuyBuy" method="post">
-												<input type="hidden" name="type" value="단건결제">
+											<form id="buyForm" action="${pageContext.request.contextPath}/cobuy/confirm" method="get">
 												<input type="hidden" name="productNo" value="${detail.cobuyNo}">
-												<input type="hidden" name="productName" value="${detail.PName}">
 												<input class="quantity" type="hidden" name="quantity" value="0">
-												<input type="hidden" name="stock" value="${detail.stock}">
 												<!-- 프로젝트 유형이 글로벌/앵콜 프로젝트가 아닌경우: 기존과 동일하게 처리 -->
 												<div class="btn-wrap funding">
 													<button class="buyBtn wz button primary block btn-reward-funding">구매하기</button>

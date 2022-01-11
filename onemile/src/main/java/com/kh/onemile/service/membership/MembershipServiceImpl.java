@@ -16,16 +16,18 @@ public class MembershipServiceImpl implements MembershipService{
 	@Override
 	public ConfirmVO getConfirm(int productNo,int quantity) {
 		
-		log.debug("productNo        "+productNo);
+		log.debug("````````상품번호 : productNo        "+productNo);
 		MembershipDTO membershipDTO =membershipDao.search(productNo);
+		log.debug("`````````````서치"+membershipDTO.toString());
 		
 		ConfirmVO confirmVO= new ConfirmVO();
-		confirmVO.setPrice(membershipDTO.getMspPrice());
+		confirmVO.setTotalAmount(membershipDTO.getMspPrice());
+//		confirmVO.setPrice(membershipDTO.getMspPrice());
 		confirmVO.setProductNo(membershipDTO.getMspNo());
 		confirmVO.setQuantity(1);
-		confirmVO.setType("정기");
+		confirmVO.setType("TCSUBSCRIP");
 		confirmVO.setProductName(membershipDTO.getMspProduct());
-		
+		log.debug("````````confirmVO : confirmVO        "+confirmVO);
 		return confirmVO;
 	}
 }

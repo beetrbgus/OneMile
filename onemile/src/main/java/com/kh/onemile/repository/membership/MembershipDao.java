@@ -4,10 +4,12 @@ import java.util.List;
 
 import com.kh.onemile.entity.product.MembershipBuyDTO;
 import com.kh.onemile.entity.product.MembershipDTO;
+import com.kh.onemile.vo.membership.MembershipListVO;
 
 public interface MembershipDao {
-	//멤버십 상품 리스트
-	List<MembershipDTO> list();
+	//멤버십 상품 리스트(혜택포함)
+	List<MembershipListVO> list();
+	
 	//결제 상품 확인
 	MembershipDTO search(int mspNo);
 	

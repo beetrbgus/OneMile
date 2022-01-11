@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cobuybuy">
+
+	<!-- 글쓰기 -->
+	<insert id="reg" parameterType="CoBuyBuyVO">
+		insert into pb(
+			PB_NO, MEMBER_NO, PRODUCT_NO,
+			TID,ITEM_NAME, TOTAL_AMOUNT,STATUS)
+		values(
+			PB_SEQ.nextval, #{memberNo},#{productNo},
+			#{tid},#{itemName},#{totalAmount},#{status} 
+		)
+	</insert>
+	<!-- 결제 취소 -->
+	<update id="cancel" parameterType="Map">
+		update cobuy set
+			STATUS = #{status}
+		where COBUY_NO = #{cobuyNo}
+	</update>
+
+	<!-- 상세페이지에서의 이미지 여러개의 정보 -->
+	<select id="countConstomer" resultType="int"
+		parameterType="int">
+		select count(*) from pb where PRODUCT_NO = #{cobuyNo}
+	</select>
+	<update id="modify" parameterType="CobuyVO">
+		update cobuy set TITLE=#{title},MIDDLE_NAME=#{middleName},
+			PRICE = #{price}, STOCK = #{stock} ,PNAME= #{pName},
+			DESCRIPT=#{descript}, DEADLINE =#{deadLine} 
+		WHERE COBUY_NO = #{cobuyNo} AND MEMBER_NO =#{memberNo}
+	</update>
+	
+	<select id="getforBuy" resultType="CobuyDTO"
+		parameterType="ConfirmVO">
+		select * from cobuy where COBUY_NO = #{productNo} and STOCK >= #{quantity}
+	</select>
+</mapper>
+
+
+
+

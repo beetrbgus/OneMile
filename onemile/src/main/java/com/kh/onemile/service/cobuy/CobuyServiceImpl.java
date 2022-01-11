@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kh.onemile.entity.cobuy.CobuyDTO;
 import com.kh.onemile.entity.image.middle.MiddleImgTableDTO;
 import com.kh.onemile.entity.map.MapDTO;
+import com.kh.onemile.repository.cobuy.CobuyBuyDao;
 import com.kh.onemile.repository.cobuy.CobuyDao;
 import com.kh.onemile.repository.image.middle.MiddleImageDAO;
 import com.kh.onemile.service.image.ImageService;
@@ -47,7 +49,8 @@ public class CobuyServiceImpl implements CobuyService {
 	private Sequence seq;
 	@Autowired
 	private DateToString dateToString;
-
+	@Autowired
+	private CobuyBuyDao cobuyBuyDao; 
 	@Override
 	public int reg(CobuyRegVO cobuyRegVO) throws IllegalStateException, IOException {
 		int cbNo = seq.nextSequence(seqName); // 공동구매 상품 번호
@@ -90,6 +93,7 @@ public class CobuyServiceImpl implements CobuyService {
 		CobuyDetailVO result = cobuyDao.detail(cobuyNo);
 		System.err.println(result.getCobuyNo());
 		result.setDeadLinestr(dateToString.dateToString(result.getDeadLine()));
+		result.setCountConstomer(cobuyBuyDao.countConstomer(cobuyNo));
 		return result;
 	}
 
@@ -135,12 +139,13 @@ public class CobuyServiceImpl implements CobuyService {
 
 	@Override
 	public ConfirmVO getConfirm(ConfirmVO confirmVO) {
-		CobuyVO cobuyVO = cobuyDao.getConfirm(confirmVO);
+		CobuyDTO cobuyDTO = cobuyDao.getConfirm(confirmVO);
 
-		int totalPrice = confirmVO.getQuantity() * cobuyVO.getPrice();
+		int totalPrice = confirmVO.getQuantity() * cobuyDTO.getPrice();
+		confirmVO.setProductNo(cobuyDTO.getCobuyNo());
 		confirmVO.setTotalAmount(totalPrice);
-		confirmVO.setPrice(cobuyVO.getPrice());
-		confirmVO.setProductName(cobuyVO.getPName());
+		confirmVO.setPrice(cobuyDTO.getPrice());
+		confirmVO.setProductName(cobuyDTO.getPname());
 		confirmVO.setType("TC0ONETIME");
 
 		return confirmVO;

@@ -1,12 +1,9 @@
 package com.kh.onemile.controller;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,12 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.kh.onemile.entity.member.MemberDTO;
 import com.kh.onemile.entity.member.certi.CertiDTO;
-import com.kh.onemile.entity.product.MembershipBuyDTO;
-import com.kh.onemile.repository.membership.MembershipDao;
 import com.kh.onemile.service.email.EmailService;
 import com.kh.onemile.service.member.MemberService;
 import com.kh.onemile.vo.MemberJoinVO;
+import com.kh.onemile.vo.MemberVO;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RequestMapping("/member")
 @Controller
 public class MemberController {
@@ -30,14 +29,12 @@ public class MemberController {
 	private MemberService memberService;
 	@Autowired
 	private EmailService emailService;
-	@Autowired
-	private MembershipDao membershipDao;
 	
 	//회원가입
 	@GetMapping("/join")
 	public String getJoin(Model model) {
-		//소모임 대분류
-		model.addAttribute("category",memberService.getfavorite());
+	//소모임 대분류
+	model.addAttribute("category",memberService.getfavorite());
 		return "member/join";
 	}
 	//가입 후 회원 승인 테이블로 감.
@@ -64,6 +61,7 @@ public class MemberController {
 			
 			MemberDTO findDTO = memberService.login(memberDTO);
 			System.err.println("findDTo======================"+findDTO);
+
 			//정보가 있으면 세션저장
 			if(findDTO != null) {
 			session.setAttribute("logNo", findDTO.getMemberNo());
@@ -71,9 +69,11 @@ public class MemberController {
 			session.setAttribute("grade", findDTO.getGrade());
 			session.setAttribute("nick", findDTO.getNick());
 			
+			System.out.println("찾아라~~~~~~~~~~~~~~~~~~~~"+findDTO.getEmail());
+			
 			if(saveId != null) {//쿠키 생성
 				Cookie c = new Cookie("saveId", findDTO.getEmail());
-				c.setMaxAge(4 * 7 * 24 * 60 * 60);//4주
+				c.setMaxAge(4 * 7 * 24 * 60 * 60);
 				response.addCookie(c);
 			}else {//쿠키 삭제
 				Cookie c = new Cookie("saveId", findDTO.getEmail());
@@ -151,10 +151,13 @@ public class MemberController {
 
 	//비밀번호찾기(이메일 체크)
 	@PostMapping("/emailCheck")
-	public String emailCheck(@ModelAttribute CertiDTO certiDTO,HttpSession session) {
+	public String emailCheck(@ModelAttribute CertiDTO certiDTO,HttpSession session, Model model) {
 		boolean success = memberService.emailCheck(certiDTO);
+		
 		if(success) {
+			model.addAttribute("email",certiDTO.getEmail());
 			return "member/edit_pw";
+			
 		}
 		else {
 			return "redirect:/";
@@ -184,17 +187,18 @@ public class MemberController {
 	@RequestMapping("/mypage")
 	public String mypage(HttpSession session,Model model) {
 		int memberNo =(int) session.getAttribute("logNo");
+		//회원정보 불러오기(이미지 포함)
+		MemberVO memberVO = memberService.imageProfile(memberNo);
+		log.debug("내정보 = MemberVO"+memberVO);		
 		
-		//회원정보 불러오기
-		MemberDTO memberDTO = memberService.profile(memberNo);
-		//회원이미지 불러오기
-//		MemberProfileMidDTO memberProfileMidDTO = imageService.getImage(imageNo);
-		model.addAttribute("memberDTO",memberDTO);
-//		model.addAttribute("memberProfileMidDTO",memberProfileMidDTO);
+//		imageService.listByMember(memberNo);
+//		MemberProfileMidDTO memberProfileMidDTO = imageService.getImage();
+		//		model.addAttribute("memberDTO",memberDTO);
+		model.addAttribute("memberVO",memberVO);
 		return "member/mypage";
 	}
 	
-	//회원정보 수정
+	//회원정보 수정(닉변경일체크 + 자잘한거 추가해야댐)
 	@GetMapping("/edit")
 	public String edit(HttpSession session, Model model) {
 		int memberNo = (int)session.getAttribute("logNo");
@@ -206,6 +210,7 @@ public class MemberController {
 	public String edit(@ModelAttribute MemberDTO memberDTO, HttpSession session) {
 		int memberNo = (int)session.getAttribute("logNo");
 		memberDTO.setMemberNo(memberNo);
+		System.out.println("멤버변경 찾기"+memberDTO);
 		boolean result = memberService.changeInformation(memberDTO);
 		if(result) {
 			return "redirect:edit_success";
@@ -213,13 +218,5 @@ public class MemberController {
 		else {
 			return "redirect:edit?error";
 		}
-	}
-	//구매한 멤버십 목록
-	@GetMapping("reg_membership")
-	public String membershipList(Model model, HttpSession session) {
-		int memberNo = (int)session.getAttribute("logNo");
-		List<MembershipBuyDTO> membershipBuyDTO = membershipDao.joinMembership(memberNo);
-		model.addAttribute("list",membershipBuyDTO);
-		return "member/reg_membership";
 	}
 }

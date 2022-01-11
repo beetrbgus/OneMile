@@ -1,27 +1,23 @@
 package com.kh.onemile.controller;
 
 import java.net.URISyntaxException;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.support.RequestContextUtils;
 
-import com.kh.onemile.entity.product.MembershipBuyDTO;
 import com.kh.onemile.repository.membership.MembershipBuyDao;
 import com.kh.onemile.service.kakaopay.KakaoPayService;
 import com.kh.onemile.vo.kakaopay.ConfirmVO;
+import com.kh.onemile.vo.kakaopay.KaKaoPayRegularPayMentStateResponseVO;
 import com.kh.onemile.vo.kakaopay.KakaoPayApproveRequestVO;
-import com.kh.onemile.vo.kakaopay.KakaoPayApproveResponseVO;
-import com.kh.onemile.vo.kakaopay.KakaoPayReadyRequestVO;
+import com.kh.onemile.vo.kakaopay.KakaoPayCancelResponseVO;
 import com.kh.onemile.vo.kakaopay.KakaoPayReadyResponseVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -37,21 +33,32 @@ public class PayController {
 
 	// 결제 준비 요청
 	@RequestMapping("/confirm")
-	public String confirm(HttpServletRequest request, @ModelAttribute KakaoPayReadyRequestVO requestVO,
-			HttpSession session) throws URISyntaxException {
-		Map<String, ConfirmVO> confirm = (Map<String, ConfirmVO>)RequestContextUtils.getInputFlashMap(request);
-		ConfirmVO confirmVO = (ConfirmVO) confirm.get("confirmVO");
-		//cid 설정. 정기 TCSUB 단건 TC0
-		String cid= (confirmVO.getType().equals("정기"))?"TCSUBSCRIP":"TC0ONETIME";
+	public String confirm(Model model, HttpServletRequest request, HttpSession session) throws URISyntaxException {
+		log.debug("model = {}", model);
+		log.debug("model map = {}", model.asMap());
 		
+		ConfirmVO confirmVO = (ConfirmVO)model.asMap().get("confirmVO");
+		log.debug("confirmVO = {}", confirmVO);
+		
+//		Map<String, ?> confirm = RequestContextUtils.getInputFlashMap(request);
+//		log.debug("```````confirm"+confirm);
+//		ConfirmVO confirmVO = null; 
+//		if(confirm != null) {
+//			 confirmVO = (ConfirmVO) confirm.get("confirmVO");			
+//		}
+		// cid 설정. 정기 TCSUB 단건 TC0
+		String cid = (confirmVO.getType().equals("TCSUBSCRIP")) ? "TCSUBSCRIP" : "TC0ONETIME";
+
 		KakaoPayReadyResponseVO responseVO = kakaoPayService.regularReady(confirmVO);
+		log.debug("컨펌VO confirmVO"+confirmVO.toString());
 		session.setAttribute("tid", responseVO.getTid());
 		session.setAttribute("cid", cid);
 		session.setAttribute("productNo", confirmVO.getProductNo());
 		
-		log.debug("cid   "+ cid);
-		log.debug("tid   "+responseVO.getTid());
-		log.debug("productNo   "+confirmVO.getProductNo());
+		
+		log.debug("cid   " + cid);
+		log.debug("tid   " + responseVO.getTid());
+		log.debug("productNo   " + confirmVO.getProductNo());
 
 		return "redirect:" + responseVO.getNext_redirect_pc_url();
 
@@ -69,15 +76,14 @@ public class PayController {
 		int memberNo = (int) session.getAttribute("logNo");
 		String cid = (String) session.getAttribute("cid");
 
-		log.debug("partner_user_id   "+partnerUserId);
-		log.debug("cid   "+ cid);
-		log.debug("tid     "+tid);
-		log.debug("productNo   "+productNo);
-		log.debug("memberNo   "+memberNo);
-		
+		log.debug("partner_user_id   " + partnerUserId);
+		log.debug("cid   " + cid);
+		log.debug("tid     " + tid);
+		log.debug("`````````````````````productNo   " + productNo);
+		log.debug("memberNo   " + memberNo);
+
 		session.removeAttribute("tid");
 		session.removeAttribute("productNo");
-		session.removeAttribute("logNo");
 		session.removeAttribute("cid");
 
 		KakaoPayApproveRequestVO requestVO = new KakaoPayApproveRequestVO();
@@ -85,22 +91,13 @@ public class PayController {
 		requestVO.setTid(tid);
 		requestVO.setPg_token(pg_token);
 		requestVO.setCid(cid);
+		requestVO.setMemberNo(memberNo);
+		requestVO.setProductNo(productNo);
 
-		KakaoPayApproveResponseVO responseVO = new KakaoPayApproveResponseVO();
-		responseVO = kakaoPayService.approve(requestVO);
+		log.debug("tid   :"+tid);
+		log.debug("requestVO.getTid()   :"+requestVO.getTid());
 		
-		if(cid.equals("TCSUBSCRIP")) {
-		// 결제가 완료된 시점 responseVO를 사용하여 membershipBuyDTO 테이블에 insert를 수행
-			MembershipBuyDTO membershipBuyDTO = new MembershipBuyDTO();
-			membershipBuyDTO.setSid(responseVO.getSid());// 정기결제 고유번호(SID)
-			membershipBuyDTO.setPartnerUserId(partnerUserId);
-			membershipBuyDTO.setTotalAmount(responseVO.getAmount().getTotal());
-			membershipBuyDTO.setMspNo(productNo);
-			membershipBuyDTO.setMemberNo(memberNo);
-			membershipBuyDao.insert(membershipBuyDTO);
-		}else {
-			
-		}
+		kakaoPayService.approve(requestVO);
 
 		return "redirect:success_result";
 	}
@@ -118,4 +115,27 @@ public class PayController {
 		membershipBuyDao.regularPayDelete(sid);
 		return "redirect:/member/reg_membership";
 	}
+
+	// 정기결제 조회 요청
+	@GetMapping("/state")
+	public String regularSearch(@RequestParam String sid, Model model) throws URISyntaxException {
+		KaKaoPayRegularPayMentStateResponseVO responseVO = kakaoPayService.regularState(sid);
+		model.addAttribute("state", responseVO);
+		return "pay/state";
+	}
+	
+	/*
+	 * //결제 취소 요청
+	 * 
+	 * @GetMapping("/cancel") public String cancel(@RequestParam String
+	 * tid, @RequestParam int amount,
+	 * 
+	 * @RequestParam int msbNo,Model model) throws URISyntaxException {
+	 * KakaoPayCancelResponseVO responseVO = kakaoPayService.cancel(tid, amount);
+	 * 
+	 * payDao.cancelDonation(payNo); donationService.updatePrice(payNo);
+	 * model.addAttribute("cancelList", responseVo);
+	 * 
+	 * return "donation/kakao/cancel"; }
+	 */
 }

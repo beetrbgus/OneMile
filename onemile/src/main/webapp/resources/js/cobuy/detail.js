@@ -1,5 +1,5 @@
 $(function() {
-	let deadLine = $("#deadLine").val();
+	let deadLine = $("#dueDate").val();
 	let deadLineDate = new Date(deadLine);
 	let now = new Date();
 	console.log("deadLineDate    " + deadLineDate);
@@ -15,21 +15,27 @@ $(function() {
 	});
 	$("#buyBtn").on("click", function() {
 		if (cnt()) {
+			console.log("수량 체크 됨"); 
 			$("#buyForm").submit();
 		}
+		console.log("수량 체크 안 됨"); 
 	});
 	function cnt() {
 		let count = $("#buyForm").find("input[name='quantity']").val();
+		console.log("count    "+count);
 		let left = $("#buyForm").find("input[name='stock']").val();
-		if (count == 0) {
+		console.log("left      " +left);  
+		
+		if (parseInt(count) <= 0) {
 			alert("수량을 선택해주세요.");
 			return false;
 		}
-		if (count > left) {
+		if (parseInt(count) > parseInt(left)) {
 			alert("구매 가능 수량을 초과했습니다.");
 			$("#buyForm").find("input[name='quantity']").val(left);
 			return false;
 		}
+		return true; 
 	}
 	function dontBuy() {
 		let stock = $("input[name=stock]").val();

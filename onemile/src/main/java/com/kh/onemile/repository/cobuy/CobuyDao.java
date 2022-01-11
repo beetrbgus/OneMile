@@ -2,6 +2,7 @@ package com.kh.onemile.repository.cobuy;
 
 import java.util.List;
 
+import com.kh.onemile.entity.cobuy.CobuyDTO;
 import com.kh.onemile.entity.menu.MiddleNameDTO;
 import com.kh.onemile.vo.cobuy.CobuyCatVO;
 import com.kh.onemile.vo.cobuy.CobuyDetailVO;
@@ -16,6 +17,6 @@ public interface CobuyDao {
 	public CobuyDetailVO detail(int cobuyNo);
 	public void delete(int cobuyNo);
 	public void modify(CobuyDetailVO cobuyModDTO);
-	public CobuyVO getConfirm(ConfirmVO confirmVO);
+	public CobuyDTO getConfirm(ConfirmVO confirmVO);
 	public List<CobuyCatVO> getMiddleName();
 }

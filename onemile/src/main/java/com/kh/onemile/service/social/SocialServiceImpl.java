@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.onemile.entity.image.middle.MiddleImgTableDTO;
 import com.kh.onemile.entity.map.MapDTO;
@@ -16,10 +17,13 @@ import com.kh.onemile.service.image.ImageService;
 import com.kh.onemile.service.map.MapService;
 import com.kh.onemile.util.Sequence;
 import com.kh.onemile.vo.SocialVO;
+import com.kh.onemile.vo.social.SocialDetailVO;
+import com.kh.onemile.vo.social.SocialListVO;
 import com.kh.onemile.vo.social.SocialRegVO;
 
 import lombok.extern.slf4j.Slf4j;
 
+@Transactional
 @Service
 @Slf4j
 public class SocialServiceImpl implements SocialService{
@@ -52,19 +56,22 @@ public class SocialServiceImpl implements SocialService{
 		int mapNo = mapService.regMap(mapDTO);		
 		//소셜링 시퀀스 생성
 		int socialNo = seq.nextSequence(seqName);
-		
+		log.debug("socialNo " + socialNo);
 		//이렇게 해야되나??
 		SocialDTO socialDto = new SocialDTO();
 		socialDto.setSocialNo(socialNo);
 		socialDto.setMemberNo(socialRegVO.getMemberNo());
 		socialDto.setTitle(socialRegVO.getTitle());
-		socialDto.setSmallType(socialRegVO.getSmallType());
+		socialDto.setSmalltype(socialRegVO.getSmalltype());
 		socialDto.setContext(socialRegVO.getContext());
 		socialDto.setStartDate(socialRegVO.getStartDate());
 		socialDto.setEndDate(socialRegVO.getEndDate());
 		socialDto.setMapNo(mapNo);
-		
+		socialDto.setMinpeople(socialRegVO.getMinpeople());
+		socialDto.setMaxpeople(socialRegVO.getMaxpeople());
+		log.debug("SocialDTO     "+socialDto.toString());
 		socialDao.reg(socialDto);
+		
 		//중간 테이블 DTO에 데이터 저장.
 		MiddleImgTableDTO imgMidDTO = new MiddleImgTableDTO();
 		imgMidDTO.setConnTableNo(socialNo); // 소셜링 번호
@@ -117,14 +124,24 @@ public class SocialServiceImpl implements SocialService{
 	}
 
 	@Override
-	public List<SocialDTO> list() {
-		List<SocialDTO> list = socialDao.list();
+	public List<SocialListVO> list() {
+		List<SocialListVO> list = socialDao.list();
 		return list;
 	}
 
 	@Override
 	public void changeSocial(SocialVO socialVo) {
-		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<SocialListVO> getList(String category) {
+		return socialDao.getList(category);
+	}
+
+	@Override
+	public List<SocialDetailVO> getDetail(int socialNo) {
+		
+		return socialDao.getDetail(socialNo);
 	}
 }
