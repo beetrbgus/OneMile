@@ -2,6 +2,7 @@ package com.kh.onemile.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,12 +11,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.onemile.entity.social.SocialBigCategoryDTO;
 import com.kh.onemile.service.category.CategoryService;
 import com.kh.onemile.service.social.SocialService;
+import com.kh.onemile.vo.social.SocialDetailVO;
+import com.kh.onemile.vo.social.SocialListVO;
 import com.kh.onemile.vo.social.SocialRegVO;
 import com.kh.onemile.vo.social.like.SocialLikeCategoryVO;
 
@@ -47,5 +51,22 @@ public class SocialController {
 		socialRegVO.setMemberNo(memNo);
 		socialService.reg(socialRegVO);
 		return "social/detail";
+	}
+
+	@GetMapping("/list/{category}")
+	public String getList(@PathVariable(required = false) String category, Model model) {
+		if(category == null) category = "";
+		List<SocialListVO> result = socialService.getList(category);
+		log.debug("result       : "+result.toString()); 
+		model.addAttribute("list",result);
+		return "social/list";
+	}
+	@GetMapping("/detail/{socailNo}")
+	public String getDetail(@PathVariable int socialNo, Model model) {
+		
+		List<SocialDetailVO> result = socialService.getDetail(socialNo);
+		log.debug("result       : "+result.toString()); 
+		model.addAttribute("list",result);
+		return "social/list";
 	}
 }

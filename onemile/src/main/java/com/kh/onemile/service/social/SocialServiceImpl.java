@@ -17,6 +17,8 @@ import com.kh.onemile.service.image.ImageService;
 import com.kh.onemile.service.map.MapService;
 import com.kh.onemile.util.Sequence;
 import com.kh.onemile.vo.SocialVO;
+import com.kh.onemile.vo.social.SocialDetailVO;
+import com.kh.onemile.vo.social.SocialListVO;
 import com.kh.onemile.vo.social.SocialRegVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -122,14 +124,24 @@ public class SocialServiceImpl implements SocialService{
 	}
 
 	@Override
-	public List<SocialDTO> list() {
-		List<SocialDTO> list = socialDao.list();
+	public List<SocialListVO> list() {
+		List<SocialListVO> list = socialDao.list();
 		return list;
 	}
 
 	@Override
 	public void changeSocial(SocialVO socialVo) {
-		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<SocialListVO> getList(String category) {
+		return socialDao.getList(category);
+	}
+
+	@Override
+	public List<SocialDetailVO> getDetail(int socialNo) {
+		
+		return socialDao.getDetail(socialNo);
 	}
 }
