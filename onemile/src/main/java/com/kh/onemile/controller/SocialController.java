@@ -21,7 +21,6 @@ import com.kh.onemile.service.social.SocialService;
 import com.kh.onemile.vo.social.SocialDetailVO;
 import com.kh.onemile.vo.social.SocialListVO;
 import com.kh.onemile.vo.social.SocialRegVO;
-import com.kh.onemile.vo.social.like.SocialLikeCategoryVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -61,7 +60,7 @@ public class SocialController {
 		model.addAttribute("list",result);
 		return "social/list";
 	}
-	@GetMapping("/detail/{socailNo}")
+	@GetMapping("/detail/{socialNo}")
 	public String getDetail(@PathVariable int socialNo, Model model) {
 		
 		List<SocialDetailVO> result = socialService.getDetail(socialNo);
