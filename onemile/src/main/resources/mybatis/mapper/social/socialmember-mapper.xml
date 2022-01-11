@@ -8,6 +8,9 @@
 	<insert id="wantjoin" parameterType="Map">
 		insert into sp values(#{socailNo},#{memberNo})
 	</insert>
+	<update id="statuschange" parameterType="Map">
+		update sp set ISJOINED = #{status} where SOCIAL_NO = #{socailNo} and MEMBER_NO=#{memberNo}
+	</update>
 	<!-- 거절 & 강퇴 -->
 	<delete id="kick" parameterType="map">
 		delete from sp where member_no = #{memberNo} and social_No = #{socialNo}
