@@ -22,7 +22,7 @@
 		    inner join map m on s.map_no = m.map_no
 		    inner join mei on mei.member_no = s.member_no
 		    inner join cmc on s.smalltype = cmc.middle_name    
-		where social_no = #{socialNo} and s.hiddenyn= 'N';
+		where social_no = #{socialNo} and s.hiddenyn= 'N'
 	</select>
 	<!-- 참가자 목록 가져오기 -->
 	<select id="getparticipate" parameterType="int" resultType="ParticipateVO">
@@ -63,7 +63,7 @@
 			ofType="ImageDTO" select="getDetailimage" column="social_no"/>
 		
 	</resultMap>
-	<select id="getList" parameterType="category" resultType="SocialListVO">
+	<select id="getList" parameterType="String" resultType="SocialListVO">
 		select
 			s.social_no,s.smalltype,s.title,
 			TO_CHAR(s.startdate, 'YYYY-MM-DD HH24:mm:ss') as startDate,
@@ -75,7 +75,7 @@
 			inner join mei on mei.member_no = m.member_no
 			inner join smi on smi.social_no = s.social_no
 			inner join map on map.map_no = s.map_no
-		where s.hiddenyn ='N'
+		where s.hiddenyn ='N' order by s.social_no desc
 		<choose>
 			<when test="category !=null || category!=''">
 				and s.smalltype = #{category} 
