@@ -162,4 +162,10 @@ public class CommuServiceImpl implements CommuService {
 		CommuDetailVO commuVo = commuDao.detail(commuNo);
 		return commuVo;
 	}
+
+	@Override
+	public List<CommuDetailVO> list(String largeName, int startRow, int endRow) {
+		List<CommuDetailVO> list = commuDao.boardList(largeName, endRow, endRow);
+		return null;
+	}
 }

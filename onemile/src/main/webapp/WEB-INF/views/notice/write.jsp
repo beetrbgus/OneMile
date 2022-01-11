@@ -2,10 +2,6 @@
 	pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <style>
-#map {
-	width:700px;
-	height:500px;
-	}
 .page-container {
 	max-width: 700px;
 	margin: auto;
@@ -23,6 +19,7 @@
 .post-content {
 	font-size: 22px;
 }
+
 textarea {
 	width: 100%;
 	padding: 0;
@@ -31,6 +28,7 @@ textarea {
 	border-radius: 0;
 	resize: none;
 }
+
 ﻿select::-ms-expand { 
 	display: none;
 }
@@ -61,39 +59,25 @@ textarea {
 .myButton:hover {
 	background-color:#dde2e6;
 }
-.form-input {
-	width:500px;
-	font-size:20px;
-	margin-top:1rem;
-	margin-bottom:1rem;
-}
-.label{
-	font-size:22px;
-}
 </style>
 <div class="page-container">
 	<div class="ui-header">
-		<h2 class="title">커뮤니티</h2>
+		<h2 class="title">운영사항</h2>
 	</div>
-	<form action="write" method="post" enctype="multipart/form-data">
+	<form  method="post" enctype="multipart/form-data">
+		<input type="hidden" name="mapNo" value=0>
 		<select name="middleName" class="category" required>
 			<option value="" class="label category">카테고리 선택</option>
-			<option value="동네맛집" class="label category">동네맛집</option>
-			<option value="동네사건사고" class="label category">동네 사건사고</option>
-			<option value="얌세권" class="label category">얌세권</option>
+			<option value="공지사항" class="label category">공지사항</option>
+			<option value="운영규칙" class="label category">운영규칙</option>
+			<option value="자주하는질문" class="label category">자주하는질문</option>
 		</select>
 		<textarea rows="1" maxlength="100" name="title" class="post-title"
 			placeholder="제목을 입력하세요."></textarea>
-		<div id="map" style="width: 100%; height: 350px;"></div>
-		<input class="form-input" type="text" name="fgLocation" readonly placeholder="참조할 위치를 클릭하세요."><br>
-		<label class="label">상세주소 : </label><input class="form-input" type="text" name="detailAddress" placeholder="상세주소를 입력하세요.">
-		<input type="hidden" name="lat">
-		<input type="hidden" name="lng">
 		<textarea cols="100" rows="20" id="content" name="content" class="post-content"
-		placeholder="내용을 입력하세요."></textarea>
+			placeholder="내용을 입력하세요."></textarea>
 		<input type="file" name="attach" class="file-choose">
 		<input type="submit" value="등록하기" class="myButton">
 	</form>
 </div>
-<script type="text/javascript"src="${root}/onemile/resources/js/commu-map.js"></script>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

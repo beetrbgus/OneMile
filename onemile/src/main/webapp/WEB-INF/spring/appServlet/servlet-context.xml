@@ -85,6 +85,32 @@
 		</mvc:interceptors>
 	 -->
 	 
+	 <mvc:interceptors>
+	 	<mvc:interceptor>
+	 		<mvc:mapping path="/member/**"/>
+	 		<mvc:mapping path="/commu/**"/>
+	 		<mvc:mapping path="/cobuy/**"/>
+	 		<mvc:mapping path="/membership/**"/>
+	 		<mvc:mapping path="/social/**"/>
+	 		
+	 		<mvc:exclude-mapping path="/member/join"/>
+	 		<mvc:exclude-mapping path="/member/join_success"/>
+	 		<mvc:exclude-mapping path="/member/login"/>
+	 		<mvc:exclude-mapping path="/member/logout"/>
+	 		<mvc:exclude-mapping path="/member/find_id"/>
+	 		<mvc:exclude-mapping path="/member/find_pw"/>
+	 		<mvc:exclude-mapping path="/commu/map/list*"/>
+	 		<mvc:exclude-mapping path="/commu/notmap/list*"/>
+	 		<mvc:exclude-mapping path="/social/list*"/>
+	 		<mvc:exclude-mapping path="/cobuy/list*"/>
+	 		<bean class="com.kh.onemile.interceptor.MemberInterceptor"></bean>
+	 	</mvc:interceptor>
+	 	<mvc:interceptor>
+	 		<mvc:mapping path="/admin/*"/>
+	 		<bean class="com.kh.onemile.interceptor.AdminInterceptor"></bean>
+	 	</mvc:interceptor>
+	 </mvc:interceptors>
+	 
 	 <!-- websocket handler -->
     <bean id="alramEchoHandler" class="com.kh.onemile.handler.AlramEchoHandler" />
 	 <websocket:handlers>

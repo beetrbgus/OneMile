@@ -52,4 +52,14 @@ public class CommuDaoImpl implements CommuDao{
 		List<CommuDetailVO> list = sqlSession.selectList("commu.menuList", map);
 		return list;
 	}
+
+	@Override
+	public List<CommuDetailVO> boardList(String largeName, int startRow, int endRow) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("largeName", largeName);
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+		List<CommuDetailVO> list = sqlSession.selectList("commu.boardList", map);
+		return list;
+	}
 }

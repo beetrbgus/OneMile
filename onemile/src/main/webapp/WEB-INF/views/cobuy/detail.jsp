@@ -3,6 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<style>
+.btn-reward-funding{
+	margin-bottom:1rem;
+}
+</style>
 <!-- S : MAIN -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/wdetail.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
@@ -53,11 +58,17 @@
 
 						<!-- 프로젝트 유형이 글로벌/앵콜 프로젝트가 아닌경우: 기존과 동일하게 처리 -->
 						<div class="btn-wrap funding">
-							<button type="submit"
+							<button id="buyBtn" type="submit"
 								class="buyBtn wz button primary block btn-reward-funding">구매하기</button>
+								<c:if test="#"></c:if>
+								<a href="${root}/onemile/cobuy/modify?cobuyNo=${detail.cobuyNo}">
+								<button type="submit"
+								class="buyBtn wz button primary block btn-reward-funding">수정하기</button></a>
+								<a href="${root}/onemile/cobuy/delete?cobuyNo=${detail.cobuyNo}">
+								<button type="submit"
+								class="buyBtn wz button primary block btn-reward-funding">삭제하기</button></a>
 						</div>
 					</div>
-
 					<!-- S : 프로젝트 신고하기 -->
 					<div class="wz-message-box project-report">
 						<div id="reward-report-content" data-campaign-id="135101"

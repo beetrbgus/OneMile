@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.onemile.entity.cobuy.CobuyDTO;
 import com.kh.onemile.entity.image.middle.MiddleImgTableDTO;
@@ -17,13 +18,12 @@ import com.kh.onemile.service.image.ImageService;
 import com.kh.onemile.service.map.MapService;
 import com.kh.onemile.util.DateToString;
 import com.kh.onemile.util.Sequence;
+import com.kh.onemile.vo.cobuy.CobuyCatVO;
 import com.kh.onemile.vo.cobuy.CobuyDetailVO;
 import com.kh.onemile.vo.cobuy.CobuyListVO;
 import com.kh.onemile.vo.cobuy.CobuyRegVO;
 import com.kh.onemile.vo.cobuy.CobuyVO;
 import com.kh.onemile.vo.kakaopay.ConfirmVO;
-import com.kh.onemile.entity.menu.MiddleNameDTO;
-import org.springframework.transaction.annotation.Transactional;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -91,13 +91,14 @@ public class CobuyServiceImpl implements CobuyService {
 	@Override
 	public CobuyDetailVO getDetail(int cobuyNo) {
 		CobuyDetailVO result = cobuyDao.detail(cobuyNo);
+		System.err.println(result.getCobuyNo());
 		result.setDeadLinestr(dateToString.dateToString(result.getDeadLine()));
 		result.setCountConstomer(cobuyBuyDao.countConstomer(cobuyNo));
 		return result;
 	}
 
 	@Override
-	public void modify(CobuyVO cobuyModDTO) {
+	public void modify(CobuyDetailVO cobuyModDTO) throws IllegalStateException, IOException {
 		// 공구 테이블에 수정
 		cobuyDao.modify(cobuyModDTO);
 		MapDTO mapDTO = new MapDTO();
@@ -108,6 +109,22 @@ public class CobuyServiceImpl implements CobuyService {
 
 		mapService.modify(mapDTO);
 
+		MiddleImgTableDTO imgMidDTO = new MiddleImgTableDTO();
+		imgMidDTO.setConnTableNo(cobuyModDTO.getCobuyNo());
+		
+		if (cobuyModDTO.getAttach() != null) {
+			System.err.println("if문 시작");
+			middleImageDao.delete(cobuyModDTO.getCobuyNo());
+			System.err.println("삭제실행");
+			List<Integer> imgNoList = imageService.regImage(cobuyModDTO.getAttach(), folderName);
+			
+			for (int imgNo : imgNoList) {
+				// 연결 테이블
+				imgMidDTO.setImgNo(imgNo);
+				// 중간 이미지 테이블에 등록
+				middleImageDao.reg(imgMidDTO);
+			}
+		}
 	}
 
 	@Override
@@ -116,7 +133,7 @@ public class CobuyServiceImpl implements CobuyService {
 	}
 
 	@Override
-	public List<MiddleNameDTO> getMiddleName() {
+	public List<CobuyCatVO> getMiddleName() {
 		return cobuyDao.getMiddleName();
 	}
 

@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="login" value="${logId != null}"></c:set>
-<c:set var="admin" value="${grade == '관리자'}"></c:set>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <style>
 .more-btn {
@@ -43,7 +42,7 @@
 						var c = commuVo.imageNo != 0;
 						var divCol = "<ul>"
 							+ "<li>"
-								+ "<a class='article' href='detail?boardNo="
+								+ "<a class='article' href='detail/"
 								+ resp[i].commuNo
 								+ "'>"
 								+ "<div class='info'>"
@@ -77,20 +76,19 @@
 
 	<main class="board wzui">
 		<div class="ui-header">
-		<h2 data-middle-name="${param.middleName}" class="title">커뮤니티</h2>
+		<h2 data-middle-name="${parameter}" class="title">운영사항</h2>
 		</div>
 			<div class="ui-tabs LeadMakerShortcutLinkSection_linkGroup__2XM2N">
 				<ul>
-					<li><a href="?middleName=동네질문" ${param.middleName == "동네질문" ? "style='color:#00b2b2;'" : ""} >동네질문</a></li>
-					<li><a href="?middleName=분실/실종센터" ${param.middleName == "분실/실종센터" ? "style='color:#00b2b2;'" : ""}>분실/실종센터</a></li>
-					<li><a href="../map/list?middleName=동네맛집" ${param.middleName == "동네맛집" ? "style='color:#00b2b2;'" : ""}>동네맛집</a></li>
-					<li><a href="../map/list?middleName=동네사건사고" ${param.middleName == "동네사건사고" ? "style='color:#00b2b2;'" : ""}>동네 사건사고</a></li>
-					<li><a href="../map/list?middleName=얌세권" ${param.middleName == "얌세권" ? "style='color:#00b2b2;'" : ""}>얌세권</a></li>
+					<li><a href="${root}/onemile/notice/list/board" ${parameter == "board" ? "style='color:#00b2b2;'" : ""} >공지사항</a></li>
+					<li><a href="${root}/onemile/notice/list/rule" ${parameter == "rule" ? "style='color:#00b2b2;'" : ""}>운영규칙</a></li>
+					<li><a href="${root}/onemile/notice/list/faq" ${parameter == "faq" ? "style='color:#00b2b2;'" : ""}>자주하는질문</a></li>
+					<li><a href="${root}/onemile/notice/contact" ${parameter == "contact" ? "style='color:#00b2b2;'" : ""}>1:1문의하기</a></li>
 				</ul>
 			</div>
 		
 		<div class="board-main">
-			<c:if test="${login}">
+			<c:if test="${admin}">
 			<div class="board-write" align="right">
 				<a href="./write"><button type="button" class="wz button write-btn">글쓰기</button></a>
 			</div>

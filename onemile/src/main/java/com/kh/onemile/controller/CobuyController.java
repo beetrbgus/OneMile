@@ -2,7 +2,9 @@ package com.kh.onemile.controller;
 
 import java.io.IOException;
 import java.util.List;
+
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,11 +17,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.onemile.service.cobuy.CobuyService;
-import com.kh.onemile.vo.CommuDetailVO;
+import com.kh.onemile.vo.cobuy.CobuyCatVO;
 import com.kh.onemile.vo.cobuy.CobuyDetailVO;
 import com.kh.onemile.vo.cobuy.CobuyListVO;
 import com.kh.onemile.vo.cobuy.CobuyRegVO;
-import com.kh.onemile.vo.cobuy.CobuyVO;
 import com.kh.onemile.vo.kakaopay.ConfirmVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -49,7 +50,10 @@ public class CobuyController {
 	}
 
 	@GetMapping("/list")
-	public String list() {
+	public String list(Model model) {
+		List<CobuyCatVO> cobuyCatVO = cobuyService.getMiddleName();
+		System.err.println(cobuyCatVO);
+		model.addAttribute("category", cobuyCatVO);
 		return "/cobuy/list";
 	}
 	
@@ -100,11 +104,11 @@ public class CobuyController {
 	@GetMapping("/modify")
 	public String getModify(@RequestParam int cobuyNo, Model model) {
 		model.addAttribute("detail", cobuyService.getDetail(cobuyNo));
-		return "detail";
+		return "/cobuy/modcobuy";
 	}
 
 	@PostMapping("/modify")
-	public String postModify(@ModelAttribute CobuyVO cobuyModDTO, HttpSession session)
+	public String postModify(@ModelAttribute CobuyDetailVO cobuyModDTO, HttpSession session)
 			throws IllegalStateException, IOException {
 		int memNo = Integer.parseInt(String.valueOf(session.getAttribute("logNo")));
 
