@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kh.onemile.entity.cobuy.CobuyDTO;
 import com.kh.onemile.entity.menu.MiddleNameDTO;
+import com.kh.onemile.vo.PaginationVO;
 import com.kh.onemile.vo.cobuy.CobuyCatVO;
 import com.kh.onemile.vo.cobuy.CobuyDetailVO;
 import com.kh.onemile.vo.cobuy.CobuyListVO;
@@ -19,4 +20,5 @@ public interface CobuyDao {
 	public void modify(CobuyDetailVO cobuyModDTO);
 	public CobuyDTO getConfirm(ConfirmVO confirmVO);
 	public List<CobuyCatVO> getMiddleName();
+	public List<CobuyListVO> cobuyList(PaginationVO paginationVO);
 }

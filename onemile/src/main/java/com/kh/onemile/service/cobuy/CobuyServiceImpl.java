@@ -18,6 +18,7 @@ import com.kh.onemile.service.image.ImageService;
 import com.kh.onemile.service.map.MapService;
 import com.kh.onemile.util.DateToString;
 import com.kh.onemile.util.Sequence;
+import com.kh.onemile.vo.PaginationVO;
 import com.kh.onemile.vo.cobuy.CobuyCatVO;
 import com.kh.onemile.vo.cobuy.CobuyDetailVO;
 import com.kh.onemile.vo.cobuy.CobuyListVO;
@@ -149,6 +150,11 @@ public class CobuyServiceImpl implements CobuyService {
 		confirmVO.setType("TC0ONETIME");
 
 		return confirmVO;
+	}
+
+	@Override
+	public List<CobuyListVO> getList(PaginationVO paginationVO) {
+		return cobuyDao.cobuyList(paginationVO);
 	}
 
 }
