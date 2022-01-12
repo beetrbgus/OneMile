@@ -21,28 +21,34 @@ img{
 
 <script>
 	$(function () {
-		var page = 1;
-		var size = 20;
-
+		var page = 2;
+		var size = 9;
+		var category = "${nowcategory}";
 		$(".ProjectListMoreButton_button__27eTb").click(function () {
-			loadData(page, size);
+			loadData(page, size,category);
 			page++;
 		});
-
-		$(".ProjectListMoreButton_button__27eTb").click();
-
-		function loadData(page, size, middleName) {
+		
+		if(cnt() <10){ 
+			$("#moreBtn").remove(); 
+		}
+		function cnt(){
+			let a = $(".ProjectCardList_item__1owJa");
+			return a.length;
+		}
+		function loadData(page, size,category) {
 
 			$.ajax({
 				url: "${pageContext.request.contextPath}/cobuy/listdetail",
 				type: "get",
 				data: {
 					page: page,
-					size: size
+					size: size,
+					category : category
 				},
 				success: function (resp) {
 					if (resp.length < size) {
-						$(".more-btn").remove();
+						$("#moreBtn").remove();
 					}
 					for (var i = 0; i < resp.length; i++) {
 						var date = new Date(resp[i].deadLine);
@@ -89,8 +95,8 @@ img{
 					console.log("실패", e);
 				}
 			});
-		}; 
-});
+		};
+	});
 </script>
 
 <div class="RewardMainWrapper_container__2HR7Y">
@@ -109,7 +115,7 @@ img{
 	  </div>
 	  <div class="carousel-inner">
 	    <div class="carousel-item active" data-bs-interval="3000">
-	     <a href="${root}/cobuy/list">
+	     <a href="${root}/cobuy/list/${category}">
 	      <img src="${root}/resources/image/beauty.jpg" class="d-block w-100">
 	      <div class="carousel-caption d-none d-md-block">
 	        <h3 class="b">[공동구매율 1위]</h3>
@@ -184,7 +190,7 @@ img{
 				<div class="CategoryCircleList_list__2YBF3">
 				<c:forEach var="cobuyCatVO" items="${category}">
 					<a class="CategoryCircleList_item__2_QZ3 RewardCategoryCircleList_item__2JEvT"
-						href="${root}/cobuy${cobuyCatVO.urlPath}">
+						href="${root}/cobuy/list${cobuyCatVO.urlPath}">
 						<span class="CategoryCircle_container__2rZ3a">
 							<span class="CategoryCircle_circle__3khwj"
 								style="background-image: url(${root}/resources/image/cobuy/${cobuyCatVO.middleName}.jpg);"></span>
@@ -279,9 +285,10 @@ img{
 						</div>
 				</c:forEach>
 			</div>
-			<div>
+			
+			<div >
 				<div class="ProjectListMoreButton_container__1JFxX ProjectCardList_more__3AbzT"><button type="button"
-						class="ProjectListMoreButton_button__27eTb">더보기<i class="icon expand-more"
+						id="moreBtn" class="ProjectListMoreButton_button__27eTb">더보기<i class="icon expand-more"
 							aria-hidden="true"></i></button>
 					<div class="wz-loader ProjectListMoreButton_loader__1Kcvt"></div>
 				</div>
