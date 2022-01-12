@@ -43,7 +43,7 @@ public class SocialDaoImpl implements SocialDao{
 
 	@Override
 	public List<SocialListVO> getList(String category) {
-		return sqlSession.selectList("social.categoryList",category);
+		return sqlSession.selectList("social.getList",category);
 	}
 
 	@Override

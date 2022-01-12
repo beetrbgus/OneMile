@@ -52,9 +52,13 @@ public class SocialController {
 		return "social/detail";
 	}
 
-	@GetMapping("/list/{category}")
+	@GetMapping({"/list/{category}","/list"})
 	public String getList(@PathVariable(required = false) String category, Model model) {
-		if(category == null) category = "";
+		if(category == null||category.trim().equals(" ")) { 
+			log.debug("들어옴  트림할거");
+			category = category.trim();
+		}
+		log.debug("category    "+category);
 		List<SocialListVO> result = socialService.getList(category);
 		log.debug("result       : "+result.toString()); 
 		model.addAttribute("list",result);

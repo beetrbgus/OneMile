@@ -65,7 +65,7 @@
 	</resultMap>
 	<select id="getList" parameterType="String" resultType="SocialListVO">
 		select
-			s.social_no,s.smalltype,s.title,
+			s.social_no ,s.smalltype ,s.title,
 			TO_CHAR(s.startdate, 'YYYY-MM-DD HH24:mm:ss') as startDate,
 			TO_CHAR(s.enddate, 'YYYY-MM-DD HH24:mm:ss') as endDate,
 			m.member_no,m.nick, mei.image_no as profileImgNo ,
@@ -75,12 +75,12 @@
 			inner join mei on mei.member_no = m.member_no
 			inner join smi on smi.social_no = s.social_no
 			inner join map on map.map_no = s.map_no
-		where s.hiddenyn ='N' order by s.social_no desc
+		where s.hiddenyn ='N' 
 		<choose>
-			<when test="category !=null || category!=''">
+			<when test="category !=null || category neq '' ||category!=''">
 				and s.smalltype = #{category} 
 			</when>
 		</choose>
-		order by s.social_no
+		order by s.social_no desc
 	</select>
 </mapper>
