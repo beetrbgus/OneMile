@@ -8,14 +8,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.onemile.entity.admin.ApproveDTO;
-import com.kh.onemile.entity.admin.MemberListDTO;
-import com.kh.onemile.entity.member.MemberDTO;
 import com.kh.onemile.repository.admin.AdminDao;
 import com.kh.onemile.service.commu.CommuService;
 import com.kh.onemile.util.Sequence;
 import com.kh.onemile.vo.CommuDetailVO;
 import com.kh.onemile.vo.CommuEditVO;
-import com.kh.onemile.vo.CommuVO;
+import com.kh.onemile.vo.admin.ExitMemberVO;
+import com.kh.onemile.vo.admin.MemberListVO;
 
 import lombok.extern.slf4j.Slf4j;
 @Slf4j
@@ -60,11 +59,21 @@ public class AdminServiceImpl implements AdminService{
 	public void deniedApproveMember(int memberNo) {
 		adminDao.deniedApproveMember(memberNo); 
 	}
+	//승인 전 회원 목록 가져오기
+	@Override
+	public List<MemberListVO> notMember(){
+		return adminDao.notMemberList();
+	}
 	//회원 목록 가져오기
 	@Override
-	public List<MemberDTO> memberList(){
-		return adminDao.memberList();
+	public List<MemberListVO> memberList(){
+		return adminDao.approveMemberList();
 	}
+	//탈퇴회원 목록 가져오기
+		@Override
+		public List<ExitMemberVO> exitMemberList(){
+			return adminDao.exitMemberList();
+		}
 	@Override
 	public void hiddenBoard(int no) {
 		commuService.hide(no);

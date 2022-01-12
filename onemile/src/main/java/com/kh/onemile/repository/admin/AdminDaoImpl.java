@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.onemile.entity.admin.ApproveDTO;
 import com.kh.onemile.entity.member.MemberDTO;
+import com.kh.onemile.vo.admin.ExitMemberVO;
+import com.kh.onemile.vo.admin.MemberListVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,7 +33,19 @@ public class AdminDaoImpl implements AdminDao{
 		sqlSession.update("admin.approveMember", memberNo);
 	}
 	@Override
-	public List<MemberDTO> memberList() {
+	public List<MemberDTO> membershipList() {
+		return sqlSession.selectList("admin.membershipList");
+	}
+	@Override
+	public List<MemberListVO> approveMemberList() {
 		return sqlSession.selectList("admin.approveMemberList");
+	}
+	@Override
+	public List<ExitMemberVO> exitMemberList() {
+		return sqlSession.selectList("admin.extiMemberList");
+	}
+	@Override
+	public List<MemberListVO> notMemberList() {
+		return sqlSession.selectList("admin.notMemberList");
 	}
 }

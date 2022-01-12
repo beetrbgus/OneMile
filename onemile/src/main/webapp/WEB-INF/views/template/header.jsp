@@ -17,11 +17,8 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b89479d3bf4f702a0c7b99d5edfb1391&libraries=services" charset="utf-8"></script> 
     <script type="text/javascript"src="${root}/resources/js/navigator.js"></script>
-    <!-- Bootstrap CSS CDN-->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-	<!-- boorStrap Skin cdn -->
 	<link href="https://bootswatch.com/5/journal/bootstrap.css" type="text/css" rel="stylesheet">
-	<!--Bootstrap bundle CSS CDN -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/sha1.min.js"></script>
@@ -223,45 +220,28 @@ $(function () {
 									<c:choose>
 										<c:when test="${login}">
 											<button type="button" class="User_btnSign__1URTs" ><a href="${root}/member/logout">로그아웃</a></button>
+										<c:choose>
+										<c:when test="${admin}">
+											<button data-event="iam.signup" class="User_btnSign__1URTs" ><a href="${root}/admin/">관리자 홈</a></button>
+										</c:when>
+										<c:otherwise>
 											<button data-event="iam.signup" class="User_btnSign__1URTs" ><a href="${root}/member/mypage">마이페이지</a></button>
+										</c:otherwise>
+										</c:choose>
 										</c:when>
 										<c:otherwise>
 											<button type="button" class="User_btnSign__1URTs" ><a href="${root}/member/login">로그인</a></button>
 											<button data-event="iam.signup" class="User_btnSign__1URTs" ><a href="${root}/member/join">회원가입</a></button>
 										</c:otherwise>
 									</c:choose>
-									
-										
-										
 									</div>
 								</div>
 								<div class="web-header-funding-open funding-open">
 									<div>
 										<div>
+											<a herf="${root}/member/membership">
 											<button class="wz button funding-open-button dense primary-outline"
-												aria-label="프로젝트 오픈 신청">공동구매 오픈 신청</button>
-											<div class="FundingOpen_fundingOpenContainer__2GDma">
-												<a class="FundingOpen_btnLink__11tnC" href="/web/wsub/openfunding">와디즈
-													메이커 시작하기
-													<small class="FundingOpen_desc__UdPr4">와디즈 서비스를 알아보고 정보를
-														구독합니다.
-													</small>
-												</a>
-												<a class="FundingOpen_btnLink__11tnC"
-													href="/web/wsub/openfunding/reward">펀딩 오픈 신청하기
-													<small class="FundingOpen_desc__UdPr4">
-														서포터에게 '제품'이나 '서비스'를 선물합니다.</small>
-												</a>
-												<a class="FundingOpen_btnLink__11tnC"
-													href="/web/wsub/openfunding/equity">투자 오픈 신청하기<small
-														class="FundingOpen_desc__UdPr4">투자자에게 기업의 주식이나 채권을
-														발행합니다.</small></a><a class="FundingOpen_btnLink__11tnC"
-													href="/web/school/main">와디즈 스쿨 보러 가기</a><a
-													class="FundingOpen_btnLink__11tnC"
-													href="/web/wevent/fanzmaker/disney">IP 라이선스 신청하기<small
-														class="FundingOpen_desc__UdPr4">캐릭터 및 유명 브랜드와 협업
-														기회를 만나 보세요.</small></a>
-											</div>
+												aria-label="프로젝트 오픈 신청">멤버십 가입</button></a>
 										</div>
 									</div>
 								</div>

@@ -21,18 +21,13 @@ table{
 	width:400px;
 	overflow: hidden;
 }
+.a:hover{
+	color:black;
+}
 </style>
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-
 <div class="board wzui">
 	<div class="ui-header">
-		<h2 class="title">탈퇴 회원 목록</h2>
-	</div>
-	<div class="ui-tabs">
-		<ul>
-			<li><a href="${root}/onemile/admin/member/list">회원목록</a></li>
-			<li><a href="${root}/onemile/admin/member/hidden">탈퇴회원목록</a></li>
-		</ul>
+		<h2 class="title">가입 승인 대기 목록</h2>
 	</div>
 </div>
 <div class="memberT">
@@ -47,8 +42,7 @@ table{
 			<th>등급</th>
 			<th>가입일</th>
 			<th>자기소개</th>
-			<th>닉네임변경일</th>
-			<th>탈퇴일</th>
+			<th>프로필보기</th>
 		</tr>
 		</thead>
 		<tbody>
@@ -62,8 +56,7 @@ table{
 				<td>${list.grade}</td>
 				<td>${list.joinDate}</td>
 				<td class="intro">${list.intro}</td>
-				<td>${list.nickModi}</td>
-				<td>${list.exitDate}</td>
+				<td><a class="a" onclick="window.open('../account/profile','window_name','width=600,height=500,location=no,status=no,scrollbars=yes');">더보기</a></td>
 			</tr>
 			</c:forEach>
 		</tbody>
