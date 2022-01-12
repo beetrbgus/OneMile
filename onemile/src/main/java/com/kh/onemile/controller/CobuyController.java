@@ -59,16 +59,20 @@ public class CobuyController {
 //	     model.addAttribute("category", cobuyCatVO);
 //		return "/cobuy/list";
 //	}
-	@GetMapping({"/{category}","/"})
+	@GetMapping({"/list/{category}","/list"})
 	public String list(@PathVariable(required = false) String category,
 			@RequestParam(required =false, defaultValue = "1") int page,
 			@RequestParam(required =false, defaultValue = "10") int size
 			,Model model) {
 		
-		if(category==null)category="";
-		log.debug("category1234    "+category);
 		PaginationVO paginationVO =new PaginationVO(page,size);
-		paginationVO.setCategory("/"+category);
+		if(category==null||category.equals("/")) {
+			category="";
+			paginationVO.setCategory(category);
+		}else {
+			paginationVO.setCategory("/"+category);
+		}	
+		log.debug("category1234    "+category);
 		
 		List<CobuyListVO> cobuyListVO = cobuyService.getList(paginationVO);
 		
@@ -79,7 +83,7 @@ public class CobuyController {
 	     List<CobuyCatVO> cobuyCatVO = cobuyService.getMiddleName();
 	     System.err.println(cobuyCatVO);
 	     model.addAttribute("category", cobuyCatVO);
-		return "/cobuy/list";
+		return "cobuy/list";
 	}
 	
 //	@GetMapping("/list")

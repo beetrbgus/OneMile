@@ -184,7 +184,7 @@ img{
 				<div class="CategoryCircleList_list__2YBF3">
 				<c:forEach var="cobuyCatVO" items="${category}">
 					<a class="CategoryCircleList_item__2_QZ3 RewardCategoryCircleList_item__2JEvT"
-						href="${root}/cobuy${cobuyCatVO.urlPath}">
+						href="${root}/cobuy/list${cobuyCatVO.urlPath}">
 						<span class="CategoryCircle_container__2rZ3a">
 							<span class="CategoryCircle_circle__3khwj"
 								style="background-image: url(${root}/resources/image/cobuy/${cobuyCatVO.middleName}.jpg);"></span>
