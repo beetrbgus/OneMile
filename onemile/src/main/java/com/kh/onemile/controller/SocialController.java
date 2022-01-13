@@ -85,7 +85,7 @@ public class SocialController {
 	public String getModify(@PathVariable int socialNo,Model model,HttpSession session) {
 		int memberNo = (int) session.getAttribute("logNo");
 		AdDTO adDTO = memberService.membership(memberNo);
-		
+		 
 		// 입력된 정보 가져오기.
 		SocialDetailVO socialDetail = socialService.getDetail(socialNo);
 		List<SocialBigCategoryDTO> bigcate = categoryService.getBiglist();
