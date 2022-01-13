@@ -15,14 +15,15 @@
 			#{minpeople},#{maxpeople}
 		)
 	</insert>
-		
+
 	<!-- 상세정보 -->
 	<select id="getDetail" parameterType="int" resultMap="socialDetail">
 		select * from social s 
 		    inner join map m on s.map_no = m.map_no
 		    inner join mei on mei.member_no = s.member_no
-		    inner join smc on s.smalltype = smc.SMALLTYPE    
-		where social_no = #{socialNo} and s.hiddenyn= 'N'
+		    inner join smc on s.smalltype = smc.SMALLTYPE
+		    left outer join sp on s.SOCIAL_NO = sp.SOCIAL_NO    
+		where S.SOCIAL_NO = #{socialNo} and s.hiddenyn= 'N'
 	</select>
 	<!-- 참가자 목록 가져오기 -->
 	<select id="getparticipate" parameterType="int" resultType="ParticipateVO">
@@ -40,8 +41,8 @@
 	<resultMap type="SocialDetailVO" id="socialDetail">
 		<result column="SOCIAL_NO" property="socialNo" />
 		<result column="TITLE" property="title" />
-		<result column="LARGE_NAME" property="type" />
-		<result column="MIDDLE_NAME" property="smalltype" />
+		<result column="BIGTYPE" property="type" />
+		<result column="SMALLTYPE" property="smalltype" />
 		<result column="STARTDATE" property="starDate" />
 		<result column="ENDDATE" property="endDate" />
 		<result column="CONTEXT" property="context" />
@@ -49,7 +50,7 @@
 		<result column="MINPEOPLE" property="minpeople" />
 		<result column="MAXPEOPLE" property="maxpeople" />
 		<result column="MEMBER_NO" property="memberNo" />
-		
+		<result column="ISJOINED" property="isJoined" />
 		<result column="REGDATE" property="regdate" />
 		
 		<result column="MAP_NO" property="mapNo" />
@@ -61,7 +62,6 @@
 			ofType="ParticipateVO" select="getparticipate" column="member_no"/>
 		<collection property="imageInfo" javaType="java.util.List"
 			ofType="ImageDTO" select="getDetailimage" column="social_no"/>
-		
 	</resultMap>
 	<!-- List ResultMap -->
 	<resultMap type="SocialListVO" id="socialList">

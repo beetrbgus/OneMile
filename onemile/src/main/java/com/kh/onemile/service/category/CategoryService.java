@@ -20,4 +20,6 @@ public interface CategoryService {
 
 	List<CategoryVO> getCategoryList();
 
+	List<MiddleCategoryVO> getMiddlelistByBigType(String categorySuper);
+
 }

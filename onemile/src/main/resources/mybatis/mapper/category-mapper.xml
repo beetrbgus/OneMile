@@ -29,12 +29,16 @@
 		select * from sbc where HIDDENYN='N' order by orderNo
 	</select>
 	<!-- 전체 대,중 분류의 하위 SQL  -->
-	<select id="getmiddle" parameterType="String" resultType="MiddleCategoryVO">
-		select smc.*,sbc.bigvalue from smc inner join sbc 
-			on smc.bigtype = sbc.bigtype  
-			where smc.HIDDENYN ='N' AND sbc.BIGVALUE=#{bigValue}
+	<select id="getmiddleByBigValue" parameterType="String" resultType="MiddleCategoryVO">
+		select smc.*,sbc.bigvalue 
+        	from smc inner join sbc on smc.bigtype = sbc.bigtype 
+    	where smc.HIDDENYN = 'N' AND sbc.BIGVALUE=#{bigValue}
 	</select>
-	
+	<select id="getmiddleByBigType" parameterType="String" resultType="MiddleCategoryVO">
+		select smc.*,sbc.bigvalue 
+        	from smc inner join sbc on smc.bigtype = sbc.bigtype 
+    	where smc.HIDDENYN = 'N' AND sbc.BIGType=#{bigType}
+	</select>
 	<!-- 단순 소분류이름 목록 -->
 	<select id="getmiddleAll" resultType="MiddleCategoryVO">
 		select * from smc where HIDDENYN ='N'

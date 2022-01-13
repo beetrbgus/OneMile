@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="participant">
+	<!-- 승인 등록 -->
+	<insert id="reg" parameterType="ParticipateVO">
+		insert into SP(SOCIAL_NO,MEMBER_NO)  
+			values(#{socialNo},#{memberNo})
+	</insert>
+	<!-- 참여자 수가 남는지 구하기 -->
+	<select id="getpartiCnt" parameterType="int" resultType="int">
+		select * from social s where s.MAXPEOPLE >= 
+    		(select count(*) from social s inner join SP 
+        		on s.social_no = sp.social_no 
+    		where sp.social_no= #{socialNo} AND SP.ISJOINED='참여중') 
+    	and s.SOCIAL_NO = #{socialNo} and HIDDENYN='N'
+	</select>
+	<!-- 승인 -->
+	<update id="approve" parameterType="participateVO">
+		update sp set ISJOINED='참여중' where social_no = #{socialNo} and member_no = #{memberNo}
+	</update>
+	<!-- 거절 -->
+	<delete id="reject" parameterType="participateVO">
+		delete from sp where social_no = #{socialNo} and member_no = #{memberNo}
+	</delete>
+</mapper>
