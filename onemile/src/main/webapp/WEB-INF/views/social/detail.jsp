@@ -31,7 +31,7 @@
 			<c:set value="true" var="isFull"></c:set>
 		</c:otherwise>
 	</c:choose>
-	<script>
+	<script> 
 		$(function(){
 			let isFull = ${isFull};
 			if(isFull){ 
