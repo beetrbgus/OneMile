@@ -25,9 +25,10 @@ public class AdminController {
 	}
 		
 	@PostMapping("/approve")
-	public String approve(Model model) {
+	public String approve(int memberNo,Model model) {
+		adminService.approveMember(memberNo);
 		return "admin/approve";
-		}
+	}
 	@GetMapping("/list")
 	public String list(Model model) {
 		return "admin/approve";

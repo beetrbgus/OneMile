@@ -36,8 +36,10 @@
 					<h3 class="text-hidden">프로젝트 정보</h3>
 					<div class="project-state-info">
 						<div class="state-box">
-
-							<p class="remaining-day"></p>
+							<p class="achievement-rate" style="margin-bottom: 16px;">
+								<strong>${detail.PName} </strong>
+							</p>
+							<p class="remaining-day"></p> 
 							<p class="rate-bar">
 								<em style="width: 4748%"></em>
 							</p>

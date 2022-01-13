@@ -9,26 +9,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.onemile.entity.social.SocialBigCategoryDTO;
-import com.kh.onemile.entity.social.SocialCategoryDTO;
 import com.kh.onemile.vo.MemberJoinVO;
-import com.kh.onemile.vo.social.like.SocialLikeCategoryVO;
+import com.kh.onemile.vo.social.category.CategoryVO;
+import com.kh.onemile.vo.social.category.MiddleCategoryVO;
 
 @Repository
-public class BigCategoryDaoImpl implements BigCategoryDao{
+public class CategoryDaoImpl implements CategoryDao{
 	
 	@Autowired
 	private SqlSession sqlSession;
 	
 	//소모임 대분류 목록
 	@Override
-	public List<SocialBigCategoryDTO> list() {
-		return sqlSession.selectList("category.list");
+	public List<SocialBigCategoryDTO> getBiglist() {
+		return sqlSession.selectList("category.getbigAll");
 	}
 	
-	//소모임 대분류로 소분류 가져오기
+	//소모임 등록시 소분류 가져오기
 	@Override
-	public List<SocialCategoryDTO> listBySuper(String categorySuper) {
-		return sqlSession.selectList("category.listBySuper",categorySuper);
+	public List<MiddleCategoryVO> getMiddlelist(String bigValue) {
+		return sqlSession.selectList("category.getmiddle",bigValue);
 	}
 	
 	//회원 관심 카테고리 
@@ -40,9 +40,9 @@ public class BigCategoryDaoImpl implements BigCategoryDao{
 		param.put("memNo", memNo);
 		sqlSession.insert("category.insert",param);
 	}
-
+	// 전체 대분류와 소분류 가져오기
 	@Override
-	public List<SocialLikeCategoryVO> getLikeCategory() {
-		return sqlSession.selectList("smc.getLarge");
+	public List<CategoryVO> getCategoryList() {
+		return sqlSession.selectList("category.getAll");
 	}
 }

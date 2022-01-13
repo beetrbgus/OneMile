@@ -3,8 +3,7 @@ package com.kh.onemile.service.social;
 import java.io.IOException;
 import java.util.List;
 
-import com.kh.onemile.entity.social.SocialBigCategoryDTO;
-import com.kh.onemile.entity.social.SocialDTO;
+import com.kh.onemile.vo.PaginationVO;
 import com.kh.onemile.vo.SocialVO;
 import com.kh.onemile.vo.social.SocialDetailVO;
 import com.kh.onemile.vo.social.SocialListVO;
@@ -15,7 +14,7 @@ public interface SocialService {
 	public SocialVO detail(int socialNo);
 	public void changeSocial(SocialVO socialVo);
 	public List<SocialListVO> list();
-	public List<SocialListVO> getList(String category);
-	public List<SocialDetailVO> getDetail(int socialNo);
+	public List<SocialListVO> getList(PaginationVO paginationVO);
+	public SocialDetailVO getDetail(int socialNo);
 	public List<SocialDTO> getCount(int memberNo);
 }
