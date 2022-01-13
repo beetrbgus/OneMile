@@ -7,6 +7,11 @@
 .outer2 {
 	display: flex;
 	justify-content: center;
+	margin-top: 70px;
+}
+.error {
+	margin-top: 10px;
+	color: red;
 }
 </style>
 
