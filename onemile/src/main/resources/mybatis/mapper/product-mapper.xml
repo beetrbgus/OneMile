@@ -8,4 +8,11 @@
 			#{pbNo}, #{memberNo}, #{productNo},#{tid},#{itemName}, #{totalAmount}, sysdate, '결제완료'
 		)
 	</insert>
+	<select id="get" parameterType="map" resultType="ProductBuyDTO">
+		select * from pb where pb_no = #{pbNo} and product_no = #{productNo}
+	</select>
+	
+	<update id="cancel" parameterType="map">
+		update pb set status='결제취소' where pb_no = #{pbNo} and product_no = #{productNo}
+	</update>
 </mapper>

@@ -198,4 +198,10 @@ public class MemberServiceImpl implements MemberService {
 		}
 		return false;
 	}
+	
+	//닉네임 변경
+	@Override
+	public int getNickModi(int memberNo) {
+		return memberDao.getNickModi(memberNo);
+	}
 }

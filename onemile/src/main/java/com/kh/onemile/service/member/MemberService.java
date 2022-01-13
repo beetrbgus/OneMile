@@ -50,5 +50,8 @@ public interface MemberService {
 	
 	//이메일로 가져오기
 	public boolean getEmail(String email);
+	
+	//닉네임 변경
+	public int getNickModi(int memberNo);
 
 }

@@ -45,4 +45,7 @@ public interface MemberDao {
 	//회원정보 불러오기(사진 포함)
 	MemberVO imageProfile(int memberNo);
 	
+	//닉네임 변경
+	int getNickModi(int memberNo);
+	
 }

@@ -42,6 +42,6 @@ public class MembershipBuyDaoImpl implements MembershipBuyDao{
 
 	@Override
 	public void regularPayDelete(String sid) {
-		sqlSession.delete("membership.regularPayDelete", sid);
+		sqlSession.update("membership.regularPayDelete", sid);
 	}
 }

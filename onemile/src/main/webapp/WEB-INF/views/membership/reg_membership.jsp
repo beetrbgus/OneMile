@@ -82,7 +82,7 @@ h2 {
 <c:forEach var="membershipBuyDTO" items="${list}">
 	<div>
 		${membershipBuyDTO.itemName} / ${membershipBuyDTO.totalAmount} / ${membershipBuyDTO.buyTime} / ${membershipBuyDTO.buyEndtime}
-		${membershipBuyDTO.status} / ${membershipBuyDTO.sid}
+		${membershipBuyDTO.status} / ${membershipBuyDTO.sid} / ${membershipBuyDTO.hiddenYN}
 		<a href="${pageContext.request.contextPath}/pay/regular/disabled?sid=${membershipBuyDTO.sid}">중지</a>
 	<a href="${pageContext.request.contextPath}/pay/state?sid=${membershipBuyDTO.sid}">조회</a>
 	</div>
@@ -98,10 +98,14 @@ h2 {
         	<c:forEach var="membershipBuyDTO" items="${list}">
             <div class="date">${membershipBuyDTO.buyTime} ~ ${membershipBuyDTO.buyEndtime}</div>
             <div class="name"><span class="TransactionItem__Name-sc-1naw9lz-1 fba-dEH">${membershipBuyDTO.itemName}</span></div>
-            <div class="expense"><span class="method">카카오페이 </span><span class="price">${membershipBuyDTO.totalAmount}원 <a href="${pageContext.request.contextPath}/pay/regular/disabled?sid=${membershipBuyDTO.sid}">[중지]</a></span></div>
-        	
-        
-      	  </c:forEach>
+            <div class="expense"><span class="method">카카오페이 </span><span class="price">${membershipBuyDTO.totalAmount}원</span></div> 
+            <c:if test="${membershipBuyDTO.hiddenYN == 'Y'}">
+				
+				<a href="${pageContext.request.contextPath}/pay/regular/disabled?sid=${membershipBuyDTO.sid}">[중지]</a>
+			</c:if>
+            
+            
+       </c:forEach>
         </div>
         <div class="PurchaseHistory__FetchingNext-wpufov-0 guWliA"></div>
     	

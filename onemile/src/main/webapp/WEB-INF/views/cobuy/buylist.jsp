@@ -10,7 +10,11 @@
 <c:forEach var="ProductBuyDTO" items="${list}">
 	<div>
 		${ProductBuyDTO.itemName} / ${ProductBuyDTO.totalAmount} / ${ProductBuyDTO.buyTime} / ${ProductBuyDTO.status}
+		${ProductBuyDTO.pbNo} / ${ProductBuyDTO.productNo} / ${ProductBuyDTO.status}
+		 <c:if test="${ProductBuyDTO.status != '결제취소'}">
+		<a href="${pageContext.request.contextPath}/pay/cancel_part?pbNo=${ProductBuyDTO.pbNo}&productNo=${ProductBuyDTO.productNo}">해당항목 취소</a>
 		
+		</c:if>
 	</div>
 </c:forEach>
 	

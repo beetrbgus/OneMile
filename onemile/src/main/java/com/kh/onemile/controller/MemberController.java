@@ -20,7 +20,6 @@ import com.kh.onemile.entity.member.certi.CertiDTO;
 import com.kh.onemile.service.email.EmailService;
 import com.kh.onemile.service.member.MemberService;
 import com.kh.onemile.vo.MemberJoinVO;
-import com.kh.onemile.vo.MemberVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -199,38 +198,45 @@ public class MemberController {
 		}
 	}
 
-	// 마이페이지
-	@RequestMapping("/mypage")
-	public String mypage(HttpSession session, Model model) {
-		int memberNo = (int) session.getAttribute("logNo");
-		// 회원정보 불러오기(이미지 포함)
-		MemberVO memberVO = memberService.imageProfile(memberNo);
-		log.debug("내정보 = MemberVO" + memberVO);
+	/*
+	 * // 마이페이지
+	 * 
+	 * @RequestMapping("/mypage") public String mypage(HttpSession session, Model
+	 * model) { int memberNo = (int) session.getAttribute("logNo"); // 회원정보 불러오기(이미지
+	 * 포함) MemberVO memberVO = memberService.imageProfile(memberNo);
+	 * log.debug("내정보 = MemberVO" + memberVO);
+	 * 
+	 * // imageService.listByMember(memberNo); // MemberProfileMidDTO
+	 * memberProfileMidDTO = imageService.getImage(); //
+	 * model.addAttribute("memberDTO",memberDTO); model.addAttribute("memberVO",
+	 * memberVO); return "member/mypage"; }
+	 */
 
-//		imageService.listByMember(memberNo);
-//		MemberProfileMidDTO memberProfileMidDTO = imageService.getImage();
-		// model.addAttribute("memberDTO",memberDTO);
-		model.addAttribute("memberVO", memberVO);
-		return "member/mypage";
-	}
-
-	// 회원정보 수정(닉변경일체크 + 자잘한거 추가해야댐)
+	// 회원정보 수정
 	@GetMapping("/edit")
 	public String edit(HttpSession session, Model model) {
 		int memberNo = (int) session.getAttribute("logNo");
+		
+		int count = memberService.getNickModi(memberNo);
+		log.debug("수정가능"+count);
+		model.addAttribute("count",count);
+		
 		MemberDTO memberDTO = memberService.profile(memberNo);
+		log.debug("정보수정"+memberDTO);
 		model.addAttribute("memberDTO", memberDTO);
 		return "member/edit";
 	}
 
 	@PostMapping("/edit")
 	public String edit(@ModelAttribute MemberDTO memberDTO, HttpSession session) {
+		log.debug("정보수정22222"+memberDTO);
+		
 		int memberNo = (int) session.getAttribute("logNo");
 		memberDTO.setMemberNo(memberNo);
-		System.out.println("멤버변경 찾기" + memberDTO);
+		
 		boolean result = memberService.changeInformation(memberDTO);
 		if (result) {
-			return "redirect:edit_success";
+			return "account/mypage";
 		} else {
 			return "redirect:edit?error";
 		}

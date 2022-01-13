@@ -223,7 +223,7 @@ $(function () {
 									<c:choose>
 										<c:when test="${login}">
 											<button type="button" class="User_btnSign__1URTs" ><a href="${root}/member/logout">로그아웃</a></button>
-											<button data-event="iam.signup" class="User_btnSign__1URTs" ><a href="${root}/member/mypage">마이페이지</a></button>
+											<button data-event="iam.signup" class="User_btnSign__1URTs" ><a href="${root}/account/mypage">마이페이지</a></button>
 										</c:when>
 										<c:otherwise>
 											<button type="button" class="User_btnSign__1URTs" ><a href="${root}/member/login">로그인</a></button>

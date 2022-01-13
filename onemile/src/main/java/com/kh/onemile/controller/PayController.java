@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.onemile.entity.product.ProductBuyDTO;
 import com.kh.onemile.repository.membership.MembershipBuyDao;
+import com.kh.onemile.repository.product.ProductBuyDao;
 import com.kh.onemile.service.kakaopay.KakaoPayService;
 import com.kh.onemile.vo.kakaopay.ConfirmVO;
 import com.kh.onemile.vo.kakaopay.KaKaoPayRegularPayMentStateResponseVO;
@@ -30,6 +32,8 @@ public class PayController {
 	private KakaoPayService kakaoPayService;
 	@Autowired
 	private MembershipBuyDao membershipBuyDao;
+	@Autowired
+	private ProductBuyDao productBuyDao;
 
 	// 결제 준비 요청
 	@RequestMapping("/confirm")
@@ -124,18 +128,28 @@ public class PayController {
 		return "pay/state";
 	}
 	
-	/*
-	 * //결제 취소 요청
-	 * 
-	 * @GetMapping("/cancel") public String cancel(@RequestParam String
-	 * tid, @RequestParam int amount,
-	 * 
-	 * @RequestParam int msbNo,Model model) throws URISyntaxException {
-	 * KakaoPayCancelResponseVO responseVO = kakaoPayService.cancel(tid, amount);
-	 * 
-	 * payDao.cancelDonation(payNo); donationService.updatePrice(payNo);
-	 * model.addAttribute("cancelList", responseVo);
-	 * 
-	 * return "donation/kakao/cancel"; }
-	 */
+	  //항목 취소 : 해당하는 항목이 취소가 가능한지 확인하고 취소가 가능한 경우 취소 처리 및 거래를 부분취소/전체취소로 변경
+	  @GetMapping("/cancel_part") 
+	  public String  cancelPart(@RequestParam int pbNo, @RequestParam int productNo) throws URISyntaxException {
+		  	//(1) 요청한 항목이 취소가 가능한 상태인지 확인
+			ProductBuyDTO productBuyDTO = productBuyDao.get(pbNo, productNo);
+			if(productBuyDTO.isCancelAvailable()) {//취소가 가능한 상황이 아니라면
+				throw new IllegalArgumentException("취소가 불가능한 항목입니다");
+			}
+			//(2) 취소 요청을 위한 정보를 수집(tid, amount)
+			//BuyDto buyDto = buyDao.get(buyNo);//tid를 알 수 있다
+			
+			//(3) 취소 요청
+			KakaoPayCancelResponseVO responseVO = kakaoPayService.cancel(productBuyDTO.getTid(), productBuyDTO.getTotalAmount());
+			
+			//(4) 기록(DB)
+			//4-1. 구매상세(buy_detail) 테이블 항목의 상태를 취소로 변경
+			productBuyDao.cancel(pbNo, productNo);
+			
+			//4-2. 구매(buy) 테이블 항목의 상태를 갱신
+			//buyDao.refresh(buyNo);
+			
+			//(5) 다시 구매내역 상세 페이지로 이동
+			return "redirect:/";
+	  }
 }

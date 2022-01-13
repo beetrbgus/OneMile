@@ -4,14 +4,16 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <style>
 .wpurchase-wrap .btn-wrap {
-    text-align: center;
+	text-align: center;
 }
+
 .wpurchase-wrap h3 em {
-    display: inline-block;
-    color: rgba(0, 0, 0, 0.84);
-    font-size: 24px;
-    font-weight: bold;
+	display: inline-block;
+	color: rgba(0, 0, 0, 0.84);
+	font-size: 24px;
+	font-weight: bold;
 }
+
 .wpurchase-terms-section .terms-notice-box {
 	border: 1px solid #f0f2f5;
 }
@@ -324,49 +326,32 @@ label.Radio_radio__1S1J3 .Radio_label__3LIYq {
 <input type="hidden" value="${confirmVO.productName}">
 <input type="hidden" name="type" value="정기">
 
-<div>${confirmVO.productNo}/ ${confirmVO.productName} /
-	${confirmVO.totalAmount} / ${confirmVO.quantity}</div>
-
-<form action="${pageContext.request.contextPath}/membership/confirm"
-	method="POST">
-	<input type="hidden" name="productNo" value="${confirmVO.productNo}">
-	<input type="hidden" name="quantity" value="${confirmVO.quantity}">
-	<button type="submit" id="btn-submit" onclick="purchaseReservation()"
-		class="wz primary button">결제하기</button>
-</form>
-
-
 <div class="outer2">
 	<div class="wpurchase-wrap" style="width: 700px">
-
-		<form name="purchaseForm" id="purchaseForm" method="post">
-			<div class="wpurchase-order">
+		
+		<form name="purchaseForm" id="purchaseForm" method="post" action="${pageContext.request.contextPath}/membership/confirm">
+			
+			<input type="hidden" name="productNo" value="${confirmVO.productNo}">
+			<input type="hidden" name="quantity" value="${confirmVO.quantity}">
+			
+			<h2 class="wz text display2 page-title" style="margin-top: 70px;">주문서 확인</h2>
+			<hr>
+			<div class="wpurchase-order" style="margin-top: 70px;">
 				<div class="order-list" data-choiced-legnth="1">
 					<ul>
-
 						<li>
-							<p class="title">[ 울트라 얼리버드 1개월 ]</p>
-							<p class="text">[ 36% 혜택 ] 1개월 109,000원 → 69,000원 1달 + (12일분
-								추가 리워드) + 최고급 선물상자 오직 와디즈에서만 만날 수 있는 대용량 &amp; 가격 혜택</p>
+							<p class="title" style="font-size: x-large;">[${confirmVO.productName}]</p>
+							<p class="text" style="font-size: middle;">
+							멤버십혜택 : 닉네임변경 시간단축, 소셜링 생성갯수 및 참가인원 확대</p>
 							<div class="info">
 
 								<p class="sum">
-									<em>수량 : 1개</em>69,000원
+									<em></em>${confirmVO.totalAmount}원
 								</p>
 							</div>
 						</li>
-						<input type="hidden" name="choiceRewards[0].rewardId"
-							value="309477">
-						<input type="hidden" name="choiceRewards[0].rewardName"
-							value="[ 36% 혜택 ] 1개월 109,000원 → 69,000원
 
-1달 + (12일분 추가 리워드) + 최고급 선물상자　　　　　　　　　　　　　　　
-　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　
-오직 와디즈에서만 만날 수 있는 대용량 &amp; 가격 혜택">
-						<input type="hidden" name="choiceRewards[0].qty" value="1">
-						<input type="hidden" name="choiceRewards[0].sumAmount"
-							value="69000">
-						<input type="hidden" name="choiceRewards[0].memo" value="">
+
 
 					</ul>
 				</div>
@@ -387,46 +372,17 @@ label.Radio_radio__1S1J3 .Radio_label__3LIYq {
 					<div>
 						<div class="DefaultFundingPrice_container__1gSin">
 							<div class="DefaultFundingPrice_title__3ba6Z">
-								<label
-									class="Radio_radio__1S1J3 Radio_md__36Y-U DefaultFundingPrice_radioButton__1prjI"><input
-									type="radio" name="price" value="DEFAULT" checked=""><span
-									class="Radio_icon__gDAhN"></span><span
-									class="Radio_label__3LIYq"></span></label>일반 펀딩가
+							주문서 확인
 							</div>
-							<dl>
-								<dt>펀딩금액</dt>
-								<dd>
-									<span>69,000</span>원
-								</dd>
-							</dl>
-							<dl>
-								<dt>쿠폰 차감금액</dt>
-								<dd class="DefaultFundingPrice_minus__1M7YC">
-									<em>-</em>
-								</dd>
-							</dl>
-							<dl>
-								<dt>포인트 차감금액</dt>
-								<dd class="DefaultFundingPrice_minus__1M7YC">
-									<em>-</em>
-								</dd>
-							</dl>
-							<dl>
-								<dt>추가 후원금</dt>
-								<dd>0원</dd>
-							</dl>
-							<dl>
-								<dt>배송비</dt>
-								<dd>3,500원</dd>
-							</dl>
+							
 							<dl class="DefaultFundingPrice_totalPrice__x2h8J">
 								<dt>최종결제금액</dt>
 								<dd>
-									<em>72,500원</em>
+									<em>${confirmVO.totalAmount}</em>원
 								</dd>
 							</dl>
 						</div>
-						<input type="hidden" id="totalPrice" value="72500">
+						
 					</div>
 				</div>
 			</div>
@@ -452,7 +408,7 @@ label.Radio_radio__1S1J3 .Radio_label__3LIYq {
 									class="Radio_icon__gDAhN"></span><span
 									class="Radio_label__3LIYq"><div
 											class="SimplePayPurchase_radioLabel__2-EE1">
-											
+
 											<span>카카오 간편결제</span>
 										</div></span></label>
 							</div>
@@ -488,7 +444,7 @@ label.Radio_radio__1S1J3 .Radio_label__3LIYq {
 					</ul>
 				</div>
 			</div>
-		</form>
+		
 
 		<div class="wpurchase-terms wpurchase-terms-section">
 			<h3>
@@ -505,7 +461,7 @@ label.Radio_radio__1S1J3 .Radio_label__3LIYq {
 						<label class="wz checkbox circular"> <input
 							id="personalInfoAgreementForThirdPartiesCheckBox"
 							class="notice-confirm-checkbox" type="checkbox" name="check1"
-							value="Y" autocomplete="off" onchange="eachTermsChanged()">
+							value="Y" autocomplete="off" onchange="eachTermsChanged()" required>
 							<span>개인정보 제3자 제공 동의</span>
 						</label> <span class="show-term"
 							onclick="showLyPop('personalInfoAgreementForThirdParties');"></span>
@@ -895,16 +851,17 @@ label.Radio_radio__1S1J3 .Radio_label__3LIYq {
 			</div>
 		</div>
 		<div class="btn-wrap">
-			<br>
-			<br>
-			<br>
+			<br> <br> <br>
 			<hr>
-			<button type="button" id="btn-submit" onclick="purchaseReservation()"
-				class="wz primary button">결제 예약하기</button>
+			<button type="submit" id="btn-submit" onclick="purchaseReservation()"
+				class="wz primary button">결제하기</button>
+				
 		</div>
 		<!-- 간편결제 예약 앱 -->
 		<div id="reward-reservation-app" data-reservation-info="null"></div>
+		</form>
 	</div>
+	
 </div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

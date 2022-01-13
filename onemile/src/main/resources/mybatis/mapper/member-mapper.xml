@@ -82,16 +82,55 @@
 			<if test="phone != null">
 				phone = #{phone},
 			</if>
-			<if test="birth != null">
+			<if test="birth != '' ">
 				birth = to_date(#{birth}, 'YYYY-MM-DD'),
+			</if>
+			<if test="mbti != null">
+				mbti = #{mbti},
+			</if>
+			<if test="intro != '' ">
+				intro = #{intro},
 			</if>
 		</set>
 		where member_no = #{memberNo}
 	</update>
 	
+	<resultMap type="MemberVO" id="getProfile">
+		<!-- 회원정보 -->
+		<result column="member_no" property="memberNo" />
+		<result column="email" property="email" />
+		<result column="pw" property="pw" />
+		<result column="nick" property="nick" />
+		<result column="phone" property="phone" />
+		<result column="gender" property="gender" />
+		<result column="birth" property="birth" />
+		<result column="grade" property="grade" />
+		<result column="joindate" property="joinDate" />
+		<result column="mbti" property="mbti" />
+		<result column="intro" property="intro" />
+		<result column="nickModi" property="nickModi" />
+		<result column="hiddenyn" property="hiddenYN" />
+		<result column="exitdate" property="exitDate" />
+		<!-- 회원 이미지들 -->
+		<collection property="imageList" javaType="java.util.List"
+			ofType="ImageDTO" select="imageProfile" column="member_no"></collection>
+	</resultMap>
+	 
 	<!-- 회원정보 불러오기(사진 포함) -->
-	<select id="imageProfile" parameterType="int" resultType="MemberVO">
-		select m.*,mei.image_no from member m left outer join mei mei on m.member_no = mei.member_no where m.member_no = #{memberNo}
+	<select id="imageProfile" parameterType="int" resultType="imageDTO">
+		select * from mei where member_no = #{memberNo}
 	</select>
-
+	
+	<select id="getMember" parameterType="int" resultMap="getProfile">
+		select * from member where member_no = #{memberNo}
+	</select>
+	
+	<select id="getNickModi" parameterType="int" resultType="int">
+		select count(*) from member me
+			left outer join msb msb on me.member_no = msb.member_no
+			left outer join msp msp on msb.msp_no = msp.msp_no
+			left outer join ad ad on msp.msp_no = ad.msp_no
+		where me.nickmodi+nvl(ad.nmodtime, 30) > sysdate and me.member_no = #{memberNo}
+	</select>
+ 
 </mapper>

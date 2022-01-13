@@ -26,7 +26,7 @@ public class MemberVO {
 	private String intro;
 	@DateTimeFormat(pattern="YYYY-MM-DD HH24:mm:ss")
 	private Date nickModi;
-	private String exitYN;
+	private String hiddenYN;
 	@DateTimeFormat(pattern="YYYY-MM-DD HH24:mm:ss")
 	private Date exitDate;
 	
