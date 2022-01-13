@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <style>
 .d-block{
@@ -174,13 +175,44 @@ img{
 	    <span class="visually-hidden">Next</span>
 	  </button>
 	</div>
+	
 	<!-- 대분류별로 소분류 나눠야 함. -->
 	<ul class="RewardMainTab_container__geHTr">
+		<c:forEach items="${bcgList}" var="bcg" >
 		<li>
-			<a aria-current="page" class="RewardMainTab_link___1r2a RewardMainTab_active__1zRir" href="${pageContext.request.contextPath}/social">
-				<span> 전체 </span>
+			<a class="RewardMainTab_link___1r2a" href="${pageContext.request.contextPath}/social/list/${bcg.bigValue}">
+				<span data-category="${bcg.bigValue}">
+					${bcg.bigType}
+				</span>
 			</a>
 		</li>
+		</c:forEach>
+		<script>
+		$(function(){
+			let now = "${nowcategory}"; 
+			let cate = $(".RewardMainTab_link___1r2a>span");
+			
+			console.log("now   "+now);
+			console.log("cate"+cate.length);
+			console.log("cate.length"+cate.length);
+			cate.each(function(index, item){
+				let catedata = $.trim($(item).data("category")); 
+				
+				console.log("index  "+index);
+				console.log("item  "+$(item).data("category"));
+				if(now==undefined || now==""||now==null){
+					$(item).parent().addClass("RewardMainTab_active__1zRir");
+					return false;
+				}
+				if($.trim(now)==catedata){
+					console.log("category는     "+ now);
+					$(item).parent().addClass("RewardMainTab_active__1zRir");
+					return false;
+				} 
+			});
+
+		});		
+		</script>
 	</ul>
 	<div class="RewardCategoryCircleList_container__1GDge">
 		<div class="CategoryCircleList_container__3fAVd">
@@ -191,20 +223,21 @@ img{
 			
 			<div class="CategoryCircleList_wrap__3jHrp">
 				<div class="CategoryCircleList_list__2YBF3">
-				<c:forEach var="cobuyCatVO" items="${category}">
+				<c:forEach var="mcg" items="${mcgList}">
 					<a class="CategoryCircleList_item__2_QZ3 RewardCategoryCircleList_item__2JEvT"
-						href="${pageContext.request.contextPath}/social/list${cobuyCatVO.urlPath}">
+						href="${pageContext.request.contextPath}/social/list/${mcg.bigValue}?sc=${mcg.smallvalue}">
 						<span class="CategoryCircle_container__2rZ3a">
 							<span class="CategoryCircle_circle__3khwj"
-								style="background-image: url(${pageContext.request.contextPath}/resources/image/social/${cobuyCatVO.middleName}.jpg);"></span>
-							<span class="CategoryCircle_name__3Ca9T">${cobuyCatVO.middleName}</span>
+								style="background-image: url(${pageContext.request.contextPath}/resources/image/social/${mcg.smallvalue}.jpg);"></span>
+							<span class="CategoryCircle_name__3Ca9T">${mcg.smallType}</span>
 						</span>
 					</a>
+					
 				</c:forEach>
 				</div>
 			</div>
 		<!-- 카테고리 끝지점 -->
-			<c:if test="${category} > 10">
+			<c:if test="${fn:length(category)} > 10">
 				<button class="CategoryCircleList_next__1mHyX" type="button" data-dir="다음">
 					<i class="icon chevron-right CategoryCircleList_icon__13sH8" aria-hidden="true"></i>
 				</button>
@@ -257,35 +290,35 @@ img{
 		<div class="ProjectCardList_container__3Y14k">
 			<div class="ProjectCardList_list__1YBa2">
 				<!-- 소셜링 항목 -->
-				<c:forEach items="${list}" var="SocialListVO">
+				<c:forEach items="${scList}" var="sc">
 				 	<div class='ProjectCardList_item__1owJa'>
 						<div> 
 							<div class='CommonCard_container__e_ebQ CommonCard_squareSmall__1Cdkn'>
-								<a href='${pageContext.request.contextPath}/social/detail/${SocialListVO.socialNo}' class='CardLink_link__1k83H CommonCard_image__vaqkf' aria-hidden='true' tabindex='-1'>
+								<a href='${pageContext.request.contextPath}/social/detail/${sc.socialNo}' class='CardLink_link__1k83H CommonCard_image__vaqkf' aria-hidden='true' tabindex='-1'>
 									<div class='CommonCard_rect__2wpm4'>
 										<span class='CommonCard_background__3toTR CommonCard_visible__ABkYx'
-											style='background-image: url("${pageContext.request.contextPath}/image/download?imageNo=${SocialListVO.imgNo}&folder=social")'></span>
+											style='background-image: url("${pageContext.request.contextPath}/image/download?imageNo=${sc.imgNo}&folder=social")'></span>
 									</div>
 								</a> 
 							 	<div class='CommonCard_info__1f4kq'>
 							 		<div class='RewardProjectCard_info__3JFub'>
 							 			<div class='RewardProjectCard_infoTop__3QR5w'>
-							 				<a href='${pageContext.request.contextPath}/social/detail/${SocialListVO.socialNo}' class='CardLink_link__1k83H'>
+							 				<a href='${pageContext.request.contextPath}/social/detail/${sc.socialNo}' class='CardLink_link__1k83H'>
 							 					<p class='CommonCard_title 1oKJY RewardProjectCard_title iUtvs'>
-							 						<strong>${SocialListVO.getTitle()}</strong>
+							 						<strong>${sc.getTitle()}</strong>
 							 					</p>
 							 					<span class='CommonCard_background__3toTR CommonCard_visible__ABkYx'>
-							 						${SocialListVO.smalltype} · ${SocialListVO.type}
+							 						${sc.smalltype} · ${sc.type}
 							 					</span>
 							 				</a>
 							 				<div>	
-								 				<a class="MakerInfoHeader_link__HmY8C" href="${pageContext.request.contextPath}/account/profile/${SocialListVO.memberNo}">
+								 				<a class="MakerInfoHeader_link__HmY8C" href="${pageContext.request.contextPath}/account/profile/${sc.memberNo}">
 													<button class="Avatar_avatar__CiRY0 Avatar_xs__1Mz7G MakerInfoHeader_avatar__ltZMd">
 														<span style="background-image: url(/onemile/image/download?imageNo=179&amp;folder=member);"></span>
 													</button>
 													<div class="MakerInfoHeader_texts__1vfam">
-														<span class="MakerInfoHeader_makerName__KDu0a">${SocialListVO.nick}</span>
-														<span class='RewardProjectCard_remainingDayText__2sRLV'>${SocialListVO.startDate} - ${SocialListVO.endDate}</span>
+														<span class="MakerInfoHeader_makerName__KDu0a">${sc.nick}</span>
+														<span class='RewardProjectCard_remainingDayText__2sRLV'>${sc.startDate} - ${sc.endDate}</span>
 													</div>
 												</a>
 							 				</div>
@@ -295,7 +328,7 @@ img{
 							 			</div>
 							 			
 							 			<span class='RewardProjectCard_days__3eece RewardProjectCard_isAchieve__1LcUu'>
-							 				<span class='RewardProjectCard_remainingDay__2TqyN'>${SocialListVO.detailAddress}</span>
+							 				<span class='RewardProjectCard_remainingDay__2TqyN'>${sc.detailAddress}</span>
 							 				<span class='RewardProjectCard_remainingDayText__2sRLV'></span>
 							 				<span class='RewardProjectCard_isAchieve__1LcUu'></span>
 							 			</span> 

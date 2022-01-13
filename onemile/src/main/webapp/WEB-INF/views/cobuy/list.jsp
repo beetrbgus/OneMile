@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <style>
@@ -21,28 +22,34 @@ img{
 
 <script>
 	$(function () {
-		var page = 1;
-		var size = 20;
-
+		var page = 2;
+		var size = 9;
+		var category = "${nowcategory}";
 		$(".ProjectListMoreButton_button__27eTb").click(function () {
-			loadData(page, size);
+			loadData(page, size,category);
 			page++;
 		});
-
-		$(".ProjectListMoreButton_button__27eTb").click();
-
-		function loadData(page, size, middleName) {
+		
+		if(cnt() <10){ 
+			$("#moreBtn").remove(); 
+		}
+		function cnt(){
+			let a = $(".ProjectCardList_item__1owJa");
+			return a.length;
+		}
+		function loadData(page, size,category) {
 
 			$.ajax({
 				url: "${pageContext.request.contextPath}/cobuy/listdetail",
 				type: "get",
 				data: {
 					page: page,
-					size: size
+					size: size,
+					category : category
 				},
 				success: function (resp) {
 					if (resp.length < size) {
-						$(".more-btn").remove();
+						$("#moreBtn").remove();
 					}
 					for (var i = 0; i < resp.length; i++) {
 						var date = new Date(resp[i].deadLine);
@@ -89,8 +96,8 @@ img{
 					console.log("실패", e);
 				}
 			});
-		}; 
-});
+		};
+	});
 </script>
 
 <div class="RewardMainWrapper_container__2HR7Y">
@@ -109,7 +116,7 @@ img{
 	  </div>
 	  <div class="carousel-inner">
 	    <div class="carousel-item active" data-bs-interval="3000">
-	     <a href="${root}/cobuy/list">
+	     <a href="${root}/cobuy/list/${category}">
 	      <img src="${root}/resources/image/beauty.jpg" class="d-block w-100">
 	      <div class="carousel-caption d-none d-md-block">
 	        <h3 class="b">[공동구매율 1위]</h3>
@@ -195,10 +202,10 @@ img{
 				</div>
 			</div>
 		<!-- 카테고리 끝지점 -->
-		<c:if test="${category} > 10">
-		<button class="CategoryCircleList_next__1mHyX" type="button" data-dir="다음">
-		<i class="icon chevron-right CategoryCircleList_icon__13sH8" aria-hidden="true"></i>
-		</button>
+		<c:if test="${fn:length(category)} > 10">
+			<button class="CategoryCircleList_next__1mHyX" type="button" data-dir="다음">
+				<i class="icon chevron-right CategoryCircleList_icon__13sH8" aria-hidden="true"></i>
+			</button>
 		</c:if>
 		</div>
 	</div>
@@ -244,7 +251,7 @@ img{
 				 	<div class='ProjectCardList_item__1owJa'>
 						<div> 
 							<div class='CommonCard_container__e_ebQ CommonCard_squareSmall__1Cdkn'>
-								<a href='detail?cobuyNo=${CobuyListVO.cobuyNo}' class='CardLink_link__1k83H CommonCard_image__vaqkf' aria-hidden='true' tabindex='-1'>
+								<a href='${pageContext.request.contextPath}/cobuy/detail?cobuyNo=${CobuyListVO.cobuyNo}' class='CardLink_link__1k83H CommonCard_image__vaqkf' aria-hidden='true' tabindex='-1'>
 									<div class='CommonCard_rect__2wpm4'>
 										<span class='CommonCard_background__3toTR CommonCard_visible__ABkYx'
 											style='background-image: url("${pageContext.request.contextPath}/image/download?imageNo=${CobuyListVO.imgNo}&folder=cobuy")'></span>
@@ -255,11 +262,19 @@ img{
 							 			<div class='RewardProjectCard_infoTop__3QR5w'>
 							 				<a href='detail?cobuyNo=${CobuyListVO.cobuyNo}' class='CardLink_link__1k83H'>
 							 					<p class='CommonCard_title__1oKJY RewardProjectCard_title__iUtvs'>
-							 						<strong>${CobuyListVO.PName}<br>${CobuyListVO.title}</strong>
+							 						<strong>${CobuyListVO.title}</strong>
 							 					</p>
 							 				</a>
-							 				<div>
-							 				<span class='RewardProjectCard_makerName__2q4oH'>${CobuyListVO.nick}</span>		
+							 				<div>	
+								 				<a class="MakerInfoHeader_link__HmY8C" href="${pageContext.request.contextPath}/account/profile/${SocialListVO.memberNo}">
+													<button class="Avatar_avatar__CiRY0 Avatar_xs__1Mz7G MakerInfoHeader_avatar__ltZMd">
+														<span style="background-image: url(/onemile/image/download?imageNo=179&amp;folder=member);"></span>
+													</button>
+													<div class="MakerInfoHeader_texts__1vfam">
+														<span class="MakerInfoHeader_makerName__KDu0a">${CobuyListVO.nick}</span>
+													</div>
+													<br>
+												</a>
 							 				</div>
 							 			</div>
 							 			<div class='RewardProjectCard_gauge__3p9US'>		
@@ -279,9 +294,10 @@ img{
 						</div>
 				</c:forEach>
 			</div>
-			<div>
+			
+			<div >
 				<div class="ProjectListMoreButton_container__1JFxX ProjectCardList_more__3AbzT"><button type="button"
-						class="ProjectListMoreButton_button__27eTb">더보기<i class="icon expand-more"
+						id="moreBtn" class="ProjectListMoreButton_button__27eTb">더보기<i class="icon expand-more"
 							aria-hidden="true"></i></button>
 					<div class="wz-loader ProjectListMoreButton_loader__1Kcvt"></div>
 				</div>

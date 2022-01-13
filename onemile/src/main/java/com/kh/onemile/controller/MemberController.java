@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.kh.onemile.entity.member.MemberDTO;
 import com.kh.onemile.entity.member.certi.CertiDTO;
+import com.kh.onemile.service.category.CategoryService;
 import com.kh.onemile.service.email.EmailService;
 import com.kh.onemile.service.member.MemberService;
 import com.kh.onemile.vo.MemberJoinVO;
@@ -29,12 +30,13 @@ public class MemberController {
 	private MemberService memberService;
 	@Autowired
 	private EmailService emailService;
-	
+	@Autowired
+	private CategoryService categoryService;
 	//회원가입
 	@GetMapping("/join")
 	public String getJoin(Model model) {
 	//소모임 대분류
-	model.addAttribute("category",memberService.getfavorite());
+	model.addAttribute("category",categoryService.getBiglist());
 		return "member/join";
 	}
 	//가입 후 회원 승인 테이블로 감.

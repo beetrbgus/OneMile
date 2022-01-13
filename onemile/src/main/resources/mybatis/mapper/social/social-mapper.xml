@@ -21,7 +21,7 @@
 		select * from social s 
 		    inner join map m on s.map_no = m.map_no
 		    inner join mei on mei.member_no = s.member_no
-		    inner join cmc on s.smalltype = cmc.middle_name    
+		    inner join smc on s.smalltype = smc.SMALLTYPE    
 		where social_no = #{socialNo} and s.hiddenyn= 'N'
 	</select>
 	<!-- 참가자 목록 가져오기 -->
@@ -63,24 +63,48 @@
 			ofType="ImageDTO" select="getDetailimage" column="social_no"/>
 		
 	</resultMap>
-	<select id="getList" parameterType="String" resultType="SocialListVO">
-		select
-			s.social_no ,s.smalltype ,s.title,
-			TO_CHAR(s.startdate, 'YYYY-MM-DD HH24:mm:ss') as startDate,
-			TO_CHAR(s.enddate, 'YYYY-MM-DD HH24:mm:ss') as endDate,
-			m.member_no,m.nick, mei.image_no as profileImgNo ,
-			map.detailaddress , smi.image_no
-		from social s
-			inner join member m on s.member_no=m.member_no
-			inner join mei on mei.member_no = m.member_no
-			inner join smi on smi.social_no = s.social_no
-			inner join map on map.map_no = s.map_no
-		where s.hiddenyn ='N' 
-		<choose>
-			<when test="category !=null || category neq '' ||category!=''">
-				and s.smalltype = #{category} 
-			</when>
-		</choose>
-		order by s.social_no desc
+	<!-- List ResultMap -->
+	<resultMap type="SocialListVO" id="socialList">
+		<result column="IMAGE_NO" property="imgNo" />
+		<result column="SOCIAL_NO" property="socialNo" />
+		<result column="BIGTYPE" property="type" />
+		<result column="SMALLTYPE" property="smalltype" />
+		<result column="TITLE" property="title" />
+		<result column="STARTDATE" property="startDate" />
+		<result column="ENDDATE" property="endDate" />
+		<result column="MEMBER_NO" property="memberNo" />
+		<result column="NICK" property="nick" />
+		<result column="PROFILEIMGNO" property="profileImgNo" />
+		<result column="DETAILADDRESS" property="detailAddress" />
+	</resultMap>
+	
+	<select id="getList" parameterType="PaginationVO" resultMap="socialList">
+		select * from (
+			select rownum rn, TMP.* from (
+				select
+					s.social_no ,s.smalltype ,s.title,
+					TO_CHAR(s.startdate, 'MM/DD HH24:mm') as startDate,
+					TO_CHAR(s.enddate, 'MM/DD HH24:mm') as endDate,
+					m.member_no,m.nick, mei.image_no as profileImgNo ,
+					map.detailaddress , smi.image_no, smc.bigtype
+				from social s
+					inner join member m on s.member_no=m.member_no
+					inner join mei on mei.member_no = m.member_no
+					inner join smi on smi.social_no = s.social_no
+					inner join map on map.map_no = s.map_no
+					inner join smc on s.smalltype = smc.SMALLTYPE
+					inner join sbc on smc.bigtype = sbc.BIGTYPE
+				where s.hiddenyn ='N' 
+			<choose>
+				<when test="category !=null and !category.equals('')">
+					and sbc.bigValue = #{category} 
+				</when>
+				<when test="keyword != null and !keyword.equals('') and searchword != null and !searchword.equals('')">
+					and #{keyword} = #{searchword}
+				</when>
+			</choose>
+				order by s.social_no desc
+			)TMP
+		) where rn between #{startRow} and #{endRow}
 	</select>
 </mapper>

@@ -16,13 +16,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.onemile.service.cobuy.CobuyService;
-import com.kh.onemile.vo.CommuDetailVO;
 import com.kh.onemile.vo.PaginationVO;
 import com.kh.onemile.vo.cobuy.CobuyCatVO;
 import com.kh.onemile.vo.cobuy.CobuyDetailVO;
 import com.kh.onemile.vo.cobuy.CobuyListVO;
 import com.kh.onemile.vo.cobuy.CobuyRegVO;
-import com.kh.onemile.vo.cobuy.CobuyVO;
 import com.kh.onemile.vo.kakaopay.ConfirmVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -59,7 +57,7 @@ public class CobuyController {
 //	     model.addAttribute("category", cobuyCatVO);
 //		return "/cobuy/list";
 //	}
-	@GetMapping({"/list/{category}","/list"})
+	@GetMapping({"/list/{category}","/list","/",""})
 	public String list(@PathVariable(required = false) String category,
 			@RequestParam(required =false, defaultValue = "1") int page,
 			@RequestParam(required =false, defaultValue = "10") int size

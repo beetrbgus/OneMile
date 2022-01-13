@@ -353,8 +353,8 @@ $(function(){
   			for (var dto of resp) {
   				
 				var middleOption = $("<option>");
-				middleOption.val(dto.smallType);
-				middleOption.text(dto.smallType);
+				middleOption.val(dto);
+				middleOption.text(dto);
 				middle.append(middleOption);
 			}
   		  },
@@ -489,12 +489,13 @@ class="wz form" novalidate="novalidate">
 				<div class="wz input">
 					<label>관심사 설정</label>
 			<div class="row">
-				<select class="big" name="location">
+				<select class="big" name="like">
 					<option value="">관심사 선택</option>
 					<c:forEach var="category" items="${category}">
 						<option value="${category.bigType}">${category.bigType}</option>
 					</c:forEach>
-				</select> <select class="middle" name="smalltype"></select>
+				</select> 
+				<select class="middle" name="smalltype"></select>
 			</div>
 			<div id="category-select"></div>
 			</div>
