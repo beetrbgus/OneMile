@@ -60,21 +60,26 @@ public class CobuyController {
 //	     model.addAttribute("category", cobuyCatVO);
 //		return "/cobuy/list";
 //	}
-	@GetMapping({"/{category}","/"})
+	@GetMapping({"/list/{category}","/list"})
 	public String list(@PathVariable(required = false) String category,
 			@RequestParam(required =false, defaultValue = "1") int page,
 			@RequestParam(required =false, defaultValue = "10") int size
 			,Model model) {
-		
-		if(category==null)category="";
-		log.debug("category1234    "+category);
+		log.warn("page=========="+page);
+		log.warn("size============"+size);
 		PaginationVO paginationVO =new PaginationVO(page,size);
-		paginationVO.setCategory("/"+category);
-		
+		if(category==null||category.equals("/")) {
+			category="";
+			paginationVO.setCategory(category);
+		}else {
+			paginationVO.setCategory("/"+category);
+			model.addAttribute("nowcategory", category);
+		}
+
 		List<CobuyListVO> cobuyListVO = cobuyService.getList(paginationVO);
 		
 		for(CobuyListVO cobuy:cobuyListVO) {
-			log.debug("cobuyListVO    "+cobuy.toString());
+			log.info("cobuyListVO    "+cobuy.toString());
 		}
 	     model.addAttribute("cobuyList", cobuyListVO);
 	     List<CobuyCatVO> cobuyCatVO = cobuyService.getMiddleName();
@@ -101,11 +106,12 @@ public class CobuyController {
 	@ResponseBody
 	public List<CobuyListVO> list(
 			@RequestParam(required =false, defaultValue = "1") int page,
-			@RequestParam(required =false, defaultValue = "10") int size
+			@RequestParam(required =false, defaultValue = "10") int size,
+			@RequestParam(required =false) String category
 			) {
-		int endRow = page* size;
-		int startRow = endRow - (size - 1);
-		return cobuyService.getList(startRow, endRow);
+		PaginationVO paginationVO =new PaginationVO(page,size);
+		paginationVO.setCategory(category);
+		return cobuyService.getList(paginationVO);
 	}
 	@GetMapping("/detail") 
 	public String detail(@RequestParam int cobuyNo , Model model) {

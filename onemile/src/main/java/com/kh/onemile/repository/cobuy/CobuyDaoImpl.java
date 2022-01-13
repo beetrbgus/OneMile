@@ -17,6 +17,8 @@ import com.kh.onemile.vo.cobuy.CobuyListVO;
 import com.kh.onemile.vo.cobuy.CobuyRegVO;
 import com.kh.onemile.vo.kakaopay.ConfirmVO;
 
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
 @Repository
 public class CobuyDaoImpl implements CobuyDao{
 	@Autowired
@@ -66,6 +68,7 @@ public class CobuyDaoImpl implements CobuyDao{
 		map.put("endRow", paginationVO.getEndRow());
 		map.put("category", paginationVO.getCategory());
 		
+		log.error("map="+map);
 		return sqlSession.selectList("cobuy.getList2", map);
 	}
 	@Override
