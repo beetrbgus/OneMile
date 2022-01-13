@@ -43,6 +43,5 @@
 			m.hiddenyn = 'N' and m.approve = 'Y'
 		order by
 			m.member_no asc
-
 	</select>
 </mapper>

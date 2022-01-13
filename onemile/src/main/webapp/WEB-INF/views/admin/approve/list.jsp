@@ -31,6 +31,13 @@ table{
 	</div>
 </div>
 <div class="memberT">
+	<form method="post">
+		<select name="search">
+			<option value="email">이메일</option>
+			<option value="nick">닉네임</option>
+		</select>
+		<input type="text" name="keywored">
+	</form>
 	<table>
 		<thead>
 		<tr>

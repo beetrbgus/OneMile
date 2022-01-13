@@ -125,20 +125,20 @@ $(function () {
 										</div>
 										<span class="GNBMobile_text__2-voS">홈</span>
 									</a></li>
-								<li class="GNBMobile_item__1b4ZL">
+								<li class="GNBMobile_item__1b4ZL"><a href="${root}/notmap/list">
 										<div class="GNBMobile_icon__3OOAF"
 											style="background-image: url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGc+CiAgICAgICAgICAgIDxnPgogICAgICAgICAgICAgICAgPHBhdGggZD0iTTAgMEgyNFYyNEgweiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTQ5MDggLTE5ODUpIHRyYW5zbGF0ZSg0OTA4IDE5ODUpIi8+CiAgICAgICAgICAgICAgICA8cGF0aCBmaWxsPSIjODY4RTk2IiBkPSJNMTIgMi4yNWMyLjQ4NiAwIDQuNzY4Ljg3NyA2LjU1MyAyLjMzOGwxLjI4LTEuNDc5IDEuMTM0Ljk4Mi0xLjMyNCAxLjUzYzEuNjgyIDEuODQgMi43MDcgNC4yOSAyLjcwNyA2Ljk3OSAwIDUuNzE2LTQuNjM0IDEwLjM1LTEwLjM1IDEwLjM1LTUuNzE2IDAtMTAuMzUtNC42MzQtMTAuMzUtMTAuMzUgMC0yLjY5MiAxLjAyOC01LjE0NCAyLjcxMi02Ljk4NUwzLjAzNSA0LjA5M2wxLjEzLS45ODYgMS4yODcgMS40NzdDNy4yMzYgMy4xMjUgOS41MTYgMi4yNSAxMiAyLjI1em0wIDEuNWMtNC44ODggMC04Ljg1IDMuOTYyLTguODUgOC44NXMzLjk2MiA4Ljg1IDguODUgOC44NSA4Ljg1LTMuOTYyIDguODUtOC44NVMxNi44ODggMy43NSAxMiAzLjc1em0uNzUgMy41NTZ2NC44Nmw0LjM4OSAyLjUyNi0uNzQ4IDEuMy01LjE0MS0yLjk1OFY3LjMwNmgxLjV6IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNDkwOCAtMTk4NSkgdHJhbnNsYXRlKDQ5MDggMTk4NSkiLz4KICAgICAgICAgICAgPC9nPgogICAgICAgIDwvZz4KICAgIDwvZz4KPC9zdmc+Cg==&quot;);">
 										</div>
 										<span class="GNBMobile_text__2-voS confirmbtn">커뮤니티</span>
-									</li>
+									</a></li>
 								<li class="GNBMobile_item__1b4ZL"><a class="GNBMobile_link__t1Y9t"
-										href="/web/wreward/main">
+										href="${root}/social/list">
 										<div class="GNBMobile_icon__3OOAF"
 											style="background-image: url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGc+CiAgICAgICAgICAgIDxnPgogICAgICAgICAgICAgICAgPHBhdGggZD0iTTAgMEgyNFYyNEgweiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTQ4MTggLTE5ODUpIHRyYW5zbGF0ZSg0ODE4IDE5ODUpIi8+CiAgICAgICAgICAgICAgICA8cGF0aCBmaWxsPSIjODY4RTk2IiBkPSJNMTQuMzQ1IDIuOTE1Yy45MTYtLjczNyAxLjgyNC0uOTc2IDIuNjg5LS43MTMuNTk2LjE5IDEuMDgxLjYyNyAxLjMzMiAxLjIuMjkuNjM0LjI5IDEuMzY0IDAgMS45OTgtLjIwNi40NDgtLjUyOC44My0uOTMgMS4xMWwtLjEzOC4wOWg0LjcyMnYxNS4wOWgtMS40NFY4LjAyOEgzLjQyVjIxLjY5SDEuOThWNi42aDQuNzIyYy0uNDY3LS4yODUtLjg0LS43MDMtMS4wNjgtMS4yLS4yOTQtLjYyNy0uMzAzLTEuMzUyLS4wMjQtMS45ODYuMjUtLjU3NC43MzUtMS4wMTIgMS4zMzItMS4yLjg2NS0uMjcgMS43NzMtLjAzIDIuNjkuNzEzbC4xMy4xMDkuMjIzLjIwOUMxMC43OTIgNC4wMiAxMS40NzIgNC45MiAxMiA1LjkxYy41Mi0uOTkyIDEuMTkzLTEuODk0IDEuOTkzLTIuNjc2bC4yMjEtLjIxLjEzLS4xMDl6TTEyLjcyIDkuOTQydjExLjY0aC0xLjQ0VjkuOTQyaDEuNDR6TTcuNjU2IDMuMzA2Yy0uMTIgMC0uMjQuMDE4LS4zNTQuMDU0LS4yNjguMDktLjQ4NS4yODgtLjYuNTQ2LS4xMzMuMzI3LS4xMTUuNjk1LjA0OCAxLjAwOC4zNzguODQ2IDEuOTUgMS40MSA0LjIgMS41NDgtLjQ2LS44NTctMS4wNDYtMS42MzgtMS43MzktMi4zMTlMOC45IDMuODQ2Yy0uMzQ0LS4zMS0uNzgtLjUtMS4yNDQtLjU0em05LjAzNi4wMzZsLS4wODktLjAyYy0uMzEyLS4wNTgtLjc3OC0uMDQ0LTEuNDk0LjUzbC0uMTA5LjA5LS4yMDcuMmMtLjY3OC42NzgtMS4yNTEgMS40NTQtMS43MDEgMi4zMDIgMi4yNDQtLjEzOCAzLjgyMi0uNzAyIDQuMi0xLjU0OC4xNDgtLjMyLjE0OC0uNjg4IDAtMS4wMDgtLjExNS0uMjU4LS4zMzItLjQ1Ni0uNi0uNTQ2eiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTQ4MTggLTE5ODUpIHRyYW5zbGF0ZSg0ODE4IDE5ODUpIi8+CiAgICAgICAgICAgIDwvZz4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPgo=&quot;);">
 										</div>
 										<span class="GNBMobile_text__2-voS">소셜링</span>
 									</a></li>
-								<li class="GNBMobile_item__1b4ZL"><a href="/web/store/main"
+								<li class="GNBMobile_item__1b4ZL"><a href="${root}/cobuy/list"
 										class="GNBMobile_link__t1Y9t">
 										<div class="MenuBadge_badge__1VGZ2 MenuBadge_new__gus4v"></div>
 										<div class="GNBMobile_icon__3OOAF"
@@ -190,9 +190,9 @@ $(function () {
 								<li class="GNBDesktop_item__H8bay confirmbtn GNBDesktop_link__1AP6q"><span>동네인증</span></li>
 								<li class="GNBDesktop_item__H8bay GNBDesktop_link__1AP6q"><input type="text" class="dong"></li>
 								<li class="GNBDesktop_item__H8bay"><a class="GNBDesktop_link__1AP6q"
-										href="/web/wreward/comingsoon"><span>마일즈</span></a></li>
+										href="${root}/miles/list"><span>마일즈</span></a></li>
 								<li class="GNBDesktop_item__H8bay"><a class="GNBDesktop_link__1AP6q"
-										href="/web/wreward/main"><span>소셜링</span></a></li>
+										href="${root}/social/list"><span>소셜링</span></a></li>
 								<li class="GNBDesktop_item__H8bay"><a href="${root}/cobuy/list"
 										class="GNBDesktop_link__1AP6q"><span>공동구매</span></a></li>
 								<li class="GNBDesktop_item__H8bay">
