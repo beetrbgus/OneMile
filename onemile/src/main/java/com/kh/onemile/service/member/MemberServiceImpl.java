@@ -98,15 +98,18 @@ public class MemberServiceImpl implements MemberService {
 	// 로그인
 	@Override
 	public MemberDTO login(MemberDTO memberDTO) {
+		
+		log.debug("11비밀번호~~~~~~~~"+memberDTO.getPw());
+		log.debug("ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ"+memberDTO);
 		MemberDTO loginMember = memberDao.login(memberDTO);
+		
 		// 암호화 비교
-		if (encoder.matches(memberDTO.getPw(), loginMember.getPw())) {
+		if (loginMember != null && encoder.matches(memberDTO.getPw(), loginMember.getPw())) {
 			return loginMember;
 		} else {
 			return null;
 		}
 	}
-
 	// 회원탈퇴
 	@Override
 	public boolean quit(String email, String pw) {
@@ -184,5 +187,15 @@ public class MemberServiceImpl implements MemberService {
 	    memberVO.setBirthstr(dateToString.dateToString(memberVO.getBirth()));
 	    
 	    return memberVO;
+	}
+	
+	//이메일로 가져오기
+	@Override
+	public boolean getEmail(String email) {
+		MemberDTO memberDTO = memberDao.get(email);
+		if(memberDTO != null) {
+			return true;
+		}
+		return false;
 	}
 }

@@ -66,6 +66,8 @@ public class MembershipController {
 		int memberNo = (int)session.getAttribute("logNo");
 		List<MembershipBuyDTO> membershipBuyDTO = membershipDao.joinMembership(memberNo);
 		model.addAttribute("list",membershipBuyDTO);
+		
+		log.debug("멤버십이름확인"+membershipBuyDTO);
 		return "membership/reg_membership";
 	}
 }

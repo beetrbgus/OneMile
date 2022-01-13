@@ -149,8 +149,9 @@
 			)TMP
 		) where rn between 1 and 10
 	</select>
+	
+	<select id="getbuyList" parameterType="int" resultType="ProductBuyDTO">
+		select * from pb where member_no = #{memberNo}
+	</select>
+	
 </mapper>
-
-
-
-

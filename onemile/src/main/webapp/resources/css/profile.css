@@ -1,0 +1,207 @@
+@media (max-width: 767px) {
+  .profile_col {
+    margin-bottom: 6px;
+  }
+}
+.profile_col .introduce_row {
+  padding: 0 20px 20px 20px;
+}
+.profile_col .introduce_row .introduce_col {
+  font-size: 14px;
+  font-weight: normal;
+  letter-spacing: -0.2px;
+  color: #383535;
+}
+.profile_col .introduce_row .tag_col .tag {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: normal;
+  color: #383535;
+  padding: 4px 10px;
+  margin-right: 8px;
+  border-radius: 4px;
+  background-color: #f4f4f4;
+  margin-top: 5px;
+}
+.profile_col .introduce_row .tag_col .tag:last-child {
+  margin-right: 0;
+}
+.profile_col .introduce_row .social_col .social_link {
+  margin-right: 12px;
+}
+.profile_col .introduce_row .social_col .social_link img {
+  width: 30px;
+  height: 30px;
+}
+.profile_col .introduce_row .social_col .social_link:last-child {
+  margin-right: 0;
+}
+.profile_col .profile_image_cover {
+  position: relative;
+}
+.profile_col .profile_image_cover .profile_update_button {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+#install_button {
+  height: 40px;
+  line-height: 37px;
+  color: #fff;
+  padding: 0 30px 0 15px !important;
+  position: relative;
+}
+#install_button img {
+  position: absolute;
+  top: 7px;
+  right: 6px;
+}
+
+.saved_col .target {
+  display: none;
+}
+.saved_col .target.selected {
+  display: block;
+}
+.saved_col .target.selected.row {
+  display: flex;
+}
+.saved_col .saved_inner {
+  height: auto;
+  padding-left: 0;
+  padding-right: 0;
+  margin-bottom: 12px;
+}
+.saved_col .saved_inner:first-child {
+  padding-top: 0;
+}
+.saved_col .saved_inner:last-child {
+  margin-bottom: 0;
+}
+.saved_col .li_row {
+  border-bottom: 1px solid #b8b8b8;
+}
+.saved_col .li_row .row {
+  max-width: 375px;
+  margin-bottom: -1px;
+}
+.saved_col .li_row .row .col-6 {
+  padding: 0 20px;
+}
+.saved_col .li_row .selector {
+  width: 100%;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: normal;
+  color: #999696;
+  cursor: pointer;
+}
+.saved_col .li_row .selected {
+  font-weight: bold;
+  color: #e73331;
+  border-bottom: 2px solid #e73331;
+}
+.saved_col #install_button .btn_inner {
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.saved_col .title_row .select_col select {
+  padding: 8px 16px;
+  height: 40px;
+}
+.saved_col .title_row h1 {
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: -0.4px;
+  color: #080606;
+}
+
+.mypage_tab_container {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 30px;
+}
+
+.profile_update_row .title_col h3 {
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: -0.4px;
+  color: #080606;
+}
+.profile_update_row .title_col h4 {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: normal;
+  color: #7a7a7a;
+}
+.profile_update_row .form-control {
+  border-radius: 8px;
+  border: solid 1px #dbdbdb;
+}
+.profile_update_row .form-control::placeholder {
+  font-size: 14px;
+  font-weight: normal;
+  letter-spacing: -0.4px;
+  color: #999696;
+}
+.profile_update_row textarea {
+  resize: none;
+}
+.profile_update_row .profile_image_col #profile_image_cover {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.profile_update_row .profile_image_col #profile_image_cover label {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin-bottom: 0;
+  cursor: pointer;
+}
+.profile_update_row .custom-checkbox .custom-control-label {
+  font-size: 12px;
+  font-weight: normal;
+  letter-spacing: -0.4px;
+  color: #080606;
+  padding-top: 3px;
+}
+.profile_update_row .tag_col .tag {
+  display: inline-block;
+  padding: 5px 16px;
+  font-size: 14px;
+  font-weight: normal;
+  letter-spacing: -0.4px;
+  text-align: center;
+  color: #ef301a;
+  border-radius: 1000px;
+  border: solid 1px #e73331;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  user-select: none;
+}
+.profile_update_row .tag_col .tag.selected {
+  color: white;
+  background-color: #e73331;
+}
+
+@media (min-width: 767px) {
+  body > .container {
+    min-height: 800px;
+  }
+}

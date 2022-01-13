@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.kh.onemile.entity.cobuy.CobuyDTO;
 import com.kh.onemile.entity.image.middle.MiddleImgTableDTO;
 import com.kh.onemile.entity.map.MapDTO;
+import com.kh.onemile.entity.product.ProductBuyDTO;
 import com.kh.onemile.repository.cobuy.CobuyBuyDao;
 import com.kh.onemile.repository.cobuy.CobuyDao;
 import com.kh.onemile.repository.image.middle.MiddleImageDAO;
@@ -155,6 +156,11 @@ public class CobuyServiceImpl implements CobuyService {
 	@Override
 	public List<CobuyListVO> getList(PaginationVO paginationVO) {
 		return cobuyDao.cobuyList(paginationVO);
+	}
+
+	@Override
+	public List<ProductBuyDTO> getbuyList(int memberNo) {
+		return cobuyDao.getbuyList(memberNo);
 	}
 
 }
