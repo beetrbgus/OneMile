@@ -107,4 +107,8 @@
 			)TMP
 		) where rn between #{startRow} and #{endRow}
 	</select>
+	
+	<select id="getCount" parameterType="int" resultType="SocialDTO">
+		select * from social where member_no = #{memberNo} and regdate > sysdate-7
+	</select>
 </mapper>

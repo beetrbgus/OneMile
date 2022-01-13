@@ -3,10 +3,82 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath }"></c:set>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<style>
+  .outer2 {
+	display: flex;
+	justify-content: center;
+	margin-top:200px;
+}
+.iAkHpv main {
+    width: 100%;
+    padding-left: 3.125rem;
+    padding-right: 3.125rem;
+}
 
-<h1>결제 내역</h1>
+.iAkHpv main {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1.5rem;
+    width: 1184px;
+}
 
-<form action="confirm" method="get">
+* {
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+}
+
+* {
+    box-sizing: inherit;
+}
+사용자 에이전트 스타일시트
+main {
+    display: block;
+}
+
+body, html {
+    height: 100%;
+    min-height: 100%;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(249, 249, 249);
+    margin: 0px;
+    -webkit-font-smoothing: antialiased;
+    font-family: "Noto Sans KR", sans-serif, 나눔고딕, 돋움, Dotum, 굴림, Gulim, "Apple SD Gothic Neo" !important;
+}
+h1, h2, h3, h4, h5 {
+    font-family: inherit;
+}
+h2 {
+    display: block;
+    font-size: 1.5em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+.ZcoDs {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+.ZcoDs .name {
+    font-size: 1.1rem;
+    margin-top: 0.25rem;
+    font-weight: 600;
+}
+.ZcoDs .expense {
+    text-align: right;
+    margin-top: 0.25rem;
+    font-size: 1.1rem;
+}
+.ZcoDs .date {
+    color: rgb(99, 99, 99);
+    font-size: 0.9rem;
+}
+
+</style>
 <c:forEach var="membershipBuyDTO" items="${list}">
 	<div>
 		${membershipBuyDTO.itemName} / ${membershipBuyDTO.totalAmount} / ${membershipBuyDTO.buyTime} / ${membershipBuyDTO.buyEndtime}
@@ -16,6 +88,26 @@
 	</div>
 </c:forEach>
 	
-</form>
 
+<div class="outer2">
+<div style="width: 1000px">
+<main >
+    <h2>이용내역</h2>
+    <div class="PurchaseHistory__Block-wpufov-2 dUCAhU">
+        <div class="TransactionItem__Block-sc-1naw9lz-0 ZcoDs">
+        	<c:forEach var="membershipBuyDTO" items="${list}">
+            <div class="date">${membershipBuyDTO.buyTime} ~ ${membershipBuyDTO.buyEndtime}</div>
+            <div class="name"><span class="TransactionItem__Name-sc-1naw9lz-1 fba-dEH">${membershipBuyDTO.itemName}</span></div>
+            <div class="expense"><span class="method">카카오페이 </span><span class="price">${membershipBuyDTO.totalAmount}원 <a href="${pageContext.request.contextPath}/pay/regular/disabled?sid=${membershipBuyDTO.sid}">[중지]</a></span></div>
+        	
+        
+      	  </c:forEach>
+        </div>
+        <div class="PurchaseHistory__FetchingNext-wpufov-0 guWliA"></div>
+    	
+    </div>
+    
+</main>
+</div>
+</div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

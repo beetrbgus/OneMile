@@ -14,7 +14,7 @@
 	<div class="reward-header"> 
 	</div>
 	<!-- E : 리워드 헤더 -->
-
+	
 	<!-- S: 리워드 오픈된 프로젝트 새소식 scroll 포커스 위치 -->
 	<div id="openRewardNavigationLocation"></div>
 	<!-- E : 리워드 네비게이션 -->

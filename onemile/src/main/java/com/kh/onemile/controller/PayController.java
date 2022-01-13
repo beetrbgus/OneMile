@@ -93,7 +93,7 @@ public class PayController {
 		requestVO.setCid(cid);
 		requestVO.setMemberNo(memberNo);
 		requestVO.setProductNo(productNo);
-
+	
 		log.debug("tid   :"+tid);
 		log.debug("requestVO.getTid()   :"+requestVO.getTid());
 		

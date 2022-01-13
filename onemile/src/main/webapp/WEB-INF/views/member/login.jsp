@@ -4,19 +4,22 @@
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <style>
-	.notice {
+	.error {
+	margin-top: 10px;
 	color: red;
 	}
 	.page-body{
 		width:400px;
+		
 	}
 	.page-body{
 		margin-left: auto;
 	    margin-right: auto;
-	    margin-top: 10px;
+	    margin-top: 70px;
 		margin-bottom: 10px;
 		padding-top:5px;
 		padding-bottom:5px;
+		
 	}
 	.bottom-message{
 		width: 100%;
@@ -70,7 +73,7 @@
             </div>	
            <c:if test="${param.error != null}">
 			<div class="row center"> 
-				<h4 class="error">로그인 정보가 일치하지 않습니다</h4>
+				<h4 class="error">로그인 정보가 일치하지 않습니다.</h4>
 			</div>
 			</c:if>
           </div>

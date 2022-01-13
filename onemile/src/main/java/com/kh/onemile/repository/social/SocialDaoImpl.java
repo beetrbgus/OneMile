@@ -51,4 +51,9 @@ public class SocialDaoImpl implements SocialDao{
 	public SocialDetailVO getDetail(int socialNo) {
 		return sqlSession.selectOne("social.getDetail", socialNo);
 	}
+
+	@Override
+	public List<SocialDTO> getCount(int memberNo) {
+		return sqlSession.selectList("social.getCount",memberNo);
+	}
 }

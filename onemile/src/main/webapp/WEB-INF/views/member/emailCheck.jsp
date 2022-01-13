@@ -7,14 +7,15 @@
 .outer2 {
 	display: flex;
 	justify-content: center;
+	margin-top: 70px;
 }
 </style>
 
 <div class="outer2">
-<div class="wz container pw-check" style="width: 500px">
-	 <h2 class="wz text display2">비밀번호 찾기</h2>
+<div class="wz container pw-check" style="width: 500px" >
+	 <h2 class="wz text display2" style="margin-top: 70px;">비밀번호 찾기</h2>
    	<form class="wz form" onsubmit="checkEmail()" action="emailCheck" method="post">
-        <input type="hidden" name="email" value="${email}">
+        <input type="hidden" name="email" value="${email}" >
         <div class="label-hidden field">
             <label class="text-hidden" for="email">이메일 주소</label>
             <div class="wz input">

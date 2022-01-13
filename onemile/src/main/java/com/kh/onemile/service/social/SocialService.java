@@ -16,4 +16,5 @@ public interface SocialService {
 	public List<SocialListVO> list();
 	public List<SocialListVO> getList(PaginationVO paginationVO);
 	public SocialDetailVO getDetail(int socialNo);
+	public List<SocialDTO> getCount(int memberNo);
 }

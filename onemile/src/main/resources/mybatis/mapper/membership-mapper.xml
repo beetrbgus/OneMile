@@ -17,11 +17,11 @@
 	<insert id="join" parameterType="membershipBuyDTO">
 		insert into msb (
 			msb_no, member_no ,msp_no, sid, total_amount, partner_user_id,
-			buy_time, buy_endtime, status
+			buy_time, buy_endtime, status, item_name
 			)
 			values(
 			#{msbNo},#{memberNo},#{mspNo},#{sid},#{totalAmount}, #{partnerUserId},
-			sysdate, sysdate+31, '결제완료'
+			sysdate, sysdate+31, '결제완료', #{itemName}
 			)
 	</insert>
 		
@@ -48,7 +48,7 @@
 	
 	<!-- 내가 가입한 멤버십  -->
 	<select id="joinMembership" parameterType="int" resultType="MembershipBuyDTO">
-		select * from msb where member_no = #{memberNo}
+		select * from msb msb inner join msp on msb.msp_no = msp.msp_no where msb.member_no = #{memberNo}
 	</select>	
 	
 	<!-- 정기결제 해지 -->

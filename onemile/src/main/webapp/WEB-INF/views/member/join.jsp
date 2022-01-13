@@ -476,8 +476,10 @@ class="wz form" novalidate="novalidate">
 <div class="page">
 	<div class="outer2">
 		<div class="wz container form-container" style="width: 500px">
+		<h2 class="wz text display2 page-title">회원가입</h2>
+		<p class="page-description">고객님의 회원가입을 환영합니다!</p>
 			
-			<div class="field password-field group">
+			<div class="field password-field group" style="margin-top: 70px">
 				<label class="label">자기소개</label>
 				<div class="wz input">
 				<textarea name="intro" rows="5" cols="50"

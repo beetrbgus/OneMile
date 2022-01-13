@@ -9,6 +9,9 @@ import com.kh.onemile.repository.membership.MembershipBuyDao;
 import com.kh.onemile.vo.buy.CoBuyBuyVO;
 import com.kh.onemile.vo.kakaopay.KakaoPayApproveResponseVO;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class BuyTableServiceImpl implements BuyTableService {
 	@Autowired
@@ -28,7 +31,8 @@ public class BuyTableServiceImpl implements BuyTableService {
 			membershipBuyDTO.setMspNo(responseVO.getProductNo());
 			System.out.println("프로덕트no"+responseVO.getProductNo());
 			membershipBuyDTO.setMemberNo(responseVO.getMemberNo());
-			
+			log.debug("상품명"+responseVO.getItem_name());
+			membershipBuyDTO.setItemName(responseVO.getItem_name());
 			membershipBuyDao.insert(membershipBuyDTO);
 		} else {
 			CoBuyBuyVO coBuyBuyVO = new CoBuyBuyVO();
@@ -37,8 +41,9 @@ public class BuyTableServiceImpl implements BuyTableService {
 			coBuyBuyVO.setTid(responseVO.getTid());
 			coBuyBuyVO.setItemName(responseVO.getItem_name());
 			coBuyBuyVO.setTotalAmount(responseVO.getAmount().getTotal());
+			coBuyBuyVO.setQuantity(responseVO.getQuantity());
+			log.debug("공동구매 갯수"+responseVO.getQuantity());										
 			coBuyBuyVO.setStatus("결제완료");
-			
 			cobuyBuyDao.reg(coBuyBuyVO);
 			cobuyBuyDao.reduceStock(responseVO.getProductNo(), responseVO.getQuantity());
 		}

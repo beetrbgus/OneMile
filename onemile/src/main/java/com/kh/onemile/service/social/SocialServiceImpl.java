@@ -145,4 +145,9 @@ public class SocialServiceImpl implements SocialService{
 		
 		return socialDao.getDetail(socialNo);
 	}
+
+	@Override
+	public List<SocialDTO> getCount(int memberNo) {
+		return socialDao.getCount(memberNo);
+	}
 }

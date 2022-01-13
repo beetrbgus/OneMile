@@ -130,6 +130,7 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 		KakaoPayApproveResponseVO responseVO = template.postForObject(uri, entity, KakaoPayApproveResponseVO.class);// 응답을
 		responseVO.setMemberNo(requestVO.getMemberNo());
 		responseVO.setProductNo(requestVO.getProductNo());
+	
 		// 결제 내역 테이블에 저장
 		buyTableService.reg(responseVO);
 	}

@@ -14,5 +14,5 @@ public class CoBuyBuyVO {
 	private int totalAmount; //거래금액
 	private Date buyTime; //거래시각
 	private String status; //결제 상태
-	
+	private int quantity;
 }
