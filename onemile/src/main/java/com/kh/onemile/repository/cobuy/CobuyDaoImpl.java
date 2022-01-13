@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.onemile.entity.cobuy.CobuyDTO;
+import com.kh.onemile.entity.product.ProductBuyDTO;
 import com.kh.onemile.vo.PaginationVO;
 import com.kh.onemile.vo.cobuy.CobuyCatVO;
 import com.kh.onemile.vo.cobuy.CobuyDetailVO;
@@ -66,6 +67,10 @@ public class CobuyDaoImpl implements CobuyDao{
 		map.put("category", paginationVO.getCategory());
 		
 		return sqlSession.selectList("cobuy.getList2", map);
+	}
+	@Override
+	public List<ProductBuyDTO> getbuyList(int memberNo) {
+		return sqlSession.selectList("cobuy.getbuyList",memberNo);
 	}
 
 }

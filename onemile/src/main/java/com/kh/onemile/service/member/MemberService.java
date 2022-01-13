@@ -47,5 +47,8 @@ public interface MemberService {
 
 	//회원정보 불러오기(사진 포함)
 	public MemberVO imageProfile(int memberNo);
+	
+	//이메일로 가져오기
+	public boolean getEmail(String email);
 
 }

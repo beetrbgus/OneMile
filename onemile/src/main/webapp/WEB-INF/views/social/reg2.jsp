@@ -84,7 +84,7 @@ $(function(){
 	<input type="number" name="minpeople" min="2" value="2" required>
 	<br>
 	최대인원 : 
-	<input type="number" name="maxpeople" min="2" value="2" required>
+	<input type="number" name="maxpeople" min="2" max="${AD}" value="2" required>
 	<div id="map" style="width: 500px; height: 400px;"></div>
 	
 	<button type="button" id="submitBtn">등록하기</button>

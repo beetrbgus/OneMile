@@ -8,10 +8,10 @@
 	<insert id="reg" parameterType="CoBuyBuyVO">
 		insert into pb(
 			PB_NO, MEMBER_NO, PRODUCT_NO,
-			TID,ITEM_NAME, TOTAL_AMOUNT,STATUS)
+			TID,ITEM_NAME, TOTAL_AMOUNT,STATUS,QUANTITY)
 		values(
 			PB_SEQ.nextval, #{memberNo},#{productNo},
-			#{tid},#{itemName},#{totalAmount},#{status} 
+			#{tid},#{itemName},#{totalAmount},#{status},#{quantity}
 		)
 	</insert>
 	<!-- 결제 취소 -->

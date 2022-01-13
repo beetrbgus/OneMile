@@ -13,4 +13,5 @@ public interface SocialDao {
 	List<SocialListVO> list();
 	List<SocialListVO> getList(String category);
 	List<SocialDetailVO> getDetail(int socialNo);
+	List<SocialDTO> getCount(int memberNo);
 }

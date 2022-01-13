@@ -13,6 +13,9 @@ import com.kh.onemile.repository.member.MemberDao;
 import com.kh.onemile.util.RandomUtil;
 import com.kh.onemile.util.Sequence;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Transactional
 @Service
 @Qualifier("gmail")
@@ -32,8 +35,10 @@ public class GmailService implements EmailService{
 	public void sendCertificationNumber(String email) {
 		//랜덤번호 생성 부분
 		String number = randomUtil.RandomNumber(6);
+		
 		//회원번호 1개 가져오기
 		int memberNo = memberDao.getMemberNo(email);
+		
 		//실제 이메일 발송 부분
 		SimpleMailMessage message = new SimpleMailMessage();
 		message.setTo(email);
@@ -49,5 +54,5 @@ public class GmailService implements EmailService{
 		certiDTO.setSerial(number);
 		certiDTO.setMemberNo(memberNo);
 		certiDao.insert(certiDTO);
-	}
+		}
 }

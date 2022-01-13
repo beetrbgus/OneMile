@@ -2,7 +2,9 @@ package com.kh.onemile.controller;
 
 import java.io.IOException;
 import java.util.List;
+
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,14 +17,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.onemile.entity.product.ProductBuyDTO;
 import com.kh.onemile.service.cobuy.CobuyService;
-import com.kh.onemile.vo.CommuDetailVO;
 import com.kh.onemile.vo.PaginationVO;
 import com.kh.onemile.vo.cobuy.CobuyCatVO;
 import com.kh.onemile.vo.cobuy.CobuyDetailVO;
 import com.kh.onemile.vo.cobuy.CobuyListVO;
 import com.kh.onemile.vo.cobuy.CobuyRegVO;
-import com.kh.onemile.vo.cobuy.CobuyVO;
 import com.kh.onemile.vo.kakaopay.ConfirmVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -173,5 +174,14 @@ public class CobuyController {
 		redirectAttributes.addFlashAttribute("confirmVO", confirmResultVO);
 		
 		return "redirect:/pay/confirm";
+	}
+	
+	//내가 구매한 공동구매 목록
+	@GetMapping("/buylist")
+	public String regMembership(Model model, HttpSession session) {
+		int memberNo = (int)session.getAttribute("logNo");
+		List<ProductBuyDTO> ProductBuyDTO = cobuyService.getbuyList(memberNo);
+		model.addAttribute("list",ProductBuyDTO);
+		return "cobuy/buylist";
 	}
 }

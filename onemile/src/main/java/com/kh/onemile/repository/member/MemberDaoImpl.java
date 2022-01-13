@@ -40,6 +40,7 @@ public class MemberDaoImpl implements MemberDao{
 	@Override
 	public int getMemberNo(String email) {
 		return sqlSession.selectOne("member.memberNoByEmail", email);
+		
 	}
 	//회원탈퇴
 	@Override
