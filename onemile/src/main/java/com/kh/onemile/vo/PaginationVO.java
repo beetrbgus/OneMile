@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class PaginationVO {
+	private String searchword;
 	private String keyword;
 	private String category;
 	private int startRow;

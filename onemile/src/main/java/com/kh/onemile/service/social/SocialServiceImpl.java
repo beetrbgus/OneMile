@@ -16,6 +16,7 @@ import com.kh.onemile.repository.social.SocialDao;
 import com.kh.onemile.service.image.ImageService;
 import com.kh.onemile.service.map.MapService;
 import com.kh.onemile.util.Sequence;
+import com.kh.onemile.vo.PaginationVO;
 import com.kh.onemile.vo.SocialVO;
 import com.kh.onemile.vo.social.SocialDetailVO;
 import com.kh.onemile.vo.social.SocialListVO;
@@ -135,12 +136,12 @@ public class SocialServiceImpl implements SocialService{
 	}
 
 	@Override
-	public List<SocialListVO> getList(String category) {
-		return socialDao.getList(category);
+	public List<SocialListVO> getList(PaginationVO paginationVO) {
+		return socialDao.getList(paginationVO);
 	}
 
 	@Override
-	public List<SocialDetailVO> getDetail(int socialNo) {
+	public SocialDetailVO getDetail(int socialNo) {
 		
 		return socialDao.getDetail(socialNo);
 	}

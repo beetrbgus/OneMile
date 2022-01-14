@@ -3,15 +3,45 @@
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="category">
-	
-	<!-- 소모임 대분류 목록 -->
-	<select id="list" resultType="SocialBigCategoryDTO">
-		select * from sbc
+	<!-- 관리자가 추가하는 항목 -->
+	<insert id="regsbc">
+		insert into sbc(BIGTYPE,BIGVALUE) values(
+			#{largeName},#{bigValue}
+		)
+	</insert>
+	<insert id="regsmc">
+		insert into smc(SMALLTYPE,BIGTYPE,SMALLVALUE) values(
+			#{smallType},#{bigType},#{smallvalue}
+		)
+	</insert>
+
+	<!-- 전체 대 중 분류 가져오기  -->
+	<resultMap type="CategoryVO" id="getList">
+		<result column="BIGTYPE" property="largeName"/>
+		<result column="BIGTYPE" property="largeName"/>
+		<result column="BIGTYPE" property="largeName"/>
+			
+		<collection property="middle" javaType="java.util.List"
+			ofType="MiddleCategoryVO" select="getmiddle" column="bigtype"/>
+	</resultMap>
+	<!-- 전체 대,중 분류 가져오기 -->
+	<select id="getAll" resultMap="getList">
+		select * from sbc where HIDDENYN='N' order by orderNo
+	</select>
+	<!-- 전체 대,중 분류의 하위 SQL  -->
+	<select id="getmiddle" parameterType="String" resultType="MiddleCategoryVO">
+		select smc.*,sbc.bigvalue from smc inner join sbc 
+			on smc.bigtype = sbc.bigtype  
+			where smc.HIDDENYN ='N' AND sbc.BIGVALUE=#{bigValue}
 	</select>
 	
-	<!-- 소모임 대분류로 소분류 가져오기 -->
-	<select id="listBySuper" parameterType="String" resultType="SocialCategoryDTO">
-		select * from smc where bigtype = #{bigtype}
+	<!-- 단순 소분류이름 목록 -->
+	<select id="getmiddleAll" resultType="MiddleCategoryVO">
+		select * from smc where HIDDENYN ='N'
+	</select>
+	<!-- 전체 대분류 목록 -->
+	<select id="getbigAll" resultType="SocialBigCategoryDTO">
+		select * from sbc where HIDDENYN ='N' order by ORDERNO
 	</select>
 	
 	<!-- 회원 관심 카테고리  -->
@@ -19,7 +49,6 @@
 		insert into ic values(
 			#{IcNo},#{smalltype},#{memNo}
 		)
-		
 	</insert>
 	
 </mapper>

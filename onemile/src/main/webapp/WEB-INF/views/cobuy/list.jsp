@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <style>
@@ -201,10 +202,10 @@ img{
 				</div>
 			</div>
 		<!-- 카테고리 끝지점 -->
-		<c:if test="${category} > 10">
-		<button class="CategoryCircleList_next__1mHyX" type="button" data-dir="다음">
-		<i class="icon chevron-right CategoryCircleList_icon__13sH8" aria-hidden="true"></i>
-		</button>
+		<c:if test="${fn:length(category)} > 10">
+			<button class="CategoryCircleList_next__1mHyX" type="button" data-dir="다음">
+				<i class="icon chevron-right CategoryCircleList_icon__13sH8" aria-hidden="true"></i>
+			</button>
 		</c:if>
 		</div>
 	</div>
@@ -250,7 +251,7 @@ img{
 				 	<div class='ProjectCardList_item__1owJa'>
 						<div> 
 							<div class='CommonCard_container__e_ebQ CommonCard_squareSmall__1Cdkn'>
-								<a href='detail?cobuyNo=${CobuyListVO.cobuyNo}' class='CardLink_link__1k83H CommonCard_image__vaqkf' aria-hidden='true' tabindex='-1'>
+								<a href='${pageContext.request.contextPath}/cobuy/detail?cobuyNo=${CobuyListVO.cobuyNo}' class='CardLink_link__1k83H CommonCard_image__vaqkf' aria-hidden='true' tabindex='-1'>
 									<div class='CommonCard_rect__2wpm4'>
 										<span class='CommonCard_background__3toTR CommonCard_visible__ABkYx'
 											style='background-image: url("${pageContext.request.contextPath}/image/download?imageNo=${CobuyListVO.imgNo}&folder=cobuy")'></span>
@@ -261,11 +262,19 @@ img{
 							 			<div class='RewardProjectCard_infoTop__3QR5w'>
 							 				<a href='detail?cobuyNo=${CobuyListVO.cobuyNo}' class='CardLink_link__1k83H'>
 							 					<p class='CommonCard_title__1oKJY RewardProjectCard_title__iUtvs'>
-							 						<strong>${CobuyListVO.PName}<br>${CobuyListVO.title}</strong>
+							 						<strong>${CobuyListVO.title}</strong>
 							 					</p>
 							 				</a>
-							 				<div>
-							 				<span class='RewardProjectCard_makerName__2q4oH'>${CobuyListVO.nick}</span>		
+							 				<div>	
+								 				<a class="MakerInfoHeader_link__HmY8C" href="${pageContext.request.contextPath}/account/profile/${SocialListVO.memberNo}">
+													<button class="Avatar_avatar__CiRY0 Avatar_xs__1Mz7G MakerInfoHeader_avatar__ltZMd">
+														<span style="background-image: url(/onemile/image/download?imageNo=179&amp;folder=member);"></span>
+													</button>
+													<div class="MakerInfoHeader_texts__1vfam">
+														<span class="MakerInfoHeader_makerName__KDu0a">${CobuyListVO.nick}</span>
+													</div>
+													<br>
+												</a>
 							 				</div>
 							 			</div>
 							 			<div class='RewardProjectCard_gauge__3p9US'>		

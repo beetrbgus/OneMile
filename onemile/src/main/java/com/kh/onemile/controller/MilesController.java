@@ -20,27 +20,25 @@ import com.kh.onemile.vo.MilesVO;
 @Controller
 public class MilesController {
 
-    @Autowired
-    private MilesService milesService;
-    @Autowired
-    private MemberService memberService;
-    @Autowired
-	private CategoryService categoryService;
-   
-    //마일즈 생성
-    @GetMapping("/create")
-    public String create(HttpSession session, Model model) {
-    	int memberNo = (int)session.getAttribute("logNo");
-    	model.addAttribute("category",categoryService.list());
-    	model.addAttribute("adDto",memberService.membership(memberNo));
-        return "miles/create";
-    }
-    @PostMapping("/create")
-    public String create(@ModelAttribute MilesVO milesVo,HttpSession session) throws IllegalStateException, IOException {
-    	int writer =(int) session.getAttribute("logNo");
-		milesVo.setMemberNo(writer);
-		milesService.create(milesVo);
-		return "redirect:/";
-    }
+	/*
+	 * @Autowired private MilesService milesService;
+	 * 
+	 * @Autowired private MemberService memberService;
+	 * 
+	 * @Autowired private CategoryService categoryService;
+	 * 
+	 * //마일즈 생성
+	 * 
+	 * @GetMapping("/create") public String create(HttpSession session, Model model)
+	 * { int memberNo = (int)session.getAttribute("logNo");
+	 * model.addAttribute("category",categoryService.list());
+	 * model.addAttribute("adDto",memberService.membership(memberNo)); return
+	 * "miles/create"; }
+	 * 
+	 * @PostMapping("/create") public String create(@ModelAttribute MilesVO
+	 * milesVo,HttpSession session) throws IllegalStateException, IOException { int
+	 * writer =(int) session.getAttribute("logNo"); milesVo.setMemberNo(writer);
+	 * milesService.create(milesVo); return "redirect:/"; }
+	 */
 
 }

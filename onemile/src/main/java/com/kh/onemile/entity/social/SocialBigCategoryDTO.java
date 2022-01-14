@@ -5,4 +5,5 @@ import lombok.Data;
 @Data
 public class SocialBigCategoryDTO {
 	private String bigType;
+	private String bigValue;
 }

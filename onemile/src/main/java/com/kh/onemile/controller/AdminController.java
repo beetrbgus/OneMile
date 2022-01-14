@@ -45,8 +45,14 @@ public class AdminController {
 //		int endRow = page* size;
 //		int startRow = endRow - (size - 1);
 //		return adminService.notMember(keyword, search, endRow, startRow);
-		
 //	}
+
+	@GetMapping("/list")
+	public String list(Model model) {
+		return "admin/approve";
+		
+	}
+
 	//게시판 목록
 	@GetMapping("/board/list/{largeName}/{middleName}")
 	public String list(@PathVariable("largeName") String largeName, @PathVariable("middleName") String middleName,
