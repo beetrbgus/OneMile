@@ -175,10 +175,18 @@ public class MemberController {
 		boolean success = memberService.emailCheck(certiDTO);
 		if (success) {
 			model.addAttribute("email", certiDTO.getEmail());
-			return "member/edit_pw";
+			log.debug("이메일찾기@@@"+certiDTO.getEmail());
+			return "member/find_edit_pw";
 		} else {
-			return "redirect:/";
+			return "redirect:find_pw?error";
 		}
+	}
+	@PostMapping("find_edit_pw")
+	public String findEditPw(@RequestParam String changePw, @RequestParam String email) {
+		boolean result = memberService.emailChangePw(email, changePw);
+		
+		return changePw;
+		
 	}
 
 	// 비밀번호 변경

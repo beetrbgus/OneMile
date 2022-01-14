@@ -82,7 +82,7 @@ $(function() {
 <div class="wz container pw-check" style="width: 500px">
 	 <h2 class="wz text display2">비밀번호 찾기</h2>
     <p class="wz text body1" style="margin-top: 70px;">가입하셨던 이메일 계정을 입력하시면,<br>인증번호를 보내드립니다.<br></p>
-    <form class="wz form" onsubmit="checkEmail()" method="post">
+    <form class="wz form" onsubmit="checkEmail()" method="post" action="${pageContext.request.contextPath}/member/emailCheck">
         <input type="hidden" id="findType" value="FIND_PASSWORD">
         <div class="label-hidden field">
             <label class="text-hidden" for="email">이메일 주소</label>

@@ -101,11 +101,13 @@
 	 		<mvc:exclude-mapping path="/member/phonecheck"/>
 	 		<mvc:exclude-mapping path="/member/emailSend"/>
 	 		
+	 		
 	 		<mvc:exclude-mapping path="/member/join_success"/>
 	 		<mvc:exclude-mapping path="/member/login"/>
 	 		<mvc:exclude-mapping path="/member/logout"/>
 	 		<mvc:exclude-mapping path="/member/find_id"/>
 	 		<mvc:exclude-mapping path="/member/find_pw"/>
+	 		<mvc:exclude-mapping path="/member/emailCheck"/>
 	 		<mvc:exclude-mapping path="/commu/map/list*"/>
 	 		<mvc:exclude-mapping path="/commu/notmap/list*"/>
 	 		<mvc:exclude-mapping path="/social/list/*"/>
