@@ -15,4 +15,7 @@
 	<delete id="deleteImage" parameterType="int">
 		delete from mi where MILES_NO = #{milesNO}
 	</delete>
+	<select id="find" parameterType="int">
+		select * from mi where cobuy_no = #{connTableNo} 
+	</select>
 </mapper>

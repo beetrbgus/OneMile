@@ -1,8 +1,9 @@
 window.kakao.maps.load(function() {
 	$(function() {
 		
-		let lat= sessionStorage.getItem("lat");
-		let lng= sessionStorage.getItem("lng");			
+		let lat= $("input[name=lat]").val();
+		let lng= $("input[name=lng]").val();
+		 			
 		if(lat ==0 ||lat ==undefined || lat == null){
 			lat= 37.5339851357212;
 			lng= 126.897094049199;
@@ -17,7 +18,6 @@ window.kakao.maps.load(function() {
 		// 지도 생성 코드
 		var map = new kakao.maps.Map(container, options);
 
-
 		// 주소-좌표 변환 객체를 생성합니다
 		var geocoder = new kakao.maps.services.Geocoder();
 
@@ -25,7 +25,7 @@ window.kakao.maps.load(function() {
 		infowindow = new kakao.maps.InfoWindow({
 			zindex : 1
 		}); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
-
+		
 		// 현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시합니다
 		searchAddrFromCoords(map.getCenter(), displayCenterInfo);
 

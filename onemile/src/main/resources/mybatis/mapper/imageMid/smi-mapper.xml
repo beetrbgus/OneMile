@@ -16,5 +16,8 @@
 	<delete id="delete" parameterType="int">
 		delete from smi where SOCIAL_NO = #{socialNo}
 	</delete>
+	<select id="find" parameterType="int">
+		select * from smi where cobuy_no = #{connTableNo} 
+	</select>
 
 </mapper>

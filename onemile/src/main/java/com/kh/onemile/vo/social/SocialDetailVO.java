@@ -14,7 +14,7 @@ public class SocialDetailVO {
 	private String title;
 	private String type; //대분류
 	private String smalltype; //소분류
-	private String starDate;
+	private String startDate;
 	private String endDate;
 	private String context;
 	private String isJoined;

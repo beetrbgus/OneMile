@@ -10,6 +10,7 @@ import com.kh.onemile.entity.social.SocialDTO;
 import com.kh.onemile.vo.PaginationVO;
 import com.kh.onemile.vo.social.SocialDetailVO;
 import com.kh.onemile.vo.social.SocialListVO;
+import com.kh.onemile.vo.social.SocialRegVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,22 +28,6 @@ public class SocialDaoImpl implements SocialDao{
 	}
 
 	@Override
-	public List<SocialListVO> list() {
-		return sqlSession.selectList("social.list");
-	}
-
-	@Override
-	public boolean changeSocial(SocialDTO socialDto) {
-		
-		return false;
-	}
-
-	@Override
-	public SocialDTO detail(int socialNo) {
-		return sqlSession.selectOne("social.get", socialNo);
-	}
-
-	@Override
 	public List<SocialListVO> getList(PaginationVO paginationVO) {
 		return sqlSession.selectList("social.getList",paginationVO);
 	}
@@ -55,5 +40,10 @@ public class SocialDaoImpl implements SocialDao{
 	@Override
 	public List<SocialDTO> getCount(int memberNo) {
 		return sqlSession.selectList("social.getCount",memberNo);
+	}
+
+	@Override
+	public void modify(SocialRegVO socialRegVO) {
+		sqlSession.update("social.modify",socialRegVO);
 	}
 }

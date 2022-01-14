@@ -5,11 +5,13 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,7 +50,12 @@ public class ImageController {
 				.contentLength(imageDTO.getFileSize())
 				.body(resource);
 	}
-
+	
+	@DeleteMapping("/delete")
+	public void delete(@RequestParam int imageNo, @RequestParam String folder)
+			throws IllegalStateException, IOException {
+		imageService.deleteImage(imageNo, folder);
+	}
 //	// 파일 업로드
 //	@PostMapping("/upload")
 //	public int data9(@RequestParam MultipartFile attach, @RequestParam String folder)

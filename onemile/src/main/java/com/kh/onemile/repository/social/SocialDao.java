@@ -6,15 +6,14 @@ import com.kh.onemile.entity.social.SocialDTO;
 import com.kh.onemile.vo.PaginationVO;
 import com.kh.onemile.vo.social.SocialDetailVO;
 import com.kh.onemile.vo.social.SocialListVO;
+import com.kh.onemile.vo.social.SocialRegVO;
 
 public interface SocialDao {
 	void reg(SocialDTO socialDto);
-	boolean changeSocial(SocialDTO socialDto);
-	SocialDTO detail(int socialNo);
-	List<SocialListVO> list();
 	List<SocialListVO> getList(PaginationVO paginationVO);
 	SocialDetailVO getDetail(int socialNo);
 	List<SocialDTO> getCount(int memberNo);
+	void modify(SocialRegVO socialRegVO);
   
 
 }

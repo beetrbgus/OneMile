@@ -15,5 +15,7 @@
 	<delete id="delete">
 		delete from mei where member_no = #{memberNo}
 	</delete>
-
+	<select id="find" parameterType="int">
+		select * from mei where cobuy_no = #{connTableNo} 
+	</select>
 </mapper>

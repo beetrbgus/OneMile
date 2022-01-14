@@ -87,10 +87,10 @@ public class ImageServiceImpl implements ImageService {
 		String savePath = path + save;
 		ImageDTO imageDto = imageDao.get(imageNo);
 		String savedFileName = String.valueOf(imageDto.getImageNo());
-		// 파일을 지우고
-		saveFile.deleteImg(savePath, savedFileName);
 		// DB에서 파일 정보를 지움.
 		imageDao.deleteImage(imageNo);
+		// 파일을 지우고
+		saveFile.deleteImg(savePath, savedFileName);
 	}
 
 	@Override

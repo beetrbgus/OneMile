@@ -247,6 +247,9 @@ img{
 	<div class="RewardProjectListApp_container__1ZYeD">
 		<div class="ProjectListHead_container__rpQ37 RewardProjectListHead_container__2FzIj">
 			<div class="ProjectListHead_bar__2dyHz">
+				<button style="float:left; align-content: flex-start;">
+					<a style="color:#00c4c4;" href="${pageContext.request.contextPath}/social/reg">등록하기</a>
+				</button>
 				<form class="ProjectListHead_search__HN3am">
 					<label for="search-keyword-4933f540-0608-4b63-9ad6-cccdc2960908">
 						<input class="" id="search-keyword-4933f540-0608-4b63-9ad6-cccdc2960908" type="search"
