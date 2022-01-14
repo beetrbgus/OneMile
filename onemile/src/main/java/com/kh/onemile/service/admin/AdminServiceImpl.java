@@ -83,8 +83,8 @@ public class AdminServiceImpl implements AdminService{
 		commuService.edit(commuEditVO);
 	}
 	@Override
-	public List<CommuDetailVO> boardList(String largeName, int startRow, int endRow) {
-		List<CommuDetailVO>list = commuService.menuList(largeName, startRow, endRow);
+	public List<CommuDetailVO> boardList(String largeName, int startRow, int endRow, String keyword, String search) {
+		List<CommuDetailVO>list = commuService.adminList(largeName, startRow, endRow, keyword, search);
 		return list;
 	}
 }

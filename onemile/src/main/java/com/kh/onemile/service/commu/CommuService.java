@@ -14,4 +14,5 @@ public interface CommuService {
 	List<CommuDetailVO> menuList(String middleName, int startRow, int endRow);
 	public int edit(CommuEditVO commuEditVO) throws IllegalStateException, IOException;
 	List<CommuDetailVO> list(String largeName, int startRow, int endRow);
+	List<CommuDetailVO> adminList(String largeName, int startRow, int endRow, String keyword, String search);
 }

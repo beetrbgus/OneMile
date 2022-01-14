@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.onemile.service.admin.AdminService;
+import com.kh.onemile.vo.CommuDetailVO;
 import com.kh.onemile.vo.admin.ExitMemberVO;
 import com.kh.onemile.vo.admin.MemberListVO;
 
@@ -55,12 +56,15 @@ public class AdminController {
 
 	//게시판 목록
 	@GetMapping("/board/list/{largeName}/{middleName}")
-	public String list(@PathVariable("largeName") String largeName, @PathVariable("middleName") String middleName,
-			@RequestParam(required =false, defaultValue = "1") int page,
-			@RequestParam(required =false, defaultValue = "10") int size
+	public List<CommuDetailVO> list(@PathVariable("largeName") String largeName, @PathVariable("middleName") String middleName,
+			@RequestParam(required =false, defaultValue = "2") int page,
+			@RequestParam(required =false, defaultValue = "20") int size,
+			@RequestParam(required =false) String keyword,
+			@RequestParam(required =false) String search
 			){
-		
-		return "/admin/board/list";
+		int endRow = page* size;
+		int startRow = endRow - (size - 1);
+		return adminService.boardList(largeName, startRow, endRow, keyword, search);
 	}
 	//게시판 숨김처리
 	@GetMapping("/board/hidden/{largeName}/{middleName}")

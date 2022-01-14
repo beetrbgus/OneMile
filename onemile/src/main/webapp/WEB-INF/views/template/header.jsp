@@ -189,14 +189,6 @@ $(function () {
 							<ul class="GNBDesktop_container__3X3Cg">
 								<li class="GNBDesktop_item__H8bay confirmbtn GNBDesktop_link__1AP6q"><span>동네인증</span></li>
 								<li class="GNBDesktop_item__H8bay GNBDesktop_link__1AP6q"><input type="text" class="dong"></li>
-<<<<<<< HEAD
-								<li class="GNBDesktop_item__H8bay"><a class="GNBDesktop_link__1AP6q"
-										href="${root}/miles/list"><span>마일즈</span></a></li>
-								<li class="GNBDesktop_item__H8bay"><a class="GNBDesktop_link__1AP6q"
-										href="${root}/social/list"><span>소셜링</span></a></li>
-								<li class="GNBDesktop_item__H8bay"><a href="${root}/cobuy/list"
-										class="GNBDesktop_link__1AP6q"><span>공동구매</span></a></li>
-=======
 								<li class="GNBDesktop_item__H8bay">
 									<a class="GNBDesktop_link__1AP6q" 
 										href="${root}/miles">
@@ -215,7 +207,6 @@ $(function () {
 										<span>공동구매</span>
 									</a>
 								</li>
->>>>>>> refs/remotes/origin/main
 								<li class="GNBDesktop_item__H8bay">
 									<div>
 										<button class="GNBDesktop_link__1AP6q GNBDesktop_more__39gyV">

@@ -16,7 +16,7 @@ public interface AdminService {
 	List<MemberListVO> memberList(String keyword, String search, int startRow, int endRow);
 	void hiddenBoard(int no);
 	void modifyBoard(CommuEditVO commuEditVO) throws IllegalStateException, IOException;
-	List<CommuDetailVO> boardList(String largeName, int startRow, int endRow); 
 	List<ExitMemberVO> exitMemberList(String keyword, String search, int startRow, int endRow);
 	List<MemberListVO> notMember(String keyword, String search, int startRow, int endRow);
+	List<CommuDetailVO> boardList(String largeName, int startRow, int endRow, String keyword, String search);
 }
