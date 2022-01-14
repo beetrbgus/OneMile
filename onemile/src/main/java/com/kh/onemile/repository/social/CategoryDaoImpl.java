@@ -28,7 +28,7 @@ public class CategoryDaoImpl implements CategoryDao{
 	//소모임 등록시 소분류 가져오기
 	@Override
 	public List<MiddleCategoryVO> getMiddlelist(String bigValue) {
-		return sqlSession.selectList("category.getmiddle",bigValue);
+		return sqlSession.selectList("category.getmiddleByBigValue",bigValue);
 	}
 	
 	//회원 관심 카테고리 
@@ -44,5 +44,11 @@ public class CategoryDaoImpl implements CategoryDao{
 	@Override
 	public List<CategoryVO> getCategoryList() {
 		return sqlSession.selectList("category.getAll");
+	}
+
+	@Override
+	public List<MiddleCategoryVO> getMiddlelistByBigType(String categorySuper) {
+		return sqlSession.selectList("category.getmiddleByBigType",categorySuper);
+		 
 	}
 }

@@ -15,14 +15,15 @@
 			#{minpeople},#{maxpeople}
 		)
 	</insert>
-		
+
 	<!-- 상세정보 -->
 	<select id="getDetail" parameterType="int" resultMap="socialDetail">
 		select * from social s 
 		    inner join map m on s.map_no = m.map_no
 		    inner join mei on mei.member_no = s.member_no
-		    inner join smc on s.smalltype = smc.SMALLTYPE    
-		where social_no = #{socialNo} and s.hiddenyn= 'N'
+		    inner join smc on s.smalltype = smc.SMALLTYPE
+		    left outer join sp on s.SOCIAL_NO = sp.SOCIAL_NO    
+		where S.SOCIAL_NO = #{socialNo} and s.hiddenyn= 'N'
 	</select>
 	<!-- 참가자 목록 가져오기 -->
 	<select id="getparticipate" parameterType="int" resultType="ParticipateVO">
@@ -40,16 +41,16 @@
 	<resultMap type="SocialDetailVO" id="socialDetail">
 		<result column="SOCIAL_NO" property="socialNo" />
 		<result column="TITLE" property="title" />
-		<result column="LARGE_NAME" property="type" />
-		<result column="MIDDLE_NAME" property="smalltype" />
-		<result column="STARTDATE" property="starDate" />
+		<result column="BIGTYPE" property="type" />
+		<result column="SMALLTYPE" property="smalltype" />
+		<result column="STARTDATE" property="startDate" />
 		<result column="ENDDATE" property="endDate" />
 		<result column="CONTEXT" property="context" />
 		<result column="IMAGE_NO" property="profileImgNo" />
 		<result column="MINPEOPLE" property="minpeople" />
 		<result column="MAXPEOPLE" property="maxpeople" />
 		<result column="MEMBER_NO" property="memberNo" />
-		
+		<result column="ISJOINED" property="isJoined" />
 		<result column="REGDATE" property="regdate" />
 		
 		<result column="MAP_NO" property="mapNo" />
@@ -61,7 +62,6 @@
 			ofType="ParticipateVO" select="getparticipate" column="member_no"/>
 		<collection property="imageInfo" javaType="java.util.List"
 			ofType="ImageDTO" select="getDetailimage" column="social_no"/>
-		
 	</resultMap>
 	<!-- List ResultMap -->
 	<resultMap type="SocialListVO" id="socialList">
@@ -86,18 +86,20 @@
 					TO_CHAR(s.startdate, 'MM/DD HH24:mm') as startDate,
 					TO_CHAR(s.enddate, 'MM/DD HH24:mm') as endDate,
 					m.member_no,m.nick, mei.image_no as profileImgNo ,
-					map.detailaddress , smi.image_no, smc.bigtype
+					map.detailaddress , smc.bigtype
 				from social s
 					inner join member m on s.member_no=m.member_no
 					inner join mei on mei.member_no = m.member_no
-					inner join smi on smi.social_no = s.social_no
 					inner join map on map.map_no = s.map_no
 					inner join smc on s.smalltype = smc.SMALLTYPE
 					inner join sbc on smc.bigtype = sbc.BIGTYPE
-				where s.hiddenyn ='N' 
+                    inner join 
+                    (select social_no , min(image_no) image_no
+						from smi group by social_no) smi on	
+						s.social_no = smi.social_no where s.hiddenyn ='N'
 			<choose>
 				<when test="category !=null and !category.equals('')">
-					and sbc.bigValue = #{category} 
+					and ${categoryType} = #{category} 
 				</when>
 				<when test="keyword != null and !keyword.equals('') and searchword != null and !searchword.equals('')">
 					and #{keyword} = #{searchword}
@@ -111,7 +113,6 @@
 	<select id="getCount" parameterType="int" resultType="SocialDTO">
 		select * from social where member_no = #{memberNo} and regdate > sysdate-7
 	</select>
-	
 	<select id="randomList" parameterType="PaginationVO" resultType="SocialListVO">
 		select * from (
 		    select rownum rn, TMP.* from (
@@ -119,4 +120,13 @@
 		    )TMP
 		) where rn between #{startRow} and #{endRow}
 	</select>
+	<update id="modify" parameterType="SocialRegVO">
+		update social set smalltype=#{smalltype}, title=#{title},context = #{context},
+			startdate=#{startDate}, endDate=#{endDate},
+			minpeople=#{minpeople}, maxpeople=#{maxpeople},moddate= sysdate 
+		where social_no = #{socialNo} and member_no=#{memberNo}
+	</update>
+	<update id="delete" parameterType="int">
+		update social set HIDDENYN='Y' where SOCIAL_NO = #{socialNo}
+	</update>
 </mapper>

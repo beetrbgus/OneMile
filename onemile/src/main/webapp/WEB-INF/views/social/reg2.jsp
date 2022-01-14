@@ -6,41 +6,45 @@
 <script>
 /* 카테고리 */
 $(function(){
-		$(".big").on("change",function(){
-			
+	$(".big").on("input",function(){
+		var root = $("#rrr").val();
+		console.log("root  "+root);
 		var category = $(this).val();
-		$.ajax({
-		  url : "${pageContext.request.contextPath}/miles/data/category/child",
-  		  type : "post",
-  		  data : {
-  			  categorySuper : category
-  		  },
-  		  success : function(resp) {
-  			console.log("성공", resp);
-  			
-  			var middle = $(".middle");
-  			middle.find("option").remove();
-  			for (var dto of resp) {
-  				
-				var middleOption = $("<option>");
-				middleOption.val(dto.smallType);
-				middleOption.text(dto.smallType);
-				middle.append(middleOption);
-			}
-  		  },
-  		  error : function(e) {
+	
+		$.ajax({ 
+			url : '${pageContext.request.contextPath}/miles/data/category/child',
+			type : "post",
+			async : false,
+			data : { 
+				categorySuper : category
+			},
+			success : function(resp) {
+				console.log("성공", resp);
+					
+				var middle = $(".middle");
+				middle.find("option").remove();
+				for (var dto of resp) { 
+					var middleOption = $("<option>");
+					middleOption.val(dto.smallType);
+					middleOption.text(dto.smallType);
+					middle.append(middleOption);
+				}
+		  	},
+	 		error : function(e) {
 			  console.log("실패", e);
-  		  }
-  		});
+ 		  	}
+ 		});
 	});
 });
 </script>
-
+<input id="rrr" type="hidden" value="${pageContext.request.contextPath}">
 <form id="regForm" action="reg" method="post" enctype="multipart/form-data">
 	<br>
 	이미지 :
 	<input type="file" name="attach" >
-	
+	<script>
+
+	</script>
 	<br>
 	제목 :
 	<input type="text" name="title" required>
@@ -49,7 +53,9 @@ $(function(){
 	<select class="big" required > 
 		<option value="">카테고리선택</option>
 		<c:forEach var="category" items="${bigCategory}">
-			<option value="${category.bigType}">${category.bigType}</option>
+			<c:if test="${category.bigType !='전체'}">
+				<option value="${category.bigType}">${category.bigType}</option>
+			</c:if>
 		</c:forEach>
 	</select>
 	<select class="middle" name="smalltype" required></select>
@@ -89,35 +95,7 @@ $(function(){
 	
 	<button type="button" id="submitBtn">등록하기</button>
 </form>
-<script>
-	$(function(){
-		function inputDate(day,time){
-			let formdate = day + " "+time+":00";
-				return formdate;
-		}
-		
-		$("#submitBtn").on("click",function(){
-			let startDate = inputDate($("#startDay").val(),$("#startTime").val());
-			let endDate = inputDate($("#endDay").val(),$("#endTime").val());
-			console.log("지도      상세주소   "+$("#location").val());
-			$("input[name=endDate]").val(endDate);
-			$("input[name=startDate]").val(endDate);
-			$("input[name=smalltype]").val($(".middle").val());
-		
-			console.log("startDate      :"+ $("input[name=startDate]").val());
-			console.log("EndDate      :"+ $("input[name=endDate]").val());
-			console.log("startDate      :"+ $("input[name=minpeople]").val());
-			console.log("EndDate      :"+ $("input[name=maxpeople]").val());
-			console.log();
-			console.log($(".big").val());
-			$("#regForm").submit(); 
-		});
-		function dateValid(){
-			
-		}
-	});
 
-</script>
 <script>
 	$(function(){
 		$("select[name=type]").on("change",function(){
@@ -151,5 +129,7 @@ $(function(){
 		}); 
 	});
 </script>
+<script type="text/javascript"src="${root}/onemile/resources/js/social/regDate.js"></script>
+<script type="text/javascript"src="${root}/onemile/resources/js/social/regValidate.js"></script>
 <script type="text/javascript"src="${root}/onemile/resources/js/cobuy/map.js"></script>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

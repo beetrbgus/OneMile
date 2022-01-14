@@ -14,5 +14,7 @@
 	<delete id="delete" parameterType="int">
 		delete from cbi where cobuy_no = #{cobuyNo}
 	</delete>
-
+	<select id="find" parameterType="int">
+		select * from cbi where cobuy_no = #{connTableNo} 
+	</select>
 </mapper>

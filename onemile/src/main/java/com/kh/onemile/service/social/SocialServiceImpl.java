@@ -13,14 +13,18 @@ import com.kh.onemile.entity.map.MapDTO;
 import com.kh.onemile.entity.social.SocialDTO;
 import com.kh.onemile.repository.image.middle.MiddleImageDAO;
 import com.kh.onemile.repository.social.SocialDao;
+import com.kh.onemile.repository.social.participant.ParticipantService;
 import com.kh.onemile.service.image.ImageService;
+import com.kh.onemile.service.image.MiddleImageService;
 import com.kh.onemile.service.map.MapService;
+import com.kh.onemile.service.social.participant.ParticipantDao;
 import com.kh.onemile.util.Sequence;
 import com.kh.onemile.vo.PaginationVO;
 import com.kh.onemile.vo.SocialVO;
 import com.kh.onemile.vo.social.SocialDetailVO;
 import com.kh.onemile.vo.social.SocialListVO;
 import com.kh.onemile.vo.social.SocialRegVO;
+import com.kh.onemile.vo.social.participate.ParticipateVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -43,9 +47,12 @@ public class SocialServiceImpl implements SocialService{
 	private MiddleImageDAO middleImageDao;
 	@Autowired
 	private Sequence seq;
-	
+	@Autowired
+	private ParticipantDao participantDao;
+	@Autowired
+	private ParticipantService participantService;
 	@Override
-	public void reg(SocialRegVO socialRegVO) throws IllegalStateException, IOException {
+	public int reg(SocialRegVO socialRegVO) throws IllegalStateException, IOException {
 		
 		//지도 테이블에 저장
 		MapDTO mapDTO = new MapDTO();
@@ -73,6 +80,12 @@ public class SocialServiceImpl implements SocialService{
 		log.debug("SocialDTO     "+socialDto.toString());
 		socialDao.reg(socialDto);
 		
+		//방장 참여자에 추가시키기
+		ParticipateVO participateVO = new ParticipateVO();
+		participateVO.setMemberNo(socialRegVO.getMemberNo());
+		participateVO.setSocialNo(socialNo);
+		participantService.reg(participateVO);
+		
 		//중간 테이블 DTO에 데이터 저장.
 		MiddleImgTableDTO imgMidDTO = new MiddleImgTableDTO();
 		imgMidDTO.setConnTableNo(socialNo); // 소셜링 번호
@@ -86,52 +99,7 @@ public class SocialServiceImpl implements SocialService{
 			middleImageDao.reg(imgMidDTO);
 			log.debug("등록 완료  socialImgMidDTO   " + imgMidDTO.toString());
 		}
-		
-	}
-
-	//소셜링 디테일
-	@Override
-	public SocialVO detail(int socialNo) {
-		SocialDTO socialDto = new SocialDTO();
-		socialDto = socialDao.detail(socialNo);
-		
-		SocialVO socialVo = new SocialVO();
-		
-		socialVo.setSocialNo(socialNo);
-		
-		int memberNo = socialDto.getMemberNo();
-//		MemberDTO memberDto = new MemberDTO();
-//		memberDto = memberDao.getNick(memberNo);
-//		commuVo.setNick(memberDto.getNick());
-			
-		int mapNo = socialDto.getMapNo();
-		
-//		MapDTO mapDTO = new MapDTO();
-//		mapDTO = mapDao.get(mapNo);
-//		
-//		socialVo.setLat(mapDTO.getLat());
-//		socialVo.setLon(mapDTO.getLng());
-//		socialVo.setDetailaddress(mapDTO.getDetailAddress());
-//		socialVo.setStartDate(socialDto.getStartDate());
-//		
-//		socialVo.setAdNo(socialDto.getAdNo());
-//		socialVo.setContext(socialDto.getContext());
-//		socialVo.setEndDate(socialDto.getEndDate());
-//		socialVo.setMemberNo(memberNo);
-//		socialVo.setName(socialDto.getTitle());
-//		socialVo.setSmalltype(socialDto.getSmallType());
-//		socialVo.setType(socialDto.getType());
-		return socialVo;
-	}
-
-	@Override
-	public List<SocialListVO> list() {
-		List<SocialListVO> list = socialDao.list();
-		return list;
-	}
-
-	@Override
-	public void changeSocial(SocialVO socialVo) {
+		return socialNo;
 		
 	}
 
@@ -139,10 +107,31 @@ public class SocialServiceImpl implements SocialService{
 	public List<SocialListVO> getList(PaginationVO paginationVO) {
 		return socialDao.getList(paginationVO);
 	}
+	@Override
+	public void modify(SocialRegVO socialRegVO) throws IllegalStateException, IOException {
+		//변경된 내용 저장.
+		socialDao.modify(socialRegVO);
+		
+		// 추가한 이미지가 있다면  이미지 저장 + 이미지와 중간 이미지 테이블에 등록.
+		if(socialRegVO.getAttach()!=null) {
+			//중간 테이블 DTO에 데이터 저장.
+			MiddleImgTableDTO imgMidDTO = new MiddleImgTableDTO();
+			imgMidDTO.setConnTableNo(socialRegVO.getSocialNo()); // 소셜링 번호
 
+			//이미지 테이블에 등록한 이미지의 번호 가져옴.
+			List<Integer> imgNoList = imageService.regImage(socialRegVO.getAttach(), folderName);
+			
+			for (int imgNo : imgNoList) {
+				// 연결 테이블에 이미지 번호 삽입.
+				imgMidDTO.setImgNo(imgNo);
+				// 중간 이미지 테이블에 등록
+				middleImageDao.reg(imgMidDTO);
+				log.debug("등록 완료  socialImgMidDTO   " + imgMidDTO.toString());
+			}
+		}
+	}
 	@Override
 	public SocialDetailVO getDetail(int socialNo) {
-		
 		return socialDao.getDetail(socialNo);
 	}
 
@@ -150,4 +139,20 @@ public class SocialServiceImpl implements SocialService{
 	public List<SocialDTO> getCount(int memberNo) {
 		return socialDao.getCount(memberNo);
 	}
+
+	@Override
+	public void socialJoin(ParticipateVO participateVO) {		
+		//소셜번호로 참여자의 숫자와 최대인원을 비교해서 맞으면 참가.
+		boolean  result = participantDao.getPartiCnt(participateVO.getSocialNo());
+		if(result){
+			//참가자 테이블에 집어넣음.
+			participantService.reg(participateVO);
+			
+		}
+	}
+	@Override
+	public void exitSocial(ParticipateVO participateVO) {
+		participantService.reject(participateVO);
+	}
+
 }

@@ -22,7 +22,6 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/sha1.min.js"></script>
-    <script src="${root}/resources/js/join.js" ></script>
 
 	<link rel="stylesheet" href="${root}/resources/css/10.458392b3.chunk.css">
 	<link rel="stylesheet" href="${root}/resources/css/2.680dde46.chunk.css">

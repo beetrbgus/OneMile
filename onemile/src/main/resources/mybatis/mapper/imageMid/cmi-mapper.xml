@@ -16,4 +16,7 @@
 	<delete id="delete" parameterType="int">
 		delete from cmi where commu_no = #{commuNo}
 	</delete>
+	<select id="find" parameterType="int">
+		select * from cmi where cobuy_no = #{connTableNo} 
+	</select>
 </mapper>

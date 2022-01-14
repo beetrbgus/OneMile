@@ -3,6 +3,7 @@ package com.kh.onemile.vo.social;
 import java.util.List;
 
 import com.kh.onemile.entity.image.ImageDTO;
+import com.kh.onemile.vo.social.participate.ParticipateVO;
 
 import lombok.Data;
 
@@ -13,10 +14,10 @@ public class SocialDetailVO {
 	private String title;
 	private String type; //대분류
 	private String smalltype; //소분류
-	private String starDate;
+	private String startDate;
 	private String endDate;
 	private String context;
-	
+	private String isJoined;
 	private int minpeople;
 	private int maxpeople;
 	private List<ParticipateVO> participate;
