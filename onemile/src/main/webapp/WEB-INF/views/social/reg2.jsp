@@ -6,7 +6,7 @@
 <script>
 /* 카테고리 */
 $(function(){
-	$(".big").on("change",function(){
+	$(".big").on("input",function(){
 		var root = $("#rrr").val();
 		console.log("root  "+root);
 		var category = $(this).val();
@@ -42,7 +42,9 @@ $(function(){
 	<br>
 	이미지 :
 	<input type="file" name="attach" >
-	
+	<script>
+
+	</script>
 	<br>
 	제목 :
 	<input type="text" name="title" required>
@@ -93,35 +95,7 @@ $(function(){
 	
 	<button type="button" id="submitBtn">등록하기</button>
 </form>
-<script>
-	$(function(){
-		function inputDate(day,time){
-			let formdate = day + " "+time+":00";
-				return formdate;
-		}
-		
-		$("#submitBtn").on("click",function(){
-			let startDate = inputDate($("#startDay").val(),$("#startTime").val());
-			let endDate = inputDate($("#endDay").val(),$("#endTime").val());
-			console.log("지도      상세주소   "+$("#location").val());
-			$("input[name=endDate]").val(endDate);
-			$("input[name=startDate]").val(endDate);
-			$("input[name=smalltype]").val($(".middle").val());
-		
-			console.log("startDate      :"+ $("input[name=startDate]").val());
-			console.log("EndDate      :"+ $("input[name=endDate]").val());
-			console.log("startDate      :"+ $("input[name=minpeople]").val());
-			console.log("EndDate      :"+ $("input[name=maxpeople]").val());
-			console.log();
-			console.log($(".big").val());
-			$("#regForm").submit(); 
-		});
-		function dateValid(){
-			
-		}
-	});
 
-</script>
 <script>
 	$(function(){
 		$("select[name=type]").on("change",function(){
@@ -155,5 +129,7 @@ $(function(){
 		}); 
 	});
 </script>
+<script type="text/javascript"src="${root}/onemile/resources/js/social/regDate.js"></script>
+<script type="text/javascript"src="${root}/onemile/resources/js/social/regValidate.js"></script>
 <script type="text/javascript"src="${root}/onemile/resources/js/cobuy/map.js"></script>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

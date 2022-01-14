@@ -7,6 +7,7 @@ public class PaginationVO {
 	private String searchword;
 	private String keyword;
 	private String category;
+	private String categoryType;
 	private int startRow;
 	private int endRow;
 	

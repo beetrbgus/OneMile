@@ -27,4 +27,10 @@ public class MilesImageDaoImpl implements MiddleImageDAO{
 		sqlSession.delete("mi.delete", milesNo);
 	}
 
+	@Override
+	public List<Integer> find(int connTableNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

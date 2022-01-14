@@ -13,12 +13,10 @@ import com.kh.onemile.vo.social.participate.ParticipateVO;
 
 public interface SocialService {
 	public int reg(SocialRegVO socialRegVO) throws IllegalStateException, IOException;
-	public SocialVO detail(int socialNo);
-	public void changeSocial(SocialVO socialVo);
-	public List<SocialListVO> list();
 	public List<SocialListVO> getList(PaginationVO paginationVO);
 	public SocialDetailVO getDetail(int socialNo);
 	public List<SocialDTO> getCount(int memberNo);
 	public void socialJoin(ParticipateVO participateVO);
 	public void exitSocial(ParticipateVO participateVO);
+	public void modify(SocialRegVO socialRegVO) throws IllegalStateException, IOException;
 }
