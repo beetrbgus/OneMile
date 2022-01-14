@@ -53,7 +53,7 @@
 	
 	<!-- 전체 글 목록 조회 -->
 	<select id="list">
-		select * from commu
+		select * from commu where hiddenyn = 'N' order by commu_no desc
 	</select>
 	
 	<!-- 수정하기 -->
@@ -106,4 +106,31 @@
 			)TMP
 		) where rn between ${startRow} and ${endRow}
 	</select>
+	
+	<resultMap type="IndexCommuVO" id="indexListMap">
+		<result column="middle_name" property="middleName" />
+		<result column="urlpath" property="urlPath" />
+		<collection property="list" javaType="java.util.List"
+			ofType="CommuDetailVO" select="listBymiddlename" column="middle_name"/>
+	</resultMap>
+	
+	<select id="indexCommus" resultMap="indexListMap">
+		select * from cmc where large_name  = '커뮤니티' and instr(urlpath, '/map') > 0
+	</select>
+	<select id="listBymiddlename" parameterType="String" resultType="CommuDetailVO">
+		select * from (
+			select rownum rn, TMP.* from (
+				select 
+					            co.commu_no, co.title, co.regdate, me.nick, CIF.image_no
+					    from
+								commu co left outer join commu_img_first CIF
+		                        on co.commu_no = CIF.commu_no
+		                        left join member me on co.member_no = me.member_no
+		                        left join cmc cmc on co.middlename = cmc.middle_name
+		                where co.middlename = #{middlename}
+		                order by commu_no desc
+		 	)TMP
+		) where rn between 1 and 3
+	</select>
+	
 </mapper>

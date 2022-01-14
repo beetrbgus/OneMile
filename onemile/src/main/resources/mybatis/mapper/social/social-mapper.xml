@@ -111,4 +111,12 @@
 	<select id="getCount" parameterType="int" resultType="SocialDTO">
 		select * from social where member_no = #{memberNo} and regdate > sysdate-7
 	</select>
+	
+	<select id="randomList" parameterType="PaginationVO" resultType="SocialListVO">
+		select * from (
+		    select rownum rn, TMP.* from (
+		        SELECT * FROM social WHERE hiddenyn = 'N' ORDER BY DBMS_RANDOM.RANDOM
+		    )TMP
+		) where rn between #{startRow} and #{endRow}
+	</select>
 </mapper>

@@ -74,4 +74,9 @@ public class CommuDaoImpl implements CommuDao{
 		List<CommuDetailVO> list = sqlSession.selectList("commu.boardList", map);
 		return list;
 	}
+
+	@Override
+	public java.util.List<CommuDetailVO> index() {
+		return sqlSession.selectList("commu.indexCommus");
+	}
 }

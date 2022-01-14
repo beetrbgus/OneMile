@@ -231,14 +231,11 @@ $(function () {
 									<c:choose>
 										<c:when test="${login}">
 											<button type="button" class="User_btnSign__1URTs" ><a href="${root}/member/logout">로그아웃</a></button>
-										<c:choose>
-										<c:when test="${admin}">
-											<button data-event="iam.signup" class="User_btnSign__1URTs" ><a href="${root}/admin/">관리자 홈</a></button>
-										</c:when>
-										<c:otherwise>
-											<button data-event="iam.signup" class="User_btnSign__1URTs" ><a href="${root}/member/mypage">마이페이지</a></button>
-										</c:otherwise>
-										</c:choose>
+												<c:choose>
+													<c:when test="${!admin}">
+														<button data-event="iam.signup" class="User_btnSign__1URTs" ><a href="${root}/member/mypage">마이페이지</a></button>
+													</c:when>
+												</c:choose>
 										</c:when>
 										<c:otherwise>
 											<button type="button" class="User_btnSign__1URTs" >
@@ -251,12 +248,22 @@ $(function () {
 									</c:choose>
 									</div>
 								</div>
+								
 								<div class="web-header-funding-open funding-open">
 									<div>
 										<div>
+										<c:choose>
+											<c:when test="${admin and login}">
+												<a href="${root}/admin/">
+												<button class="wz button funding-open-button dense primary-outline"
+													aria-label="프로젝트 오픈 신청">관리자 홈</button></a>
+											</c:when>
+											<c:otherwise>
 											<a herf="${root}/member/membership">
-											<button class="wz button funding-open-button dense primary-outline"
+												<button class="wz button funding-open-button dense primary-outline"
 												aria-label="프로젝트 오픈 신청">멤버십 가입</button></a>
+											</c:otherwise>
+										</c:choose>
 										</div>
 									</div>
 								</div>

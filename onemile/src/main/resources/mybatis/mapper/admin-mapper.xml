@@ -23,7 +23,7 @@
 					<where>
 						and hiddenyn = 'N' 
 						and approve = 'N'
-						<if test="search != null and keyword != null">
+						<if test="search != '' and keyword != ''">
 							and instr(${search}, #{keyword}) > 0
 						</if>
 					</where>
@@ -36,7 +36,7 @@
 	select * from (
 			select rownum rn, TMP.* from (
 				select * from member where hiddenyn = 'N' and approve = 'Y'
-					<if test="search != null and keyword != null">
+					<if test="search != '' and keyword != ''">
 							and instr(${search}, #{keyword}) > 0
 						</if>
 				order by member_no asc

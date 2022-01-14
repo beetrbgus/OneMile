@@ -154,4 +154,11 @@
 		select * from pb where member_no = #{memberNo}
 	</select>
 	
+	<select id="randomList" parameterType="PaginationVO" resultType="CobuyListVO">
+		select * from (
+		    select rownum rn, TMP.* from (
+		        SELECT * FROM cobuy WHERE hiddenyn = 'N' ORDER BY DBMS_RANDOM.RANDOM
+		    )TMP
+		) where rn between ${startRow} and ${endRow}
+	</select>
 </mapper>

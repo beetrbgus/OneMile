@@ -38,15 +38,23 @@ public class AdminController {
 //		adminService.approveMember(memberNo);
 //		return "redirect:/admin/approve/list";
 //		}
-//	@GetMapping("/approve/list")
-//	@ResponseBody
-//	public List<MemberListVO> approveList(@RequestParam(required = false) String keyword, @RequestParam(required = false) String search,
-//			@RequestParam(required =false, defaultValue = "2") int page,
-//			@RequestParam(required =false, defaultValue = "20") int size) {
-//		int endRow = page* size;
-//		int startRow = endRow - (size - 1);
-//		return adminService.notMember(keyword, search, endRow, startRow);
-//	}
+	@GetMapping("/approve/listdetail")
+	@ResponseBody
+	public List<MemberListVO> approveListD(
+			@RequestParam(required = false) String keyword,
+			@RequestParam(required = false) String search,
+			@RequestParam(required =false, defaultValue = "1") int page,
+			@RequestParam(required =false, defaultValue = "20") int size) {
+		int endRow = page* size;
+		int startRow = endRow - (size - 1);
+		System.err.println(keyword=="");
+		System.err.println(keyword==null);
+		return adminService.notMember(keyword, search, startRow,endRow);
+	}
+	@GetMapping("/approve/list")
+	public String approveList() {
+		return "/admin/approve/list";
+	}
 
 	@GetMapping("/list")
 	public String list(Model model) {
@@ -57,7 +65,7 @@ public class AdminController {
 	//게시판 목록
 	@GetMapping("/board/list/{largeName}/{middleName}")
 	public List<CommuDetailVO> list(@PathVariable("largeName") String largeName, @PathVariable("middleName") String middleName,
-			@RequestParam(required =false, defaultValue = "2") int page,
+			@RequestParam(required =false, defaultValue = "1") int page,
 			@RequestParam(required =false, defaultValue = "20") int size,
 			@RequestParam(required =false) String keyword,
 			@RequestParam(required =false) String search
@@ -82,17 +90,18 @@ public class AdminController {
 	@GetMapping("/member/list")
 	@ResponseBody
 	public List<MemberListVO> memList(@RequestParam(required = false) String keyword, @RequestParam(required = false) String search,
-			@RequestParam(required =false, defaultValue = "2") int page,
-			@RequestParam(required =false, defaultValue = "20") int size) {
+			@RequestParam(required =false, defaultValue = "1") int page,
+			@RequestParam(required =false, defaultValue = "20") int size, Model model) {
 		int endRow = page* size;
 		int startRow = endRow - (size - 1);
 		return adminService.memberList(keyword, search, endRow, startRow);
 	}
+	
 	//탈퇴회원 목록
 	@GetMapping("/member/hidden")
 	@ResponseBody
 	public List<ExitMemberVO> exitMemList(@RequestParam(required = false) String keyword, @RequestParam(required = false) String search,
-			@RequestParam(required =false, defaultValue = "2") int page,
+			@RequestParam(required =false, defaultValue = "1") int page,
 			@RequestParam(required =false, defaultValue = "20") int size) {
 		
 		int endRow = page* size;

@@ -18,8 +18,13 @@ public class CommuTest1 {
 	@Autowired
 	private SqlSession sqlSession;
 
-	@Test
+//	@Test
 	public void test() {
 		System.out.println(sqlSession);
+	}
+	
+	@Test
+	public void testq() {
+		System.out.println(sqlSession.selectList("commu.indexCommus"));
 	}
 }
