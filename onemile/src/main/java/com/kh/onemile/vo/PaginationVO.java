@@ -8,6 +8,9 @@ public class PaginationVO {
 	private String keyword;
 	private String category;
 	private String categoryType;
+	private String endyn;
+	private String order;
+	
 	private int startRow;
 	private int endRow;
 	
