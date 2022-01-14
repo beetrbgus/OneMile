@@ -1,6 +1,8 @@
 package com.kh.onemile.repository.admin;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,15 +39,30 @@ public class AdminDaoImpl implements AdminDao{
 		return sqlSession.selectList("admin.membershipList");
 	}
 	@Override
-	public List<MemberListVO> approveMemberList() {
-		return sqlSession.selectList("admin.approveMemberList");
+	public List<MemberListVO> approveMemberList(String keyword, String search, int startRow, int endRow) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("keyword", keyword);
+		map.put("search", search);
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+		return sqlSession.selectList("admin.approveMemberList", map);
 	}
 	@Override
-	public List<ExitMemberVO> exitMemberList() {
-		return sqlSession.selectList("admin.extiMemberList");
+	public List<ExitMemberVO> exitMemberList(String keyword, String search, int startRow, int endRow) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("keyword", keyword);
+		map.put("search", search);
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+		return sqlSession.selectList("admin.extiMemberList",map);
 	}
 	@Override
-	public List<MemberListVO> notMemberList() {
-		return sqlSession.selectList("admin.notMemberList");
+	public List<MemberListVO> notMemberList(String keyword, String search, int startRow, int endRow) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("keyword", keyword);
+		map.put("search", search);
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+		return sqlSession.selectList("admin.notMemberList", map);
 	}
 }

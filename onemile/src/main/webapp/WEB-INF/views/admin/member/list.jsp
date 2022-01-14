@@ -24,8 +24,98 @@ table{
 .a:hover{
 	color:black;
 }
+.input-form{
+	font-size:20px;
+	border: 1px solid #00c4c4;
+	padding-top:0.07em;
+	width:350px;
+}
+.search-box{
+	margin-left:auto;
+	margin-right:auto;
+	width:50%;
+	text-align:center;
+	overflow:auto;
+}
 </style>
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script>
+$(function () {
+	var page = 2;
+	var size = 20;
+	
+	$(".ProjectListMoreButton_button__27eTb").click(function () {
+		loadData(page, size, search, keyword);
+		page++;
+	});
+	
+	if(cnt() <10){ 
+		$(".ProjectListMoreButton_button__27eTb").remove(); 
+	}
+	
+	function cnt(){
+		let a = $(".ProjectCardList_item__1owJa");
+		return a.length;
+	}
+	function loadData(page, size, keyword, search) {
+
+		$.ajax({
+			url: "${pageContext.request.contextPath}/admin/member/list",
+			type: "get",
+			data: {
+				page: page,
+				size: size,
+				keyword: keyword,
+				search: search
+			},
+			success: function (resp) {
+				if (resp.length < size) {
+					$("#moreBtn").remove();
+				}
+				for (var i = 0; i < resp.length; i++) {
+					var CobuyListVO = resp[i];
+					console.log(CobuyListVO.cobuyNo);
+					console.log(typeof CobuyListVO.cobuyNo);
+					var divCol=
+						"<div class='ProjectCardList_item__1owJa'>"+
+						"<div>"+ 
+						"<div class='CommonCard_container__e_ebQ CommonCard_squareSmall__1Cdkn'>"+
+						"<a href='detail?cobuyNo="+CobuyListVO.cobuyNo+
+						"' class='CardLink_link__1k83H CommonCard_image__vaqkf' aria-hidden='true' tabindex='-1'>"+
+						"<div class='CommonCard_rect__2wpm4'>"+
+						"<span class='CommonCard_background__3toTR CommonCard_visible__ABkYx'"+
+						"style='background-image: url(${pageContext.request.contextPath}/image/download?imageNo="+CobuyListVO.imgNo+"&folder=cobuy)'></span>"+
+						"</div>"+
+						"</a>"+
+						"<div class='CommonCard_info__1f4kq'>"+
+						"<div class='RewardProjectCard_info__3JFub'>"+
+						"<div class='RewardProjectCard_infoTop__3QR5w'>"+
+						"<a href='detail?cobuyNo="+CobuyListVO.cobuyNo+
+						"' class='CardLink_link__1k83H'>"+
+						"<p class='CommonCard_title__1oKJY RewardProjectCard_title__iUtvs'>"+
+						"<strong>"+CobuyListVO.pname+"<br>"+CobuyListVO.title+"</strong>"+
+						"</p>"+
+						"</a>"+
+						"<div>"+
+						"<span class='RewardProjectCard_makerName__2q4oH'>"+CobuyListVO.nick+"</span>"+		
+						"</div></div><div class='RewardProjectCard_gauge__3p9US'>"+		
+						"<span style='width: 100%;'></span>"+
+						"</div>"+
+						"<span class='RewardProjectCard_percent__3TW4_'>"+CobuyListVO.stock+"개 남음</span>"+
+						"<span class='RewardProjectCard_amount__2AyJF'>"+CobuyListVO.price+"원</span>"+
+						"<span class='RewardProjectCard_days__3eece RewardProjectCard_isAchieve__1LcUu'>"+
+						"<span class='RewardProjectCard_remainingDay__2TqyN'>"+dateString+"</span>"+
+						"<span class='RewardProjectCard_remainingDayText__2sRLV'>마감</span>"+
+						"<span class='RewardProjectCard_isAchieve__1LcUu'></span></span></div></div></div></div></div>";
+					$(".ProjectCardList_list__1YBa2").append(divCol);
+				}
+			},
+			error: function (e) {
+				console.log("실패", e);
+			}
+		});
+	};
+});
+</script>
 
 <div class="board wzui">
 	<div class="ui-header">
@@ -37,6 +127,16 @@ table{
 			<li><a href="${root}/onemile/admin/member/hidden">탈퇴회원목록</a></li>
 		</ul>
 	</div>
+</div>
+<div class="search-box">
+	<form method="get">
+		<select name="search">
+			<option value="email">이메일</option>
+			<option value="nick">닉네임</option>
+		</select>
+		<input type="text" name="keyword" class="input-form">
+		<input type="submit" value="검색" class="wz button primary">
+	</form>
 </div>
 <div class="memberT">
 	<table>

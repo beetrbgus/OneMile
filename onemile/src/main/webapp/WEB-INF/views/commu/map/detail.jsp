@@ -55,7 +55,7 @@
 		kakao.maps.load(function() {
 			var lat = parseFloat('${commuDetailVO.lat}');
 			var lng = parseFloat('${commuDetailVO.lng}');
-
+			
 			var mapContainer = document.getElementById("map"), // 지도를 표시할 div 
 			mapOption = {
 				center : new kakao.maps.LatLng(lat, lng), // 지도의 중심좌표

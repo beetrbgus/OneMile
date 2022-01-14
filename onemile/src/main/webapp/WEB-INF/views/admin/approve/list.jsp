@@ -5,6 +5,7 @@
 <style>
 .memberT{
 	padding-top:1rem;
+	margin:0 auto;
 }
 table, th, td{
 	margin-left:auto;
@@ -24,20 +25,35 @@ table{
 .a:hover{
 	color:black;
 }
+.input-form{
+	font-size:20px;
+	border: 1px solid #00c4c4;
+	padding-top:0.07em;
+	width:350px;
+}
+.search-box{
+	margin-left:auto;
+	margin-right:auto;
+	width:50%;
+	text-align:center;
+	overflow:auto;
+}
 </style>
 <div class="board wzui">
 	<div class="ui-header">
 		<h2 class="title">가입 승인 대기 목록</h2>
 	</div>
-</div>
-<div class="memberT">
-	<form method="post">
+<div class="search-box">
+	<form method="get">
 		<select name="search">
 			<option value="email">이메일</option>
 			<option value="nick">닉네임</option>
 		</select>
-		<input type="text" name="keywored">
+		<input type="text" name="keyword" class="input-form">
+		<input type="submit" value="검색" class="wz button primary">
 	</form>
+</div>
+<div class="memberT">
 	<table>
 		<thead>
 		<tr>
@@ -69,5 +85,5 @@ table{
 		</tbody>
 	</table>
 </div>
-
+</div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

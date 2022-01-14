@@ -1,15 +1,19 @@
 package com.kh.onemile.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.onemile.service.admin.AdminService;
+import com.kh.onemile.vo.admin.ExitMemberVO;
+import com.kh.onemile.vo.admin.MemberListVO;
 
 @RequestMapping("/admin")
 @Controller
@@ -33,12 +37,16 @@ public class AdminController {
 //		adminService.approveMember(memberNo);
 //		return "redirect:/admin/approve/list";
 //		}
-	@GetMapping("/approve/list")
-	public String list(Model model) {
-		model.addAttribute("list",adminService.notMember());
-		return "/admin/approve/list";
+//	@GetMapping("/approve/list")
+//	@ResponseBody
+//	public List<MemberListVO> approveList(@RequestParam(required = false) String keyword, @RequestParam(required = false) String search,
+//			@RequestParam(required =false, defaultValue = "2") int page,
+//			@RequestParam(required =false, defaultValue = "20") int size) {
+//		int endRow = page* size;
+//		int startRow = endRow - (size - 1);
+//		return adminService.notMember(keyword, search, endRow, startRow);
 		
-	}
+//	}
 	//게시판 목록
 	@GetMapping("/board/list/{largeName}/{middleName}")
 	public String list(@PathVariable("largeName") String largeName, @PathVariable("middleName") String middleName,
@@ -62,15 +70,24 @@ public class AdminController {
 	}
 	//회원 목록
 	@GetMapping("/member/list")
-	public String memList(Model model) {
-		model.addAttribute("list", adminService.memberList());
-		return "/admin/member/list";
+	@ResponseBody
+	public List<MemberListVO> memList(@RequestParam(required = false) String keyword, @RequestParam(required = false) String search,
+			@RequestParam(required =false, defaultValue = "2") int page,
+			@RequestParam(required =false, defaultValue = "20") int size) {
+		int endRow = page* size;
+		int startRow = endRow - (size - 1);
+		return adminService.memberList(keyword, search, endRow, startRow);
 	}
 	//탈퇴회원 목록
 	@GetMapping("/member/hidden")
-	public String exitMemList(Model model) {
-		model.addAttribute("list", adminService.exitMemberList());
-		return "/admin/member/hidden";
+	@ResponseBody
+	public List<ExitMemberVO> exitMemList(@RequestParam(required = false) String keyword, @RequestParam(required = false) String search,
+			@RequestParam(required =false, defaultValue = "2") int page,
+			@RequestParam(required =false, defaultValue = "20") int size) {
+		
+		int endRow = page* size;
+		int startRow = endRow - (size - 1);
+		return adminService.exitMemberList(keyword, search, endRow, startRow);
 	}
 	//회원 수정
 	@GetMapping("/member/modify")

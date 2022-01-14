@@ -61,18 +61,18 @@ public class AdminServiceImpl implements AdminService{
 	}
 	//승인 전 회원 목록 가져오기
 	@Override
-	public List<MemberListVO> notMember(){
-		return adminDao.notMemberList();
+	public List<MemberListVO> notMember(String keyword, String search, int startRow, int endRow){
+		return adminDao.notMemberList(keyword, search, startRow, endRow);
 	}
 	//회원 목록 가져오기
 	@Override
-	public List<MemberListVO> memberList(){
-		return adminDao.approveMemberList();
+	public List<MemberListVO> memberList(String keyword, String search, int startRow, int endRow){
+		return adminDao.approveMemberList(keyword, search, startRow, endRow);
 	}
 	//탈퇴회원 목록 가져오기
 		@Override
-		public List<ExitMemberVO> exitMemberList(){
-			return adminDao.exitMemberList();
+		public List<ExitMemberVO> exitMemberList(String keyword, String search, int startRow, int endRow){
+			return adminDao.exitMemberList(keyword, search, startRow, endRow);
 		}
 	@Override
 	public void hiddenBoard(int no) {

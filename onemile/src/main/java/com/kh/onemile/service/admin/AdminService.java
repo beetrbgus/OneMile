@@ -13,10 +13,10 @@ public interface AdminService {
 	void regApproveMember(int memberNo);
 	void deniedApproveMember(int memberNo);
 	void approveMember(int memberNo);
-	List<MemberListVO> memberList();
+	List<MemberListVO> memberList(String keyword, String search, int startRow, int endRow);
 	void hiddenBoard(int no);
 	void modifyBoard(CommuEditVO commuEditVO) throws IllegalStateException, IOException;
 	List<CommuDetailVO> boardList(String largeName, int startRow, int endRow); 
-	List<ExitMemberVO> exitMemberList();
-	List<MemberListVO> notMember();
+	List<ExitMemberVO> exitMemberList(String keyword, String search, int startRow, int endRow);
+	List<MemberListVO> notMember(String keyword, String search, int startRow, int endRow);
 }

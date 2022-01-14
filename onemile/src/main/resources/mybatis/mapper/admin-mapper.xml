@@ -16,21 +16,47 @@
 	</update>
 	
 	<!-- 승인 전 회원 목록 가져오기 -->
-	<select id="notMemberList" resultType="MemberListVO">
-		select * from member where hiddenyn = 'N' and approve = 'N' order by member_no asc
+	<select id="notMemberList" resultType="MemberListVO" parameterType="map">
+	select * from (
+			select rownum rn, TMP.* from (
+				select * from member  
+					<where>
+						and hiddenyn = 'N' 
+						and approve = 'N'
+						<if test="search != null and keyword != null">
+							and instr(${search}, #{keyword}) > 0
+						</if>
+					</where>
+				order by member_no asc
+			)TMP
+		) where rn between ${startRow} and ${endRow}
 	</select>
 	<!-- 회원 목록 가져오기 -->
-	<select id="approveMemberList" resultType="MemberListVO">
-		select * from member where hiddenyn = 'N' and approve = 'Y' order by member_no asc
+	<select id="approveMemberList" resultType="MemberListVO" parameterType="map">
+	select * from (
+			select rownum rn, TMP.* from (
+				select * from member where hiddenyn = 'N' and approve = 'Y'
+					<if test="search != null and keyword != null">
+							and instr(${search}, #{keyword}) > 0
+						</if>
+				order by member_no asc
+			)TMP
+		) where rn between ${startRow} and ${endRow}
 	</select>
 	
 	<!-- 탈퇴 회원 목록 가져오기 -->
-	<select id="extiMemberList" resultType="ExitMemberVO">
+	<select id="extiMemberList" resultType="ExitMemberVO" parameterType="map">
+		select * from (
+			select rownum rn, TMP.* from (
 		select * from member where hiddenyn = 'Y' and exitdate != null order by member_no asc
+					)TMP
+		) where rn between ${startRow} and ${endRow}
 	</select>
 	
 	<!-- 회원 멤버십 목록 가져오기 -->
-	<select id="membershipList" resultType="List">
+	<select id="membershipList" resultType="List" parameterType="map">
+		select * from (
+			select rownum rn, TMP.* from (
 		select
 			m.member_no, m.email, m.nick, m.phone, m.birth,
 			m.grade, m.joindate, m.mbti, m.intro, m.corona, m.popular,
@@ -43,5 +69,8 @@
 			m.hiddenyn = 'N' and m.approve = 'Y'
 		order by
 			m.member_no asc
+			
+				)TMP
+		) where rn between ${startRow} and ${endRow}
 	</select>
 </mapper>

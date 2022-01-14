@@ -12,7 +12,7 @@ public interface AdminDao {
 	public void deniedApproveMember(int memberNo);
 	public void approveMember(int memberNo);
 	public List<MemberDTO> membershipList();
-	public List<MemberListVO> approveMemberList();
-	public List<ExitMemberVO> exitMemberList();
-	public List<MemberListVO> notMemberList();
+	public List<MemberListVO> approveMemberList(String keyword, String search, int startRow, int endRow);
+	public List<ExitMemberVO> exitMemberList(String keyword, String search, int startRow, int endRow);
+	public List<MemberListVO> notMemberList(String keyword, String search, int startRow, int endRow);
 }
