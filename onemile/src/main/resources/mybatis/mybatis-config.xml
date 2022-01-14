@@ -57,6 +57,7 @@
 			<package name="com.kh.onemile.vo.cobuy"/>
 			<package name="com.kh.onemile.vo.reply"/>
 			<package name="com.kh.onemile.vo.social.category"/>
+			<package name="com.kh.onemile.vo.social.participate"/>
 			
 	</typeAliases>
 
