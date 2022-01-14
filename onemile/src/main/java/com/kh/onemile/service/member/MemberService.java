@@ -6,9 +6,9 @@ import java.util.List;
 import com.kh.onemile.entity.member.MemberDTO;
 import com.kh.onemile.entity.member.certi.CertiDTO;
 import com.kh.onemile.entity.member.membership.AdDTO;
-import com.kh.onemile.entity.social.SocialBigCategoryDTO;
 import com.kh.onemile.vo.MemberJoinVO;
 import com.kh.onemile.vo.MemberVO;
+import com.kh.onemile.vo.social.category.CategoryVO;
 
 public interface MemberService {
 	
@@ -43,7 +43,7 @@ public interface MemberService {
 	public boolean changeInformation(MemberDTO memberDTO);
 
 	//소모임 대분류
-	public List<SocialBigCategoryDTO> getfavorite();
+	public List<CategoryVO> getfavorite();
 
 	//회원정보 불러오기(사진 포함)
 	public MemberVO imageProfile(int memberNo);

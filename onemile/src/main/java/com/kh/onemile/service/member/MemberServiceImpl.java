@@ -15,7 +15,6 @@ import com.kh.onemile.entity.image.middle.MiddleImgTableDTO;
 import com.kh.onemile.entity.member.MemberDTO;
 import com.kh.onemile.entity.member.certi.CertiDTO;
 import com.kh.onemile.entity.member.membership.AdDTO;
-import com.kh.onemile.entity.social.SocialBigCategoryDTO;
 import com.kh.onemile.repository.certi.CertiDao;
 import com.kh.onemile.repository.image.middle.MiddleImageDAO;
 import com.kh.onemile.repository.member.MemberDao;
@@ -27,6 +26,7 @@ import com.kh.onemile.util.DateToString;
 import com.kh.onemile.util.Sequence;
 import com.kh.onemile.vo.MemberJoinVO;
 import com.kh.onemile.vo.MemberVO;
+import com.kh.onemile.vo.social.category.CategoryVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -48,8 +48,6 @@ public class MemberServiceImpl implements MemberService {
 	private Sequence seq;
 	@Autowired
 	private PasswordEncoder encoder;
-	@Autowired
-	private CategoryService categoryService;
 	@Autowired
 	private AdminService adminService;
 	@Autowired @Qualifier("meiDAO")
@@ -92,7 +90,7 @@ public class MemberServiceImpl implements MemberService {
 		// 승인 테이블 등록
 		adminService.regApproveMember(memNo);
 		// 관심 카테고리 테이블 전송
-		categoryService.insert(memberJoinVO, memNo);
+//		ICService.insert(memberJoinVO, memNo);
 	}
 
 	// 로그인
@@ -177,15 +175,15 @@ public class MemberServiceImpl implements MemberService {
 	
 	//소모임 대분류
 	@Override
-	public List<SocialBigCategoryDTO> getfavorite() {
-		return categoryService.list();
+	public List<CategoryVO> getfavorite() {
+		// IC 서비스 만들기.
+//		categoryService.list();
+		return null; 
 	}
 
 	//회원정보 불러오기(사진 포함)
 	public MemberVO imageProfile(int memberNo) {
 	    MemberVO memberVO = memberDao.imageProfile(memberNo);
-	    memberVO.setBirthstr(dateToString.dateToString(memberVO.getBirth()));
-	    
 	    return memberVO;
 	}
 	

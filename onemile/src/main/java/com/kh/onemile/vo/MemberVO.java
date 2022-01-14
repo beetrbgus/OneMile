@@ -33,4 +33,5 @@ public class MemberVO {
 	private int imageNo;
 	private List<ImageDTO> imageList; //가져올 때 이미지 번호들
 	
+	
 }

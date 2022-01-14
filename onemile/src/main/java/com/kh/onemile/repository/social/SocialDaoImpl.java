@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.onemile.entity.social.SocialDTO;
+import com.kh.onemile.vo.PaginationVO;
 import com.kh.onemile.vo.social.SocialDetailVO;
 import com.kh.onemile.vo.social.SocialListVO;
 
@@ -42,17 +43,22 @@ public class SocialDaoImpl implements SocialDao{
 	}
 
 	@Override
-	public List<SocialListVO> getList(String category) {
-		return sqlSession.selectList("social.categoryList",category);
+	public List<SocialListVO> getList(PaginationVO paginationVO) {
+		return sqlSession.selectList("social.getList",paginationVO);
 	}
 
 	@Override
-	public List<SocialDetailVO> getDetail(int socialNo) {
+	public SocialDetailVO getDetail(int socialNo) {
 		return sqlSession.selectOne("social.getDetail", socialNo);
 	}
 
 	@Override
 	public List<SocialDTO> getCount(int memberNo) {
 		return sqlSession.selectList("social.getCount",memberNo);
+	}
+
+	@Override
+	public List<SocialListVO> getMemberByList(int memberNo) {
+		return sqlSession.selectList("social.getMemberByList",memberNo);
 	}
 }

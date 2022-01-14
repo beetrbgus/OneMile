@@ -112,14 +112,38 @@
 				<div class="row user_row">
 					<div class="col-12 image_col">
 						<div class="profile_image_cover">
-							<div class="row">
-								<c:forEach items="${memberVO.imageList}" var="profile">
-										<img
-											src="${pageContext.request.contextPath}/image/download?imageNo=${profile.imageNo}&folder=member"
-											width="100%" height="100%"
-											class="image image-round image-border">
-									</c:forEach>
+
+							<div id="carouselExampleFade"
+								class="carousel slide carousel-fade" data-bs-ride="carousel">
+								<div class="carousel-inner">
+										<c:forEach items="${memberVO.imageList}" var="profile" varStatus="status">
+									<div class="carousel-item ${status.index == 0 ? 'active' : ''}">
+										
+										<img src="${pageContext.request.contextPath}/image/download?imageNo=${profile.imageNo}&folder=member" class="d-block w-100" alt="...">
+									</div>
+										</c:forEach>
+								</div>
+								<button class="carousel-control-prev" type="button"
+									data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+									<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+									<span class="visually-hidden">Previous</span>
+								</button>
+								<button class="carousel-control-next" type="button"
+									data-bs-target="#carouselExampleFade" data-bs-slide="next">
+									<span class="carousel-control-next-icon" aria-hidden="true"></span>
+									<span class="visually-hidden">Next</span>
+								</button>
 							</div>
+
+
+							<%-- <div class="row">
+								<c:forEach items="${memberVO.imageList}" var="profile">
+									<img
+										src="${pageContext.request.contextPath}/image/download?imageNo=${profile.imageNo}&folder=member"
+										width="100%" height="100%"
+										class="image image-round image-border">
+								</c:forEach>
+							</div> --%>
 						</div>
 					</div>
 					<div class="col-12 text_col">
@@ -150,7 +174,7 @@
 			</div>
 		</div>
 		<div class="saved_col">
-			
+
 			<div class="saved_inner target target_meeting selected">
 				<div class="p-20 row target target_meeting title_row selected">
 					<div class="col-12">
@@ -185,4 +209,5 @@
 		</div>
 	</div>
 </div>
+
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

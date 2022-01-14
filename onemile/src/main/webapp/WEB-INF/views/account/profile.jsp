@@ -139,20 +139,16 @@
 
 					</div>
 				</div>
-				<div class="menu_row row"></div>
-				<a class="link_row row" href="edit">
-					<div class="col">회원정보 수정</div>
-				</a> <a class="link_row row" href="edit_pw">
-					<div class="col">비밀번호 변경</div>
-				</a> <a class="row link_row"
-					href="${pageContext.request.contextPath}/membership/reg_membership">
-					<div class="col">멤버십 결제내역</div>
-				</a><a class="row link_row"
-					href="${pageContext.request.contextPath}/cobuy/buylist">
-					<div class="col">공동구매 결제내역</div>
-				</a><a class="row link_row"
-					href="${pageContext.request.contextPath}/member/logout">
-					<div class="col">로그아웃</div>
+				<div class="menu_row row">
+				
+				</div>
+				<a class="link_row row">
+					<div class="col">MBTI  :  ${memberVO.mbti}</div>
+				</a> <a class="link_row row">
+					<div class="col">${memberVO.intro}</div>
+				</a> <a class="row link_row">
+					<div class="col"></div>
+				
 				</a>
 			</div>
 		</div>
