@@ -86,11 +86,6 @@ public class CobuyServiceImpl implements CobuyService {
 	}
 
 	@Override
-	public List<CobuyListVO> getList(int startRow, int endRow) {
-		return cobuyDao.cobuyList(startRow, endRow);
-	}
-
-	@Override
 	public CobuyDetailVO getDetail(int cobuyNo) {
 		CobuyDetailVO result = cobuyDao.detail(cobuyNo);
 		System.err.println(result.getCobuyNo());
@@ -161,6 +156,11 @@ public class CobuyServiceImpl implements CobuyService {
 	@Override
 	public List<ProductBuyDTO> getbuyList(int memberNo) {
 		return cobuyDao.getbuyList(memberNo);
+	}
+
+	@Override
+	public List<CobuyListVO> indexList() {
+		return cobuyDao.cobuyList();
 	}
 
 }

@@ -108,9 +108,9 @@ public class CobuyController {
 			@RequestParam(required =false, defaultValue = "1") int page,
 			@RequestParam(required =false, defaultValue = "10") int size
 			) {
-		int endRow = page* size;
-		int startRow = endRow - (size - 1);
-		return cobuyService.getList(startRow, endRow);
+		
+		PaginationVO paginationVO =new PaginationVO(page,size);
+		return cobuyService.getList(paginationVO);
 	}
 	@GetMapping("/detail") 
 	public String detail(@RequestParam int cobuyNo , Model model) {

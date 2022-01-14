@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.kh.onemile.service.cobuy.CobuyService;
 import com.kh.onemile.service.commu.CommuService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -16,13 +17,15 @@ public class HomeController {
 	@Autowired
 	private CommuService commuService;
 	
+	@Autowired
+	private CobuyService cobuyService;
+	
 	//메인페이지
 	@RequestMapping("")
 	public String home(Model model) {
-		log.debug("============================tttt");
-		log.debug("{}", commuService.index());
-		log.debug("============================");
 		model.addAttribute("commuDetailVOList", commuService.index());
+		System.err.println(cobuyService.indexList());
+		model.addAttribute("cobuyList", cobuyService.indexList());
 		return "home";
 	}
 }
