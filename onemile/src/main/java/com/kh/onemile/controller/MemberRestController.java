@@ -2,11 +2,14 @@ package com.kh.onemile.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.kh.onemile.entity.member.MemberDTO;
 import com.kh.onemile.repository.member.MemberDao;
+import com.kh.onemile.service.email.EmailService;
 
 @RequestMapping("/member")
 @RestController
@@ -14,6 +17,9 @@ public class MemberRestController {
 	
 	@Autowired
 	private MemberDao memberDao;
+	@Autowired
+	private EmailService emailService;
+	
 	
 	//이메일 중복체크
 	@GetMapping("/emailcheck")
@@ -49,5 +55,19 @@ public class MemberRestController {
 		else {//있으면 사용 불가 -> NONONO리턴
 			return "NONONO"; 
 		}
+	}
+	
+	//이메일 발송
+	@GetMapping("/emailSend")
+	public String emailSend(@RequestParam String email) {
+		
+		String num = "";
+		try {
+			emailService.sendCertificationNumber(email);
+		} catch (Exception e) {	
+			num = "error";
+			return num;
+		} 
+		return num;
 	}
 }

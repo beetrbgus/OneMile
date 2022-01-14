@@ -1,110 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%-- 출력 --%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/mypage.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/common2.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/profile.css">
-
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common2.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/profile.css">
 <style>
+.image {
+    border: 2px solid transparent;
+}
+
 .image.image-round {
-	border-radius: 50%;
+    border-radius: 50%;
+}
+
+.image.image-border,
+.image.image-hover:hover {
+    border: 2px solid gray;
 }
 </style>
-<%-- <div class="container-900 container-center">
-	<div class="row float-container">
-	
-	<div class="float-item-left">
-		<!-- 회원 프로필 이미지 -->
-		<div class="row">	
-			<c:choose>
-				<c:when test="${memberVO.imageNo==0}">
-				<img src="https://via.placeholder.com/300x300?text=User" width="100%" class="image image-round image-border">
-				</c:when>
-				<c:otherwise>
-					<img src="${pageContext.request.contextPath}/image/download?imageNo=${memberVO.imageNo}&folder=member" width="100%" height="100%" class="image image-round image-border">
-				</c:otherwise>
-			</c:choose>
-	
-		</div> 
-			
-			<!-- 회원 정보 -->
-			<div class="row center">
-				<h2>${memberVO.nick}</h2>
-			</div>
-			<div class="row center">
-				<h4>${memberVO.email}</h4>
-			</div>
-			<div class="row center">
-				<h4>[${memberVO.grade}]</h4>
-			</div>
-			
-			<div class="row center"></div>
-			
-			<!-- 각종 메뉴들 -->
-			<div class="row center">
-				<a href="edit" class="link-btn-block">내 정보 수정</a>
-			</div>
-			<div class="row center">
-				<a href="edit_pw" class="link-btn-block">비밀번호 변경</a>
-			</div>
-			<div class="row center">
-				<a href="${pageContext.request.contextPath}/membership/reg_membership" class="link-btn-block">멤버십 구매목록</a>
-				<a href="${pageContext.request.contextPath}/cobuy/buylist" class="link-btn-block">공동구매 구매목록</a>
-			</div>
-			
-		</div>
-		
-		<!-- 2단 -->
-		<div class="float-item-left">
-		
-			<!-- 회원 정보 출력 -->
-			<div class="row">
-				<table class="table table-stripe">
-					<tbody>
-						<tr>
-							<th width="25%">아이디</th>
-							<td>${memberVO.email}</td>
-						</tr>
-						<tr>
-							<th>닉네임</th>
-							<td>${memberVO.nick}</td>
-						</tr>
-						<tr>
-							<th>생년월일</th>
-							<td>${memberVO.birth}</td>
-						</tr>
-						
-						<tr>
-							<th>이메일</th>
-							<td>${memberVO.email}</td>
-						</tr>
-						<tr>
-							<th>전화번호</th>
-							<td>${memberVO.phone}</td>
-						</tr>
-						<tr>
-							<th>가입일시</th>
-							<td>${memberVO.joinDate}</td>
-						</tr>
-						<tr>
-							<th>등급</th>
-							<td>${memberVO.grade}</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			
-		</div>
-	</div>
-</div> --%>
-
-
 <div class="container">
 	<div class="row">
 		<div class="profile_col">
@@ -112,16 +27,17 @@
 				<div class="row user_row">
 					<div class="col-12 image_col">
 						<div class="profile_image_cover">
-
+							<!-- 이미지  -->
 							<div id="carouselExampleFade"
 								class="carousel slide carousel-fade" data-bs-ride="carousel">
 								<div class="carousel-inner">
-										<c:forEach items="${memberVO.imageList}" var="profile" varStatus="status">
-									<div class="carousel-item ${status.index == 0 ? 'active' : ''}">
-										
-										<img src="${pageContext.request.contextPath}/image/download?imageNo=${profile.imageNo}&folder=member" class="d-block w-100" alt="...">
-									</div>
-										</c:forEach>
+									<c:forEach items="${memberVO.imageList}" var="profile"
+										varStatus="status">
+										<div
+											class="carousel-item ${status.index == 0 ? 'active' : ''}">
+											<img src="${pageContext.request.contextPath}/image/download?imageNo=${profile.imageNo}&folder=member" class="d-block w-100 image image-round image-border" alt="..." style="width:150px;height:150px">
+										</div>
+									</c:forEach>
 								</div>
 								<button class="carousel-control-prev" type="button"
 									data-bs-target="#carouselExampleFade" data-bs-slide="prev">
@@ -134,17 +50,8 @@
 									<span class="visually-hidden">Next</span>
 								</button>
 							</div>
-
-
-							<%-- <div class="row">
-								<c:forEach items="${memberVO.imageList}" var="profile">
-									<img
-										src="${pageContext.request.contextPath}/image/download?imageNo=${profile.imageNo}&folder=member"
-										width="100%" height="100%"
-										class="image image-round image-border">
-								</c:forEach>
-							</div> --%>
 						</div>
+						<!-- 1단 프로필 -->
 					</div>
 					<div class="col-12 text_col">
 						<div class="name_zone">
@@ -153,28 +60,27 @@
 						<div class="email_zone">
 							<span class="badge"> </span> <span class="email">${memberVO.email}</span>
 						</div>
-
 					</div>
 				</div>
+				
+				
 				<div class="menu_row row"></div>
 				<a class="link_row row" href="${root}/member/edit">
-					<div class="col">회원정보 수정</div>
-				</a> <a class="link_row row" href="${root}/member/edit_pw">
-					<div class="col">비밀번호 변경</div>
-				</a> <a class="row link_row"
-					href="${pageContext.request.contextPath}/membership/reg_membership">
-					<div class="col">멤버십 결제내역</div>
-				</a><a class="row link_row"
-					href="${pageContext.request.contextPath}/cobuy/buylist">
-					<div class="col">공동구매 결제내역</div>
-				</a><a class="row link_row"
-					href="${pageContext.request.contextPath}/member/logout">
-					<div class="col">로그아웃</div>
-				</a>
+					<div class="col">회원정보 수정</div></a>
+				 <a class="link_row row" href="${root}/member/edit_pw">
+					<div class="col">비밀번호 변경</div></a> 
+					<a class="row link_row" href="${root}/membership/reg_membership">
+					<div class="col">멤버십 결제내역</div></a>
+					<a class="row link_row" href="${root}/cobuy/buylist">
+					<div class="col">공동구매 결제내역</div></a>
+					<a class="row link_row" href="${root}/member/logout">
+					<div class="col">로그아웃</div></a>
 			</div>
 		</div>
+		
+		
+		<!-- 소셜링 자리 -->
 		<div class="saved_col">
-
 			<div class="saved_inner target target_meeting selected">
 				<div class="p-20 row target target_meeting title_row selected">
 					<div class="col-12">
@@ -207,7 +113,10 @@
 				</div>
 			</div>
 		</div>
+
 	</div>
 </div>
+
+<!-- 테스트중 -->
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

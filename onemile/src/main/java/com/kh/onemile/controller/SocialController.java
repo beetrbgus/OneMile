@@ -26,6 +26,7 @@ import com.kh.onemile.vo.social.SocialDetailVO;
 import com.kh.onemile.vo.social.SocialListVO;
 import com.kh.onemile.vo.social.SocialRegVO;
 import com.kh.onemile.vo.social.category.MiddleCategoryVO;
+import com.kh.onemile.vo.social.participate.ParticipateVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -40,6 +41,7 @@ public class SocialController {
 	
 	@Autowired
 	private MemberService memberService;
+	
 	@GetMapping("/reg")
 	public String getReg(Model model,HttpSession session) {
 		int memberNo = (int) session.getAttribute("logNo");
@@ -68,6 +70,7 @@ public class SocialController {
 		}
 		
 	}
+	
 	@PostMapping("/reg")
 	public String postReg(@ModelAttribute SocialRegVO socialRegVO,HttpSession session) throws IllegalStateException, IOException{
 		log.debug("SocialRegVO  "+socialRegVO.toString());
@@ -75,42 +78,71 @@ public class SocialController {
 		int memNo = Integer.parseInt(String.valueOf(session.getAttribute("logNo")));
 		
 		socialRegVO.setMemberNo(memNo);
-		socialService.reg(socialRegVO);
-		return "social/detail";
+		int socialNo = socialService.reg(socialRegVO);
+		return "redirect:detail/"+socialNo;
+	}
+	@GetMapping("/modify/{socialNo}")
+	public String getModify(@PathVariable int socialNo,Model model,HttpSession session) {
+		int memberNo = (int) session.getAttribute("logNo");
+		AdDTO adDTO = memberService.membership(memberNo);
+		 
+		// 입력된 정보 가져오기.
+		SocialDetailVO socialDetail = socialService.getDetail(socialNo);
+		List<SocialBigCategoryDTO> bigcate = categoryService.getBiglist();
+		
+		model.addAttribute("AD",adDTO.getSMaxCnt());
+		model.addAttribute("bigCategory",bigcate);
+		model.addAttribute("socialDetail",socialDetail);
+		
+		log.debug("혜택"+adDTO.getSMaxCnt());
+		log.debug("result       : "+bigcate.toString()); 
+		return "redirect:detail/"+socialNo;
+	}
+	
+	@PostMapping("/modify")
+	public String postModify(@ModelAttribute SocialRegVO socialRegVO,HttpSession session) throws IllegalStateException, IOException{
+		log.debug("SocialRegVO  "+socialRegVO.toString());
+		
+		int memNo = Integer.parseInt(String.valueOf(session.getAttribute("logNo")));
+		
+		socialRegVO.setMemberNo(memNo);
+		int socialNo = socialService.reg(socialRegVO);
+		return "redirect:detail/"+socialNo;
 	}
 
 
-	@GetMapping({"/list/{bigCategory}","/list","/",""})
-	public String getList(@PathVariable(required = false) String bigCategory,
+	@GetMapping({"/list/{bigcate}","/list","/",""})
+	public String getList(@PathVariable(required = false) String bigcate,
 			@RequestParam(required = false,defaultValue = "") String sc,
 			@RequestParam(required =false, defaultValue = "1") int page,
 			@RequestParam(required =false, defaultValue = "10") int size
 			,Model model) {
 		PaginationVO paginationVO =new PaginationVO(page,size);
-		bigCategory =(bigCategory==null||bigCategory.equals("/"))?"":bigCategory;
+		bigcate =(bigcate==null||bigcate.equals("/"))?"":bigcate;
 		
 		if(sc==null||sc.equals("/")) {
 			paginationVO.setKeyword("smc.smallValue");
 			sc ="";
 		}
-		paginationVO.setCategory(bigCategory);
+		paginationVO.setCategory(bigcate);
 		paginationVO.setSearchword(sc);
 		List<SocialBigCategoryDTO> bcgList = categoryService.getBiglist();
-		List<MiddleCategoryVO> mcgList = categoryService.getMiddlelist(bigCategory);		
+		List<MiddleCategoryVO> mcgList = categoryService.getMiddlelist(bigcate);		
 		List<SocialListVO> scList = socialService.getList(paginationVO);
 		
 		log.debug("mcgList12345   "+mcgList);
 		log.debug("bcgList12345   "+bcgList);
-		log.debug("category1234   "+bigCategory);
+		log.debug("category1234   "+bigcate);
 		log.debug("category    "+paginationVO.toString());
 		log.debug("result       : "+scList.toString());
-		model.addAttribute("nowcategory", bigCategory);
+		model.addAttribute("nowcategory", bigcate);
 		model.addAttribute("bcgList",bcgList);
 		model.addAttribute("mcgList",mcgList);
 		model.addAttribute("scList",scList);
 
 		return "social/list";
 	}
+	// 소모임 상세
 	@GetMapping("/detail/{socialNo}")
 	public String getDetail(@PathVariable int socialNo, Model model) {
 		
@@ -118,5 +150,31 @@ public class SocialController {
 		log.debug("result       : "+detail.toString()); 
 		model.addAttribute("detail",detail);
 		return "social/detail";
+	}
+	// 소모임 참가.
+	@PostMapping("/socialjoin")
+	public String joinSocial(@RequestParam int socialNo, Model model,HttpSession session) {
+		
+		int memberNo = (int)session.getAttribute("logNo");
+		ParticipateVO participateVO = new ParticipateVO();
+		participateVO.setMemberNo(memberNo);
+		participateVO.setSocialNo(socialNo);
+		
+		socialService.socialJoin(participateVO);
+		log.debug("result       : "+participateVO.toString());
+		return "redirect:detail/"+socialNo;
+	}
+	// 소모임 참가.
+	@PostMapping("/socialexit")
+	public String exitSocial(@RequestParam int socialNo, Model model,HttpSession session) {
+		
+		int memberNo = (int)session.getAttribute("logNo");
+		ParticipateVO participateVO = new ParticipateVO();
+		participateVO.setMemberNo(memberNo);
+		participateVO.setSocialNo(socialNo);
+
+		socialService.exitSocial(participateVO);
+		log.debug("result       : "+participateVO.toString());
+		return "redirect:list";
 	}
 }

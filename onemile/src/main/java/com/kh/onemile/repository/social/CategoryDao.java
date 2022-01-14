@@ -20,4 +20,6 @@ public interface CategoryDao {
 
 	List<CategoryVO> getCategoryList();
 
+	List<MiddleCategoryVO> getMiddlelistByBigType(String categorySuper);
+
 }

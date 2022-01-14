@@ -143,16 +143,24 @@
 				
 				</div>
 				<a class="link_row row">
-					<div class="col">MBTI  :  ${memberVO.mbti}</div>
+					<div class="col">MBTI  :  ${memberVO.mbti}
+					<c:forEach items="${socialListVO}" var="socialListVO">
+					${socialListVO.title} ${socialListVO.startDate} ${socialListVO.endDate}
+					</c:forEach>
+					</div>
 				</a> <a class="link_row row">
-					<div class="col">${memberVO.intro}</div>
+					<div class="col">${memberVO.intro} 
+					
+					</div>
 				</a> <a class="row link_row">
-					<div class="col"></div>
+					<div class="col">
+					<%-- <img src="${pageContext.request.contextPath}/image/download?imageNo=${socialListVO.imgNo}&folder=social"> --%>
+					</div>
 				
 				</a>
 			</div>
 		</div>
-		<div class="saved_col">
+		<!-- <div class="saved_col">
 			<div class="saved_inner">
 				<div class="li_row mb-3">
 					<div class="row">
@@ -225,7 +233,10 @@
 						<div class="period">2022.01.13 ~ 2022.01.13</div></a>
 				</div>
 			</div>
-		</div>
+		</div> -->
+		<c:forEach items="${socialListVO}" var="socialListVO">
+			${socialListVO.title}
+		</c:forEach>
 	</div>
 </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

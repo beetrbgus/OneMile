@@ -85,15 +85,22 @@
 		</mvc:interceptors>
 	 -->
 	 
-	 <mvc:interceptors>
+	<mvc:interceptors>
 	 	<mvc:interceptor>
 	 		<mvc:mapping path="/member/**"/>
 	 		<mvc:mapping path="/commu/**"/>
 	 		<mvc:mapping path="/cobuy/**"/>
 	 		<mvc:mapping path="/membership/**"/>
-	 		<mvc:mapping path="/social/**"/>
+	 		<mvc:mapping path="/social/detail/**"/>
+	 		<mvc:mapping path="/social/modify/**"/>
+	 		<mvc:mapping path="/social/reg/**"/>
 	 		
 	 		<mvc:exclude-mapping path="/member/join"/>
+	 		<mvc:exclude-mapping path="/member/emailcheck"/>
+	 		<mvc:exclude-mapping path="/member/nickcheck"/>
+	 		<mvc:exclude-mapping path="/member/phonecheck"/>
+	 		<mvc:exclude-mapping path="/member/emailSend"/>
+	 		
 	 		<mvc:exclude-mapping path="/member/join_success"/>
 	 		<mvc:exclude-mapping path="/member/login"/>
 	 		<mvc:exclude-mapping path="/member/logout"/>
@@ -101,8 +108,7 @@
 	 		<mvc:exclude-mapping path="/member/find_pw"/>
 	 		<mvc:exclude-mapping path="/commu/map/list*"/>
 	 		<mvc:exclude-mapping path="/commu/notmap/list*"/>
-	 		<mvc:exclude-mapping path="/social/list*"/>
-	 		<mvc:exclude-mapping path="/cobuy/list*"/>
+	 		<mvc:exclude-mapping path="/social/list/*"/>
 	 		<mvc:exclude-mapping path="/cobuy/list/*"/>
 	 		<bean class="com.kh.onemile.interceptor.MemberInterceptor"></bean>
 	 	</mvc:interceptor>

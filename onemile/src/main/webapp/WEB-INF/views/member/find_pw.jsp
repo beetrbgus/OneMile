@@ -15,6 +15,31 @@
 }
 </style>
 <script>
+$(function() {
+	/* 인증번호 전송 */
+	var number = "";
+		
+	$("#BtnSendlink").click(function(e) {
+		e.preventDefault();
+			
+		var email = $("input[name=email]").val();
+		console.log("email"+email);
+		$.ajax({
+				url : "${root}/member/emailSend?email=" + email,
+				type : "get",
+				dataType : "text",
+				success : function(data) {
+					if (data == "error") {
+					} else {
+					number = data;			
+					}
+				}
+			});
+		});
+	});
+
+
+	/*인증시간 타이머  */
 	var timer = null;
 	var isRunning = false;
 	$(function() {
@@ -62,7 +87,7 @@
         <div class="label-hidden field">
             <label class="text-hidden" for="email">이메일 주소</label>
             <div class="wz input">
-                <input id="userName serialChk" type="email" name="email" placeholder="이메일 계정">
+                <input id="serialChk" type="email" name="email" id="email" placeholder="이메일 계정">
             	<span class="timer" id="timerC">00:00</span>
             </div>
             <c:if test="${param.error != null}">
@@ -72,8 +97,8 @@
 			</c:if>
          </div>
         <button id="BtnSendlink" class="wz primary block button btn_recive_num" type="button" onclick="checkEmail()">인증요청</button>
-        <input type="email" name="email" class="userName" placeholder="인증번호 6자리">
-        
+        <input type="text" name="serial" placeholder="인증번호 6자리">
+        <button type="submit">인증하기</button>
         
     </form>
 </div>

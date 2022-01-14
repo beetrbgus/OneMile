@@ -19,6 +19,6 @@ public class MilesRestController {
 	//소모임 대분류로 소분류 가져오기
 	@PostMapping("/category/child") 
 	public List<MiddleCategoryVO> listBySuper(@RequestParam String categorySuper) {
-		return categoryService.getMiddlelist(categorySuper);
+		return categoryService.getMiddlelistByBigType(categorySuper);
 	}
 }

@@ -8,25 +8,64 @@
 	display: flex;
 	justify-content: center;
 }
+.notice {
+	color: red;
+}
+.error {
+	color: red;
 </style>
 
-<div class="outer2">
+<script>
+//비밀번호 정규표현식
+function pwCheck(){
+    var regex = /^[A-Za-z0-9!@#$\s_-]{8,16}$/;
+    var input = document.querySelector("input[name=nowPw]");
+    var notice = input.nextElementSibling;
+
+    if(regex.test(input.value)){
+        notice.textContent = "";
+        return true;
+    }
+    else{
+        notice.textContent = "비밀번호는 8~16자 이내의 영문,숫자,특수문자로 작성하세요";
+        return false;
+    }
+}
+//비밀번호 확인
+function pw2Check(){
+    var pwInput = document.querySelector("input[name=nowPw]");
+    var pw2Input = document.querySelector("input[name=changePw]");
+    var notice = pw2Input.nextElementSibling;
+
+   if(pwInput.value.length > 0 && pwInput.value == pw2Input.value){
+        notice.textContent = "";
+        return true;
+    }
+    else{
+        notice.textContent = "비밀번호가 일치하지 않습니다";
+        return false;
+    }
+}	
+</script>
+<div class="outer2" style="margin-top: 70px">
 <div class="page-body" style="width: 500px">
   <main class="account-intro-login">
     <div class="user-sign-container">
       <div class="wz container form-container form-login">
-        <h2 class="wz text display2">비밀번호 변경</h2>
+        <h2 class="wz text display2" style="margin-top: 70px">비밀번호 변경</h2>
         <form name="frm_login" id="frm_login" class="wz form" method = "post">
           <div class="field">
             <div class="wz input">
             <label class="label">현재 비밀번호</label>
               <input type="password" name="nowPw" id="userName" class="input-text" autocomplete="off"/>
+           	<div class="notice"></div>
             </div>
             </div>
           <div class="field">
             <div class="wz input">
             <label class="label">변경할 비밀번호</label>
-              <input type="password" name="changePw" class="input-text"   />
+              <input type="password" name="changePw" class="input-text"/>
+              <div class="notice"></div>
             </div>
            <c:if test="${param.error != null}">
 			<div class="row center"> 

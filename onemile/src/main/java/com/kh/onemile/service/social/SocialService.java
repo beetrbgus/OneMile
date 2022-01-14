@@ -9,9 +9,10 @@ import com.kh.onemile.vo.SocialVO;
 import com.kh.onemile.vo.social.SocialDetailVO;
 import com.kh.onemile.vo.social.SocialListVO;
 import com.kh.onemile.vo.social.SocialRegVO;
+import com.kh.onemile.vo.social.participate.ParticipateVO;
 
 public interface SocialService {
-	public void reg(SocialRegVO socialRegVO) throws IllegalStateException, IOException;
+	public int reg(SocialRegVO socialRegVO) throws IllegalStateException, IOException;
 	public SocialVO detail(int socialNo);
 	public void changeSocial(SocialVO socialVo);
 	public List<SocialListVO> list();
@@ -19,4 +20,7 @@ public interface SocialService {
 	public SocialDetailVO getDetail(int socialNo);
 	public List<SocialDTO> getCount(int memberNo);
 	public List<SocialListVO> getMemberByList(int memberNo);
+	public void socialJoin(ParticipateVO participateVO);
+	public void exitSocial(ParticipateVO participateVO);
+
 }

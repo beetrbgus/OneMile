@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath }"></c:set>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+
 <style>
   .outer2 {
 	display: flex;
@@ -77,41 +78,28 @@ h2 {
     color: rgb(99, 99, 99);
     font-size: 0.9rem;
 }
-
 </style>
-<c:forEach var="membershipBuyDTO" items="${list}">
-	<div>
-		${membershipBuyDTO.itemName} / ${membershipBuyDTO.totalAmount} / ${membershipBuyDTO.buyTime} / ${membershipBuyDTO.buyEndtime}
-		${membershipBuyDTO.status} / ${membershipBuyDTO.sid} / ${membershipBuyDTO.hiddenYN}
-		<a href="${pageContext.request.contextPath}/pay/regular/disabled?sid=${membershipBuyDTO.sid}">중지</a>
-	<a href="${pageContext.request.contextPath}/pay/state?sid=${membershipBuyDTO.sid}">조회</a>
-	</div>
-</c:forEach>
-	
 
-<div class="outer2">
-<div style="width: 1000px">
-<main >
-    <h2>이용내역</h2>
-    <div class="PurchaseHistory__Block-wpufov-2 dUCAhU">
+<div class="outer2" style="margin-top: 70px">
+<div style="width: 1000px" style="margin-top: 70px">
+<main style="margin-top: 70px">
+    <h2 class="wz text display2 page-title">이용내역</h2>
+    <div class="PurchaseHistory__Block-wpufov-2 dUCAhU" style="margin-top: 70px">
         <div class="TransactionItem__Block-sc-1naw9lz-0 ZcoDs">
         	<c:forEach var="membershipBuyDTO" items="${list}">
             <div class="date">${membershipBuyDTO.buyTime} ~ ${membershipBuyDTO.buyEndtime}</div>
             <div class="name"><span class="TransactionItem__Name-sc-1naw9lz-1 fba-dEH">${membershipBuyDTO.itemName}</span></div>
-            <div class="expense"><span class="method">카카오페이 </span><span class="price">${membershipBuyDTO.totalAmount}원</span></div> 
+            <div class="expense"><span class="method">카카오페이</span><span class="price">  ${membershipBuyDTO.totalAmount}원</span></div> 
             <c:if test="${membershipBuyDTO.hiddenYN == 'Y'}">
-				
-				<a href="${pageContext.request.contextPath}/pay/regular/disabled?sid=${membershipBuyDTO.sid}">[중지]</a>
+				<a href="${pageContext.request.contextPath}/pay/regular/disabled?sid=${membershipBuyDTO.sid}">[멤버십 중지]</a>
 			</c:if>
-            
-            
-       </c:forEach>
+            </c:forEach>
         </div>
         <div class="PurchaseHistory__FetchingNext-wpufov-0 guWliA"></div>
-    	
     </div>
     
 </main>
 </div>
 </div>
+
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

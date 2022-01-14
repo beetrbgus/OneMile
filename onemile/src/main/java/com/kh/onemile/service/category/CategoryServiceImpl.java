@@ -45,4 +45,9 @@ public class CategoryServiceImpl implements CategoryService{
 		categoryDao.insert(memberJoinVO, memNo);
 		
 	}
+
+	@Override
+	public List<MiddleCategoryVO> getMiddlelistByBigType(String categorySuper) {
+		return categoryDao.getMiddlelistByBigType(categorySuper);
+		}
 }

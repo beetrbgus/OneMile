@@ -1,9 +1,9 @@
-package com.kh.onemile.vo.social;
+package com.kh.onemile.vo.social.participate;
 
 import lombok.Data;
 
 @Data
-public class ParticipateVO {
+public class ParticipateDetailVO {
 	private int memberNo;
 	private int profileNo;
 	private String nick;

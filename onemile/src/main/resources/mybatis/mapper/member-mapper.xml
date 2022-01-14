@@ -95,6 +95,18 @@
 		where member_no = #{memberNo}
 	</update>
 	
+	
+	 
+	<!-- 회원정보 불러오기(사진 포함) -->
+	<select id="imageProfile" parameterType="int" resultType="imageDTO">
+		select * from mei where member_no = #{memberNo}
+	</select>
+	
+	<!-- 회원정보 불러오기 -->
+	<select id="getMember" parameterType="int" resultMap="getProfile">
+		select * from member where member_no = #{memberNo}
+	</select>
+	
 	<resultMap type="MemberVO" id="getProfile">
 		<!-- 회원정보 -->
 		<result column="member_no" property="memberNo" />
@@ -115,15 +127,6 @@
 		<collection property="imageList" javaType="java.util.List"
 			ofType="ImageDTO" select="imageProfile" column="member_no"></collection>
 	</resultMap>
-	 
-	<!-- 회원정보 불러오기(사진 포함) -->
-	<select id="imageProfile" parameterType="int" resultType="imageDTO">
-		select * from mei where member_no = #{memberNo}
-	</select>
-	
-	<select id="getMember" parameterType="int" resultMap="getProfile">
-		select * from member where member_no = #{memberNo}
-	</select>
 	
 	<select id="getNickModi" parameterType="int" resultType="int">
 		select count(*) from member me

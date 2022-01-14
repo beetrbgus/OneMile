@@ -6,36 +6,38 @@
 <script>
 /* 카테고리 */
 $(function(){
-		$(".big").on("change",function(){
-			
+	$(".big").on("change",function(){
+		var root = $("#rrr").val();
+		console.log("root  "+root);
 		var category = $(this).val();
-		$.ajax({
-		  url : "${pageContext.request.contextPath}/miles/data/category/child",
-  		  type : "post",
-  		  data : {
-  			  categorySuper : category
-  		  },
-  		  success : function(resp) {
-  			console.log("성공", resp);
-  			
-  			var middle = $(".middle");
-  			middle.find("option").remove();
-  			for (var dto of resp) {
-  				
-				var middleOption = $("<option>");
-				middleOption.val(dto.smallType);
-				middleOption.text(dto.smallType);
-				middle.append(middleOption);
-			}
-  		  },
-  		  error : function(e) {
+	
+		$.ajax({ 
+			url : '${pageContext.request.contextPath}/miles/data/category/child',
+			type : "post",
+			async : false,
+			data : { 
+				categorySuper : category
+			},
+			success : function(resp) {
+				console.log("성공", resp);
+					
+				var middle = $(".middle");
+				middle.find("option").remove();
+				for (var dto of resp) { 
+					var middleOption = $("<option>");
+					middleOption.val(dto.smallType);
+					middleOption.text(dto.smallType);
+					middle.append(middleOption);
+				}
+		  	},
+	 		error : function(e) {
 			  console.log("실패", e);
-  		  }
-  		});
+ 		  	}
+ 		});
 	});
 });
 </script>
-
+<input id="rrr" type="hidden" value="${pageContext.request.contextPath}">
 <form id="regForm" action="reg" method="post" enctype="multipart/form-data">
 	<br>
 	이미지 :
@@ -49,7 +51,9 @@ $(function(){
 	<select class="big" required > 
 		<option value="">카테고리선택</option>
 		<c:forEach var="category" items="${bigCategory}">
-			<option value="${category.bigType}">${category.bigType}</option>
+			<c:if test="${category.bigType !='전체'}">
+				<option value="${category.bigType}">${category.bigType}</option>
+			</c:if>
 		</c:forEach>
 	</select>
 	<select class="middle" name="smalltype" required></select>
