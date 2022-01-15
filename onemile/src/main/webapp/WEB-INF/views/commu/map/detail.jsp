@@ -19,7 +19,7 @@
 				<div class="article-top">
 					<p class="title">${commuDetailVO.title}</p>
 					<div class="info">
-						<c:if test="${commuDetailVO.imageNo} != null">
+						<c:if test="${commuDetailVO.imageNo != 0}">
 							<em class="user-img"
 								style="background-image:url(${pageContext.request.contextPath}/image/download?imageNo=${commuDetailVO.imageNo}&folder=member)"></em>
 						</c:if>

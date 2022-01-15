@@ -11,7 +11,7 @@
 		<div class="wboard-wrap">
 			<div class="wboard-detail-content">
 				<div class="article-top">
-					<p class="title">${commuDetailVO.title} ${commuDetailVO.imageNo}</p>
+					<p class="title">${commuDetailVO.title}</p>
 					<div class="info">
 						<c:choose>
 							<c:when test="${commuDetailVO.imageNo != 0}">
@@ -35,19 +35,19 @@
 		</div>
 		<div class="wboard-detail-bottom">
 			<div class="wboard-detail-btn-wrap">
-				<a class="wz button" href="${root}/commu/map/list?middleName=${commuDetailVO.middleName}">목록으로 돌아가기</a>
+				<a class="wz button" href="${root}/commu/notmap/list?middleName=${commuDetailVO.middleName}">목록으로 돌아가기</a>
 				<c:if test="${admin and logNo ne commuDetailVO.memberNo}">
 				<a class="wz button" href="${root}/admin/">관리자 홈</a>
-				<a class="wz button" href="${root}/commu/map/delete?boardNo=${commuDetailVO.commuNo}&middleName=${commuDetailVO.middleName}">삭제하기</a>
+				<a class="wz button" href="${root}/commu/notmap/delete?boardNo=${commuDetailVO.commuNo}&middleName=${commuDetailVO.middleName}">삭제하기</a>
 				</c:if>
 				<c:if test="${admin and logNo eq commuDetailVO.memberNo}">
 				<a class="wz button" href="${root}/admin/">관리자 홈</a>
-				<a class="wz button" href="${root}/commu/map/delete?boardNo=${commuDetailVO.commuNo}&middleName=${commuDetailVO.middleName}">삭제하기</a>
-				<a class="wz button" href="${root}/commu/map/edit?boardNo=${commuDetailVO.commuNo}">수정하기</a>
+				<a class="wz button" href="${root}/commu/notmap/delete?boardNo=${commuDetailVO.commuNo}&middleName=${commuDetailVO.middleName}">삭제하기</a>
+				<a class="wz button" href="${root}/commu/notmap/edit?boardNo=${commuDetailVO.commuNo}">수정하기</a>
 				</c:if>
 				<c:if test="${logNo eq commuDetailVO.memberNo and not admin}">
-				<a class="wz button" href="${root}/commu/map/delete?boardNo=${commuDetailVO.commuNo}&middleName=${commuDetailVO.middleName}">삭제하기</a>
-				<a class="wz button" href="${root}/commu/map/edit?boardNo=${commuDetailVO.commuNo}">수정하기</a>
+				<a class="wz button" href="${root}/commu/notmap/delete?boardNo=${commuDetailVO.commuNo}&middleName=${commuDetailVO.middleName}">삭제하기</a>
+				<a class="wz button" href="${root}/commu/notmap/edit?boardNo=${commuDetailVO.commuNo}">수정하기</a>
 				</c:if>
 			</div>
 		</div>
