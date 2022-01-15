@@ -26,15 +26,11 @@
         <h2 class="wz text display2" style="margin-top: 70px">비밀번호 변경</h2>
         <form name="frm_login" id="frm_login" class="wz form" method = "post">
           <div class="field">
-            <div class="wz input">
-            <label class="label">현재 비밀번호</label>
-              <input type="password" name="nowPw" id="userName" class="input-text" autocomplete="off"/>
-           	<div class="notice"></div>
-            </div>
-            </div>
+           </div>
           <div class="field">
             <div class="wz input">
             <label class="label">변경할 비밀번호</label>
+              <input type="hidden" name="email" value="${email}">
               <input type="password" name="changePw" class="input-text"/>
               <div class="notice"></div>
             </div>

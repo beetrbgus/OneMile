@@ -139,24 +139,28 @@
 
 					</div>
 				</div>
-				<div class="menu_row row"></div>
-				<a class="link_row row" href="edit">
-					<div class="col">회원정보 수정</div>
-				</a> <a class="link_row row" href="edit_pw">
-					<div class="col">비밀번호 변경</div>
-				</a> <a class="row link_row"
-					href="${pageContext.request.contextPath}/membership/reg_membership">
-					<div class="col">멤버십 결제내역</div>
-				</a><a class="row link_row"
-					href="${pageContext.request.contextPath}/cobuy/buylist">
-					<div class="col">공동구매 결제내역</div>
-				</a><a class="row link_row"
-					href="${pageContext.request.contextPath}/member/logout">
-					<div class="col">로그아웃</div>
+				<div class="menu_row row">
+				
+				</div>
+				<a class="link_row row">
+					<div class="col">MBTI  :  ${memberVO.mbti}
+					<c:forEach items="${socialListVO}" var="socialListVO">
+					${socialListVO.title} ${socialListVO.startDate} ${socialListVO.endDate}
+					</c:forEach>
+					</div>
+				</a> <a class="link_row row">
+					<div class="col">${memberVO.intro} 
+					
+					</div>
+				</a> <a class="row link_row">
+					<div class="col">
+					<%-- <img src="${pageContext.request.contextPath}/image/download?imageNo=${socialListVO.imgNo}&folder=social"> --%>
+					</div>
+				
 				</a>
 			</div>
 		</div>
-		<div class="saved_col">
+		<!-- <div class="saved_col">
 			<div class="saved_inner">
 				<div class="li_row mb-3">
 					<div class="row">
@@ -229,7 +233,10 @@
 						<div class="period">2022.01.13 ~ 2022.01.13</div></a>
 				</div>
 			</div>
-		</div>
+		</div> -->
+		<c:forEach items="${socialListVO}" var="socialListVO">
+			${socialListVO.title}
+		</c:forEach>
 	</div>
 </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

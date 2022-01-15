@@ -13,7 +13,7 @@ public interface SocialDao {
 	List<SocialListVO> getList(PaginationVO paginationVO);
 	SocialDetailVO getDetail(int socialNo);
 	List<SocialDTO> getCount(int memberNo);
+	List<SocialListVO> getMemberByList(int memberNo);
 	void modify(SocialRegVO socialRegVO);
-  
 
 }

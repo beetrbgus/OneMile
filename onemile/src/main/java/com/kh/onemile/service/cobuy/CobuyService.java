@@ -23,4 +23,6 @@ public interface CobuyService {
 	public List<CobuyListVO> getList(int startRow, int endRow);
 	public List<CobuyListVO> getList(PaginationVO paginationVO);
 	public List<ProductBuyDTO> getbuyList(int memberNo);
+	
+	
 }

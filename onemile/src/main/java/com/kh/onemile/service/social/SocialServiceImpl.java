@@ -15,12 +15,10 @@ import com.kh.onemile.repository.image.middle.MiddleImageDAO;
 import com.kh.onemile.repository.social.SocialDao;
 import com.kh.onemile.repository.social.participant.ParticipantService;
 import com.kh.onemile.service.image.ImageService;
-import com.kh.onemile.service.image.MiddleImageService;
 import com.kh.onemile.service.map.MapService;
 import com.kh.onemile.service.social.participant.ParticipantDao;
 import com.kh.onemile.util.Sequence;
 import com.kh.onemile.vo.PaginationVO;
-import com.kh.onemile.vo.SocialVO;
 import com.kh.onemile.vo.social.SocialDetailVO;
 import com.kh.onemile.vo.social.SocialListVO;
 import com.kh.onemile.vo.social.SocialRegVO;
@@ -141,6 +139,11 @@ public class SocialServiceImpl implements SocialService{
 	}
 
 	@Override
+	public List<SocialListVO> getMemberByList(int memberNo) {
+		return socialDao.getMemberByList(memberNo);
+	}
+	
+	@Override
 	public void socialJoin(ParticipateVO participateVO) {		
 		//소셜번호로 참여자의 숫자와 최대인원을 비교해서 맞으면 참가.
 		boolean  result = participantDao.getPartiCnt(participateVO.getSocialNo());
@@ -153,6 +156,7 @@ public class SocialServiceImpl implements SocialService{
 	@Override
 	public void exitSocial(ParticipateVO participateVO) {
 		participantService.reject(participateVO);
+
 	}
 
 }

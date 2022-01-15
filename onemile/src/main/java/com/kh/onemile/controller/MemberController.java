@@ -35,6 +35,7 @@ public class MemberController {
 	private EmailService emailService;
 	@Autowired
 	private CategoryService categoryService;
+	
 	//회원가입
 	@GetMapping("/join")
 	public String getJoin(Model model) {
@@ -158,19 +159,15 @@ public class MemberController {
 		return "member/find_pw";
 	}
 
-	@PostMapping("/find_pw")
-	public String cert(@RequestParam String email, Model model) {
-		boolean result = memberService.getEmail(email);
-		log.debug("리절트" + result);
-
-		if (result) {
-			emailService.sendCertificationNumber(email);
-			model.addAttribute("email", email);
-			return "member/emailCheck";
-		} else {
-			return "redirect:find_pw?error";
-		}
-	}
+	/*
+	 * @PostMapping("/emailCheck") public String cert(@ModelAttribute CertiDTO
+	 * certiDTO, @RequestParam String email, Model model) { boolean result =
+	 * memberService.getEmail(certiDTO.getEmail()); log.debug("리절트" + result);
+	 * 
+	 * if (result) { emailService.sendCertificationNumber(email);
+	 * model.addAttribute("email", email); return "member/emailCheck"; } else {
+	 * return "redirect:find_pw?error"; } }
+	 */
 
 	// 비밀번호찾기(이메일 인증번호 체크)
 	@PostMapping("/emailCheck")
@@ -178,9 +175,19 @@ public class MemberController {
 		boolean success = memberService.emailCheck(certiDTO);
 		if (success) {
 			model.addAttribute("email", certiDTO.getEmail());
-			return "member/edit_pw";
+			log.debug("이메일찾기@@@"+certiDTO.getEmail());
+			return "member/find_edit_pw";
 		} else {
+			return "redirect:find_pw?error";
+		}
+	}
+	@GetMapping("find_edit_pw")
+	public String findEditPw(@RequestParam String changePw, @RequestParam String email) {
+		boolean result = memberService.emailChangePw(email, changePw);
+		if(result) {
 			return "redirect:/";
+		} else {
+			return "redirect:find_edit_pw?error";
 		}
 	}
 
@@ -189,7 +196,6 @@ public class MemberController {
 	public String editPw() {
 		return "member/edit_pw";
 	}
-
 	@PostMapping("/edit_pw")
 	public String editPw(@RequestParam String nowPw, @RequestParam String changePw, HttpSession session) {
 		String email = (String) session.getAttribute("logId");
@@ -201,38 +207,33 @@ public class MemberController {
 		}
 	}
 
-	// 마이페이지
-	@RequestMapping("/mypage")
-	public String mypage(HttpSession session, Model model) {
-		int memberNo = (int) session.getAttribute("logNo");
-		// 회원정보 불러오기(이미지 포함)
-		MemberVO memberVO = memberService.imageProfile(memberNo);
-		log.debug("내정보 = MemberVO" + memberVO);
-
-//		imageService.listByMember(memberNo);
-//		MemberProfileMidDTO memberProfileMidDTO = imageService.getImage();
-		// model.addAttribute("memberDTO",memberDTO);
-		model.addAttribute("memberVO", memberVO);
-		return "member/mypage";
-	}
-
-	// 회원정보 수정(닉변경일체크 + 자잘한거 추가해야댐)
+	// 회원정보 수정
 	@GetMapping("/edit")
 	public String edit(HttpSession session, Model model) {
 		int memberNo = (int) session.getAttribute("logNo");
-		MemberDTO memberDTO = memberService.profile(memberNo);
-		model.addAttribute("memberDTO", memberDTO);
+		
+		int count = memberService.getNickModi(memberNo);
+		log.debug("수정가능"+count);
+		model.addAttribute("count",count);
+		
+		// 회원정보 불러오기(이미지 포함)
+		MemberVO memberVO = memberService.imageProfile(memberNo);
+		log.debug("내정보 = MemberVO" + memberVO);
+		model.addAttribute("memberVO", memberVO);
+		
+		//MemberDTO memberDTO = memberService.profile(memberNo);
+		//log.debug("정보수정"+memberDTO);
+		//model.addAttribute("memberDTO", memberDTO);
 		return "member/edit";
 	}
-
 	@PostMapping("/edit")
 	public String edit(@ModelAttribute MemberDTO memberDTO, HttpSession session) {
+		log.debug("정보수정22222"+memberDTO);
 		int memberNo = (int) session.getAttribute("logNo");
 		memberDTO.setMemberNo(memberNo);
-		System.out.println("멤버변경 찾기" + memberDTO);
 		boolean result = memberService.changeInformation(memberDTO);
 		if (result) {
-			return "redirect:edit_success";
+			return "account/mypage";
 		} else {
 			return "redirect:edit?error";
 		}

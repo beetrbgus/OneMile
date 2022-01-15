@@ -17,18 +17,18 @@
 	<insert id="join" parameterType="membershipBuyDTO">
 		insert into msb (
 			msb_no, member_no ,msp_no, sid, total_amount, partner_user_id,
-			buy_time, buy_endtime, status, item_name
+			buy_time, buy_endtime, status, item_name, hiddenyn
 			)
 			values(
 			#{msbNo},#{memberNo},#{mspNo},#{sid},#{totalAmount}, #{partnerUserId},
-			sysdate, sysdate+31, '결제완료', #{itemName}
+			sysdate, sysdate+31, '결제완료', #{itemName}, 'Y'
 			)
 	</insert>
 		
 	<!-- 결제일 비교하기-->
 	<select id="dayCheck" resultType="MembershipBuyDTO">
 	<![CDATA[
-		 select  * from msb where buy_endtime <= sysdate and status = '결제완료'
+		select  * from msb where buy_endtime <= sysdate and status = '결제완료' and hiddenyn = 'y'
 		 ]]>
 	</select>
 	
@@ -52,7 +52,7 @@
 	</select>	
 	
 	<!-- 정기결제 해지 -->
-		<delete id="regularPayDelete" parameterType="String">
-			delete msb where sid = #{sid}
-		</delete>
+		<update id="regularPayDelete" parameterType="String">
+			 update msb set hiddenyn = 'N' where sid = #{sid}
+		</update>
 </mapper>

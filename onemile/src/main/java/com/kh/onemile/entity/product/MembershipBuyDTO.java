@@ -18,4 +18,5 @@ public class MembershipBuyDTO {
 	private Date buyEndtime;
 	private String partnerUserId;
 	private String status;
+	private String hiddenYN;
 }

@@ -43,7 +43,12 @@ public class SocialDaoImpl implements SocialDao{
 	}
 
 	@Override
+
+	public List<SocialListVO> getMemberByList(int memberNo) {
+		return sqlSession.selectList("social.getMemberByList",memberNo);
+	}
 	public void modify(SocialRegVO socialRegVO) {
 		sqlSession.update("social.modify",socialRegVO);
+
 	}
 }

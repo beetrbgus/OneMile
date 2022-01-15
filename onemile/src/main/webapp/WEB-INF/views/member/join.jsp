@@ -14,8 +14,8 @@
 }
 </style>
 
-<!-- <script>
-let imgList = new Array();
+<script>
+/* let imgList = new Array();
 let folder = "member";
 	$(function(){
 		$("input[name=attach]").on("input", function(e){
@@ -65,24 +65,7 @@ function readURL(input) {
        reader.readAsDataURL(input.files[0]);
     }
 }
- $(function () {
-	 //파일이 선택되면 3개 이상인지 확인해서 차단
-    $("input[name=attach]").on("input", function () {
-    	console.log(this.files);
-    	console.log("event " +event.target);
-    	console.log(this.files);
-        if (this.files.length > 3) {
-            alert("파일은 3개까지만 선택이 가능합니다");
-            $(this).val(""); //선택취소
-            return;
-        }
-        setThumbnail($(this).files);
-		//선택한 파일을 읽어서 전송 가능하도록 보관
-        //파일이 몇갠지 모르니까 배열에 보관한다
-        fileList = this.files;
-        console.log(fileList);  
-		
-    });
+  
 		function setThumbnail(imagefile) {
 			console.log("썸네일    "+imagefile)
             var reader = new FileReader();
@@ -91,13 +74,29 @@ function readURL(input) {
                 img.setAttribute("src", event.target.result);
                 document.querySelector("div#preview").appendChild(img);
             };
-            reader.readAsDataURL(event.target.files[0]); }
+            reader.readAsDataURL(event.target.files[0]); } */
         
-		 
- });  -->
- 
- <script>
- //이미지 미리보기
+//파일 갯수 제한
+$(function () {
+	//파일이 선택되면 3개 이상인지 확인해서 차단
+	$("input[name=attach]").on("input", function () {
+    console.log(this.files);
+    console.log("event " +event.target);
+    console.log(this.files);
+    if (this.files.length > 3) {
+      	alert("파일은 3개까지만 선택이 가능합니다");
+      	$(this).val(""); //선택취소
+      	return;
+      }
+      setThumbnail($(this).files);
+      //선택한 파일을 읽어서 전송 가능하도록 보관
+      //파일이 몇갠지 모르니까 배열에 보관한다
+      fileList = this.files;
+      console.log(fileList);  
+     });
+});	
+      						
+//이미지 미리보기
  var sel_files = [];
  $(document).ready(function(){
      $("input[name=attach]").on("change", handleImgsFilesSelect);
@@ -116,7 +115,7 @@ function readURL(input) {
          sel_files.push(f);
          var reader = new FileReader();
          reader.onload = function(e) {
-             var html = "<a href=\"javascript:void(0);\" onclick=\"deleteImageAction("+index+")\" id=\"img_id_"+index+"\"><img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selProductFile' title='Click to remove'></a>";
+             var html = "<a href=\"javascript:void(0);\" onclick=\"deleteImageAction("+index+")\" id=\"img_id_"+index+"\"><img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selProductFile' title='Click to remove' width='150px' height='150px'></a>";
              $("#result").append(html);
              index++;
            }
@@ -392,10 +391,11 @@ class="wz form" novalidate="novalidate">
 		<p class="page-description">고객님의 회원가입을 환영합니다!</p>
 		
 			<div class="field name-field ">
-				<label>프로필 사진</label> 
-				<input type="file" name="attach" multiple>
+				<label>프로필 사진<br>
+				[최대 3장, 5MB까지 등록 가능합니다]</label> 
+				<input type="file" name="attach" multiple accept=".jpg, .png">
 			</div>
-			
+			<!-- 미리보기  -->
 			<div id="result" style="width: 5px"></div>
 		
 			<div class="field name-field ">
@@ -544,7 +544,7 @@ class="wz form" novalidate="novalidate">
 			<button type="button" id="btnJoin" class="wz button primary block prev">이전 단계로</button>
 			</div>
 			</div>
-			<input type="submit" id="btnJoin" class="wz button primary block" value="가입하기">
+			<input type="submit" id="btnJoin" class="wz button primary block" onclick="formCheck();" value="가입하기">
 			
 		</div>
 	</div>

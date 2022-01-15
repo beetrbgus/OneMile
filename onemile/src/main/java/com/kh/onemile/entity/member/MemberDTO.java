@@ -1,6 +1,6 @@
 package com.kh.onemile.entity.member;
 
-import java.util.Date;
+import java.sql.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 import lombok.Data;
 
@@ -13,7 +13,8 @@ public class MemberDTO {
 	private String nick;
 	private String phone;
 	private String gender;
-	private Date birth;
+	@DateTimeFormat(pattern = "YYYY-MM-DD")
+	private String birth;
 	private String grade;
 	@DateTimeFormat(pattern="YYYY-MM-DD HH:mm:ss")
 	private Date joinDate;

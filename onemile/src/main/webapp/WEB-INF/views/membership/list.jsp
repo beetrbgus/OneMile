@@ -76,9 +76,10 @@
 		});
 	});
 </script>
+<h2 class="wz text display2 page-title" style="text-align: center;margin-top: 30px;">멤버십 목록</h2>
 <c:forEach var="MembershipListVO" items="${list}" >
 	
-	<div class="outer2">
+	<div class="outer2" style="margin-top: 20px;">
 	<div class="MembershipProductCard__Card-sc-12c6erg-0 elaFmh" >
 	<input class="productNo" name="isselect" type="radio" value="${MembershipListVO.mspNo}">
 		<h2>${MembershipListVO.mspProduct}</h2>
