@@ -237,7 +237,7 @@ $(function () {
 											<button type="button" class="User_btnSign__1URTs" ><a href="${root}/member/logout">로그아웃</a></button>
 												<c:choose>
 													<c:when test="${!admin}">
-														<button data-event="iam.signup" class="User_btnSign__1URTs" ><a href="${root}/member/mypage">마이페이지</a></button>
+														<button data-event="iam.signup" class="User_btnSign__1URTs" ><a href="${root}/account/mypage">마이페이지</a></button>
 													</c:when>
 												</c:choose>
 										</c:when>
@@ -263,7 +263,7 @@ $(function () {
 													aria-label="프로젝트 오픈 신청">관리자 홈</button></a>
 											</c:when>
 											<c:otherwise>
-											<a herf="${root}/member/membership">
+											<a href="${root}/membership/list">
 												<button class="wz button funding-open-button dense primary-outline"
 												aria-label="프로젝트 오픈 신청">멤버십 가입</button></a>
 											</c:otherwise>

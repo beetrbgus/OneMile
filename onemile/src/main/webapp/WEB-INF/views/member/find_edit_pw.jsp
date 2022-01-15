@@ -29,9 +29,9 @@
            </div>
           <div class="field">
             <div class="wz input">
-            <label class="label">변경할 비밀번호</label>
+            <label class="label"></label>
               <input type="hidden" name="email" value="${email}">
-              <input type="password" name="changePw" class="input-text"/>
+              <input type="password" name="changePw" class="input-text" placeholder="변경할 비밀번호를 입력해주세요"/>
               <div class="notice"></div>
             </div>
            <c:if test="${param.error != null}">

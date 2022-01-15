@@ -100,8 +100,11 @@
 	 		<mvc:exclude-mapping path="/member/nickcheck"/>
 	 		<mvc:exclude-mapping path="/member/phonecheck"/>
 	 		<mvc:exclude-mapping path="/member/emailSend"/>
+	 		<mvc:exclude-mapping path="/member/find_edit_pw"/>
 	 		
 	 		
+	 		<mvc:exclude-mapping path="/member/quit_success"/>
+	 		<mvc:exclude-mapping path="/member/quit"/>
 	 		<mvc:exclude-mapping path="/member/join_success"/>
 	 		<mvc:exclude-mapping path="/member/login"/>
 	 		<mvc:exclude-mapping path="/member/logout"/>

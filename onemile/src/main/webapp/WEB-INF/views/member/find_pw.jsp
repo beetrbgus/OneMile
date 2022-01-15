@@ -83,8 +83,7 @@
 		<p class="wz text body1" style="margin-top: 70px;">
 			가입하셨던 이메일 계정을 입력하시면,<br>인증번호를 보내드립니다.<br>
 		</p>
-		<form class="wz form" onsubmit="checkEmail()" method="post"
-			action="${pageContext.request.contextPath}/member/emailCheck">
+		<form class="wz form" onsubmit="checkEmail()" method="post">
 			<input type="hidden" id="findType" value="FIND_PASSWORD">
 			<div class="label-hidden field">
 				<label class="text-hidden" for="email">이메일 주소</label>
@@ -94,8 +93,9 @@
 						<span class="timer" id="timerC">00:00</span>
 						
 						<button id="BtnSendlink" class="wz primary block button btn_recive_num" type="button" onclick="checkEmail()" style="width: 150px; height: 48px; position:absolute; ; top : 1px; right:1px;margin-left: -119px;">인증요청</button>
-				</div>
 				
+						<input id="serialChk" type="text" name="serial" placeholder="인증번호 6자리"  maxlength="6"> 
+				</div>
 				<c:if test="${param.error != null}">
 					<div class="row center">
 						<h4 class="error">입력하신 정보가 일치하지 않습니다</h4>
@@ -103,11 +103,7 @@
 				</c:if>
 			</div>
 
-			
-			
-			<input type="text" name="serial" placeholder="인증번호 6자리">
-			<button type="submit">인증하기</button>
-
+			<button type="submit" class="wz button primary block submit-button">인증하기</button>
 		</form>
 	</div>
 </div>
