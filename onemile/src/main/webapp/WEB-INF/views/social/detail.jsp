@@ -19,7 +19,6 @@
 .image.image-round {
     border-radius: 50%;
 }
-
 .image.image-border,
 .image.image-hover:hover {
     border: 2px solid gray;
@@ -37,6 +36,11 @@
 	
   <p>번호 : ${detail.socialNo}</p>
 	<p>제목 : ${detail.title}</p>
+
+ <%--  <p>번호 : ${detail.socialNo}</p>
+
+  <p>제목 : ${detail.title}</p>
+>>>>>>> branch 'MS95' of https://github.com/beetrbgus/OneMile.git
   <p>대분류 : ${detail.type}</p>
   <p>소분류 : ${detail.smalltype}</p>
   <p>시작일 : ${detail.startDate}</p> 

@@ -9,5 +9,6 @@ public class ParticipateVO {
 	private int socialNo;
 	private String nick;
 	private String intro;
+
 	private String isJoined;
 }
