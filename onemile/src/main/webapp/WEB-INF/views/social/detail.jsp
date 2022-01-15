@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common2.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/detail.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/detail-socialing.css">
@@ -11,6 +12,7 @@
 
 
  <%--  <p>번호 : ${detail.socialNo}</p>
+
   <p>제목 : ${detail.title}</p>
   <p>대분류 : ${detail.type}</p>
   <p>소분류 : ${detail.smalltype}</p>

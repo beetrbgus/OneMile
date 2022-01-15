@@ -100,6 +100,11 @@ $(function () {
     	$(".Backdrop_backDrop__3v5kD").toggleClass("dark")
     	$(".MoreMenuDesktop_container__1I6Al").toggleClass("MoreMenuDesktop_active__3wtR4");
     });
+    
+	$(".Backdrop_backDrop__3v5kD.Backdrop_dimmed__23l4b.GNBDesktop_backdrop__3h5Cq").click(function(){
+		$(this).removeClass("dark"); 
+		$(".MoreMenuDesktop_container__1I6Al.MoreMenuDesktop_active__3wtR4").removeClass("MoreMenuDesktop_active__3wtR4");
+	});
 });
 </script>
 <body>

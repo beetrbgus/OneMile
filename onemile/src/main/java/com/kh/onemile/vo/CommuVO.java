@@ -23,8 +23,8 @@ public class CommuVO {
 	private Date regDate;
 	
 	//지도
-	private double lat;
-	private double lng;
+	private float lat;
+	private float lng;
 	private String detailAddress;
 	
 	//이미지
