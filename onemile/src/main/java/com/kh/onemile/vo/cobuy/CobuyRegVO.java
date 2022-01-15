@@ -23,8 +23,8 @@ public class CobuyRegVO {
 	
 	//지도 부분
 	private int mapNo;
-	private double lat;
-	private double lng;
+	private float lat;
+	private float lng;
 	private String detailAddress;
 	private List<MultipartFile> attach;
 }

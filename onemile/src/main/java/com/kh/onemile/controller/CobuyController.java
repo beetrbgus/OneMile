@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.onemile.entity.member.membership.AdDTO;
 import com.kh.onemile.entity.product.ProductBuyDTO;
+import com.kh.onemile.entity.social.SocialBigCategoryDTO;
 import com.kh.onemile.service.cobuy.CobuyService;
 import com.kh.onemile.vo.PaginationVO;
 import com.kh.onemile.vo.cobuy.CobuyCatVO;
@@ -25,24 +27,27 @@ import com.kh.onemile.vo.cobuy.CobuyDetailVO;
 import com.kh.onemile.vo.cobuy.CobuyListVO;
 import com.kh.onemile.vo.cobuy.CobuyRegVO;
 import com.kh.onemile.vo.kakaopay.ConfirmVO;
+import com.kh.onemile.vo.social.SocialDetailVO;
+import com.kh.onemile.vo.social.SocialRegVO;
+import com.kh.onemile.vo.social.category.MiddleCategoryVO;
 
 import lombok.extern.slf4j.Slf4j;
 
 @RequestMapping("/cobuy")
-@Controller
+@Controller 
 @Slf4j
 public class CobuyController {
 	@Autowired
 	private CobuyService cobuyService;
-
-	@GetMapping("/regcobuy")
+	// 등록
+	@GetMapping("/reg")
 	public String getreg(Model model) throws IllegalStateException, IOException {
 		model.addAttribute("", "");
 
-		return "/cobuy/regcobuy";
+		return "/cobuy/reg";
 	}
 
-	@PostMapping("/regcobuy")
+	@PostMapping("/reg")
 	public String postreg(@ModelAttribute CobuyRegVO cobuyRegVO, HttpSession session)
 			throws IllegalStateException, IOException {
 		int memNo = Integer.parseInt(String.valueOf(session.getAttribute("logNo")));
@@ -51,15 +56,7 @@ public class CobuyController {
 
 		return "redirect:detail?cobuyNo=" + cobuyNo;
 	}
-
-//	@GetMapping("/list")
-//	public
-//	String list(Model model) {
-//		List<CobuyCatVO> cobuyCatVO = cobuyService.getMiddleName();
-//	     System.err.println(cobuyCatVO);
-//	     model.addAttribute("category", cobuyCatVO);
-//		return "/cobuy/list";
-//	}
+	// 상품 목록
 	@GetMapping({"/list/{category}","/list","/",""})
 	public String list(@PathVariable(required = false) String category,
 			@RequestParam(required =false, defaultValue = "1") int page,
@@ -87,21 +84,7 @@ public class CobuyController {
 	     model.addAttribute("category", cobuyCatVO);
 		return "cobuy/list";
 	}
-	
-//	@GetMapping("/list")
-//	public String list(Model model) {
-//		List<CobuyListVO> result = cobuyService.getList();
-//		for(CobuyListVO item :result) {
-//			log.debug("---------------------------");
-//			log.debug(item.getPName());
-//			System.out.println("---------------------------");
-//			System.out.println(item.getPName());
-//		}
-//		model.addAttribute("list", result);
-//		
-//		return "/cobuy/list";
-//	}
-	
+	// 상품 목록
 	@GetMapping("/listdetail")
 	@ResponseBody
 	public List<CobuyListVO> list(
@@ -112,6 +95,7 @@ public class CobuyController {
 		PaginationVO paginationVO =new PaginationVO(page,size);
 		return cobuyService.getList(paginationVO);
 	}
+	
 	@GetMapping("/detail") 
 	public String detail(@RequestParam int cobuyNo , Model model) {
 		CobuyDetailVO cobuyDetailVO =cobuyService.getDetail(cobuyNo);
@@ -126,16 +110,16 @@ public class CobuyController {
 		return "/cobuy/detail";
 	}
 
-	@PostMapping("/delete")
-	public String delete(@RequestParam int cobuyNo) {
+	@GetMapping("/delete/{cobuyNo}")
+	public String delete(@PathVariable int cobuyNo) {
 		cobuyService.delete(cobuyNo);
 		return "redirect:/list";
 	}
 
-	@GetMapping("/modify")
-	public String getModify(@RequestParam int cobuyNo, Model model) {
+	@GetMapping("/modify/{cobuyNo}")
+	public String getModify(@PathVariable int cobuyNo, Model model) {
 		model.addAttribute("detail", cobuyService.getDetail(cobuyNo));
-		return "detail";
+		return "/cobuy/modify";
 	}
 
 	@PostMapping("/modify")

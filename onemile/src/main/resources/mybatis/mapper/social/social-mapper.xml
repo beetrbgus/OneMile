@@ -29,9 +29,12 @@
 	</select>
 	<!-- 참가자 목록 가져오기 -->
 	<select id="getparticipate" parameterType="int" resultType="ParticipateVO">
-		select m.member_No, m.nick, m.intro , mei.IMAGE_NO 
+		select m.member_No, m.nick, m.intro , mei.profileImgNo 
 		    from SP  inner join member m on sp.member_no = m.member_no
-			inner join mei on sp.member_no = mei.member_no
+			inner join 
+         		(select member_no , min(image_no) as profileImgNo
+					from mei group by member_no) mei on	
+            		mei.member_no = sp.member_no
 		where SOCIAL_NO = #{SOCIAL_NO}
 	</select>
 	<!-- 글의 이미지 목록 가져오기. -->
@@ -49,7 +52,7 @@
 		<result column="STARTDATE" property="startDate" />
 		<result column="ENDDATE" property="endDate" />
 		<result column="CONTEXT" property="context" />
-		<result column="profileImgNo" property="profileImgNo" />
+		<result column="profileImgNo" property="hostImgNo" />
 		<result column="MINPEOPLE" property="minpeople" />
 		<result column="MAXPEOPLE" property="maxpeople" />
 		<result column="MEMBER_NO" property="memberNo" />
@@ -62,7 +65,7 @@
 		<result column="DETAILADDRESS" property="detailAddress" />
 		
 		<collection property="participate" javaType="java.util.List"
-			ofType="ParticipateVO" select="getparticipate" column="member_no"/>
+			ofType="ParticipateVO" select="getparticipate" column="social_no"/>
 		<collection property="imageInfo" javaType="java.util.List"
 			ofType="ImageDTO" select="getDetailimage" column="social_no"/>
 	</resultMap>
