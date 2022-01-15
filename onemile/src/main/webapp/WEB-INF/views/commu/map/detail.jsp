@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="login" value="${logId != null}"></c:set>
+<c:set var="admin" value="${grade == '관리자'}"></c:set>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <style>
 .detailAddress {
@@ -42,38 +44,41 @@
 		</div>
 		<div class="wboard-detail-bottom">
 			<div class="wboard-detail-btn-wrap">
-				<a class="wz button"
-					href="${root}/commu/map/list?middleName=${commuDetailVO.middleName}">목록으로 돌아가기</a>
-				<a class="wz button"
-					href="${root}/commu/map/edit?boardNo=${commuDetailVO.commuNo}">수정하기</a>
-				<a class="wz button"
-					href="${root}/commu/map/delete?boardNo=${commuDetailVO.commuNo}&middleName=${commuDetailVO.middleName}">삭제하기</a>
+				<a class="wz button" href="${root}/onemile/commu/map/list?middleName=${commuDetailVO.middleName}">목록으로 돌아가기</a>
+				<c:if test="${admin}">
+				<a class="wz button" href="${root}/onemile/admin/">관리자 홈</a>
+				<a class="wz button" href="${root}/onemile/commu/map/delete?boardNo=${commuDetailVO.commuNo}&middleName=${commuDetailVO.middleName}">삭제하기</a>
+				</c:if>
+				<c:if test="${logNo==commuDetailVO.memberNo}">
+				<a class="wz button" href="${root}/onemile/commu/map/delete?boardNo=${commuDetailVO.commuNo}&middleName=${commuDetailVO.middleName}">삭제하기</a>
+				<a class="wz button" href="${root}/onemile/commu/map/edit?boardNo=${commuDetailVO.commuNo}">수정하기</a>
+				</c:if>
 			</div>
 		</div>
 	</div>
-<script>
-		kakao.maps.load(function() {
-			var lat = parseFloat('${commuDetailVO.lat}');
-			var lng = parseFloat('${commuDetailVO.lng}');
-
-			var mapContainer = document.getElementById("map"), // 지도를 표시할 div 
-			mapOption = {
-				center : new kakao.maps.LatLng(lat, lng), // 지도의 중심좌표
-				level : 3// 지도의 확대 레벨
-			};
-
-			var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-			// 마커가 표시될 위치입니다 
-			var markerPosition = new kakao.maps.LatLng(lat, lng);
-
-			// 마커를 생성합니다
-			var marker = new kakao.maps.Marker({
-				position : markerPosition
+	<script>
+			kakao.maps.load(function() {
+				var lat = parseFloat('${commuDetailVO.lat}');
+				var lng = parseFloat('${commuDetailVO.lng}');
+				
+				var mapContainer = document.getElementById("map"), // 지도를 표시할 div 
+				mapOption = {
+					center : new kakao.maps.LatLng(lat, lng), // 지도의 중심좌표
+					level : 3// 지도의 확대 레벨
+				};
+	
+				var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+				// 마커가 표시될 위치입니다 
+				var markerPosition = new kakao.maps.LatLng(lat, lng);
+	
+				// 마커를 생성합니다
+				var marker = new kakao.maps.Marker({
+					position : markerPosition
+				});
+	
+				// 마커가 지도 위에 표시되도록 설정합니다
+				marker.setMap(map);
 			});
-
-			// 마커가 지도 위에 표시되도록 설정합니다
-			marker.setMap(map);
-		});
-</script>
+	</script>
 </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
