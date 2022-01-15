@@ -15,13 +15,62 @@
 		update member set APPROVE = 'Y' where member_no=#{memerNo}
 	</update>
 	
+	<!-- 승인 전 회원 목록 가져오기 -->
+	<select id="notMemberList" resultType="MemberListVO" parameterType="map">
+	select * from (
+			select rownum rn, TMP.* from (
+				select * from member  
+					<where>
+						and hiddenyn = 'N' 
+						and approve = 'N'
+						<if test="search != '' and keyword != ''">
+							and instr(${search}, #{keyword}) > 0
+						</if>
+					</where>
+				order by member_no asc
+			)TMP
+		) where rn between ${startRow} and ${endRow}
+	</select>
 	<!-- 회원 목록 가져오기 -->
-	<select id="approveMemberList" resultType="MemberDTO">
-		select * from Approve where HIDDENYN != 'N'
+	<select id="approveMemberList" resultType="MemberListVO" parameterType="map">
+	select * from (
+			select rownum rn, TMP.* from (
+				select * from member where hiddenyn = 'N' and approve = 'Y'
+					<if test="search != '' and keyword != ''">
+							and instr(${search}, #{keyword}) > 0
+						</if>
+				order by member_no asc
+			)TMP
+		) where rn between ${startRow} and ${endRow}
 	</select>
 	
-	<!-- 회원 목록 가져오기 -->
-	<select id="memberSearchList" resultType="List">
-		select * from member m inner join msp where m.member_no = msp.member_no
+	<!-- 탈퇴 회원 목록 가져오기 -->
+	<select id="extiMemberList" resultType="ExitMemberVO" parameterType="map">
+		select * from (
+			select rownum rn, TMP.* from (
+		select * from member where hiddenyn = 'Y' and exitdate != null order by member_no asc
+					)TMP
+		) where rn between ${startRow} and ${endRow}
+	</select>
+	
+	<!-- 회원 멤버십 목록 가져오기 -->
+	<select id="membershipList" resultType="List" parameterType="map">
+		select * from (
+			select rownum rn, TMP.* from (
+		select
+			m.member_no, m.email, m.nick, m.phone, m.birth,
+			m.grade, m.joindate, m.mbti, m.intro, m.corona, m.popular,
+			m.nickmodi, m.gender, msb.buy_time, msb.buy_endtime,
+			msb.total_amount, msb.status, msp.msp_product
+		from member m 
+			left join msb on m.member_no = msb.member_no 
+			left join msp on msb.msp_no = msp.msp_no 
+		where
+			m.hiddenyn = 'N' and m.approve = 'Y'
+		order by
+			m.member_no asc
+			
+				)TMP
+		) where rn between ${startRow} and ${endRow}
 	</select>
 </mapper>

@@ -70,20 +70,18 @@
 	<!-- 목록에는 이미지가 1개만 있는데 -->
 	<!-- 한 글에 사진이 4개가 들어가면 그 중에 하나만 뽑아야하는데 -->
 	<!-- 목록 조회 구문 (메인) -->
-	<select id="getList" parameterType="map" resultMap="CobuyList">
+	<select id="getList" resultType="CobuyListVO">
 	select * from (
-			select rownum rn, TMP.* from (
-				select c.* , m.nick ,cbi.image_no
-				from cobuy c
-				left outer join (select cobuy_no, min(image_no) image_no
+    	select rownum rn, TMP.* from (
+       		SELECT c.* , m.nick ,cbi.image_no FROM cobuy c 
+       		left outer join (select cobuy_no, min(image_no) image_no
 				from cbi group by
-				cobuy_no) cbi on
-				c.cobuy_no = cbi.cobuy_no
-				inner join
-				member m on m.member_no = c.member_no
-				where c.hiddenyn = 'N' order by c.cobuy_no desc
-			)TMP
-		) where rn between ${startRow} and ${endRow}
+				cobuy_no) cbi on c.cobuy_no = cbi.cobuy_no
+				inner join member m on 
+					m.member_no = c.member_no
+       		WHERE c.hiddenyn = 'N' ORDER BY DBMS_RANDOM.RANDOM
+    	)TMP
+	) where rn between 1 and 6
 	</select>
 	<select id="getList2" parameterType="map" resultMap="CobuyList">
 	select * from (
@@ -154,4 +152,11 @@
 		select * from pb where member_no = #{memberNo}
 	</select>
 	
+	<select id="randomList" parameterType="PaginationVO" resultType="CobuyListVO">
+		select * from (
+		    select rownum rn, TMP.* from (
+		        SELECT * FROM cobuy WHERE hiddenyn = 'N' ORDER BY DBMS_RANDOM.RANDOM
+		    )TMP
+		) where rn between ${startRow} and ${endRow}
+	</select>
 </mapper>
