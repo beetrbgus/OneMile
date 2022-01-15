@@ -198,7 +198,8 @@
         </div>
         <div class="col-12">
             <div class="info_row no_padding row">
-                <div class="col-auto"> <img src="/2_group_24px.a24d0983.svg"> </div>
+                <div class="col-auto">
+                </div>참여 인원 : 
                 <div class="col info_people">최소 ${detail.minpeople}명 ~ 최대 ${detail.maxpeople}명</div>
             </div>
             <div class="info_row no_padding row">
