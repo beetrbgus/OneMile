@@ -30,8 +30,8 @@ public class CommuDetailVO {
 	private int mapNo;
 	private String lagname;
 	private String nick;
-	private double lat;
-	private double lng;
+	private float lat;
+	private float lng;
 	private String detailAddress;
 	
 	private int cmiNo;

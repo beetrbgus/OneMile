@@ -25,12 +25,12 @@ public class SocialDetailVO {
 	private int memberNo;
 	private String nick;
 	private String regdate;
-	private int profileImgNo;	
+	private int hostImgNo;	
 	private List<ImageDTO> imageInfo;
 	//지도 테이블에서 보여줘야 할 내용들.
 	private int mapNo;
-	private double lat;
-	private double lng;
+	private float lat;
+	private float lng;
 	private String detailAddress;
 	
 }

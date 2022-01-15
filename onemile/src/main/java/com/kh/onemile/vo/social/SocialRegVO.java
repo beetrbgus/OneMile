@@ -25,8 +25,8 @@ public class SocialRegVO {
 	private int maxpeople;
 	//지도 테이블
 	private int mapNo;
-	private double lat;
-	private double lng;
+	private float lat;
+	private float lng;
 	private String location;
 	//이미지 테이블
 	private List<MultipartFile> attach;
