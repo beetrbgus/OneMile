@@ -145,7 +145,7 @@
                         <c:forEach var="commuList" items="${commuDetailVOList}">
                         <li class="PlannedDesktop_listItem__1gYYi">
                             <article class="CardType_projectCard__3xhjb CardType_cardTypePlanned__5H09T"><a
-                                    class="CardType_linkThumb__TCaxa" href="/web/wreward/collection/newyearsresolution">
+                                    class="CardType_linkThumb__TCaxa" href="${root}/commu/map/list?middleName=${commuList.middleName}">
                                     <div
                                         class="commons_thumbnail__3wYGv CardType_keyVisual__LJ58b commons_active__1tjD5">
                                         <span class="commons_img__2UTCA commons_visible__1xTJh"
@@ -157,7 +157,7 @@
                                     <ul>
                                         <c:forEach var="commuDetailList" items="${commuList.list}">
                                         <li class="CardType_cardList__3AqkY"><a
-                                                href="/web/campaign/detail/135443?_refer_section_st=collection-newyearsresolution-0_0">
+                                                href="${root}/commu/map/list?middleName=${commuList.middleName}">
                                                 <div class="CardType_projectCard__3xhjb CardType_projectCardA__33rbP">
                                                     <article>
                                                         <div class="commons_content__2K1SH CardType_content__1Pavj">
@@ -177,7 +177,7 @@
                                         </c:forEach>
                                     </ul>
                                 </div><a class="CardType_linkBtn__1QHvM"
-                                    href="/web/wreward/collection/newyearsresolution">더보기<i
+                                    href="${root}/commu/map/list?middleName=${commuList.middleName}">더보기<i
                                         class="wz icon chevron-right"></i></a>
                             </article>
                         </li>

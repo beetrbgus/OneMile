@@ -43,7 +43,8 @@ public class NoticeController {
 		int memberNo = (int)session.getAttribute("logNo");
 		commuVo.setMemberNo(memberNo);
 		commuService.write(commuVo);
-		return "redirect:/notice/list"+commuVo.getMiddleName();
+		String encodedParam = URLEncoder.encode(commuVo.getMiddleName(), "UTF-8");
+		return "redirect:/notice/list/"+encodedParam;
 	}
 	
 	@GetMapping("/listdetail")
@@ -58,7 +59,7 @@ public class NoticeController {
 		return commuService.menuList(middleName, startRow, endRow);
 	}
 	
-	@GetMapping("/list/{middleName}")
+	@GetMapping({"/list/{middleName}","/list"})
 	public String list(@PathVariable("middleName") String middleName, Model model){
 		model.addAttribute("parameter", middleName);
 		return "/notice/list";
@@ -74,19 +75,21 @@ public class NoticeController {
 		model.addAttribute("commuEditVO", commuService.detail(boardNo));
 		model.addAttribute("imageNoList", imageService.listByBoardNo(boardNo));
 		
-		return "/edit";
+		return "/notice/edit";
 	}
 	
 	@PostMapping("/edit")
 	public String edit(@ModelAttribute CommuEditVO commuEditVo, HttpSession session) throws IllegalStateException, IOException {
 		commuService.edit(commuEditVo);
-		return "redirect:/notice/list"+commuEditVo.getMiddleName();
+		String encodedParam = URLEncoder.encode(commuEditVo.getMiddleName(), "UTF-8");
+		return "redirect:/notice/list/"+encodedParam;
 	}
 	
 	@RequestMapping("/delete")
-	public String delete(@RequestParam int boardNo) throws IOException {
+	public String delete(@RequestParam int boardNo, @RequestParam String middleName) throws IOException {
 		commuService.hide(boardNo);
-		return "redirect:/notice/list";
+		String encodedParam = URLEncoder.encode(middleName, "UTF-8");
+		return "redirect:/notice/list/"+encodedParam;
 	}
 	
 	@GetMapping("/detail/{boardNo}")

@@ -46,17 +46,17 @@
 			<div class="wboard-detail-btn-wrap">
 				<a class="wz button" href="${root}/onemile/commu/map/list?middleName=${commuDetailVO.middleName}">목록으로 돌아가기</a>
 				<c:if test="${admin and logNo ne commuDetailVO.memberNo}">
-				<a class="wz button" href="${root}/admin/">관리자 홈</a>
-				<a class="wz button" href="${root}/commu/map/delete?boardNo=${commuDetailVO.commuNo}&middleName=${commuDetailVO.middleName}">삭제하기</a>
+				<a class="wz button" href="${root}/onemile/admin/">관리자 홈</a>
+				<a class="wz button" href="${root}/onemile/commu/map/delete?boardNo=${commuDetailVO.commuNo}&middleName=${commuDetailVO.middleName}">삭제하기</a>
 				</c:if>
 				<c:if test="${admin and logNo eq commuDetailVO.memberNo}">
-				<a class="wz button" href="${root}/admin/">관리자 홈</a>
-				<a class="wz button" href="${root}/commu/map/delete?boardNo=${commuDetailVO.commuNo}&middleName=${commuDetailVO.middleName}">삭제하기</a>
-				<a class="wz button" href="${root}/commu/map/edit?boardNo=${commuDetailVO.commuNo}">수정하기</a>
+				<a class="wz button" href="${root}/onemile/admin/">관리자 홈</a>
+				<a class="wz button" href="${root}/onemile/commu/map/delete?boardNo=${commuDetailVO.commuNo}&middleName=${commuDetailVO.middleName}">삭제하기</a>
+				<a class="wz button" href="${root}/onemile/commu/map/edit?boardNo=${commuDetailVO.commuNo}">수정하기</a>
 				</c:if>
 				<c:if test="${logNo eq commuDetailVO.memberNo and not admin}">
-				<a class="wz button" href="${root}/commu/map/delete?boardNo=${commuDetailVO.commuNo}&middleName=${commuDetailVO.middleName}">삭제하기</a>
-				<a class="wz button" href="${root}/commu/map/edit?boardNo=${commuDetailVO.commuNo}">수정하기</a>
+				<a class="wz button" href="${root}/onemile/commu/map/delete?boardNo=${commuDetailVO.commuNo}&middleName=${commuDetailVO.middleName}">삭제하기</a>
+				<a class="wz button" href="${root}/onemile/commu/map/edit?boardNo=${commuDetailVO.commuNo}">수정하기</a>
 				</c:if>
 			</div>
 		</div>

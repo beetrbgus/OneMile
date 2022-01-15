@@ -84,8 +84,8 @@
 					<li><a href="${root}/onemile/commu/notmap/list?middleName=동네질문" ${param.middleName == "동네질문" ? "style='color:#00b2b2;'" : ""} >동네질문</a></li>
 					<li><a href="${root}/onemile/commu/notmap/list?middleName=분실/실종센터" ${param.middleName == "분실/실종센터" ? "style='color:#00b2b2;'" : ""}>분실/실종센터</a></li>
 					<li><a href="${root}/onemile/commu/map/list?middleName=동네맛집" ${param.middleName == "동네맛집" ? "style='color:#00b2b2;'" : ""}>동네맛집</a></li>
-					<li><a href="${root}/onemile/commu//map/list?middleName=동네사건사고" ${param.middleName == "동네사건사고" ? "style='color:#00b2b2;'" : ""}>동네 사건사고</a></li>
-					<li><a href="${root}/onemile/commu//map/list?middleName=얌세권" ${param.middleName == "얌세권" ? "style='color:#00b2b2;'" : ""}>얌세권</a></li>
+					<li><a href="${root}/onemile/commu/map/list?middleName=동네사건사고" ${param.middleName == "동네사건사고" ? "style='color:#00b2b2;'" : ""}>동네 사건사고</a></li>
+					<li><a href="${root}/onemile/commu/map/list?middleName=얌세권" ${param.middleName == "얌세권" ? "style='color:#00b2b2;'" : ""}>얌세권</a></li>
 				</ul>
 			</div>
 		
