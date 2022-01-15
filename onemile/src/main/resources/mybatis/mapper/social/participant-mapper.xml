@@ -24,4 +24,7 @@
 	<delete id="reject" parameterType="participateVO">
 		delete from sp where social_no = #{socialNo} and member_no = #{memberNo}
 	</delete>
+	<select id="getParti" parameterType="map" resultType="String">
+		select isjoined from sp where member_no = #{memberNo} and social_no = #{socialNo}
+	</select>
 </mapper>
