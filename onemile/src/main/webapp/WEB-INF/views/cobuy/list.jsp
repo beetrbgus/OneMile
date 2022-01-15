@@ -255,16 +255,16 @@ img{
 				 	<div class='ProjectCardList_item__1owJa'>
 						<div> 
 							<div class='CommonCard_container__e_ebQ CommonCard_squareSmall__1Cdkn'>
-								<a href='${pageContext.request.contextPath}/cobuy/detail?cobuyNo=${CobuyListVO.cobuyNo}' class='CardLink_link__1k83H CommonCard_image__vaqkf' aria-hidden='true' tabindex='-1'>
+								<a href='${pageContext.request.contextPath}/cobuy/detail/${CobuyListVO.cobuyNo}' class='CardLink_link__1k83H CommonCard_image__vaqkf' aria-hidden='true' tabindex='-1'>
 									<div class='CommonCard_rect__2wpm4'>
 										<span class='CommonCard_background__3toTR CommonCard_visible__ABkYx'
 											style='background-image: url("${pageContext.request.contextPath}/image/download?imageNo=${CobuyListVO.imgNo}&folder=cobuy")'></span>
-									</div>
+									</div> 
 								</a>
 							 	<div class='CommonCard_info__1f4kq'>
 							 		<div class='RewardProjectCard_info__3JFub'>
 							 			<div class='RewardProjectCard_infoTop__3QR5w'>
-							 				<a href='detail?cobuyNo=${CobuyListVO.cobuyNo}' class='CardLink_link__1k83H'>
+							 				<a href='detail/${CobuyListVO.cobuyNo}' class='CardLink_link__1k83H'>
 							 					<p class='CommonCard_title__1oKJY RewardProjectCard_title__iUtvs'>
 							 						<strong>${CobuyListVO.title}</strong>
 							 					</p>

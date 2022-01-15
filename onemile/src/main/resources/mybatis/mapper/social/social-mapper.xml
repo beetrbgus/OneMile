@@ -122,6 +122,9 @@
 					and  <![CDATA[ s.ENDDate > sysdate]]> 
 				</when>
 			</choose>
+			<if test="goo!=null and goo!=''">
+				and instr(map.DETAILADDRESS ,#{goo} ) > 0 
+			</if> 
 				order by s.social_no desc
 			)TMP
 		) where rn between #{startRow} and #{endRow}
@@ -140,6 +143,13 @@
 	<select id="getCount" parameterType="int" resultType="SocialDTO">
 		select * from social where member_no = #{memberNo} and regdate > sysdate-7
 	</select>
+	<select id="randomList" parameterType="PaginationVO" resultType="SocialListVO">
+		select * from (
+		    select rownum rn, TMP.* from (
+		        SELECT * FROM social WHERE hiddenyn = 'N' ORDER BY DBMS_RANDOM.RANDOM
+		    )TMP
+		) where rn between #{startRow} and #{endRow}
+	</select>
 	<update id="modify" parameterType="SocialRegVO">
 		update social set smalltype=#{smalltype}, title=#{title},context = #{context},
 			startdate=#{startDate}, endDate=#{endDate},
@@ -149,4 +159,38 @@
 	<update id="delete" parameterType="int">
 		update social set HIDDENYN='Y' where SOCIAL_NO = #{socialNo}
 	</update>
+	<select id="indexList" resultType="SocialIndexVO">
+	select * from (
+			select rownum rn, TMP.* from (
+				select
+					s.social_no ,s.smalltype ,s.title,
+					TO_CHAR(s.startdate, 'MM/DD HH24:mm') as startDate,
+					TO_CHAR(s.enddate, 'MM/DD HH24:mm') as endDate,
+					m.member_no,m.nick, mei.profileImgNo ,
+					map.detailaddress , smc.bigtype, smi.image_no
+				from social s
+					inner join member m on s.member_no=m.member_no
+					inner join 
+           				(select member_no , min(image_no) as profileImgNo
+							from mei group by member_no) mei on	
+            				mei.member_no = s.member_no
+					inner join map on map.map_no = s.map_no
+					inner join smc on s.smalltype = smc.SMALLTYPE
+					inner join sbc on smc.bigtype = sbc.BIGTYPE
+                    inner join 
+                    (select social_no , min(image_no) image_no
+						from smi group by social_no) smi on	
+						s.social_no = smi.social_no where s.hiddenyn ='N'
+						<choose>
+				<when test="endyn != null and endyn.equals('Y')">
+					and  <![CDATA[ s.ENDDate < sysdate]]> 
+				</when>
+				<when test="endyn != null and endyn.equals('N')">
+					and  <![CDATA[ s.ENDDate > sysdate]]> 
+				</when>
+			</choose>
+				ORDER BY DBMS_RANDOM.RANDOM
+			)TMP
+		) where rn between 1 and 3
+	</select>
 </mapper>

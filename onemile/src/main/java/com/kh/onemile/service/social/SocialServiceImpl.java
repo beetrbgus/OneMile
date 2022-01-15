@@ -20,6 +20,7 @@ import com.kh.onemile.service.social.participant.ParticipantDao;
 import com.kh.onemile.util.Sequence;
 import com.kh.onemile.vo.PaginationVO;
 import com.kh.onemile.vo.social.SocialDetailVO;
+import com.kh.onemile.vo.social.SocialIndexVO;
 import com.kh.onemile.vo.social.SocialListVO;
 import com.kh.onemile.vo.social.SocialRegVO;
 import com.kh.onemile.vo.social.participate.ParticipateVO;
@@ -157,6 +158,10 @@ public class SocialServiceImpl implements SocialService{
 	public void exitSocial(ParticipateVO participateVO) {
 		participantService.reject(participateVO);
 
+	}
+	@Override
+	public List<SocialIndexVO> indexList() {
+		return socialDao.getIndexList();
 	}
 
 }

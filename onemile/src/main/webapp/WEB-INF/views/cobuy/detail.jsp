@@ -64,18 +64,18 @@
 								<c:when test="${detail.memberNo==logNo}"> 
 									<a href="${root}/onemile/cobuy/modify/${detail.cobuyNo}">
 										<button type="submit"
-											class="buyBtn wz button primary block btn-reward-funding">
+											class="wz button primary block btn-reward-funding">
 											수정하기
 										</button>
 									</a>
 									<a href="${root}/onemile/cobuy/delete/${detail.cobuyNo}">
-										<button type="button" class="buyBtn wz button primary block btn-reward-funding">
+										<button type="button" class="wz button primary block btn-reward-funding">
 											삭제하기
 										</button>
 									</a>
 								</c:when>
 								<c:otherwise>
-									<button id="buyBtn" type="submit"
+									<button type="button"
 										class="buyBtn wz button primary block btn-reward-funding">
 											구매하기
 									</button>
@@ -268,11 +268,23 @@
 												<div class="btn-wrap funding">
 													<c:choose>
 														<c:when test="${detail.memberNo==logNo}"> 
-															<button class="buyBtn wz button primary block btn-reward-funding" data-iswriter="modify">수정하기</button>
-															<button class="buyBtn wz button primary block btn-reward-funding" data-iswriter="delete">삭제하기</button>
+															<a href="${root}/onemile/cobuy/modify/${detail.cobuyNo}">
+																<button type="submit"
+																	class="wz button primary block btn-reward-funding">
+																	수정하기
+																</button>
+															</a>
+															<a href="${root}/onemile/cobuy/delete/${detail.cobuyNo}">
+																<button type="button" class="wz button primary block btn-reward-funding">
+																	삭제하기
+																</button>
+															</a>
 														</c:when>
 														<c:otherwise>
-															<button class="buyBtn wz button primary block btn-reward-funding" data-iswriter="delete">구매하기</button>
+															<button type="button"
+																class="buyBtn wz button primary block btn-reward-funding">
+																	구매하기
+															</button>
 														</c:otherwise>
 													</c:choose>
 													

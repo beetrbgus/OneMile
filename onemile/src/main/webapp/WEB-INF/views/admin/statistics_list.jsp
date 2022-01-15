@@ -7,3 +7,6 @@
 <c:set var="login" value="${logId != null}"></c:set>
 <c:set var="admin" value="${grade == '관리자'}"></c:set>
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
+
+
+<h3><a href="${pageContext.request.contextPath}/admin/statistics/member_statistics">회원 관련 통계 보러가기</a></h3>

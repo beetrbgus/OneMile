@@ -55,21 +55,13 @@ public class CobuyDaoImpl implements CobuyDao{
 		return sqlSession.selectOne("cobuy.getforBuy", confirmVO);
 	}
 	@Override
-	public List<CobuyListVO> cobuyList(int startRow, int endRow) {
-		Map<String, Object> map = new HashMap<>();
-		map.put("startRow", startRow);
-		map.put("endRow", endRow);
-		return sqlSession.selectList("cobuy.getList", map);
+	public List<CobuyListVO> cobuyList() {
+		return sqlSession.selectList("cobuy.getList");
 	}
 	@Override
 	public List<CobuyListVO> cobuyList(PaginationVO paginationVO) {
-		Map<String, Object> map = new HashMap<>();
-		map.put("startRow", paginationVO.getStartRow());
-		map.put("endRow", paginationVO.getEndRow());
-		map.put("category", paginationVO.getCategory());
-		
-		log.error("map="+map);
-		return sqlSession.selectList("cobuy.getList2", map);
+
+		return sqlSession.selectList("cobuy.getList2", paginationVO);
 	}
 	@Override
 	public List<ProductBuyDTO> getbuyList(int memberNo) {
