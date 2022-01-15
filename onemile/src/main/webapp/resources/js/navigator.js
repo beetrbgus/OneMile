@@ -1,18 +1,18 @@
 $(function(){
+
+	/*인증 버튼 클릭시 위치 정보 받아오고 세션에 저장.*/
 	$(".confirmbtn").click(function(){
 		if('geolocation' in navigator){
 		    navigator.geolocation.getCurrentPosition((position) => {
 		    	let lat = position.coords.latitude;
 		    	let lng = position.coords.longitude;
 		    	//세션이 있으면 세션 지우고  세션에 저장.
-		    	if(removeSession()){
-		    		setSession(lat,lng);
-		    	}
-		    	let region = getAddr(lat,lng);
+		    	getAddr(lat,lng);
+		    	
 		    });
-
 		}
 	});
+	/* 위도 경도로 해당 위치의 동이름 가져오기.*/
 	function getAddr(lat,lng){
 		let geocoder = new kakao.maps.services.Geocoder();
 
@@ -20,33 +20,48 @@ $(function(){
 	    let callback = function(result, status) {
 	        if (status === kakao.maps.services.Status.OK) {
 	        	console.log(result[0]);
+	        	let goo = result[0].region_2depth_name;
 	        	let dong = result[0].region_3depth_name;
 	        	$(".dong").val(dong);
+	        	console.log("result[0].x "+result[0].x);
+	        	console.log("result[0].y "+result[0].y);
+	        	console.log("result[0].region_2depth_name "+ goo);
+	        	console.log("result[0].region_3depth_name "+ dong);
+	        	let goo =  goo;
+		    	if(removeSession()){
+		    		setSession(result[0].x,result[0].y,dong,goo);
+		    	}
+	        	
 	        }
-	        return result[0];
 	    };
 	    geocoder.coord2RegionCode(lng,lat,callback);
 	}
+	/* 세션제 저장된 위치 정보 모두 삭제  */
 	function removeSession(){
-    	let sessionlat= sessionStorage.getItem("lat");
-		let sessionlng= sessionStorage.getItem("lng");		
-    	
-		if(sessionlat ==0 ||sessionlat ==undefined || sessionlat == null
-				|| sessionlng ==0 ||sessionlng ==undefined || sessionlng == null){
+    	let lat= sessionStorage.getItem("lat");
+    	let lng= sessionStorage.getItem("lng");
+    	let dong= sessionStorage.getItem("dong");
+    	let goo= sessionStorage.getItem("goo");
+
+		if(lat !=0 ||lat !=undefined || lat != null
+			|| lng !=0 ||lng ==undefined || lng != null
+			|| dong !=0 ||dong ==undefined || dong != null){
 			sessionStorage.removeItem("lat");
 			sessionStorage.removeItem("lng");
+			sessionStorage.removeItem("dong");
+			sessionStorage.removeItem("goo");
 	    	//지웠으면 트루 반환
 	    	return true;
 		}
 		return false;
 	}
-	function setSession(lat,lng){
-    	let sessionlat= sessionStorage.getItem("lat");
-		let sessionlng= sessionStorage.getItem("lng");		
-    	
+	/* 세션에 위도 , 경도 , 동네이름 저장 */
+	function setSession(lat,lng,dong,goo){
+		
 	    sessionStorage.setItem("lat", lat );
 	    sessionStorage.setItem("lng", lng );
-
+	    sessionStorage.setItem("dong", dong );
+	    sessionStorage.setItem("goo", goo);
 	}
 
 });

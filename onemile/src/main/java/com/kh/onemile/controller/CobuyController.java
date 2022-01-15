@@ -61,10 +61,15 @@ public class CobuyController {
 	public String list(@PathVariable(required = false) String category,
 			@RequestParam(required =false, defaultValue = "1") int page,
 			@RequestParam(required =false, defaultValue = "10") int size
-			,Model model) {
+			,Model model,HttpSession session) {
 		log.warn("page=========="+page);
 		log.warn("size============"+size);
 		PaginationVO paginationVO =new PaginationVO(page,size);
+
+		if(session.getAttribute("goo")!=null) {
+			String goo = (String)session.getAttribute("goo");
+			paginationVO.setGoo(goo);	
+		}
 		if(category==null||category.equals("/")) {
 			category="";
 			paginationVO.setCategory(category);
@@ -96,8 +101,9 @@ public class CobuyController {
 		return cobuyService.getList(paginationVO);
 	}
 	
-	@GetMapping("/detail") 
-	public String detail(@RequestParam int cobuyNo , Model model) {
+	@GetMapping("/detail/{cobuyNo}") 
+	public String detail(@PathVariable int cobuyNo , Model model) {
+		log.debug("cobuyNo  "+cobuyNo);
 		CobuyDetailVO cobuyDetailVO =cobuyService.getDetail(cobuyNo);
 		System.out.println("cobuyDetailVO.getCobuyNo()   "+cobuyDetailVO.getCobuyNo());
 		System.out.println("cobuyDetailVO.getDescript()   "+cobuyDetailVO.getDescript());
@@ -113,7 +119,7 @@ public class CobuyController {
 	@GetMapping("/delete/{cobuyNo}")
 	public String delete(@PathVariable int cobuyNo) {
 		cobuyService.delete(cobuyNo);
-		return "redirect:/list";
+		return "redirect:/cobuy/list";
 	}
 
 	@GetMapping("/modify/{cobuyNo}")

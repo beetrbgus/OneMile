@@ -123,6 +123,9 @@
 					and  <![CDATA[ s.ENDDate > sysdate]]> 
 				</when>
 			</choose>
+			<if test="goo!=null and goo!=''">
+				and instr(map.DETAILADDRESS ,#{goo} ) > 0 
+			</if> 
 				order by s.social_no desc
 			)TMP
 		) where rn between #{startRow} and #{endRow}
