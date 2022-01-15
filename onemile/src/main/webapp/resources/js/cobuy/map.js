@@ -1,13 +1,17 @@
 window.kakao.maps.load(function() {
 	$(function() {
-		
 		let lat= sessionStorage.getItem("lat");
-		let lng= sessionStorage.getItem("lng");			
+		let lng= sessionStorage.getItem("lng");
+		
+		
 		if(lat ==0 ||lat ==undefined || lat == null){
 			lat= 37.5339851357212;
 			lng= 126.897094049199;
 		}
-
+		
+		console.log("map.js의    lat   "+lat);
+		console.log("map.js의    lng   "+lng);
+		
 		// 지도 생성 준비 코드
 		var container = document.querySelector("#map");
 		var options = {
@@ -64,8 +68,6 @@ window.kakao.maps.load(function() {
 								result[0].x);
 						$("input[name=lat]").val(result[0].y);
 						$("input[name=lng]").val(result[0].x);
-						
-						console.log($("input[name=lat]").val());
 
 					});
 				}

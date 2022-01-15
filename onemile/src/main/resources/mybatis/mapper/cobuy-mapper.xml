@@ -83,7 +83,7 @@
     	)TMP
 	) where rn between 1 and 6
 	</select>
-	<select id="getList2" parameterType="map" resultMap="CobuyList">
+	<select id="getList2" parameterType="PaginationVO" resultMap="CobuyList">
 	select * from (
 			select rownum rn, TMP.* from (
 				select c.* , m.nick ,cbi.image_no
@@ -94,9 +94,13 @@
 				inner join member m on 
 					m.member_no = c.member_no
 				inner join cmc on cmc.MIDDLE_NAME = c.MIDDLE_NAME
+				inner join map on map.map_no = c.map_no
 				where 
 				<if test="category!=''">
 					cmc.URLPATH = #{category} and
+				</if>
+				<if test="goo!=null and goo!=''">
+					instr(map.DETAILADDRESS ,#{goo} ) > 0 and
 				</if> 
 				c.hiddenyn = 'N' order by c.cobuy_no desc
 			)TMP
@@ -109,7 +113,7 @@
 		inner join member m on c.member_no = m.member_no
 		inner join mei on mei.member_no = m.member_no
 		inner join map m on m.map_no = c.map_no
-		where cobuy_no = ${cobuyNo} and c.HIDDENYN = 'N' AND m.HIDDENYN='N'
+		where cobuy_no = #{cobuyNo} and c.HIDDENYN = 'N' AND m.HIDDENYN='N'
 	</select>
 	<!-- 목록에서의 이미지 한개 -->
 	<select id="oneImg" resultType="ImageDto" parameterType="int">

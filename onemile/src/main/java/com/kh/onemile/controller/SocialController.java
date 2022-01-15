@@ -120,9 +120,14 @@ public class SocialController {
 			@RequestParam(required = false,defaultValue = "") String endyn,
 			@RequestParam(required =false, defaultValue = "1") int page,
 			@RequestParam(required =false, defaultValue = "10") int size
-			,Model model) {
+			,Model model,HttpSession session) {
 		PaginationVO paginationVO =new PaginationVO(page,size);
 		bigcate =(bigcate==null||bigcate.equals("/"))?"":bigcate;
+		//저장된 인증이 있을 때.
+		if(session.getAttribute("goo")!=null) {
+			String goo = (String)session.getAttribute("goo");
+			paginationVO.setGoo(goo);	
+		}
 		//종료된 것 목록 -endyn 
 		if(endyn.equals("Y")) {
 			paginationVO.setEndyn("Y");
