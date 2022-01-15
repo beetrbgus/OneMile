@@ -3,17 +3,44 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common2.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/detail.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/detail-socialing.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/grid.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reboot.css">
+<style>
+	#carouselExampleFade {
+		padding-top: 60px;
+	}
+	.image {
+    border: 2px solid transparent;
+}
 
+.image.image-round {
+    border-radius: 50%;
+}
+.image.image-border,
+.image.image-hover:hover {
+    border: 2px solid gray;
+}
+</style>
+
+<%-- <p>번호 : ${detail.socialNo}</p>
+
+	<h2>  멤버가 참가한 갯수 해서 참가 불가능하게 만들기. </h2>
+	<h2>  공동구매 수정 </h2> 
+	<h2>  내 위치 기반으로 만들기 </h2> 
+	<h2>  차트 물어보기. </h2> 
+	<h2>  신고 기능 </h2> 
+	<h2>  관리자 페이지. </h2> 
+	
+  <p>번호 : ${detail.socialNo}</p>
+	<p>제목 : ${detail.title}</p>
 
  <%--  <p>번호 : ${detail.socialNo}</p>
 
   <p>제목 : ${detail.title}</p>
+>>>>>>> branch 'MS95' of https://github.com/beetrbgus/OneMile.git
   <p>대분류 : ${detail.type}</p>
   <p>소분류 : ${detail.smalltype}</p>
   <p>시작일 : ${detail.startDate}</p> 
@@ -43,22 +70,9 @@
   <p>상세주소 : ${detail.detailAddress}</p>
   <form id="socialform" method="post" action="../socialjoin" >
    	<input type="hidden" name="socialNo" value="${detail.socialNo}">
-  </form>
+  </form> --%>
 	
-	<c:choose>
-		<c:when test="${detail.memberNo==logNo}"> 
-			<button type="button" id="btn" data-joined="modify">수정하기</button>
-		</c:when>
-		<c:when test="${detail.isJoined=='수락대기중'}">
-			<button type="button" id="btn" data-joined="exit">취소하기</button>
-		</c:when>
-		<c:when test="${detail.isJoined=='참여중'}">
-			<button type="button" id="btn" data-joined="exit">탈퇴하기</button>
-		</c:when>
-		<c:otherwise>
-			<button type="button" id="btn" data-joined="join">참가하기</button>
-		</c:otherwise>
-	</c:choose>
+	
 	<c:choose>
 		<c:when test="${detail.maxpeople > fn:length(detail.participate)}">
 			<c:set value="false" var="isFull"></c:set>
@@ -66,9 +80,12 @@
 		<c:otherwise>
 			<c:set value="true" var="isFull"></c:set>
 		</c:otherwise>
-	</c:choose> --%>
-	
+	</c:choose>
+<form id="socialform" method="post" action="../socialjoin" >
+<input type="hidden" name="socialNo" value="${detail.socialNo}">	
+</form> 
 <div class="container detail">
+	
     <div class="detail-wrapper">
         <div class="detail_info">
             <p class="detail_name">${detail.title}</p>
@@ -93,16 +110,17 @@
                 </div>
             </div>
         </div>
+        
         <div class="detail_carousel_row no_padding row">
             <div class="col-12">
                 <div id="carouselExampleFade"
-								class="carousel slide carousel-fade" data-bs-ride="carousel">
+								class="carousel slide carousel-fade" data-bs-ride="carousel" >
 								<div class="carousel-inner">
 									<c:forEach items="${detail.imageInfo}" var="imageDTO"
 										varStatus="status">
 										<div
 											class="carousel-item ${status.index == 0 ? 'active' : ''}">
-											<img src="${pageContext.request.contextPath}/image/download?imageNo=${imageDTO.imageNo}&folder=social" class="d-block w-100 image image-round image-border" alt="..." style="width:150px;height:350px">
+											<img src="${pageContext.request.contextPath}/image/download?imageNo=${imageDTO.imageNo}&folder=social" class="d-block w-100" alt="..." style="width:150px;height:350px">
 										</div>
 									</c:forEach>
 								</div>
@@ -126,40 +144,67 @@
                     <div class="detail_info__host__img"
                         style="background-image: url(&quot;https://munto-images.s3.ap-northeast-2.amazonaws.com/production-user/1634097886594-image-69491-profileImage&quot;);">
                    		
-                    </div> <img class="socialing-host-hand" src="/host_20px.02a2c6f6.svg">
+                    </div>
                 </div>
-                <div class="detail_info__host__name">심다예</div>
+                <div class="detail_info__host__name">${detail.nick}</div>
             </div>
             <div class="detail_info__header">
                 <div class="detail_info__title">여자들의 로망 폴댄스 체험❤️</div>
             </div>
-            <div class="detail_info__location"><img src="/1_calendar_location_24px.83d0023a.svg"><span>${detail.startDate} ~ ${detail.endDate}</span></div>
+            <div class="detail_info__location"><span>${detail.startDate} ~ ${detail.endDate}</span></div>
         </div>
     </div>
-    <div class="detail_floating_zone" style="position: absolute; top: 600px; width: 412px; right: 350px;">
+    <div class="detail_floating_zone" style="position: absolute; top: 530px; width: 430px; right: 350px;">
         <div class="detail_summary_row mt-5 row">
             <div class="col-12 main_col">
                 <div class="user_cover"
-                    style="background-image: url(&quot;https://munto-images.s3.ap-northeast-2.amazonaws.com/production-user/1634097886594-image-69491-profileImage&quot;);">
+                    style="background-image">
+                	<img class=" image image-round image-border" style="width:300px;height:50px;" src="${pageContext.request.contextPath}/image/download?imageNo=${detail.hostImgNo}&folder=member">
                 
-                
-                </div> <span class="user">심다예</span>
-                <div class="socialing_name">여자들의 로망 폴댄스 체험❤️</div>
+                </div> <span class="user">모임장 닉네임${detail.nick}${detail.isJoined}</span>
+                <div class="socialing_name">${detail.title}</div>
                 <div> </div>
             </div>
-            <div class="col-12 loc_col"> <span class="loc"> <img src="/ic-social-calendar-location-24-px.2d6a2683.svg">
-                    ${detail.detailAddress} ・</span><span> ${detail.startDate} ~ ${detail.endDate}</span> </div>
+            <div class="col-12 loc_col"> <span class="loc">
+                    ${detail.detailAddress}</span>
+                    <br>
+                    <span> ${detail.startDate} ~ ${detail.endDate}</span> </div>
         </div>
         <div class="detail_buttons_row floating row">
             <div class="col">
-                <div id="purchase" class="pointer purchase_button"> 소셜링 참여하기 </div>
-                <div id="map" style="width:412px;height:400px;top: 50px;right: 20px;"></div>
+                <c:choose>
+							<c:when test="${detail.memberNo==logNo}">
+									<div class="pointer purchase_button">
+									<a href="${pageContext.request.contextPath}/social/modify/${detail.socialNo}"> 
+										 수정하기 
+									</a>
+									</div>
+									<div  class="pointer purchase_button" style="margin-top:20px;">
+										<a href="${pageContext.request.contextPath}/social/delete/${detail.socialNo}">
+											 삭제하기 
+										</a>
+									</div>
+							</c:when>
+							
+							<c:when test="${joined eq '수락대기중'}">
+								<div id="purchase"   data-joined="exit" class="pointer purchase_button"> 취소하기</div>
+							</c:when>
+							<c:when test="${joined eq '참여중'}">
+								<div id="purchase"    data-joined="exit" class="pointer purchase_button"> 탈퇴하기 </div>
+							</c:when>
+							<c:otherwise>
+								<div  id="purchase"   data-joined="join" class="pointer purchase_button"> 소셜링 참여하기 </div>
+							</c:otherwise>
+						</c:choose>
+                
+              
+                <div id="map" style="width:412px;height:300px;top:50px;right: 20px;"></div>
             </div>
         </div>
     </div>
     <div id="introduce_row" class="detail_content_row row">
         <div class="col-12 p-20"> </div>
-        <div class="col-12" id="introduce">${detail.context}
+        <div class="col-12" id="introduce">${detail.context} 
         </div>
     </div>
     <div id="host_row" class="detail_content_row row">
@@ -173,19 +218,16 @@
                     <div class="background_col col-auto">
                         <div>
                             <div class="user_cover"
-                                style="background-image: url(&quot;https://munto-images.s3.ap-northeast-2.amazonaws.com/production-user/1634097886594-image-69491-profileImage&quot;);">
-                            </div> <img class="socialing-host-hand" src="/host_20px.02a2c6f6.svg">
+                                style="background-image: url('${pageContext.request.contextPath}/image/download?imageNo=${detail.hostImgNo}&folder=member');">
+                            </div>
                         </div>
                     </div>
                     <div class="col user_info_col">
                         <div class="user">
                         <c:forEach items="${detail.participate}" var="parti">
 							  	<br>
-							  	${parti.memberNo} /
-								${parti.profileImgNo} /
-								${parti.nick} /
-								${parti.intro} /
-							  </c:forEach>		
+							  	${parti.nick} ·
+						</c:forEach>		
                         </div>
                         <div class="user_grade"></div>
                     </div>
@@ -201,16 +243,16 @@
         <div class="col-12">
             <div class="info_row no_padding row">
                 <div class="col-auto">
-                </div>참여 인원 : 
-                <div class="col info_people">최소 ${detail.minpeople}명 ~ 최대 ${detail.maxpeople}명</div>
+                </div>인원 :  
+                <div class="col info_people"> 최소 ${detail.minpeople}명 ~ 최대 ${detail.maxpeople}명</div>
             </div>
             <div class="info_row no_padding row">
-                <div class="col-auto"> <img src="/3_location_24px.5fffb19f.svg"> </div>
-                <div class="col info_location">온라인(오픈채팅)</div>
+                <div class="col-auto"></div>
+                <div class="col info_location">위치 : ${detail.detailAddress}</div>
             </div>
             <div class="info_row no_padding row">
-                <div class="col-auto"> <img src="/4_calendar_time_24px.83b374d3.svg"> </div>
-                <div class="col info_datetime">${detail.startDate} ~ ${detail.endDate}</div>
+                <div class="col-auto"></div>
+                <div class="col info_datetime">일정 : ${detail.startDate} ~ ${detail.endDate}</div>
             </div>
             <div class="info_price_row info_row no_padding row" style="display: none;">
                 <div class="col-auto"> <img src="/info_price.08ff223f.png"> </div>
@@ -224,29 +266,25 @@
 	<script> 
 		$(function(){
 			let isFull = ${isFull};
-			if(isFull){ 
-				$("#joinBtn").attr("disabled",true);
+			if(!isFull){ 
+				$(".purchase_button").on("click",function(){
+					let status = $(this).data("joined");
+					console.log("클릭됨!   "+status);
+					let socialForm = $("#socialform");
+					let  action = "";
+					/* 각 버튼 클릭시 Action 지정. 수정은 페이지 이동 */
+					if(status=='exit'){
+						action = "../socialexit"; 
+					}else{
+						action = "../socialjoin";
+					}
+					console.log("status     "+status);
+					console.log("action     "+action);
+					socialForm.attr("action",action);
+					socialForm.submit(); 
+				});
 			}
 			console.log("isFull   "+isFull );
-			$("#btn").on("click",function(){
-				let status = $(this).data("joined");
-				console.log("클릭됨!   "+status);
-				let socialForm = $("#socialform");
-				let  action = "";
-				/* 각 버튼 클릭시 Action 지정. 수정은 페이지 이동 */
-				if(status='modify'){
-					location.href="${pageContext.request.contextPath}/social/modify/"+${detail.socialNo};
-					return ;
-				} else if(status=='exit'){
-					action = "../socialexit";
-				}else{
-					action = "../socialjoin";
-				}
-				console.log("status     "+status);
-				console.log("action     "+action);
-				socialForm.attr("action",action);
-				socialForm.submit();
-			});
 
 
 		});

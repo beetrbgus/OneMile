@@ -24,12 +24,12 @@
             (select member_no , min(image_no) as hostImgNo
 						from mei group by member_no) mei on	
             mei.member_no = s.member_no
-		    inner join smc on s.smalltype = smc.SMALLTYPE  
+		    inner join smc on s.smalltype = smc.SMALLTYPE 
 		where S.SOCIAL_NO = #{social_no} and s.hiddenyn= 'N'
 	</select>
 	<!-- 참가자 목록 가져오기 -->
 	<select id="getparticipate" parameterType="int" resultType="ParticipateVO">
-		select m.member_No, m.nick, m.intro , mei.profileImgNo 
+		select m.member_No, m.nick, m.intro , mei.profileImgNo ,sp.isJoined
 		    from SP  inner join member m on sp.member_no = m.member_no
 			inner join 
          		(select member_no , min(image_no) as profileImgNo
@@ -57,7 +57,6 @@
 		<result column="MINPEOPLE" property="minpeople" />
 		<result column="MAXPEOPLE" property="maxpeople" />
 		<result column="MEMBER_NO" property="memberNo" />
-		<result column="ISJOINED" property="isJoined" />
 		<result column="REGDATE" property="regdate" />
 		
 		<result column="MAP_NO" property="mapNo" />
@@ -123,6 +122,9 @@
 					and  <![CDATA[ s.ENDDate > sysdate]]> 
 				</when>
 			</choose>
+			<if test="goo!=null and goo!=''">
+				and instr(map.DETAILADDRESS ,#{goo} ) > 0 
+			</if> 
 				order by s.social_no desc
 			)TMP
 		) where rn between #{startRow} and #{endRow}

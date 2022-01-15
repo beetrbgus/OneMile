@@ -8,4 +8,5 @@ public class ParticipateDetailVO {
 	private int profileNo;
 	private String nick;
 	private String intro;
+	private String isjoined;
 }

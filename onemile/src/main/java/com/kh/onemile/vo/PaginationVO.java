@@ -10,7 +10,7 @@ public class PaginationVO {
 	private String categoryType;
 	private String endyn;
 	private String order;
-	
+	private String goo;
 	private int startRow;
 	private int endRow;
 	
