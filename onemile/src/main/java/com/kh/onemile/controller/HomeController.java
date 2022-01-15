@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.onemile.service.cobuy.CobuyService;
 import com.kh.onemile.service.commu.CommuService;
+import com.kh.onemile.service.social.SocialService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,12 +21,16 @@ public class HomeController {
 	@Autowired
 	private CobuyService cobuyService;
 	
+	@Autowired
+	private SocialService socialService;
+	
 	//메인페이지
 	@RequestMapping("")
 	public String home(Model model) {
 		model.addAttribute("commuDetailVOList", commuService.index());
-		System.err.println(cobuyService.indexList());
 		model.addAttribute("cobuyList", cobuyService.indexList());
+		model.addAttribute("socialIndexVOList", socialService.indexList());
+		System.err.println(socialService.indexList());
 		return "home";
 	}
 }

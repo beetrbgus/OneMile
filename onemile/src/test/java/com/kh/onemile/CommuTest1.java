@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+
+import com.kh.onemile.service.social.SocialService;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations= {
         "file:src/main/webapp/WEB-INF/spring/root-context.xml",
@@ -17,6 +19,9 @@ public class CommuTest1 {
 	
 	@Autowired
 	private SqlSession sqlSession;
+	
+	@Autowired
+	private SocialService socialService;
 
 //	@Test
 	public void test() {
@@ -25,6 +30,6 @@ public class CommuTest1 {
 	
 	@Test
 	public void testq() {
-		System.out.println(sqlSession.selectList("commu.indexCommus"));
+		System.out.println(socialService.indexList());
 	}
 }

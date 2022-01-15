@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.onemile.entity.social.SocialDTO;
 import com.kh.onemile.vo.PaginationVO;
 import com.kh.onemile.vo.social.SocialDetailVO;
+import com.kh.onemile.vo.social.SocialIndexVO;
 import com.kh.onemile.vo.social.SocialListVO;
 import com.kh.onemile.vo.social.SocialRegVO;
 
@@ -45,5 +46,10 @@ public class SocialDaoImpl implements SocialDao{
 	@Override
 	public void modify(SocialRegVO socialRegVO) {
 		sqlSession.update("social.modify",socialRegVO);
+	}
+
+	@Override
+	public List<SocialIndexVO> getIndexList() {
+		return sqlSession.selectList("social.indexList");
 	}
 }

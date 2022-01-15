@@ -15,13 +15,12 @@ import com.kh.onemile.repository.image.middle.MiddleImageDAO;
 import com.kh.onemile.repository.social.SocialDao;
 import com.kh.onemile.repository.social.participant.ParticipantService;
 import com.kh.onemile.service.image.ImageService;
-import com.kh.onemile.service.image.MiddleImageService;
 import com.kh.onemile.service.map.MapService;
 import com.kh.onemile.service.social.participant.ParticipantDao;
 import com.kh.onemile.util.Sequence;
 import com.kh.onemile.vo.PaginationVO;
-import com.kh.onemile.vo.SocialVO;
 import com.kh.onemile.vo.social.SocialDetailVO;
+import com.kh.onemile.vo.social.SocialIndexVO;
 import com.kh.onemile.vo.social.SocialListVO;
 import com.kh.onemile.vo.social.SocialRegVO;
 import com.kh.onemile.vo.social.participate.ParticipateVO;
@@ -153,6 +152,11 @@ public class SocialServiceImpl implements SocialService{
 	@Override
 	public void exitSocial(ParticipateVO participateVO) {
 		participantService.reject(participateVO);
+	}
+
+	@Override
+	public List<SocialIndexVO> indexList() {
+		return socialDao.getIndexList();
 	}
 
 }

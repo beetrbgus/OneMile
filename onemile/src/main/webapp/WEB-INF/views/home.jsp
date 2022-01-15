@@ -25,6 +25,9 @@
 .RecommendationStore_tableWrap__2rBP7{
 	height:275.49px;
 }
+.CardTable_itemContainer__3KZ_w{
+	display: inline-block;
+}
 </style>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <div>
@@ -53,7 +56,7 @@
                                         <c:forEach items="${cobuyList}" var="cobuy">
                                         <div aria-hidden="true" class="CardTable_itemContainer__3KZ_w"
                                             style="width: calc((16.6667% - 16px + 2.66667px) - 0.01px);margin-left: 0px;margin-right: 8px;margin-bottom: 0px;">
-                                            <a href="/web/store/detail/48?_refer_section_st=storeCurator_0"
+                                            <a href="${pageContext.request.contextPath}/cobuy/detail?cobuyNo=${cobuy.cobuyNo}"
                                                 class="RecommendationStoreCard_item__3iMMQ">
                                                 <div class="RecommendationStoreCard_thumbnailContainer__mghKx">
                                                     <div class="RecommendationStoreCard_thumbnailPlaceholder__3TTOS"
@@ -61,7 +64,6 @@
                                                         <div class="RecommendationStoreCard_thumbnail__mis5O"
                                                             style="background-image: url(&quot;${root}/image/download?imageNo=${cobuy.imgNo}&folder=cobuy&quot;);">
                                                         </div>
-                                                        <div class="RecommendationStoreCard_wadizOnly__zxtNd"></div>
                                                     </div>
                                                 </div>
                                                 <div class="RecommendationStoreCard_contentContainer__aDF-5">
@@ -91,42 +93,40 @@
                 <div class="EarlybirdDesktop_container__1a_Ne">
                     <div class="EarlybirdDesktop_wrap__3k3bW">
                         <div class="title_titleWrapper__1ggAh">
-                            <h1 class="title_title__2rv2M">얼리버드</h1>
-                            <p>먼저 참여하는 분들께 드리는 얼리버드 혜택</p>
+                            <h1 class="title_title__2rv2M">소셜링</h1>
+                            <p>서로의 관심사를 함께 즐기는 모임, 소셜링</p>
                         </div>
                     </div>
                     <ul class="EarlybirdDesktop_earlybirdList__3hBAw">
+                    	<c:forEach var="SocialIndexVO" items="${socialIndexVOList}">
                         <li class="EarlybirdDesktop_listItem__1aZrM"><a
-                                href="/web/campaign/detail/132558?_refer_section_st=earlyBird_0" data-ec-id="132558"
-                                data-ec-name="[단백질23g, 고작140kcal, 유당0%]찾다 지쳐 내가 만든 프로틴" data-ec-list="earlyBird"
-                                data-ec-position="0">
+                                href="${pageContext.request.contextPath}/social/detail/${SocialIndexVO.socialNo}">
                                 <div class="CardType_projectCard__3xhjb CardType_earlybirdCard__1t1n1">
                                     <div
                                         class="commons_thumbnail__3wYGv CardType_thumbnail__2dtTe commons_active__1tjD5">
                                         <span class="commons_img__2UTCA commons_visible__1xTJh"
-                                            style="background-image: -webkit-image-set(url(&quot;https://cdn.wadiz.kr/wwwwadiz/green001/2022/0113/20220113135416662_132558.jpg/wadiz/thumbnail/403/format/jpg/quality/95/optimize/&quot;) 1x, url(&quot;https://cdn.wadiz.kr/wwwwadiz/green001/2022/0113/20220113135416662_132558.jpg/wadiz/thumbnail/806/format/jpg/quality/95/optimize/&quot;) 2x);"></span>
+                                            style='background-image: url("${pageContext.request.contextPath}/image/download?imageNo=${SocialIndexVO.imageNo}&folder=social")'></span>
                                     </div>
                                     <div class="CardType_cardContent__3UMOr">
                                         <div>
-                                            <p class="CardType_type__El7XP">펀딩</p>
+                                            <p class="CardType_type__El7XP">${SocialIndexVO.bigType}</p>
                                             <div class="commons_content__2K1SH CardType_content__1Pavj">
-                                                <h1 class="commons_title__1yGWm">[단백질23g, 고작140kcal, 유당0%]찾다 지쳐 내가 만든
-                                                    프로틴</h1>
+                                                <h1 class="commons_title__1yGWm">${SocialIndexVO.title}</h1>
                                                 <p class="commons_summary__2Ynez"><span
-                                                        class="commons_achievementRate__2J-KL">1851%</span>푸드</p>
+                                                        class="commons_achievementRate__2J-KL">${SocialIndexVO.nick}</span>${SocialIndexVO.smallType}</p>
                                             </div>
                                         </div>
                                         <div class="CardType_earlybirdContent__1b8VN">
-                                            <h2 class="CardType_title__2qEmh">[와디즈 한정 혜택] 새해 결심 응원 패키지</h2>
-                                            <p class="CardType_description__2BtXk">모두의 단백질 더The23 프로틴 본품 3개 + 나무 스푼 1개
-                                                증정</p>
-                                            <p class="CardType_subContent__3QETf">67,600원</p>
+                                            <h2 class="CardType_title__2qEmh">${SocialIndexVO.startDate} - ${SocialIndexVO.endDate}</h2>
+                                            <p class="CardType_description__2BtXk">${SocialIndexVO.detailAddress}</p>
                                         </div>
+                                        <a href="${pageContext.request.contextPath}/social/detail/${SocialIndexVO.socialNo}">
                                         <div class="CardType_linkBtn__1QHvM">지금 참여하기<i
-                                                class="wz icon chevron-right"></i></div>
+                                                class="wz icon chevron-right"></i></div></a>
                                     </div>
                                 </div>
                             </a></li>
+                            </c:forEach>
                     </ul>
                 </div>
             </div>
