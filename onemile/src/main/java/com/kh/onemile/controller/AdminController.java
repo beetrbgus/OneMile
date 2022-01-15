@@ -72,4 +72,10 @@ public class AdminController {
 	public String memHidden() {
 		return "/member/hidden";
 	}
+	
+	//대충 만든 통계
+	@GetMapping("/statistics")
+	public String statistics() {
+		return "/admin/statistics";
+	}
 }

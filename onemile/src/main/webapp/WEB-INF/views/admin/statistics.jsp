@@ -9,3 +9,6 @@
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 
 
+<h3>회원 수 : </h3>
+<h3>남성회원 수 : </h3>
+<h3>여성회원 수 : </h3>
