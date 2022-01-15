@@ -133,38 +133,38 @@ img{
 	</div>
 	<div class="RewardProjectListApp_container__1ZYeD">
 		<div class="ProjectListHead_container__rpQ37 RewardProjectListHead_container__2FzIj">
-			<!-- 검색기능
-						<div class="ProjectListHead_bar__2dyHz">
-						<form class="ProjectListHead_search__HN3am"><label
-								for="search-keyword-4933f540-0608-4b63-9ad6-cccdc2960908"><input class=""
-									id="search-keyword-4933f540-0608-4b63-9ad6-cccdc2960908" type="search"
-									placeholder="검색" value="">
-								<div class="ProjectListHead_right__3_Jo1"><button type="submit"
-										class="ProjectListHead_find__3HsFc" aria-label="검색"><i
-											class="icon search"></i></button></div>
-							</label></form>
-						<div
-							class="SortingSelect_container__3voSC ProjectListHead_sorting__2n1WY RewardProjectListHead_fundingSorting__2n0MF">
-							전체<i class="icon expand-more SortingSelect_icon__khE3_"
-								aria-hidden="true"></i><select name="status"
-								class="SortingSelect_select__23ANT">
-								<option value="ALL">전체</option>
-								<option value="N">진행중</option>
-								<option value="Y">종료된</option>
-							</select></div>
-						<div class="SortingSelect_container__3voSC ProjectListHead_sorting__2n1WY">추천순<i
-								class="icon expand-more SortingSelect_icon__khE3_"
-								aria-hidden="true"></i><select name="order" class="SortingSelect_select__23ANT">
-								<option value="recommend">추천순</option>
-								<option value="popular">인기순</option>
-								<option value="amount">펀딩액순</option>
-								<option value="closing">마감임박순</option>
-								<option value="recent">최신순</option>
-								<option value="support">응원참여자순</option>
-							</select></div>
-						<div class="ProjectListHead_children__2Y7-F"></div><button
-							class="ProjectListHead_cardType__2_YL4"></button>
-					</div>-->
+			<!-- 검색기능 -->
+			<div class="ProjectListHead_bar__2dyHz">
+				<form class="ProjectListHead_search__HN3am"><label
+						for="search-keyword-4933f540-0608-4b63-9ad6-cccdc2960908">
+						<input class="" id="search-keyword-4933f540-0608-4b63-9ad6-cccdc2960908" type="search"
+							placeholder="검색" value="">
+						<div class="ProjectListHead_right__3_Jo1"><button type="submit"
+								class="ProjectListHead_find__3HsFc" aria-label="검색"><i
+									class="icon search"></i></button></div>
+					</label></form>
+				<div
+					class="SortingSelect_container__3voSC ProjectListHead_sorting__2n1WY RewardProjectListHead_fundingSorting__2n0MF">
+					전체<i class="icon expand-more SortingSelect_icon__khE3_"
+						aria-hidden="true"></i><select name="status"
+						class="SortingSelect_select__23ANT">
+						<option value="ALL">전체</option>
+						<option value="N">진행중</option>
+						<option value="Y">종료된</option>
+					</select></div>
+				<div class="SortingSelect_container__3voSC ProjectListHead_sorting__2n1WY">추천순<i
+						class="icon expand-more SortingSelect_icon__khE3_"
+						aria-hidden="true"></i><select name="order" class="SortingSelect_select__23ANT">
+						<option value="recommend">추천순</option>
+						<option value="popular">인기순</option>
+						<option value="amount">펀딩액순</option>
+						<option value="closing">마감임박순</option>
+						<option value="recent">최신순</option>
+						<option value="support">응원참여자순</option>
+					</select></div>
+				<div class="ProjectListHead_children__2Y7-F"></div><button
+					class="ProjectListHead_cardType__2_YL4"></button>
+			</div>
 			<div class="ProjectListHead_children__2Y7-F"></div>
 		</div>
 		<div class="ProjectCardList_container__3Y14k">

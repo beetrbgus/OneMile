@@ -60,15 +60,27 @@
 
 						<!-- 프로젝트 유형이 글로벌/앵콜 프로젝트가 아닌경우: 기존과 동일하게 처리 -->
 						<div class="btn-wrap funding">
-							<button id="buyBtn" type="submit"
-								class="buyBtn wz button primary block btn-reward-funding">구매하기</button>
-								<c:if test="#"></c:if>
-								<a href="${root}/onemile/cobuy/modify?cobuyNo=${detail.cobuyNo}">
-								<button type="submit"
-								class="buyBtn wz button primary block btn-reward-funding">수정하기</button></a>
-								<a href="${root}/onemile/cobuy/delete?cobuyNo=${detail.cobuyNo}">
-								<button type="submit"
-								class="buyBtn wz button primary block btn-reward-funding">삭제하기</button></a>
+							<c:choose>
+								<c:when test="${detail.memberNo==logNo}"> 
+									<a href="${root}/onemile/cobuy/modify/${detail.cobuyNo}">
+										<button type="submit"
+											class="buyBtn wz button primary block btn-reward-funding">
+											수정하기
+										</button>
+									</a>
+									<a href="${root}/onemile/cobuy/delete/${detail.cobuyNo}">
+										<button type="button" class="buyBtn wz button primary block btn-reward-funding">
+											삭제하기
+										</button>
+									</a>
+								</c:when>
+								<c:otherwise>
+									<button id="buyBtn" type="submit"
+										class="buyBtn wz button primary block btn-reward-funding">
+											구매하기
+									</button>
+								</c:otherwise>
+							</c:choose>
 						</div>
 					</div>
 					<!-- S : 프로젝트 신고하기 -->
@@ -126,7 +138,7 @@
 							<div class="FundingMakerInfoContainer_container__hy1D5">
 								<div class="FundingMakerInfoContainer_header__1pDXk">
 									<a class="MakerInfoHeader_link__HmY8C"
-										href="${pageContext.request.contextPath}/image/download/image${memberImageNo}">
+										href="${pageContext.request.contextPath}/account/profile/${detail.memberNo}">
 										<button
 											class="Avatar_avatar__CiRY0 Avatar_xs__1Mz7G MakerInfoHeader_avatar__ltZMd">
 											<span
@@ -254,7 +266,16 @@
 												<input class="quantity" type="hidden" name="quantity" value="0">
 												<!-- 프로젝트 유형이 글로벌/앵콜 프로젝트가 아닌경우: 기존과 동일하게 처리 -->
 												<div class="btn-wrap funding">
-													<button class="buyBtn wz button primary block btn-reward-funding">구매하기</button>
+													<c:choose>
+														<c:when test="${detail.memberNo==logNo}"> 
+															<button class="buyBtn wz button primary block btn-reward-funding" data-iswriter="modify">수정하기</button>
+															<button class="buyBtn wz button primary block btn-reward-funding" data-iswriter="delete">삭제하기</button>
+														</c:when>
+														<c:otherwise>
+															<button class="buyBtn wz button primary block btn-reward-funding" data-iswriter="delete">구매하기</button>
+														</c:otherwise>
+													</c:choose>
+													
 												</div>
 											</form>
 										</div>
@@ -322,12 +343,12 @@
 												<c:forEach items="${detail.imageList}" var="item">
 													<p>
 														<img class="fr-fic fr-dib lazyloaded" data-width="750"
-															data-height="400" width = "750" height="400" 
-															src="${pageContext.request.contextPath}/image/download?imageNo=${item.imageNo}&folder=cobuy">
+															src="${pageContext.request.contextPath}/image/download?imageNo=${item.imageNo}&folder=cobuy"
+															data-height="400" style="width:750px;height:400px;"> 
 													</p>
 												</c:forEach>
-												<p style="font: bold;">수령 장소 </p>
-												<p style="font: bold;"> ${detail.detailAddress}</p>
+												<h2 style="font-weight: bold;">수령 장소 </h2>
+												<p style="font-weight: bold;"> ${detail.detailAddress} </p>
 											</div>
 										</div>
 									</div>

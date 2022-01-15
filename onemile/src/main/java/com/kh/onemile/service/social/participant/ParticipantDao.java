@@ -12,4 +12,6 @@ public interface ParticipantDao {
 
 	public void reject(ParticipateVO participateVO);
 
+	public String getParti(int memberNo,int socialNo);
+
 }

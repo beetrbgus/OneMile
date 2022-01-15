@@ -35,5 +35,13 @@ public class ParticipantDaoImpl implements ParticipantDao {
 	public void reject(ParticipateVO participateVO) {
 		sqlSession.delete("participant.reject", participateVO);
 	}
+
+	@Override
+	public String getParti(int memberNo, int socialNo) {
+		Map<String,Integer> map = new HashMap<String, Integer>();
+		map.put("memberNo", memberNo);
+		map.put("socialNo", socialNo);
+		return sqlSession.selectOne("participant.getParti",map);
+	}
 	
 }

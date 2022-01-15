@@ -24,13 +24,12 @@
             (select member_no , min(image_no) as hostImgNo
 						from mei group by member_no) mei on	
             mei.member_no = s.member_no
-		    inner join smc on s.smalltype = smc.SMALLTYPE  
+		    inner join smc on s.smalltype = smc.SMALLTYPE 
 		where S.SOCIAL_NO = #{social_no} and s.hiddenyn= 'N'
-
 	</select>
 	<!-- 참가자 목록 가져오기 -->
 	<select id="getparticipate" parameterType="int" resultType="ParticipateVO">
-		select m.member_No, m.nick, m.intro , mei.profileImgNo 
+		select m.member_No, m.nick, m.intro , mei.profileImgNo ,sp.isJoined
 		    from SP  inner join member m on sp.member_no = m.member_no
 			inner join 
          		(select member_no , min(image_no) as profileImgNo
@@ -38,7 +37,8 @@
             		mei.member_no = sp.member_no
 		where SOCIAL_NO = #{SOCIAL_NO}
 	</select>
-	
+
+	<!-- 글의 이미지 목록 가져오기. -->
 	<select id="getDetailimage" parameterType="int" resultType="ImageDTO">
 		select * from SMI inner join image 
 			img on smi.image_no = img.image_no
@@ -57,7 +57,6 @@
 		<result column="MINPEOPLE" property="minpeople" />
 		<result column="MAXPEOPLE" property="maxpeople" />
 		<result column="MEMBER_NO" property="memberNo" />
-		<result column="ISJOINED" property="isJoined" />
 		<result column="REGDATE" property="regdate" />
 		
 		<result column="MAP_NO" property="mapNo" />
@@ -92,11 +91,14 @@
 					s.social_no ,s.smalltype ,s.title,
 					TO_CHAR(s.startdate, 'MM/DD HH24:mm') as startDate,
 					TO_CHAR(s.enddate, 'MM/DD HH24:mm') as endDate,
-					m.member_no,m.nick, mei.image_no as profileImgNo ,
+					m.member_no,m.nick, mei.profileImgNo ,
 					map.detailaddress , smc.bigtype
 				from social s
 					inner join member m on s.member_no=m.member_no
-					inner join mei on mei.member_no = m.member_no
+					inner join 
+           				(select member_no , min(image_no) as profileImgNo
+							from mei group by member_no) mei on	
+            				mei.member_no = s.member_no
 					inner join map on map.map_no = s.map_no
 					inner join smc on s.smalltype = smc.SMALLTYPE
 					inner join sbc on smc.bigtype = sbc.BIGTYPE
@@ -110,6 +112,14 @@
 				</when>
 				<when test="keyword != null and !keyword.equals('') and searchword != null and !searchword.equals('')">
 					and #{keyword} = #{searchword}
+				</when>
+			</choose>
+			<choose>
+				<when test="endyn != null and endyn.equals('Y')">
+					and  <![CDATA[ s.ENDDate < sysdate]]> 
+				</when>
+				<when test="endyn != null and endyn.equals('N')">
+					and  <![CDATA[ s.ENDDate > sysdate]]> 
 				</when>
 			</choose>
 				order by s.social_no desc

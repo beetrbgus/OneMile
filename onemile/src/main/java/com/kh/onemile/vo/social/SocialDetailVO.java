@@ -29,8 +29,8 @@ public class SocialDetailVO {
 	private List<ImageDTO> imageInfo; // 소셜의 이미지 목록 
 	//지도 테이블에서 보여줘야 할 내용들.
 	private int mapNo;
-	private double lat;
-	private double lng;
+	private float lat;
+	private float lng;
 	private String detailAddress;
 	
 }

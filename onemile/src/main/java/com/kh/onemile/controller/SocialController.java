@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kh.onemile.entity.member.membership.AdDTO;
 import com.kh.onemile.entity.social.SocialBigCategoryDTO;
 import com.kh.onemile.entity.social.SocialDTO;
+import com.kh.onemile.repository.social.participant.ParticipantService;
 import com.kh.onemile.service.category.CategoryService;
 import com.kh.onemile.service.member.MemberService;
 import com.kh.onemile.service.social.SocialService;
+import com.kh.onemile.service.social.participant.ParticipantDao;
 import com.kh.onemile.vo.PaginationVO;
 import com.kh.onemile.vo.social.SocialDetailVO;
 import com.kh.onemile.vo.social.SocialListVO;
@@ -41,6 +43,8 @@ public class SocialController {
 	
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private ParticipantDao participantDao; 
 	
 	@GetMapping("/reg")
 	public String getReg(Model model,HttpSession session) {
@@ -116,12 +120,22 @@ public class SocialController {
 	@GetMapping({"/list/{bigcate}","/list","/",""})
 	public String getList(@PathVariable(required = false) String bigcate,
 			@RequestParam(required = false,defaultValue = "") String sc,
+			@RequestParam(required = false,defaultValue = "") String order,
+			@RequestParam(required = false,defaultValue = "") String endyn,
 			@RequestParam(required =false, defaultValue = "1") int page,
 			@RequestParam(required =false, defaultValue = "10") int size
 			,Model model) {
 		PaginationVO paginationVO =new PaginationVO(page,size);
 		bigcate =(bigcate==null||bigcate.equals("/"))?"":bigcate;
-		
+		//종료된 것 목록 -endyn 
+		if(endyn.equals("Y")) {
+			paginationVO.setEndyn("Y");
+		}
+		//진행중인 것 목록 -endyn
+		else if(endyn.equals("N")) {
+			paginationVO.setEndyn("N");
+		}
+		//소분류 카테고리 목록
 		if(sc.equals("") || sc.equals("/")) {
 			paginationVO.setCategoryType("sbc.bigValue");
 			paginationVO.setCategory(bigcate);
@@ -149,11 +163,14 @@ public class SocialController {
 	}
 	// 소모임 상세
 	@GetMapping("/detail/{socialNo}")
-	public String getDetail(@PathVariable int socialNo, Model model) {
-		
+	public String getDetail(@PathVariable int socialNo, Model model, HttpSession session) {
+		int memberNo = (int)session.getAttribute("logNo");
 		SocialDetailVO detail = socialService.getDetail(socialNo);
+		String joined = participantDao.getParti(memberNo,socialNo);
+		
 		log.debug("result       : "+detail.toString()); 
 		model.addAttribute("detail",detail);
+		model.addAttribute("joined",joined);
 		return "social/detail";
 	}
 	@PostMapping("/detail/{socialNo}")
