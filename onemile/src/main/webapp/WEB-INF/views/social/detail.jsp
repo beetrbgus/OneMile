@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reboot.css">
 
 
-  <p>번호 : ${detail.socialNo}</p>
+ <%--  <p>번호 : ${detail.socialNo}</p>
   <p>제목 : ${detail.title}</p>
   <p>대분류 : ${detail.type}</p>
   <p>소분류 : ${detail.smalltype}</p>
@@ -20,10 +20,10 @@
   <p>최소인원 : ${detail.minpeople}</p>
   <p>최대인원 :${detail.maxpeople}</p>
   <p>참여자 목록 : </p>
-  <c:forEach items="${detail.participate}" var="parti">
+ <c:forEach items="${detail.participate}" var="parti">
   	<br>
   	${parti.memberNo} /
-	${parti.profileImgNo} /
+	 ${parti.profileImgNo} /
 	${parti.nick} /
 	${parti.intro} /
   </c:forEach>
@@ -31,7 +31,7 @@
   <p>모임장 닉네임 : ${detail.nick}</p>
   <p>등록일 :${detail.regdate}</p>
   <p>모임장 이미지 번호 :</p>
-  	<img width="400px" height="300" src="${pageContext.request.contextPath}/image/download?imageNo=${detail.profileImgNo}&folder=member">  
+  	<img width="400px" height="300" src="${pageContext.request.contextPath}/image/download?imageNo=${detail.hostImgNo}&folder=member">  
   <p>소셜링 이미지 번호 : </p>
   <c:forEach items="${detail.imageInfo}" var="imageDTO">
   	<img width="400px" height="300" src="${pageContext.request.contextPath}/image/download?imageNo=${imageDTO.imageNo}&folder=social">	
@@ -64,7 +64,7 @@
 		<c:otherwise>
 			<c:set value="true" var="isFull"></c:set>
 		</c:otherwise>
-	</c:choose>
+	</c:choose> --%>
 	
 <div class="container detail">
     <div class="detail-wrapper">
@@ -139,6 +139,8 @@
             <div class="col-12 main_col">
                 <div class="user_cover"
                     style="background-image: url(&quot;https://munto-images.s3.ap-northeast-2.amazonaws.com/production-user/1634097886594-image-69491-profileImage&quot;);">
+                
+                
                 </div> <span class="user">심다예</span>
                 <div class="socialing_name">여자들의 로망 폴댄스 체험❤️</div>
                 <div> </div>
@@ -176,12 +178,12 @@
                     <div class="col user_info_col">
                         <div class="user">
                         <c:forEach items="${detail.participate}" var="parti">
-  						<br>
-						  	${parti.memberNo} /
-							${parti.profileImgNo} /
-							${parti.nick} /
-							${parti.intro} /
-						 </c:forEach>
+							  	<br>
+							  	${parti.memberNo} /
+								${parti.profileImgNo} /
+								${parti.nick} /
+								${parti.intro} /
+							  </c:forEach>		
                         </div>
                         <div class="user_grade"></div>
                     </div>
