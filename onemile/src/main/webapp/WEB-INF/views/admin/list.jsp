@@ -7,5 +7,3 @@
 <c:set var="login" value="${logId != null}"></c:set>
 <c:set var="admin" value="${grade == '관리자'}"></c:set>
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
-
-

@@ -54,12 +54,29 @@ public class CommuDaoImpl implements CommuDao{
 	}
 
 	@Override
-	public List<CommuDetailVO> boardList(String largeName, int startRow, int endRow) {
+	public List<CommuDetailVO> adminList(String largeName, int startRow, int endRow, String keyword, String search) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("largeName", largeName);
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+		map.put("search", search);
+		map.put("keyword", keyword);
+		List<CommuDetailVO> list = sqlSession.selectList("commu.adminList", map);
+		return list;
+	}
+
+	@Override
+	public java.util.List<CommuDetailVO> boardList(String largeName, int startRow, int endRow) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("largeName", largeName);
 		map.put("startRow", startRow);
 		map.put("endRow", endRow);
 		List<CommuDetailVO> list = sqlSession.selectList("commu.boardList", map);
 		return list;
+	}
+
+	@Override
+	public java.util.List<CommuDetailVO> index() {
+		return sqlSession.selectList("commu.indexCommus");
 	}
 }

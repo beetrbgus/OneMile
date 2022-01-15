@@ -15,7 +15,7 @@ import com.kh.onemile.vo.cobuy.CobuyRegVO;
 
 public interface CobuyDao {
 	public void reg(CobuyRegVO cobuyRegVO);
-	public List<CobuyListVO> cobuyList(int startRow, int endRow);
+	public List<CobuyListVO> cobuyList();
 	public CobuyDetailVO detail(int cobuyNo);
 	public void delete(int cobuyNo);
 	public void modify(CobuyDetailVO cobuyModDTO);

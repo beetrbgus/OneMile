@@ -17,11 +17,8 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b89479d3bf4f702a0c7b99d5edfb1391&libraries=services" charset="utf-8"></script> 
     <script type="text/javascript"src="${root}/resources/js/navigator.js"></script>
-    <!-- Bootstrap CSS CDN-->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-	<!-- boorStrap Skin cdn -->
 	<link href="https://bootswatch.com/5/journal/bootstrap.css" type="text/css" rel="stylesheet">
-	<!--Bootstrap bundle CSS CDN -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/sha1.min.js"></script>
@@ -132,12 +129,12 @@ $(function () {
 										</div>
 										<span class="GNBMobile_text__2-voS">홈</span>
 									</a></li>
-								<li class="GNBMobile_item__1b4ZL">
+								<li class="GNBMobile_item__1b4ZL"><a href="${root}/notmap/list">
 										<div class="GNBMobile_icon__3OOAF"
 											style="background-image: url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGc+CiAgICAgICAgICAgIDxnPgogICAgICAgICAgICAgICAgPHBhdGggZD0iTTAgMEgyNFYyNEgweiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTQ5MDggLTE5ODUpIHRyYW5zbGF0ZSg0OTA4IDE5ODUpIi8+CiAgICAgICAgICAgICAgICA8cGF0aCBmaWxsPSIjODY4RTk2IiBkPSJNMTIgMi4yNWMyLjQ4NiAwIDQuNzY4Ljg3NyA2LjU1MyAyLjMzOGwxLjI4LTEuNDc5IDEuMTM0Ljk4Mi0xLjMyNCAxLjUzYzEuNjgyIDEuODQgMi43MDcgNC4yOSAyLjcwNyA2Ljk3OSAwIDUuNzE2LTQuNjM0IDEwLjM1LTEwLjM1IDEwLjM1LTUuNzE2IDAtMTAuMzUtNC42MzQtMTAuMzUtMTAuMzUgMC0yLjY5MiAxLjAyOC01LjE0NCAyLjcxMi02Ljk4NUwzLjAzNSA0LjA5M2wxLjEzLS45ODYgMS4yODcgMS40NzdDNy4yMzYgMy4xMjUgOS41MTYgMi4yNSAxMiAyLjI1em0wIDEuNWMtNC44ODggMC04Ljg1IDMuOTYyLTguODUgOC44NXMzLjk2MiA4Ljg1IDguODUgOC44NSA4Ljg1LTMuOTYyIDguODUtOC44NVMxNi44ODggMy43NSAxMiAzLjc1em0uNzUgMy41NTZ2NC44Nmw0LjM4OSAyLjUyNi0uNzQ4IDEuMy01LjE0MS0yLjk1OFY3LjMwNmgxLjV6IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNDkwOCAtMTk4NSkgdHJhbnNsYXRlKDQ5MDggMTk4NSkiLz4KICAgICAgICAgICAgPC9nPgogICAgICAgIDwvZz4KICAgIDwvZz4KPC9zdmc+Cg==&quot;);">
 										</div>
 										<span class="GNBMobile_text__2-voS confirmbtn">커뮤니티</span>
-									</li>
+									</a></li>
 								<li class="GNBMobile_item__1b4ZL"><a class="GNBMobile_link__t1Y9t"
 										href="${root}/social">
 										<div class="GNBMobile_icon__3OOAF"
@@ -237,15 +234,12 @@ $(function () {
 									<div class="User_container__bqVd2">
 									<c:choose>
 										<c:when test="${login}">
-
-											<button type="button" class="User_btnSign__1URTs" >
-											<a href="${root}/member/logout">로그아웃</a></button>
-											<button data-event="iam.signup" class="User_btnSign__1URTs" >
-											<a href="${root}/account/mypage">마이페이지</a></button>
-
-											
-											</button>
-
+											<button type="button" class="User_btnSign__1URTs" ><a href="${root}/member/logout">로그아웃</a></button>
+												<c:choose>
+													<c:when test="${!admin}">
+														<button data-event="iam.signup" class="User_btnSign__1URTs" ><a href="${root}/member/mypage">마이페이지</a></button>
+													</c:when>
+												</c:choose>
 										</c:when>
 										<c:otherwise>
 											<button type="button" class="User_btnSign__1URTs" >
@@ -256,36 +250,24 @@ $(function () {
 											</button>
 										</c:otherwise>
 									</c:choose>
-										
 									</div>
 								</div>
+								
 								<div class="web-header-funding-open funding-open">
 									<div>
 										<div>
-											<button class="wz button funding-open-button dense primary-outline"
-												aria-label="프로젝트 오픈 신청">공동구매 오픈 신청</button>
-											<div class="FundingOpen_fundingOpenContainer__2GDma">
-												<a class="FundingOpen_btnLink__11tnC" href="/web/wsub/openfunding">와디즈
-													메이커 시작하기
-													<small class="FundingOpen_desc__UdPr4">와디즈 서비스를 알아보고 정보를
-														구독합니다.
-													</small>
-												</a>
-												<a class="FundingOpen_btnLink__11tnC"
-													href="/web/wsub/openfunding/reward">펀딩 오픈 신청하기
-													<small class="FundingOpen_desc__UdPr4">
-														서포터에게 '제품'이나 '서비스'를 선물합니다.</small>
-												</a>
-												<a class="FundingOpen_btnLink__11tnC"
-													href="/web/wsub/openfunding/equity">투자 오픈 신청하기<small
-														class="FundingOpen_desc__UdPr4">투자자에게 기업의 주식이나 채권을
-														발행합니다.</small></a><a class="FundingOpen_btnLink__11tnC"
-													href="/web/school/main">와디즈 스쿨 보러 가기</a><a
-													class="FundingOpen_btnLink__11tnC"
-													href="/web/wevent/fanzmaker/disney">IP 라이선스 신청하기<small
-														class="FundingOpen_desc__UdPr4">캐릭터 및 유명 브랜드와 협업
-														기회를 만나 보세요.</small></a>
-											</div>
+										<c:choose>
+											<c:when test="${admin and login}">
+												<a href="${root}/admin/">
+												<button class="wz button funding-open-button dense primary-outline"
+													aria-label="프로젝트 오픈 신청">관리자 홈</button></a>
+											</c:when>
+											<c:otherwise>
+											<a herf="${root}/member/membership">
+												<button class="wz button funding-open-button dense primary-outline"
+												aria-label="프로젝트 오픈 신청">멤버십 가입</button></a>
+											</c:otherwise>
+										</c:choose>
 										</div>
 									</div>
 								</div>
