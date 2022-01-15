@@ -1,5 +1,6 @@
 package com.kh.onemile.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,13 +8,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.onemile.repository.admin.AdminDao;
 import com.kh.onemile.service.admin.AdminService;
 import com.kh.onemile.vo.CommuDetailVO;
 import com.kh.onemile.vo.admin.ExitMemberVO;
+import com.kh.onemile.vo.admin.MemberCountChartVO;
 import com.kh.onemile.vo.admin.MemberListVO;
 
 @RequestMapping("/admin")
@@ -22,6 +26,9 @@ public class AdminController {
 	@Autowired 
 	private AdminService adminService;
 
+	@Autowired
+	private AdminDao adminDao;
+	
 	//관리자 홈
 	@GetMapping("/")
 	public String home() {
@@ -115,8 +122,38 @@ public class AdminController {
 	}
 	
 	//대충 만든 통계
-	@GetMapping("/statistics")
+	@GetMapping("/statistics/list")
 	public String statistics() {
-		return "/admin/statistics";
+		return "/admin/statistics_list";
+	}
+	
+	@GetMapping("/statistics/member_statistics")
+	public String memberStatisticsList() {
+		return "/admin/statistics/member_statistics";
+	}
+	
+	//회원수관련 통계
+	@PostMapping("/statistics/member_statistics")
+	@ResponseBody
+	public List<MemberCountChartVO> memberStatistics() {
+		return adminService.memberCount();
+	}
+	//연령대분포도 통계
+	@PostMapping("/statistics/age_distribution_statistics")
+	@ResponseBody
+	public List<MemberCountChartVO> ageDistributionStatistics(){
+		return adminService.ageDistribution();
+	}
+	//지역분포도 통계
+	@PostMapping("/statistics/location_statistics")
+	@ResponseBody
+	public List<MemberCountChartVO> locationDistribution(){
+		return adminService.locationDistribution();
+	}
+	//멤버쉽가입여부 통계
+	@PostMapping("/statistics/membership_statistics")
+	@ResponseBody
+	public List<MemberCountChartVO> membership(){
+		return adminService.membershipActiveMemberCount();
 	}
 }

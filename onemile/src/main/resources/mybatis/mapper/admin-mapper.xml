@@ -73,4 +73,27 @@
 				)TMP
 		) where rn between ${startRow} and ${endRow}
 	</select>
+	
+	<select id="memberCount" resultType="int">
+		select count(*) from member
+	</select>
+	<select id="manGenderCount" resultType="int">
+		select count(*) from member where gender = '남자'
+	</select>
+	<select id="womanGenderCount" resultType="int">
+		select count(*) from member where gender = '여자'
+	</select>
+	<select id="membershipActiveMemberCount" resultType="int">
+		select count(*) from msb where hiddenyn = 'Y'
+	</select>
+	
+	<select id="ageDistribution" parameterType="map" resultType="int">
+		select count(*) from member where 
+		to_number((substr(to_char(sysdate , 'YYYYMMDD'), 0, 4))) - to_number((substr(to_char(birth, 'YYYYMMDD'), 0, 4))) between ${startAge} and ${endAge}
+	</select>
+	
+	<select id="locationDistribution" parameterType="String" resultType="int">
+		select count(m.detailaddress) from social S inner join map M on S.map_no = M.map_no 
+		where substr(m.detailaddress, 0, 2) = #{locationName}
+	</select>
 </mapper>

@@ -9,6 +9,4 @@
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 
 
-<h3>회원 수 : </h3>
-<h3>남성회원 수 : </h3>
-<h3>여성회원 수 : </h3>
+<h3><a href="${pageContext.request.contextPath}/admin/statistics/member_statistics">회원 관련 통계 보러가기</a></h3>
