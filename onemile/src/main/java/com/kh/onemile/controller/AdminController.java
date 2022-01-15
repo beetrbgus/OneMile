@@ -89,14 +89,16 @@ public class AdminController {
 	}
 	//게시판 수정
 	@GetMapping("/board/modify/{largeName}/{middleName}")
-	public String modify(@PathVariable("largeName") String largeName, @PathVariable("middleName") String middleName){
+	public String modify(@PathVariable("largeName") String largeName, 
+			@PathVariable("middleName") String middleName){
 		
 		return "/admin/board/modify";
 	}
 	//회원 목록
 	@GetMapping("/member/list")
 	@ResponseBody
-	public List<MemberListVO> memList(@RequestParam(required = false) String keyword, @RequestParam(required = false) String search,
+	public List<MemberListVO> memList(@RequestParam(required = false,defaultValue = "") String keyword, 
+			@RequestParam(required = false,defaultValue = "") String search,
 			@RequestParam(required =false, defaultValue = "1") int page,
 			@RequestParam(required =false, defaultValue = "20") int size, Model model) {
 		int endRow = page* size;

@@ -102,6 +102,12 @@
 				<if test="goo!=null and goo!=''">
 					instr(map.DETAILADDRESS ,#{goo} ) > 0 and
 				</if> 
+				<if test="keyword!=null and keyword!=''">
+					and instr( c.title ,#{keyword}) > 0 or 
+					instr( c.descript ,#{keyword}) > 0 or
+					instr( c.PNAME ,#{keyword}) > 0 or 
+					instr( map.DETAILADDRESS ,#{keyword}) > 0 
+				</if>
 				c.hiddenyn = 'N' order by c.cobuy_no desc
 			)TMP
 		) where rn between ${startRow} and ${endRow}
