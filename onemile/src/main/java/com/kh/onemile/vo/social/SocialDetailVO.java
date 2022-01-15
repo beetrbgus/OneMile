@@ -14,7 +14,7 @@ public class SocialDetailVO {
 	private String title;
 	private String type; //대분류
 	private String smalltype; //소분류
-	private String starDate;
+	private String startDate;
 	private String endDate;
 	private String context;
 	private String isJoined;
@@ -25,8 +25,8 @@ public class SocialDetailVO {
 	private int memberNo;
 	private String nick;
 	private String regdate;
-	private int profileImgNo;	
-	private List<ImageDTO> imageInfo;
+	private int hostImgNo;	
+	private List<ImageDTO> imageInfo; // 소셜의 이미지 목록 
 	//지도 테이블에서 보여줘야 할 내용들.
 	private int mapNo;
 	private double lat;

@@ -54,4 +54,6 @@ public interface MemberService {
 	//닉네임 변경
 	public int getNickModi(int memberNo);
 
+	public boolean emailChangePw(String email, String changePw);
+
 }

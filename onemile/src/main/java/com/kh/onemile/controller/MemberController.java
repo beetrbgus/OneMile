@@ -181,12 +181,14 @@ public class MemberController {
 			return "redirect:find_pw?error";
 		}
 	}
-	@PostMapping("find_edit_pw")
+	@GetMapping("find_edit_pw")
 	public String findEditPw(@RequestParam String changePw, @RequestParam String email) {
 		boolean result = memberService.emailChangePw(email, changePw);
-		
-		return changePw;
-		
+		if(result) {
+			return "redirect:/";
+		} else {
+			return "redirect:find_edit_pw?error";
+		}
 	}
 
 	// 비밀번호 변경

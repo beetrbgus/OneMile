@@ -135,5 +135,10 @@
 			left outer join ad ad on msp.msp_no = ad.msp_no
 		where me.nickmodi+nvl(ad.nmodtime, 30) > sysdate and me.member_no = #{memberNo}
 	</select>
+	
+	<select id="emailChangePw">
+		update member set pw = #{changePw}
+		where email = #{email}
+	</select>
  
 </mapper>

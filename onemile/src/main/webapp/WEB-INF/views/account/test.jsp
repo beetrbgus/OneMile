@@ -4,7 +4,8 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common2.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/detail.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/detail-socialing.css">
-
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/grid.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reboot.css">
 <div class="container detail">
     <div class="detail-wrapper">
         <div class="detail_info">
@@ -51,7 +52,7 @@
                     3시 0분</span></div>
         </div>
     </div>
-    <div class="detail_floating_zone" style="position: absolute; top: 720px; width: 412px; right: 136px;">
+    <div class="detail_floating_zone" style="position: absolute; top: 600px; width: 412px; right: 350px;">
         <div class="detail_summary_row mt-5 row">
             <div class="col-12 main_col">
                 <div class="user_cover"
@@ -66,6 +67,7 @@
         <div class="detail_buttons_row floating row">
             <div class="col">
                 <div id="purchase" class="pointer purchase_button"> 소셜링 참여하기 </div>
+                <div id="map" style="width:412px;height:400px;top: 50px;right: 20px;"></div>
             </div>
         </div>
     </div>
@@ -95,7 +97,7 @@
                     </div>
                     <div class="col user_info_col">
                         <div class="user">심다예</div>
-                        <div class="user_grade">//매일 운동 후 밤산책 매운음식 먹으며 하루 스트레스 풀기폴댄스 ,댄스 ,등산 등 활동적인 것을 좋아해요!!</div>
+                        <div class="user_grade"></div>
                     </div>
                 </div>
             </div>
@@ -126,5 +128,10 @@
         </div>
     </div>
 </div>
-    
+
+<!-- 지도 영역 -->
+<input type="hidden" id="lat" value="${detail.lat}">
+<input type="hidden" id="lng" value="${detail.lng}">
+
+<script type="text/javascript"src="${root}/onemile/resources/js/social/mapRead.js"></script>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

@@ -6,4 +6,7 @@ import lombok.Data;
 public class ParticipateVO {
 	private int memberNo;
 	private int socialNo;
+	private int profileImgNo;
+	private String nick;
+	private String intro;
 }

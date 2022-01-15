@@ -1,5 +1,7 @@
 package com.kh.onemile.repository.image.middle;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -20,6 +22,11 @@ public class CobuyMidImgDaoImpl implements MiddleImageDAO {
 	@Override
 	public void delete(int cobuyNo) {
 		sqlSession.delete("cbi.delete", cobuyNo);
+	}
+
+	@Override
+	public List<Integer> find(int connTableNo) {
+		return sqlSession.selectList("cbi.find", connTableNo);
 	}
 	
 }

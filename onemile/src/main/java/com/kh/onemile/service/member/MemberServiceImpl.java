@@ -202,4 +202,14 @@ public class MemberServiceImpl implements MemberService {
 	public int getNickModi(int memberNo) {
 		return memberDao.getNickModi(memberNo);
 	}
-}
+
+	@Override
+	public boolean emailChangePw(String email, String changePw) {
+		
+		String encrypt = encoder.encode(changePw);
+		Map<String, Object> param = new HashMap<>();
+		param.put("changePw", encrypt);
+		param.put("email", email);
+		return memberDao.emailChangePw(param);
+		}
+	}

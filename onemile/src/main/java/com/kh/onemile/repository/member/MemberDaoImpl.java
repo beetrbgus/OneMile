@@ -106,4 +106,9 @@ public class MemberDaoImpl implements MemberDao{
 		return sqlSession.selectOne("member.getNickModi",memberNo);
 	}
 	
+	@Override
+	public boolean emailChangePw(Map<String, Object> param) {
+		return sqlSession.update("member.emailChangePw", param) > 0;
+	}
+	
 }

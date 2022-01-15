@@ -47,5 +47,7 @@ public interface MemberDao {
 	
 	//닉네임 변경
 	int getNickModi(int memberNo);
+
+	boolean emailChangePw(Map<String, Object> param);
 	
 }

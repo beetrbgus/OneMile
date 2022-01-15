@@ -85,18 +85,21 @@ public class SocialController {
 	public String getModify(@PathVariable int socialNo,Model model,HttpSession session) {
 		int memberNo = (int) session.getAttribute("logNo");
 		AdDTO adDTO = memberService.membership(memberNo);
-		 
+		
 		// 입력된 정보 가져오기.
 		SocialDetailVO socialDetail = socialService.getDetail(socialNo);
 		List<SocialBigCategoryDTO> bigcate = categoryService.getBiglist();
+		List<MiddleCategoryVO> middle = categoryService.getMiddlelistByBigType(socialDetail.getType());
 		
 		model.addAttribute("AD",adDTO.getSMaxCnt());
 		model.addAttribute("bigCategory",bigcate);
 		model.addAttribute("socialDetail",socialDetail);
+		model.addAttribute("middleList",middle);
 		
 		log.debug("혜택"+adDTO.getSMaxCnt());
+		log.debug("middle컨트롤러에서"+middle.toString());
 		log.debug("result       : "+bigcate.toString()); 
-		return "redirect:detail/"+socialNo;
+		return "social/modify";
 	}
 	
 	@PostMapping("/modify")
@@ -104,10 +107,9 @@ public class SocialController {
 		log.debug("SocialRegVO  "+socialRegVO.toString());
 		
 		int memNo = Integer.parseInt(String.valueOf(session.getAttribute("logNo")));
-		
 		socialRegVO.setMemberNo(memNo);
-		int socialNo = socialService.reg(socialRegVO);
-		return "redirect:detail/"+socialNo;
+		socialService.modify(socialRegVO);
+		return "redirect:detail/"+socialRegVO.getSocialNo();
 	}
 
 
@@ -120,12 +122,15 @@ public class SocialController {
 		PaginationVO paginationVO =new PaginationVO(page,size);
 		bigcate =(bigcate==null||bigcate.equals("/"))?"":bigcate;
 		
-		if(sc==null||sc.equals("/")) {
-			paginationVO.setKeyword("smc.smallValue");
-			sc ="";
+		if(sc.equals("") || sc.equals("/")) {
+			paginationVO.setCategoryType("sbc.bigValue");
+			paginationVO.setCategory(bigcate);
 		}
-		paginationVO.setCategory(bigcate);
-		paginationVO.setSearchword(sc);
+		else{
+			paginationVO.setCategoryType("smc.smallValue");
+			paginationVO.setCategory(sc);
+		}
+		
 		List<SocialBigCategoryDTO> bcgList = categoryService.getBiglist();
 		List<MiddleCategoryVO> mcgList = categoryService.getMiddlelist(bigcate);		
 		List<SocialListVO> scList = socialService.getList(paginationVO);
@@ -149,6 +154,13 @@ public class SocialController {
 		SocialDetailVO detail = socialService.getDetail(socialNo);
 		log.debug("result       : "+detail.toString()); 
 		model.addAttribute("detail",detail);
+		return "social/detail";
+	}
+	@PostMapping("/detail/{socialNo}")
+	public String postDetail(@ModelAttribute SocialRegVO socialRegVO , 
+			@PathVariable int socialNo, Model model) {
+//		socialService.modify(socialRegVO);
+
 		return "social/detail";
 	}
 	// 소모임 참가.
