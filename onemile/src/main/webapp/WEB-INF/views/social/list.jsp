@@ -252,7 +252,7 @@ img{
 				</button>
 				<form class="ProjectListHead_search__HN3am">
 					<label for="search-keyword-4933f540-0608-4b63-9ad6-cccdc2960908">
-						<input class="" id="search-keyword-4933f540-0608-4b63-9ad6-cccdc2960908" type="search"
+						<input class="" id="keyword" type="search"
 							placeholder="검색" value="">
 						<div class="ProjectListHead_right__3_Jo1">
 							<button type="submit" class="ProjectListHead_find__3HsFc" aria-label="검색">

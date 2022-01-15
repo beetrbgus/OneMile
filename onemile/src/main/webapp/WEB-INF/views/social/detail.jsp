@@ -3,7 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-
+	
+	<h2>  멤버가 참가한 갯수 해서 참가 불가능하게 만들기. </h2>
+	<h2>  공동구매 수정 </h2> 
+	<h2>  내 위치 기반으로 만들기 </h2> 
+	<h2>  차트 물어보기. </h2> 
+	<h2>  신고 기능 </h2> 
+	<h2>  관리자 페이지. </h2> 
+	
   <p>번호 : ${detail.socialNo}</p>
   <p>제목 : ${detail.title}</p>
   <p>대분류 : ${detail.type}</p>
