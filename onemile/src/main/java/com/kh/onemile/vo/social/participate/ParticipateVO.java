@@ -10,5 +10,5 @@ public class ParticipateVO {
 	private String nick;
 	private String intro;
 
-
+	private String isJoined;
 }
