@@ -68,4 +68,35 @@ public class AdminDaoImpl implements AdminDao{
 		System.err.println(map);
 		return sqlSession.selectList("admin.notMemberList", map);
 	}
+	
+	@Override
+	public int memberCount() {
+		return sqlSession.selectOne("admin.memberCount");
+	}
+	@Override
+	public int manGenderCount() {
+		return sqlSession.selectOne("admin.manGenderCount");
+	}
+	@Override
+	public int womanGenderCount() {
+		return sqlSession.selectOne("admin.womanGenderCount");
+	}
+	
+	@Override
+	public int ageDistribution(int startAge, int endAge) {
+		Map<String, Integer> map = new HashMap<>();
+		map.put("startAge", startAge);
+		map.put("endAge", endAge);
+		return sqlSession.selectOne("admin.ageDistribution", map);
+	}
+	
+	@Override
+	public int loactionDistribution(String locationName) {
+		return sqlSession.selectOne("admin.locationDistribution", locationName);
+	}
+	
+	@Override
+	public int membershipActiveMemberCount() {
+		return sqlSession.selectOne("admin.membershipActiveMemberCount");
+	}
 }

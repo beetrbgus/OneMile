@@ -15,4 +15,10 @@ public interface AdminDao {
 	public List<MemberListVO> approveMemberList(String keyword, String search, int startRow, int endRow);
 	public List<ExitMemberVO> exitMemberList(String keyword, String search, int startRow, int endRow);
 	public List<MemberListVO> notMemberList(String keyword, String search, int startRow, int endRow);
+	public int memberCount();
+	public int manGenderCount();
+	public int womanGenderCount();
+	public int membershipActiveMemberCount();
+	public int ageDistribution(int startAge, int end);
+	public int loactionDistribution(String locationName);
 }
