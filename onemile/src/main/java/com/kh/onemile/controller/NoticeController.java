@@ -35,7 +35,7 @@ public class NoticeController {
 	
 	@GetMapping("/write")
 	public String write() {
-		return "commu/notmap/write";
+		return "notice/write";
 	}
 	
 	@PostMapping("/write")
@@ -94,6 +94,6 @@ public class NoticeController {
 		model.addAttribute("commuDetailVO", commuService.detail(boardNo));
 		model.addAttribute("imageNoList", imageService.listByBoardNo(boardNo)); //boardNo로 imageNo list를 불러오는 거 만들기
 		
-		return "commu/notmap/detail";
+		return "/notice/detail";
 	}
 }

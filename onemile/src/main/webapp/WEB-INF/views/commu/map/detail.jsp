@@ -49,7 +49,7 @@
 				<a class="wz button" href="${root}/onemile/admin/">관리자 홈</a>
 				<a class="wz button" href="${root}/onemile/commu/map/delete?boardNo=${commuDetailVO.commuNo}&middleName=${commuDetailVO.middleName}">삭제하기</a>
 				</c:if>
-				<c:if test="${logNo==commuDetailVO.memberNo}">
+				<c:if test="${logNo==commuDetailVO.memberNo && not admin}">
 				<a class="wz button" href="${root}/onemile/commu/map/delete?boardNo=${commuDetailVO.commuNo}&middleName=${commuDetailVO.middleName}">삭제하기</a>
 				<a class="wz button" href="${root}/onemile/commu/map/edit?boardNo=${commuDetailVO.commuNo}">수정하기</a>
 				</c:if>

@@ -50,7 +50,7 @@ $(function(){
 	<input type="text" name="title" required>
 	<br>
 	관심 카테고리 :
-	<select class="big" required > 
+	<select class="big" required name="type"> 
 		<option value="">카테고리선택</option>
 		<c:forEach var="category" items="${bigCategory}">
 			<c:if test="${category.bigType !='전체'}">
