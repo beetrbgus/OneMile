@@ -21,11 +21,11 @@
 		select * from social s 
 		    inner join map m on s.map_no = m.map_no
 		    inner join 
-            (select member_no , min(image_no) as profileImgNo
+            (select member_no , min(image_no) as hostImgNo
 						from mei group by member_no) mei on	
             mei.member_no = s.member_no
 		    inner join smc on s.smalltype = smc.SMALLTYPE  
-		where S.SOCIAL_NO = #{socialNo} and s.hiddenyn= 'N'
+		where S.SOCIAL_NO = #{social_no} and s.hiddenyn= 'N'
 	</select>
 	<!-- 참가자 목록 가져오기 -->
 	<select id="getparticipate" parameterType="int" resultType="ParticipateVO">
@@ -37,6 +37,7 @@
             		mei.member_no = sp.member_no
 		where SOCIAL_NO = #{SOCIAL_NO}
 	</select>
+
 	<!-- 글의 이미지 목록 가져오기. -->
 	<select id="getDetailimage" parameterType="int" resultType="ImageDTO">
 		select * from SMI inner join image 
@@ -52,7 +53,7 @@
 		<result column="STARTDATE" property="startDate" />
 		<result column="ENDDATE" property="endDate" />
 		<result column="CONTEXT" property="context" />
-		<result column="profileImgNo" property="hostImgNo" />
+		<result column="hostImgNo" property="hostImgNo" />
 		<result column="MINPEOPLE" property="minpeople" />
 		<result column="MAXPEOPLE" property="maxpeople" />
 		<result column="MEMBER_NO" property="memberNo" />
@@ -125,6 +126,16 @@
 				order by s.social_no desc
 			)TMP
 		) where rn between #{startRow} and #{endRow}
+	</select>
+	
+	<select id="getMemberByList" parameterType="int" resultType="SocialListVO">
+			                select s.title,
+                				TO_CHAR(s.startdate, 'MM/DD HH24:mm') as startDate, 
+                				TO_CHAR(s.enddate, 'MM/DD HH24:mm') as endDate ,smi.image_no
+                  			 from social s 
+                           		inner join sp p on s.social_no = p.social_no
+                           		inner join smi on smi.social_no = s.social_no
+                                 where s.hiddenyn ='N' and p.member_no = #{memberNo}
 	</select>
 	
 	<select id="getCount" parameterType="int" resultType="SocialDTO">

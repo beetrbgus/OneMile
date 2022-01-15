@@ -6,4 +6,8 @@ public interface ProductBuyDao {
 
 	void insert(ProductBuyDTO productBuyDTO);
 
+	ProductBuyDTO get(int pbNo, int productNo);
+
+	void cancel(int pbNo, int productNo);
+
 }

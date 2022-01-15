@@ -16,6 +16,7 @@ public interface SocialService {
 	public List<SocialListVO> getList(PaginationVO paginationVO);
 	public SocialDetailVO getDetail(int socialNo);
 	public List<SocialDTO> getCount(int memberNo);
+	public List<SocialListVO> getMemberByList(int memberNo);
 	public void socialJoin(ParticipateVO participateVO);
 	public void exitSocial(ParticipateVO participateVO);
 	public void modify(SocialRegVO socialRegVO) throws IllegalStateException, IOException;

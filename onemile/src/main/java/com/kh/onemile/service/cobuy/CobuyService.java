@@ -22,4 +22,6 @@ public interface CobuyService {
 	public ConfirmVO getConfirm(ConfirmVO confirmVO);
 	public List<CobuyListVO> getList(PaginationVO paginationVO);
 	public List<ProductBuyDTO> getbuyList(int memberNo);
+	
+	
 }

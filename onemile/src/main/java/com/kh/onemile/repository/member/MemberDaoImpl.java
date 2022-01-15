@@ -95,8 +95,20 @@ public class MemberDaoImpl implements MemberDao{
 	}
 
 	//회원정보 불러오기(사진 포함)
+	@Override
 	public MemberVO imageProfile(int memberNo) {
-		return sqlSession.selectOne("member.imageProfile",memberNo);
+		return sqlSession.selectOne("member.getMember",memberNo);
+	}
+	
+	//닉네임 변경
+	@Override
+	public int getNickModi(int memberNo) {
+		return sqlSession.selectOne("member.getNickModi",memberNo);
+	}
+	
+	@Override
+	public boolean emailChangePw(Map<String, Object> param) {
+		return sqlSession.update("member.emailChangePw", param) > 0;
 	}
 	
 }

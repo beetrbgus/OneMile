@@ -8,5 +8,7 @@ public class ParticipateVO {
 	private int profileImgNo;
 	private int socialNo;
 	private String nick;
-	
+	private String intro;
+
+
 }

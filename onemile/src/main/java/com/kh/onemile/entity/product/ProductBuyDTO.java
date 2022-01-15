@@ -16,4 +16,9 @@ public class ProductBuyDTO {
 	private int totalAmount;
 	private Date buyTime;
 	private String status;
+	private int quantity;
+	
+	public boolean isCancelAvailable() {
+		return status != null && status.equals("결제취소");
+	}
 }

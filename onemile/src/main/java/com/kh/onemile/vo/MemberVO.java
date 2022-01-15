@@ -26,11 +26,12 @@ public class MemberVO {
 	private String intro;
 	@DateTimeFormat(pattern="YYYY-MM-DD HH24:mm:ss")
 	private Date nickModi;
-	private String exitYN;
+	private String hiddenYN;
 	@DateTimeFormat(pattern="YYYY-MM-DD HH24:mm:ss")
 	private Date exitDate;
 	
 	private int imageNo;
 	private List<ImageDTO> imageList; //가져올 때 이미지 번호들
+	
 	
 }

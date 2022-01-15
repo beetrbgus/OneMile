@@ -140,6 +140,11 @@ public class SocialServiceImpl implements SocialService{
 	}
 
 	@Override
+	public List<SocialListVO> getMemberByList(int memberNo) {
+		return socialDao.getMemberByList(memberNo);
+	}
+	
+	@Override
 	public void socialJoin(ParticipateVO participateVO) {		
 		//소셜번호로 참여자의 숫자와 최대인원을 비교해서 맞으면 참가.
 		boolean  result = participantDao.getPartiCnt(participateVO.getSocialNo());
@@ -152,8 +157,8 @@ public class SocialServiceImpl implements SocialService{
 	@Override
 	public void exitSocial(ParticipateVO participateVO) {
 		participantService.reject(participateVO);
-	}
 
+	}
 	@Override
 	public List<SocialIndexVO> indexList() {
 		return socialDao.getIndexList();

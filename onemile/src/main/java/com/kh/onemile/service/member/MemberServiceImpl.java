@@ -184,8 +184,6 @@ public class MemberServiceImpl implements MemberService {
 	//회원정보 불러오기(사진 포함)
 	public MemberVO imageProfile(int memberNo) {
 	    MemberVO memberVO = memberDao.imageProfile(memberNo);
-	    memberVO.setBirthstr(dateToString.dateToString(memberVO.getBirth()));
-	    
 	    return memberVO;
 	}
 	
@@ -198,4 +196,20 @@ public class MemberServiceImpl implements MemberService {
 		}
 		return false;
 	}
-}
+	
+	//닉네임 변경
+	@Override
+	public int getNickModi(int memberNo) {
+		return memberDao.getNickModi(memberNo);
+	}
+
+	@Override
+	public boolean emailChangePw(String email, String changePw) {
+		
+		String encrypt = encoder.encode(changePw);
+		Map<String, Object> param = new HashMap<>();
+		param.put("changePw", encrypt);
+		param.put("email", email);
+		return memberDao.emailChangePw(param);
+		}
+	}
