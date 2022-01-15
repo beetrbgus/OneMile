@@ -116,12 +116,22 @@ public class SocialController {
 	@GetMapping({"/list/{bigcate}","/list","/",""})
 	public String getList(@PathVariable(required = false) String bigcate,
 			@RequestParam(required = false,defaultValue = "") String sc,
+			@RequestParam(required = false,defaultValue = "") String order,
+			@RequestParam(required = false,defaultValue = "") String endyn,
 			@RequestParam(required =false, defaultValue = "1") int page,
 			@RequestParam(required =false, defaultValue = "10") int size
 			,Model model) {
 		PaginationVO paginationVO =new PaginationVO(page,size);
 		bigcate =(bigcate==null||bigcate.equals("/"))?"":bigcate;
-		
+		//종료된 것 목록 -endyn 
+		if(endyn.equals("Y")) {
+			paginationVO.setEndyn("Y");
+		}
+		//진행중인 것 목록 -endyn
+		else if(endyn.equals("N")) {
+			paginationVO.setEndyn("N");
+		}
+		//소분류 카테고리 목록
 		if(sc.equals("") || sc.equals("/")) {
 			paginationVO.setCategoryType("sbc.bigValue");
 			paginationVO.setCategory(bigcate);
