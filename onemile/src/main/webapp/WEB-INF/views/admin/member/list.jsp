@@ -59,7 +59,13 @@ $(function () {
 		loadData(page, size);
 		page++;
 	});
-	
+	$(".hiddenmember").click(function(){ 
+		let memberno = 	$(this).data("memberno");
+		$("#memberno").val(memberNo);
+		console.log("memberno  "+memberno );
+		/*$("#hiddenForm").submit();*/
+		 
+	});
 	$("#moreBtn").click();
 	function loadData(page, size) {
 
@@ -88,7 +94,9 @@ $(function () {
 					template = template.replace("{{joinDate}}", resp[i].joinDate);
 					template = template.replace("{{intro}}", resp[i].intro);
 					template = template.replace("{{nickModi}}", resp[i].nickModi);
+					template = template.replace("{{memberno}}", resp[i].memberNo);
 					tbody.append(template);
+					
 				}
 			},
 			error: function (e) {
@@ -106,7 +114,8 @@ $(function () {
 	<div class="ui-tabs">
 		<ul>
 			<li><a href="${root}/onemile/admin/member/list">회원목록</a></li>
-			<li><a href="${root}/onemile/admin/member/hidden">탈퇴회원목록</a></li>
+			<li><a href="${root}/onemile/admin/member/quit">탈퇴회원목록</a></li>
+			<li><a href="${root}/onemile/admin/member/hide">숨김회원목록</a></li>
 		</ul>
 	</div>
 <div class="search-box">
@@ -132,12 +141,14 @@ $(function () {
 			<th>가입일</th>
 			<th>자기소개</th>
 			<th>닉네임변경일</th>
-			<th>정보변경</th>
+			<th>숨김</th>
 		</tr>
 		</thead>
 		<tbody id="tbody">
-		
+			
+			
 		</tbody>
+		
 	</table>
 <div class="ProjectListMoreButton_container__1JFxX ProjectCardList_more__3AbzT"><button type="button"
 						id="moreBtn" class="ProjectListMoreButton_button__27eTb">더보기<i class="icon expand-more"
@@ -146,6 +157,9 @@ $(function () {
 				</div>
 </div>
 </div>
+<form id="hiddenForm" action="hidden" method="post">
+   <input id="memberNo" type="hidden" value="">
+</form>
 <template id="memberTemplate">
 	<tr>
 		<td>{{email}}</td>
@@ -157,7 +171,7 @@ $(function () {
 		<td>{{joinDate}}</td>
 		<td>{{intro}}</td>
 		<td>{{nickModi}}</td>
-		<td><a class="a" href="#">수정</a></td>
+		<td class ="hiddenmember" onclick="location.href='${pageContext.request.contextPath}/admin/member/hidden?memberNo={{memberno}}'">숨김</td>
 	</tr>
 </template>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

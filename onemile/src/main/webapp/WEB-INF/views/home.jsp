@@ -31,7 +31,7 @@
 </style>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <div>
-	<img src="${root}/resources/image/main-logo.png">
+	<img class="main-image" src="${root}/resources/image/main-logo.png">
     <div>
         <div class="RecommendationDesktop_container__3RLMb">
             <div class="Main_wrap__2jKMu">

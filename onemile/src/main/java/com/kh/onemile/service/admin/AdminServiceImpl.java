@@ -1,6 +1,5 @@
 package com.kh.onemile.service.admin;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,10 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.onemile.entity.admin.ApproveDTO;
 import com.kh.onemile.repository.admin.AdminDao;
+import com.kh.onemile.repository.member.MemberDao;
 import com.kh.onemile.service.commu.CommuService;
 import com.kh.onemile.util.Sequence;
 import com.kh.onemile.vo.CommuDetailVO;
-import com.kh.onemile.vo.CommuEditVO;
 import com.kh.onemile.vo.admin.ExitMemberVO;
 import com.kh.onemile.vo.admin.MemberCountChartVO;
 import com.kh.onemile.vo.admin.MemberListVO;
@@ -30,6 +29,8 @@ public class AdminServiceImpl implements AdminService{
 	private CommuService commuService;
 	@Autowired
 	private Sequence sequnce;
+	@Autowired
+	private MemberDao memberDao;
 	
 	//가입시 회원 승인 정보 등록.
 	public void regApproveMember(int memberNo) {
@@ -79,10 +80,6 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public void hiddenBoard(int no) {
 		commuService.hide(no);
-	}
-	@Override
-	public void modifyBoard(CommuEditVO commuEditVO) throws IllegalStateException, IOException {
-		commuService.edit(commuEditVO);
 	}
 	@Override
 	public List<CommuDetailVO> boardList(String largeName, int startRow, int endRow, String keyword, String search) {
@@ -235,5 +232,13 @@ public class AdminServiceImpl implements AdminService{
 		count.add(membershipCount);
 		
 		return count;
+	}
+	@Override
+	public void hiddenMember(int memberNo) {
+		memberDao.memberHidden(memberNo);
+	}
+	@Override
+	public List<ExitMemberVO> hideMemberList(String keyword, String search, int startRow, int endRow) {
+		return adminDao.hideMemberList(keyword, search, startRow, endRow);
 	}
 }
