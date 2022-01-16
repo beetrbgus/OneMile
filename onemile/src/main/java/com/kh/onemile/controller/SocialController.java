@@ -216,4 +216,9 @@ public class SocialController {
 		log.debug("result       : "+participateVO.toString());
 		return "redirect:list";
 	}
+	@GetMapping("/delete/{socialNo}")
+	public String delete(@PathVariable int socialNo) {
+		socialService.delete(socialNo);
+		return "redirect:list";
+	}
 }

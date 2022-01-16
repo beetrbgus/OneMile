@@ -3,10 +3,9 @@ package com.kh.onemile.vo.report;
 import lombok.Data;
 
 @Data
-public class ReportVO {
+public class ReportRegVO {
 	private int rlNo;
-	private int memberNo;
+	private int reporterNo;
 	private String reportType;
 	private String reportReason;
-	private int reportNo; //신고한 것 번호.
 }

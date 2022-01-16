@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.onemile.service.report.ReportService;
-import com.kh.onemile.vo.report.ReportVO;
+import com.kh.onemile.vo.report.ReportRegVO;
 
 @RequestMapping("/report")
 @Controller
@@ -16,7 +16,7 @@ public class ReportController {
 	
 	//신고하면 블랙리스트 테이블에 경고차수 +1 
 	@PostMapping("/commu")
-	public void commuReport(ReportVO reportVO) {
+	public void commuReport(ReportRegVO reportVO) {
 		reportService.reg(reportVO);
 	}
 	@PostMapping("/cobuy")
@@ -28,7 +28,8 @@ public class ReportController {
 		reportService.adminDelete(rlNo);
 	}
 	@PostMapping("/reg")
-	public void regReport(int rlNo) {
-		reportService.adminDelete(rlNo);
+	public void regReport(ReportRegVO reportVO) {
+		reportService.reg(reportVO);
 	}
 }
+

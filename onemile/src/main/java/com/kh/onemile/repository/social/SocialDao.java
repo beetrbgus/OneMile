@@ -10,11 +10,12 @@ import com.kh.onemile.vo.social.SocialListVO;
 import com.kh.onemile.vo.social.SocialRegVO;
 
 public interface SocialDao {
-	void reg(SocialDTO socialDto);
-	List<SocialListVO> getList(PaginationVO paginationVO);
-	SocialDetailVO getDetail(int socialNo);
-	List<SocialDTO> getCount(int memberNo);
-	List<SocialListVO> getMemberByList(int memberNo);
-	void modify(SocialRegVO socialRegVO);
-	List<SocialIndexVO> getIndexList();
+	public void reg(SocialDTO socialDto);
+	public List<SocialListVO> getList(PaginationVO paginationVO);
+	public SocialDetailVO getDetail(int socialNo);
+	public List<SocialDTO> getCount(int memberNo);
+	public List<SocialListVO> getMemberByList(int memberNo);
+	public void modify(SocialRegVO socialRegVO);
+	public List<SocialIndexVO> getIndexList();
+	public void delete(int socialNo);
 }

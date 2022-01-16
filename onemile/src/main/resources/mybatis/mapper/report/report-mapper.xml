@@ -5,7 +5,7 @@
 <mapper namespace="rl">
 	<insert id="reg" parameterType="ReportRegVO">
 		insert into rl(RL_NO,REPORTER,REPOTREASON,RLDATE,HIDDENYN) values(
-			rl_seq.nextval , #{reporter},#{repotReason},#{rlDate},'Y'
+			rl_seq.nextval , #{reporterNo},#{repotReason},#{rlDate},'Y'
 		)
 	</insert>
 	
