@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="rl">
+	<insert id="reg" parameterType="ReportVO">
+		insert into rl(RL_NO,MEMBER_NO,REPORTTYPE,REPOTREASON,REPORTNO) values(
+			rl_seq.nextval , #{memberNo},#{reportType},#{reportReason},#{reportNo}
+		)
+	</insert>
+	<update id="delete" parameterType="int">
+		update rl set HIDDENYN='Y' where rl_no = #{rlNo}
+	</update>
+	<delete id="adminDelete" parameterType="int">
+		delete from rl where rl_no = #{rlNo}
+	</delete>
+	
+	<select id="getRlList" parameterType="ReportVO">
+		
+	</select>
+</mapper>
