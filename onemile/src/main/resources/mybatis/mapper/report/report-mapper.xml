@@ -4,8 +4,8 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="rl">
 	<insert id="reg" parameterType="ReportRegVO">
-		insert into rl(RL_NO,REPORTER,REPOTREASON,RLDATE,HIDDENYN) values(
-			rl_seq.nextval , #{reporterNo},#{repotReason},#{rlDate},'Y'
+		insert into rl(RL_NO, REPORTER, REPOTREASON, RLDATE, HIDDENYN) values(
+			#{rlNo} , #{reporterNo},#{repotReason},#{rlDate},'Y'
 		)
 	</insert>
 	
