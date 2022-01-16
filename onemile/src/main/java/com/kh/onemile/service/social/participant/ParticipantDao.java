@@ -14,4 +14,6 @@ public interface ParticipantDao {
 
 	public String getParti(int memberNo,int socialNo);
 
+	public void regHost(ParticipateVO participateVO);
+
 }

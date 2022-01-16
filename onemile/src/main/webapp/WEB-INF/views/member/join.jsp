@@ -348,12 +348,13 @@ $(function(){
   			console.log("성공", resp);
   			
   			var middle = $(".middle");
+  			
   			middle.find("option").remove();
   			for (var dto of resp) {
   				
 				var middleOption = $("<option>");
-				middleOption.val(dto);
-				middleOption.text(dto);
+				middleOption.val(dto.smallType);
+				middleOption.text(dto.smallType);
 				middle.append(middleOption);
 			}
   		  },

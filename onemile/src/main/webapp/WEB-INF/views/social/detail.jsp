@@ -149,7 +149,7 @@
                 <div class="detail_info__host__name">${detail.nick}</div>
             </div>
             <div class="detail_info__header">
-                <div class="detail_info__title">여자들의 로망 폴댄스 체험❤️</div>
+                <div class="detail_info__title">${detail.title}</div>
             </div>
             <div class="detail_info__location"><span>${detail.startDate} ~ ${detail.endDate}</span></div>
         </div>
@@ -161,7 +161,7 @@
                     style="background-image">
                 	<img class=" image image-round image-border" style="width:300px;height:50px;" src="${pageContext.request.contextPath}/image/download?imageNo=${detail.hostImgNo}&folder=member">
                 
-                </div> <span class="user">모임장 닉네임${detail.nick}${detail.isJoined}</span>
+                </div> <span class="user">모임장 닉네임${detail.nick}</span>
                 <div class="socialing_name">${detail.title}</div>
                 <div> </div>
             </div>
@@ -189,7 +189,7 @@
 							<c:when test="${joined eq '수락대기중'}">
 								<div id="purchase"   data-joined="exit" class="pointer purchase_button"> 취소하기</div>
 							</c:when>
-							<c:when test="${joined eq '참여중'}">
+							<c:when test="${detail.memberNo!=logNo and joined eq '참여중'}">
 								<div id="purchase"    data-joined="exit" class="pointer purchase_button"> 탈퇴하기 </div>
 							</c:when>
 							<c:otherwise>
@@ -267,7 +267,7 @@
 		$(function(){
 			let isFull = ${isFull};
 			if(!isFull){ 
-				$(".purchase_button").on("click",function(){
+				$("#purchase").on("click",function(){
 					let status = $(this).data("joined");
 					console.log("클릭됨!   "+status);
 					let socialForm = $("#socialform");
@@ -276,7 +276,7 @@
 					if(status=='exit'){
 						action = "../socialexit"; 
 					}else{
-						action = "../socialjoin";
+						action = "../socialjoin"; 
 					}
 					console.log("status     "+status);
 					console.log("action     "+action);

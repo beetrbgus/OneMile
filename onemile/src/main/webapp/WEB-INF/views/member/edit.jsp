@@ -113,6 +113,25 @@
 		return nickCheck() && birthCheck() && phoneCheck();
 		
 	}
+	/* 이미지 비동기 삭제*/
+	$(function(){
+		$(".deleteImg").on("click",function(){
+			let imgdiv = $(this).parent()
+			let imageNo = imgdiv.find("input").val();
+			console.log("imageNo    " + imageNo);
+			$.ajax({
+				  url : "${pageContext.request.contextPath}/image/delete?imageNo="+imageNo+"&folder=social",
+		  		  type : "delete",
+		  		  dataType : "text",
+		  		  success : function() {
+		  			console.log("성공");
+		  			imgdiv.remove();
+		  		  },
+		  		  error : function(e) {
+					  console.log("실패", e);
+		  		  }
+	  		});
+		});
 </script>
 
 <form method="post">
@@ -121,6 +140,7 @@
 			<h2 class="wz text display2 page-title" style="margin-top: 50px">회원정보
 				수정</h2>
 			<div class="field name-field" style="margin-top: 30px">
+			
 				<label class="label">이메일</label>
 				<div class="wz input">
 					<input id="nickName" class="input text block large" type="email"
@@ -165,7 +185,7 @@
 			<div class="field password-field group">
 				<div class="wz input">
 					<label>MBTI</label> <br> <select name="mbti">
-						<option value="없음">없음</option>
+						<option value="선택안함">선택안함</option>
 						<option value="ISTJ">ISTJ</option>
 						<option value="ISFJ">ISFJ</option>
 						<option value="INFJ">INFJ</option>
@@ -200,9 +220,10 @@
 			</c:if>
 			<input type="submit" id="btnJoin"
 				class="wz button primary block" onclick="formCheck();" value="수정하기" onClick="alert('정보가 성공적으로 변경되었습니다.')">
+				<a href="${root}/member/quit">탈퇴하기</a>
 		</div>
 	</div>
-			<a href="${root}/member/quit">탈퇴하기</a>
+			
 </form>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

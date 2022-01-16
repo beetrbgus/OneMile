@@ -25,7 +25,10 @@ public class ParticipantDaoImpl implements ParticipantDao {
 	public void reg(ParticipateVO participateVO) {
 		sqlSession.insert("participant.reg",participateVO);
 	}
-
+	@Override
+	public void regHost(ParticipateVO participateVO) {
+		sqlSession.insert("participant.regHost",participateVO);
+	}
 	@Override
 	public void approve(ParticipateVO participateVO) {
 		sqlSession.update("participant.approve", participateVO);
@@ -43,5 +46,7 @@ public class ParticipantDaoImpl implements ParticipantDao {
 		map.put("socialNo", socialNo);
 		return sqlSession.selectOne("participant.getParti",map);
 	}
+
+
 	
 }

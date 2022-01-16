@@ -70,7 +70,7 @@ public class SocialController {
 			return "social/reg2";
 		}
 		else {
-			return "redirect:social/list";	
+			return "redirect:list";	
 		}
 		
 	}
@@ -128,11 +128,11 @@ public class SocialController {
 			,Model model,HttpSession session) {
 		PaginationVO paginationVO =new PaginationVO(page,size);
 		bigcate =(bigcate==null||bigcate.equals("/"))?"":bigcate;
-		
-		log.debug("endyn       : "+endyn);
+
 		//저장된 인증이 있을 때. 검색에서는 현재 위치 무효화 시키려고 함.
 		if((keyword == null||keyword.equals(""))&&session.getAttribute("goo")!=null) {
 			String goo = (String)session.getAttribute("goo");
+			log.debug("googoogoo    "+goo);
 			paginationVO.setGoo(goo);	
 		}else {
 			paginationVO.setKeyword(keyword);
@@ -270,6 +270,11 @@ public class SocialController {
 
 		socialService.exitSocial(participateVO);
 		log.debug("result       : "+participateVO.toString());
+		return "redirect:list";
+	}
+	@GetMapping("/delete/{socialNo}")
+	public String delete(@PathVariable int socialNo) {
+		socialService.delete(socialNo);
 		return "redirect:list";
 	}
 }

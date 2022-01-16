@@ -1,4 +1,24 @@
 	$(function(){
+		let startArr = new Array(2);
+		let endArr = new Array(2);
+		
+		$("#startDay").on("input",function(){
+			startArr[0] = $(this).val();
+			console.log(startArr[0]);
+		});
+		$("#startTime").on("input",function(){
+			startArr[1] = $(this).val();
+			console.log(startArr[1]);
+		});
+		$("#endDay").on("input",function(){
+			endArr[0] = $(this).val();
+			console.log(endArr[0]);
+		});
+		$("#endTime").on("input",function(){
+			endArr[1] = $(this).val();
+			console.log(endArr[1]);
+			
+		});
 		//입력 값 Vaidate
 		// 이미지
 		function imgValid(){
@@ -87,8 +107,8 @@
 			let startDate = inputDate($("#startDay").val(),$("#startTime").val());
 			let endDate = inputDate($("#endDay").val(),$("#endTime").val());
 			console.log("지도      상세주소   "+$("#location").val());
-			$("input[name=endDate]").val(endDate);
-			$("input[name=startDate]").val(endDate);
+			$("input[name=endDate]").val(endArr[0]+" "+endArr[1]+":00");
+			$("input[name=startDate]").val(startArr[0]+" "+startArr[1]+":00");
 			
 			console.log("startDate      :"+ $("input[name=startDate]").val());
 			console.log("EndDate      :"+ $("input[name=endDate]").val());
@@ -98,8 +118,6 @@
 			if(contextValid()&&imgValid() && titleValid() && cateValid()  &&
 				contextValid() && mapValid() &&startEndValid()){
 				$("#regForm").submit();
-			}else{
-				alert("입력할 값을 확인해주세요."); 
 			}
 		});
 

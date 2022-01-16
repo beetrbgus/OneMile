@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="srl">
+	<insert id="reg" parameterType="MiddleRLVO">
+		insert into socialRL(srl, social_no, rl_no) values(
+			srl_seq.nextval , #{socialNo}, #{rlNo}
+		)
+	</insert>
+	<update id="delete" parameterType="int">
+		update srl set HIDDENYN='Y' where rl_no = #{rlNo}
+	</update>
+	<delete id="adminDelete" parameterType="int">
+		delete from srl where rl_no = #{rlNo}
+	</delete>
+	
+</mapper>

@@ -26,5 +26,5 @@ public class MemberDTO {
 	private String exitYN;
 	@DateTimeFormat(pattern="YYYY-MM-DD HH:mm:ss")
 	private Date exitDate;
-	
+
 }

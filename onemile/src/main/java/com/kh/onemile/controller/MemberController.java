@@ -160,16 +160,6 @@ public class MemberController {
 		return "member/find_pw";
 	}
 
-	/*
-	 * @PostMapping("/emailCheck") public String cert(@ModelAttribute CertiDTO
-	 * certiDTO, @RequestParam String email, Model model) { boolean result =
-	 * memberService.getEmail(certiDTO.getEmail()); log.debug("리절트" + result);
-	 * 
-	 * if (result) { emailService.sendCertificationNumber(email);
-	 * model.addAttribute("email", email); return "member/emailCheck"; } else {
-	 * return "redirect:find_pw?error"; } }
-	 */
-
 	// 비밀번호찾기(이메일 인증번호 체크)
 	@PostMapping("/find_pw")
 	public String emailCheck(@ModelAttribute CertiDTO certiDTO, HttpSession session, Model mode) {

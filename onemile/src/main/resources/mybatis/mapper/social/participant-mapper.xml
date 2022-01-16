@@ -8,6 +8,11 @@
 		insert into SP(SOCIAL_NO,MEMBER_NO)  
 			values(#{socialNo},#{memberNo})
 	</insert>
+	<!-- 만든 사람은 등록 -->
+	<insert id="regHost" parameterType="ParticipateVO">
+		insert into SP(SOCIAL_NO,MEMBER_NO,ISJOINED,JOINDATE)  
+			values(#{socialNo},#{memberNo},'참여중',sysdate)
+	</insert>
 	<!-- 참여자 수가 남는지 구하기 -->
 	<select id="getpartiCnt" parameterType="int" resultType="int">
 		select * from social s where s.MAXPEOPLE >= 

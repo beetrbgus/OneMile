@@ -65,14 +65,16 @@ public class CobuyController {
 			,Model model,HttpSession session) {
 		log.warn("page=========="+page);
 		log.warn("size============"+size);
+		
 		PaginationVO paginationVO =new PaginationVO(page,size);
-		//검색어가 있으면 지역 무시
-		if(!keyword.equals("") &&session.getAttribute("goo")!=null) {
+		
+		if((keyword == null||keyword.equals(""))&&session.getAttribute("goo")!=null) {
 			String goo = (String)session.getAttribute("goo");
+			log.debug("googoogoo    "+goo);
 			paginationVO.setGoo(goo);	
 		}else {
 			paginationVO.setKeyword(keyword);
-		} 
+		}
 		if(category==null||category.equals("/")) {
 			category="";
 			paginationVO.setCategory(category);
