@@ -31,18 +31,44 @@ $(function(){
 	});
 });
 
-//회원승인 거절
+//회원승인
 $(function(){
-	$(".socialexit").on("click",function(){
-		var memNo = $(this).val();
-		var socialNo = '${detail.socialNo}''
+	$(".socialaprrove").on("click",function(){
+		var partiMemberNo = $(this).data("memberno");
+		var socialNo = '${detail.socialNo}'
 		$.ajax({ 
-			url : '${pageContext.request.contextPath}/social/socialexit',
+			url : '${pageContext.request.contextPath}/social/appove',
 			type : "post",
 			async : false,
 			data : { 
-				memNo : memNo
-				socialNo : socialNo
+				"partiMemberNo" : partiMemberNo,
+				
+				"socialNo" : socialNo
+			},
+			success : function(resp) {
+				console.log("성공", resp);
+					
+			
+		  	},
+	 		error : function(e) {
+			  console.log("실패", e);
+ 		  	}
+ 		});
+	});
+
+
+//회원거절
+	$(".ban").on("click",function(){
+		var partiMemberNo = $(this).data("memberno");
+		var socialNo = '${detail.socialNo}'
+		$.ajax({ 
+			url : '${pageContext.request.contextPath}/social/denied',
+			type : "post",
+			async : false,
+			data : { 
+				"partiMemberNo" : partiMemberNo,
+				
+				"socialNo" : socialNo
 			},
 			success : function(resp) {
 				console.log("성공", resp);
@@ -272,25 +298,26 @@ $(function(){
                         </div>
                     </div>
                     <div class="col user_info_col">
-                        <c:choose>
-							<c:when test="${detail.memberNo!=logNo}">
-                        <div class="user">
+                      <div class="user">
+                        
                         <c:forEach items="${detail.participate}" var="parti">
 							  	<br>
 							  	${parti.nick} 
-							  	<a href="">수락하기</a>
-						</c:forEach>		
-                        </div>
-                        </c:when>
-                        <c:otherwise>
-                        	 <c:forEach items="${detail.participate}" var="parti">
-							  	<br>
-							  	<c:if test="${joined eq '수락대기중'}"></c:if>
-							  	<a href="">수락하기</a>
-							  	<a href="socialexit">거절하기</a>
-						</c:forEach>
-                        </c:otherwise>
-                        </c:choose>
+                      			<c:choose>
+                     				<c:when test="${detail.memberNo==logNo}">
+                     					<c:choose>
+							  				<c:when test= "${parti.isJoined eq '수락대기중'}">
+							  					<button type="button" class="socialaprrove" data-memberno="${parti.memberNo}">수락하기</button>
+							  					<button type="button" class="ban" data-memberno="${parti.memberNo}">거절하기</button>
+							  				</c:when>
+							  				<c:otherwise>
+							  					<button type="button" class="ban" data-memberno="${parti.memberNo}">강퇴하기</button>
+							  				</c:otherwise>
+							  			</c:choose>
+                     				</c:when>
+                     			</c:choose>
+                      </c:forEach>
+                         </div>
                         <div class="user_grade"></div>
                     </div>
                 </div>
