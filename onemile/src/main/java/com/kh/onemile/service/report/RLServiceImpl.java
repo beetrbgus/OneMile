@@ -43,9 +43,8 @@ public class RLServiceImpl implements RLService {
 
 		// 중간 테이블에 저장.
 		MiddleRLVO middleRLVO = new MiddleRLVO();
-		middleRLVO.setConnTableNo(reportVO.getConnTableNo());
 		middleRLVO.setRlNo(rlNo);
-		middleRLVO.setType(reportVO.getType());
+		middleRLVO.setType(type);
 		middleRLService.delete(rlNo,type);
 	}
 
