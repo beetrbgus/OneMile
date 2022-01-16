@@ -301,16 +301,20 @@ public class SocialController {
 		
 		participantService.approve(socialNo,partiMemberNo);
 	}
+	
 	@ResponseBody
 	@PostMapping("/denied")
-	public void denied(@RequestParam int socialNo, Model model,HttpSession session) {
+	public void denied(@RequestParam int socialNo,int partiMemberNo) {
 		
-		int memberNo = (int)session.getAttribute("logNo");
+		
 		ParticipateVO participateVO = new ParticipateVO();
-		participateVO.setMemberNo(memberNo);
+		participateVO.setMemberNo(partiMemberNo);
+
 		participateVO.setSocialNo(socialNo);
 
 		socialService.exitSocial(participateVO);
 		log.debug("result       : "+participateVO.toString());
 	}
+
 }
+
