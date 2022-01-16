@@ -10,7 +10,7 @@ import com.kh.onemile.vo.report.middle.MiddleRLVO;
 
 @Qualifier("member")
 @Repository
-public class MemberRLDaoImpl implements ReportDao{
+public class MemberRLDaoImpl implements MiddleRLDao{
 	
 	@Autowired
 	private SqlSession sqlSession;

@@ -189,8 +189,15 @@
                     inner join 
                     (select social_no , min(image_no) image_no
 						from smi group by social_no) smi on	
-						s.social_no = smi.social_no 
-					where s.hiddenyn ='N'
+						s.social_no = smi.social_no where s.hiddenyn ='N'
+			<choose>
+				<when test='endyn != null and endyn.equals("Y")'>
+					and  <![CDATA[ s.STARTDATE < sysdate]]> 
+				</when>
+				<when test='endyn != null and endyn.equals("N")'>
+					and  <![CDATA[ s.STARTDATE > sysdate]]> 
+				</when>
+			</choose>
 				ORDER BY DBMS_RANDOM.RANDOM
 			)TMP
 		) where rn between 1 and 3
