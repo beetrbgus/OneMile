@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.kh.onemile.vo.report.ReportRegVO;
+import com.kh.onemile.vo.report.middle.MiddleRLVO;
 
 @Qualifier("member")
 @Repository
@@ -15,8 +16,8 @@ public class MemberRLDaoImpl implements ReportDao{
 	private SqlSession sqlSession;
 	
 	@Override
-	public void reg(ReportRegVO reportVO) {
-		sqlSession.insert("rl.reg", reportVO);
+	public void reg(MiddleRLVO middleRLVO) {
+		sqlSession.insert("rl.reg", middleRLVO);
 	}  
 
 	@Override

@@ -186,12 +186,12 @@
                     (select social_no , min(image_no) image_no
 						from smi group by social_no) smi on	
 						s.social_no = smi.social_no where s.hiddenyn ='N'
-						<choose>
+			<choose>
 				<when test="endyn != null and endyn.equals('Y')">
-					and  <![CDATA[ s.ENDDate < sysdate]]> 
+					and  <![CDATA[ s.STARTDATE < sysdate]]> 
 				</when>
 				<when test="endyn != null and endyn.equals('N')">
-					and  <![CDATA[ s.ENDDate > sysdate]]> 
+					and  <![CDATA[ s.STARTDATE > sysdate]]> 
 				</when>
 			</choose>
 				ORDER BY DBMS_RANDOM.RANDOM
