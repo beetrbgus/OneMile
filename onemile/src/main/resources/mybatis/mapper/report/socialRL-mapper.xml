@@ -8,6 +8,11 @@
 			srl_seq.nextval , #{socialNo}, #{rlNo}
 		)
 	</insert>
-	
+	<update id="delete" parameterType="int">
+		update srl set HIDDENYN='Y' where rl_no = #{rlNo}
+	</update>
+	<delete id="adminDelete" parameterType="int">
+		delete from srl where rl_no = #{rlNo}
+	</delete>
 	
 </mapper>

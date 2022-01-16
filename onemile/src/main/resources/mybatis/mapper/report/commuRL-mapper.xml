@@ -8,6 +8,11 @@
 			crl_seq.nextval , #{commuNo}, #{rlNo}
 		)
 	</insert>
-	
+	<update id="delete" parameterType="int">
+		update crl set HIDDENYN='Y' where rl_no = #{rlNo}
+	</update>
+	<delete id="adminDelete" parameterType="int">
+		delete from crl where rl_no = #{rlNo}
+	</delete>
 	
 </mapper>
