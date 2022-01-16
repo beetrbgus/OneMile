@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.onemile.entity.member.MemberDTO;
 import com.kh.onemile.vo.MemberJoinVO;
 import com.kh.onemile.vo.MemberVO;
+import com.kh.onemile.vo.member.LoginVO;
 
 @Repository
 public class MemberDaoImpl implements MemberDao{
@@ -24,8 +25,8 @@ public class MemberDaoImpl implements MemberDao{
 	}
 	//로그인
 	@Override
-	public MemberDTO login(MemberDTO memberDTO) {
-		return sqlSession.selectOne("member.get",memberDTO.getEmail());
+	public MemberDTO login(LoginVO loginVO) {
+		return sqlSession.selectOne("member.get",loginVO.getEmail());
 	}
 	//아이디 찾기
 	@Override
