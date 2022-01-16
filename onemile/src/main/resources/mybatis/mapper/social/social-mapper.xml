@@ -187,14 +187,6 @@
 						from smi group by social_no) smi on	
 						s.social_no = smi.social_no 
 					where s.hiddenyn ='N'
-					<choose>
-						<when test="endyn != null and endyn =='Y' or endyn.equals('Y')">
-							<![CDATA[ s.STARTDATE < sysdate]]>  
-						</when>
-						<when test="endyn != null and endyn =='N' or endyn.equals('N')">
-							<![CDATA[ s.STARTDATE > sysdate]]> 
-						</when>
-					</choose>
 				ORDER BY DBMS_RANDOM.RANDOM
 			)TMP
 		) where rn between 1 and 3

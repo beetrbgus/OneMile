@@ -23,8 +23,8 @@ import com.kh.onemile.vo.PaginationVO;
 import com.kh.onemile.vo.cobuy.CobuyCatVO;
 import com.kh.onemile.vo.cobuy.CobuyDetailVO;
 import com.kh.onemile.vo.cobuy.CobuyListVO;
+import com.kh.onemile.vo.cobuy.CobuyListVO2;
 import com.kh.onemile.vo.cobuy.CobuyRegVO;
-import com.kh.onemile.vo.cobuy.CobuyVO;
 import com.kh.onemile.vo.kakaopay.ConfirmVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -159,7 +159,7 @@ public class CobuyServiceImpl implements CobuyService {
 	}
 
 	@Override
-	public List<CobuyListVO> indexList() {
+	public List<CobuyListVO2> indexList() {
 		return cobuyDao.cobuyList();
 	}
 

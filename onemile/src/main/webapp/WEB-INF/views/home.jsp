@@ -62,7 +62,7 @@
                                                     <div class="RecommendationStoreCard_thumbnailPlaceholder__3TTOS"
                                                         style="padding-top: calc(100% - 0px);">
                                                         <div class="RecommendationStoreCard_thumbnail__mis5O"
-                                                            style="background-image: url(&quot;${root}/image/download?imageNo=${cobuy.imgNo}&folder=cobuy&quot;);">
+                                                            style="background-image: url(&quot;${root}/image/download?imageNo=${cobuy.imageNo}&folder=cobuy&quot;);">
                                                         </div>
                                                     </div>
                                                 </div>
