@@ -2,17 +2,17 @@
 <!DOCTYPE mapper
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="crl">
+<mapper namespace="cbrl">
 	<insert id="reg" parameterType="MiddleRLVO">
-		insert into commuRL(crl_no,commu_no,rl_no) values(
-			crl_seq.nextval , #{connTableNo}, #{rlNo}
+		insert into cobuyRL(cbrl_no, cobuy_no, rl_no) values(
+			cbrl_seq.nextval , #{connTableNo}, #{rlNo}
 		)
 	</insert>
 	<update id="delete" parameterType="int">
-		update commuRL set HIDDENYN='Y' where rl_no = #{rlNo}
+		update cobuyRL set HIDDENYN='Y' where rl_no = #{rlNo}
 	</update>
 	<delete id="adminDelete" parameterType="int">
-		delete from commuRL where rl_no = #{rlNo}
+		delete from cobuyRL where rl_no = #{rlNo}
 	</delete>
 	
 </mapper>

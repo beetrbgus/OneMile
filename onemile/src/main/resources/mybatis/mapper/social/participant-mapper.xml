@@ -32,4 +32,7 @@
 	<select id="getParti" parameterType="map" resultType="String">
 		select isjoined from sp where member_no = #{memberNo} and social_no = #{socialNo}
 	</select>
+	<select id="getPartiList" parameterType="map" resultType="ParticipateDetailVO">
+		select * from sp where member_no = #{memberNo} and social_no = #{socialNo}
+	</select>
 </mapper>

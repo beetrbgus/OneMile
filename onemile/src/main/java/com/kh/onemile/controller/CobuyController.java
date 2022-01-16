@@ -54,7 +54,7 @@ public class CobuyController {
 		cobuyRegVO.setMemberNo(memNo);
 		int cobuyNo = cobuyService.reg(cobuyRegVO);
 
-		return "redirect:detail?cobuyNo=" + cobuyNo;
+		return "redirect:detail/"+cobuyNo;
 	}
 	// 상품 목록
 	@GetMapping({"/list/{category}","/list","/",""})
