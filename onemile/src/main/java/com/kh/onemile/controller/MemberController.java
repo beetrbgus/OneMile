@@ -14,15 +14,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.onemile.entity.member.MemberDTO;
 import com.kh.onemile.entity.member.certi.CertiDTO;
 import com.kh.onemile.service.category.CategoryService;
-import com.kh.onemile.service.email.EmailService;
 import com.kh.onemile.service.member.MemberService;
 import com.kh.onemile.vo.MemberJoinVO;
 import com.kh.onemile.vo.MemberVO;
+import com.kh.onemile.vo.member.LoginVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -32,8 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberController {
 	@Autowired
 	private MemberService memberService;
-	@Autowired
-	private EmailService emailService;
+
 	@Autowired
 	private CategoryService categoryService;
 	
@@ -70,10 +68,10 @@ public class MemberController {
 	}
 
 	@PostMapping("/login")
-	public String login(@ModelAttribute MemberDTO memberDTO, @RequestParam(required = false) String saveId,
+	public String login(@ModelAttribute LoginVO loginVO, @RequestParam(required = false) String saveId,
 			HttpServletResponse response, HttpSession session) {
 
-		MemberDTO findDTO = memberService.login(memberDTO);
+		MemberDTO findDTO = memberService.login(loginVO);
 		System.err.println("findDTo======================" + findDTO);
 
 		// 정보가 있으면 세션저장

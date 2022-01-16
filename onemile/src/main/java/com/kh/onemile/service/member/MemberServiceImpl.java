@@ -26,6 +26,7 @@ import com.kh.onemile.util.DateToString;
 import com.kh.onemile.util.Sequence;
 import com.kh.onemile.vo.MemberJoinVO;
 import com.kh.onemile.vo.MemberVO;
+import com.kh.onemile.vo.member.LoginVO;
 import com.kh.onemile.vo.social.category.CategoryVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -36,7 +37,6 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberServiceImpl implements MemberService {
 	private final String folderName = "/member";
 	private final String SEQID = "member_seq";
-	private final String SEQNAME = "member_no";// 혹시 몰라서 보류 나중에 지우기
 
 	@Autowired
 	private MemberDao memberDao;
@@ -54,8 +54,6 @@ public class MemberServiceImpl implements MemberService {
 	private MiddleImageDAO middleImageDao; // 회원 이미지 중간 테이블
 	@Autowired
 	private ImageService imageService;
-	@Autowired
-	private DateToString dateToString;
 	
 	// 회원가입
 	@Override
@@ -95,14 +93,14 @@ public class MemberServiceImpl implements MemberService {
 
 	// 로그인
 	@Override
-	public MemberDTO login(MemberDTO memberDTO) {
+	public MemberDTO login(LoginVO loginVO) {
 		
-		log.debug("11비밀번호~~~~~~~~"+memberDTO.getPw());
-		log.debug("ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ"+memberDTO);
-		MemberDTO loginMember = memberDao.login(memberDTO);
+		log.debug("11비밀번호~~~~~~~~"+loginVO.getPw());
+		
+		MemberDTO loginMember = memberDao.login(loginVO);
 		
 		// 암호화 비교
-		if (loginMember != null && encoder.matches(memberDTO.getPw(), loginMember.getPw())) {
+		if (loginMember != null && encoder.matches(loginVO.getPw(), loginMember.getPw())) {
 			return loginMember;
 		} else {
 			return null;
