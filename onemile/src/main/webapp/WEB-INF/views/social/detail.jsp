@@ -189,7 +189,7 @@
 							<c:when test="${joined eq '수락대기중'}">
 								<div id="purchase"   data-joined="exit" class="pointer purchase_button"> 취소하기</div>
 							</c:when>
-							<c:when test="${joined eq '참여중'}">
+							<c:when test="${detail.memberNo!=logNo and joined eq '참여중'}">
 								<div id="purchase"    data-joined="exit" class="pointer purchase_button"> 탈퇴하기 </div>
 							</c:when>
 							<c:otherwise>
@@ -267,7 +267,7 @@
 		$(function(){
 			let isFull = ${isFull};
 			if(!isFull){ 
-				$(".purchase_button").on("click",function(){
+				$("#purchase").on("click",function(){
 					let status = $(this).data("joined");
 					console.log("클릭됨!   "+status);
 					let socialForm = $("#socialform");
@@ -276,7 +276,7 @@
 					if(status=='exit'){
 						action = "../socialexit"; 
 					}else{
-						action = "../socialjoin";
+						action = "../socialjoin"; 
 					}
 					console.log("status     "+status);
 					console.log("action     "+action);

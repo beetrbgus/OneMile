@@ -27,4 +27,8 @@ public class ReportController {
 	public void socialReport(int rlNo) {
 		reportService.adminDelete(rlNo);
 	}
+	@PostMapping("/reg")
+	public void regReport(int rlNo) {
+		reportService.adminDelete(rlNo);
+	}
 }

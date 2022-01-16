@@ -13,6 +13,9 @@
 	href="${pageContext.request.contextPath}/resources/css/grid.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/reboot.css">
+<script type="text/javascript" src="${root}/onemile/resources/js/social/mapRead.js"></script>
+<script type="text/javascript" src="${root}/onemile/resources/js/social/regDate.js"></script>
+<script type="text/javascript" src="${root}/onemile/resources/js/social/regValidate.js"></script>
 <script>
 /* 카테고리 */
 $(function(){
@@ -106,7 +109,8 @@ function deleteImageAction(index){
 </script>
 <form id="regForm" action="../modify" method="post"
 	enctype="multipart/form-data">
-
+	<input type="hidden" name="socialNo" value="${socialDetail.socialNo}">
+	
 	<!-- css테스트중 -->
 	<div class="container detail">
 		<div class="detail-wrapper">
@@ -188,7 +192,7 @@ function deleteImageAction(index){
 			</div>
 		</div>
 		<div class="detail_floating_zone"
-			style="position: absolute; top: 380px; width: 412px; right: 350px;">
+			style="position: absolute; top: 600px; width: 412px; right: 500px;">
 			<div class="detail_buttons_row floating row">
 				<div id="map"
 					style="width: 412px; height: 400px; top: 10px; right: 20px;"></div>
@@ -236,10 +240,6 @@ function deleteImageAction(index){
 					style="display: none;">
 					<div class="col-auto"></div>
 					<div class="col info_price">
-						
-						
-
-
 					</div>
 				</div>
 			</div>
@@ -254,11 +254,11 @@ function deleteImageAction(index){
 		</div>
 		<input type="hidden" name="lat" value="${socialDetail.lat}" required>
 		<input type="hidden" name="lng" value="${socialDetail.lng}" required>
-		<input type="hidden" name="socialNo" value="${socialDetail.socialNo}"> 
+		
 		
 		<button type="button" id="submitBtn">수정하기</button>
 	</div>
-
+</form>
 	
 		<!-- <input type="file"
 		name="attach" multiple="multiple"> 이미지 : -->
@@ -313,7 +313,7 @@ function deleteImageAction(index){
 	<button type="button" id="submitBtn">등록하기</button> --%>
 
 
-</form>
+
 
 <script type="text/javascript"src="${root}/onemile/resources/js/social/mapRead.js"></script>
 <script type="text/javascript"src="${root}/onemile/resources/js/social/regDate.js"></script>
@@ -420,8 +420,6 @@ function deleteImageAction(index){
 	});
 </script>
 
-<script type="text/javascript" src="${root}/onemile/resources/js/social/mapRead.js"></script>
-<script type="text/javascript" src="${root}/onemile/resources/js/social/regDate.js"></script>
-<script type="text/javascript" src="${root}/onemile/resources/js/social/regValidate.js"></script>
+
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
