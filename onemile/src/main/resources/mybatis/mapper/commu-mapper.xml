@@ -29,10 +29,14 @@
 				commu co left join cmc cmc on co.middlename = cmc.middle_name
 				left join member me on co.member_no = me.member_no
 				left join map map on co.map_no = map.map_no
-                left join mei mei on co.member_no = mei.member_no
-                left join image img on img.image_no = mei.image_no
+                left join cmi cmi on co.commu_no = cmi.commu_no
+                left join image img on img.image_no = cmi.image_no
+                inner join(
+                    select commu_no , min(image_no) as image_no
+                    from cmi group by commu_no) cmi on	
+                    cmi.commu_no = co.commu_no
 		where
-				commu_no = #{commuNo}
+				co.commu_no = ${commu_no}
 	</select>
 	
 	<!-- 메뉴별 목록 조회 -->

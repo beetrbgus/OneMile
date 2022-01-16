@@ -16,7 +16,8 @@
 		delete from rl where rl_no = #{rlNo}
 	</delete>
 	
-	<select id="getRlList" parameterType="ReportVO">
+	<!-- <select id="getRlList" parameterType="ReportVO">
 		
 	</select>
-</mapper>
+ -->
+ </mapper>
