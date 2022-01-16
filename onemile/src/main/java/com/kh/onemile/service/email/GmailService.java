@@ -54,5 +54,22 @@ public class GmailService implements EmailService{
 		certiDTO.setSerial(number);
 		certiDTO.setMemberNo(memberNo);
 		certiDao.insert(certiDTO);
-		}
+	}
+	@Override
+	public void sendAcceptEmail(String email) {
+		SimpleMailMessage message = new SimpleMailMessage();
+		message.setTo(email);
+		message.setSubject("[원마일] 회원가입이 승인되었습니다.");
+		message.setText("[원마일]에 가입 해주셔서 감사합니다.");
+		sender.send(message);
+	}
+	@Override
+	public void sendDeclineEmail(String email) {
+		SimpleMailMessage message = new SimpleMailMessage();
+		message.setTo(email);
+		message.setSubject("[원마일] 회원가입이 거절되었습다.");
+		message.setText("정보를 수정한 후 재 신청 부탁드립니다.");
+		sender.send(message);
+	}
+	
 }

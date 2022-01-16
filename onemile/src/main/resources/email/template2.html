@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<!--
+	이메일에 표시될 내용을 정의할 페이지
+	내용 모두 정의하지 않고 보여줄 부분만 정의한다.
+	가급적 인라인 스타일을 사용해야 다른 홈페이지 설정보다 우선 적용된다.
+-->
+
+{@ $site_title_top = 'ONE MILE' }
+{@ $site_title_content = '원마일' }
+{@ $point_color = '#00C4C4' }
+
+<div style="font-family: 'Apple SD Gothic Neo', 'sans-serif' !important; width: 540px; height: 600px; border-top: 4px solid {$point_color}; margin: 100px auto; padding: 30px 0; box-sizing: border-box;">
+	<h1 style="margin: 0; padding: 0 5px; font-size: 28px; font-weight: 400;">
+		<span style="font-size: 15px; margin: 0 0 10px 3px;">{$site_title_top}</span><br />
+		<span style="color: {$point_color};">회원가입거절</span> 안내입니다.
+	</h1>
+	<p style="font-size: 16px; line-height: 26px; margin-top: 50px; padding: 0 5px;">
+		안녕하세요.<br />
+		{$site_title_content}에 가입을 신청 해주셔서 정말 감사합니다.<br />
+		회원님이 적어주신 정보에 <b style="color: {$point_color};">'원마일'</b>운영 정책을 위반한 내용이 있는 것으로 확인이 됩니다.<br />
+		마이페이지에서 회원 정보를 수정하여 재 가입 신청을 해주시기 바랍니다<br />
+		감사합니다.
+	</p>
+</div>

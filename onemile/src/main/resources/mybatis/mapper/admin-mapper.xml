@@ -53,6 +53,14 @@
 		) where rn between ${startRow} and ${endRow}
 	</select>
 	
+	<select id="hideMemberList" resultType="ExitMemberVO" parameterType="map">
+		select * from (
+			select rownum rn, TMP.* from (
+				select * from member where hiddenyn = 'Y' and exitdate = null order by member_no asc
+			)TMP
+		) where rn between ${startRow} and ${endRow}
+	</select>
+	
 	<!-- 회원 멤버십 목록 가져오기 -->
 	<select id="membershipList" resultType="List" parameterType="map">
 		select * from (

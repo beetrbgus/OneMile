@@ -1,12 +1,14 @@
-package com.kh.onemile.service.social.participant;
+package com.kh.onemile.repository.social.participant;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.onemile.vo.social.participate.ParticipateDetailVO;
 import com.kh.onemile.vo.social.participate.ParticipateVO;
 
 @Repository
@@ -45,6 +47,14 @@ public class ParticipantDaoImpl implements ParticipantDao {
 		map.put("memberNo", memberNo);
 		map.put("socialNo", socialNo);
 		return sqlSession.selectOne("participant.getParti",map);
+	}
+
+	@Override
+	public List<ParticipateDetailVO> getPaticipantList(int socialNo, int memberNo) {
+		Map<String,Integer> map = new HashMap<String, Integer>();
+		map.put("memberNo", memberNo);
+		map.put("socialNo", socialNo);
+		return sqlSession.selectList("participant.getParti", map);
 	}
 
 

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <%-- 페이지에서 사용할 JSTL 변수 --%>
 <!-- jstl 변수 틀렸음. 수정 필요. -->
 <c:set var="login" value="${logId != null}"></c:set>
@@ -9,7 +9,6 @@
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
 	$(function(){
 		//바로 차트관련 자료를 불러옴
@@ -262,22 +261,42 @@
 		});
 	}
 </script>
-
-
-<div style="width: 900px; height: 900px;">
-	<!--차트가 그려질 부분-->
-	<canvas id="myChart"></canvas>
+<style>
+.wrap{
+	width:900px;
+	text-align:center;
+	heigth:auto;
+	margin:0 auto;
+}
+</style>
+<div class="board wzui">
+	<div class="ui-header">
+		<h2 class="title">회원 성별 분포</h2>
+	</div>
+	<div class="wrap">
+		<!--차트가 그려질 부분-->
+		<canvas id="myChart"></canvas>
+	</div>
+	<div class="ui-header">
+		<h2 class="title">회원 연령 분포</h2>
+	</div>
+	<div class="wrap">
+		<!--차트가 그려질 부분-->
+		<canvas id="myChart2"></canvas>
+	</div>
+	<div class="ui-header">
+		<h2 class="title">소셜링 지역 분포</h2>
+	</div>
+	<div class="wrap">
+		<!--차트가 그려질 부분-->
+		<canvas id="myChart3"></canvas>
+	</div>
+	<div class="ui-header">
+		<h2 class="title">멤버십 가입 비율</h2>
+	</div>
+	<div class="wrap">
+		<!--차트가 그려질 부분-->
+		<canvas id="myChart4"></canvas>
+	</div>
 </div>
-<div style="width: 900px; height: 900px;">
-	<!--차트가 그려질 부분-->
-	<canvas id="myChart2"></canvas>
-</div>
-<div style="width: 900px; height: 900px;">
-	<!--차트가 그려질 부분-->
-	<canvas id="myChart3"></canvas>
-</div>
-<div style="width: 900px; height: 900px;">
-	<!--차트가 그려질 부분-->
-	<canvas id="myChart4"></canvas>
-</div>
-
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

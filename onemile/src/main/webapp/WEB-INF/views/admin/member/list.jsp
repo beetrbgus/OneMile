@@ -40,73 +40,63 @@ table{
 </style>
 <script>
 $(function () {
-	var page = 2;
-	var size = 20;
+	var page = 1;
+	var size = 25;
+	var search = '';
+	var keyword = '';
+	var url = new URL(location.href);
+	var urlParams = url.searchParams;
+
+	if(urlParams.get("search")){
+		search = urlParams.get("search");
+	}
 	
-	$(".ProjectListMoreButton_button__27eTb").click(function () {
-		loadData(page, size, search, keyword);
+	if(urlParams.get("keyword")){
+		keyword = urlParams.get("keyword");
+	}
+	
+	$("#moreBtn").click(function () {
+		loadData(page, size);
 		page++;
 	});
-	
-	if(cnt() <10){ 
-		$(".ProjectListMoreButton_button__27eTb").remove(); 
-	}
-	
-	function cnt(){
-		let a = $(".ProjectCardList_item__1owJa");
-		return a.length;
-	}
-	function loadData(page, size, keyword, search) {
+	$(".hiddenmember").click(function(){ 
+		let memberno = 	$(this).data("memberno");
+		$("#memberno").val(memberNo);
+		console.log("memberno  "+memberno );
+		/*$("#hiddenForm").submit();*/
+		 
+	});
+	$("#moreBtn").click();
+	function loadData(page, size) {
 
 		$.ajax({
-			url: "${pageContext.request.contextPath}/admin/member/list",
+			url: "${pageContext.request.contextPath}/admin/member/listdetail",
 			type: "get",
 			data: {
 				page: page,
 				size: size,
-				keyword: keyword,
-				search: search
+				search: search,
+				keyword: keyword
 			},
 			success: function (resp) {
 				if (resp.length < size) {
 					$("#moreBtn").remove();
 				}
+				var tbody = $('#tbody');
 				for (var i = 0; i < resp.length; i++) {
-					var CobuyListVO = resp[i];
-					console.log(CobuyListVO.cobuyNo);
-					console.log(typeof CobuyListVO.cobuyNo);
-					var divCol=
-						"<div class='ProjectCardList_item__1owJa'>"+
-						"<div>"+ 
-						"<div class='CommonCard_container__e_ebQ CommonCard_squareSmall__1Cdkn'>"+
-						"<a href='detail?cobuyNo="+CobuyListVO.cobuyNo+
-						"' class='CardLink_link__1k83H CommonCard_image__vaqkf' aria-hidden='true' tabindex='-1'>"+
-						"<div class='CommonCard_rect__2wpm4'>"+
-						"<span class='CommonCard_background__3toTR CommonCard_visible__ABkYx'"+
-						"style='background-image: url(${pageContext.request.contextPath}/image/download?imageNo="+CobuyListVO.imgNo+"&folder=cobuy)'></span>"+
-						"</div>"+
-						"</a>"+
-						"<div class='CommonCard_info__1f4kq'>"+
-						"<div class='RewardProjectCard_info__3JFub'>"+
-						"<div class='RewardProjectCard_infoTop__3QR5w'>"+
-						"<a href='detail?cobuyNo="+CobuyListVO.cobuyNo+
-						"' class='CardLink_link__1k83H'>"+
-						"<p class='CommonCard_title__1oKJY RewardProjectCard_title__iUtvs'>"+
-						"<strong>"+CobuyListVO.pname+"<br>"+CobuyListVO.title+"</strong>"+
-						"</p>"+
-						"</a>"+
-						"<div>"+
-						"<span class='RewardProjectCard_makerName__2q4oH'>"+CobuyListVO.nick+"</span>"+		
-						"</div></div><div class='RewardProjectCard_gauge__3p9US'>"+		
-						"<span style='width: 100%;'></span>"+
-						"</div>"+
-						"<span class='RewardProjectCard_percent__3TW4_'>"+CobuyListVO.stock+"개 남음</span>"+
-						"<span class='RewardProjectCard_amount__2AyJF'>"+CobuyListVO.price+"원</span>"+
-						"<span class='RewardProjectCard_days__3eece RewardProjectCard_isAchieve__1LcUu'>"+
-						"<span class='RewardProjectCard_remainingDay__2TqyN'>"+dateString+"</span>"+
-						"<span class='RewardProjectCard_remainingDayText__2sRLV'>마감</span>"+
-						"<span class='RewardProjectCard_isAchieve__1LcUu'></span></span></div></div></div></div></div>";
-					$(".ProjectCardList_list__1YBa2").append(divCol);
+					var template = $('#memberTemplate').html();
+					template = template.replace("{{email}}", resp[i].email);
+					template = template.replace("{{nick}}", resp[i].nick);
+					template = template.replace("{{phone}}", resp[i].phone);
+					template = template.replace("{{gender}}", resp[i].gender);
+					template = template.replace("{{birth}}", resp[i].birth);
+					template = template.replace("{{grade}}", resp[i].grade);
+					template = template.replace("{{joinDate}}", resp[i].joinDate);
+					template = template.replace("{{intro}}", resp[i].intro);
+					template = template.replace("{{nickModi}}", resp[i].nickModi);
+					template = template.replace("{{memberno}}", resp[i].memberNo);
+					tbody.append(template);
+					
 				}
 			},
 			error: function (e) {
@@ -124,10 +114,10 @@ $(function () {
 	<div class="ui-tabs">
 		<ul>
 			<li><a href="${root}/onemile/admin/member/list">회원목록</a></li>
-			<li><a href="${root}/onemile/admin/member/hidden">탈퇴회원목록</a></li>
+			<li><a href="${root}/onemile/admin/member/quit">탈퇴회원목록</a></li>
+			<li><a href="${root}/onemile/admin/member/hide">숨김회원목록</a></li>
 		</ul>
 	</div>
-</div>
 <div class="search-box">
 	<form method="get">
 		<select name="search">
@@ -151,26 +141,37 @@ $(function () {
 			<th>가입일</th>
 			<th>자기소개</th>
 			<th>닉네임변경일</th>
-			<th>정보변경</th>
+			<th>숨김</th>
 		</tr>
 		</thead>
-		<tbody>
-			<c:forEach var="list" items="${list}">
-			<tr>
-				<td>${list.email}</td>
-				<td>${list.nick}</td>
-				<td>${list.phone}</td>
-				<td>${list.gender}</td>
-				<td>${list.birth}</td>
-				<td>${list.grade}</td>
-				<td>${list.joinDate}</td>
-				<td class="intro">${list.intro}</td>
-				<td>${list.nickModi}</td>
-				<td><a class="a" href="#">수정</a></td>
-			</tr>
-			</c:forEach>
+		<tbody id="tbody">
+			
+			
 		</tbody>
+		
 	</table>
+<div class="ProjectListMoreButton_container__1JFxX ProjectCardList_more__3AbzT"><button type="button"
+						id="moreBtn" class="ProjectListMoreButton_button__27eTb">더보기<i class="icon expand-more"
+							aria-hidden="true"></i></button>
+					<div class="wz-loader ProjectListMoreButton_loader__1Kcvt"></div>
+				</div>
 </div>
-
+</div>
+<form id="hiddenForm" action="hidden" method="post">
+   <input id="memberNo" type="hidden" value="">
+</form>
+<template id="memberTemplate">
+	<tr>
+		<td>{{email}}</td>
+		<td>{{nick}}</td>
+		<td>{{phone}}</td>
+		<td>{{gender}}</td>
+		<td>{{birth}}</td>
+		<td>{{grade}}</td>
+		<td>{{joinDate}}</td>
+		<td>{{intro}}</td>
+		<td>{{nickModi}}</td>
+		<td class ="hiddenmember" onclick="location.href='${pageContext.request.contextPath}/admin/member/hidden?memberNo={{memberno}}'">숨김</td>
+	</tr>
+</template>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

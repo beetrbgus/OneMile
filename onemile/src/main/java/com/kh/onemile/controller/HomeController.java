@@ -24,7 +24,6 @@ public class HomeController {
 		model.addAttribute("commuDetailVOList", commuService.index());
 		model.addAttribute("cobuyList", cobuyService.indexList());
 		model.addAttribute("socialIndexVOList", socialService.indexList());
-		System.err.println(socialService.indexList());
 		return "home";
 	}
 }

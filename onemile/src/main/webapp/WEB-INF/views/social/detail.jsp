@@ -30,6 +30,31 @@ $(function(){
 		$("body").addClass("ReactModal__Body--open");
 	});
 });
+
+//회원승인 거절
+$(function(){
+	$(".socialexit").on("click",function(){
+		var memNo = $(this).val();
+		var socialNo = '${detail.socialNo}''
+		$.ajax({ 
+			url : '${pageContext.request.contextPath}/social/socialexit',
+			type : "post",
+			async : false,
+			data : { 
+				memNo : memNo
+				socialNo : socialNo
+			},
+			success : function(resp) {
+				console.log("성공", resp);
+					
+			
+		  	},
+	 		error : function(e) {
+			  console.log("실패", e);
+ 		  	}
+ 		});
+	});
+});
 </script>
 <%-- <p>번호 : ${detail.socialNo}</p>
 
@@ -262,7 +287,7 @@ $(function(){
 							  	<br>
 							  	<c:if test="${joined eq '수락대기중'}"></c:if>
 							  	<a href="">수락하기</a>
-							  	<a href="">거절하기</a>
+							  	<a href="socialexit">거절하기</a>
 						</c:forEach>
                         </c:otherwise>
                         </c:choose>

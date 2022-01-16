@@ -29,9 +29,9 @@
 		</div>
 		<div class="wboard-detail-bottom">
 			<div class="wboard-detail-btn-wrap">
-				<a class="wz button" href="${root}/commu/notmap/list?middleName=${commuDetailVO.middleName}">목록으로 돌아가기</a>
-				<a class="wz button" href="${root}/commu/notmap/edit?boardNo=${commuDetailVO.commuNo}">수정하기</a>
-				<a class="wz button" href="${root}/commu/notmap/delete?boardNo=${commuDetailVO.commuNo}&middleName=${commuDetailVO.middleName}">삭제하기</a>
+				<a class="wz button" href="${root}/notice/list/${commuDetailVO.middleName}">목록으로 돌아가기</a>
+				<a class="wz button" href="${root}/notice/edit?boardNo=${commuDetailVO.commuNo}">수정하기</a>
+				<a class="wz button" href="${root}/notice/delete?boardNo=${commuDetailVO.commuNo}&middleName=${commuDetailVO.middleName}">삭제하기</a>
 			</div>
 		</div>
 	</div>

@@ -5,12 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
-import com.kh.onemile.vo.report.ReportRegVO;
 import com.kh.onemile.vo.report.middle.MiddleRLVO;
 
 @Qualifier("commu")
 @Repository
-public class CommuRLDaoImpl implements ReportDao{
+public class CommuRLDaoImpl implements MiddleRLDao{
 	
 	@Autowired
 	private SqlSession sqlSession;

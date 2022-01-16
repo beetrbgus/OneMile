@@ -91,7 +91,7 @@
 					s.social_no ,s.smalltype ,s.title,
 					TO_CHAR(s.startdate, 'MM/DD HH24:mm') as startDate,
 					TO_CHAR(s.enddate, 'MM/DD HH24:mm') as endDate,
-					m.member_no,m.nick, mei.profileImgNo ,
+					m.member_no,m.nick, mei.profileImgNo, smi.image_no,
 					map.detailaddress , smc.bigtype
 				from social s
 					inner join member m on s.member_no=m.member_no
@@ -115,11 +115,11 @@
 				</when>
 			</choose>
 			<choose>
-				<when test="endyn != null and endyn.equals('Y')">
-					and  <![CDATA[ s.ENDDate < sysdate]]> 
+				<when test='endyn != null and endyn.equals("Y") or endyn=="Y"'>
+					and   s.ENDDate <![CDATA[<]]> sysdate 
 				</when>
-				<when test="endyn != null and endyn.equals('N')">
-					and  <![CDATA[ s.ENDDate > sysdate]]> 
+				<when test='endyn != null and endyn.equals("N") or endyn=="N"'>
+					and   s.ENDDate <![CDATA[>]]> sysdate 
 				</when>
 			</choose>
 			<if test="goo!=null and goo!=''">
@@ -191,10 +191,10 @@
 						from smi group by social_no) smi on	
 						s.social_no = smi.social_no where s.hiddenyn ='N'
 			<choose>
-				<when test="endyn != null and endyn.equals('Y')">
+				<when test='endyn != null and endyn.equals("Y")'>
 					and  <![CDATA[ s.STARTDATE < sysdate]]> 
 				</when>
-				<when test="endyn != null and endyn.equals('N')">
+				<when test='endyn != null and endyn.equals("N")'>
 					and  <![CDATA[ s.STARTDATE > sysdate]]> 
 				</when>
 			</choose>

@@ -509,7 +509,7 @@ class="wz form" novalidate="novalidate">
 				<label>MBTI</label> 
 				<br> 
 				<select name="mbti">
-					<option value="없음">없음</option>
+					<option value="선택안함">없음</option>
 					<option value="ISTJ">ISTJ</option>
 					<option value="ISFJ">ISFJ</option>
 					<option value="INFJ">INFJ</option>

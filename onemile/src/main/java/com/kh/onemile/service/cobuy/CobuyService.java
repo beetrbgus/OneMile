@@ -8,12 +8,13 @@ import com.kh.onemile.vo.PaginationVO;
 import com.kh.onemile.vo.cobuy.CobuyCatVO;
 import com.kh.onemile.vo.cobuy.CobuyDetailVO;
 import com.kh.onemile.vo.cobuy.CobuyListVO;
+import com.kh.onemile.vo.cobuy.CobuyListVO2;
 import com.kh.onemile.vo.cobuy.CobuyRegVO;
 import com.kh.onemile.vo.kakaopay.ConfirmVO;
 
 public interface CobuyService {
 	public int reg(CobuyRegVO cobuyRegDTO) throws IllegalStateException, IOException;
-	public List<CobuyListVO> indexList();
+	public List<CobuyListVO2> indexList();
 	public CobuyDetailVO getDetail(int cobuyNo);
 	public void modify(CobuyDetailVO cobuyModDTO) throws IllegalStateException, IOException;
 	public void delete(int cobuyNo);

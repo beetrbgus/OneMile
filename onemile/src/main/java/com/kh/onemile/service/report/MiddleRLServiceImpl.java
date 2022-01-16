@@ -4,18 +4,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.kh.onemile.repository.report.ReportDao;
+import com.kh.onemile.repository.report.MiddleRLDao;
 import com.kh.onemile.vo.report.middle.MiddleRLVO;
 
 @Service
 public class MiddleRLServiceImpl implements  MiddleRLService{
 
 	@Autowired @Qualifier("commu")
-	private ReportDao commuDao;
+	private MiddleRLDao commuDao;
 	@Autowired @Qualifier("social")
-	private ReportDao socialDao;
+	private MiddleRLDao socialDao;
 	@Autowired @Qualifier("member")
-	private ReportDao memberDao;
+	private MiddleRLDao memberDao;
+	@Autowired @Qualifier("cobuy")
+	private MiddleRLDao cobuyDao;
 	
 	@Override
 	public void reg(MiddleRLVO middleRLVO) {
@@ -24,6 +26,8 @@ public class MiddleRLServiceImpl implements  MiddleRLService{
 			commuDao.reg(middleRLVO);
 		}else if(type.equals("social")){
 			socialDao.reg(middleRLVO);
+		}else if(type.equals("cobuy")){
+			cobuyDao.reg(middleRLVO);
 		}else {
 			memberDao.reg(middleRLVO);
 		}
@@ -36,6 +40,8 @@ public class MiddleRLServiceImpl implements  MiddleRLService{
 			commuDao.delete(rlNo);
 		}else if(type.equals("social")){
 			socialDao.delete(rlNo);
+		}else if(type.equals("cobuy")){
+			cobuyDao.delete(rlNo);
 		}else {
 			memberDao.delete(rlNo);
 		}
@@ -47,6 +53,8 @@ public class MiddleRLServiceImpl implements  MiddleRLService{
 			commuDao.adminDelete(rlNo);
 		}else if(type.equals("social")){
 			socialDao.adminDelete(rlNo);
+		}else if(type.equals("cobuy")){
+			cobuyDao.adminDelete(rlNo);
 		}else {
 			memberDao.adminDelete(rlNo);
 		}

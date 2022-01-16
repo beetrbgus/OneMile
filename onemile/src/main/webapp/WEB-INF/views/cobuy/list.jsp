@@ -116,7 +116,7 @@ img{
 	  </div>
 	  <div class="carousel-inner">
 	    <div class="carousel-item active" data-bs-interval="3000">
-	     <a href="${root}/cobuy/list/${category}">
+	     <a href="${root}/cobuy/list">
 	      <img src="${root}/resources/image/beauty.jpg" class="d-block w-100">
 	      <div class="carousel-caption d-none d-md-block">
 	        <h3 class="b">[공동구매율 1위]</h3>
