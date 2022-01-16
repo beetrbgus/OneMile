@@ -63,7 +63,6 @@
 					</div>
 				</div>
 				
-				
 				<div class="menu_row row"></div>
 				<a class="link_row row" href="${root}/member/edit">
 					<div class="col">회원정보 수정</div></a>
@@ -79,44 +78,27 @@
 		</div>
 		
 		
-		<!-- 소셜링 자리 -->
+		<!-- 2단 -->
 		<div class="saved_col">
-			<div class="saved_inner target target_meeting selected">
+			<div class="saved_inner target target_meeting selected" style="padding-left:30px;border-left-width: 0px;margin-left: 10px;padding-top: 15px;padding-right:30px;">
 				<div class="p-20 row target target_meeting title_row selected">
 					<div class="col-12">
-						<h1 class="mb-4">
-							소셜링 <span class="text_munto" id="SOCIALING_cnt">4건</span>
-						</h1>
+						<h1 class="mb-4">내 소셜링<span class="text_munto" id="SOCIALING_cnt"></span></h1>
 					</div>
 				</div>
+				
 				<div class="item_row p-20 row" id="SOCIALING_row">
-					<a class="item_col col-6 col-md-4"><div class="image_zone"
-							style="background-image: url(https://munto-images.s3.ap-northeast-2.amazonaws.com/production-socialing/1641468204669-cover-83584-image_cropper_E720A01D-AFAD-4BAE-87B1-9AD465F50613-37699-000017E0E76E7CBB.jpg)"></div>
+					<c:forEach items="${socialListVO}" var="socialListVO">
+					<a class="item_col col-6 col-md-4">
+					<div class="image_zone" style="background-image: url('${pageContext.request.contextPath}/image/download?imageNo=${socialListVO.imgNo}&folder=social')"></div>
 						<div class="item_type">소셜링</div>
-						<div class="item_name">프리다이빙 하실분🤚</div>
-						<div class="period">2022.01.30 ~ 2022.01.30</div></a><a
-						class="item_col col-6 col-md-4"><div class="image_zone"
-							style="background-image: url(https://munto-images.s3.ap-northeast-2.amazonaws.com/meta/coverimg_activity.png)"></div>
-						<div class="item_type">소셜링</div>
-						<div class="item_name">해이마마 배우기 슈퍼댄서 우리 버킷리스트 언능 치루자고여!!!!</div>
-						<div class="period">2022.01.18 ~ 2022.01.18</div></a><a
-						class="item_col col-6 col-md-4"><div class="image_zone"
-							style="background-image: url(https://munto-images.s3.ap-northeast-2.amazonaws.com/production-socialing/1641668627686-cover-30009-image_cropper_CDF814DA-B9C9-46EE-A85B-53BECB4E97B3-24090-000006274DFAB077.jpg)"></div>
-						<div class="item_type">소셜링</div>
-						<div class="item_name">리틀포레스트 컨셉 여행 1박</div>
-						<div class="period">2022.01.13 ~ 2022.01.13</div></a><a
-						class="item_col col-6 col-md-4"><div class="image_zone"
-							style="background-image: url(https://munto-images.s3.ap-northeast-2.amazonaws.com/production-socialing/1641883562238-cover-30009-image_cropper_D635E852-C5C6-45BD-87FD-91E1E8FD5229-45322-00000ABB1078208E.jpg)"></div>
-						<div class="item_type">소셜링</div>
-						<div class="item_name">강원도 영월 리틀포레스트 여행</div>
-						<div class="period">2022.01.13 ~ 2022.01.13</div></a>
+						<div class="item_name">${socialListVO.title}</div>
+						<div class="period">${socialListVO.startDate} ~ ${socialListVO.endDate}</div></a>
+						</c:forEach>
 				</div>
 			</div>
 		</div>
-
 	</div>
 </div>
-
-<!-- 테스트중 -->
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

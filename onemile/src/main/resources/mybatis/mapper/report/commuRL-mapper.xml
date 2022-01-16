@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="crl">
+	<insert id="reg" parameterType="MiddleRLVO">
+		insert into commuRL(crl_no,commu_no,rl_no) values(
+			crl_seq.nextval , #{commuNo}, #{rlNo}
+		)
+	</insert>
+	<update id="delete" parameterType="int">
+		update crl set HIDDENYN='Y' where rl_no = #{rlNo}
+	</update>
+	<delete id="adminDelete" parameterType="int">
+		delete from crl where rl_no = #{rlNo}
+	</delete>
+	
+</mapper>

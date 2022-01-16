@@ -70,7 +70,7 @@ public class SocialController {
 			return "social/reg2";
 		}
 		else {
-			return "redirect:social/list";	
+			return "redirect:list";	
 		}
 		
 	}

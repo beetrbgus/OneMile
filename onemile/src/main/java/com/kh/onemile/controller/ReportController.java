@@ -32,3 +32,4 @@ public class ReportController {
 		reportService.reg(reportVO);
 	}
 }
+
