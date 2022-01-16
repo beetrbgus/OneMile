@@ -5,13 +5,14 @@ import java.util.Map;
 import com.kh.onemile.entity.member.MemberDTO;
 import com.kh.onemile.vo.MemberJoinVO;
 import com.kh.onemile.vo.MemberVO;
+import com.kh.onemile.vo.member.LoginVO;
 
 public interface MemberDao {
 	//회원가입
 	void join(MemberJoinVO memberJoinVO);
 	
 	//로그인
-	MemberDTO login(MemberDTO memberDTO);
+	MemberDTO login(LoginVO loginVO);
 	
 	//회원탈퇴
 	boolean quit(String email);

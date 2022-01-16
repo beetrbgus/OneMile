@@ -8,6 +8,7 @@ import com.kh.onemile.entity.member.certi.CertiDTO;
 import com.kh.onemile.entity.member.membership.AdDTO;
 import com.kh.onemile.vo.MemberJoinVO;
 import com.kh.onemile.vo.MemberVO;
+import com.kh.onemile.vo.member.LoginVO;
 import com.kh.onemile.vo.social.category.CategoryVO;
 
 public interface MemberService {
@@ -16,7 +17,7 @@ public interface MemberService {
 	public void join(MemberJoinVO memberJoinVO) throws IllegalStateException, IOException;
 	
 	//로그인
-	public MemberDTO login(MemberDTO memberDTO);
+	public MemberDTO login(LoginVO loginVO);
 	
 	//회원탈퇴
 	public boolean quit(String email, String pw);

@@ -61,53 +61,6 @@
 </style>
 <script>
 $(function () {
-	var socket = null;
-
-	$(document).ready(function() { // 준비가 되면
-		connectWs();
-	});
-
-	function connectWs() {
-		sock = new SockJS('http://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/alramserver');
-		socket = sock;
-
-		sock.onopen = function() {
-			console.log('info:connection opened.');
-		};
-
-		sock.onmessage = function(evt) {
-			var data = evt.data;
-
-			var toastTop = app.toast.create({
-				text : "알림 : " + data + "\n",
-				closeButton : true,
-				debug : false,
-				newestOnTop : false,
-				progressBar : false,
-				positionClass : "toast-top-right",
-				preventDuplicates : false,
-				onclick : null,
-				showDuration : 300,
-				hideDuration : 1000,
-				timeOut : 5000,
-				extendedTimeOut : 1000,
-				showEasing : "swing",
-				hideEasing : "linear",
-				showMethod : "fadeIn",
-				hideMethod : "fadeOut"
-			});
-			toastTop.open();
-		};
-
-		sock.onclose = function() {
-			console.log('connect close');
-		};
-
-		sock.onerror = function(err) {
-			console.log('Errors : ', err);
-		};
-
-	}
     //메뉴 ajax
         $.ajax({
             url: "${pageContext.request.contextPath}/menu/",
@@ -206,7 +159,7 @@ $(function () {
 							</ul>
 							<div class="HeaderMobile_myButton__32Bob">
 							<c:choose>
-								<c:when test="${1 eq 1}">
+								<c:when test="${login}">
 									<a href="${root}/member/mypage">
 									<button type="button">
 										<i class="icon my" aria-hidden="true"></i>
@@ -281,7 +234,11 @@ $(function () {
 									<div class="User_container__bqVd2">
 									<c:choose>
 										<c:when test="${login}">
-											<button type="button" class="User_btnSign__1URTs" ><a href="${root}/member/logout">로그아웃</a></button>
+											<a href="${root}/member/logout">
+												<button type="button" class="User_btnSign__1URTs" >
+													로그아웃
+												</button>
+											</a>
 												<c:choose>
 													<c:when test="${!admin}">
 														<button data-event="iam.signup" class="User_btnSign__1URTs" ><a href="${root}/account/mypage">마이페이지</a></button>
@@ -304,7 +261,7 @@ $(function () {
 									<div>
 										<div>
 										<c:choose>
-											<c:when test="${admin and login}">
+											<c:when test="${login and admin}">
 												<a href="${root}/admin/">
 												<button class="wz button funding-open-button dense primary-outline"
 													aria-label="프로젝트 오픈 신청">관리자 홈</button></a>
