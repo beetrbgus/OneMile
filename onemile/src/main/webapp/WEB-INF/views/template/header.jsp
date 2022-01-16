@@ -37,7 +37,6 @@
 	<link rel="stylesheet" href="${root}/resources/css/main.e49dc743.css">
 	<link rel="stylesheet" href="${root}/resources/css/mobile-w.css">
 	<link rel="stylesheet" href="${root}/resources/css/partners.e0da7bd4.css">
-	<link rel="stylesheet" href="${root}/resources/css/reply.css">
 	<link rel="stylesheet" href="${root}/resources/css/reset-w.css">
 	<link rel="stylesheet" href="${root}/resources/css/reward-main.57e0ec6d.chunk.css">
 	<link rel="stylesheet" href="${root}/resources/css/terms.09f05cfa.css">
@@ -206,7 +205,7 @@ $(function () {
 							</ul>
 							<div class="HeaderMobile_myButton__32Bob">
 							<c:choose>
-								<c:when test="${1 eq 1}">
+								<c:when test="${login}">
 									<a href="${root}/member/mypage">
 									<button type="button">
 										<i class="icon my" aria-hidden="true"></i>

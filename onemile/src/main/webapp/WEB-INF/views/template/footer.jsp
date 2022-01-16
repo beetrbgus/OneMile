@@ -3,23 +3,6 @@
 </section>
 		<footer id="footer">
             <footer id="footer" class="web-footer visible">
-                <div class="FooterMenu_container__15kue">
-                    <div class="FooterMenu_bar__22KhW">
-                        <!--FooterMenu_menu__3nRbk Linker_btnMore__1PEzz Linker_active__mkIlt 하위 메뉴 보이기-->
-                        <div class="FooterMenu_menu__3nRbk Linker_btnMore__1PEzz">SNS
-                            <i class="icon chevron-right Linker_linkerIcon__1QJpf" aria-hidden="true"></i>
-                        </div>
-                        <!--<div class="menu-container SNSMenu_right__Ifv-D SNSMenu_container__2jheu">
-                            <div class="SNSMenu_menu__2HPjd"><a href="https://blog.naver.com/wadiz_crowdfunding"
-                                    class="SNSMenu_sub__20rtH" target="_blank" rel="noopener noreferrer">
-                                    <i class="icon icon-naver-blog" aria-hidden="true"></i> 블로그</a>
-                                <span class="SNSMenu_space__3QlWW"></span><a href="https://www.wadiz.kr/link/youtube"
-                                    class="SNSMenu_sub__20rtH" target="_blank" rel="noopener noreferrer">
-                                    <i class="icon icon-youtube-play" aria-hidden="true"></i> 유튜브</a>
-                            </div>
-                        </div> --> <!--하위 메뉴-->
-                    </div>
-                </div>
     </div>
     <div class="FooterInfo_container__229Pz">
         <div class="FooterInfo_inner__29dOw">
