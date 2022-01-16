@@ -18,4 +18,5 @@ public interface SocialDao {
 	public void modify(SocialRegVO socialRegVO);
 	public List<SocialIndexVO> getIndexList();
 	public void delete(int socialNo);
+	public boolean getIsMytown(int socialNo,String goo);
 }

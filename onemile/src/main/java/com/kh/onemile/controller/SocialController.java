@@ -238,10 +238,14 @@ public class SocialController {
 		int memberNo = (int)session.getAttribute("logNo");
 		SocialDetailVO detail = socialService.getDetail(socialNo);
 		String joined = participantDao.getParti(memberNo,socialNo);
+		String goo = (String)session.getAttribute("goo");
+		boolean ismytown = socialService.getIsMytown(socialNo,goo);
 		
 		log.debug("result       : "+detail.toString()); 
 		model.addAttribute("detail",detail);
 		model.addAttribute("joined",joined);
+		model.addAttribute("ismytown", ismytown);
+		
 		return "social/detail";
 	}
 	@PostMapping("/detail/{socialNo}")
@@ -296,5 +300,17 @@ public class SocialController {
 	public void appove(int socialNo,int partiMemberNo) {
 		
 		participantService.approve(socialNo,partiMemberNo);
+	}
+	@ResponseBody
+	@PostMapping("/denied")
+	public void denied(@RequestParam int socialNo, Model model,HttpSession session) {
+		
+		int memberNo = (int)session.getAttribute("logNo");
+		ParticipateVO participateVO = new ParticipateVO();
+		participateVO.setMemberNo(memberNo);
+		participateVO.setSocialNo(socialNo);
+
+		socialService.exitSocial(participateVO);
+		log.debug("result       : "+participateVO.toString());
 	}
 }
