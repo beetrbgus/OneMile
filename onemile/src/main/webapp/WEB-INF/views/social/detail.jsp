@@ -24,6 +24,66 @@
     border: 2px solid gray;
 }
 </style>
+<<<<<<< HEAD
+
+<script >
+$(function(){
+	$("#reportBtn").on("click",function(){
+		$("body").addClass("ReactModal__Body--open");
+	});
+});
+
+//회원승인
+$(function(){
+	$(".socialaprrove").on("click",function(){
+		var partiMemberNo = $(this).data("memberno");
+		var socialNo = '${detail.socialNo}'
+		$.ajax({ 
+			url : '${pageContext.request.contextPath}/social/appove',
+			type : "post",
+			async : false,
+			data : { 
+				"partiMemberNo" : partiMemberNo,
+				
+				"socialNo" : socialNo
+			},
+			success : function(resp) {
+				console.log("성공", resp);
+					
+			
+		  	},
+	 		error : function(e) {
+			  console.log("실패", e);
+ 		  	}
+ 		});
+	});
+
+
+//회원거절
+	$(".ban").on("click",function(){
+		var partiMemberNo = $(this).data("memberno");
+		var socialNo = '${detail.socialNo}'
+		$.ajax({ 
+			url : '${pageContext.request.contextPath}/social/denied',
+			type : "post",
+			async : false,
+			data : { 
+				"partiMemberNo" : partiMemberNo,
+				
+				"socialNo" : socialNo
+			},
+			success : function(resp) {
+				console.log("성공", resp);
+					
+			
+		  	},
+	 		error : function(e) {
+			  console.log("실패", e);
+ 		  	}
+ 		});
+	});
+});
+</script>
 	<c:choose>
 		<c:when test="${detail.maxpeople > fn:length(detail.participate)}">
 			<c:set value="false" var="isFull"></c:set>

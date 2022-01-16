@@ -37,7 +37,6 @@
 	<link rel="stylesheet" href="${root}/resources/css/main.e49dc743.css">
 	<link rel="stylesheet" href="${root}/resources/css/mobile-w.css">
 	<link rel="stylesheet" href="${root}/resources/css/partners.e0da7bd4.css">
-	<link rel="stylesheet" href="${root}/resources/css/reply.css">
 	<link rel="stylesheet" href="${root}/resources/css/reset-w.css">
 	<link rel="stylesheet" href="${root}/resources/css/reward-main.57e0ec6d.chunk.css">
 	<link rel="stylesheet" href="${root}/resources/css/terms.09f05cfa.css">
@@ -193,12 +192,6 @@ $(function () {
 							<ul class="GNBDesktop_container__3X3Cg">
 								<li class="GNBDesktop_item__H8bay confirmbtn GNBDesktop_link__1AP6q"><span>동네인증</span></li>
 								<li class="GNBDesktop_item__H8bay GNBDesktop_link__1AP6q"><input type="text" class="dong"></li>
-								<li class="GNBDesktop_item__H8bay">
-									<a class="GNBDesktop_link__1AP6q" 
-										href="${root}/miles">
-										<span>마일즈</span>
-									</a>
-								</li>
 								<li class="GNBDesktop_item__H8bay">
 									<a class="GNBDesktop_link__1AP6q"
 										href="${root}/social">
