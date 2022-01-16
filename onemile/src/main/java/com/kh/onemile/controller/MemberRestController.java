@@ -1,5 +1,9 @@
 package com.kh.onemile.controller;
 
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +15,8 @@ import com.kh.onemile.entity.member.MemberDTO;
 import com.kh.onemile.repository.member.MemberDao;
 import com.kh.onemile.service.email.EmailService;
 
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
 @RequestMapping("/member")
 @RestController
 public class MemberRestController {
@@ -70,4 +76,11 @@ public class MemberRestController {
 		} 
 		return num;
 	}
+	@GetMapping("/myTown")
+	public void setMyTown(@RequestParam String goo,HttpSession session) {
+		session.setAttribute("goo", goo);
+		log.debug("session.getAttribute(\"goo\")  "+(String)session.getAttribute("goo"));
+	}
+	
+	
 }

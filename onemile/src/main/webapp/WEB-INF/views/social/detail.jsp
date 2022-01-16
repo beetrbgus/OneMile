@@ -149,7 +149,7 @@
                 <div class="detail_info__host__name">${detail.nick}</div>
             </div>
             <div class="detail_info__header">
-                <div class="detail_info__title">여자들의 로망 폴댄스 체험❤️</div>
+                <div class="detail_info__title">${detail.title}</div>
             </div>
             <div class="detail_info__location"><span>${detail.startDate} ~ ${detail.endDate}</span></div>
         </div>
@@ -161,7 +161,7 @@
                     style="background-image">
                 	<img class=" image image-round image-border" style="width:300px;height:50px;" src="${pageContext.request.contextPath}/image/download?imageNo=${detail.hostImgNo}&folder=member">
                 
-                </div> <span class="user">모임장 닉네임${detail.nick}${detail.isJoined}</span>
+                </div> <span class="user">모임장 닉네임${detail.nick}</span>
                 <div class="socialing_name">${detail.title}</div>
                 <div> </div>
             </div>

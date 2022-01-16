@@ -18,7 +18,7 @@ window.kakao.maps.load(function() {
 				center : new kakao.maps.LatLng(lat, lng),
 				level : 4
 		}; 
-
+		console.log("옵션의 센터 값   "+options.center);
 		// 지도 생성 코드
 		var map = new kakao.maps.Map(container, options);
 		
