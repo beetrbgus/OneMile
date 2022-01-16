@@ -24,6 +24,7 @@
     border: 2px solid gray;
 }
 </style>
+<<<<<<< HEAD
 
 <script >
 $(function(){
@@ -83,18 +84,6 @@ $(function(){
 	});
 });
 </script>
-<%-- <p>번호 : ${detail.socialNo}</p>
-
-	<h2>  멤버가 참가한 갯수 해서 참가 불가능하게 만들기. </h2>
-	<h2>  공동구매 수정 </h2> 
-	<h2>  내 위치 기반으로 만들기 </h2> 
-	<h2>  차트 물어보기. </h2> 
-	<h2>  신고 기능 </h2> 
-	<h2>  관리자 페이지. </h2> 
-	
-  <p>번호 : ${detail.socialNo}</p>
-	<p>제목 : ${detail.title}</p> --%>
-	
 	<c:choose>
 		<c:when test="${detail.maxpeople > fn:length(detail.participate)}">
 			<c:set value="false" var="isFull"></c:set>
@@ -193,7 +182,6 @@ $(function(){
                     <span> ${detail.startDate} ~ ${detail.endDate}</span> </div>
         </div>
         <div class="detail_buttons_row floating row">
-        	
             <div class="col">
                 <c:choose>
 							<c:when test="${detail.memberNo==logNo}">
@@ -219,25 +207,8 @@ $(function(){
 								<div  id="purchase"   data-joined="join" class="pointer purchase_button"> 소셜링 참여하기 </div>
 							</c:otherwise>
 						</c:choose>
-						
-						<!-- 신고하기 -->
-						<form>
-						<div class="wz-message-box project-report">
-						<div id="reward-report-content" data-campaign-id="135101" data-is-logged-in="false" data-maker-name="(주)투유에이치앤비">
-							<div class="RewardProjectReportContainer_container__1XPZm">
-								<div class="RewardProjectReportContainer_text__20T0i">
-									<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MCA0MCI+PGcgaWQ9IkxheWVyXzIiIGRhdGEtbmFtZT0iTGF5ZXIgMiI+PGcgaWQ9Imljb240Ij48cmVjdCB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNMzUsMzEuOTRIMzRWMjJBMTQsMTQsMCwwLDAsNiwyMnY5Ljk0SDVhMSwxLDAsMCwwLTEsMVYzN2ExLDEsMCwwLDAsMSwxSDM1YTEsMSwwLDAsMCwxLTFWMzIuOTRBMSwxLDAsMCwwLDM1LDMxLjk0Wk04LDIyYTEyLDEyLDAsMCwxLDI0LDB2OS45NEg4Wk0zNCwzNkg2VjMzLjk0SDM0WiIvPjxyZWN0IHg9IjE5IiB5PSIyIiB3aWR0aD0iMiIgaGVpZ2h0PSI0Ii8+PHJlY3QgeD0iNi4yMSIgeT0iNy4zIiB3aWR0aD0iMiIgaGVpZ2h0PSI0IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNC40NiA3LjgyKSByb3RhdGUoLTQ0Ljk5KSIvPjxyZWN0IHg9IjMwLjY3IiB5PSI4LjI1IiB3aWR0aD0iNCIgaGVpZ2h0PSIyIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzLjAzIDI1LjgxKSByb3RhdGUoLTQ1KSIvPjxwYXRoIGQ9Ik0xMSwyMmgyYTcsNywwLDAsMSw3LTdWMTNBOSw5LDAsMCwwLDExLDIyWiIvPjwvZz48L2c+PC9zdmc+" alt="alarm icon">상품에 문제가 있나요?
-								</div>
-								<input type="hidden" name="soclaiNo" value="${detail.socialNo}">
-								<input type="hidden" name="type" value="social">
-								
-								<span><button type="button" id="reportBtn">신고하기</button><i class="icon chevron-right" aria-hidden="true"></i></span></a>
-							
-								</div>
-						</div>
-					</div>
-                	</form>
-              												
+                
+              
                 <div id="map" style="width:412px;height:300px;top:50px;right: 20px;"></div>
             </div>
         </div>
@@ -263,26 +234,12 @@ $(function(){
                         </div>
                     </div>
                     <div class="col user_info_col">
-                      <div class="user">
-                        
+                        <div class="user">
                         <c:forEach items="${detail.participate}" var="parti">
 							  	<br>
-							  	${parti.nick} 
-                      			<c:choose>
-                     				<c:when test="${detail.memberNo==logNo}">
-                     					<c:choose>
-							  				<c:when test= "${parti.isJoined eq '수락대기중'}">
-							  					<button type="button" class="socialaprrove" data-memberno="${parti.memberNo}">수락하기</button>
-							  					<button type="button" class="ban" data-memberno="${parti.memberNo}">거절하기</button>
-							  				</c:when>
-							  				<c:otherwise>
-							  					<button type="button" class="ban" data-memberno="${parti.memberNo}">강퇴하기</button>
-							  				</c:otherwise>
-							  			</c:choose>
-                     				</c:when>
-                     			</c:choose>
-                      </c:forEach>
-                         </div>
+							  	${parti.nick} ·
+						</c:forEach>		
+                        </div>
                         <div class="user_grade"></div>
                     </div>
                 </div>
@@ -328,6 +285,11 @@ $(function(){
 					let socialForm = $("#socialform");
 					let  action = "";
 					/* 각 버튼 클릭시 Action 지정. 수정은 페이지 이동 */
+					let ismyTown = ${ismytown};
+					if(!ismyTown){
+						alert("내 동네가 아닙니다. 지역의 소모임을 이용해보세요!");
+						return false;
+					}
 					if(status=='exit'){
 						action = "../socialexit"; 
 					}else{
@@ -341,10 +303,7 @@ $(function(){
 			}
 			console.log("isFull   "+isFull );
 			// 내 동네일때
-			let ismyTown = ${ismytown};
-			if(!ismyTown){
-				$("#purchase").attr("disabled",true);
-			}
+			
 
 		});
 	</script>
