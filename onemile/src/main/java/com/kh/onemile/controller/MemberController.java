@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.onemile.entity.member.MemberDTO;
 import com.kh.onemile.entity.member.certi.CertiDTO;
@@ -170,22 +171,33 @@ public class MemberController {
 	 */
 
 	// 비밀번호찾기(이메일 인증번호 체크)
-	@PostMapping("/emailCheck")
-	public String emailCheck(@ModelAttribute CertiDTO certiDTO, HttpSession session, Model model) {
+	@PostMapping("/find_pw")
+	public String emailCheck(@ModelAttribute CertiDTO certiDTO, HttpSession session, Model mode) {
 		boolean success = memberService.emailCheck(certiDTO);
 		if (success) {
-			model.addAttribute("email", certiDTO.getEmail());
-			log.debug("이메일찾기@@@"+certiDTO.getEmail());
-			return "member/find_edit_pw";
+//			model.addAttribute("email", certiDTO.getEmail());
+//			log.debug("이메일찾기@@@"+certiDTO.getEmail());
+			session.setAttribute("email", certiDTO.getEmail());
+			return "redirect:find_edit_pw";
 		} else {
-			return "redirect:find_pw?error";
+			return "redirect:find_edit_pw?error";
 		}
 	}
-	@GetMapping("find_edit_pw")
-	public String findEditPw(@RequestParam String changePw, @RequestParam String email) {
+	@GetMapping("/find_edit_pw")
+	public String findEditPw() {
+		return "member/find_edit_pw";
+		
+	}
+	
+	@PostMapping("/find_edit_pw")
+	public String findEditPw(@RequestParam String changePw, HttpSession session) {
+//		log.debug("이메이이잉이ㅣㅇ이ㅣㅇ이이이잉"+email);
+		String email = (String) session.getAttribute("email");
 		boolean result = memberService.emailChangePw(email, changePw);
 		if(result) {
+			session.removeAttribute("email");
 			return "redirect:/";
+			
 		} else {
 			return "redirect:find_edit_pw?error";
 		}
