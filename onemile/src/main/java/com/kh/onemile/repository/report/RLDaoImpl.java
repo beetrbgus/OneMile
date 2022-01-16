@@ -2,30 +2,28 @@ package com.kh.onemile.repository.report;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.kh.onemile.vo.report.ReportRegVO;
-import com.kh.onemile.vo.report.middle.MiddleRLVO;
 
-@Repository
-public class ReportDaoImpl implements ReportDao{
+@Service
+public class RLDaoImpl implements RLDao{
 	
 	@Autowired
 	private SqlSession sqlSession;
-	
 	@Override
-	public void reg(MiddleRLVO middleRLVO) {
-		sqlSession.insert("rl.reg", middleRLVO);
-	}  
+	public void reg(ReportRegVO reportVO) {
+		sqlSession.insert("", reportVO);
+	}
 
 	@Override
 	public void delete(int rlNo) {
-		sqlSession.update("rl.delete", rlNo);
+		sqlSession.update("", rlNo);
 	}
 
 	@Override
 	public void adminDelete(int rlNo) {
-		sqlSession.delete("rl.adminDelete", rlNo);
+		sqlSession.delete("", rlNo);
 	}
 
 }
