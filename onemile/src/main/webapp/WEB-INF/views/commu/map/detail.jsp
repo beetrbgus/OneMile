@@ -19,12 +19,16 @@
 				<div class="article-top">
 					<p class="title">${commuDetailVO.title}</p>
 					<div class="info">
-						<c:if test="${commuDetailVO.imageNo != 0}">
+					<c:choose>
+						<c:when test="${commuDetailVO.imageNo != 0}">
 							<em class="user-img"
 								style="background-image:url(${pageContext.request.contextPath}/image/download?imageNo=${commuDetailVO.imageNo}&folder=member)"></em>
-						</c:if>
+						</c:when>
+						<c:otherwise>
 						<em class="user-img"
 							style="background-image: url(https://via.placeholder.com/300x300?text=User)"></em>
+						</c:otherwise>
+					</c:choose>
 						<span class="user-info">${commuDetailVO.nick}<br>${commuDetailVO.regDate}</span>
 					</div>
 				</div>

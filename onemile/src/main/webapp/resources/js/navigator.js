@@ -27,7 +27,6 @@ $(function(){
 	        	console.log("result[0].y "+result[0].y);
 	        	console.log("result[0].region_2depth_name "+ goo);
 	        	console.log("result[0].region_3depth_name "+ dong);
-	        	let goo =  goo;
 		    	if(removeSession()){
 		    		setSession(result[0].x,result[0].y,dong,goo);
 		    	}
