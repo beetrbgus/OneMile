@@ -262,6 +262,7 @@ $(function(){
 							  	<br>
 							  	<c:if test="${joined eq '수락대기중'}"></c:if>
 							  	<a href="">수락하기</a>
+							  	<a href="">거절하기</a>
 						</c:forEach>
                         </c:otherwise>
                         </c:choose>
