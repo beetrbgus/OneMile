@@ -191,12 +191,6 @@ $(function () {
 								<li class="GNBDesktop_item__H8bay confirmbtn GNBDesktop_link__1AP6q"><span>동네인증</span></li>
 								<li class="GNBDesktop_item__H8bay GNBDesktop_link__1AP6q"><input type="text" class="dong"></li>
 								<li class="GNBDesktop_item__H8bay">
-									<a class="GNBDesktop_link__1AP6q" 
-										href="${root}/miles">
-										<span>마일즈</span>
-									</a>
-								</li>
-								<li class="GNBDesktop_item__H8bay">
 									<a class="GNBDesktop_link__1AP6q"
 										href="${root}/social">
 										<span>소셜링</span>
