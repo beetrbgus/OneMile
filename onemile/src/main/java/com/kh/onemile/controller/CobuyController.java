@@ -59,17 +59,20 @@ public class CobuyController {
 	// 상품 목록
 	@GetMapping({"/list/{category}","/list","/",""})
 	public String list(@PathVariable(required = false) String category,
+			@RequestParam(required = false,defaultValue = "") String keyword,
 			@RequestParam(required =false, defaultValue = "1") int page,
 			@RequestParam(required =false, defaultValue = "10") int size
 			,Model model,HttpSession session) {
 		log.warn("page=========="+page);
 		log.warn("size============"+size);
 		PaginationVO paginationVO =new PaginationVO(page,size);
-
-		if(session.getAttribute("goo")!=null) {
+		//검색어가 있으면 지역 무시
+		if(!keyword.equals("") &&session.getAttribute("goo")!=null) {
 			String goo = (String)session.getAttribute("goo");
 			paginationVO.setGoo(goo);	
-		}
+		}else {
+			paginationVO.setKeyword(keyword);
+		} 
 		if(category==null||category.equals("/")) {
 			category="";
 			paginationVO.setCategory(category);
