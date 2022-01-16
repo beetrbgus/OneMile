@@ -128,10 +128,11 @@ public class SocialController {
 			,Model model,HttpSession session) {
 		PaginationVO paginationVO =new PaginationVO(page,size);
 		bigcate =(bigcate==null||bigcate.equals("/"))?"":bigcate;
-		
+		log.debug("googoo    "+(String)session.getAttribute("goo"));
 		//저장된 인증이 있을 때. 검색에서는 현재 위치 무효화 시키려고 함.
 		if((keyword == null||keyword.equals(""))&&session.getAttribute("goo")!=null) {
 			String goo = (String)session.getAttribute("goo");
+			log.debug("googoogoo    "+goo);
 			paginationVO.setGoo(goo);	
 		}else {
 			paginationVO.setKeyword(keyword);
