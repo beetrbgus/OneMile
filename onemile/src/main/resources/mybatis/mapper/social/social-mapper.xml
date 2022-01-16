@@ -202,4 +202,9 @@
 			)TMP
 		) where rn between 1 and 3
 	</select>
+	<select id="getIsMytown" parameterType="Map" resultType="int">
+		select count(*) from social s inner join map m 
+			on s.map_no = m.map_no
+		where social_no = ${socialNo} and instr(m.detailaddress,#{goo}) > 0
+	</select>
 </mapper>

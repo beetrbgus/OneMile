@@ -238,10 +238,14 @@ public class SocialController {
 		int memberNo = (int)session.getAttribute("logNo");
 		SocialDetailVO detail = socialService.getDetail(socialNo);
 		String joined = participantDao.getParti(memberNo,socialNo);
+		String goo = (String)session.getAttribute("goo");
+		boolean ismytown = socialService.getIsMytown(socialNo,goo);
 		
 		log.debug("result       : "+detail.toString()); 
 		model.addAttribute("detail",detail);
 		model.addAttribute("joined",joined);
+		model.addAttribute("ismytown", ismytown);
+		
 		return "social/detail";
 	}
 	@PostMapping("/detail/{socialNo}")
@@ -305,9 +309,12 @@ public class SocialController {
 		
 		ParticipateVO participateVO = new ParticipateVO();
 		participateVO.setMemberNo(partiMemberNo);
+
 		participateVO.setSocialNo(socialNo);
 
 		socialService.exitSocial(participateVO);
 		log.debug("result       : "+participateVO.toString());
 	}
+
 }
+

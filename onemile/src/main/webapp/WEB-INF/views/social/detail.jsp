@@ -24,6 +24,7 @@
     border: 2px solid gray;
 }
 </style>
+
 <script >
 $(function(){
 	$("#reportBtn").on("click",function(){
@@ -93,42 +94,6 @@ $(function(){
 	
   <p>번호 : ${detail.socialNo}</p>
 	<p>제목 : ${detail.title}</p>
-
- <%--  <p>번호 : ${detail.socialNo}</p>
-
-  <p>제목 : ${detail.title}</p>
->>>>>>> branch 'MS95' of https://github.com/beetrbgus/OneMile.git
-  <p>대분류 : ${detail.type}</p>
-  <p>소분류 : ${detail.smalltype}</p>
-  <p>시작일 : ${detail.startDate}</p> 
-  <p>종료일 : ${detail.endDate}</p>
-  <p>설명 : ${detail.context}</p>
-  <p>최소인원 : ${detail.minpeople}</p>
-  <p>최대인원 :${detail.maxpeople}</p>
-  <p>참여자 목록 : </p>
- <c:forEach items="${detail.participate}" var="parti">
-  	<br>
-  	${parti.memberNo} /
-	 ${parti.profileImgNo} /
-	${parti.nick} /
-	${parti.intro} /
-  </c:forEach>
-  <p>모임장 회원번호 :${detail.memberNo}</p>
-  <p>모임장 닉네임 : ${detail.nick}</p>
-  <p>등록일 :${detail.regdate}</p>
-  <p>모임장 이미지 번호 :</p>
-  	<img width="400px" height="300" src="${pageContext.request.contextPath}/image/download?imageNo=${detail.hostImgNo}&folder=member">  
-  <p>소셜링 이미지 번호 : </p>
-  <c:forEach items="${detail.imageInfo}" var="imageDTO">
-  	<img width="400px" height="300" src="${pageContext.request.contextPath}/image/download?imageNo=${imageDTO.imageNo}&folder=social">	
-  </c:forEach>
-  <p>위도 :${detail.lat}</p> 
-  <p>경도 : ${detail.lng}</p>
-  <p>상세주소 : ${detail.detailAddress}</p>
-  <form id="socialform" method="post" action="../socialjoin" >
-   	<input type="hidden" name="socialNo" value="${detail.socialNo}">
-  </form> --%>
-	
 	
 	<c:choose>
 		<c:when test="${detail.maxpeople > fn:length(detail.participate)}">
@@ -354,6 +319,7 @@ $(function(){
 	
 	<script> 
 		$(function(){
+			//참가자 꽉 찼을 때
 			let isFull = ${isFull};
 			if(!isFull){ 
 				$("#purchase").on("click",function(){
@@ -374,7 +340,11 @@ $(function(){
 				});
 			}
 			console.log("isFull   "+isFull );
-
+			// 내 동네일때
+			let ismyTown = ${ismytown};
+			if(!ismyTown){
+				$("#purchase").attr("disabled",true);
+			}
 
 		});
 	</script>
