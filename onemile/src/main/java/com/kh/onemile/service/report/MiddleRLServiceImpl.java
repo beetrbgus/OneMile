@@ -16,6 +16,8 @@ public class MiddleRLServiceImpl implements  MiddleRLService{
 	private MiddleRLDao socialDao;
 	@Autowired @Qualifier("member")
 	private MiddleRLDao memberDao;
+	@Autowired @Qualifier("cobuy")
+	private MiddleRLDao cobuyDao;
 	
 	@Override
 	public void reg(MiddleRLVO middleRLVO) {
@@ -24,6 +26,8 @@ public class MiddleRLServiceImpl implements  MiddleRLService{
 			commuDao.reg(middleRLVO);
 		}else if(type.equals("social")){
 			socialDao.reg(middleRLVO);
+		}else if(type.equals("cobuy")){
+			cobuyDao.reg(middleRLVO);
 		}else {
 			memberDao.reg(middleRLVO);
 		}
@@ -36,6 +40,8 @@ public class MiddleRLServiceImpl implements  MiddleRLService{
 			commuDao.delete(rlNo);
 		}else if(type.equals("social")){
 			socialDao.delete(rlNo);
+		}else if(type.equals("cobuy")){
+			cobuyDao.delete(rlNo);
 		}else {
 			memberDao.delete(rlNo);
 		}
@@ -47,6 +53,8 @@ public class MiddleRLServiceImpl implements  MiddleRLService{
 			commuDao.adminDelete(rlNo);
 		}else if(type.equals("social")){
 			socialDao.adminDelete(rlNo);
+		}else if(type.equals("cobuy")){
+			cobuyDao.adminDelete(rlNo);
 		}else {
 			memberDao.adminDelete(rlNo);
 		}

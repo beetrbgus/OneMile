@@ -18,16 +18,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kh.onemile.entity.member.membership.AdDTO;
 import com.kh.onemile.entity.social.SocialBigCategoryDTO;
 import com.kh.onemile.entity.social.SocialDTO;
-import com.kh.onemile.repository.social.participant.ParticipantService;
+import com.kh.onemile.repository.social.participant.ParticipantDao;
 import com.kh.onemile.service.category.CategoryService;
 import com.kh.onemile.service.member.MemberService;
 import com.kh.onemile.service.social.SocialService;
-import com.kh.onemile.service.social.participant.ParticipantDao;
+import com.kh.onemile.service.social.participant.ParticipantService;
 import com.kh.onemile.vo.PaginationVO;
 import com.kh.onemile.vo.social.SocialDetailVO;
 import com.kh.onemile.vo.social.SocialListVO;
 import com.kh.onemile.vo.social.SocialRegVO;
 import com.kh.onemile.vo.social.category.MiddleCategoryVO;
+import com.kh.onemile.vo.social.participate.ParticipateDetailVO;
 import com.kh.onemile.vo.social.participate.ParticipateVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -220,5 +221,13 @@ public class SocialController {
 	public String delete(@PathVariable int socialNo) {
 		socialService.delete(socialNo);
 		return "redirect:list";
+	}
+	@GetMapping("/memberManage")
+	public String memberManage(int socialNo,Model model,HttpSession session) {
+		int memberNo = (int)session.getAttribute("logNo");
+		List<ParticipateDetailVO> result = socialService.getPaticipantList(socialNo,memberNo);
+		model.addAttribute("result",result);
+		log.debug("getPaticipantList    "+result.toString());
+		return "manage";
 	}
 }

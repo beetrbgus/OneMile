@@ -9,10 +9,10 @@
 		)
 	</insert>
 	<update id="delete" parameterType="int">
-		update mrl set HIDDENYN='Y' where rl_no = #{rlNo}
+		update memberRL set HIDDENYN='Y' where rl_no = #{rlNo}
 	</update>
 	<delete id="adminDelete" parameterType="int">
-		delete from mrl where rl_no = #{rlNo}
+		delete from memberRL where rl_no = #{rlNo}
 	</delete>
 	
 </mapper>

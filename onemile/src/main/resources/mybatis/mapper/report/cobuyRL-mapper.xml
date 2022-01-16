@@ -4,15 +4,15 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cbrl">
 	<insert id="reg" parameterType="MiddleRLVO">
-		insert into socialRL(cbrl_no, cobuy_no, rl_no) values(
+		insert into cobuyRL(cbrl_no, cobuy_no, rl_no) values(
 			cbrl_seq.nextval , #{connTableNo}, #{rlNo}
 		)
 	</insert>
 	<update id="delete" parameterType="int">
-		update srl set HIDDENYN='Y' where rl_no = #{rlNo}
+		update cobuyRL set HIDDENYN='Y' where rl_no = #{rlNo}
 	</update>
 	<delete id="adminDelete" parameterType="int">
-		delete from srl where rl_no = #{rlNo}
+		delete from cobuyRL where rl_no = #{rlNo}
 	</delete>
 	
 </mapper>
