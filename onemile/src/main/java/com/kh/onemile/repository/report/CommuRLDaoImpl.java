@@ -17,17 +17,17 @@ public class CommuRLDaoImpl implements ReportDao{
 	
 	@Override
 	public void reg(MiddleRLVO middleRLVO) {
-		sqlSession.insert("rl.reg", middleRLVO);
+		sqlSession.insert("crl.reg", middleRLVO);
 	}  
 
 	@Override
 	public void delete(int rlNo) {
-		sqlSession.update("rl.delete", rlNo);
+		sqlSession.update("crl.delete", rlNo);
 	}
 
 	@Override
 	public void adminDelete(int rlNo) {
-		sqlSession.delete("rl.adminDelete", rlNo);
+		sqlSession.delete("crl.adminDelete", rlNo);
 	}
 
 }
