@@ -21,4 +21,5 @@ public interface SocialService {
 	public void exitSocial(ParticipateVO participateVO);
 	public void modify(SocialRegVO socialRegVO) throws IllegalStateException, IOException;
 	public List<SocialIndexVO> indexList();
+	public void delete(int socialNo);
 }

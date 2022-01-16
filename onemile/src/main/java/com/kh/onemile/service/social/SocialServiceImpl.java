@@ -164,4 +164,9 @@ public class SocialServiceImpl implements SocialService{
 		return socialDao.getIndexList();
 	}
 
+	@Override
+	public void delete(int socialNo) {
+		socialDao.delete(socialNo);
+	}
+
 }

@@ -57,4 +57,9 @@ public class SocialDaoImpl implements SocialDao{
 	public List<SocialIndexVO> getIndexList() {
 		return sqlSession.selectList("social.indexList");
 	}
+
+	@Override
+	public void delete(int socialNo) {
+		sqlSession.update("social.delete", socialNo);
+	}
 }
