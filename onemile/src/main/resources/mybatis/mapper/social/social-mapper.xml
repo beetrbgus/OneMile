@@ -115,11 +115,11 @@
 				</when>
 			</choose>
 			<choose>
-				<when test="endyn != null and endyn.equals('Y')">
-					and  <![CDATA[ s.ENDDate < sysdate]]> 
+				<when test='endyn != null and endyn.equals("Y") or endyn=="Y"'>
+					and   s.ENDDate <![CDATA[<]]> sysdate 
 				</when>
-				<when test="endyn != null and endyn.equals('N')">
-					and  <![CDATA[ s.ENDDate > sysdate]]> 
+				<when test='endyn != null and endyn.equals("N") or endyn=="N"'>
+					and   s.ENDDate <![CDATA[>]]> sysdate 
 				</when>
 			</choose>
 			<if test="goo!=null and goo!=''">
@@ -185,15 +185,16 @@
                     inner join 
                     (select social_no , min(image_no) image_no
 						from smi group by social_no) smi on	
-						s.social_no = smi.social_no where s.hiddenyn ='N'
-						<choose>
-				<when test="endyn != null and endyn.equals('Y')">
-					and  <![CDATA[ s.ENDDate < sysdate]]> 
-				</when>
-				<when test="endyn != null and endyn.equals('N')">
-					and  <![CDATA[ s.ENDDate > sysdate]]> 
-				</when>
-			</choose>
+						s.social_no = smi.social_no 
+					where s.hiddenyn ='N'
+					<choose>
+						<when test="endyn != null and endyn =='Y' or endyn.equals('Y')">
+							<![CDATA[ s.STARTDATE < sysdate]]>  
+						</when>
+						<when test="endyn != null and endyn =='N' or endyn.equals('N')">
+							<![CDATA[ s.STARTDATE > sysdate]]> 
+						</when>
+					</choose>
 				ORDER BY DBMS_RANDOM.RANDOM
 			)TMP
 		) where rn between 1 and 3
