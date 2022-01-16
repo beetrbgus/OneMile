@@ -4,7 +4,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.kh.onemile.vo.report.ReportVO;
+import com.kh.onemile.vo.report.ReportRegVO;
 
 @Repository
 public class ReportDaoImpl implements ReportDao{
@@ -13,7 +13,7 @@ public class ReportDaoImpl implements ReportDao{
 	private SqlSession sqlSession;
 	
 	@Override
-	public void reg(ReportVO reportVO) {
+	public void reg(ReportRegVO reportVO) {
 		sqlSession.insert("rl.reg", reportVO);
 	}  
 

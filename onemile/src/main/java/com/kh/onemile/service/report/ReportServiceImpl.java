@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.onemile.repository.report.ReportDao;
-import com.kh.onemile.vo.report.ReportVO;
+import com.kh.onemile.vo.report.ReportRegVO;
 
 @Service
 public class ReportServiceImpl implements ReportService{
@@ -12,7 +12,7 @@ public class ReportServiceImpl implements ReportService{
 	private ReportDao reportDao;
 	
 	@Override
-	public void reg(ReportVO reportVO) {
+	public void reg(ReportRegVO reportVO) {
 		reportDao.reg(reportVO);
 	}
 
