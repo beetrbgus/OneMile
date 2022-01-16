@@ -22,7 +22,12 @@ public class ParticipantServiceImpl implements ParticipantService{
 		participantDao.reg(participateVO);
 	}
 	@Override
-	public void approve(ParticipateVO participateVO) {
+	public void approve(int socialNo,int partiMemberNo) {
+		
+		ParticipateVO participateVO =new ParticipateVO();
+		participateVO.setMemberNo(partiMemberNo);
+		participateVO.setSocialNo(socialNo);
+		
 		participantDao.approve(participateVO);
 	}
 	@Override
