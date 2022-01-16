@@ -5,7 +5,7 @@
 <mapper namespace="mrl">
 	<insert id="reg" parameterType="MiddleRLVO">
 		insert into memberRL(mrl_no, member_no, rl_no) values(
-			mrl_seq.nextval , #{memberNo}, #{rlNo}
+			mrl_seq.nextval , #{connTableNo}, #{rlNo}
 		)
 	</insert>
 	<update id="delete" parameterType="int">

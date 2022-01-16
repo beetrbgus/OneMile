@@ -4,18 +4,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.kh.onemile.repository.report.ReportDao;
+import com.kh.onemile.repository.report.MiddleRLDao;
 import com.kh.onemile.vo.report.middle.MiddleRLVO;
 
 @Service
 public class MiddleRLServiceImpl implements  MiddleRLService{
 
 	@Autowired @Qualifier("commu")
-	private ReportDao commuDao;
+	private MiddleRLDao commuDao;
 	@Autowired @Qualifier("social")
-	private ReportDao socialDao;
+	private MiddleRLDao socialDao;
 	@Autowired @Qualifier("member")
-	private ReportDao memberDao;
+	private MiddleRLDao memberDao;
 	
 	@Override
 	public void reg(MiddleRLVO middleRLVO) {
