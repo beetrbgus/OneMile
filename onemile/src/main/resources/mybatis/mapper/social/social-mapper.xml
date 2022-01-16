@@ -131,13 +131,17 @@
 	</select>
 	
 	<select id="getMemberByList" parameterType="int" resultType="SocialListVO">
-			                select s.title,
-                				TO_CHAR(s.startdate, 'MM/DD HH24:mm') as startDate, 
-                				TO_CHAR(s.enddate, 'MM/DD HH24:mm') as endDate ,smi.image_no
-                  			 from social s 
-                           		inner join sp p on s.social_no = p.social_no
-                           		inner join smi on smi.social_no = s.social_no
-                                 where s.hiddenyn ='N' and p.member_no = #{memberNo}
+			  select s.title,s.social_no,
+    TO_CHAR(s.startdate, 'MM/DD HH24:mm') as startDate, 
+    TO_CHAR(s.enddate, 'MM/DD HH24:mm') as endDate ,smi.image_no as img_no
+            from social s 
+            inner join sp p on s.social_no = p.social_no
+            inner join 
+            (select social_no, min(image_no) as image_no
+					from smi group by social_no) smi on 
+                    smi.social_no = s.social_no
+        where s.hiddenyn ='N' and p.member_no = 286 order by s.startdate desc
+                                 
 	</select>
 	
 	<select id="getCount" parameterType="int" resultType="SocialDTO">
