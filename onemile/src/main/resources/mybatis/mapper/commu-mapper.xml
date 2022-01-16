@@ -115,7 +115,7 @@
 	</resultMap>
 	
 	<select id="indexCommus" resultMap="indexListMap">
-		select * from cmc where large_name  = '커뮤니티' and instr(urlpath, '/map') > 0
+		select * from cmc where large_name  = '커뮤니티' and instr(urlpath, '/map') > 0 and hiddenyn = 'N'
 	</select>
 	<select id="listBymiddlename" parameterType="String" resultType="CommuDetailVO">
 		select * from (
@@ -127,7 +127,7 @@
 		                        on co.commu_no = CIF.commu_no
 		                        left join member me on co.member_no = me.member_no
 		                        left join cmc cmc on co.middlename = cmc.middle_name
-		                where co.middlename = #{middlename}
+		                where co.middlename = #{middlename} and co.hiddenyn = 'N'
 		                order by commu_no desc
 		 	)TMP
 		) where rn between 1 and 3

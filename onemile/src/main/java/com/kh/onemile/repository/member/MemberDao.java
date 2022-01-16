@@ -49,5 +49,8 @@ public interface MemberDao {
 	int getNickModi(int memberNo);
 
 	boolean emailChangePw(Map<String, Object> param);
+
+	//숨김처리
+	void memberHidden(int memberNo);
 	
 }

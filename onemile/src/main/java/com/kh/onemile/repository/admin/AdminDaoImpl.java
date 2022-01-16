@@ -61,11 +61,8 @@ public class AdminDaoImpl implements AdminDao{
 		Map<String, Object> map = new HashMap<>();
 		map.put("keyword", keyword);
 		map.put("search", search);
-		System.err.println(map.get("keyword")=="");
-		System.err.println(map.get("keyword")==null);
 		map.put("startRow", startRow);
 		map.put("endRow", endRow);
-		System.err.println(map);
 		return sqlSession.selectList("admin.notMemberList", map);
 	}
 	
@@ -98,5 +95,14 @@ public class AdminDaoImpl implements AdminDao{
 	@Override
 	public int membershipActiveMemberCount() {
 		return sqlSession.selectOne("admin.membershipActiveMemberCount");
+	}
+	@Override
+	public List<ExitMemberVO> hideMemberList(String keyword, String search, int startRow, int endRow) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("keyword", keyword);
+		map.put("search", search);
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+		return sqlSession.selectList("admin.hideMemberList", map);
 	}
 }

@@ -27,8 +27,18 @@
 	
 	<!-- 회원탈퇴(상태변경) -->
 	<update id="quit" parameterType="String">
-		update member set approve = 
-		'N' where email = #{email}
+		update
+			member set hiddenyn = 'Y' and exitdate = sysdate 
+		where
+			email = #{email}
+	</update>
+	
+	<!-- 회원 숨김 -->
+	<update id="hidden" parameterType="int">
+		update
+			member set hiddenyn = 'Y'
+		where
+			member_no = #{memberNo}
 	</update>
 
 	<!-- 아이디찾기 -->
