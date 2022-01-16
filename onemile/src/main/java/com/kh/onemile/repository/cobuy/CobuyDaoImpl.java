@@ -14,6 +14,7 @@ import com.kh.onemile.vo.PaginationVO;
 import com.kh.onemile.vo.cobuy.CobuyCatVO;
 import com.kh.onemile.vo.cobuy.CobuyDetailVO;
 import com.kh.onemile.vo.cobuy.CobuyListVO;
+import com.kh.onemile.vo.cobuy.CobuyListVO2;
 import com.kh.onemile.vo.cobuy.CobuyRegVO;
 import com.kh.onemile.vo.kakaopay.ConfirmVO;
 
@@ -55,7 +56,7 @@ public class CobuyDaoImpl implements CobuyDao{
 		return sqlSession.selectOne("cobuy.getforBuy", confirmVO);
 	}
 	@Override
-	public List<CobuyListVO> cobuyList() {
+	public List<CobuyListVO2> cobuyList() {
 		return sqlSession.selectList("cobuy.getList");
 	}
 	@Override

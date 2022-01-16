@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="login" value="${logId != null}"></c:set>
 <c:set var="admin" value="${grade == '관리자'}"></c:set>
+<c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <style>
 .detailAddress {
@@ -19,12 +20,16 @@
 				<div class="article-top">
 					<p class="title">${commuDetailVO.title}</p>
 					<div class="info">
-						<c:if test="${commuDetailVO.imageNo} != null">
+					<c:choose>
+						<c:when test="${commuDetailVO.imageNo != 0}">
 							<em class="user-img"
 								style="background-image:url(${pageContext.request.contextPath}/image/download?imageNo=${commuDetailVO.imageNo}&folder=member)"></em>
-						</c:if>
+						</c:when>
+						<c:otherwise>
 						<em class="user-img"
 							style="background-image: url(https://via.placeholder.com/300x300?text=User)"></em>
+						</c:otherwise>
+					</c:choose>
 						<span class="user-info">${commuDetailVO.nick}<br>${commuDetailVO.regDate}</span>
 					</div>
 				</div>
@@ -44,14 +49,19 @@
 		</div>
 		<div class="wboard-detail-bottom">
 			<div class="wboard-detail-btn-wrap">
-				<a class="wz button" href="${root}/onemile/commu/map/list?middleName=${commuDetailVO.middleName}">목록으로 돌아가기</a>
-				<c:if test="${admin}">
-				<a class="wz button" href="${root}/onemile/admin/">관리자 홈</a>
-				<a class="wz button" href="${root}/onemile/commu/map/delete?boardNo=${commuDetailVO.commuNo}&middleName=${commuDetailVO.middleName}">삭제하기</a>
+				<a class="wz button" href="${root}/commu/map/list?middleName=${commuDetailVO.middleName}">목록으로 돌아가기</a>
+				<c:if test="${admin and logNo ne commuDetailVO.memberNo}">
+				<a class="wz button" href="${root}/admin/">관리자 홈</a>
+				<a class="wz button" href="${root}/commu/map/delete?boardNo=${commuDetailVO.commuNo}&middleName=${commuDetailVO.middleName}">삭제하기</a>
 				</c:if>
-				<c:if test="${logNo==commuDetailVO.memberNo}">
-				<a class="wz button" href="${root}/onemile/commu/map/delete?boardNo=${commuDetailVO.commuNo}&middleName=${commuDetailVO.middleName}">삭제하기</a>
-				<a class="wz button" href="${root}/onemile/commu/map/edit?boardNo=${commuDetailVO.commuNo}">수정하기</a>
+				<c:if test="${admin and logNo eq commuDetailVO.memberNo}">
+				<a class="wz button" href="${root}/admin/">관리자 홈</a>
+				<a class="wz button" href="${root}/commu/map/delete?boardNo=${commuDetailVO.commuNo}&middleName=${commuDetailVO.middleName}">삭제하기</a>
+				<a class="wz button" href="${root}/commu/map/edit?boardNo=${commuDetailVO.commuNo}">수정하기</a>
+				</c:if>
+				<c:if test="${logNo eq commuDetailVO.memberNo and not admin}">
+				<a class="wz button" href="${root}/commu/map/delete?boardNo=${commuDetailVO.commuNo}&middleName=${commuDetailVO.middleName}">삭제하기</a>
+				<a class="wz button" href="${root}/commu/map/edit?boardNo=${commuDetailVO.commuNo}">수정하기</a>
 				</c:if>
 			</div>
 		</div>

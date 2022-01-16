@@ -21,4 +21,5 @@ public interface AdminDao {
 	public int membershipActiveMemberCount();
 	public int ageDistribution(int startAge, int end);
 	public int loactionDistribution(String locationName);
+	public List<ExitMemberVO> hideMemberList(String keyword, String search, int startRow, int endRow);
 }

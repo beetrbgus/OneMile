@@ -104,7 +104,6 @@ function deleteImageAction(index){
 	  console.log(sel_files);
 }
 </script>
-
 <!-- CSS 테스트중 -->
 <form id="regForm" action="reg" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="lat" required>

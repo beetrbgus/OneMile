@@ -5,7 +5,6 @@
 <style>
 .memberT{
 	padding-top:1rem;
-	margin:0 auto;
 }
 table, th, td{
 	margin-left:auto;
@@ -21,9 +20,6 @@ table{
 .intro{
 	width:400px;
 	overflow: hidden;
-}
-.a:hover{
-	color:black;
 }
 .input-form{
 	font-size:20px;
@@ -60,12 +56,18 @@ $(function () {
 		loadData(page, size);
 		page++;
 	});
-	
+	$(".hiddenmember").click(function(){ 
+		let memberno = 	$(this).data("memberno");
+		$("#memberno").val(memberNo);
+		console.log("memberno  "+memberno );
+		/*$("#hiddenForm").submit();*/
+		 
+	});
 	$("#moreBtn").click();
 	function loadData(page, size) {
 
 		$.ajax({
-			url: "${pageContext.request.contextPath}/admin/approve/listdetail",
+			url: "${pageContext.request.contextPath}/admin/member/hidedetail",
 			type: "get",
 			data: {
 				page: page,
@@ -74,11 +76,10 @@ $(function () {
 				keyword: keyword
 			},
 			success: function (resp) {
-				console.log("성공", resp);
-				var tbody = $('#tbody');
 				if (resp.length < size) {
 					$("#moreBtn").remove();
 				}
+				var tbody = $('#tbody');
 				for (var i = 0; i < resp.length; i++) {
 					var template = $('#memberTemplate').html();
 					template = template.replace("{{email}}", resp[i].email);
@@ -89,9 +90,6 @@ $(function () {
 					template = template.replace("{{grade}}", resp[i].grade);
 					template = template.replace("{{joinDate}}", resp[i].joinDate);
 					template = template.replace("{{intro}}", resp[i].intro);
-					template = template.replace("{{memberNo}}", resp[i].memberNo);
-					template = template.replace("{{email}}", resp[i].email);
-					template = template.replace("{{email}}", resp[i].email);
 					tbody.append(template);
 				}
 			},
@@ -104,8 +102,16 @@ $(function () {
 </script>
 <div class="board wzui">
 	<div class="ui-header">
-		<h2 class="title">가입 승인 대기 목록</h2>
+		<h2 class="title">숨김 회원 목록</h2>
 	</div>
+	<div class="ui-tabs">
+		<ul>
+			<li><a href="${root}/onemile/admin/member/list">회원목록</a></li>
+			<li><a href="${root}/onemile/admin/member/quit">탈퇴회원목록</a></li>
+			<li><a href="${root}/onemile/admin/member/hide">숨김회원목록</a></li>
+		</ul>
+	</div>
+</div>
 <div class="search-box">
 	<form method="get">
 		<select name="search">
@@ -128,21 +134,12 @@ $(function () {
 			<th>등급</th>
 			<th>가입일</th>
 			<th>자기소개</th>
-			<th>프로필보기</th>
-			<th>가입승인</th>
-			<th>가입거절</th>
 		</tr>
 		</thead>
 		<tbody id="tbody">
-		
+			
 		</tbody>
 	</table>
-	<div class="ProjectListMoreButton_container__1JFxX ProjectCardList_more__3AbzT"><button type="button"
-						id="moreBtn" class="ProjectListMoreButton_button__27eTb">더보기<i class="icon expand-more"
-							aria-hidden="true"></i></button>
-					<div class="wz-loader ProjectListMoreButton_loader__1Kcvt"></div>
-				</div>
-</div>
 </div>
 <template id="memberTemplate">
 	<tr>
@@ -154,14 +151,7 @@ $(function () {
 		<td>{{grade}}</td>
 		<td>{{joinDate}}</td>
 		<td>{{intro}}</td>
-		<td><a class="a" onclick="window.open('${pageContext.request.contextPath}/account/profile/{{memberNo}}','window_name','width=600,height=500,location=no,status=no,scrollbars=yes');">더보기</a></td>
-		<td><a class="a" id="accept" href="${pageContext.request.contextPath}/admin/member/accept?email={{email}}" onclick="return confirm('승인하시겠습니까?')">가입승인</a></td>
-		<td><a class="a" id="reject" href="${pageContext.request.contextPath}/admin/member/decline?email={{email}}" onclick="return confirm('거절하시겠습니까?')">가입거절</a></td>
 	</tr>
 </template>
-<script>
-	$("#accept").click(function(){
-		
-	});
-</script>
+
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

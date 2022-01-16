@@ -10,7 +10,10 @@ public class AdminInterceptor implements HandlerInterceptor{
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		String grade = (String)request.getSession().getAttribute("grade");
+		String grade="";
+		if(request.getSession().getAttribute("grade")!=null) {
+			grade = (String)request.getSession().getAttribute("grade");
+		}
 		boolean isAdmin = grade.equals("관리자");
 		if(isAdmin) {
 			return true;

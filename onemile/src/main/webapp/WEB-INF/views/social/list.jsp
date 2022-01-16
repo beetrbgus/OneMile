@@ -18,37 +18,63 @@ img{
 	color:white;
 }
 </style>
-
 <script>
 	$(function () {
+		var category = "${nowcategory}";
 		var page = 2;
 		var size = 9;
-		var category = "${nowcategory}";
-		var keyword = $("#keyword").val();
-		$(".ProjectListMoreButton_button__27eTb").click(function () {
-			if(keywordCheck()){
-				loadData(page, size,category,keyword);			
+		var keyword = "${keyword}";
+		
+		var select = "";
+		
+		$("#selectStatus").change(function(){
+			select = $(this).val();
+
+			if(select == 'N'){
+				$(".content").empty();
+				page = 1;
+				$(".content").empty;
 			}
+			else if(select == 'Y'){
+				$(".content").empty;
+				page = 1;
+				$(".content").empty;
+			}
+			else{
+				$(".content").empty;
+				page = 2;
+				$(".content").empty;
+			}
+			
+			loadData(category, page, size, select);
+			
+			console.log("선택은", select);
+			console.log("page = ", page);
+		});
+		
+		$(".ProjectListMoreButton_button__27eTb").click(function () {
+			loadData(category, page, size, select, keyword);
 			page++;
 		});
 		
-		if(cnt() <10){ 
+		if(cnt() <9){ 
 			$("#moreBtn").remove(); 
 		}
 		function cnt(){
 			let a = $(".ProjectCardList_item__1owJa");
 			return a.length;
 		}
-		function loadData(page, size,category,keyword) {
+		function loadData(category, page, size, select, keyword) {
 
 			$.ajax({
-				url: "${pageContext.request.contextPath}/cobuy/listdetail",
+				url: "${pageContext.request.contextPath}/social/listdetail",
 				type: "get",
 				data: {
-					page: page,
-					size: size,
-					category : category,
-					keyword : keyword
+					"category": category,
+					"page": page,
+					"size": size,
+					"endyn": select,
+					"keyword": keyword
 				},
 				success: function (resp) {
 					if (resp.length < size) {
@@ -58,41 +84,26 @@ img{
 						var date = new Date(resp[i].deadLine);
 						var dateString = date.getFullYear()+"년 "+date.getMonth()+1+"월 "+date.getDate()+"일 "+date.getHours()+"시 "+date.getMinutes()+"분 "+date.getSeconds()+"초";
 
-						var CobuyListVO = resp[i];
-						console.log(CobuyListVO.cobuyNo);
-						console.log(typeof CobuyListVO.cobuyNo);
+						var sc = resp[i];
 						var divCol=
-							"<div class='ProjectCardList_item__1owJa'>"+
-							"<div>"+ 
-							"<div class='CommonCard_container__e_ebQ CommonCard_squareSmall__1Cdkn'>"+
-							"<a href='detail?cobuyNo="+CobuyListVO.cobuyNo+
-							"' class='CardLink_link__1k83H CommonCard_image__vaqkf' aria-hidden='true' tabindex='-1'>"+
-							"<div class='CommonCard_rect__2wpm4'>"+
-							"<span class='CommonCard_background__3toTR CommonCard_visible__ABkYx'"+
-							"style='background-image: url(${pageContext.request.contextPath}/image/download?imageNo="+CobuyListVO.imgNo+"&folder=cobuy)'></span>"+
-							"</div>"+
-							"</a>"+
-							"<div class='CommonCard_info__1f4kq'>"+
-							"<div class='RewardProjectCard_info__3JFub'>"+
-							"<div class='RewardProjectCard_infoTop__3QR5w'>"+
-							"<a href='detail?cobuyNo="+CobuyListVO.cobuyNo+
-							"' class='CardLink_link__1k83H'>"+
-							"<p class='CommonCard_title__1oKJY RewardProjectCard_title__iUtvs'>"+
-							"<strong>"+CobuyListVO.pname+"<br>"+CobuyListVO.title+"</strong>"+
-							"</p>"+
-							"</a>"+
-							"<div>"+
-							"<span class='RewardProjectCard_makerName__2q4oH'>"+CobuyListVO.nick+"</span>"+		
-							"</div></div><div class='RewardProjectCard_gauge__3p9US'>"+		
-							"<span style='width: 100%;'></span>"+
-							"</div>"+
-							"<span class='RewardProjectCard_percent__3TW4_'>"+CobuyListVO.stock+"개 남음</span>"+
-							"<span class='RewardProjectCard_amount__2AyJF'>"+CobuyListVO.price+"원</span>"+
-							"<span class='RewardProjectCard_days__3eece RewardProjectCard_isAchieve__1LcUu'>"+
-							"<span class='RewardProjectCard_remainingDay__2TqyN'>"+dateString+"</span>"+
-							"<span class='RewardProjectCard_remainingDayText__2sRLV'>마감</span>"+
+							"<div class='ProjectCardList_item__1owJa'><div><div class='CommonCard_container__e_ebQ CommonCard_squareSmall__1Cdkn'>"+
+							"<a href='${pageContext.request.contextPath}/social/detail/"+sc.socialNo+"' class='CardLink_link__1k83H CommonCard_image__vaqkf' aria-hidden='true' tabindex='-1'>"+
+							"<div class='CommonCard_rect__2wpm4'><span class='CommonCard_background__3toTR CommonCard_visible__ABkYx'style='background-image: url("+
+							"${pageContext.request.contextPath}/image/download?imageNo="+sc.imgNo+"&folder=social')></span>"+
+							"</div></a><div class='CommonCard_info__1f4kq'><div class='RewardProjectCard_info__3JFub'><div class='RewardProjectCard_infoTop__3QR5w'>"+
+							"<a href='${pageContext.request.contextPath}/social/detail/"+sc.socialNo+"' class='CardLink_link__1k83H'>"+
+							"<p class='CommonCard_title 1oKJY RewardProjectCard_title iUtvs'><strong>"+sc.title+"</strong></p>"+
+							"<span class='CommonCard_background__3toTR CommonCard_visible__ABkYx'>"+sc.smalltype+"·"+sc.type+
+							"</span></a><div><a class='MakerInfoHeader_link__HmY8C' href='${pageContext.request.contextPath}/account/profile/"+sc.memberNo+"'>"+
+							"<button class='Avatar_avatar__CiRY0 Avatar_xs__1Mz7G MakerInfoHeader_avatar__ltZMd'>"+
+							"<span style='background-image: url(/onemile/image/download?imageNo=179&amp;folder=member);''></span>"+
+							"</button><div class='MakerInfoHeader_texts__1vfam'><span class='MakerInfoHeader_makerName__KDu0a'>"+sc.nick+"</span>"+
+							"<span class='RewardProjectCard_remainingDayText__2sRLV'>"+sc.startDate+"-"+sc.endDate+"</span></div></a></div>"+
+							"</div><div class='RewardProjectCard_gauge__3p9US'><span style='width: 100%;'></span></div><span class='RewardProjectCard_days__3eece RewardProjectCard_isAchieve__1LcUu'>"+
+							"<span class='RewardProjectCard_remainingDay__2TqyN'>"+sc.detailAddress+"</span><span class='RewardProjectCard_remainingDayText__2sRLV'></span>"+
 							"<span class='RewardProjectCard_isAchieve__1LcUu'></span></span></div></div></div></div></div>";
-						$(".ProjectCardList_list__1YBa2").append(divCol);
+							
+							$(".ProjectCardList_list__1YBa2").append(divCol);
 					}
 				},
 				error: function (e) {
@@ -279,7 +290,7 @@ img{
 					<i class="icon expand-more SortingSelect_icon__khE3_"
 						aria-hidden="true">
 					</i>
-					<select name="status" class="SortingSelect_select__23ANT">
+					<select id="selectStatus" name="status" class="SortingSelect_select__23ANT">
 						<option value="ALL">전체</option>
 						<option value="N">진행중</option>
 						<option value="Y">종료된</option>
@@ -304,10 +315,10 @@ img{
 			<div class="ProjectListHead_children__2Y7-F"></div>
 		</div>
 		<div class="ProjectCardList_container__3Y14k">
-			<div class="ProjectCardList_list__1YBa2">
+			<div class="ProjectCardList_list__1YBa2 content">
 				<!-- 소셜링 항목 -->
 				<c:forEach items="${scList}" var="sc">
-				 	<div class='ProjectCardList_item__1owJa'>
+				 	<div class='ProjectCardList_item__1owJa content'>
 						<div> 
 							<div class='CommonCard_container__e_ebQ CommonCard_squareSmall__1Cdkn'>
 								<a href='${pageContext.request.contextPath}/social/detail/${sc.socialNo}' class='CardLink_link__1k83H CommonCard_image__vaqkf' aria-hidden='true' tabindex='-1'>
@@ -330,7 +341,7 @@ img{
 							 				<div>	
 								 				<a class="MakerInfoHeader_link__HmY8C" href="${pageContext.request.contextPath}/account/profile/${sc.memberNo}">
 													<button class="Avatar_avatar__CiRY0 Avatar_xs__1Mz7G MakerInfoHeader_avatar__ltZMd">
-														<span style="background-image: url(/onemile/image/download?imageNo=179&amp;folder=member);"></span>
+														<span style="background-image: url(/onemile/image/download?imageNo=${sc.profileImgNo}&amp;folder=member);"></span>
 													</button>
 													<div class="MakerInfoHeader_texts__1vfam">
 														<span class="MakerInfoHeader_makerName__KDu0a">${sc.nick}</span>
@@ -356,7 +367,7 @@ img{
 				</c:forEach>
 			</div>
 			
-			<div >
+			<div>
 				<div class="ProjectListMoreButton_container__1JFxX ProjectCardList_more__3AbzT"><button type="button"
 						id="moreBtn" class="ProjectListMoreButton_button__27eTb">더보기<i class="icon expand-more"
 							aria-hidden="true"></i></button>

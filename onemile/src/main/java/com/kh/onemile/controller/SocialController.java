@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.onemile.entity.member.membership.AdDTO;
 import com.kh.onemile.entity.social.SocialBigCategoryDTO;
 import com.kh.onemile.entity.social.SocialDTO;
-import com.kh.onemile.repository.social.participant.ParticipantService;
 import com.kh.onemile.service.category.CategoryService;
 import com.kh.onemile.service.member.MemberService;
 import com.kh.onemile.service.social.SocialService;
@@ -124,11 +124,11 @@ public class SocialController {
 			@RequestParam(required = false,defaultValue = "") String endyn,
 			@RequestParam(required = false,defaultValue = "") String keyword,
 			@RequestParam(required =false, defaultValue = "1") int page,
-			@RequestParam(required =false, defaultValue = "10") int size
+			@RequestParam(required =false, defaultValue = "9") int size
 			,Model model,HttpSession session) {
 		PaginationVO paginationVO =new PaginationVO(page,size);
 		bigcate =(bigcate==null||bigcate.equals("/"))?"":bigcate;
-		log.debug("googoo    "+(String)session.getAttribute("goo"));
+
 		//저장된 인증이 있을 때. 검색에서는 현재 위치 무효화 시키려고 함.
 		if((keyword == null||keyword.equals(""))&&session.getAttribute("goo")!=null) {
 			String goo = (String)session.getAttribute("goo");
@@ -164,12 +164,68 @@ public class SocialController {
 		log.debug("category1234   "+bigcate);
 		log.debug("category    "+paginationVO.toString());
 		log.debug("result       : "+scList.toString());
+		model.addAttribute("keyword", keyword);
 		model.addAttribute("nowcategory", bigcate);
 		model.addAttribute("bcgList",bcgList);
 		model.addAttribute("mcgList",mcgList);
 		model.addAttribute("scList",scList);
 
 		return "social/list";
+	}
+	
+	@GetMapping("/listdetail")
+	@ResponseBody
+	public List<SocialListVO> listDetail(@RequestParam(required = false,defaultValue = "") String bigcate,
+			@RequestParam(required = false,defaultValue = "") String sc,
+			@RequestParam(required = false,defaultValue = "") String order,
+			@RequestParam(required = false,defaultValue = "") String endyn,
+			@RequestParam(required = false,defaultValue = "") String keyword,
+			@RequestParam(required =false, defaultValue = "2") int page,
+			@RequestParam(required =false, defaultValue = "9") int size
+			,Model model,HttpSession session) {
+		PaginationVO paginationVO =new PaginationVO(page,size);
+		bigcate =(bigcate==null||bigcate.equals(""))?"":bigcate;
+		
+		//저장된 인증이 있을 때. 검색에서는 현재 위치 무효화 시키려고 함.
+		if((keyword == null||keyword.equals(""))&&session.getAttribute("goo")!=null) {
+			String goo = (String)session.getAttribute("goo");
+			paginationVO.setGoo(goo);	
+		}else {
+			paginationVO.setKeyword(keyword);
+		}
+		//종료된 것 목록 -endyn 
+		if(endyn.equals("Y")) {
+			paginationVO.setEndyn("Y");
+			log.debug("paginationVO.setEndyn(\"Y\")    ");
+		}
+		//진행중인 것 목록 -endyn
+		else if(endyn.equals("N")) {
+			paginationVO.setEndyn("N");
+			log.debug("paginationVO.setEndyn(\"N\")    ");
+		}
+		//소분류 카테고리 목록
+		if(sc.equals("") || sc.equals("/")) {
+			paginationVO.setCategoryType("sbc.bigValue");
+			paginationVO.setCategory(bigcate);
+		}
+		else{
+			paginationVO.setCategoryType("smc.smallValue");
+			paginationVO.setCategory(sc);
+		}	
+		log.debug("paginationVO    "+paginationVO.toString());
+		List<SocialListVO> scList = socialService.getList(paginationVO);
+		
+//		log.debug("mcgList12345   "+mcgList);
+//		log.debug("bcgList12345   "+bcgList);
+//		log.debug("category1234   "+bigcate);
+//		log.debug("category    "+paginationVO.toString());
+//		log.debug("result       : "+scList.toString());
+//		model.addAttribute("nowcategory", bigcate);
+//		model.addAttribute("bcgList",bcgList);
+//		model.addAttribute("mcgList",mcgList);
+//		model.addAttribute("scList",scList);
+
+		return scList;
 	}
 	// 소모임 상세
 	@GetMapping("/detail/{socialNo}")

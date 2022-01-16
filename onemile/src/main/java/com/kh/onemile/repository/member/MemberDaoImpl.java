@@ -111,4 +111,8 @@ public class MemberDaoImpl implements MemberDao{
 		return sqlSession.update("member.emailChangePw", param) > 0;
 	}
 	
+	@Override
+	public void memberHidden(int memberNo) {
+		sqlSession.update("member.hidden", memberNo);
+	}
 }

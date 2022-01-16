@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<!--
+	이메일에 표시될 내용을 정의할 페이지
+	내용 모두 정의하지 않고 보여줄 부분만 정의한다.
+	가급적 인라인 스타일을 사용해야 다른 홈페이지 설정보다 우선 적용된다.
+-->
+
+{@ $site_title_top = 'ONE MILE' }
+{@ $point_color = '#00C4C4' }
+
+<div style="font-family: 'Apple SD Gothic Neo', 'sans-serif' !important; width: 540px; height: 600px; border-top: 4px solid {$point_color}; margin: 100px auto; padding: 30px 0; box-sizing: border-box;">
+	<h1 style="margin: 0; padding: 0 5px; font-size: 28px; font-weight: 400;">
+		<span style="font-size: 15px; margin: 0 0 10px 3px;">{$site_title_top}</span><br />
+		<span style="color: {$point_color};">임시 비밀번호</span> 안내입니다.
+	</h1>
+	<p style="font-size: 16px; line-height: 26px; margin-top: 50px; padding: 0 5px;">
+		안녕하세요.<br />
+		요청하신 인증번호가 생성되었습니다.<br />
+		아래 생성된 인증번호를 원래 페이지에 입력하신 후 비밀번호 찾기를 계속 해주시기 바랍니다.<br />
+		감사합니다.
+	</p>
+
+	<p style="font-size: 16px; margin: 40px 5px 20px; line-height: 28px;">
+		인증번호: <br />
+		<span style="font-size: 24px;">{{number}}</span>
+	</p>
+</div>
