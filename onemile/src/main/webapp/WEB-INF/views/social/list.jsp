@@ -332,7 +332,7 @@ img{
 							 				<div>	
 								 				<a class="MakerInfoHeader_link__HmY8C" href="${pageContext.request.contextPath}/account/profile/${sc.memberNo}">
 													<button class="Avatar_avatar__CiRY0 Avatar_xs__1Mz7G MakerInfoHeader_avatar__ltZMd">
-														<span style="background-image: url(/onemile/image/download?imageNo=179&amp;folder=member);"></span>
+														<span style="background-image: url(/onemile/image/download?imageNo=${sc.profileImgNo}&amp;folder=member);"></span>
 													</button>
 													<div class="MakerInfoHeader_texts__1vfam">
 														<span class="MakerInfoHeader_makerName__KDu0a">${sc.nick}</span>
