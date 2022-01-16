@@ -5,12 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import lombok.extern.slf4j.Slf4j;
+@Component
 @Slf4j
 public class AlramEchoHandler extends TextWebSocketHandler{
 
@@ -48,7 +50,7 @@ public class AlramEchoHandler extends TextWebSocketHandler{
 				//받는 사람이 로그인한 상태라면
 				WebSocketSession receiverSession = userSessions.get(receiver);
 				
-				if("reply".contentEquals(type)&& receiverSession != null) { //type이 댓글이라면
+				if("memberReject".contentEquals(type)&& receiverSession != null) { //type이 댓글이라면
 					TextMessage tmpMsg = new TextMessage(giver+"님이 게시글에 댓글을 남겼습니다.");
 					receiverSession.sendMessage(tmpMsg);
 				}
@@ -56,6 +58,7 @@ public class AlramEchoHandler extends TextWebSocketHandler{
 					TextMessage tmpMsg = new TextMessage(giver+"님이 마일즈에 참가하셨습니다.");
 					receiverSession.sendMessage(tmpMsg);
 				}
+				
 			}
 		}
 	}
@@ -75,8 +78,12 @@ public class AlramEchoHandler extends TextWebSocketHandler{
 
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-		userSessions.remove(session.getId()); //맵에서 삭제
-		sessions.remove(session); //로그인 목록에서 삭제
+		//사용자가 있을 때 
+		if(getNick(session)!=null) {
+			userSessions.remove(session.getId()); //맵에서 삭제
+			sessions.remove(session); //로그인 목록에서 삭제
+			
+		}
 		log.info("연결 해제");
 	}
 }
