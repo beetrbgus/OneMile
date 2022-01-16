@@ -47,7 +47,9 @@ public class SocialController {
 	@Autowired
 	private MemberService memberService;
 	@Autowired
-	private ParticipantDao participantDao; 
+	private ParticipantDao participantDao;
+	@Autowired
+	private ParticipantService participantService;
 	
 	@GetMapping("/reg")
 	public String getReg(Model model,HttpSession session) {
@@ -262,7 +264,7 @@ public class SocialController {
 		log.debug("result       : "+participateVO.toString());
 		return "redirect:detail/"+socialNo;
 	}
-	// 소모임 참가.
+	// 소모임 탈퇴.
 	@PostMapping("/socialexit")
 	public String exitSocial(@RequestParam int socialNo, Model model,HttpSession session) {
 		
@@ -282,10 +284,17 @@ public class SocialController {
 	}
 	@GetMapping("/memberManage")
 	public String memberManage(int socialNo,Model model,HttpSession session) {
+		
 		int memberNo = (int)session.getAttribute("logNo");
 		List<ParticipateDetailVO> result = socialService.getPaticipantList(socialNo,memberNo);
 		model.addAttribute("result",result);
 		log.debug("getPaticipantList    "+result.toString());
 		return "manage";
+	}
+	@ResponseBody
+	@PostMapping("/appove")
+	public void appove(int socialNo,int partiMemberNo) {
+		
+		participantService.approve(socialNo,partiMemberNo);
 	}
 }
