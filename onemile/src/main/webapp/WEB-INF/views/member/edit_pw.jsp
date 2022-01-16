@@ -44,7 +44,7 @@
 			</div>
 			</c:if>
           </div>
-          <input type="submit" id="btnLogin" class="wz button primary block submit-button" value="변경하기"/>
+          <input type="submit" id="btnLogin" class="wz button primary block submit-button" value="변경하기" onClick="alert('비밀번호가 성공적으로 변경되었습니다.')"/>
            </form>
       </div>
      </div>

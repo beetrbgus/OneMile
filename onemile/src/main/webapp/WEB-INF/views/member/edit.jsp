@@ -199,10 +199,10 @@
 			</div>
 			</c:if>
 			<input type="submit" id="btnJoin"
-				class="wz button primary block" onclick="formCheck();" value="수정하기">
+				class="wz button primary block" onclick="formCheck();" value="수정하기" onClick="alert('정보가 성공적으로 변경되었습니다.')">
 		</div>
 	</div>
-
+			<a href="${root}/member/quit">탈퇴하기</a>
 </form>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
