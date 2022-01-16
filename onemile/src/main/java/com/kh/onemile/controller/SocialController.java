@@ -297,4 +297,17 @@ public class SocialController {
 		
 		participantService.approve(socialNo,partiMemberNo);
 	}
+	
+	@ResponseBody
+	@PostMapping("/denied")
+	public void denied(@RequestParam int socialNo,int partiMemberNo) {
+		
+		
+		ParticipateVO participateVO = new ParticipateVO();
+		participateVO.setMemberNo(partiMemberNo);
+		participateVO.setSocialNo(socialNo);
+
+		socialService.exitSocial(participateVO);
+		log.debug("result       : "+participateVO.toString());
+	}
 }

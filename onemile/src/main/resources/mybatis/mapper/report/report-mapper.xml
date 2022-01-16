@@ -15,8 +15,5 @@
 	<delete id="adminDelete" parameterType="int">
 		delete from rl where rl_no = #{rlNo}
 	</delete>
-	<!-- 
-	<select id="getRlList" parameterType="ReportRegVO">
-		
-	</select> -->
+
 </mapper>
