@@ -93,7 +93,7 @@ $(function(){
 	<h2>  관리자 페이지. </h2> 
 	
   <p>번호 : ${detail.socialNo}</p>
-	<p>제목 : ${detail.title}</p>
+	<p>제목 : ${detail.title}</p> --%>
 	
 	<c:choose>
 		<c:when test="${detail.maxpeople > fn:length(detail.participate)}">
