@@ -83,7 +83,7 @@ public class SocialServiceImpl implements SocialService{
 		ParticipateVO participateVO = new ParticipateVO();
 		participateVO.setMemberNo(socialRegVO.getMemberNo());
 		participateVO.setSocialNo(socialNo);
-		participantService.reg(participateVO);
+		participantService.regHost(participateVO);
 		
 		//중간 테이블 DTO에 데이터 저장.
 		MiddleImgTableDTO imgMidDTO = new MiddleImgTableDTO();

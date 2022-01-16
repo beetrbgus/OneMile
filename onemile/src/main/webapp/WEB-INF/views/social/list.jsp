@@ -19,13 +19,16 @@ img{
 }
 </style>
 
-<!-- <script>
+<script>
 	$(function () {
 		var page = 2;
 		var size = 9;
 		var category = "${nowcategory}";
+		var keyword = $("#keyword").val();
 		$(".ProjectListMoreButton_button__27eTb").click(function () {
-			loadData(page, size,category);
+			if(keywordCheck()){
+				loadData(page, size,category,keyword);			
+			}
 			page++;
 		});
 		
@@ -36,7 +39,7 @@ img{
 			let a = $(".ProjectCardList_item__1owJa");
 			return a.length;
 		}
-		function loadData(page, size,category) {
+		function loadData(page, size,category,keyword) {
 
 			$.ajax({
 				url: "${pageContext.request.contextPath}/cobuy/listdetail",
@@ -44,7 +47,8 @@ img{
 				data: {
 					page: page,
 					size: size,
-					category : category
+					category : category,
+					keyword : keyword
 				},
 				success: function (resp) {
 					if (resp.length < size) {
@@ -96,8 +100,16 @@ img{
 				}
 			});
 		};
+		function keywordCheck(){
+			let keyword = $("#keyword").val();
+			if(keyword==undefined||keyword==''||keyword.length<2){
+				alert("검색어는 두글자 이상 입력해주세요.");
+				return false;
+			}
+			return true;
+		}
 	});
-</script> -->
+</script>
 
 <div class="RewardMainWrapper_container__2HR7Y">
 	
@@ -249,10 +261,11 @@ img{
 			<div class="ProjectListHead_bar__2dyHz">
 				<button style="float:left; align-content: flex-start;">
 					<a style="color:#00c4c4;" href="${pageContext.request.contextPath}/social/reg">등록하기</a>
-				</button> 
-				<form class="ProjectListHead_search__HN3am">
+				</button>
+				<form class="ProjectListHead_search__HN3am" action="">
+
 					<label for="search-keyword-4933f540-0608-4b63-9ad6-cccdc2960908">
-						<input class="" id="keyword" type="search"
+						<input class="" id="keyword" name="keyword" type="search"
 							placeholder="검색" value="">
 						<div class="ProjectListHead_right__3_Jo1">
 							<button type="submit" class="ProjectListHead_find__3HsFc" aria-label="검색">

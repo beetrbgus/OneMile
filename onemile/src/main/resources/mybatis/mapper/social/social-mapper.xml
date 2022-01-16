@@ -125,6 +125,11 @@
 			<if test="goo!=null and goo!=''">
 				and instr(map.DETAILADDRESS ,#{goo} ) > 0 
 			</if> 
+			<if test="keyword!=null and keyword!=''">
+				and instr( s.title ,#{keyword}) > 0 or 
+				instr( s.context ,#{keyword}) > 0 or 
+				instr( map.DETAILADDRESS ,#{keyword}) > 0 
+			</if>
 				order by s.social_no desc
 			)TMP
 		) where rn between #{startRow} and #{endRow}

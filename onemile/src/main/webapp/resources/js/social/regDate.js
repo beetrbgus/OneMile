@@ -17,5 +17,7 @@ $(function(){
 	$("#endTime").on("input",function(){
 		endArr[1] = $(this).val();
 		console.log(endArr[1]);
+		
 	});
+	
 });

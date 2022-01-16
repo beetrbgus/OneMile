@@ -315,6 +315,9 @@ function deleteImageAction(index){
 
 </form>
 
+<script type="text/javascript"src="${root}/onemile/resources/js/social/mapRead.js"></script>
+<script type="text/javascript"src="${root}/onemile/resources/js/social/regDate.js"></script>
+<script type="text/javascript"src="${root}/onemile/resources/js/social/regValidate.js"></script>
 <script>
 	/* 가져온 값 넣기 */
 	$(function(){
@@ -416,10 +419,9 @@ function deleteImageAction(index){
 		}); 
 	});
 </script>
-<script type="text/javascript"
-	src="${root}/onemile/resources/js/social/mapRead.js"></script>
-<script type="text/javascript"
-	src="${root}/onemile/resources/js/social/regDate.js"></script>
-<script type="text/javascript"
-	src="${root}/onemile/resources/js/social/regValidate.js"></script>
+
+<script type="text/javascript" src="${root}/onemile/resources/js/social/mapRead.js"></script>
+<script type="text/javascript" src="${root}/onemile/resources/js/social/regDate.js"></script>
+<script type="text/javascript" src="${root}/onemile/resources/js/social/regValidate.js"></script>
+
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

@@ -9,6 +9,8 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/grid.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reboot.css">
 
+<script type="text/javascript"src="${root}/onemile/resources/js/social/regDate.js"></script>
+<script type="text/javascript"src="${root}/onemile/resources/js/social/regValidate.js"></script>
 <script>
 /* 카테고리 */
 $(function(){
@@ -102,61 +104,7 @@ function deleteImageAction(index){
 	  console.log(sel_files);
 }
 </script>
-<%-- <input id="rrr" type="hidden" value="${pageContext.request.contextPath}">
-<form id="regForm" action="reg" method="post" enctype="multipart/form-data">
-	<br>
-	이미지 :
-	<input type="file" name="attach" >
-	<br>
-	제목 :
-	<input type="text" name="title" required>
-	<br>
-	관심 카테고리 :
-	<select class="big" required > 
-		<option value="">카테고리선택</option>
-		<c:forEach var="category" items="${bigCategory}">
-			<c:if test="${category.bigType !='전체'}">
-				<option value="${category.bigType}">${category.bigType}</option>
-			</c:if>
-		</c:forEach>
-	</select>
-	<select class="middle" name="smalltype" required></select>
-	<br>
-	설명 :
-	<textarea name="context" placeholder="모임을 설명해주세요." required></textarea>
-	<br>
-	추가 이미지 등록 :<input type="file" name="attach" multiple="multiple">
-	<br>
-	시작일 :
-	<input type="hidden" name="startDate">
-	<input type="date" id="startDay" required>
-	<input type="time" id="startTime" required>
-	<input type="datetime-local" id="startTime" required>
-	<br>
-	종료일 :
-	<input type="hidden" name="endDate">
-	<input type="date" id="endDay" required>
-	<input type="time" id="endTime" required>
-	<br>
-	위도 :
-	<input type="hidden" name="lat" required>
-	<br>
-	경도 :
-	<input type="hidden" name="lng" required>
-	<br>
-	상세주소 :
-	<input type="text" id="location" name="location" required>
-	
-	<br>
-	최소인원 :
-	<input type="number" name="minpeople" min="2" value="2" required>
-	<br>
-	최대인원 : 
-	<input type="number" name="maxpeople" min="2" max="${AD}" value="2" required>
-	<div id="map" style="width: 500px; height: 400px;"></div>
-	
-	<button type="button" id="submitBtn">등록하기</button>
-</form> --%>
+
 <!-- CSS 테스트중 -->
 <form id="regForm" action="reg" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="lat" required>
@@ -263,7 +211,8 @@ function deleteImageAction(index){
     
     <button type="button" id="submitBtn">등록하기</button>
 </div>
-</form>
+</form> 
+<script type="text/javascript"src="${root}/onemile/resources/js/social/regMap.js"></script>
 <script>
 	$(function(){
 		$("select[name=type]").on("change",function(){
@@ -297,7 +246,6 @@ function deleteImageAction(index){
 		}); 
 	});
 </script>
-<script type="text/javascript"src="${root}/onemile/resources/js/social/regDate.js"></script>
-<script type="text/javascript"src="${root}/onemile/resources/js/social/regValidate.js"></script>
-<script type="text/javascript"src="${root}/onemile/resources/js/cobuy/map.js"></script>
+
+
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

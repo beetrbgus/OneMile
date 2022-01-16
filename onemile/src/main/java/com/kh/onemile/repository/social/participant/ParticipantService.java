@@ -7,4 +7,5 @@ public interface ParticipantService {
 	public void reg(ParticipateVO participateVO);
 	public void approve(ParticipateVO participateVO);
 	public void reject(ParticipateVO participateVO);
+	public void regHost(ParticipateVO participateVO);
 }

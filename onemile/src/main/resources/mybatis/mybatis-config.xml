@@ -56,6 +56,7 @@
 			<package name="com.kh.onemile.vo.kakaopay"/>
 			<package name="com.kh.onemile.vo.cobuy"/>
 			<package name="com.kh.onemile.vo.reply"/>
+			<package name="com.kh.onemile.vo.report"/>
 			<package name="com.kh.onemile.vo.social.category"/>
 			<package name="com.kh.onemile.vo.social.participate"/>
 			

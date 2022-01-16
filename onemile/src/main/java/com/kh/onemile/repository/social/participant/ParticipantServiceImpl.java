@@ -26,5 +26,10 @@ public class ParticipantServiceImpl implements ParticipantService{
 	public void reject(ParticipateVO participateVO) {
 		participantDao.reject(participateVO);
 	}
+	@Override
+	public void regHost(ParticipateVO participateVO) {
+		participantDao.regHost(participateVO);
+		
+	}
 	
 }
