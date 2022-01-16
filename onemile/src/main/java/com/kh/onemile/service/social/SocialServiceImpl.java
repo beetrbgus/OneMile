@@ -175,4 +175,9 @@ public class SocialServiceImpl implements SocialService{
 		return participantService.getPaticipantList(socialNo,memberNo);
 	}
 
+	@Override
+	public boolean getIsMytown(int socialNo,String goo) {
+		return socialDao.getIsMytown(socialNo,goo);
+	}
+
 }

@@ -1,6 +1,8 @@
 package com.kh.onemile.repository.social;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,5 +63,15 @@ public class SocialDaoImpl implements SocialDao{
 	@Override
 	public void delete(int socialNo) {
 		sqlSession.update("social.delete", socialNo);
+	}
+
+	@Override
+	public boolean getIsMytown(int socialNo,String goo) {
+		Map<String,Object> map = new HashMap<>();
+		map.put("socialNo", socialNo);
+		map.put("goo", goo);
+		int result = sqlSession.selectOne("social.getIsMytown", map);
+		
+		return result > 0;
 	}
 }
