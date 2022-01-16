@@ -66,7 +66,6 @@ public class AdminController {
 	@GetMapping("/list")
 	public String list(Model model) {
 		return "admin/approve";
-		
 	}
 
 	//게시판 목록
@@ -95,7 +94,7 @@ public class AdminController {
 		return "/admin/board/modify";
 	}
 	//회원 목록
-	@GetMapping("/member/list")
+	@GetMapping("/member/listdetail")
 	@ResponseBody
 	public List<MemberListVO> memList(@RequestParam(required = false,defaultValue = "") String keyword, 
 			@RequestParam(required = false,defaultValue = "") String search,
@@ -103,11 +102,16 @@ public class AdminController {
 			@RequestParam(required =false, defaultValue = "20") int size, Model model) {
 		int endRow = page* size;
 		int startRow = endRow - (size - 1);
-		return adminService.memberList(keyword, search, endRow, startRow);
+		return adminService.memberList(keyword, search, startRow, endRow);
+	}
+	
+	@GetMapping("/member/list")
+	public String memberList() {
+		return "admin/member/list";
 	}
 	
 	//탈퇴회원 목록
-	@GetMapping("/member/hidden")
+	@GetMapping("/member/hiddendetail")
 	@ResponseBody
 	public List<ExitMemberVO> exitMemList(@RequestParam(required = false) String keyword, @RequestParam(required = false) String search,
 			@RequestParam(required =false, defaultValue = "1") int page,
@@ -115,7 +119,12 @@ public class AdminController {
 		
 		int endRow = page* size;
 		int startRow = endRow - (size - 1);
-		return adminService.exitMemberList(keyword, search, endRow, startRow);
+		return adminService.exitMemberList(keyword, search, startRow, endRow);
+	}
+	
+	@GetMapping("/member/hidden")
+	public String exitmemberList() {
+		return "admin/member/hidden";
 	}
 	//회원 수정
 	@GetMapping("/member/modify")

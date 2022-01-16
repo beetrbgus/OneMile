@@ -130,6 +130,7 @@ $(function () {
 		</tr>
 		</thead>
 		<tbody id="tbody">
+		
 		</tbody>
 	</table>
 	<div class="ProjectListMoreButton_container__1JFxX ProjectCardList_more__3AbzT"><button type="button"
@@ -149,7 +150,7 @@ $(function () {
 		<td>{{grade}}</td>
 		<td>{{joinDate}}</td>
 		<td>{{intro}}</td>
-		<td><a class="a" onclick="window.open('../account/profile?memberNo={{memberNo}}','window_name','width=600,height=500,location=no,status=no,scrollbars=yes');">더보기</a></td>
+		<td><a class="a" onclick="window.open('${pageContext.request.contextPath}/account/profile/{{memberNo}}','window_name','width=600,height=500,location=no,status=no,scrollbars=yes');">더보기</a></td>
 	</tr>
 </template>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

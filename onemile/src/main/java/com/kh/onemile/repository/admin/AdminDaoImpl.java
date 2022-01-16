@@ -61,11 +61,8 @@ public class AdminDaoImpl implements AdminDao{
 		Map<String, Object> map = new HashMap<>();
 		map.put("keyword", keyword);
 		map.put("search", search);
-		System.err.println(map.get("keyword")=="");
-		System.err.println(map.get("keyword")==null);
 		map.put("startRow", startRow);
 		map.put("endRow", endRow);
-		System.err.println(map);
 		return sqlSession.selectList("admin.notMemberList", map);
 	}
 	

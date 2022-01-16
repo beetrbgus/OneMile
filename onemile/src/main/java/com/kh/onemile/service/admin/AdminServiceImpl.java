@@ -72,10 +72,10 @@ public class AdminServiceImpl implements AdminService{
 		return adminDao.approveMemberList(keyword, search, startRow, endRow);
 	}
 	//탈퇴회원 목록 가져오기
-		@Override
-		public List<ExitMemberVO> exitMemberList(String keyword, String search, int startRow, int endRow){
-			return adminDao.exitMemberList(keyword, search, startRow, endRow);
-		}
+	@Override
+	public List<ExitMemberVO> exitMemberList(String keyword, String search, int startRow, int endRow){
+		return adminDao.exitMemberList(keyword, search, startRow, endRow);
+	}
 	@Override
 	public void hiddenBoard(int no) {
 		commuService.hide(no);
