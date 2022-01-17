@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.kh.onemile.vo.kakaopay.ConfirmVO;
 import com.kh.onemile.vo.kakaopay.KaKaoPayRegularPayMentStateResponseVO;
@@ -57,9 +58,24 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 
 		// 카카오서버에게 결제 결과에 따른 페이지를 미리 안내(단, 애플리케이션에 등록된 주소만 가능)
 		// =(주의) 반드시 완성된 주소를 알려줘야 카카오에서 우리 서버로 다시 돌아올 수 있다
-		body.add("approval_url", "http://localhost:8080/onemile/pay/success");
-		body.add("cancel_url", "http://localhost:8080/onemile/pay/cancel");
-		body.add("fail_url", "http://localhost:8080/onemile/pay/fail");
+		
+		String approvalUrl = ServletUriComponentsBuilder.fromCurrentContextPath()
+//	            .port(8080)
+	            .path("/pay/success")
+	            .toUriString();
+		
+		String cancelUrl = ServletUriComponentsBuilder.fromCurrentContextPath()
+//	            .port(8080)
+	            .path("/pay/cancel")
+	            .toUriString();
+		
+		String failUrl = ServletUriComponentsBuilder.fromCurrentContextPath()
+//	            .port(8080)
+	            .path("/pay/fail")
+	            .toUriString();
+		body.add("approval_url", approvalUrl);
+		body.add("cancel_url", cancelUrl);
+		body.add("fail_url", failUrl);
 
 		// 2-3. Header와 Body를 합성
 		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
@@ -92,9 +108,23 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 		body.add("total_amount", requestVO.getTotal_amount_string());
 		body.add("tax_free_amount", "0");
 
-		body.add("approval_url", "http://localhost:8080/onemile/pay/success");
-		body.add("cancel_url", "http://localhost:8080/onemile/pay/cancel");
-		body.add("fail_url", "http://localhost:8080/onemile/pay/fail");
+		String approvalUrl = ServletUriComponentsBuilder.fromCurrentContextPath()
+//	            .port(8080)
+	            .path("/pay/success")
+	            .toUriString();
+		
+		String cancelUrl = ServletUriComponentsBuilder.fromCurrentContextPath()
+//	            .port(8080)
+	            .path("/pay/cancel")
+	            .toUriString();
+		
+		String failUrl = ServletUriComponentsBuilder.fromCurrentContextPath()
+//	            .port(8080)
+	            .path("/pay/fail")
+	            .toUriString();
+		body.add("approval_url", approvalUrl);
+		body.add("cancel_url", cancelUrl);
+		body.add("fail_url", failUrl);
 
 		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
 
