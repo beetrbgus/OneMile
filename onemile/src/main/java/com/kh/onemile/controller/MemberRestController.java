@@ -77,8 +77,9 @@ public class MemberRestController {
 		return num;
 	}
 	@GetMapping("/myTown")
-	public void setMyTown(@RequestParam String goo,HttpSession session) {
+	public void setMyTown(@RequestParam String goo,@RequestParam String dong,HttpSession session) {
 		session.setAttribute("goo", goo);
+		session.setAttribute("dong", dong);
 		log.debug("session.getAttribute(\"goo\")  "+(String)session.getAttribute("goo"));
 	}
 	
