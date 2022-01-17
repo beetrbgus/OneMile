@@ -35,6 +35,7 @@ $(function(){
 					url:rootURL+"/member/myTown?goo="+goo+"&dong="+dong,
 					type:"get",
 					dataType:"text",
+					contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 					success:function(resp){
 						console.log("세션 저장 성공");
 					},
