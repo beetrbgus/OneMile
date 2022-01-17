@@ -24,7 +24,6 @@
     border: 2px solid gray;
 }
 </style>
-
 <script >
 $(function(){
 	$("#reportBtn").on("click",function(){
