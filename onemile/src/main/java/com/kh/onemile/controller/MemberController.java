@@ -76,7 +76,7 @@ public class MemberController {
 
 		// 정보가 있으면 세션저장
 		if (findDTO != null) {
-			session.invalidate();
+			
 			session.setAttribute("logNo", findDTO.getMemberNo());
 			session.setAttribute("logId", findDTO.getEmail());
 			session.setAttribute("grade", findDTO.getGrade());

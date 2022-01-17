@@ -238,8 +238,13 @@ public class SocialController {
 		int memberNo = (int)session.getAttribute("logNo");
 		SocialDetailVO detail = socialService.getDetail(socialNo);
 		String joined = participantDao.getParti(memberNo,socialNo);
-		String goo = (String)session.getAttribute("goo");
-		boolean ismytown = socialService.getIsMytown(socialNo,goo);
+		boolean ismytown = false;
+		
+		if((session.getAttribute("goo")!=null)){
+			String goo = (String)session.getAttribute("goo");
+			ismytown = socialService.getIsMytown(socialNo,goo);
+		}
+		
 		
 		log.debug("result       : "+detail.toString()); 
 		model.addAttribute("detail",detail);

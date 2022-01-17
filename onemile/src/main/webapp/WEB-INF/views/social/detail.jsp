@@ -24,7 +24,6 @@
     border: 2px solid gray;
 }
 </style>
-<<<<<<< HEAD
 
 <script >
 $(function(){
