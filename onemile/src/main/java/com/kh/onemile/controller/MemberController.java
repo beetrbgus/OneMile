@@ -102,10 +102,7 @@ public class MemberController {
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
 		// 로그아웃 시 세션 삭제
-		session.removeAttribute("logId");
-		session.removeAttribute("nick");
-		session.removeAttribute("grade");
-		session.removeAttribute("logNo");
+		session.invalidate();
 		return "redirect:/";
 	}
 
