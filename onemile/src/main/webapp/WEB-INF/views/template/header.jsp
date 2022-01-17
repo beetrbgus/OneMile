@@ -86,10 +86,14 @@ $(function () {
             	
             }
         });
-    if(sessionStorage.getItem("dong")!=null||sessionStorage.getItem("dong")!=undefined||sessionStorage.getItem("dong")!=""){
+    /* if(sessionStorage.getItem("dong")!=null||sessionStorage.getItem("dong")!=undefined||sessionStorage.getItem("dong")!=""){
 	    $(".dong").val(sessionStorage.getItem("dong"));
-    } 
-    
+	    
+    }  */
+    let dongsession = "${dong}";
+    $(".dong").val(dongsession);
+
+
     $(".GNBDesktop_more__39gyV").click(function(){
     	$(".Backdrop_backDrop__3v5kD").toggleClass("dark")
     	$(".MoreMenuDesktop_container__1I6Al").toggleClass("MoreMenuDesktop_active__3wtR4");
@@ -171,7 +175,7 @@ $(function () {
 									</a>
 								</c:otherwise>
 								</c:choose>
-								<input type="text" value="${session.dong}" class="dong">
+								<input type="text" value="${dong}" class="dong">
 							</div>
 						</div>
 					</header>
