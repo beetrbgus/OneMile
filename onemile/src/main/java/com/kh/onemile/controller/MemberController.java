@@ -70,12 +70,13 @@ public class MemberController {
 	@PostMapping("/login")
 	public String login(@ModelAttribute LoginVO loginVO, @RequestParam(required = false) String saveId,
 			HttpServletResponse response, HttpSession session) {
-
+		
 		MemberDTO findDTO = memberService.login(loginVO);
 		System.err.println("findDTo======================" + findDTO);
 
 		// 정보가 있으면 세션저장
 		if (findDTO != null) {
+			session.invalidate();
 			session.setAttribute("logNo", findDTO.getMemberNo());
 			session.setAttribute("logId", findDTO.getEmail());
 			session.setAttribute("grade", findDTO.getGrade());
