@@ -28,7 +28,7 @@ public class ImageServiceImpl implements ImageService {
 	@Autowired
 	private SaveFile saveFile;
 
-	private final String path = "D:/upload";
+	private final String path = "D:/upload/kh8d";
 
 	@Override
 	public List<Integer> regImage(List<MultipartFile> attach, String savePath)
