@@ -5,17 +5,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.kh.onemile.entity.noti.NotiDTO;
+import com.kh.onemile.service.noti.NotiService;
+
 import lombok.extern.slf4j.Slf4j;
 @Component
 @Slf4j
 public class AlramEchoHandler extends TextWebSocketHandler{
-
+	@Autowired
+	private NotiService notiService;
 	//로그인한 전체 회원
 	List<WebSocketSession> sessions = new ArrayList<>();
 	
@@ -49,8 +54,10 @@ public class AlramEchoHandler extends TextWebSocketHandler{
 				
 				//받는 사람이 로그인한 상태라면
 				WebSocketSession receiverSession = userSessions.get(receiver);
-				
+				NotiDTO notiDTO =new NotiDTO();
 				if("memberReject".contentEquals(type)&& receiverSession != null) { //type이 댓글이라면
+					notiDTO.setSender(giver);
+					notiDTO.setMsg("님이 게시글에 댓글을 남겼습니다");
 					TextMessage tmpMsg = new TextMessage(giver+"님이 게시글에 댓글을 남겼습니다.");
 					receiverSession.sendMessage(tmpMsg);
 				}
