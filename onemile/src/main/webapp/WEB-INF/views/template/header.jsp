@@ -13,6 +13,9 @@
 <html lang="ko" class="show-footer">
 
 <head>
+	<script>
+		var context = "${pageContext.request.contextPath}";
+	</script>
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b89479d3bf4f702a0c7b99d5edfb1391&libraries=services" charset="utf-8"></script> 
 	<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script> -->
