@@ -54,31 +54,23 @@ public class SocialController {
 	@GetMapping("/reg")
 	public String getReg(Model model,HttpSession session) {
 		int memberNo = (int) session.getAttribute("logNo");
+		
 		AdDTO adDTO = memberService.membership(memberNo);
-		
-		List<SocialDTO> socialDTO = socialService.getCount(memberNo);
-		
-		log.debug("혜택"+adDTO.getSMaxCnt());
 		model.addAttribute("AD",adDTO.getSMaxCnt());
+		log.debug("혜택"+adDTO.getSMaxCnt());
 		
-		log.debug("갯수"+adDTO.getSRegCnt());
-		log.debug("생성한 소셜링"+socialDTO.size());
-		if(adDTO.getSRegCnt() > socialDTO.size())
-		{
-			// 지도에 위치 정보 등록
-			// 이미지 등록.
-			// 소셜 내용 등록.
-			// 등록할 마일즈 등록 null 허용.
-			List<SocialBigCategoryDTO> result = categoryService.getBiglist();
-			log.debug("result       : "+result.toString()); 
-			model.addAttribute("bigCategory",result);
-			return "social/reg2";
-		}
-		else {
-			return "redirect:list";	
-		}
 		
-	}
+		
+		// 지도에 위치 정보 등록
+		// 이미지 등록.
+		// 소셜 내용 등록.
+		// 등록할 마일즈 등록 null 허용.
+		List<SocialBigCategoryDTO> result = categoryService.getBiglist();
+		log.debug("result       : "+result.toString()); 
+		model.addAttribute("bigCategory",result);
+		
+		return "social/reg2";
+		}
 	
 	@PostMapping("/reg")
 	public String postReg(@ModelAttribute SocialRegVO socialRegVO,HttpSession session) throws IllegalStateException, IOException{
@@ -130,6 +122,9 @@ public class SocialController {
 			@RequestParam(required =false, defaultValue = "1") int page,
 			@RequestParam(required =false, defaultValue = "9") int size
 			,Model model,HttpSession session) {
+		int memberNo = (int) session.getAttribute("logNo");
+		
+		
 		PaginationVO paginationVO =new PaginationVO(page,size);
 		
 		bigcate =(bigcate==null||bigcate.equals("/"))?"":bigcate;
@@ -154,6 +149,17 @@ public class SocialController {
 			paginationVO.setCategoryType("smc.smallValue");
 			paginationVO.setCategory(sc);
 		}
+		
+		List<SocialDTO> socialDTO = socialService.getCount(memberNo);
+		
+		
+		AdDTO adDTO = memberService.membership(memberNo);
+		log.debug("갯수"+adDTO.getSRegCnt());
+		log.debug("생성한 소셜링"+socialDTO.size());
+		
+		boolean produce = adDTO.getSRegCnt() > socialDTO.size();
+		log.debug("생성가능한 체크 "+produce);
+		model.addAttribute("produce",produce);
 		
 		List<SocialBigCategoryDTO> bcgList = categoryService.getBiglist();
 		List<MiddleCategoryVO> mcgList = categoryService.getMiddlelist(bigcate);		

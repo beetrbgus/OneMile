@@ -15,5 +15,5 @@ public interface MembershipBuyDao {
 	List<MembershipBuyDTO> list();
 
 	void regularPayDelete(String sid);
-	
+
 }

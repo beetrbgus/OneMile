@@ -120,6 +120,14 @@ img{
 			return true;
 		}
 	});
+	function produceBtn(){
+
+		if (confirm("소셜링 생성횟수 초과!! 멤버십 가입페이지로 이동하시겠습니까?")){    //확인
+			location.href="${pageContext.request.contextPath}/membership/list";
+		}else{   //취소
+			return;
+		}
+	}
 </script>
 
 <div class="RewardMainWrapper_container__2HR7Y">
@@ -273,7 +281,14 @@ img{
 		<div class="ProjectListHead_container__rpQ37 RewardProjectListHead_container__2FzIj">
 			<div class="ProjectListHead_bar__2dyHz">
 				<button style="float:left; align-content: flex-start;">
-					<a style="color:#00c4c4;" href="${pageContext.request.contextPath}/social/reg">등록하기</a>
+					<c:choose>
+						<c:when test="${produce==true}">
+							<a id="regBtn" style="color:#00c4c4;" href="${pageContext.request.contextPath}/social/reg">등록하기</a>
+						</c:when>
+						<c:otherwise>
+							<a id="regBtn" style="color:#00c4c4;" onclick="produceBtn();">등록하기</a>
+						</c:otherwise>
+					</c:choose>
 				</button>
 				<form class="ProjectListHead_search__HN3am" action="">
 

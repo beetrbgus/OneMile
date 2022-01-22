@@ -33,4 +33,10 @@ public class MembershipDaoImpl implements MembershipDao{
 		return sqlSession.selectList("membership.joinMembership", memberNo);
 		
 	}
+
+	@Override
+	public void join(int memNo) {
+		sqlSession.insert("membership.join2",memNo);
+		
+	}
 }

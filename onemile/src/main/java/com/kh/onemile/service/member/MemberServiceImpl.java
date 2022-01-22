@@ -22,6 +22,7 @@ import com.kh.onemile.repository.member.membership.IsMembershipDao;
 import com.kh.onemile.service.admin.AdminService;
 import com.kh.onemile.service.category.CategoryService;
 import com.kh.onemile.service.image.ImageService;
+import com.kh.onemile.service.membership.MembershipService;
 import com.kh.onemile.util.DateToString;
 import com.kh.onemile.util.Sequence;
 import com.kh.onemile.vo.MemberJoinVO;
@@ -54,6 +55,9 @@ public class MemberServiceImpl implements MemberService {
 	private MiddleImageDAO middleImageDao; // 회원 이미지 중간 테이블
 	@Autowired
 	private ImageService imageService;
+	@Autowired
+	private MembershipService membershipService;
+	
 	
 	// 회원가입
 	@Override
@@ -87,8 +91,12 @@ public class MemberServiceImpl implements MemberService {
 		}
 		// 승인 테이블 등록
 		adminService.regApproveMember(memNo);
+		//기본 멤버십
+		membershipService.join(memNo);
+		
 		// 관심 카테고리 테이블 전송
 //		ICService.insert(memberJoinVO, memNo);
+		
 	}
 
 	// 로그인

@@ -15,4 +15,7 @@ public interface MembershipDao {
 	
 	//내가 가입한 멤버십
 	List<MembershipBuyDTO> joinMembership(int memberNo);
+	
+	//기본 멤버십 가입시키기
+	void join(int memNo);
 }
