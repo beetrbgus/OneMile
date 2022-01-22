@@ -56,7 +56,7 @@
                                         <c:forEach items="${cobuyList}" var="cobuy">
                                         <div aria-hidden="true" class="CardTable_itemContainer__3KZ_w"
                                             style="width: calc((16.6667% - 16px + 2.66667px) - 0.01px);margin-left: 0px;margin-right: 8px;margin-bottom: 0px;">
-                                            <a href="${pageContext.request.contextPath}/cobuy/detail?cobuyNo=${cobuy.cobuyNo}"
+                                            <a href="${pageContext.request.contextPath}/cobuy/detail/${cobuy.cobuyNo}"
                                                 class="RecommendationStoreCard_item__3iMMQ">
                                                 <div class="RecommendationStoreCard_thumbnailContainer__mghKx">
                                                     <div class="RecommendationStoreCard_thumbnailPlaceholder__3TTOS"

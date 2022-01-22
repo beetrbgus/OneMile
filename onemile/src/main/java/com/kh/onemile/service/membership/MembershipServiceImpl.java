@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.onemile.entity.product.MembershipDTO;
+import com.kh.onemile.repository.membership.MembershipBuyDao;
 import com.kh.onemile.repository.membership.MembershipDao;
 import com.kh.onemile.vo.kakaopay.ConfirmVO;
 
@@ -13,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 public class MembershipServiceImpl implements MembershipService{
 	@Autowired
 	private MembershipDao membershipDao;
+	
 	@Override
 	public ConfirmVO getConfirm(int productNo,int quantity) {
 		
@@ -30,4 +32,10 @@ public class MembershipServiceImpl implements MembershipService{
 		log.debug("````````confirmVO : confirmVO        "+confirmVO);
 		return confirmVO;
 	}
+	@Override
+	public void join(int memNo) {
+		membershipDao.join(memNo);
+		
+	}
+	
 }

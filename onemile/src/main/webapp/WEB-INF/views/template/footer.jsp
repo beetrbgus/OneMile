@@ -8,7 +8,7 @@
         <div class="FooterInfo_inner__29dOw">
             <div class="FooterInfo_infoSection__3yqPT FooterInfo_firstInfoSection__11jAQ">
                 <div class="FooterInfo_sectionInner__2u_LK">
-                    <div class="FooterInfo_infoCell__llsjL FooterInfo_contactButton__1lK1l"><button type="button"
+                    <div class="FooterInfo_infoCell__llsjL FooterInfo_contactButton__1lK1l"> <a href="${pageContext.request.contextPath}/notice/contact"><button type="button"
                             class="FooterInfo_channelTalkBtn__2OkPb"><svg xmlns="http://www.w3.org/2000/svg" width="20"
                                 height="20" viewBox="0 0 20 20">
                                 <g fill="none" fill-rule="evenodd">
@@ -21,7 +21,8 @@
                                         </g>
                                     </g>
                                 </g>
-                            </svg>원마일에 문의하기</button></div>
+                               
+                           </svg>원마일에 문의하기</button></a></div>
                     <div class="FooterInfo_callCenter__2k-Qa">
                         <div class="FooterInfo_infoCell__llsjL">
                             <p class="FooterInfo_infoDescription__1_sRe">상담 가능 시간 : 평일 오전 9시 ~ 오후 6시 (주말,

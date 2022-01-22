@@ -19,6 +19,7 @@ import com.kh.onemile.entity.member.MemberDTO;
 import com.kh.onemile.entity.member.certi.CertiDTO;
 import com.kh.onemile.service.category.CategoryService;
 import com.kh.onemile.service.member.MemberService;
+import com.kh.onemile.service.membership.MembershipService;
 import com.kh.onemile.vo.MemberJoinVO;
 import com.kh.onemile.vo.MemberVO;
 import com.kh.onemile.vo.member.LoginVO;
@@ -31,7 +32,6 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberController {
 	@Autowired
 	private MemberService memberService;
-
 	@Autowired
 	private CategoryService categoryService;
 	
@@ -48,6 +48,7 @@ public class MemberController {
 	public String postJoin(@ModelAttribute MemberJoinVO memberJoinVO, HttpSession session)
 			throws IllegalStateException, IOException {
 		memberService.join(memberJoinVO);
+		
 		session.setAttribute("joinId", memberJoinVO.getNick());
 		// 회원 승인 테이블 전송.
 		log.debug("닉닉닉닉닉닉닉" + memberJoinVO.getNick());
