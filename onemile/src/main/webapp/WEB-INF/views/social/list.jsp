@@ -218,7 +218,8 @@ img{
 			</a>
 		</li>
 		</c:forEach>
-		<script>
+	</ul>
+	<script>
 		$(function(){
 			let now = "${nowcategory}"; 
 			let cate = $(".RewardMainTab_link___1r2a>span");
@@ -244,7 +245,6 @@ img{
 
 		});		
 		</script>
-	</ul>
 	<div class="RewardCategoryCircleList_container__1GDge">
 		<div class="CategoryCircleList_container__3fAVd">
 			<button class="CategoryCircleList_previous__xJMxg CategoryCircleList_hidden__2fdvp" type="button" data-dir="이전">
@@ -259,7 +259,9 @@ img{
 						href="${pageContext.request.contextPath}/social/list/${mcg.bigValue}?sc=${mcg.smallvalue}">
 						<span class="CategoryCircle_container__2rZ3a">
 							<span class="CategoryCircle_circle__3khwj"
-								style="background-image: url(${pageContext.request.contextPath}/resources/image/social/${mcg.smallvalue}.jpg);"></span>
+								style="background-image: url(${pageContext.request.contextPath}/resources/image/social/${mcg.smallvalue}.jpg);">
+								
+								</span>
 							<span class="CategoryCircle_name__3Ca9T">${mcg.smallType}</span>
 						</span>
 					</a>

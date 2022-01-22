@@ -9,6 +9,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.onemile.entity.image.ImageDTO;
 import com.kh.onemile.vo.reply.ReplyVO;
 
+import lombok.Builder.Default;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
@@ -16,7 +18,7 @@ public class CobuyListVO {
 	// 목록에서 보여질 것 : 
 	// 이미지  제목 , 글쓴닉네임,  마감일 , 조회수
 	// 가격 
-	private int cobuyNo;
+	private int cobuyNo  = 1;
 	private int memberNo;
 	private String nick;
 	private String title;

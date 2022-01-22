@@ -38,6 +38,53 @@
                 <div class="RecommendationDesktop_innerGroup__as4jB Main_innerWrap__7-_Vm"></div>
             </div>
             <div class="Main_wrap__2jKMu">
+        <div class="Main_innerWrap__7-_Vm">
+            <div>
+                <div class="EarlybirdDesktop_container__1a_Ne">
+                    <div class="EarlybirdDesktop_wrap__3k3bW">
+                        <div class="title_titleWrapper__1ggAh">
+                            <h1 class="title_title__2rv2M">소셜링</h1>
+                            <p>서로의 관심사를 함께 즐기는 모임, 소셜링</p>
+                        </div>
+                    </div>
+                    <ul class="EarlybirdDesktop_earlybirdList__3hBAw">
+                    	<c:forEach var="SocialIndexVO" items="${socialIndexVOList}">
+                        <li class="EarlybirdDesktop_listItem__1aZrM"><a
+                                href="${pageContext.request.contextPath}/social/detail/${SocialIndexVO.socialNo}">
+                                <div class="CardType_projectCard__3xhjb CardType_earlybirdCard__1t1n1">
+                                    <div
+                                        class="commons_thumbnail__3wYGv CardType_thumbnail__2dtTe commons_active__1tjD5">
+                                        <span class="commons_img__2UTCA commons_visible__1xTJh"
+                                            style='background-image: url("${pageContext.request.contextPath}/image/download?imageNo=${SocialIndexVO.imageNo}&folder=social")'></span>
+                                    </div>
+                                    <div class="CardType_cardContent__3UMOr">
+                                        <div>
+                                            <p class="CardType_type__El7XP">${SocialIndexVO.bigType}</p>
+                                            <div class="commons_content__2K1SH CardType_content__1Pavj">
+                                                <h1 class="commons_title__1yGWm">${SocialIndexVO.title}</h1>
+                                                <p class="commons_summary__2Ynez"><span
+                                                        class="commons_achievementRate__2J-KL">${SocialIndexVO.nick}</span>${SocialIndexVO.smallType}</p>
+                                            </div>
+                                        </div>
+                                        <div class="CardType_earlybirdContent__1b8VN">
+                                            <h2 class="CardType_title__2qEmh">${SocialIndexVO.startDate} - ${SocialIndexVO.endDate}</h2>
+                                            <p class="CardType_description__2BtXk">${SocialIndexVO.detailAddress}</p>
+                                        </div>
+                                        <a href="${pageContext.request.contextPath}/social/detail/${SocialIndexVO.socialNo}">
+                                        <div class="CardType_linkBtn__1QHvM">지금 참여하기<i
+                                                class="wz icon chevron-right"></i></div></a>
+                                    </div>
+                                </div>
+                            </a></li>
+                            </c:forEach>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+    <div class="Main_wrap__2jKMu">
                 <div class="RecommendationStore_innerGroup__tYMzy Main_innerWrap__7-_Vm">
                     <div class="RecommendationStore_container__3macz">
                         <div class="RecommendationStore_badgeContainer__33HMF">
@@ -85,53 +132,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="Main_wrap__2jKMu">
-        <div class="Main_innerWrap__7-_Vm">
-            <div>
-                <div class="EarlybirdDesktop_container__1a_Ne">
-                    <div class="EarlybirdDesktop_wrap__3k3bW">
-                        <div class="title_titleWrapper__1ggAh">
-                            <h1 class="title_title__2rv2M">소셜링</h1>
-                            <p>서로의 관심사를 함께 즐기는 모임, 소셜링</p>
-                        </div>
-                    </div>
-                    <ul class="EarlybirdDesktop_earlybirdList__3hBAw">
-                    	<c:forEach var="SocialIndexVO" items="${socialIndexVOList}">
-                        <li class="EarlybirdDesktop_listItem__1aZrM"><a
-                                href="${pageContext.request.contextPath}/social/detail/${SocialIndexVO.socialNo}">
-                                <div class="CardType_projectCard__3xhjb CardType_earlybirdCard__1t1n1">
-                                    <div
-                                        class="commons_thumbnail__3wYGv CardType_thumbnail__2dtTe commons_active__1tjD5">
-                                        <span class="commons_img__2UTCA commons_visible__1xTJh"
-                                            style='background-image: url("${pageContext.request.contextPath}/image/download?imageNo=${SocialIndexVO.imageNo}&folder=social")'></span>
-                                    </div>
-                                    <div class="CardType_cardContent__3UMOr">
-                                        <div>
-                                            <p class="CardType_type__El7XP">${SocialIndexVO.bigType}</p>
-                                            <div class="commons_content__2K1SH CardType_content__1Pavj">
-                                                <h1 class="commons_title__1yGWm">${SocialIndexVO.title}</h1>
-                                                <p class="commons_summary__2Ynez"><span
-                                                        class="commons_achievementRate__2J-KL">${SocialIndexVO.nick}</span>${SocialIndexVO.smallType}</p>
-                                            </div>
-                                        </div>
-                                        <div class="CardType_earlybirdContent__1b8VN">
-                                            <h2 class="CardType_title__2qEmh">${SocialIndexVO.startDate} - ${SocialIndexVO.endDate}</h2>
-                                            <p class="CardType_description__2BtXk">${SocialIndexVO.detailAddress}</p>
-                                        </div>
-                                        <a href="${pageContext.request.contextPath}/social/detail/${SocialIndexVO.socialNo}">
-                                        <div class="CardType_linkBtn__1QHvM">지금 참여하기<i
-                                                class="wz icon chevron-right"></i></div></a>
-                                    </div>
-                                </div>
-                            </a></li>
-                            </c:forEach>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+    
+    
     <div class="Main_wrap__2jKMu">
         <div class="Main_innerWrap__7-_Vm">
             <div class="PlannedDesktop_container__3hnzQ">
@@ -160,12 +162,14 @@
                                                 href="${root}/commu/map/list?middleName=${commuList.middleName}">
                                                 <div class="CardType_projectCard__3xhjb CardType_projectCardA__33rbP">
                                                     <article>
-                                                        <div class="commons_content__2K1SH CardType_content__1Pavj">
-                                                            <h1 class="commons_title__1yGWm">${commuDetailList.title}</h1>
-                                                            <p class="commons_summary__2Ynez"><span
-                                                                    class="commons_achievementRate__2J-KL">${commuDetailList.nick}</span>${commuDetailList.regDate}
-                                                            </p>
-                                                        </div>
+                                                    	<a href="${root}/commu/map/detail?boardNo=${commuDetailList.commuNo}">
+	                                                        <div class="commons_content__2K1SH CardType_content__1Pavj">
+	                                                            <h1 class="commons_title__1yGWm">${commuDetailList.title}</h1>
+	                                                            <p class="commons_summary__2Ynez"><span
+	                                                                    class="commons_achievementRate__2J-KL">${commuDetailList.nick}</span>${commuDetailList.regDate}
+	                                                            </p>
+	                                                        </div>
+                                                        </a>
                                                         <div
                                                             class="commons_thumbnail__3wYGv CardType_thumbnail__2dtTe commons_active__1tjD5">
                                                             <span class="commons_img__2UTCA commons_visible__1xTJh"

@@ -113,7 +113,6 @@ public class SocialController {
 		return "redirect:detail/"+socialRegVO.getSocialNo();
 	}
 
-
 	@GetMapping({"/list/{bigcate}","/list","/",""})
 	public String getList(@PathVariable(required = false) String bigcate,
 			@RequestParam(required = false,defaultValue = "") String sc,
@@ -127,24 +126,20 @@ public class SocialController {
 		
 		
 		PaginationVO paginationVO =new PaginationVO(page,size);
+		
 		bigcate =(bigcate==null||bigcate.equals("/"))?"":bigcate;
 
 		//저장된 인증이 있을 때. 검색에서는 현재 위치 무효화 시키려고 함.
-		if((keyword == null||keyword.equals(""))&&session.getAttribute("goo")!=null) {
+		if(keyword.equals("") && session.getAttribute("goo")!=null) {
 			String goo = (String)session.getAttribute("goo");
 			log.debug("googoogoo    "+goo);
 			paginationVO.setGoo(goo);	
 		}else {
 			paginationVO.setKeyword(keyword);
 		}
-		//종료된 것 목록 -endyn 
-		if(endyn.equals("Y")) {
-			paginationVO.setEndyn("Y");
-		}
-		//진행중인 것 목록 -endyn
-		else if(endyn.equals("N")) {
-			paginationVO.setEndyn("N");
-		}
+		// (종료 /진행 중)  검색어
+		paginationVO.setEndyn(endyn);
+		
 		//소분류 카테고리 목록
 		if(sc.equals("") || sc.equals("/")) {
 			paginationVO.setCategoryType("sbc.bigValue");
@@ -292,11 +287,13 @@ public class SocialController {
 		log.debug("result       : "+participateVO.toString());
 		return "redirect:list";
 	}
+	//소셜링 삭제
 	@GetMapping("/delete/{socialNo}")
 	public String delete(@PathVariable int socialNo) {
 		socialService.delete(socialNo);
 		return "redirect:list";
 	}
+	//회원
 	@GetMapping("/memberManage")
 	public String memberManage(int socialNo,Model model,HttpSession session) {
 		
