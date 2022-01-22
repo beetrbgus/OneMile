@@ -125,7 +125,7 @@ img{
 	      </a>
 	    </div>
 	    <div class="carousel-item" data-bs-interval="3000">
-	     <a href="${root}/cobuy/list">
+	     <a href="${root}/cobuy/list/fashion">
 	      <img src="${root}/resources/image/fashion.jpg" class="d-block w-100">
 	      <div class="carousel-caption d-none d-md-block">
 	        <h3 class="w">해외직구 어려워서 고민이었다면.</h3>
@@ -134,7 +134,7 @@ img{
 	      </a>
 	    </div>
 	    <div class="carousel-item" data-bs-interval="3000">
-	     <a href="${root}/cobuy/list">
+	     <a href="${root}/cobuy/list/food">
 	      <img src="${root}/resources/image/food.jpg" class="d-block w-100">
 	      <div class="carousel-caption d-none d-md-block">
 	        <h3 class="w">자취 필수품 모음전</h3>
@@ -143,7 +143,7 @@ img{
 	      </a>
 	    </div>
 	    <div class="carousel-item" data-bs-interval="3000">
-	     <a href="${root}/cobuy/list">
+	     <a href="${root}/cobuy/list/kids">
 	      <img src="${root}/resources/image/kids.jpg" class="d-block w-100">
 	      <div class="carousel-caption d-none d-md-block">
 	        <h3 class="w">[육아9단 PICK!]</h3>
@@ -152,16 +152,16 @@ img{
 	      </a>
 	    </div>
 	    <div class="carousel-item" data-bs-interval="3000">
-	     <a href="${root}/cobuy/list">
+	     <a href="${root}/cobuy/list/living">
 	      <img src="${root}/resources/image/living.jpg" class="d-block w-100">
 	      <div class="carousel-caption d-none d-md-block">
 	        <h3 class="b">겨울철 나만의 따듯함을 위해.</h3>
 	        <p class="b">따듯한 나만의 공간에서 맛있는 귤이라도 먹어요, 우리</p>
 	      </div>
 	      </a>
-	    </div>
+	    </div> 
 	    <div class="carousel-item" data-bs-interval="3000">
-	     <a href="${root}/cobuy/list">
+	     <a href="${root}/cobuy/list/companion">
 	      <img src="${root}/resources/image/pet.jpg" class="d-block w-100">
 	      <div class="carousel-caption d-none d-md-block">
 	        <h3 class="w">루비도 좋아하는 모래</h3>
@@ -214,39 +214,47 @@ img{
 			<!-- 검색기능 -->
 			<div class="ProjectListHead_bar__2dyHz">
 				<button style="float:left; align-content: flex-start;">
-					<a style="color:#00c4c4;" href="${pageContext.request.contextPath}/cobuy/reg">등록하기</a>
+					<c:if test="${session.grade =='판매자'}">
+						<a style="color:#00c4c4;" href="${pageContext.request.contextPath}/cobuy/reg">등록하기</a>
+					</c:if>
 				</button>
-				<form class="ProjectListHead_search__HN3am">
+				<form class="ProjectListHead_search__HN3am" method="get">
 					<label for="search-keyword-4933f540-0608-4b63-9ad6-cccdc2960908">
 						<input class="" id="search-keyword-4933f540-0608-4b63-9ad6-cccdc2960908" type="search"
-								placeholder="검색" value="">
-							<div class="ProjectListHead_right__3_Jo1">
-								<button type="submit" class="ProjectListHead_find__3HsFc" aria-label="검색">
-									<i
-										class="icon search"></i></button></div>
-						</label></form>
-					<div
-						class="SortingSelect_container__3voSC ProjectListHead_sorting__2n1WY RewardProjectListHead_fundingSorting__2n0MF">
-						전체<i class="icon expand-more SortingSelect_icon__khE3_"
-							aria-hidden="true"></i><select name="status"
-							class="SortingSelect_select__23ANT">
-							<option value="ALL">전체</option>
-							<option value="N">진행중</option>
-							<option value="Y">종료된</option>
-						</select></div>
-					<div class="SortingSelect_container__3voSC ProjectListHead_sorting__2n1WY">추천순<i
-							class="icon expand-more SortingSelect_icon__khE3_"
-							aria-hidden="true"></i><select name="order" class="SortingSelect_select__23ANT">
-							<option value="recommend">추천순</option>
-							<option value="popular">인기순</option>
-							<option value="amount">펀딩액순</option>
-							<option value="closing">마감임박순</option>
-							<option value="recent">최신순</option>
-							<option value="support">응원참여자순</option>
-						</select></div>
-					<div class="ProjectListHead_children__2Y7-F"></div><button
-						class="ProjectListHead_cardType__2_YL4"></button>
+							name="keyword" placeholder="검색" value="">
+						<div class="ProjectListHead_right__3_Jo1">
+							<button type="submit" class="ProjectListHead_find__3HsFc" aria-label="검색">
+								<i class="icon search"></i>
+							</button>
+						</div>
+					</label>
+				</form>
+				<div class="SortingSelect_container__3voSC ProjectListHead_sorting__2n1WY RewardProjectListHead_fundingSorting__2n0MF">
+					전체
+					<i class="icon expand-more SortingSelect_icon__khE3_" aria-hidden="true">
+					</i>
+					<select name="status" class="SortingSelect_select__23ANT">
+						<option value="ALL">전체</option>
+						<option value="N">진행중</option>
+						<option value="Y">종료된</option>
+					</select>
 				</div>
+				<div class="SortingSelect_container__3voSC ProjectListHead_sorting__2n1WY">
+					추천순
+					<i class="icon expand-more SortingSelect_icon__khE3_" aria-hidden="true">
+					</i>
+					<select name="order" class="SortingSelect_select__23ANT">
+						<option value="recommend">추천순</option>
+						<option value="popular">인기순</option>
+						<option value="amount">펀딩액순</option>
+						<option value="closing">마감임박순</option>
+						<option value="recent">최신순</option>
+						<option value="support">응원참여자순</option>
+					</select>
+				</div>
+				<div class="ProjectListHead_children__2Y7-F"></div>
+				<button class="ProjectListHead_cardType__2_YL4"></button>
+			</div>
 			<div class="ProjectListHead_children__2Y7-F"></div>
 		</div>
 		<div class="ProjectCardList_container__3Y14k">

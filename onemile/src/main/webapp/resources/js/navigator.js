@@ -29,10 +29,8 @@ $(function(){
 	        	console.log("result[0].region_3depth_name "+ dong);
 		    	removeSession(); 
 	    		setSession(result[0].y,result[0].x,dong,goo);
-	    		let rootURL = '/onemile';
-	    		console.log(rootURL);
 	    		$.ajax({
-					url:rootURL+"/member/myTown?goo="+goo+"&dong="+dong,
+					url:context+"/member/myTown?goo="+goo+"&dong="+dong,
 					type:"get",
 					dataType:"text",
 					contentType: "application/x-www-form-urlencoded; charset=UTF-8",

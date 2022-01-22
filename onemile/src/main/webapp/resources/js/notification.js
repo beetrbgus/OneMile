@@ -1,13 +1,11 @@
 $(function() {
-
 	var socket = null;
-
 	$(document).ready(function() { // 준비가 되면
 		connectWs();
 	});
 
 	function connectWs() {
-		sock = new SockJS("");
+		sock = new SockJS('http://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/alramserver');
 		socket = sock;
 
 		sock.onopen = function() {

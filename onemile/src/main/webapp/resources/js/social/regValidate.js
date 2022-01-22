@@ -89,7 +89,11 @@
 		function startEndValid(){
 			let startVal = $("input[name=startDate]").val();
 			let endVal = $("input[name=endDate]").val();
-
+			let startDate = new Date(startVal);
+			let endDate = new Date(endVal);
+			if(startVal){
+				
+			}
 			if((startVal!=""||startVal!=undefined)&&
 				(endVal!=""||endVal!=undefined)){
 				return true;
