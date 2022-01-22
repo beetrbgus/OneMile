@@ -34,11 +34,12 @@ import com.kh.onemile.vo.social.category.MiddleCategoryVO;
 import lombok.extern.slf4j.Slf4j;
 
 @RequestMapping("/cobuy")
-@Controller 
+@Controller
 @Slf4j
 public class CobuyController {
 	@Autowired
 	private CobuyService cobuyService;
+
 	// 등록
 	@GetMapping("/reg")
 	public String getreg(Model model) throws IllegalStateException, IOException {
@@ -54,70 +55,74 @@ public class CobuyController {
 		cobuyRegVO.setMemberNo(memNo);
 		int cobuyNo = cobuyService.reg(cobuyRegVO);
 
-		return "redirect:detail/"+cobuyNo;
+		return "redirect:detail/" + cobuyNo;
 	}
+
 	// 상품 목록
-	@GetMapping({"/list/{category}","/list","/",""})
+	@GetMapping({ "/list/{category}", "/list", "/", "" })
 	public String list(@PathVariable(required = false) String category,
-			@RequestParam(required = false,defaultValue = "") String keyword,
-			@RequestParam(required =false, defaultValue = "1") int page,
-			@RequestParam(required =false, defaultValue = "10") int size
-			,Model model,HttpSession session) {
-		log.warn("page=========="+page);
-		log.warn("size============"+size);
-		
-		PaginationVO paginationVO =new PaginationVO(page,size);
-		
-		if((keyword == null||keyword.equals(""))&&session.getAttribute("goo")!=null) {
-			String goo = (String)session.getAttribute("goo");
-			log.debug("googoogoo    "+goo);
-			paginationVO.setGoo(goo);	
-		}else {
-			paginationVO.setKeyword(keyword);
-		}
-		if(category==null||category.equals("/")) {
-			category="";
+			@RequestParam(required = false, defaultValue = "") String order,
+			@RequestParam(required = false, defaultValue = "") String endyn,
+			@RequestParam(required = false, defaultValue = "") String keyword,
+			@RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "9") int size, Model model, HttpSession session) {
+
+		PaginationVO paginationVO = new PaginationVO(page, size);
+		//카테고리 없을시 ( 전체 목록일 시 
+		if (category == null || category.equals("/")) {
+			category = "";
+		} else {
 			paginationVO.setCategory(category);
-		}else {
-			paginationVO.setCategory("/"+category);
 			model.addAttribute("nowcategory", category);
 		}
-
-		List<CobuyListVO> cobuyListVO = cobuyService.getList(paginationVO);
-		
-		for(CobuyListVO cobuy:cobuyListVO) {
-			log.debug("cobuyListVO    "+cobuy.toString());
+		// 키워드 없고 , 세션에 회원의 구가 있을시 - 검색에서는 세션의 구 적용 안되게 하기 위함
+		if (keyword.equals("") && session.getAttribute("goo") != null) {
+			String goo = (String) session.getAttribute("goo");
+			log.debug("googoogoo    " + goo);
+			paginationVO.setGoo(goo);
+		} else if(!keyword.equals("")){
+			paginationVO.setKeyword(keyword);
 		}
-	     model.addAttribute("cobuyList", cobuyListVO);
-	     List<CobuyCatVO> cobuyCatVO = cobuyService.getMiddleName();
-	     System.err.println(cobuyCatVO);
-	     model.addAttribute("category", cobuyCatVO);
+		// (종료 /진행 중) 검색어
+		paginationVO.setEndyn(endyn);
+		log.debug("category    " + category);
+		log.debug("order    " + order);
+		log.debug("endyn    " + endyn);
+		log.debug("keyword    " + keyword);
+		
+		List<CobuyListVO> cobuyListVO = cobuyService.getList(paginationVO);
+		List<CobuyCatVO> cobuyCatVO = cobuyService.getMiddleName();
+		System.err.println(cobuyCatVO);
+		model.addAttribute("cobuyList", cobuyListVO);
+		model.addAttribute("category", cobuyCatVO);
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("nowcategory", category);
+
 		return "cobuy/list";
 	}
+
 	// 상품 목록
 	@GetMapping("/listdetail")
 	@ResponseBody
-	public List<CobuyListVO> list(
-			@RequestParam(required =false, defaultValue = "1") int page,
-			@RequestParam(required =false, defaultValue = "10") int size
-			) {
-		
-		PaginationVO paginationVO =new PaginationVO(page,size);
+	public List<CobuyListVO> list(@RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "10") int size) {
+
+		PaginationVO paginationVO = new PaginationVO(page, size);
 		return cobuyService.getList(paginationVO);
 	}
-	
-	@GetMapping("/detail/{cobuyNo}") 
-	public String detail(@PathVariable int cobuyNo , Model model) {
-		log.debug("cobuyNo  "+cobuyNo);
-		CobuyDetailVO cobuyDetailVO =cobuyService.getDetail(cobuyNo);
-		System.out.println("cobuyDetailVO.getCobuyNo()   "+cobuyDetailVO.getCobuyNo());
-		System.out.println("cobuyDetailVO.getDescript()   "+cobuyDetailVO.getDescript());
-		System.out.println("cobuyDetailVO.getDetailAddress()   "+cobuyDetailVO.getDetailAddress());
-		System.out.println("cobuyDetailVO.getMemberNo()   "+cobuyDetailVO.getMemberNo());
-		System.out.println("cobuyDetailVO.getTitle()   "+cobuyDetailVO.getTitle());
-		
+
+	@GetMapping("/detail/{cobuyNo}")
+	public String detail(@PathVariable int cobuyNo, Model model) {
+		log.debug("cobuyNo  " + cobuyNo);
+		CobuyDetailVO cobuyDetailVO = cobuyService.getDetail(cobuyNo);
+		System.out.println("cobuyDetailVO.getCobuyNo()   " + cobuyDetailVO.getCobuyNo());
+		System.out.println("cobuyDetailVO.getDescript()   " + cobuyDetailVO.getDescript());
+		System.out.println("cobuyDetailVO.getDetailAddress()   " + cobuyDetailVO.getDetailAddress());
+		System.out.println("cobuyDetailVO.getMemberNo()   " + cobuyDetailVO.getMemberNo());
+		System.out.println("cobuyDetailVO.getTitle()   " + cobuyDetailVO.getTitle());
+
 		model.addAttribute("detail", cobuyDetailVO);
-		
+
 		return "/cobuy/detail";
 	}
 
@@ -166,22 +171,22 @@ public class CobuyController {
 		ConfirmVO confirmVO = new ConfirmVO();
 		confirmVO.setProductNo(productNo);
 		confirmVO.setQuantity(quantity);
-		
+
 		int memNo = (int) session.getAttribute("logNo");
 		ConfirmVO confirmResultVO = cobuyService.getConfirm(confirmVO);
 		confirmResultVO.setMemberNo(memNo);
 		confirmResultVO.setPartner_user_id(String.valueOf(session.getAttribute("logId")));
 		redirectAttributes.addFlashAttribute("confirmVO", confirmResultVO);
-		
+
 		return "redirect:/pay/confirm";
 	}
-	
-	//내가 구매한 공동구매 목록
+
+	// 내가 구매한 공동구매 목록
 	@GetMapping("/buylist")
 	public String regMembership(Model model, HttpSession session) {
-		int memberNo = (int)session.getAttribute("logNo");
+		int memberNo = (int) session.getAttribute("logNo");
 		List<ProductBuyDTO> ProductBuyDTO = cobuyService.getbuyList(memberNo);
-		model.addAttribute("list",ProductBuyDTO);
+		model.addAttribute("list", ProductBuyDTO);
 		return "cobuy/buylist";
 	}
 }

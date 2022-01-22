@@ -9,7 +9,8 @@
             <div class="FooterInfo_infoSection__3yqPT FooterInfo_firstInfoSection__11jAQ">
                 <div class="FooterInfo_sectionInner__2u_LK">
                     <div class="FooterInfo_infoCell__llsjL FooterInfo_contactButton__1lK1l"><button type="button"
-                            class="FooterInfo_channelTalkBtn__2OkPb"><svg xmlns="http://www.w3.org/2000/svg" width="20"
+                            class="FooterInfo_channelTalkBtn__2OkPb">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20"
                                 height="20" viewBox="0 0 20 20">
                                 <g fill="none" fill-rule="evenodd">
                                     <g fill="#FFF">

@@ -38,56 +38,6 @@
                 <div class="RecommendationDesktop_innerGroup__as4jB Main_innerWrap__7-_Vm"></div>
             </div>
             <div class="Main_wrap__2jKMu">
-                <div class="RecommendationStore_innerGroup__tYMzy Main_innerWrap__7-_Vm">
-                    <div class="RecommendationStore_container__3macz">
-                        <div class="RecommendationStore_badgeContainer__33HMF">
-                            <div class="RecommendationStore_badge__xCEiV"><span
-                                    class="RecommendationStore_storeIcon__DoCqP"></span><span
-                                    class="RecommendationStore_text__RmcS7">공동구매</span></div>
-                        </div>
-                        <div class="RecommendationStore_header__VkYC6">
-                            <div class="RecommendationStore_headerText__2_8B0">우리 동네에서 공구!</div>
-                        </div>
-                        <div class="RecommendationStore_cardList__1FZ5m">
-                            <div class="RecommendationStore_tableWrap__2rBP7">
-                                <div class="RecommendationStore_tableContent__yUkCF">
-                                    <div class="CardTable_container__XsdEp RecommendationStore_cardTable__-AvHK"
-                                        style="width: calc(100% - 0px);">
-                                        <c:forEach items="${cobuyList}" var="cobuy">
-                                        <div aria-hidden="true" class="CardTable_itemContainer__3KZ_w"
-                                            style="width: calc((16.6667% - 16px + 2.66667px) - 0.01px);margin-left: 0px;margin-right: 8px;margin-bottom: 0px;">
-                                            <a href="${pageContext.request.contextPath}/cobuy/detail?cobuyNo=${cobuy.cobuyNo}"
-                                                class="RecommendationStoreCard_item__3iMMQ">
-                                                <div class="RecommendationStoreCard_thumbnailContainer__mghKx">
-                                                    <div class="RecommendationStoreCard_thumbnailPlaceholder__3TTOS"
-                                                        style="padding-top: calc(100% - 0px);">
-                                                        <div class="RecommendationStoreCard_thumbnail__mis5O"
-                                                            style="background-image: url(&quot;${root}/image/download?imageNo=${cobuy.imageNo}&folder=cobuy&quot;);">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="RecommendationStoreCard_contentContainer__aDF-5">
-                                                    <div class="RecommendationStoreCard_projectName__kIgBJ">${cobuy.title}</div>
-                                                    <div>
-                                                        <div class="RecommendationStoreCard_peopleCount__2AK_E">
-                                                            <div class="RecommendationStoreCard_peopleIcon__1RxB1">
-                                                            </div><span
-                                                                class="RecommendationStoreCard_peopleCountText__15U8g">${cobuy.nick}</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </a></div>
-                                        </c:forEach>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="Main_wrap__2jKMu">
         <div class="Main_innerWrap__7-_Vm">
             <div>
                 <div class="EarlybirdDesktop_container__1a_Ne">
@@ -132,6 +82,58 @@
             </div>
         </div>
     </div>
+        </div>
+    </div>
+    <div class="Main_wrap__2jKMu">
+                <div class="RecommendationStore_innerGroup__tYMzy Main_innerWrap__7-_Vm">
+                    <div class="RecommendationStore_container__3macz">
+                        <div class="RecommendationStore_badgeContainer__33HMF">
+                            <div class="RecommendationStore_badge__xCEiV"><span
+                                    class="RecommendationStore_storeIcon__DoCqP"></span><span
+                                    class="RecommendationStore_text__RmcS7">공동구매</span></div>
+                        </div>
+                        <div class="RecommendationStore_header__VkYC6">
+                            <div class="RecommendationStore_headerText__2_8B0">우리 동네에서 공구!</div>
+                        </div>
+                        <div class="RecommendationStore_cardList__1FZ5m">
+                            <div class="RecommendationStore_tableWrap__2rBP7">
+                                <div class="RecommendationStore_tableContent__yUkCF">
+                                    <div class="CardTable_container__XsdEp RecommendationStore_cardTable__-AvHK"
+                                        style="width: calc(100% - 0px);">
+                                        <c:forEach items="${cobuyList}" var="cobuy">
+                                        <div aria-hidden="true" class="CardTable_itemContainer__3KZ_w"
+                                            style="width: calc((16.6667% - 16px + 2.66667px) - 0.01px);margin-left: 0px;margin-right: 8px;margin-bottom: 0px;">
+                                            <a href="${pageContext.request.contextPath}/cobuy/detail/${cobuy.cobuyNo}"
+                                                class="RecommendationStoreCard_item__3iMMQ">
+                                                <div class="RecommendationStoreCard_thumbnailContainer__mghKx">
+                                                    <div class="RecommendationStoreCard_thumbnailPlaceholder__3TTOS"
+                                                        style="padding-top: calc(100% - 0px);">
+                                                        <div class="RecommendationStoreCard_thumbnail__mis5O"
+                                                            style="background-image: url(&quot;${root}/image/download?imageNo=${cobuy.imageNo}&folder=cobuy&quot;);">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="RecommendationStoreCard_contentContainer__aDF-5">
+                                                    <div class="RecommendationStoreCard_projectName__kIgBJ">${cobuy.title}</div>
+                                                    <div>
+                                                        <div class="RecommendationStoreCard_peopleCount__2AK_E">
+                                                            <div class="RecommendationStoreCard_peopleIcon__1RxB1">
+                                                            </div><span
+                                                                class="RecommendationStoreCard_peopleCountText__15U8g">${cobuy.nick}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a></div>
+                                        </c:forEach>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+    
     <div class="Main_wrap__2jKMu">
         <div class="Main_innerWrap__7-_Vm">
             <div class="PlannedDesktop_container__3hnzQ">
@@ -160,12 +162,14 @@
                                                 href="${root}/commu/map/list?middleName=${commuList.middleName}">
                                                 <div class="CardType_projectCard__3xhjb CardType_projectCardA__33rbP">
                                                     <article>
-                                                        <div class="commons_content__2K1SH CardType_content__1Pavj">
-                                                            <h1 class="commons_title__1yGWm">${commuDetailList.title}</h1>
-                                                            <p class="commons_summary__2Ynez"><span
-                                                                    class="commons_achievementRate__2J-KL">${commuDetailList.nick}</span>${commuDetailList.regDate}
-                                                            </p>
-                                                        </div>
+                                                    	<a href="${root}/commu/map/detail?boardNo=${commuDetailList.commuNo}">
+	                                                        <div class="commons_content__2K1SH CardType_content__1Pavj">
+	                                                            <h1 class="commons_title__1yGWm">${commuDetailList.title}</h1>
+	                                                            <p class="commons_summary__2Ynez"><span
+	                                                                    class="commons_achievementRate__2J-KL">${commuDetailList.nick}</span>${commuDetailList.regDate}
+	                                                            </p>
+	                                                        </div>
+                                                        </a>
                                                         <div
                                                             class="commons_thumbnail__3wYGv CardType_thumbnail__2dtTe commons_active__1tjD5">
                                                             <span class="commons_img__2UTCA commons_visible__1xTJh"

@@ -67,7 +67,7 @@ $(function () {
             type: "post",
             data: {},
             success: function (resp) {
-            	
+            
             	for(var i = 0; i<resp.length; i++){
             		var menuDto = resp[i];
             		
