@@ -20,6 +20,32 @@
     border: 2px solid gray;
 }
 </style>
+<script>
+$(function(){
+	$("#socialstatus").on("change",function(){
+		var checkNo = $(this).val();
+		console.log(checkNo);
+		$.ajax({ 
+			url : '${pageContext.request.contextPath}/account/status/',
+			type : "post",
+			async : false,
+			data : { 
+				checkNo : checkNo
+			},
+			success : function(resp) {
+				console.log("성공", resp);
+				
+				},
+	 		error : function(e) {
+			  console.log("실패", e);
+ 		  	}
+		});
+	});
+});
+
+</script>
+
+
 <div class="container">
 	<div class="row">
 		<div class="profile_col">
@@ -83,8 +109,13 @@
 			<div class="saved_inner target target_meeting selected" style="padding-left:30px;border-left-width: 0px;margin-left: 10px;padding-top: 15px;padding-right:30px;">
 				<div class="p-20 row target target_meeting title_row selected">
 					<div class="col-12">
-						<h1 class="mb-4">내 소셜링<span class="text_munto" id="SOCIALING_cnt"></span></h1>
+						<h1 class="mb-4">내 소셜링 <span class="text_munto" id="SOCIALING_cnt"></span></h1>
 					</div>
+					<select id="socialstatus" class="form-control"> 
+						<option value="0" selected="">활동중인 모임</option><!-- 0이면 참여중 --> 
+						<option value="1">참여했던 모임</option> <!-- 1이면 참여종료 -->
+						<option value="2">참여 대기중</option> <!-- 2이면 참여대기중 -->
+					</select>
 				</div>
 				
 				<div class="item_row p-20 row" id="SOCIALING_row">
@@ -92,7 +123,9 @@
 					<a class="item_col col-6 col-md-4">
 					<div class="image_zone" style="background-image: url('${pageContext.request.contextPath}/image/download?imageNo=${socialListVO.imgNo}&folder=social')"></div>
 						<div class="item_type">소셜링</div>
+						<a href="${pageContext.request.contextPath}/social/detail/${socialListVO.socialNo}">
 						<div class="item_name">${socialListVO.title}</div>
+						</a>
 						<div class="period">${socialListVO.startDate} ~ ${socialListVO.endDate}</div></a>
 						</c:forEach>
 				</div>

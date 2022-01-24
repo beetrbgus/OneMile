@@ -6,7 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.kh.onemile.service.member.MemberService;
 import com.kh.onemile.service.social.SocialService;
 import com.kh.onemile.vo.MemberVO;
@@ -30,6 +34,7 @@ public class AccountController {
 		List<SocialListVO> socialListVO = socialService.getMemberByList(memberNo);
 		log.debug("마이페이지 내정보[MemberVO] :"+memberVO);
 		model.addAttribute("socialListVO", socialListVO);
+		log.debug("마이페이지 내 소셜링[socialListVO] : "+socialListVO);
 		model.addAttribute("memberVO", memberVO);
 		return "account/mypage";
 		}
@@ -45,5 +50,13 @@ public class AccountController {
 		model.addAttribute("socialListVO", socialListVO);
 		model.addAttribute("memberVO", memberVO);
 		return "account/profile";
+	}
+	@ResponseBody
+	@PostMapping("/status")
+	public void joined(HttpSession session, Model model, @RequestParam int checkNo) {
+		int memberNo = (int) session.getAttribute("logNo");
+		List<SocialListVO> socialListVO = socialService.getMemberByList2(memberNo);
+		model.addAttribute("socialListVO", socialListVO);
+		log.debug("마이페이지 내 소셜링[socialListVO] : "+socialListVO);
 	}
 }

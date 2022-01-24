@@ -180,4 +180,9 @@ public class SocialServiceImpl implements SocialService{
 		return socialDao.getIsMytown(socialNo,goo);
 	}
 
+	@Override
+	public List<SocialListVO> getMemberByList2(int memberNo) {
+		return socialDao.getMemberByList2(memberNo);
+	}
+
 }

@@ -145,7 +145,7 @@
             (select social_no, min(image_no) as image_no
 					from smi group by social_no) smi on 
                     smi.social_no = s.social_no
-        where s.hiddenyn ='N' and p.member_no = 286 order by s.startdate desc                    
+        where s.hiddenyn ='N' and p.member_no = #{memberNo} order by s.startdate desc                    
 	</select>
 	<!-- 내가 글쓴게 일주일간 몇 개인지 -->
 	<select id="getCount" parameterType="int" resultType="SocialDTO">
@@ -210,5 +210,29 @@
 		select count(*) from social s inner join map m 
 			on s.map_no = m.map_no
 		where social_no = ${socialNo} and instr(m.detailaddress,#{goo}) > 0
+	</select>
+	
+	<select id="getStatusCheck" resultType="SocialListVO">
+		<![CDATA[
+		select sp.member_no,sp.social_no from sp sp inner join social s on sp.social_no = s.social_no 
+        where sp.isjoined = '참여중' and s.enddate <= sysdate
+		]]>
+	</select>
+	
+	<update id="statusUpdate" parameterType="map">
+		update sp set isjoined ='참여종료' where member_no = #{memberNo} and social_no = #{socialNo}
+	</update>
+	
+	<select id="getMemberByList2" parameterType="int" resultType="SocialListVO">
+			  select s.title,s.social_no,
+    TO_CHAR(s.startdate, 'MM/DD HH24:mm') as startDate, 
+    TO_CHAR(s.enddate, 'MM/DD HH24:mm') as endDate ,smi.image_no as img_no
+            from social s 
+            inner join sp p on s.social_no = p.social_no
+            inner join 
+            (select social_no, min(image_no) as image_no
+					from smi group by social_no) smi on 
+                    smi.social_no = s.social_no
+        where s.hiddenyn ='N' and p.member_no = #{memberNo} and p.isjoined = '참여종료' order by s.startdate desc                    
 	</select>
 </mapper>
