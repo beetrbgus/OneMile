@@ -56,7 +56,7 @@ public class AlramEchoHandler extends TextWebSocketHandler{
 				WebSocketSession receiverSession = userSessions.get(receiver);
 				NotiDTO notiDTO =new NotiDTO();
 				if("memberReject".contentEquals(type)&& receiverSession != null) { //type이 댓글이라면
-					notiDTO.setSender(giver);
+//					notiDTO.setSender(giver);
 					notiDTO.setMsg("님이 게시글에 댓글을 남겼습니다");
 					TextMessage tmpMsg = new TextMessage(giver+"님이 게시글에 댓글을 남겼습니다.");
 					receiverSession.sendMessage(tmpMsg);
