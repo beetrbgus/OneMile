@@ -35,10 +35,7 @@ public class CommuWithMapController {
 	
 	@Autowired
 	private ImageService imageService;
-	
-	@Autowired
-	private Sequence seq;
-	
+
 	@GetMapping("/map/write")
 	public String writeMatjip() {
 		return "commu/map/write";
