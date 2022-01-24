@@ -122,28 +122,35 @@ $(function(){
         
         <div class="detail_carousel_row no_padding row">
             <div class="col-12">
-                <div id="carouselExampleFade"
-								class="carousel slide carousel-fade" data-bs-ride="carousel" >
-								<div class="carousel-inner">
-									<c:forEach items="${detail.imageInfo}" var="imageDTO"
-										varStatus="status">
-										<div
-											class="carousel-item ${status.index == 0 ? 'active' : ''}">
-											<img src="${pageContext.request.contextPath}/image/download?imageNo=${imageDTO.imageNo}&folder=social" class="d-block w-100" alt="..." style="width:150px;height:350px">
-										</div>
-									</c:forEach>
-								</div>
-								<button class="carousel-control-prev" type="button"
-									data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-									<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-									<span class="visually-hidden">Previous</span>
-								</button>
-								<button class="carousel-control-next" type="button"
-									data-bs-target="#carouselExampleFade" data-bs-slide="next">
-									<span class="carousel-control-next-icon" aria-hidden="true"></span>
-									<span class="visually-hidden">Next</span>
-								</button>
+                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+					<div class="carousel-indicators">
+						<c:forEach items="${detail.imageInfo}" var="imageDTO" varStatus="status">
+					    	<button type="button" 
+					    		data-bs-target="#carouselExampleIndicators"
+					    		data-bs-slide-to="${status.index}" 
+					    		class="${status.index == 0 ? 'active' : ''}"
+					    		aria-current="${status.index == 0 ? 'true' : ''}"
+					    		aria-label="Slide ${status.index+1}"></button>
+				    	</c:forEach>
+					</div>
+					<div class="carousel-inner">
+						<c:forEach items="${detail.imageInfo}" var="imageDTO"
+							varStatus="status">
+							<div
+								class="carousel-item ${status.index == 0 ? 'active' : ''}">
+								<img src="${pageContext.request.contextPath}/image/download?imageNo=${imageDTO.imageNo}&folder=social" class="d-block w-100" alt="..." style="width:150px;height:350px">
 							</div>
+						</c:forEach>
+					</div>
+					<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+					    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					    <span class="visually-hidden">Previous</span>
+					</button>
+					<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+					    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+					    <span class="visually-hidden">Next</span>
+					</button>
+				</div>
             </div>
         </div>
         <div class="detail_info_mobile">
@@ -169,43 +176,43 @@ $(function(){
                 <div class="user_cover"
                     style="background-image">
                 	<img class=" image image-round image-border" style="width:300px;height:50px;" src="${pageContext.request.contextPath}/image/download?imageNo=${detail.hostImgNo}&folder=member">
-                
-                </div> <span class="user">모임장 닉네임${detail.nick}</span>
+                </div> 
+                <span class="user">${detail.nick}</span>
                 <div class="socialing_name">${detail.title}</div>
                 <div> </div>
             </div>
-            <div class="col-12 loc_col"> <span class="loc">
-                    ${detail.detailAddress}</span>
-                    <br>
-                    <span> ${detail.startDate} ~ ${detail.endDate}</span> </div>
+            <div class="col-12 loc_col"> 
+            	<span class="loc">
+                   ${detail.detailAddress}</span>
+                   <br>
+                <span> ${detail.startDate} ~ ${detail.endDate}</span>
+            </div>
         </div>
         <div class="detail_buttons_row floating row">
             <div class="col">
                 <c:choose>
-							<c:when test="${detail.memberNo==logNo}">
-									<div class="pointer purchase_button">
-									<a href="${pageContext.request.contextPath}/social/modify/${detail.socialNo}"> 
-										 수정하기 
-									</a>
-									</div>
-									<div  class="pointer purchase_button" style="margin-top:20px;">
-										<a href="${pageContext.request.contextPath}/social/delete/${detail.socialNo}">
-											 삭제하기 
-										</a>
-									</div>
-							</c:when>
-							
-							<c:when test="${joined eq '수락대기중'}">
-								<div id="purchase"   data-joined="exit" class="pointer purchase_button"> 취소하기</div>
-							</c:when>
-							<c:when test="${detail.memberNo!=logNo and joined eq '참여중'}">
-								<div id="purchase"    data-joined="exit" class="pointer purchase_button"> 탈퇴하기 </div>
-							</c:when>
-							<c:otherwise>
-								<div  id="purchase"   data-joined="join" class="pointer purchase_button"> 소셜링 참여하기 </div>
-							</c:otherwise>
-						</c:choose>
-                
+					<c:when test="${detail.memberNo==logNo}">
+						<div class="pointer purchase_button">
+							<a href="${pageContext.request.contextPath}/social/modify/${detail.socialNo}"> 
+								 수정하기 
+							</a>
+						</div>
+						<div  class="pointer purchase_button" style="margin-top:20px;">
+							<a href="${pageContext.request.contextPath}/social/delete/${detail.socialNo}">
+								 삭제하기 
+							</a>
+						</div>
+					</c:when>
+					<c:when test="${joined eq '수락대기중'}">
+						<div id="purchase"   data-joined="exit" class="pointer purchase_button"> 취소하기</div>
+					</c:when>
+					<c:when test="${detail.memberNo!=logNo and joined eq '참여중'}">
+						<div id="purchase"    data-joined="exit" class="pointer purchase_button"> 탈퇴하기 </div>
+					</c:when>
+					<c:otherwise>
+						<div  id="purchase"   data-joined="join" class="pointer purchase_button"> 소셜링 참여하기 </div>
+					</c:otherwise>
+				</c:choose>
               
                 <div id="map" style="width:412px;height:300px;top:50px;right: 20px;"></div>
             </div>
@@ -213,7 +220,8 @@ $(function(){
     </div>
     <div id="introduce_row" class="detail_content_row row">
         <div class="col-12 p-20"> </div>
-        <div class="col-12" id="introduce">${detail.context} 
+        <div class="col-12" id="introduce">
+        	${detail.context} 
         </div>
     </div>
     <div id="host_row" class="detail_content_row row">
@@ -233,10 +241,10 @@ $(function(){
                     </div>
                     <div class="col user_info_col">
                         <div class="user">
-                        <c:forEach items="${detail.participate}" var="parti">
+    	                    <c:forEach items="${detail.participate}" var="parti">
 							  	<br>
 							  	${parti.nick} ·
-						</c:forEach>		
+							</c:forEach>		
                         </div>
                         <div class="user_grade"></div>
                     </div>
@@ -263,47 +271,41 @@ $(function(){
                 <div class="col-auto"></div>
                 <div class="col info_datetime">일정 : ${detail.startDate} ~ ${detail.endDate}</div>
             </div>
-            <div class="info_price_row info_row no_padding row" style="display: none;">
-                <div class="col-auto"> <img src="/info_price.08ff223f.png"> </div>
-                <div class="col info_price"></div>
-            </div>
         </div>
     </div>
 </div>	
-	
-	
-	<script> 
-		$(function(){
-			//참가자 꽉 찼을 때
-			let isFull = ${isFull};
-			if(!isFull){ 
-				$("#purchase").on("click",function(){
-					let status = $(this).data("joined");
-					console.log("클릭됨!   "+status);
-					let socialForm = $("#socialform");
-					let  action = "";
-					/* 각 버튼 클릭시 Action 지정. 수정은 페이지 이동 */
-					let ismyTown = ${ismytown};
-					if(!ismyTown){
-						alert("내 동네가 아닙니다. 지역의 소모임을 이용해보세요!");
-						return false;
-					}
-					if(status=='exit'){
-						action = "../socialexit"; 
-					}else{
-						action = "../socialjoin"; 
-					}
-					console.log("status     "+status);
-					console.log("action     "+action);
-					socialForm.attr("action",action);
-					socialForm.submit(); 
-				});
-			}
-			console.log("isFull   "+isFull );
-			// 내 동네일때
-			
+<script> 
+	$(function(){
+		//참가자 꽉 찼을 때
+		let isFull = ${isFull};
+		if(!isFull){ 
+			$("#purchase").on("click",function(){
+				let status = $(this).data("joined");
+				console.log("클릭됨!   "+status);
+				let socialForm = $("#socialform");
+				let  action = "";
+				/* 각 버튼 클릭시 Action 지정. 수정은 페이지 이동 */
+				let ismyTown = ${ismytown};
+				if(!ismyTown){
+					alert("내 동네가 아닙니다. 지역의 소모임을 이용해보세요!");
+					return false;
+				}
+				if(status=='exit'){
+					action = "../socialexit"; 
+				}else{
+					action = "../socialjoin"; 
+				}
+				console.log("status     "+status);
+				console.log("action     "+action);
+				socialForm.attr("action",action);
+				socialForm.submit(); 
+			});
+		}
+		console.log("isFull   "+isFull );
+		// 내 동네일때
+		
 
-		});
-	</script>
+	});
+</script>
 <script type="text/javascript"src="${root}/onemile/resources/js/social/mapRead.js"></script>	
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

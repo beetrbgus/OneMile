@@ -19,113 +19,93 @@ img{
 }
 </style>
 <script>
-	$(function () {
-		var category = "${nowcategory}";
-		var page = 2;
-		var size = 9;
-		var keyword = "${keyword}";
-		
-		var select = "";
-		
-		$("#selectStatus").change(function(){
-			select = $(this).val();
+$(function () {
+	var category = "${nowcategory}";
+	var page = 2;
+	var size = 9;
+	var keyword = "${keyword}";
 
-			if(select == 'N'){
-				$(".content").empty();
-				page = 1;
-				$(".content").empty;
-			}
-			else if(select == 'Y'){
-				$(".content").empty;
-				page = 1;
-				$(".content").empty;
-			}
-			else{
-				$(".content").empty;
-				page = 2;
-				$(".content").empty;
-			}
-			
-			loadData(category, page, size, select);
-			
-			console.log("선택은", select);
-			console.log("page = ", page);
-		});
+	var select = "";
+	$("#selectStatus").change(function(){
+		select = $(this).val();
+		page = 1;		
 		
-		$(".ProjectListMoreButton_button__27eTb").click(function () {
-			loadData(category, page, size, select, keyword);
-			page++;
-		});
-		
-		if(cnt() <9){ 
-			$("#moreBtn").remove(); 
-		}
-		function cnt(){
-			let a = $(".ProjectCardList_item__1owJa");
-			return a.length;
-		}
-		function loadData(category, page, size, select, keyword) {
-
-			$.ajax({
-				url: "${pageContext.request.contextPath}/social/listdetail",
-				type: "get",
-				data: {
-					"category": category,
-					"page": page,
-					"size": size,
-					"endyn": select,
-					"keyword": keyword
-				},
-				success: function (resp) {
-					if (resp.length < size) {
-						$("#moreBtn").remove();
-					}
-					for (var i = 0; i < resp.length; i++) {
-						var date = new Date(resp[i].deadLine);
-						var dateString = date.getFullYear()+"년 "+date.getMonth()+1+"월 "+date.getDate()+"일 "+date.getHours()+"시 "+date.getMinutes()+"분 "+date.getSeconds()+"초";
-
-						var sc = resp[i];
-						var divCol=
-							"<div class='ProjectCardList_item__1owJa'><div><div class='CommonCard_container__e_ebQ CommonCard_squareSmall__1Cdkn'>"+
-							"<a href='${pageContext.request.contextPath}/social/detail/"+sc.socialNo+"' class='CardLink_link__1k83H CommonCard_image__vaqkf' aria-hidden='true' tabindex='-1'>"+
-							"<div class='CommonCard_rect__2wpm4'><span class='CommonCard_background__3toTR CommonCard_visible__ABkYx'style='background-image: url("+
-							"${pageContext.request.contextPath}/image/download?imageNo="+sc.imgNo+"&folder=social')></span>"+
-							"</div></a><div class='CommonCard_info__1f4kq'><div class='RewardProjectCard_info__3JFub'><div class='RewardProjectCard_infoTop__3QR5w'>"+
-							"<a href='${pageContext.request.contextPath}/social/detail/"+sc.socialNo+"' class='CardLink_link__1k83H'>"+
-							"<p class='CommonCard_title 1oKJY RewardProjectCard_title iUtvs'><strong>"+sc.title+"</strong></p>"+
-							"<span class='CommonCard_background__3toTR CommonCard_visible__ABkYx'>"+sc.smalltype+"·"+sc.type+
-							"</span></a><div><a class='MakerInfoHeader_link__HmY8C' href='${pageContext.request.contextPath}/account/profile/"+sc.memberNo+"'>"+
-							"<button class='Avatar_avatar__CiRY0 Avatar_xs__1Mz7G MakerInfoHeader_avatar__ltZMd'>"+
-							"<span style='background-image: url(/onemile/image/download?imageNo=179&amp;folder=member);''></span>"+
-							"</button><div class='MakerInfoHeader_texts__1vfam'><span class='MakerInfoHeader_makerName__KDu0a'>"+sc.nick+"</span>"+
-							"<span class='RewardProjectCard_remainingDayText__2sRLV'>"+sc.startDate+"-"+sc.endDate+"</span></div></a></div>"+
-							"</div><div class='RewardProjectCard_gauge__3p9US'><span style='width: 100%;'></span></div><span class='RewardProjectCard_days__3eece RewardProjectCard_isAchieve__1LcUu'>"+
-							"<span class='RewardProjectCard_remainingDay__2TqyN'>"+sc.detailAddress+"</span><span class='RewardProjectCard_remainingDayText__2sRLV'></span>"+
-							"<span class='RewardProjectCard_isAchieve__1LcUu'></span></span></div></div></div></div></div>";
-							
-							$(".ProjectCardList_list__1YBa2").append(divCol);
-					}
-				},
-				error: function (e) {
-					console.log("실패", e);
-				}
-			});
-		};
-		function keywordCheck(){
-			let keyword = $("#keyword").val();
-			if(keyword==undefined||keyword==''||keyword.length<2){
-				alert("검색어는 두글자 이상 입력해주세요.");
-				return false;
-			}
-			return true;
-		}
+		$(".ProjectCardList_list__1YBa2").empty();
+		loadData(category, page, size, select);
 	});
-	function produceBtn(){
+		
+	$(".ProjectListMoreButton_button__27eTb").click(function () {
+		loadData(category, page, size, select, keyword);
+		page++;
+	});
+	/*보여줄 갯수가  페이지 사이즈보다 작으면 더보기 삭제*/		
+	if(cnt() < size){ 
+		$("#moreBtn").remove(); 
+	}
+	function cnt(){
+		let a = $(".ProjectCardList_item__1owJa");
+		return a.length;
+	}
+	/* 데이터 불러오기. */
+	function loadData(category, page, size, select, keyword) {
+		$.ajax({
+			url: "${pageContext.request.contextPath}/social/listdetail",
+			type: "get",
+			data: {
+				"category": category,
+				"page": page,
+				"size": size,
+				"endyn": select,
+				"keyword": keyword
+			},
+			success: function (resp) {
+				if (resp.length < size) {
+					$("#moreBtn").remove();
+				}
+				for (var i = 0; i < resp.length; i++) {
+					var date = new Date(resp[i].deadLine);
+					var dateString = date.getFullYear()+"년 "+date.getMonth()+1+"월 "+date.getDate()+"일 "+date.getHours()+"시 "+date.getMinutes()+"분 "+date.getSeconds()+"초";
 
-		if (confirm("소셜링 생성횟수 초과!! 멤버십 가입페이지로 이동하시겠습니까?")){    //확인
+					var sc = resp[i];
+					var divCol=
+						"<div class='ProjectCardList_item__1owJa'><div><div class='CommonCard_container__e_ebQ CommonCard_squareSmall__1Cdkn'>"+
+						"<a href='${pageContext.request.contextPath}/social/detail/"+sc.socialNo+"' class='CardLink_link__1k83H CommonCard_image__vaqkf' aria-hidden='true' tabindex='-1'>"+
+						"<div class='CommonCard_rect__2wpm4'><span class='CommonCard_background__3toTR CommonCard_visible__ABkYx'style='background-image: url("+
+						"${pageContext.request.contextPath}/image/download?imageNo="+sc.imgNo+"&folder=social')></span>"+
+						"</div></a><div class='CommonCard_info__1f4kq'><div class='RewardProjectCard_info__3JFub'><div class='RewardProjectCard_infoTop__3QR5w'>"+
+						"<a href='${pageContext.request.contextPath}/social/detail/"+sc.socialNo+"' class='CardLink_link__1k83H'>"+
+						"<p class='CommonCard_title 1oKJY RewardProjectCard_title iUtvs'><strong>"+sc.title+"</strong></p>"+
+						"<span class='CommonCard_background__3toTR CommonCard_visible__ABkYx'>"+sc.smalltype+"·"+sc.type+
+						"</span></a><div><a class='MakerInfoHeader_link__HmY8C' href='${pageContext.request.contextPath}/account/profile/"+sc.memberNo+"'>"+
+						"<button class='Avatar_avatar__CiRY0 Avatar_xs__1Mz7G MakerInfoHeader_avatar__ltZMd'>"+
+						"<span style='background-image: url(/onemile/image/download?imageNo=179&amp;folder=member);''></span>"+
+						"</button><div class='MakerInfoHeader_texts__1vfam'><span class='MakerInfoHeader_makerName__KDu0a'>"+sc.nick+"</span>"+
+						"<span class='RewardProjectCard_remainingDayText__2sRLV'>"+sc.startDate+"-"+sc.endDate+"</span></div></a></div>"+
+						"</div><div class='RewardProjectCard_gauge__3p9US'><span style='width: 100%;'></span></div><span class='RewardProjectCard_days__3eece RewardProjectCard_isAchieve__1LcUu'>"+
+						"<span class='RewardProjectCard_remainingDay__2TqyN'>"+sc.detailAddress+"</span><span class='RewardProjectCard_remainingDayText__2sRLV'></span>"+
+						"<span class='RewardProjectCard_isAchieve__1LcUu'></span></span></div></div></div></div></div>";
+						
+						$(".ProjectCardList_list__1YBa2").append(divCol);
+				}
+			},
+			error: function (e) {
+				console.log("실패", e);
+			}
+		});
+	}
+
+	function keywordCheck(){
+		let keyword = $("#keyword").val();
+		if(keyword==undefined||keyword==''||keyword.length<2){
+			alert("검색어는 두글자 이상 입력해주세요.");
+			return false;
+		}
+	}	
+});
+	/*등록한 갯수 초과일 때 등록버튼 누를 시*/
+	function produceBtn(){
+		if (confirm("소셜링 생성횟수 초과!! 멤버십 가입페이지로 이동하시겠습니까?")){
 			location.href="${pageContext.request.contextPath}/membership/list";
-		}else{   //취소
-			return;
 		}
 	}
 </script>
@@ -281,8 +261,9 @@ img{
 		<div class="ProjectListHead_container__rpQ37 RewardProjectListHead_container__2FzIj">
 			<div class="ProjectListHead_bar__2dyHz">
 				<button style="float:left; align-content: flex-start;">
+				
 					<c:choose>
-						<c:when test="${produce==true}">
+						<c:when test="${produce ==null or produce==true}">
 							<a id="regBtn" style="color:#00c4c4;" href="${pageContext.request.contextPath}/social/reg">등록하기</a>
 						</c:when>
 						<c:otherwise>
