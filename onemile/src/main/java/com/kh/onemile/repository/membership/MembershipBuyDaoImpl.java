@@ -44,4 +44,5 @@ public class MembershipBuyDaoImpl implements MembershipBuyDao{
 	public void regularPayDelete(String sid) {
 		sqlSession.update("membership.regularPayDelete", sid);
 	}
+
 }

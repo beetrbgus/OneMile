@@ -6,4 +6,7 @@ public interface MembershipService {
 
 	public ConfirmVO getConfirm(int productNo , int quantity);
 
+	public void join(int memNo);
+
+	
 }
