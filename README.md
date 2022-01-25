@@ -26,9 +26,20 @@
 * Developer tool : Eclipse(2020-06) / SQL-Developer 18.4.0 (Oracle)
 
 ## 조원
-Github ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
--  [황규현](https://github.com/beetrbgus) 
+
+-  [황규현]
 - [박근우](https://github.com/lostMS95)
 -  [최별](https://github.com/ChoeByeol)
+| 조원   | Github | Gmail | 역할 |
+| ------ | -- | -- |----------- |
+| 황규현 | [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/beetrbgus)  |  |  |
+| 박근우 |  |  | Autolayout을 통한 기초 UI구성, Scroll View의 이해 |
+| 최별 |  |  | TableView, CollectionView, 데이터 전달 방식 |
+| 김민진 |  |  | Cocoapods & Networking + 솝커톤 전 보충 세미나 |
+| 조수현 |  |  |디자인 합동 세미나 |
+
+
+
+
 
 동네인증 / 공동구매 / 소셜링 / 이미지 모듈화 / Github 관리
