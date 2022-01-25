@@ -28,7 +28,7 @@ public class AccountController {
 	
 	// 마이페이지
 	@RequestMapping("/mypage")
-	public String mypage(HttpSession session, Model model) {
+	public String mypage(HttpSession session, Model model, @RequestParam(required = false, defaultValue = "0") int checkNo) {
 	int memberNo = (int)session.getAttribute("logNo");
 		MemberVO memberVO = memberService.imageProfile(memberNo);
 		List<SocialListVO> socialListVO = socialService.getMemberByList(memberNo);
@@ -51,7 +51,7 @@ public class AccountController {
 		model.addAttribute("memberVO", memberVO);
 		return "account/profile";
 	}
-	@ResponseBody
+	
 	@PostMapping("/status")
 	public void joined(HttpSession session, Model model, @RequestParam int checkNo) {
 		int memberNo = (int) session.getAttribute("logNo");

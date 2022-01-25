@@ -25,21 +25,7 @@ $(function(){
 	$("#socialstatus").on("change",function(){
 		var checkNo = $(this).val();
 		console.log(checkNo);
-		$.ajax({ 
-			url : '${pageContext.request.contextPath}/account/status/',
-			type : "post",
-			async : false,
-			data : { 
-				checkNo : checkNo
-			},
-			success : function(resp) {
-				console.log("성공", resp);
-				
-				},
-	 		error : function(e) {
-			  console.log("실패", e);
- 		  	}
-		});
+		location.href="${root}/account/mypage?checkNo="+checkNo;
 	});
 });
 
