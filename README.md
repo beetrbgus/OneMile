@@ -35,3 +35,7 @@
 | 김민진 | [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/koronchann)  | mjkim7633@gmail.com | ERD / 플로우 차트 / PPT |
 | 조수현 | [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/qww2141)  | tngusdlqslekd@hanmail.net |  ERD / 플로우 차트 |
 
+# 사용 툴
+- OS : 	![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
+- 협업 : ![Slack](https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack&logoColor=white)
+- Build tool : 	![Apache Maven](https://img.shields.io/badge/Apache%20Maven-C71A36?style=for-the-badge&logo=Apache%20Maven&logoColor=white)
