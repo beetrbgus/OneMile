@@ -27,20 +27,13 @@
 
 ## 조원
 
--  [황규현]
-- [박근우](https://github.com/lostMS95)
-
-
 | 조원   | Github | Gmail | 역할 |
 | ------ | ------ | ----- |----------- |
-| 황규현 | [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/beetrbgus)  |  |  |
-| 박근우 |  |  | Autolayout을 통한 기초 UI구성, Scroll View의 이해 |
-| 최별 |  |  | TableView, CollectionView, 데이터 전달 방식 |
-| 김민진 |  |  | Cocoapods & Networking + 솝커톤 전 보충 세미나 |
-| 조수현 |  |  |디자인 합동 세미나 |
+| 황규현 | [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/beetrbgus)  | beetrb0214@gmail.com | 
+공동구매 / 소모임 / 동네인증 / 이미지 모듈화 / Github 관리|
+| 박근우 | [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/lostMS95) | rmsdn0415@gmail.com | 
+회원 / 멤버십 / 정기·단건 결제 / APP UI |
+| 최별 |  [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ChoeByeol) | cb68862643@gmail.com | 커뮤니티 / 공지사항 / 관리자 페이지 / 페이징 / 메인화면 / APP UI |
+| 김민진 | [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/koronchann)  | mjkim7633@gmail.com | ERD / 플로우 차트 / PPT |
+| 조수현 | [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/qww2141)  | tngusdlqslekd@hanmail.net |  ERD / 플로우 차트 |
 
-
-
-
-
-동네인증 / 공동구매 / 소셜링 / 이미지 모듈화 / Github 관리
