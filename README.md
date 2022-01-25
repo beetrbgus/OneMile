@@ -27,6 +27,6 @@
 
 ## 조원
 Github ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
-*  [황규현](https://github.com/beetrbgus)
+*  [황규현](https://github.com/beetrbgus) 동네인증 / 공동구매 / 소셜링 / 이미지 모듈화 / Github 관리
 *  [박근우](https://github.com/lostMS95)
 *  [최별](https://github.com/ChoeByeol)
