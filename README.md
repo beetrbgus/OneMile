@@ -24,3 +24,8 @@
 * Server : Apache Tomcat v9.0
 * DBMS : Oracle RDBMS (Oracle Database 11g)
 * Developer tool : Eclipse(2020-06) / SQL-Developer 18.4.0 (Oracle)
+
+## 조원
+- 황규현 ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
+- 박근우 ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
+- 최별 [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ChoeByeol)
