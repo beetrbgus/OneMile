@@ -26,7 +26,7 @@
 * Developer tool : Eclipse(2020-06) / SQL-Developer 18.4.0 (Oracle)
 
 ## 조원
-Github ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
+![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
 *  [황규현](https://github.com/beetrbgus)
-*  [박근우](https://github.com/lostMS95)
+*  [박근우](https://github.com/lostMS95) : 회원 / 멤버십 / 정기·단건 결제 / APP UI
 *  [최별](https://github.com/ChoeByeol)
