@@ -286,14 +286,15 @@ $(function(){
 				let  action = "";
 				/* 각 버튼 클릭시 Action 지정. 수정은 페이지 이동 */
 				let ismyTown = ${ismytown};
-				if(!ismyTown){
-					alert("내 동네가 아닙니다. 지역의 소모임을 이용해보세요!");
-					return false;
-				}
+				
 				if(status=='exit'){
 					action = "../socialexit"; 
 				}else{
-					action = "../socialjoin"; 
+					action = "../socialjoin";
+					if(!ismyTown){
+						alert("내 동네가 아닙니다. 지역의 소모임을 이용해보세요!");
+						return false;
+					}
 				}
 				console.log("status     "+status);
 				console.log("action     "+action);

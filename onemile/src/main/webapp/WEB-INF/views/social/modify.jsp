@@ -16,97 +16,7 @@
 <script type="text/javascript" src="${root}/onemile/resources/js/social/mapRead.js"></script>
 <script type="text/javascript" src="${root}/onemile/resources/js/social/regDate.js"></script>
 <script type="text/javascript" src="${root}/onemile/resources/js/social/regValidate.js"></script>
-<script>
-/* 카테고리 */
-$(function(){
-	$(".big").on("change",function(){
-		var category = $(this).val();
-	
-		$.ajax({ 
-			url : '${pageContext.request.contextPath}/miles/data/category/child',
-			type : "post",
-			async : false,
-			data : { 
-				categorySuper : category
-			},
-			success : function(resp) {
-				console.log("성공", resp);
-					
-				var middle = $(".middle");
-				middle.find("option").remove();
-				for (var dto of resp) { 
-					var middleOption = $("<option>");
-					middleOption.val(dto.smallType);
-					middleOption.text(dto.smallType);
-					middle.append(middleOption);
-				}
-		  	},
-	 		error : function(e) {
-			  console.log("실패", e);
- 		  	}
- 		});
-	});
-});
 
-//파일 갯수 제한
-$(function () {
-	//파일이 선택되면 3개 이상인지 확인해서 차단
-	$("input[name=attach]").on("input", function () {
-    console.log(this.files);
-    console.log("event " +event.target);
-    console.log(this.files);
-    if (this.files.length > 3) {
-      	alert("파일은 3개까지만 선택이 가능합니다");
-      	$(this).val(""); //선택취소
-      	return;
-      }
-      setThumbnail($(this).files);
-      //선택한 파일을 읽어서 전송 가능하도록 보관
-      //파일이 몇갠지 모르니까 배열에 보관한다
-      fileList = this.files;
-      console.log(fileList);  
-     });
-});	
-      						
-//이미지 미리보기
- var sel_files = [];
- $(document).ready(function(){
-     $("input[name=attach]").on("change", handleImgsFilesSelect);
- });
- function handleImgsFilesSelect(e) {
-     sel_files = [];
-     $("#result").empty();
-     var files = e.target.files;
-     var filesArr = Array.prototype.slice.call(files);
-     var index = 0;
-     filesArr.forEach(function(f){
-         if(!f.type.match("image.*")){
-             alert("확장자는 이미지 확장자만 가능합니다.");
-             return;
-         }
-         sel_files.push(f);
-         var reader = new FileReader();
-         reader.onload = function(e) {
-             var html = "<a href=\"javascript:void(0);\" onclick=\"deleteImageAction("+index+")\" id=\"img_id_"+index+"\"><img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selProductFile' title='Click to remove' width='150px' height='150px'></a>";
-             $("#result").append(html);
-             index++;
-           }
-            reader.readAsDataURL(f);
-            });
-        }
-function deleteImageAction(index){
-	  console.log("index : " + index);
-	  sel_files.splice();
-		
-	  var img_id = "#img_id_" + index;
-	  var del = $(img_id).remove();
-	  if(del){
-		  $("input[name=attach]").val("");
-		  $("#result").empty();
-	  }
-	  console.log(sel_files);
-}
-</script>
 <form id="regForm" action="../modify" method="post"
 	enctype="multipart/form-data">
 	<input type="hidden" name="socialNo" value="${socialDetail.socialNo}">
@@ -173,19 +83,17 @@ function deleteImageAction(index){
 
 							<!-- 미리보기  -->
 							<div id="result"
-								style="width: 500px; height: 400px; margin-left: 200px;">
+								style="display: flex; flex-direction: row; width: 500px; height: 400px; margin-left: 200px;">
 							
-							<c:forEach var="image" items="${socialDetail.imageInfo}">
-							<div class="imgdiv">
-								<img width="300px" height="215px"
-									src="${pageContext.request.contextPath}/image/download?imageNo=${image.imageNo}&folder=social">
-								<input type="hidden" value="${image.imageNo}">
-								<button type="button" class="deleteImg">x</button>
+								<c:forEach var="image" items="${socialDetail.imageInfo}">
+									<div class="imgdiv">
+										<img  width="150px" height="150px"
+											src="${pageContext.request.contextPath}/image/download?imageNo=${image.imageNo}&folder=social">
+										<input type="hidden" value="${image.imageNo}">
+										<button type="button" class="deleteImg">x</button>
+									</div>
+								</c:forEach>	
 							</div>
-							</c:forEach>	
-								
-								</div>
-				
 						</div>
 					</div>
 				</div>
@@ -259,65 +167,156 @@ function deleteImageAction(index){
 		<button type="button" id="submitBtn">수정하기</button>
 	</div>
 </form>
-	
-		<!-- <input type="file"
-		name="attach" multiple="multiple"> 이미지 : -->
-	<%-- <c:forEach var="image" items="${socialDetail.imageInfo}">
-		<div class="imgdiv">
-			<img width="300px" height="215px"
-				src="${pageContext.request.contextPath}/image/download?imageNo=${image.imageNo}&folder=social">
-			<input type="hidden" value="${image.imageNo}"> 업로드 이름 :
-			${image.uploadName} 저장된 이름 : ${image.saveName}" 파일 크기 :
-			${image.fileSize} 파일 유형 : ${image.fileType}
-			<button type="button" class="deleteImg">x</button>
-		</div>
-	</c:forEach> --%>
-	<%-- <br> 제목 : <input type="text" name="title" value="${socialDetail.title}" required>
-	<br> 관심 카테고리 : <select
-		class="big" required>
-		<option value="">카테고리선택</option>
-		<c:forEach var="category" items="${bigCategory}">
-			<c:if test="${category.bigType !='전체'}">
-				<option value="${category.bigType}"
-					<c:if test="${category.bigType eq socialDetail.type}">selected="selected"</c:if>>
-					${category.bigType}</option>
-			</c:if>
-		</c:forEach>
-	</select> <select class="middle" name="smalltype" required>
-		<c:forEach items="${middleList}" var="middle">
-			<option value="${middle.smallType}"
-				<c:if test="${middle.smallType eq socialDetail.smalltype}">selected="selected"</c:if>>
-				${middle.smallType}</option>
-		</c:forEach>
-	</select>  --%>
-	<%-- <br> 설명 :
-	<textarea name="context" placeholder="모임을 설명해주세요." required>
-		${socialDetail.context}
-	</textarea>
-	<br> 추가 이미지 등록 :<input type="file" name="attach"
-		multiple="multiple"> <br> 시작일 : <input type="hidden"
-		name="startDate"> <input type="date" id="startDay" required>
-	<input type="time" id="startTime" required> <br> 종료일 : <input
-		type="hidden" name="endDate"> <input type="date" id="endDay"
-		required> <input type="time" id="endTime" required> <br> --%>
-	
-	<%-- 	<br> 상세주소 : <input
-		type="text" id="location" value="${socialDetail.detailAddress}"
-		name="location" required> <br> 최소인원 : <input
-		type="number" name="minpeople" min="2"
-		value="${socialDetail.minpeople}" required> <br>${AD}
-	최대인원 : <input type="number" name="maxpeople" min="2" max="${AD}"
-		value="${socialDetail.maxpeople}" required>
-	<div id="map" style="width: 500px; height: 400px;"></div>
-
-	<button type="button" id="submitBtn">등록하기</button> --%>
-
-
-
 
 <script type="text/javascript"src="${root}/onemile/resources/js/social/mapRead.js"></script>
 <script type="text/javascript"src="${root}/onemile/resources/js/social/regDate.js"></script>
 <script type="text/javascript"src="${root}/onemile/resources/js/social/regValidate.js"></script>
+<script>
+/* 카테고리 */
+$(function(){
+	let imgCnt = $(".imgdiv").length;
+	console.log("imgCnt    "+imgCnt);
+	$(".big").on("change",function(){
+		var category = $(this).val();
+	
+		$.ajax({ 
+			url : '${pageContext.request.contextPath}/miles/data/category/child',
+			type : "post",
+			async : false,
+			data : { 
+				categorySuper : category
+			},
+			success : function(resp) {
+				console.log("성공", resp);
+					
+				var middle = $(".middle");
+				middle.find("option").remove();
+				for (var dto of resp) { 
+					var middleOption = $("<option>");
+					middleOption.val(dto.smallType);
+					middleOption.text(dto.smallType);
+					middle.append(middleOption);
+				}
+		  	},
+	 		error : function(e) {
+			  console.log("실패", e);
+ 		  	}
+ 		});
+	});
+
+	//파일 갯수 제한
+	//파일이 선택되면 3개 이상인지 확인해서 차단
+	if(imgCnt <= 3){
+		$("input[name=attach]").on("input", function () {
+		    console.log(this.files);
+		    console.log("event " +event.target);
+		    console.log(this.files);
+		    if (this.files.length + imgCnt > 3) {
+		      	alert("파일은 3개까지만 선택이 가능합니다");
+		      	$(this).val(""); //선택취소
+		      	return;
+	      	}
+    	 });
+	}else{
+		alert("이미지는 3장까지 등록 가능합니다.");
+	}
+      						
+	//이미지 미리보기
+ 	var sel_files = [];
+ 	$("input[name=attach]").on("input", handleImgsFilesSelect);
+ 	
+	function handleImgsFilesSelect(e) {
+	    sel_files = [];
+	    var files = e.target.files;
+	    var filesArr = Array.prototype.slice.call(files);
+	    
+	    filesArr.forEach(function(f){
+	    	if(!f.type.match("image.*")){
+	        	alert("확장자는 이미지 확장자만 가능합니다.");
+	            return;
+	        }
+        sel_files.push(f);
+        var reader = new FileReader();
+        reader.onload = function(e) {
+	        var html = "<div class='imgdiv'><img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selProductFile'width='150px' height='150px'><button type='button' class='deleteImg'>x</button></div>";
+	       
+	        $("#result").append(html);
+	        /* 동적으로 추가한 것에대해서는 이벤트 적용이 안되기 때문에 , 이벤트 걸어주기. */
+	        $(document).on('click', '.deleteImg', function deleteEvent(){
+	    		let imgdiv = $(this).parent();
+    			imgdiv.remove();
+    			return;
+	    	});
+        }
+        reader.readAsDataURL(f);
+     });
+	}
+	
+
+	/* 이미지 비동기 삭제*/
+	
+	$(".deleteImg").on("click",function(){
+		let imgdiv = $(this).parent();
+		let imageNo = imgdiv.find("input").val();
+		console.log("imageNo    " + imageNo);
+		console.log("imgdiv    " + imgdiv);
+		console.log("imgdiv.find('input')    " + imgdiv.find("input"));
+		if(!imgdiv.find("input")){
+			imgdiv.remove();
+			return;
+		}
+		$.ajax({
+			  url : "${pageContext.request.contextPath}/image/delete?imageNo="+imageNo+"&folder=social",
+	  		  type : "delete",
+	  		  dataType : "text",
+	  		  success : function() {
+	  			console.log("성공");
+	  			imgCnt--;
+	  			console.log("imgCnt   "+imgCnt);
+	  			imgdiv.remove();
+	  		  },
+	  		  error : function(e) {
+				  console.log("실패", e);
+	  		  }
+  		});
+	});
+	/*카테고리 선택시 비동기 */
+	$("select[name=type]").on("change",function(){
+		var category = $(this).val();
+		
+		var root = "${pageContext.request.contextPath}"; 
+		
+		console.log("root   "+root);
+		$.ajax({
+		  url : root+'/miles/data/category/child',
+  		  type : "post",
+  		  data : {
+  			  categorySuper : category
+  		  },
+  		  success : function(resp) {
+  			console.log("성공", resp);
+  			
+  			var middle = $(".middle");
+  			middle.children().remove();
+  			for (var dto of resp) {
+				var middleOption = $("<option>");
+				middleOption.val(dto.smallType);
+				middleOption.text(dto.smallType);
+				middle.append(middleOption);
+			}
+  		  },
+  		  error : function(e) {
+			  console.log("실패", e);
+  		  }
+  		});
+	}); 
+	/*최대 이미지 파일 갯수*/
+	function maxFileValidate(){
+		let originImglength = $(".imgdiv").length;
+		
+	}
+});
+</script>
 <script>
 	/* 가져온 값 넣기 */
 	$(function(){
@@ -367,59 +366,5 @@ function deleteImageAction(index){
 		});
 	});
 </script>
-<script>
-	/* 이미지 비동기 삭제*/
-	$(function(){
-		$(".deleteImg").on("click",function(){
-			let imgdiv = $(this).parent()
-			let imageNo = imgdiv.find("input").val();
-			console.log("imageNo    " + imageNo);
-			$.ajax({
-				  url : "${pageContext.request.contextPath}/image/delete?imageNo="+imageNo+"&folder=social",
-		  		  type : "delete",
-		  		  dataType : "text",
-		  		  success : function() {
-		  			console.log("성공");
-		  			imgdiv.remove();
-		  		  },
-		  		  error : function(e) {
-					  console.log("실패", e);
-		  		  }
-	  		});
-		});
-		/*카테고리 선택시 비동기 */
-		$("select[name=type]").on("change",function(){
-			var category = $(this).val();
-			
-			var root = "${pageContext.request.contextPath}"; 
-			
-			console.log("root   "+root);
-			$.ajax({
-			  url : root+'/miles/data/category/child',
-	  		  type : "post",
-	  		  data : {
-	  			  categorySuper : category
-	  		  },
-	  		  success : function(resp) {
-	  			console.log("성공", resp);
-	  			
-	  			var middle = $(".middle");
-	  			middle.children().remove();
-	  			for (var dto of resp) {
-					var middleOption = $("<option>");
-					middleOption.val(dto.smallType);
-					middleOption.text(dto.smallType);
-					middle.append(middleOption);
-				}
-	  		  },
-	  		  error : function(e) {
-				  console.log("실패", e);
-	  		  }
-	  		});
-		}); 
-	});
-</script>
-
-
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
