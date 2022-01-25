@@ -1,5 +1,3 @@
-# 제목 없음
-
 # [OneMile](http://www.sysout.co.kr/onemile)
 
 - 프로젝트 소개
@@ -61,4 +59,4 @@ Java 8 <img src="[https://img.shields.io/badge/JAVA-007396?style=for-the-badge&l
 
 Kakao Map , Kakao Pay
 
-![www.sysout.co.kr_onemile_.png](%E1%84%8C%E1%85%A6%E1%84%86%E1%85%A9%E1%86%A8%20%E1%84%8B%E1%85%A5%E1%86%B9%E1%84%8B%E1%85%B3%E1%86%B7%205deccc8385c64b809b29eb2dbe22b38c/www.sysout.co.kr_onemile_.png)
+![www.sysout.co.kr_onemile_.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5458fa0b-d369-47eb-83df-68a931fcfcc1/www.sysout.co.kr_onemile_.png)
