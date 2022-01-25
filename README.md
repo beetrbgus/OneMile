@@ -33,7 +33,7 @@
 
 | 조원   | Github | Gmail | 역할 |
 | ------ | ------ | ----- |----------- |
-| 황규현 | [Github](https://github.com/beetrbgus)  |  |  |
+| 황규현 | [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/beetrbgus)  |  |  |
 | 박근우 |  |  | Autolayout을 통한 기초 UI구성, Scroll View의 이해 |
 | 최별 |  |  | TableView, CollectionView, 데이터 전달 방식 |
 | 김민진 |  |  | Cocoapods & Networking + 솝커톤 전 보충 세미나 |
