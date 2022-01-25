@@ -74,11 +74,9 @@
   font-weight: normal;
   margin-right: 5px;
 }
-
-.detail_carousel_row .col-12 {
+.detail_carousel_row{
   z-index: -1;
 }
-
 .contaier {
   position: relative;
 }

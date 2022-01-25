@@ -122,9 +122,17 @@ public class SocialController {
 			@RequestParam(required =false, defaultValue = "1") int page,
 			@RequestParam(required =false, defaultValue = "9") int size
 			,Model model,HttpSession session) {
-		int memberNo = (int) session.getAttribute("logNo");
-		
-		
+		if(session.getAttribute("logNo")!=null) {
+			int memberNo = (int)session.getAttribute("logNo");
+			
+			AdDTO adDTO = memberService.membership(memberNo);
+			List<SocialDTO> socialDTO = socialService.getCount(memberNo);
+			boolean produce = adDTO.getSRegCnt() > socialDTO.size();
+			log.debug("생성가능한 체크 "+produce);
+			model.addAttribute("produce",produce);
+			log.debug("갯수"+adDTO.getSRegCnt());
+			log.debug("생성한 소셜링"+socialDTO.size());
+		}
 		PaginationVO paginationVO =new PaginationVO(page,size);
 		
 		bigcate =(bigcate==null||bigcate.equals("/"))?"":bigcate;
@@ -149,17 +157,6 @@ public class SocialController {
 			paginationVO.setCategoryType("smc.smallValue");
 			paginationVO.setCategory(sc);
 		}
-		
-		List<SocialDTO> socialDTO = socialService.getCount(memberNo);
-		
-		
-		AdDTO adDTO = memberService.membership(memberNo);
-		log.debug("갯수"+adDTO.getSRegCnt());
-		log.debug("생성한 소셜링"+socialDTO.size());
-		
-		boolean produce = adDTO.getSRegCnt() > socialDTO.size();
-		log.debug("생성가능한 체크 "+produce);
-		model.addAttribute("produce",produce);
 		
 		List<SocialBigCategoryDTO> bcgList = categoryService.getBiglist();
 		List<MiddleCategoryVO> mcgList = categoryService.getMiddlelist(bigcate);		
@@ -245,8 +242,6 @@ public class SocialController {
 			String goo = (String)session.getAttribute("goo");
 			ismytown = socialService.getIsMytown(socialNo,goo);
 		}
-		
-		
 		log.debug("result       : "+detail.toString()); 
 		model.addAttribute("detail",detail);
 		model.addAttribute("joined",joined);
