@@ -4,8 +4,9 @@
 - 왜 이 프로젝트를 써야하는가.
 - 어떤 사람들이 이 프로젝트를 사용하면 좋은가.
 
-관리자 계정 : admin@admin.com
-관리자 비밀번호 : admin1234
+- 관리자 계정 : admin@admin.com
+- 관리자 비밀번호 : admin1234
+
 ![stats](https://github-readme-stats.vercel.app/api?username=beetrbgus&theme=dark&show_icons=true)
 # 시작하는 방법 
 - 사용하기 위한 전제
