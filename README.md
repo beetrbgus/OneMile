@@ -29,7 +29,8 @@
 
 -  [황규현]
 - [박근우](https://github.com/lostMS95)
--  [최별](https://github.com/ChoeByeol)
+
+
 | 조원   | Github | Gmail | 역할 |
 | ------ | ------ | ----- |----------- |
 | 황규현 | [Github](https://github.com/beetrbgus)  |  |  |
