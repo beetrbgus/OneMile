@@ -1,10 +1,9 @@
-> # OneMile
+> # [OneMile](http://www.sysout.co.kr/onemile)
 - 프로젝트의 무엇을 위한 것인가
 - 어떤 문제를 해결할 수 있는가
 - 왜 이 프로젝트를 써야하는가.
 - 어떤 사람들이 이 프로젝트를 사용하면 좋은가.
 
-[원마일](http://www.sysout.co.kr/onemile)
 관리자 계정 : admin@admin.com
 관리자 비밀번호 : admin1234
 
