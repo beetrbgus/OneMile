@@ -286,7 +286,7 @@ public class SocialController {
 	@GetMapping("/delete/{socialNo}")
 	public String delete(@PathVariable int socialNo) {
 		socialService.delete(socialNo);
-		return "redirect:list";
+		return "redirect:../list";
 	}
 	//회원
 	@GetMapping("/memberManage")

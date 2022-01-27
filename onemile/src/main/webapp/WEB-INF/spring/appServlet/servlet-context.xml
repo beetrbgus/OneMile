@@ -102,7 +102,6 @@
 	 		<mvc:exclude-mapping path="/member/emailSend"/>
 	 		<mvc:exclude-mapping path="/member/find_edit_pw"/>
 	 		
-	 		
 	 		<mvc:exclude-mapping path="/member/quit_success"/>
 	 		<mvc:exclude-mapping path="/member/quit"/>
 	 		<mvc:exclude-mapping path="/member/join_success"/>

@@ -377,15 +377,10 @@
 		</div>
 	</div>
 </div>
-<!-- 상품 번호 -->
-<input type="hidden" name="cobuyNo" value="${detail.getCobuyNo()}">
 
-<!-- 지도 영역 -->
-<input type="hidden" id="lat" value="${detail.lat}">
-<input type="hidden" id="lng" value="${detail.lng}">
 <script>
-	var lat = $("#lat").val();
-	var lng = $("#lng").val();
+	var lat = ${detail.lat};
+	var lng = ${detail.lng};
 	console.log("lat    "+lat);
 	console.log("lng    "+lng);
 	var mapContainer = document.getElementById("map"), // 지도를 표시할 div 
