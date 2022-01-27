@@ -123,11 +123,11 @@
 		<result column="email" property="email" />
 		<result column="pw" property="pw" />
 		<result column="nick" property="nick" />
+		<result column="joindate" property="joinday" />
 		<result column="phone" property="phone" />
 		<result column="gender" property="gender" />
 		<result column="birth" property="birth" />
 		<result column="grade" property="grade" />
-		<result column="joindate" property="joinDate" />
 		<result column="mbti" property="mbti" />
 		<result column="intro" property="intro" />
 		<result column="nickModi" property="nickModi" />

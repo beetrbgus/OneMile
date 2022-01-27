@@ -64,7 +64,7 @@
 		<result column="TITLE" property="title" />
 		<result column="PRICE" property="price" />
 		<result column="STOCK" property="stock" />
-		<result column="DEADLINE" property="deadLine" />
+		<result column="DEADLINE" property="deadLineDay" />
 		<result column="IMAGE_NO" property="imgNo" />
 	</resultMap>
 	<!-- 목록에는 이미지가 1개만 있는데 -->

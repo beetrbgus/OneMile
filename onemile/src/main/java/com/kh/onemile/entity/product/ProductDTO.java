@@ -9,10 +9,19 @@ import lombok.Data;
 public class ProductDTO {
 	private int productNo;
 	private int memberNo;
+	private int quantity;
 	
 	private int tpNo;
 	private String name;
 	private int price;
 	private String description;
-	private Date deadline;
+	private String deadline;
+	private String buyTime;
+	private int pbNo;
+	private String tid;
+	private String itemName;
+	private int totalAmount;
+	private String status;
+	
+	
 }

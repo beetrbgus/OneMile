@@ -134,7 +134,7 @@ $(function () {
 										</div>
 										<span class="GNBMobile_text__2-voS">홈</span>
 									</a></li>
-								<li class="GNBMobile_item__1b4ZL"><a href="${root}/notmap/list">
+								<li class="GNBMobile_item__1b4ZL"><a href="${root}/commu/notmap/list?middleName=동네질문">
 										<div class="GNBMobile_icon__3OOAF"
 											style="background-image: url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGc+CiAgICAgICAgICAgIDxnPgogICAgICAgICAgICAgICAgPHBhdGggZD0iTTAgMEgyNFYyNEgweiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTQ5MDggLTE5ODUpIHRyYW5zbGF0ZSg0OTA4IDE5ODUpIi8+CiAgICAgICAgICAgICAgICA8cGF0aCBmaWxsPSIjODY4RTk2IiBkPSJNMTIgMi4yNWMyLjQ4NiAwIDQuNzY4Ljg3NyA2LjU1MyAyLjMzOGwxLjI4LTEuNDc5IDEuMTM0Ljk4Mi0xLjMyNCAxLjUzYzEuNjgyIDEuODQgMi43MDcgNC4yOSAyLjcwNyA2Ljk3OSAwIDUuNzE2LTQuNjM0IDEwLjM1LTEwLjM1IDEwLjM1LTUuNzE2IDAtMTAuMzUtNC42MzQtMTAuMzUtMTAuMzUgMC0yLjY5MiAxLjAyOC01LjE0NCAyLjcxMi02Ljk4NUwzLjAzNSA0LjA5M2wxLjEzLS45ODYgMS4yODcgMS40NzdDNy4yMzYgMy4xMjUgOS41MTYgMi4yNSAxMiAyLjI1em0wIDEuNWMtNC44ODggMC04Ljg1IDMuOTYyLTguODUgOC44NXMzLjk2MiA4Ljg1IDguODUgOC44NSA4Ljg1LTMuOTYyIDguODUtOC44NVMxNi44ODggMy43NSAxMiAzLjc1em0uNzUgMy41NTZ2NC44Nmw0LjM4OSAyLjUyNi0uNzQ4IDEuMy01LjE0MS0yLjk1OFY3LjMwNmgxLjV6IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNDkwOCAtMTk4NSkgdHJhbnNsYXRlKDQ5MDggMTk4NSkiLz4KICAgICAgICAgICAgPC9nPgogICAgICAgIDwvZz4KICAgIDwvZz4KPC9zdmc+Cg==&quot;);">
 										</div>

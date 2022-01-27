@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <style>
@@ -126,6 +126,13 @@ img{
 			$(".ProjectCardList_list__1YBa2").empty();
 			loadData(category, page, size, select);
 		});
+		
+		var toDay = "${CobuyListVO.deadLineDay}";
+		console.log(toDay);
+		var dayArr =toDay.split(" ");
+		dayArr[0];
+		console.log(dayArr[0]);
+		
 	});
 </script>
 
@@ -324,7 +331,9 @@ img{
 							 			<span class='RewardProjectCard_percent__3TW4_'>${CobuyListVO.stock}개 남음</span>
 							 			<span class='RewardProjectCard_amount__2AyJF'>${CobuyListVO.price}원</span>
 							 			<span class='RewardProjectCard_days__3eece RewardProjectCard_isAchieve__1LcUu'>
-							 				<span class='RewardProjectCard_remainingDay__2TqyN'>${CobuyListVO.deadLine}</span>
+							 				
+											
+							 				<span class='RewardProjectCard_remainingDay__2TqyN'><c:out value="${fn:substring(CobuyListVO.deadLineDay,0,10) }" /></span>
 							 				<span class='RewardProjectCard_remainingDayText__2sRLV'>마감</span>
 							 				<span class='RewardProjectCard_isAchieve__1LcUu'></span>
 							 			</span> 

@@ -16,10 +16,10 @@
 
 function getYmd10() {
 	var val = '${memberVO.joinDate}'
-	
+	console.log("현재날짜"+typeof val);
 	
     //yyyy-mm-dd 포맷 날짜 생성
-	var d = new Date();
+	var d = new Date(${memberVO.joinDate});
     return d.getFullYear() + "년 " + (d.getMonth()+1) + "월 " + d.getDate() + "일 " + d.getHours() + "시 " + d.getMinutes() + "분 " + d.getSeconds() + "초 " +  '일월화수목금토'.charAt(d.getUTCDay())+'요일';
 }
 console.log(getYmd10());
@@ -79,7 +79,7 @@ console.log(formattedDateKR);
 					<div class="col">성별 : ${memberVO.gender}</div>
 				</a> 
 				<a class="link_row row">
-					<div class="col">가입일 : ${memberVO.joinDate}getYmd10</div>
+					<div class="col">가입일 : ${memberVO.joinday}</div>
 				</a>
 			</div>
 		</div>
