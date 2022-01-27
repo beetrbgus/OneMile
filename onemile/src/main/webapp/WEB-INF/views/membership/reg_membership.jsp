@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath }"></c:set>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-
 <style>
   .outer2 {
 	display: flex;
@@ -91,7 +90,9 @@ h2 {
             <div class="name"><span class="TransactionItem__Name-sc-1naw9lz-1 fba-dEH">${membershipBuyDTO.itemName}</span></div>
             <div class="expense"><span class="method">카카오페이</span><span class="price">  ${membershipBuyDTO.totalAmount}원</span></div> 
             <c:if test="${membershipBuyDTO.hiddenYN == 'Y'}">
-				<a href="${pageContext.request.contextPath}/pay/regular/disabled?sid=${membershipBuyDTO.sid}">[멤버십 중지]</a>
+            	<div style="float:right">
+				<a href="${pageContext.request.contextPath}/pay/regular/disabled?sid=${membershipBuyDTO.sid}"  onclick="produceBtn();">[멤버십 중지]</a>
+				</div>
 			</c:if>
             </c:forEach>
         </div>

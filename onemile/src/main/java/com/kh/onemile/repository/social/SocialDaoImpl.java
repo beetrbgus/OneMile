@@ -95,4 +95,10 @@ public class SocialDaoImpl implements SocialDao{
 	public List<SocialListVO> getMemberByList2(int memberNo) {
 		return sqlSession.selectList("social.getMemberByList2",memberNo);
 	}
-}
+
+	@Override
+	public List<SocialListVO> getMemberByList3(int memberNo) {
+		return sqlSession.selectList("social.getMemberByList3",memberNo);
+	}
+
+	}

@@ -30,8 +30,10 @@ public class AccountController {
 	@RequestMapping("/mypage")
 	public String mypage(HttpSession session, Model model, @RequestParam(required = false, defaultValue = "0") int checkNo) {
 	int memberNo = (int)session.getAttribute("logNo");
+		log.debug("체크No"+checkNo);
 		MemberVO memberVO = memberService.imageProfile(memberNo);
-		List<SocialListVO> socialListVO = socialService.getMemberByList(memberNo);
+		
+		List<SocialListVO> socialListVO = socialService.getMemberByList(memberNo,checkNo);
 		log.debug("마이페이지 내정보[MemberVO] :"+memberVO);
 		model.addAttribute("socialListVO", socialListVO);
 		log.debug("마이페이지 내 소셜링[socialListVO] : "+socialListVO);
@@ -52,11 +54,4 @@ public class AccountController {
 		return "account/profile";
 	}
 	
-	@PostMapping("/status")
-	public void joined(HttpSession session, Model model, @RequestParam int checkNo) {
-		int memberNo = (int) session.getAttribute("logNo");
-		List<SocialListVO> socialListVO = socialService.getMemberByList2(memberNo);
-		model.addAttribute("socialListVO", socialListVO);
-		log.debug("마이페이지 내 소셜링[socialListVO] : "+socialListVO);
-	}
 }

@@ -181,8 +181,16 @@ public class SocialServiceImpl implements SocialService{
 	}
 
 	@Override
-	public List<SocialListVO> getMemberByList2(int memberNo) {
-		return socialDao.getMemberByList2(memberNo);
+	public List<SocialListVO> getMemberByList(int memberNo, int checkNo) {
+		log.debug("체크번호 다시확인"+checkNo);
+		if(checkNo == 0) {
+		return socialDao.getMemberByList(memberNo);
+		}
+		else if(checkNo == 1) {
+			return socialDao.getMemberByList2(memberNo);
+		}
+		else{
+			return socialDao.getMemberByList3(memberNo);
+		}
 	}
-
 }

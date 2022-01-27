@@ -25,5 +25,8 @@ public interface SocialService {
 	public void delete(int socialNo);
 	public List<ParticipateDetailVO> getPaticipantList(int socialNo, int memberNo);
 	public boolean getIsMytown(int socialNo,String goo);
-	public List<SocialListVO> getMemberByList2(int memberNo);
+	
+	public List<SocialListVO> getMemberByList(int memberNo, int checkNo);
+	
+	
 }

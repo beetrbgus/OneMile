@@ -164,7 +164,7 @@ $(function () {
 							<div class="HeaderMobile_myButton__32Bob">
 							<c:choose>
 								<c:when test="${login}">
-									<a href="${root}/member/mypage">
+									<a href="${root}/account/mypage">
 									<button type="button">
 										<i class="icon my" aria-hidden="true"></i>
 									</button>

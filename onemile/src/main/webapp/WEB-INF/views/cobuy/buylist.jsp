@@ -90,7 +90,9 @@ h2 {
              <div class="name"><span class="TransactionItem__Name-sc-1naw9lz-1 fba-dEH">수량 : ${ProductBuyDTO.quantity}개</span></div>
             <div class="expense"><span class="method">카카오페이</span><span class="price">  ${ProductBuyDTO.totalAmount}원 [${ProductBuyDTO.status}]</span>
             <c:if test="${ProductBuyDTO.status != '결제취소'}">
+            	<div style="float:right">
 				<a href="${pageContext.request.contextPath}/pay/cancel_part?pbNo=${ProductBuyDTO.pbNo}&productNo=${ProductBuyDTO.productNo}">취소하기</a>
+				</div>
 			</c:if>
             </div> 
            	

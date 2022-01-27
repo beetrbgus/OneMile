@@ -278,7 +278,7 @@ img{
 							 					</p>
 							 				</a>
 							 				<div>	
-								 				<a class="MakerInfoHeader_link__HmY8C" href="${pageContext.request.contextPath}/account/profile/${SocialListVO.memberNo}">
+								 				<a class="MakerInfoHeader_link__HmY8C" href="${pageContext.request.contextPath}/account/profile/${CobuyListVO.memberNo}">
 													<button class="Avatar_avatar__CiRY0 Avatar_xs__1Mz7G MakerInfoHeader_avatar__ltZMd">
 														<span style="background-image: url(/onemile/image/download?imageNo=179&amp;folder=member);"></span>
 													</button>

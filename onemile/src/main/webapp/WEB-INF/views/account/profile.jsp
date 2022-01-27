@@ -12,17 +12,21 @@
 }
 </style>
 <script>
-var val = '${memberVO.joinDate}'
-console.log(val);
-function getYmd10() {
-    //yyyy-mm-dd 포맷 날짜 생성
-    var d = new Date();
-    return d.getFullYear() + "-" + ((d.getMonth() + 1) > 9 ? (d.getMonth() + 1).toString() : "0" + (d.getMonth() + 1)) + "-" + (d.getDate() > 9 ? d.getDate().toString() : "0" + d.getDate().toString());
-}
 
-let today = new Date();
-console.log(today);
+
+function getYmd10() {
+	var val = '${memberVO.joinDate}'
+	
+	
+    //yyyy-mm-dd 포맷 날짜 생성
+	var d = new Date();
+    return d.getFullYear() + "년 " + (d.getMonth()+1) + "월 " + d.getDate() + "일 " + d.getHours() + "시 " + d.getMinutes() + "분 " + d.getSeconds() + "초 " +  '일월화수목금토'.charAt(d.getUTCDay())+'요일';
+}
 console.log(getYmd10());
+
+const today = new Date();
+const formattedDateKR = new Intl.DateTimeFormat("ko-KR").format(today);
+console.log(formattedDateKR);
 </script>
 <!-- 1단 -->
 <div class="container">
@@ -75,7 +79,7 @@ console.log(getYmd10());
 					<div class="col">성별 : ${memberVO.gender}</div>
 				</a> 
 				<a class="link_row row">
-					<div class="col">가입일 : ${memberVO.joinDate}</div>
+					<div class="col">가입일 : ${memberVO.joinDate}getYmd10</div>
 				</a>
 			</div>
 		</div>
@@ -94,7 +98,7 @@ console.log(getYmd10());
 					<a class="item_col col-6 col-md-4">
 					<div class="image_zone" style="background-image: url('${pageContext.request.contextPath}/image/download?imageNo=${socialListVO.imgNo}&folder=social')"></div>
 						<div class="item_type">소셜링</div>
-						<div class="item_name">${socialListVO.title} ${socialListVO.socialNo}</div>
+						<div class="item_name">${socialListVO.title}</div>
 						<div class="period">${socialListVO.startDate} ~ ${socialListVO.endDate}</div></a>
 						</c:forEach>
 				</div>

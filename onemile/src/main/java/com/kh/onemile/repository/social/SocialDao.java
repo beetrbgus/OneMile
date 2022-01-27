@@ -22,5 +22,7 @@ public interface SocialDao {
 	public List<SocialListVO> dayCheck();
 	public void statusUpdate(int socialNo, int memberNo);
 	public List<SocialListVO> getMemberByList2(int memberNo);
+	public List<SocialListVO> getMemberByList3(int memberNo);
+	
 	
 }

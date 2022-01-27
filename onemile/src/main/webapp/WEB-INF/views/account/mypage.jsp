@@ -22,11 +22,13 @@
 </style>
 <script>
 $(function(){
-	$("#socialstatus").on("change",function(){
-		var checkNo = $(this).val();
+    $("#socialstatus").on("change",function(){
+		var checkNo = $("#socialstatus option:selected").val();
 		console.log(checkNo);
 		location.href="${root}/account/mypage?checkNo="+checkNo;
 	});
+	$("#socialstatus > option[value='${param.checkNo}']").attr("selected","selected");
+	
 });
 
 </script>
@@ -98,9 +100,9 @@ $(function(){
 						<h1 class="mb-4">내 소셜링 <span class="text_munto" id="SOCIALING_cnt"></span></h1>
 					</div>
 					<select id="socialstatus" class="form-control"> 
-						<option value="0" selected="">활동중인 모임</option><!-- 0이면 참여중 --> 
+						<option value="0" >활동중인 모임</option><!-- 0이면 참여중 --> 
 						<option value="1">참여했던 모임</option> <!-- 1이면 참여종료 -->
-						<option value="2">참여 대기중</option> <!-- 2이면 참여대기중 -->
+						<option value="2">수락 대기중</option> <!-- 2이면 수락 대기중 -->
 					</select>
 				</div>
 				
