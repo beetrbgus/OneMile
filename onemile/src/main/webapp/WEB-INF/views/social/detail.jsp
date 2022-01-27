@@ -25,7 +25,9 @@
 }
 </style>
 <script >
+var detailAddress="${detail.detailAddress}";
 $(function(){
+	
 	$("#reportBtn").on("click",function(){
 		$("body").addClass("ReactModal__Body--open");
 	});
@@ -274,6 +276,7 @@ $(function(){
         </div>
     </div>
 </div>	
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b89479d3bf4f702a0c7b99d5edfb1391&libraries=services" charset="utf-8"></script>
 <script> 
 	$(function(){
 		//참가자 꽉 찼을 때
@@ -304,9 +307,11 @@ $(function(){
 		}
 		console.log("isFull   "+isFull );
 		// 내 동네일때
-		
-
 	});
+</script>
+<script>
+var lat= ${detail.lat};
+var lng= ${detail.lng}; 
 </script>
 <script type="text/javascript"src="${root}/onemile/resources/js/social/mapRead.js"></script>	
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
