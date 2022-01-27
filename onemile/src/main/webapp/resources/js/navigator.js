@@ -1,5 +1,4 @@
 $(function(){
-
 	//인증 버튼 클릭시 위치 정보 받아오고 세션에 저장.
 	$(".confirmbtn").click(function(){
 		if('geolocation' in navigator){

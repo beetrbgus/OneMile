@@ -24,8 +24,8 @@ $(function () {
 	var page = 2;
 	var size = 9;
 	var keyword = "${keyword}";
-
 	var select = "";
+	
 	$("#selectStatus").change(function(){
 		select = $(this).val();
 		page = 1;		
@@ -33,7 +33,23 @@ $(function () {
 		$(".ProjectCardList_list__1YBa2").empty();
 		loadData(category, page, size, select);
 	});
-		
+	/*	검색버튼 눌렀을 때 길이 검사 */
+	$("#searchBtn").on("click",function(e){
+		e.preventDefault();
+		var searchKey = $("#keyword").val();
+
+		if(keywordCheck(searchKey)){
+			$(".ProjectListHead_search__HN3am").submit();
+		}
+	});
+	function keywordCheck(searchKey){
+		if(!searchKey||searchKey.length<2){
+			alert("검색어는 두글자 이상 입력해주세요.");
+			return false;
+		}
+		return true;
+	}
+	/* 더보기 버튼 클릭시 */
 	$(".ProjectListMoreButton_button__27eTb").click(function () {
 		loadData(category, page, size, select, keyword);
 		page++;
@@ -94,13 +110,7 @@ $(function () {
 		});
 	}
 
-	function keywordCheck(){
-		let keyword = $("#keyword").val();
-		if(keyword==undefined||keyword==''||keyword.length<2){
-			alert("검색어는 두글자 이상 입력해주세요.");
-			return false;
-		}
-	}	
+	
 });
 	/*등록한 갯수 초과일 때 등록버튼 누를 시*/
 	function produceBtn(){
@@ -277,14 +287,13 @@ $(function () {
 						<input class="" id="keyword" name="keyword" type="search"
 							placeholder="검색" value="">
 						<div class="ProjectListHead_right__3_Jo1">
-							<button type="submit" class="ProjectListHead_find__3HsFc" aria-label="검색">
+							<button id="searchBtn" type="button" class="ProjectListHead_find__3HsFc" aria-label="검색">
 								<i class="icon search"></i>
 							</button>
 						</div>
 					</label>
-				</form>
+				</form> 
 				<div class="SortingSelect_container__3voSC ProjectListHead_sorting__2n1WY RewardProjectListHead_fundingSorting__2n0MF">
-					전체
 					<i class="icon expand-more SortingSelect_icon__khE3_"
 						aria-hidden="true">
 					</i>
@@ -292,19 +301,6 @@ $(function () {
 						<option value="ALL">전체</option>
 						<option value="N">진행중</option>
 						<option value="Y">종료된</option>
-					</select>
-				</div>
-				<div class="SortingSelect_container__3voSC ProjectListHead_sorting__2n1WY">추천순
-					<i class="icon expand-more SortingSelect_icon__khE3_"
-						aria-hidden="true">
-					</i>
-					<select name="order" class="SortingSelect_select__23ANT">
-						<option value="recommend">추천순</option>
-						<option value="popular">인기순</option>
-						<option value="amount">펀딩액순</option>
-						<option value="closing">마감임박순</option>
-						<option value="recent">최신순</option>
-						<option value="support">응원참여자순</option>
 					</select>
 				</div>
 				<div class="ProjectListHead_children__2Y7-F"></div>

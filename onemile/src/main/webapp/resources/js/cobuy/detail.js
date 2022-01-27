@@ -1,4 +1,5 @@
 $(function() {
+	
 	let deadLine = $("#dueDate").val();
 	let deadLineDate = new Date(deadLine);
 	let now = new Date();
@@ -8,6 +9,7 @@ $(function() {
 	let diffTime = passed(deadLine);
 	console.log("passed의    diffTime  " + diffTime);
 	let diffTimeMsg = getDiffMessage(diffTime);
+	
 	$(".remaining-day").text(diffTimeMsg);
 
 	$(".quantity").on("change", function() {
@@ -20,6 +22,7 @@ $(function() {
 		}
 		console.log("수량 체크 안 됨"); 
 	});
+	/* 사용자 구매하는 수량과 재고 비교. */
 	function cnt() {
 		let count = $("#buyForm").find("input[name='quantity']").val();
 		console.log("count    "+count);
@@ -37,6 +40,7 @@ $(function() {
 		}
 		return true; 
 	}
+	/* 재고 없을 때 구매버튼 비활성화 */
 	function dontBuy() {
 		let stock = $("input[name=stock]").val();
 		console.log("stock    " + stock);
@@ -47,6 +51,7 @@ $(function() {
 			$(".buyBtn").attr("disabled", false);
 		}
 	}
+	/* 마감기한 지났을 때 구매버튼 비활성화 */
 	function passed(deadLine) {
 
 		let due = new Date(deadLine);
@@ -60,6 +65,7 @@ $(function() {
 		}
 		return diffTime;
 	}
+	/* 남은 시간 세주기 */
 	function getDiffMessage(diffTime) {
 		let diffMessage = "";
 		if (diffTime <= 0) {

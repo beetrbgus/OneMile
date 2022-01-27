@@ -22,30 +22,37 @@ img{
 
 <script>
 	$(function () {
+		var category = "${nowcategory}";
 		var page = 2;
 		var size = 9;
-		var category = "${nowcategory}";
+		var keyword = "${keyword}";
+		var select = "";
+		
+		/* 더보기 버튼 클릭시 */
 		$(".ProjectListMoreButton_button__27eTb").click(function () {
-			loadData(page, size,category);
+			loadData(category, page, size, select, keyword);
 			page++;
 		});
 		
-		if(cnt() <10){ 
+		/*보여줄 갯수가  페이지 사이즈보다 작으면 더보기 삭제*/		
+		if(cnt() < size){ 
 			$("#moreBtn").remove(); 
 		}
 		function cnt(){
 			let a = $(".ProjectCardList_item__1owJa");
 			return a.length;
 		}
-		function loadData(page, size,category) {
-
+		/* 데이터 불러오기. */
+		function loadData(category, page, size, select, keyword) {
 			$.ajax({
 				url: "${pageContext.request.contextPath}/cobuy/listdetail",
 				type: "get",
 				data: {
-					page: page,
-					size: size,
-					category : category
+					"category": category,
+					"page": page,
+					"size": size,
+					"endyn": select,
+					"keyword": keyword
 				},
 				success: function (resp) {
 					if (resp.length < size) {
@@ -97,13 +104,35 @@ img{
 				}
 			});
 		};
+		$("#searchBtn").on("click",function(e){
+			e.preventDefault();
+			var searchKey = $("#keyword").val();
+
+			if(keywordCheck(searchKey)){
+				$(".ProjectListHead_search__HN3am").submit();
+			}
+		});
+		function keywordCheck(searchKey){
+			if(!searchKey||searchKey.length<2){
+				alert("검색어는 두글자 이상 입력해주세요.");
+				return false;
+			}
+			return true;
+		}
+		$("#selectStatus").change(function(){
+			select = $(this).val();
+			page = 1;		
+			
+			$(".ProjectCardList_list__1YBa2").empty();
+			loadData(category, page, size, select);
+		});
 	});
 </script>
 
 <div class="RewardMainWrapper_container__2HR7Y">
 	
 	<ul class="RewardMainTab_container__geHTr">
-		<li><a aria-current="page" class="RewardMainTab_link___1r2a RewardMainTab_active__1zRir" href="/web/wreward/main"><span>공동구매 홈</span></a>
+		<li><a aria-current="page" class="RewardMainTab_link___1r2a RewardMainTab_active__1zRir" href="${root}/cobuy"><span>공동구매 홈</span></a>
 	</ul>
 	<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
 	  <div class="carousel-indicators">
@@ -220,10 +249,10 @@ img{
 				</button>
 				<form class="ProjectListHead_search__HN3am" method="get">
 					<label for="search-keyword-4933f540-0608-4b63-9ad6-cccdc2960908">
-						<input class="" id="search-keyword-4933f540-0608-4b63-9ad6-cccdc2960908" type="search"
-							name="keyword" placeholder="검색" value="">
+						<input class="" id="keyword" name="keyword" type="search"
+							placeholder="검색" value="">
 						<div class="ProjectListHead_right__3_Jo1">
-							<button type="submit" class="ProjectListHead_find__3HsFc" aria-label="검색">
+							<button id="searchBtn" type="submit" class="ProjectListHead_find__3HsFc" aria-label="검색">
 								<i class="icon search"></i>
 							</button>
 						</div>
@@ -233,13 +262,13 @@ img{
 					전체
 					<i class="icon expand-more SortingSelect_icon__khE3_" aria-hidden="true">
 					</i>
-					<select name="status" class="SortingSelect_select__23ANT">
+					<select id="selectStatus" name="status" class="SortingSelect_select__23ANT">
 						<option value="ALL">전체</option>
 						<option value="N">진행중</option>
 						<option value="Y">종료된</option>
 					</select>
 				</div>
-				<div class="SortingSelect_container__3voSC ProjectListHead_sorting__2n1WY">
+				<!-- <div class="SortingSelect_container__3voSC ProjectListHead_sorting__2n1WY">
 					추천순
 					<i class="icon expand-more SortingSelect_icon__khE3_" aria-hidden="true">
 					</i>
@@ -251,7 +280,7 @@ img{
 						<option value="recent">최신순</option>
 						<option value="support">응원참여자순</option>
 					</select>
-				</div>
+				</div> -->
 				<div class="ProjectListHead_children__2Y7-F"></div>
 				<button class="ProjectListHead_cardType__2_YL4"></button>
 			</div>

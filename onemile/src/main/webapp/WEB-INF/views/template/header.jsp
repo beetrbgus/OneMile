@@ -15,6 +15,7 @@
 <head>
 	<script>
 		var context = "${pageContext.request.contextPath}";
+		var login = ${login};
 	</script>
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b89479d3bf4f702a0c7b99d5edfb1391&libraries=services" charset="utf-8"></script> 
@@ -137,7 +138,7 @@ $(function () {
 										<div class="GNBMobile_icon__3OOAF"
 											style="background-image: url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGc+CiAgICAgICAgICAgIDxnPgogICAgICAgICAgICAgICAgPHBhdGggZD0iTTAgMEgyNFYyNEgweiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTQ5MDggLTE5ODUpIHRyYW5zbGF0ZSg0OTA4IDE5ODUpIi8+CiAgICAgICAgICAgICAgICA8cGF0aCBmaWxsPSIjODY4RTk2IiBkPSJNMTIgMi4yNWMyLjQ4NiAwIDQuNzY4Ljg3NyA2LjU1MyAyLjMzOGwxLjI4LTEuNDc5IDEuMTM0Ljk4Mi0xLjMyNCAxLjUzYzEuNjgyIDEuODQgMi43MDcgNC4yOSAyLjcwNyA2Ljk3OSAwIDUuNzE2LTQuNjM0IDEwLjM1LTEwLjM1IDEwLjM1LTUuNzE2IDAtMTAuMzUtNC42MzQtMTAuMzUtMTAuMzUgMC0yLjY5MiAxLjAyOC01LjE0NCAyLjcxMi02Ljk4NUwzLjAzNSA0LjA5M2wxLjEzLS45ODYgMS4yODcgMS40NzdDNy4yMzYgMy4xMjUgOS41MTYgMi4yNSAxMiAyLjI1em0wIDEuNWMtNC44ODggMC04Ljg1IDMuOTYyLTguODUgOC44NXMzLjk2MiA4Ljg1IDguODUgOC44NSA4Ljg1LTMuOTYyIDguODUtOC44NVMxNi44ODggMy43NSAxMiAzLjc1em0uNzUgMy41NTZ2NC44Nmw0LjM4OSAyLjUyNi0uNzQ4IDEuMy01LjE0MS0yLjk1OFY3LjMwNmgxLjV6IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNDkwOCAtMTk4NSkgdHJhbnNsYXRlKDQ5MDggMTk4NSkiLz4KICAgICAgICAgICAgPC9nPgogICAgICAgIDwvZz4KICAgIDwvZz4KPC9zdmc+Cg==&quot;);">
 										</div>
-										<span class="GNBMobile_text__2-voS confirmbtn">커뮤니티</span>
+										<span class="GNBMobile_text__2-voS">커뮤니티</span>
 									</a></li>
 								<li class="GNBMobile_item__1b4ZL"><a class="GNBMobile_link__t1Y9t"
 										href="${root}/social">
@@ -146,7 +147,7 @@ $(function () {
 										</div>
 										<span class="GNBMobile_text__2-voS">소셜링</span>
 									</a></li>
-								<li class="GNBMobile_item__1b4ZL"><a href="${root}/cobuy/list"
+								<li class="GNBMobile_item__1b4ZL"><a href="${root}/cobuy"
 										class="GNBMobile_link__t1Y9t">
 										<div class="MenuBadge_badge__1VGZ2 MenuBadge_new__gus4v"></div>
 										<div class="GNBMobile_icon__3OOAF"
@@ -155,10 +156,10 @@ $(function () {
 										<span class="GNBMobile_text__2-voS">공동구매</span>
 									</a></li>
 								<li class="GNBMobile_item__1b4ZL confirmbtn">
-										<div class="GNBMobile_icon__3OOAF confirmbtn"
+										<div class="GNBMobile_icon__3OOAF"
 											style="background-image: url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGc+CiAgICAgICAgICAgIDxnPgogICAgICAgICAgICAgICAgPHBhdGggZD0iTTAgMEgyNFYyNEgweiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTUwODggLTE5ODUpIHRyYW5zbGF0ZSg1MDg4IDE5ODUpIi8+CiAgICAgICAgICAgICAgICA8cGF0aCBmaWxsPSIjODY4RTk2IiBkPSJNMy4zNiA5LjEyYy43NjUtLjAwMiAxLjQ5OS4zMDEgMi4wNC44NDEuNTQyLjU0Ljg0NiAxLjI3NC44NDYgMi4wMzkgMCAxLjU5LTEuMjg4IDIuODc5LTIuODc4IDIuODgtMS41OS4wMDEtMi44OC0xLjI4Ni0yLjg4Mi0yLjg3Ni0uMDAyLTEuNTkgMS4yODQtMi44OCAyLjg3NC0yLjg4NHptMTcuMjggMGMuNzY0IDAgMS40OTYuMzAzIDIuMDM2Ljg0NC41NC41NC44NDQgMS4yNzIuODQ0IDIuMDM2IDAgMS41OS0xLjI5IDIuODgtMi44OCAyLjg4LTEuNTkgMC0yLjg4LTEuMjktMi44OC0yLjg4IDAtMS41OSAxLjI5LTIuODggMi44OC0yLjg4em0tOC41NzQgMGMxLjU5IDAgMi44OCAxLjI5IDIuODggMi44OCAwIDEuNTktMS4yOSAyLjg4LTIuODggMi44OC0xLjU5IDAtMi44OC0xLjI5LTIuODgtMi44OCAwLTEuNTkgMS4yOS0yLjg4IDIuODgtMi44OHpNMy4zNiAxMC41NmMtLjc5NSAwLTEuNDQuNjQ1LTEuNDQgMS40NCAwIC43OTUuNjQ1IDEuNDQgMS40NCAxLjQ0Ljc5NC0uMDAzIDEuNDM3LS42NDYgMS40NC0xLjQ0IDAtLjc5NS0uNjQ1LTEuNDQtMS40NC0xLjQ0em0xNy44MzEuMTFjLS41MzgtLjIyMy0xLjE1Ny0uMS0xLjU3LjMxMi0uNDExLjQxMi0uNTM0IDEuMDMxLS4zMTEgMS41Ny4yMjIuNTM3Ljc0OC44ODggMS4zMy44ODguNzk1IDAgMS40NC0uNjQ1IDEuNDQtMS40NCAwLS41ODItLjM1LTEuMTA4LS44ODktMS4zM3ptLTkuMTI1LS4xMWMtLjc5NSAwLTEuNDQuNjQ1LTEuNDQgMS40NCAwIC43OTUuNjQ1IDEuNDQgMS40NCAxLjQ0Ljc5NC0uMDAzIDEuNDM3LS42NDYgMS40NC0xLjQ0IDAtLjc5NS0uNjQ1LTEuNDQtMS40NC0xLjQ0eiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTUwODggLTE5ODUpIHRyYW5zbGF0ZSg1MDg4IDE5ODUpIi8+CiAgICAgICAgICAgIDwvZz4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPgo=&quot;);">
 										</div>
-										<span class="GNBMobile_text__2-voS confirmbtn">동네인증</span>
+										<span class="GNBMobile_text__2-voS">동네인증</span>
 								</li>
 							</ul>
 							<div class="HeaderMobile_myButton__32Bob">
@@ -171,7 +172,7 @@ $(function () {
 									</a>
 								</c:when>
 								<c:otherwise>
-									<a href="${root}/member/mypage">
+									<a href="${root}/member/login">
 									<button type="button">
 										<i class="icon my" aria-hidden="true"></i>
 									</button>
