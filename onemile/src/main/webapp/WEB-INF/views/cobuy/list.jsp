@@ -26,11 +26,11 @@ img{
 		var page = 2;
 		var size = 9;
 		var keyword = "${keyword}";
-		var select = "";
+		var endYN = "";
 		
 		/* 더보기 버튼 클릭시 */
 		$(".ProjectListMoreButton_button__27eTb").click(function () {
-			loadData(category, page, size, select, keyword);
+			loadData();
 			page++;
 		});
 		
@@ -43,7 +43,12 @@ img{
 			return a.length;
 		}
 		/* 데이터 불러오기. */
-		function loadData(category, page, size, select, keyword) {
+		function loadData() {
+			console.log("category   "+ category);
+			console.log("page   "+ page);
+			console.log("size   "+ size);
+			console.log("endYN   "+ endYN);
+			console.log("keyword   "+ keyword);
 			$.ajax({
 				url: "${pageContext.request.contextPath}/cobuy/listdetail",
 				type: "get",
@@ -51,7 +56,7 @@ img{
 					"category": category,
 					"page": page,
 					"size": size,
-					"endyn": select,
+					"endyn": endYN,
 					"keyword": keyword
 				},
 				success: function (resp) {
@@ -120,19 +125,12 @@ img{
 			return true;
 		}
 		$("#selectStatus").change(function(){
-			select = $(this).val();
+			endYN = $(this).val();
 			page = 1;		
 			
 			$(".ProjectCardList_list__1YBa2").empty();
-			loadData(category, page, size, select);
+			loadData();
 		});
-		
-		var toDay = "${CobuyListVO.deadLineDay}";
-		console.log(toDay);
-		var dayArr =toDay.split(" ");
-		dayArr[0];
-		console.log(dayArr[0]);
-		
 	});
 </script>
 
@@ -227,7 +225,7 @@ img{
 				<div class="CategoryCircleList_list__2YBF3">
 				<c:forEach var="cobuyCatVO" items="${category}">
 					<a class="CategoryCircleList_item__2_QZ3 RewardCategoryCircleList_item__2JEvT"
-						href="${root}/cobuy/list${cobuyCatVO.urlPath}">
+						href="${root}/cobuy/list/${cobuyCatVO.urlPath}">
 						<span class="CategoryCircle_container__2rZ3a">
 							<span class="CategoryCircle_circle__3khwj"
 								style="background-image: url(${root}/resources/image/cobuy/${cobuyCatVO.middleName}.jpg);"></span>
@@ -254,6 +252,7 @@ img{
 						<a style="color:#00c4c4;" href="${pageContext.request.contextPath}/cobuy/reg">등록하기</a>
 					</c:if>
 				</button>
+				
 				<form class="ProjectListHead_search__HN3am" method="get">
 					<label for="search-keyword-4933f540-0608-4b63-9ad6-cccdc2960908">
 						<input class="" id="keyword" name="keyword" type="search"
@@ -266,7 +265,7 @@ img{
 					</label>
 				</form>
 				<div class="SortingSelect_container__3voSC ProjectListHead_sorting__2n1WY RewardProjectListHead_fundingSorting__2n0MF">
-					전체
+					전체  
 					<i class="icon expand-more SortingSelect_icon__khE3_" aria-hidden="true">
 					</i>
 					<select id="selectStatus" name="status" class="SortingSelect_select__23ANT">
@@ -274,6 +273,7 @@ img{
 						<option value="N">진행중</option>
 						<option value="Y">종료된</option>
 					</select>
+					
 				</div>
 				<!-- <div class="SortingSelect_container__3voSC ProjectListHead_sorting__2n1WY">
 					추천순
@@ -310,7 +310,7 @@ img{
 							 			<div class='RewardProjectCard_infoTop__3QR5w'>
 							 				<a href='detail/${CobuyListVO.cobuyNo}' class='CardLink_link__1k83H'>
 							 					<p class='CommonCard_title__1oKJY RewardProjectCard_title__iUtvs'>
-							 						<strong>${CobuyListVO.title}</strong>
+							 						<strong>${CobuyListVO.title}</strong> ${session.grade}${session.grade}${session.grade}
 							 					</p>
 							 				</a>
 							 				<div>	
