@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.onemile.entity.cobuy.CobuyDTO;
 import com.kh.onemile.entity.product.ProductBuyDTO;
+import com.kh.onemile.entity.product.ProductDTO;
 import com.kh.onemile.vo.PaginationVO;
 import com.kh.onemile.vo.cobuy.CobuyCatVO;
 import com.kh.onemile.vo.cobuy.CobuyDetailVO;
@@ -65,8 +66,8 @@ public class CobuyDaoImpl implements CobuyDao{
 		return sqlSession.selectList("cobuy.getList2", paginationVO);
 	}
 	@Override
-	public List<ProductBuyDTO> getbuyList(int memberNo) {
-		return sqlSession.selectList("cobuy.getbuyList",memberNo);
+	public List<ProductDTO> getbuyList(int memberNo) {
+		return sqlSession.selectList("product.get",memberNo);
 	}
 
 }

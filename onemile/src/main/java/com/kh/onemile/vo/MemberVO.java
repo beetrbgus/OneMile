@@ -30,6 +30,8 @@ public class MemberVO {
 	@DateTimeFormat(pattern="YYYY-MM-DD HH24:mm:ss")
 	private Date exitDate;
 	
+	private String joinday;
+	
 	private int imageNo;
 	private List<ImageDTO> imageList; //가져올 때 이미지 번호들
 	

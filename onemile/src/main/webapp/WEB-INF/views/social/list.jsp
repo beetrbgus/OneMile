@@ -337,7 +337,7 @@ $(function () {
 													<button class="Avatar_avatar__CiRY0 Avatar_xs__1Mz7G MakerInfoHeader_avatar__ltZMd">
 														<span style="background-image: url(/onemile/image/download?imageNo=${sc.profileImgNo}&amp;folder=member);"></span>
 													</button>
-													<div class="MakerInfoHeader_texts__1vfam">
+													<div class="MakerInfoHeader_texts__1vfam"> 
 														<span class="MakerInfoHeader_makerName__KDu0a">${sc.nick}</span>
 														<span class='RewardProjectCard_remainingDayText__2sRLV'>${sc.startDate} - ${sc.endDate}</span>
 													</div>

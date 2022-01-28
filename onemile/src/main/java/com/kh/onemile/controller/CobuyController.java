@@ -17,9 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.kh.onemile.entity.member.membership.AdDTO;
-import com.kh.onemile.entity.product.ProductBuyDTO;
-import com.kh.onemile.entity.social.SocialBigCategoryDTO;
+import com.kh.onemile.entity.product.ProductDTO;
 import com.kh.onemile.service.cobuy.CobuyService;
 import com.kh.onemile.vo.PaginationVO;
 import com.kh.onemile.vo.cobuy.CobuyCatVO;
@@ -27,9 +25,6 @@ import com.kh.onemile.vo.cobuy.CobuyDetailVO;
 import com.kh.onemile.vo.cobuy.CobuyListVO;
 import com.kh.onemile.vo.cobuy.CobuyRegVO;
 import com.kh.onemile.vo.kakaopay.ConfirmVO;
-import com.kh.onemile.vo.social.SocialDetailVO;
-import com.kh.onemile.vo.social.SocialRegVO;
-import com.kh.onemile.vo.social.category.MiddleCategoryVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -185,8 +180,10 @@ public class CobuyController {
 	@GetMapping("/buylist")
 	public String regMembership(Model model, HttpSession session) {
 		int memberNo = (int) session.getAttribute("logNo");
-		List<ProductBuyDTO> ProductBuyDTO = cobuyService.getbuyList(memberNo);
-		model.addAttribute("list", ProductBuyDTO);
+		List<ProductDTO> productDTO = cobuyService.getbuyList(memberNo);
+		log.debug("공동구매 내역"+productDTO);
+		model.addAttribute("list", productDTO);
+		
 		return "cobuy/buylist";
 	}
 }

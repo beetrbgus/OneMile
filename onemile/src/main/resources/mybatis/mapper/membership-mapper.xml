@@ -43,7 +43,10 @@
 			inner join msb msb on me.member_no = msb.member_no
 			inner join msp msp on msb.msp_no = msp.msp_no
 			inner join ad ad on msp.msp_no = ad.msp_no
-		where me.member_no = #{memberNo}
+		where me.member_no = #{memberNo} and 
+			msp.msp_no = (select max(msp_no) from msb 
+				where member_no = #{memberNo} group by member_no)
+	
 	</select>
 	
 	<!-- 내가 가입한 멤버십  -->

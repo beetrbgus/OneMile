@@ -28,4 +28,6 @@ public class CobuyListVO {
 	@DateTimeFormat(pattern="YYYY-MM-DD HH24:mm:ss")
 	private Date deadLine;
 	private int imgNo;
+	
+	private String deadLineDay;
 }

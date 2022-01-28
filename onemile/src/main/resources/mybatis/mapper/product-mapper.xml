@@ -8,8 +8,10 @@
 			#{pbNo}, #{memberNo}, #{productNo},#{tid},#{itemName}, #{totalAmount}, sysdate, '결제완료'
 		)
 	</insert>
-	<select id="get" parameterType="map" resultType="ProductBuyDTO">
-		select * from pb where pb_no = #{pbNo} and product_no = #{productNo}
+	<select id="get" parameterType="int" resultType="ProductDTO">
+		select p.* ,to_char(c.deadline,'yyyy-mm-dd hh:mm:ss') deadline from pb p inner join cobuy c on p.product_no = c.cobuy_no
+		where p.member_no= #{memberNo}
+	
 	</select>
 	
 	<update id="cancel" parameterType="map">
