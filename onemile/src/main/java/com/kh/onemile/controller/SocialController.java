@@ -318,6 +318,6 @@ public class SocialController {
 		socialService.exitSocial(participateVO);
 		log.debug("result       : "+participateVO.toString());
 	}
-
+	
+	
 }
-

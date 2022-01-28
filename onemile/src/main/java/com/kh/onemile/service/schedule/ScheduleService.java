@@ -7,4 +7,6 @@ public interface ScheduleService {
 	void execute();
 	//멤버십 정기결제 스케줄러
 	void regularPayment() throws URISyntaxException;
+	//소셜링 참가상태 변경
+	void socialStatus();
 }

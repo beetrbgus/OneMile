@@ -452,15 +452,15 @@ label.Radio_radio__1S1J3 .Radio_label__3LIYq {
 			</h3>
 			<div class="terms-notice-box">
 				<label class="wz checkbox circular doing-all-agree"> <input
-					id="acceptAllCheckBox" class="notice-confirm-checkbox"
+					id="acceptAllCheckBox" class="notice-confirm-checkbox check-all"
 					type="checkbox" name="check1" value="Y" autocomplete="off"
-					onchange="acceptAllChanged(this)"> <span>전체 동의하기</span>
+					oninput="checkToggle2();"> <span>전체 동의하기</span>
 				</label>
 				<div id="eachTermsNoticeWrap">
 					<div class="term-checkbox-wrap">
 						<label class="wz checkbox circular"> <input
 							id="personalInfoAgreementForThirdPartiesCheckBox"
-							class="notice-confirm-checkbox" type="checkbox" name="check1"
+							class="notice-confirm-checkbox chxbox" type="checkbox" name="check1"
 							value="Y" autocomplete="off" onchange="eachTermsChanged()" required>
 							<span>개인정보 제3자 제공 동의</span>
 						</label> <span class="show-term"
@@ -515,7 +515,7 @@ label.Radio_radio__1S1J3 .Radio_label__3LIYq {
 					<div class="term-checkbox-wrap">
 						<label class="wz checkbox circular"> <input
 							id="AcceptanceOfLiabilityCheckBox"
-							class="notice-confirm-checkbox" type="checkbox" name="check1"
+							class="notice-confirm-checkbox chxbox" type="checkbox" name="check1"
 							value="Y" autocomplete="off" onchange="eachTermsChanged()">
 							<span>책임 규정에 대한 동의</span>
 						</label> <span class="show-term"
@@ -863,5 +863,36 @@ label.Radio_radio__1S1J3 .Radio_label__3LIYq {
 	</div>
 	
 </div>
+<script>
+var selected = 0;
+var checkbox = $("#acceptAllCheckBox");
+$(".chxbox").change(function() {
+    if(this.checked) {
+    	selected++;
+    	
+    }
+    else{
+    	selected--;
+    	
+    }
+    
+    if($(".chxbox").length == selected){
+    	
+    	checkbox.prop("checked",true);
+    }else{
+    	checkbox.prop("checked",false);
+    }
+});
+
+function checkToggle2(){
+    var checkbox = document.querySelector(".check-all");
+    var checkboxList = document.querySelectorAll("input[type=checkbox]:not(.check-all)");
+
+    for(var i=0; i < checkboxList.length; i++){
+        checkboxList[i].checked = checkbox.checked;
+    }
+}
+</script>
+
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

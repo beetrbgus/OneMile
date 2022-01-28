@@ -74,4 +74,31 @@ public class SocialDaoImpl implements SocialDao{
 		
 		return result > 0;
 	}
-}
+
+	@Override
+	public List<SocialListVO> dayCheck() {
+		return sqlSession.selectList("social.getStatusCheck");
+	}
+
+	@Override
+	public void statusUpdate(int socialNo, int memberNo) {
+		Map<String,Object> map = new HashMap<>();
+		log.debug(""+socialNo,memberNo);
+		
+		map.put("socialNo", socialNo);
+		map.put("memberNo", memberNo);
+		sqlSession.update("social.statusUpdate",map);
+		
+	}
+
+	@Override
+	public List<SocialListVO> getMemberByList2(int memberNo) {
+		return sqlSession.selectList("social.getMemberByList2",memberNo);
+	}
+
+	@Override
+	public List<SocialListVO> getMemberByList3(int memberNo) {
+		return sqlSession.selectList("social.getMemberByList3",memberNo);
+	}
+
+	}

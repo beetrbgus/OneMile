@@ -78,6 +78,8 @@
 </script>
 <h2 class="wz text display2 page-title" style="text-align: center;margin-top: 30px;">멤버십 목록</h2>
 <c:forEach var="MembershipListVO" items="${list}" >
+	<c:choose>
+	<c:when test="${MembershipListVO.mspProduct ne '일반회원'}">
 	
 	<div class="outer2" style="margin-top: 20px;">
 	<div class="MembershipProductCard__Card-sc-12c6erg-0 elaFmh" >
@@ -120,6 +122,9 @@
 	</div>
 	</div>
 	</div>
+	
+	</c:when>
+	</c:choose>
 </c:forEach>
 <div class="outer2">
 <button id="submitBtn" type="button" class="Button__StyledButton-sc-1o33g42-0 huLQLR" style="width:580px;height:50px">시작하기</button>

@@ -10,9 +10,12 @@ import org.springframework.stereotype.Service;
 import com.kh.onemile.entity.product.MembershipBuyDTO;
 import com.kh.onemile.repository.certi.CertiDao;
 import com.kh.onemile.repository.membership.MembershipBuyDao;
+import com.kh.onemile.repository.social.SocialDao;
 import com.kh.onemile.service.kakaopay.KakaoPayService;
+import com.kh.onemile.service.social.SocialService;
 import com.kh.onemile.vo.kakaopay.KakaoPayApproveResponseVO;
 import com.kh.onemile.vo.kakaopay.KakaoPayRegularApproveRequestVO;
+import com.kh.onemile.vo.social.SocialListVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,6 +29,10 @@ public class ScheduleServiceImpl implements ScheduleService{
 	private MembershipBuyDao membershipBuyDao;
 	@Autowired
 	private KakaoPayService kakaoPaySerivce;
+	@Autowired
+	private SocialService socialService;
+	@Autowired
+	private SocialDao socialDao;
 	
 	//이메일 인증번호(누적된 DB) 삭제 스케줄러
 	@Scheduled(cron = "0 0 0 * * *")//매일 오전12시
@@ -52,5 +59,19 @@ public class ScheduleServiceImpl implements ScheduleService{
 			
 			membershipBuyDao.insert(msbDTO);
 		}
+	
 	}
+	//소셜링 참가상태 스케줄러
+	@Scheduled(cron = "0 0 0 * * *")//매일 오전12시
+//	@Scheduled(cron = "*/10 * * * * *")//매일 오전12시
+	@Override
+	public void socialStatus() {
+		List<SocialListVO> socialListVO = socialDao.dayCheck();
+		log.debug("소셜링 참가상태"+socialListVO);
+		for(SocialListVO listVO : socialListVO) {
+			socialDao.statusUpdate(listVO.getMemberNo(),listVO.getSocialNo());
+			log.debug("업데이트완료");
+		}
+	}
+	
 }

@@ -6,7 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.kh.onemile.service.member.MemberService;
 import com.kh.onemile.service.social.SocialService;
 import com.kh.onemile.vo.MemberVO;
@@ -24,12 +28,15 @@ public class AccountController {
 	
 	// 마이페이지
 	@RequestMapping("/mypage")
-	public String mypage(HttpSession session, Model model) {
+	public String mypage(HttpSession session, Model model, @RequestParam(required = false, defaultValue = "0") int checkNo) {
 	int memberNo = (int)session.getAttribute("logNo");
+		log.debug("체크No"+checkNo);
 		MemberVO memberVO = memberService.imageProfile(memberNo);
-		List<SocialListVO> socialListVO = socialService.getMemberByList(memberNo);
+		
+		List<SocialListVO> socialListVO = socialService.getMemberByList(memberNo,checkNo);
 		log.debug("마이페이지 내정보[MemberVO] :"+memberVO);
 		model.addAttribute("socialListVO", socialListVO);
+		log.debug("마이페이지 내 소셜링[socialListVO] : "+socialListVO);
 		model.addAttribute("memberVO", memberVO);
 		return "account/mypage";
 		}
@@ -46,4 +53,5 @@ public class AccountController {
 		model.addAttribute("memberVO", memberVO);
 		return "account/profile";
 	}
+	
 }

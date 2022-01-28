@@ -12,6 +12,7 @@ import com.kh.onemile.entity.cobuy.CobuyDTO;
 import com.kh.onemile.entity.image.middle.MiddleImgTableDTO;
 import com.kh.onemile.entity.map.MapDTO;
 import com.kh.onemile.entity.product.ProductBuyDTO;
+import com.kh.onemile.entity.product.ProductDTO;
 import com.kh.onemile.repository.cobuy.CobuyBuyDao;
 import com.kh.onemile.repository.cobuy.CobuyDao;
 import com.kh.onemile.repository.image.middle.MiddleImageDAO;
@@ -154,7 +155,7 @@ public class CobuyServiceImpl implements CobuyService {
 	}
 
 	@Override
-	public List<ProductBuyDTO> getbuyList(int memberNo) {
+	public List<ProductDTO> getbuyList(int memberNo) {
 		return cobuyDao.getbuyList(memberNo);
 	}
 
