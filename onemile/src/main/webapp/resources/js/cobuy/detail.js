@@ -1,5 +1,4 @@
 $(function() {
-	
 	let deadLine = $("#dueDate").val();
 	let deadLineDate = new Date(deadLine);
 	let now = new Date();
@@ -15,7 +14,7 @@ $(function() {
 	$(".quantity").on("change", function() {
 		$(".quantity").val($(this).val());
 	});
-	$("#buyBtn").on("click", function() {
+	$(".buyBtn").on("click", function() {
 		if (cnt()) {
 			console.log("수량 체크 됨"); 
 			$("#buyForm").submit();
