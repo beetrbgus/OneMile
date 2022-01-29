@@ -24,16 +24,25 @@ $(function () {
 	var page = 2;
 	var size = 9;
 	var keyword = "${keyword}";
-	var select = "";
+	var endYN = "";
 	
 	$("#selectStatus").change(function(){
-		select = $(this).val();
+		endYN = $(this).val();
 		page = 1;		
-		
+		console.log("endYN   "+endYN);
 		$(".ProjectCardList_list__1YBa2").empty();
-		loadData(category, page, size, select);
+		loadData();
 	});
 	/*	검색버튼 눌렀을 때 길이 검사 */
+	$("#searchBtn").on("click",function(e){
+		e.preventDefault();
+		var searchKey = $("#keyword").val();
+
+		if(keywordCheck(searchKey)){
+			$(".ProjectListHead_search__HN3am").submit();
+		}
+	});
+	/* 검색 버튼 누를때 폼 전송 및 유효성 검사. */
 	$("#searchBtn").on("click",function(e){
 		e.preventDefault();
 		var searchKey = $("#keyword").val();
@@ -51,7 +60,7 @@ $(function () {
 	}
 	/* 더보기 버튼 클릭시 */
 	$(".ProjectListMoreButton_button__27eTb").click(function () {
-		loadData(category, page, size, select, keyword);
+		loadData();
 		page++;
 	});
 	/*보여줄 갯수가  페이지 사이즈보다 작으면 더보기 삭제*/		
@@ -63,7 +72,7 @@ $(function () {
 		return a.length;
 	}
 	/* 데이터 불러오기. */
-	function loadData(category, page, size, select, keyword) {
+	function loadData() {
 		$.ajax({
 			url: "${pageContext.request.contextPath}/social/listdetail",
 			type: "get",
@@ -71,7 +80,7 @@ $(function () {
 				"category": category,
 				"page": page,
 				"size": size,
-				"endyn": select,
+				"endyn": endYN,
 				"keyword": keyword
 			},
 			success: function (resp) {

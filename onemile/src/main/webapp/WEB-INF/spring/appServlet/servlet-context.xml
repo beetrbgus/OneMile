@@ -113,7 +113,9 @@
 	 		<mvc:exclude-mapping path="/commu/map/list*"/>
 	 		<mvc:exclude-mapping path="/commu/notmap/list*"/>
 	 		<mvc:exclude-mapping path="/social/list/*"/>
+	 		<mvc:exclude-mapping path="/cobuy"/>
 	 		<mvc:exclude-mapping path="/cobuy/list/*"/>
+	 		
 	 		<bean class="com.kh.onemile.interceptor.MemberInterceptor"></bean>
 	 	</mvc:interceptor>
 	 	<mvc:interceptor>

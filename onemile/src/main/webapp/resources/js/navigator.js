@@ -1,22 +1,27 @@
 $(function(){
+	
 	//인증 버튼 클릭시 위치 정보 받아오고 세션에 저장.
 	$(".confirmbtn").click(function(){
-		if('geolocation' in navigator){
-		    navigator.geolocation.getCurrentPosition((position) => {
-		    	let lat = position.coords.latitude;
-		    	let lng = position.coords.longitude;
-		    	//세션이 있으면 세션 지우고  세션에 저장.
-		    	getAddr(lat,lng);
-		    	
-		    });
-		}
+		navigator.geolocation.getCurrentPosition(locationLoadSuccess,locationLoadError);
+	    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+				
 	});
+	function locationLoadSuccess(pos){
+	    // 현재 위치 받아오기
+	    var lat = pos.coords.latitude;
+	    var lng = pos.coords.longitude;
+	    getAddr(lat,lng)
+	};
+
+	function locationLoadError(pos){
+	    alert('위치 정보를 가져오는데 실패했습니다.');
+	};
 	//위도 경도로 해당 위치의 동이름 가져오기.
 	function getAddr(lat,lng){
-		let geocoder = new kakao.maps.services.Geocoder();
+		var geocoder = new kakao.maps.services.Geocoder();
 
-	    let coord = new kakao.maps.LatLng(lat, lng);
-	    let callback = function(result, status) {
+	    var coord = new kakao.maps.LatLng(lat, lng);
+	    var callback = function(result, status) {
 	        if (status === kakao.maps.services.Status.OK) {
 	        	console.log(result[0]);
 	        	let goo = String(result[0].region_2depth_name);

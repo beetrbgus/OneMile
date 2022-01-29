@@ -1,5 +1,4 @@
 $(function() {
-	
 	let deadLine = $("#dueDate").val();
 	let deadLineDate = new Date(deadLine);
 	let now = new Date();

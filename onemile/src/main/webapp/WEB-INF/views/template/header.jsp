@@ -13,15 +13,9 @@
 <html lang="ko" class="show-footer">
 
 <head>
-	<script>
-		var context = "${pageContext.request.contextPath}";
-		var login = ${login};
-	</script>
-	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b89479d3bf4f702a0c7b99d5edfb1391&libraries=services" charset="utf-8"></script> 
+	 
 	<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script> -->
-    <script type="text/javascript"src="${root}/resources/js/navigator.js"></script>
-    <%-- <script type="text/javascript"src="${root}/resources/js/notification.js"></script> --%>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link href="https://bootswatch.com/5/journal/bootstrap.css" type="text/css" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -280,4 +274,12 @@ $(function () {
 				</div>
 			</div>
 		</div>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b1cc79c94ac55588eb38ef2801174855&libraries=services" charset="utf-8"></script>
+	<script>
+		var context = "${pageContext.request.contextPath}";
+		var login = ${login};
+	</script>
+		
+   	 	
+		<script type="text/javascript"src="${root}/resources/js/navigator.js"></script>
 		<section>

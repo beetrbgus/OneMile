@@ -99,10 +99,44 @@ public class CobuyController {
 	// 상품 목록
 	@GetMapping("/listdetail")
 	@ResponseBody
-	public List<CobuyListVO> list(@RequestParam(required = false, defaultValue = "1") int page,
-			@RequestParam(required = false, defaultValue = "10") int size) {
+	public List<CobuyListVO> list(
+			@RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "10") int size,
+			@RequestParam(required = false,defaultValue = "") String sc,
+			@RequestParam(required = false,defaultValue = "") String order,
+			@RequestParam(required = false,defaultValue = "") String endyn,
+			@RequestParam(required = false,defaultValue = "") String keyword
+			,HttpSession session) {
 
 		PaginationVO paginationVO = new PaginationVO(page, size);
+sc =(sc==null||sc.equals(""))?"":sc;
+		
+		//저장된 인증이 있을 때. 검색에서는 현재 위치 무효화 시키려고 함.
+		if((keyword == null||keyword.equals(""))&&session.getAttribute("goo")!=null) {
+			String goo = (String)session.getAttribute("goo");
+			paginationVO.setGoo(goo);	
+		}else {
+			paginationVO.setKeyword(keyword);
+		}
+		//종료된 것 목록 -endyn 
+		if(endyn.equals("Y")) {
+			paginationVO.setEndyn("Y");
+			log.debug("paginationVO.setEndyn(\"Y\")    ");
+		}
+		//진행중인 것 목록 -endyn
+		else if(endyn.equals("N")) {
+			paginationVO.setEndyn("N");
+			log.debug("paginationVO.setEndyn(\"N\")    ");
+		}
+		//소분류 카테고리 목록
+		if(sc.equals("") || sc.equals("/")) {
+			paginationVO.setCategoryType("cbc.bigValue");
+			paginationVO.setCategory(sc);
+		}
+		else{
+			paginationVO.setCategoryType("cmc.smallValue");
+			paginationVO.setCategory(sc);
+		}
 		return cobuyService.getList(paginationVO);
 	}
 
