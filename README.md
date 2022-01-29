@@ -16,6 +16,7 @@
   - 2021.12.24 ~ 2022.01.17 ( 3주 )
 
 - 사이트
+  - **문제점** : geolocation은 https 에서만 허용되기 때문에 local에서는 원활하게 동작하지만, 호스팅 된 사이트에서는 인식이 되지 않는 문제점이 발생.
   - http://www.sysout.co.kr/onemile/
   - 유저 : hihyunwoo@naver.com / dlgusdn1234
   - 관리자 계정  : admin@admin.com / admin1234
