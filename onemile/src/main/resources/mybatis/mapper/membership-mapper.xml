@@ -60,7 +60,7 @@
 		</update>
 		
 	<!-- 기본 멤버십 가입 -->
-		<insert id="get2" parameterType="int">
+		<insert id="join2" parameterType="int">
 			  insert into msb(msb_no, member_no ,msp_no, hiddenyn)
            	 values(msb_seq.nextval, #{memNo}, 1 , 'N');
 		</insert>	
