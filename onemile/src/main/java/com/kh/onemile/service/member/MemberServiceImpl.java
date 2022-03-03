@@ -34,7 +34,6 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-@Transactional
 public class MemberServiceImpl implements MemberService {
 	private final String folderName = "/member";
 	private final String SEQID = "member_seq";
@@ -60,6 +59,7 @@ public class MemberServiceImpl implements MemberService {
 	
 	
 	// 회원가입
+	@Transactional
 	@Override
 	public void join(MemberJoinVO memberJoinVO) throws IllegalStateException, IOException {
 

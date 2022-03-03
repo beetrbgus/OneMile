@@ -51,7 +51,7 @@
 	
 	<!-- 내가 가입한 멤버십  -->
 	<select id="joinMembership" parameterType="int" resultType="MembershipBuyDTO">
-		select * from msb msb inner join msp on msb.msp_no = msp.msp_no where msb.member_no = #{memberNo}
+		select * from msb inner join msp on msb.msp_no = msp.msp_no where msb.member_no = #{memberNo}
 	</select>	
 	
 	<!-- 정기결제 해지 -->
@@ -60,8 +60,8 @@
 		</update>
 		
 	<!-- 기본 멤버십 가입 -->
-		<insert id="get2" parameterType="int">
-			  insert into msb(msb_no, member_no ,msp_no, hiddenyn)
-           	 values(msb_seq.nextval, #{memNo}, 1 , 'N');
-		</insert>	
+	<insert id="join2" parameterType="int">
+		  insert into msb(msb_no, member_no ,msp_no)
+          	 values(msb_seq.nextval, #{memNo}, 1)
+	</insert>	
 </mapper>

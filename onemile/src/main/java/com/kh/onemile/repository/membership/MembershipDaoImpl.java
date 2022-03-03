@@ -10,6 +10,9 @@ import com.kh.onemile.entity.product.MembershipBuyDTO;
 import com.kh.onemile.entity.product.MembershipDTO;
 import com.kh.onemile.vo.membership.MembershipListVO;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Repository
 public class MembershipDaoImpl implements MembershipDao{
 	@Autowired
@@ -36,6 +39,7 @@ public class MembershipDaoImpl implements MembershipDao{
 
 	@Override
 	public void join(int memNo) {
+		log.debug("memNo :   "+memNo);
 		sqlSession.insert("membership.join2",memNo);
 		
 	}
