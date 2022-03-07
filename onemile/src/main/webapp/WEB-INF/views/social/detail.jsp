@@ -212,7 +212,15 @@ $(function(){
 						<div id="purchase"    data-joined="exit" class="pointer purchase_button"> 탈퇴하기 </div>
 					</c:when>
 					<c:otherwise>
-						<div  id="purchase"   data-joined="join" class="pointer purchase_button"> 소셜링 참여하기 </div>
+						<c:choose>
+							<c:when test="${isFull}">
+								<div class="pointer purchase_button"> 모집 인원 완료 </div>
+							</c:when>
+							<c:otherwise>
+								<div id="purchase"   data-joined="join" class="pointer purchase_button"> 소셜링 참여하기 </div>
+							</c:otherwise>
+						</c:choose>
+						
 					</c:otherwise>
 				</c:choose>
               
@@ -281,11 +289,11 @@ $(function(){
 	$(function(){
 		//참가자 꽉 차지 않았을 때
 		let isFull = ${isFull};
-		
-		let status = $(this).data("joined");
-		 
-		if(isFull&&status=='join'){ 
-			$("#purchase").prop("disabled", true);
+		let status = $("#purchase").data("joined");
+		console.log("status "+status);
+		if(isFull&&status=='join'){
+			console.log("다 참");
+			$("#purchase").off('click');
 		}
 		$("#purchase").on("click",function(){
 			console.log("클릭됨!   "+status);
@@ -311,7 +319,6 @@ $(function(){
 		});
 		
 		console.log("isFull   "+isFull );
-		// 내 동네일때
 	});
 </script>
 <script>
