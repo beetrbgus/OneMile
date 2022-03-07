@@ -58,9 +58,6 @@ public class SocialController {
 		AdDTO adDTO = memberService.membership(memberNo);
 		model.addAttribute("AD",adDTO.getSMaxCnt());
 		log.debug("혜택"+adDTO.getSMaxCnt());
-		
-		
-		
 		// 지도에 위치 정보 등록
 		// 이미지 등록.
 		// 소셜 내용 등록.
@@ -69,9 +66,8 @@ public class SocialController {
 		log.debug("result       : "+result.toString()); 
 		model.addAttribute("bigCategory",result);
 		
-		return "social/reg2";
+		return "social/reg";
 		}
-	
 	@PostMapping("/reg")
 	public String postReg(@ModelAttribute SocialRegVO socialRegVO,HttpSession session) throws IllegalStateException, IOException{
 		log.debug("SocialRegVO  "+socialRegVO.toString());
@@ -271,7 +267,7 @@ public class SocialController {
 	}
 	// 소모임 탈퇴.
 	@PostMapping("/socialexit")
-	public String exitSocial(@RequestParam int socialNo, Model model,HttpSession session) {
+	public String exitSocial(@RequestParam int socialNo,HttpSession session) {
 		
 		int memberNo = (int)session.getAttribute("logNo");
 		ParticipateVO participateVO = new ParticipateVO();
@@ -309,10 +305,8 @@ public class SocialController {
 	@PostMapping("/denied")
 	public void denied(@RequestParam int socialNo,int partiMemberNo) {
 		
-		
 		ParticipateVO participateVO = new ParticipateVO();
 		participateVO.setMemberNo(partiMemberNo);
-
 		participateVO.setSocialNo(socialNo);
 
 		socialService.exitSocial(participateVO);

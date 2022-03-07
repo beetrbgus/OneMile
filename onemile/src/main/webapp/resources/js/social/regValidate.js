@@ -85,23 +85,33 @@
 				return false;
 			}
 		}
-		// 시작일  & 종료일 
+		// 시작일  & 종료일 입력
 		function startEndValid(){
-			let startVal = $("input[name=startDate]").val();
-			let endVal = $("input[name=endDate]").val();
-			let startDate = new Date(startVal);
-			let endDate = new Date(endVal);
-			if(startVal){
-				
+			if(startArr[0]==undefined||startArr[1]==undefined){
+				alert("시작시간을 입력하세요.");
+				return false;
 			}
-			if((startVal!=""||startVal!=undefined)&&
-				(endVal!=""||endVal!=undefined)){
-				return true;
+			if(endArr[0]==undefined||endArr[1]==undefined){
+				alert("종료시간을 입력하세요.");
+				console.log(endVal);
+				return false;
+			}
+			return true;
+		}
+		//시작일 종료일 비교
+		function startEndCompare(){
+			if(startArr[0]>endArr[0]){
+				alert("시작일과 종료일을 확인해주세요.");
+				return false;
 			}
 			else{
-				alert("위치를 선택해주세요.");
-				return false; 
-			} 
+				if(startArr[0]==endArr[0]&&startArr[1]>endArr[1]){
+					alert("시작시간과 종료시간을 확인해주세요.");
+					return false;
+				}
+				return true;
+			}
+			return true;
 		}
 		function inputDate(day,time){
 			let formdate = day + " "+time+":00";
@@ -119,8 +129,8 @@
 
 			console.log();
 			
-			if(contextValid()&&imgValid() && titleValid() && cateValid()  &&
-				contextValid() && mapValid() &&startEndValid()){
+			if(titleValid() &&contextValid()&&imgValid() && cateValid()  &&
+				contextValid() && mapValid() &&startEndValid()&&startEndCompare()){
 				$("#regForm").submit();
 			}
 		});

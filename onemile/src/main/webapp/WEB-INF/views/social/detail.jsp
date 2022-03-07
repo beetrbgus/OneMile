@@ -279,32 +279,37 @@ $(function(){
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b89479d3bf4f702a0c7b99d5edfb1391&libraries=services" charset="utf-8"></script>
 <script> 
 	$(function(){
-		//참가자 꽉 찼을 때
+		//참가자 꽉 차지 않았을 때
 		let isFull = ${isFull};
-		if(!isFull){ 
-			$("#purchase").on("click",function(){
-				let status = $(this).data("joined");
-				console.log("클릭됨!   "+status);
-				let socialForm = $("#socialform");
-				let  action = "";
-				/* 각 버튼 클릭시 Action 지정. 수정은 페이지 이동 */
-				let ismyTown = ${ismytown};
-				
-				if(status=='exit'){
-					action = "../socialexit"; 
-				}else{
-					action = "../socialjoin";
-					if(!ismyTown){
-						alert("내 동네가 아닙니다. 지역의 소모임을 이용해보세요!");
-						return false;
-					}
-				}
-				console.log("status     "+status);
-				console.log("action     "+action);
-				socialForm.attr("action",action);
-				socialForm.submit(); 
-			});
+		
+		let status = $(this).data("joined");
+		 
+		if(isFull&&status=='join'){ 
+			$("#purchase").prop("disabled", true);
 		}
+		$("#purchase").on("click",function(){
+			console.log("클릭됨!   "+status);
+			let socialForm = $("#socialform");
+			let  action = "";
+			/* 각 버튼 클릭시 Action 지정. 수정은 페이지 이동 */
+			let ismyTown = ${ismytown};
+			
+			if(status=='exit'){
+				action = "../socialexit";
+			}else{
+				action = "../socialjoin";
+				
+				if(!ismyTown){
+					alert("내 동네가 아닙니다. 지역의 소모임을 이용해보세요!");
+					return false;
+				}
+			}
+			console.log("status     "+status);
+			console.log("action     "+action);
+			socialForm.attr("action",action);
+			socialForm.submit(); 
+		});
+		
 		console.log("isFull   "+isFull );
 		// 내 동네일때
 	});
